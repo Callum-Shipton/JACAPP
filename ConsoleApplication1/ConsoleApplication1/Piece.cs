@@ -8,13 +8,15 @@ namespace ConsoleApplication1
 {
     public class Piece
     {
-        int[] position = new int [2];
-        bool team;
-        bool king = false;
+        private int[] position;
+        private char piece;
+        private bool team;
+        private bool king = false;
 
-        public Piece(int[] position, bool team)
+        public Piece(int[] position, char piece, bool team)
         {
             this.position = position;
+            this.piece = piece;
             this.team = team;
         }
 
@@ -28,6 +30,11 @@ namespace ConsoleApplication1
             position = newPosition;
         }
 
+        public char getPiece()
+        {
+            return piece;
+        }
+
         public bool getTeam()
         {
             return team;
@@ -36,6 +43,14 @@ namespace ConsoleApplication1
         public void setKing()
         {
             king = true;
+            if (!team)
+            {
+                piece = '$';
+            }
+            else
+            {
+                piece = '0';
+            }
         }
 
         public bool getKing()
