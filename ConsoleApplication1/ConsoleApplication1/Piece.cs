@@ -11,17 +11,9 @@ namespace ConsoleApplication1
         int[] position = new int [2];
         bool team;
 
-        public Piece(int[] position, Boolean team){
-            this.position = position;
-        }
-
-        public bool moveLeft(){
-            return true;
-        }
-
-        public bool moveRight()
+        public Piece(int[] position, Boolean team)
         {
-            return true;
+            this.position = position;
         }
     }
 }
