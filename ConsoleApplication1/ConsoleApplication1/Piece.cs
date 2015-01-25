@@ -23,14 +23,14 @@ namespace ConsoleApplication1
             return position;
         }
 
-        public bool getTeam()
-        {
-            return team;
-        }
-
         public void setPosition(int[] newPosition)
         {
             position = newPosition;
+        }
+
+        public bool getTeam()
+        {
+            return team;
         }
 
         public void setKing()
