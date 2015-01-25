@@ -11,7 +11,7 @@ namespace ConsoleApplication1
         int[] position = new int [2];
         bool team;
 
-        public Piece(int[] position, Boolean team)
+        public Piece(int[] position, bool team)
         {
             this.position = position;
         }
