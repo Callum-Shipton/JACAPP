@@ -2,3 +2,14 @@ Jack
 	-Graph search
 	-Image Processing
 	-Evolutionary/Genetic Algorithms
+
+Callum
+	-Integer and Linear Programming
+	-Digital Signal Processing
+	-Graph Algorithms
+	-Intrusion Detection Systems
+	-Threading
+	-Networking
+	-Oracle/SQL Database Integration
+	-Virtual Machine Tests
+	-OpenGL
