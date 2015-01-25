@@ -74,15 +74,47 @@ namespace ConsoleApplication1
             {
                 for (int i = 0; i < BWidth; i++)
                 {
-                    switch (j)
-                    {
-                        case 0:
-                            switch (i % 3)
+                    if (j == 0 || j == 2){
+                            switch (i % 4)
                             {
-                                case 0: board[i, j] = '|'; break;
-                                case 1: board[i, j] = 
+
+                                case 1: board[i, j] = ' '; break;
+                                case 3: board[i, j] = P1; break;
+                                default: board[i, j] = '|'; break;
                             }
-                        default:break;
+                    }
+                    else if(j == 1){
+                        switch (i % 4)
+                        {
+                                case 1: board[i, j] = P1; break;
+                                case 3: board[i, j] = ' '; break;
+                                default: board[i, j] = '|'; break;
+                        }
+                    }
+                    else if(j == (Height) || j == (Height - 2)){
+                        switch (i % 4)
+	                    {
+                            case 1: board[i,j] = P2; break;
+                            case 3: board[i,j] = ' '; break;
+		                    default: board[i, j] = '|'; break;
+	                    }
+                                
+                    }
+                    else if(j == (Height - 1)){
+                         switch (i % 4)
+	                     {
+                             case 1: board[i,j] = ' '; break;
+                             case 3: board[i,j] = P2; break;
+		                    default: board[i, j] = '|'; break;
+	                     }
+                    }
+                    else{
+                        switch (i % 2)
+                        {
+                            case 0: board[i,j] = '|';break;
+                            case 1: board[i,j] = ' ';break;
+                        }
+                    }
                     }
                 }
             }
