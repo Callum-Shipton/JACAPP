@@ -22,7 +22,7 @@ namespace ConsoleApplication1
 
         private char[,] board;
         private char P1 = '$';
-        private char P2 = '0';
+        private char P2 = 'O';
 
         Board(char P1, char P2, int Width, int Height)
         {
@@ -86,9 +86,9 @@ namespace ConsoleApplication1
                     else if(j == 1){
                         switch (i % 4)
                         {
-                                case 1: board[i, j] = P1; break;
-                                case 3: board[i, j] = ' '; break;
-                                default: board[i, j] = '|'; break;
+                            case 1: board[i, j] = P1; break;
+                            case 3: board[i, j] = ' '; break;
+                            default: board[i, j] = '|'; break;
                         }
                     }
                     else if(j == (Height) || j == (Height - 2)){
@@ -115,9 +115,17 @@ namespace ConsoleApplication1
                             case 1: board[i,j] = ' ';break;
                         }
                     }
-                    }
                 }
             }
         }
+
+        private void printBoard() { 
+            for (int i = 0;i<BWidth; i++){
+                for (int j; j<BHeight; j++){
+                    Console.Write(board[i,j]);
+                }
+                Console.WriteLine();
+            }
+
     }
 }
