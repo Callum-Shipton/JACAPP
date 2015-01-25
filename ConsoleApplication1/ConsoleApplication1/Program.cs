@@ -119,13 +119,17 @@ namespace ConsoleApplication1
             }
         }
 
-        private void printBoard() { 
-            for (int i = 0;i<BWidth; i++){
-                for (int j; j<BHeight; j++){
-                    Console.Write(board[i,j]);
+        private void printBoard()
+        {
+            for (int i = 0; i < BWidth; i++)
+            {
+                for (int j = 0; j < BHeight; j++)
+                {
+                    Console.Write(board[i, j]);
                 }
                 Console.WriteLine();
             }
+        }
 
     }
 }
