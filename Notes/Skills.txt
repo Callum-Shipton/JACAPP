@@ -1,2 +1,4 @@
-Graph search
-Image Processing
+Jack
+	-Graph search
+	-Image Processing
+	-Evolutionary/Genetic Algorithms
