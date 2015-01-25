@@ -9,6 +9,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
+    	<Slider HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="244"/>
+    	<TextBlock HorizontalAlignment="Left" Margin="64,242,0,0" TextWrapping="Wrap" Text="HOW MUCH DOES THIS SUCK?" VerticalAlignment="Top" FontSize="18.667"/>
+    	<TextBlock HorizontalAlignment="Left" Margin="64,339,0,0" TextWrapping="Wrap" Text="Not Much" VerticalAlignment="Top"/>
+    	<TextBlock HorizontalAlignment="Left" Margin="264,336,0,0" TextWrapping="Wrap" Text="Worse than QUEEN!" VerticalAlignment="Top"/>
     </Grid>
 </Page>
