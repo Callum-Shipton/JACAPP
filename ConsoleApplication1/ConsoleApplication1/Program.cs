@@ -74,14 +74,14 @@ namespace ConsoleApplication1
             {
                 for (int i = 0; i < BWidth; i++)
                 {
-                    if (j == 0 || j == 2){
-                            switch (i % 4)
-                            {
-
-                                case 1: board[i, j] = ' '; break;
-                                case 3: board[i, j] = P1; break;
-                                default: board[i, j] = '|'; break;
-                            }
+                    if (j == 0 || j == 2)
+                    {
+                         switch (i % 4)
+                         {
+                            case 1: board[i, j] = ' '; break;
+                            case 3: board[i, j] = P1; break;
+                            default: board[i, j] = '|'; break;
+                         }
                     }
                     else if(j == 1){
                         switch (i % 4)
