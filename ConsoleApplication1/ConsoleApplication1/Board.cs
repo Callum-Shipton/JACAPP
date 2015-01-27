@@ -18,7 +18,7 @@ namespace ConsoleApplication1
 
         private char[,] board;
 
-        Board(Player P1, Player P2, int Width, int Height)
+        public Board(Player P1, Player P2, int Width, int Height)
         {
             this.P1 = P1;
             this.P2 = P2;
@@ -30,7 +30,7 @@ namespace ConsoleApplication1
             initBoard();
         }
 
-        Board(Player P1, Player P2)
+        public Board(Player P1, Player P2)
         {
             this.P1 = P1;
             this.P2 = P2;
@@ -54,7 +54,7 @@ namespace ConsoleApplication1
                         {
                             case 1: board[i, j] = ' '; break;
                             case 3: board[i, j] = ' ';
-                                P1.addPiece(i, j);
+                                P1.addPiece((i - 1) / 2, j);
                                 break;
                             default: board[i, j] = '|'; break;
                         }
@@ -64,33 +64,98 @@ namespace ConsoleApplication1
                         switch (i % 4)
                         {
                             case 1: board[i, j] = ' ';
-                                P1.addPiece(i, j);
+                                P1.addPiece((i - 1) / 2, j);
                                 break;
                             case 3: board[i, j] = ' '; break;
                             default: board[i, j] = '|'; break;
                         }
                     }
-                    else if (j == (Height) || j == (Height - 2))
+                    else if (j == (Height - 1) || j == (Height - 3))
                     {
                         switch (i % 4)
                         {
                             case 1: board[i, j] = ' ';
-                                P2.addPiece(i, j);
+                                P2.addPiece((i - 1) / 2, j);
                                 break;
                             case 3: board[i, j] = ' '; break;
                             default: board[i, j] = '|'; break;
                         }
-
                     }
-                    else if (j == (Height - 1))
+                    else if (j == (Height - 2))
                     {
                         switch (i % 4)
                         {
                             case 1: board[i, j] = ' '; break;
                             case 3: board[i, j] = ' ';
-                                P2.addPiece(i, j);
+                                P2.addPiece((i - 1) / 2, j);
                                 break;
                             default: board[i, j] = '|'; break;
+                        }
+                    }
+                    else if (Height >= 10)
+                    {
+                        if (j == (Height - 4))
+                        {
+                            switch (i % 4)
+                            {
+                                case 1: board[i, j] = ' '; break;
+                                case 3: board[i, j] = ' ';
+                                    P2.addPiece((i - 1) / 2, j);
+                                    break;
+                                default: board[i, j] = '|'; break;
+                            }
+                        }
+                        else if (j == 3)
+                        {
+                            switch (i % 4)
+                            {
+                                case 1: board[i, j] = ' ';
+                                    P1.addPiece((i - 1) / 2, j);
+                                    break;
+                                case 3: board[i, j] = ' '; break;
+                                default: board[i, j] = '|'; break;
+                            }
+                        }
+                        else if (Height == 12)
+                        {
+                            if (j == (Height - 5))
+                            {
+                                switch (i % 4)
+                                {
+                                    case 1: board[i, j] = ' ';
+                                        P2.addPiece((i - 1) / 2, j);
+                                        break;
+                                    case 3: board[i, j] = ' '; break;
+                                    default: board[i, j] = '|'; break;
+                                }
+                            }
+                            else if (j == 4)
+                            {
+                                switch (i % 4)
+                                {
+                                    case 1: board[i, j] = ' '; break;
+                                    case 3: board[i, j] = ' ';
+                                        P1.addPiece((i - 1) / 2, j);
+                                        break;
+                                    default: board[i, j] = '|'; break;
+                                }
+                            }
+                            else
+                            {
+                                switch (i % 2)
+                                {
+                                    case 0: board[i, j] = '|'; break;
+                                    case 1: board[i, j] = ' '; break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            switch (i % 2)
+                            {
+                                case 0: board[i, j] = '|'; break;
+                                case 1: board[i, j] = ' '; break;
+                            }
                         }
                     }
                     else
@@ -107,25 +172,38 @@ namespace ConsoleApplication1
 
         public void printBoard()
         {
-            for (int j = BHeight; j > 0; j--)
+            for (int j = BHeight - 1; j >= 0; j--)
             {
                 for (int i = 0; i < BWidth; i++)
                 {
-                    if (P1.getPiece(i, j) != null)
+                    if (i % 2 == 1)
                     {
-                        Console.Write(P1.getPieceSym(i, j));
-                    }
-                    else if (P2.getPiece(i, j) != null)
-                    {
-                        Console.Write(P2.getPieceSym(i, j));
+                        if (P1.getPiece((i - 1) / 2, j) != null)
+                        {
+                            Console.Write(P1.getPieceSym((i - 1) / 2, j));
+                        }
+                        else if (P2.getPiece((i - 1) / 2, j) != null)
+                        {
+                            Console.Write(P2.getPieceSym((i - 1) / 2, j));
+                        }
+                        else
+                        {
+                            Console.Write(board[i, j]);
+                        }
                     }
                     else
                     {
                         Console.Write(board[i, j]);
                     }
                 }
-                Console.WriteLine();
+                Console.WriteLine("  {0}", j);
             }
+            Console.WriteLine();
+            for (int i = 0; i < Width; i++)
+            {
+                Console.Write(" {0}", i);
+            }
+            Console.WriteLine();
         }
     }
 }

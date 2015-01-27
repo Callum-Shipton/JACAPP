@@ -9,36 +9,38 @@ namespace ConsoleApplication1
     class Player
     {
         private Piece[,] Pieces;
+        private int count;
 
         private Player OtherPlayer;
 
         private int Width;
         private int Height;
 
-        private char PieceSym;
-        private char KingSym;
+        private string PieceSym;
+        private string KingSym;
 
         private bool team;
 
-        Player(int Width, int Height, bool team)
+        public Player(int Width, int Height, bool team)
         {
             this.Width = Width;
             this.Height = Height;
             this.team = team;
             if (team)
             {
-                PieceSym = 'S';
-                KingSym = '$';
+                PieceSym = "S";
+                KingSym = "$";
             }
             else
             {
-                PieceSym = 'O';
-                KingSym = '0';
+                PieceSym = "O";
+                KingSym = "0";
             }
             Pieces = new Piece[Width, Height];
+            count = 0;
         }
 
-        Player(int Width, int Height, char PieceSym, char KingSym, bool team)
+        public Player(int Width, int Height, string PieceSym, string KingSym, bool team)
         {
             this.Width = Width;
             this.Height = Height;
@@ -46,6 +48,7 @@ namespace ConsoleApplication1
             this.KingSym = KingSym;
             this.team = team;
             Pieces = new Piece[Width, Height];
+            count = 0;
         }
 
         public void setOpponent(Player p)
@@ -56,6 +59,7 @@ namespace ConsoleApplication1
         public void addPiece(int i, int j)
         {
             Pieces[i, j] = new Piece();
+            count++;
         }
 
         public Piece getPiece(int i, int j)
@@ -63,7 +67,12 @@ namespace ConsoleApplication1
             return Pieces[i, j];
         }
 
-        public char getPieceSym(int i, int j)
+        public int getCount()
+        {
+            return count;
+        }
+
+        public string getPieceSym(int i, int j)
         {
             if (Pieces[i, j].getKing())
             {
@@ -79,24 +88,28 @@ namespace ConsoleApplication1
         {
             if (Math.Abs(newi - i) == 2)
             {
-                OtherPlayer.Pieces[i + (newi - i), j + (newj - j)] = null;
+                OtherPlayer.Pieces[i + (newi - i) / 2, j + (newj - j) / 2] = null;
+                OtherPlayer.count--;
             }
             Pieces[newi, newj] = Pieces[i, j];
             Pieces[i, j] = null;
+            if ((team && newj == 0) || (!team && newj == Height - 1))
+            {
+                Pieces[newi, newj].setKing();
+            }
         }
 
         public bool moveSequence(int[,] sequence)
         {
             Piece p = Pieces[sequence[0, 0], sequence[0, 1]];
             int j = 1;
-            while (j < sequence.Length && checkMove(p, sequence[j - 1, 0], sequence[j - 1, 1], sequence[j, 0], sequence[j, 1]))
+            while (j < sequence.Length / 2 && checkMove(p, sequence[j - 1, 0], sequence[j - 1, 1], sequence[j, 0], sequence[j, 1]))
             {
                 j++;
             };
-
-            if (j == sequence.Length - 1)
+            if (j == (sequence.Length / 2))
             {
-                for (j = 0; j < sequence.Length; j++)
+                for (j = 1; j < sequence.Length / 2; j++)
                 {
                     move(sequence[j - 1, 0], sequence[j - 1, 1], sequence[j, 0], sequence[j, 1]);
                 }
@@ -163,7 +176,6 @@ namespace ConsoleApplication1
 
         private bool checkKingMove(int i, int j, int newi, int newj)
         {
-
             if (Math.Abs(newi - i) == 2 && Math.Abs(newj - j) == 2)
             {
                 return checkTake(i, j, newi, newj);
