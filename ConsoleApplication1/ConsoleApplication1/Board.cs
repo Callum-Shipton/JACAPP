@@ -54,7 +54,7 @@ namespace ConsoleApplication1
                         {
                             case 1: board[i, j] = ' '; break;
                             case 3: board[i, j] = ' ';
-                                P1.addPiece(i,j);
+                                P1.addPiece(i, j);
                                 break;
                             default: board[i, j] = '|'; break;
                         }
@@ -64,7 +64,7 @@ namespace ConsoleApplication1
                         switch (i % 4)
                         {
                             case 1: board[i, j] = ' ';
-                                P1.addPiece(i,j);
+                                P1.addPiece(i, j);
                                 break;
                             case 3: board[i, j] = ' '; break;
                             default: board[i, j] = '|'; break;
@@ -75,7 +75,7 @@ namespace ConsoleApplication1
                         switch (i % 4)
                         {
                             case 1: board[i, j] = ' ';
-                                P2.addPiece(i,j);
+                                P2.addPiece(i, j);
                                 break;
                             case 3: board[i, j] = ' '; break;
                             default: board[i, j] = '|'; break;
@@ -107,9 +107,9 @@ namespace ConsoleApplication1
 
         public void printBoard()
         {
-            for (int i = 0; i < BWidth; i++)
+            for (int j = BHeight; j > 0; j--)
             {
-                for (int j = 0; j < BHeight; j++)
+                for (int i = 0; i < BWidth; i++)
                 {
                     if (P1.getPiece(i, j) != null)
                     {
