@@ -30,6 +30,8 @@ namespace ShootEmUp
 
         }
 
+        //Methods
+
         public int getX()
         {
             return posX;
