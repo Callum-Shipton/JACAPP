@@ -204,6 +204,7 @@ namespace ConsoleApplication1
                 Console.Write(" {0}", i);
             }
             Console.WriteLine();
+            Console.WriteLine();
         }
     }
 }
