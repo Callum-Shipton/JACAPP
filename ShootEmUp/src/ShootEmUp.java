@@ -98,29 +98,12 @@ public class ShootEmUp {
         // Set the clear color
         glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
         
-        double FPS = 60.0;
-        
-        double oldTime = GLFW.glfwGetTime();
-        double newTime = GLFW.glfwGetTime();
-        double delta = newTime - oldTime;
-        double sleepTime = (1.0/FPS) - delta;
  
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
         while ( glfwWindowShouldClose(window) == GL_FALSE ) {
 
-           
-            delta =newTime-oldTime;
-            oldTime = newTime;
-            sleepTime = (1.0/FPS) - delta;
-            if(sleepTime > 0.5)
-				try {
-					Thread.sleep((long) (sleepTime*1000));
-					System.out.println("I slept for " + sleepTime*1000 + " seconds." );
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-            newTime = GLFW.glfwGetTime();
+
             update();
             render();
             
