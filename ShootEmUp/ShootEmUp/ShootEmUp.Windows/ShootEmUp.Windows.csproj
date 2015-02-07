@@ -109,6 +109,7 @@
     <Compile Include="Entity.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShootEmUp.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -121,6 +122,14 @@
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Libraries\OpenGLDotNet\Assembler.dll" />
+    <Content Include="Libraries\OpenGLDotNet\DevIL.dll" />
+    <Content Include="Libraries\OpenGLDotNet\freeglut.dll" />
+    <Content Include="Libraries\OpenGLDotNet\glut32.dll" />
+    <Content Include="Libraries\OpenGLDotNet\glut32.old.dll" />
+    <Content Include="Libraries\OpenGLDotNet\ILU.dll" />
+    <Content Include="Libraries\OpenGLDotNet\ILUT.dll" />
+    <Content Include="Libraries\OpenGLDotNet\OpenGLDotNet.dll" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
