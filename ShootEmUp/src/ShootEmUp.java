@@ -80,6 +80,7 @@ public class ShootEmUp {
         // Enable v-sync
         glfwSwapInterval(1);
         
+        GLContext.createFromCurrent();
         
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
@@ -96,7 +97,7 @@ public class ShootEmUp {
         // LWJGL detects the context that is current in the current thread,
         // creates the ContextCapabilities instance and makes the OpenGL
         // bindings available for use.
-        GLContext.createFromCurrent();
+
  
         // Set the clear color
         glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
