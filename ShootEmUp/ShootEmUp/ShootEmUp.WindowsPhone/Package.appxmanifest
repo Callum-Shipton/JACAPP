@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
 
-  <Identity Name="5b324677-b357-4362-9307-71f50f981c52"
+  <Identity Name="d53d8904-6a5c-4fd0-96ce-f76ae0f02100"
             Publisher="CN=Callum"
             Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="5b324677-b357-4362-9307-71f50f981c52" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="d53d8904-6a5c-4fd0-96ce-f76ae0f02100" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>ShootEmUp.WindowsPhone</DisplayName>
@@ -25,7 +25,7 @@
   <Applications>
     <Application Id="App"
         Executable="$targetnametoken$.exe"
-        EntryPoint="ShootEmUp.WindowsPhone.App">
+        EntryPoint="ShootEmUp_WindowsPhone.App">
         <m3:VisualElements
             DisplayName="ShootEmUp.WindowsPhone"
             Square150x150Logo="Assets\Logo.png"

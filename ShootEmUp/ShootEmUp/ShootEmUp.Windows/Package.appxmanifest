@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
 
-  <Identity Name="a3ccd494-930c-4f3f-8186-14e550a89261"
+  <Identity Name="ab647aeb-eec3-4d16-9fdf-a000413a5025"
             Publisher="CN=Callum"
             Version="1.0.0.0" />
 
@@ -23,16 +23,17 @@
   <Applications>
     <Application Id="App"
         Executable="$targetnametoken$.exe"
-        EntryPoint="ShootEmUp.Windows.App">
-        <m2:VisualElements
+        EntryPoint="ShootEmUp_Windows.App">
+        <VisualElements
             DisplayName="ShootEmUp.Windows"
-            Square150x150Logo="Assets\Logo.png"
-            Square30x30Logo="Assets\SmallLogo.png"
+            Logo="Assets\Logo.png"
+            SmallLogo="Assets\SmallLogo.png"
             Description="ShootEmUp.Windows"
             ForegroundText="light"
             BackgroundColor="#464646">
-            <m2:SplashScreen Image="Assets\SplashScreen.png" />
-        </m2:VisualElements>
+            <DefaultTile ShowName="allLogos" />
+            <SplashScreen Image="Assets\SplashScreen.png" />
+        </VisualElements>
     </Application>
   </Applications>
   <Capabilities>
