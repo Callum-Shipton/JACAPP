@@ -76,12 +76,21 @@ public class ShootEmUp {
             (GLFWvidmode.width(vidmode) - WIDTH) / 2,
             (GLFWvidmode.height(vidmode) - HEIGHT) / 2
         );
+        
+
  
         // Make the OpenGL context current
         glfwMakeContextCurrent(window);
+
         
         glfwSwapInterval(1);
         GLContext.createFromCurrent();
+        
+        
+        GL11.glMatrixMode(GL11.GL_PROJECTION);
+        GL11.glLoadIdentity();
+        GL11.glOrtho(0, 800, 0, 600, 1, -1);
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
  
         // Make the window visible
         glfwShowWindow(window);
@@ -103,7 +112,7 @@ public class ShootEmUp {
         // the window or has pressed the ESCAPE key.
         while ( glfwWindowShouldClose(window) == GL_FALSE ) {
 
-
+        	
             update();
             render();
             
@@ -120,8 +129,20 @@ public class ShootEmUp {
 
 	private void render() {
 		// TODO Auto-generated method stub
+		
+		
+		
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-        glfwSwapBuffers(window); // swap the color buffers
+        
+        GL11.glColor3f(0.5f,0.5f,1.0f);
+        
+     // draw quad
+     GL11.glBegin(GL11.GL_QUADS);
+         GL11.glVertex2f(100,100);
+         GL11.glVertex2f(100+200,100);
+         GL11.glVertex2f(100+200,100+200);
+         GL11.glVertex2f(100,100+200);
+     GL11.glEnd();
 	}
 
 	public static void main(String[] args) {
