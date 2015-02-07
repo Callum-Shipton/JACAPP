@@ -9,28 +9,43 @@ namespace ShootEmUp
     {
         private int posX;
         private int posY;
+        private int speed;
         private int health;
 
-        public Entity(int x, int y)
+        protected Entity(int x, int y)
         {
             posX = x;
             posY = y;
             health = 100;
+            speed = 10;
         }
 
-        public Entity(int x, int y, int health)
+        protected Entity(int x, int y, int speed, int health)
         {
             posX = x;
             posY = y;
+            this.speed = speed;
             this.health = health;
         }
 
-        public Entity()
+        protected Entity()
         {
 
         }
 
-        //Methods
+        //methods
+
+        public void moveVertically(int direction)
+        {
+            posY += (speed * direction);
+        }
+
+        public void moveHorizontally(int direction)
+        {
+            posX += (speed * direction);
+        }
+
+        //get and set methods
 
         public int getX()
         {
@@ -50,6 +65,16 @@ namespace ShootEmUp
         public void setY(int y)
         {
             posY = y;
+        }
+
+        public int getSpeed()
+        {
+            return speed;
+        }
+
+        public void setSpeed(int speed)
+        {
+            this.speed = speed;
         }
 
         public int getHealth()
