@@ -79,6 +79,7 @@ public class ShootEmUp {
         glfwMakeContextCurrent(window);
         // Enable v-sync
         glfwSwapInterval(1);
+        GLContext.createFromCurrent();
  
         // Make the window visible
         glfwShowWindow(window);
@@ -94,6 +95,9 @@ public class ShootEmUp {
  
         // Set the clear color
         glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+        
+        
+        
  
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
@@ -101,6 +105,9 @@ public class ShootEmUp {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
  
             glfwSwapBuffers(window); // swap the color buffers
+            
+            
+            
  
             // Poll for window events. The key callback above will only be
             // invoked during this call.
