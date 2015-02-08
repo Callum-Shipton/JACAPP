@@ -22,14 +22,17 @@ public class Image {
 		}			
 	}
 	
-	public ByteBuffer byteBuffer() throws IOException{
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ImageIO.write( img, "png", baos );
-		baos.flush();
-		byte[] imageInByte = baos.toByteArray();
-		baos.close();
-		
-		return ByteBuffer.wrap(imageInByte);
+	public ByteBuffer byteBuffer() {
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ImageIO.write( img, "png", baos );
+			baos.flush();
+			byte[] imageInByte = baos.toByteArray();
+			baos.close();
+			return ByteBuffer.wrap(imageInByte);
+		} catch (IOException e) {
+		}
+		return null;
 	}
 	
 	public int getHeight(){
