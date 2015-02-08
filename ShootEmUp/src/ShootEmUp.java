@@ -1,6 +1,8 @@
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
+import java.io.IOException;
+
 import org.lwjgl.opengl.GL11;
 
 public class ShootEmUp {
@@ -15,7 +17,7 @@ public class ShootEmUp {
 	// Will be moved to LEVEL
 	Player p;
 
-	public void run() {
+	public void run() throws IOException {
 		try {
 			init();
 			loop();
@@ -30,11 +32,11 @@ public class ShootEmUp {
 		}
 	}
 
-	private void init() {
+	private void init() throws IOException {
 		d = new Display(WIDTH, HEIGHT);
 		d.initGLFW();
 
-		p = new Player(100, 100, 1, 10);
+		p = new Player(100, 100, 1, 10, Art.grass);
 		
 		// Initialise key handling
 		Keyboard.keyCheck(d.getWindow());
@@ -70,7 +72,7 @@ public class ShootEmUp {
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		new ShootEmUp().run();
 	}
 

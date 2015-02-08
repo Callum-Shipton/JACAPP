@@ -1,17 +1,24 @@
+import java.io.File;
+import java.io.IOException;
+
 public abstract class Entity {
 
 	private int posX;
 	private int posY;
 	private int speed;
 	private int health;
+	
+	private Image image;
 
 	// Constructors
 
-	public Entity(int posX, int posY, int speed, int health) {
+	public Entity(int posX, int posY, int speed, int health, File image) throws IOException {
 		this.posX = posX;
 		this.posY = posY;
 		this.speed = speed;
 		this.health = health;
+		
+		this.image = new Image(image);
 	}
 
 	// Methods

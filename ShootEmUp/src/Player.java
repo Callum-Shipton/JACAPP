@@ -1,13 +1,16 @@
 import static org.lwjgl.glfw.GLFW.*;
 
+import java.io.File;
+import java.io.IOException;
+
 public class Player extends Entity {
 
-	public Player() {
-		super(10, 10, 10, 10);
+	public Player() throws IOException {
+		super(10, 10, 10, 10, Art.grass);
 	}
 
-	public Player(int posX, int posY, int speed, int health) {
-		super(posX, posY, speed, health);
+	public Player(int posX, int posY, int speed, int health, File file) throws IOException {
+		super(posX, posY, speed, health, file);
 	}
 
 	// called every update
