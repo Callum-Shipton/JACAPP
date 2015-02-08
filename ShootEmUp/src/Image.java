@@ -10,14 +10,14 @@ public class Image {
 	private BufferedImage img = null;
 	private File image;
 	
-	public Image(String file) throws IOException{
-		image = new File(file);
-		loadImage(image);
+	public Image(String file){
+		loadImage(file);
 	}
 	
-	private void loadImage(File file){
+	private void loadImage(String file){
 		try {
-		    img = ImageIO.read(file);
+			image = new File(file);
+		    img = ImageIO.read(image);
 		} catch (IOException e) {
 		}			
 	}
@@ -32,11 +32,11 @@ public class Image {
 		return ByteBuffer.wrap(imageInByte);
 	}
 	
-	public int getHeight()throws IOException{
+	public int getHeight(){
 		return img.getHeight();
 	}
 	
-	public int getWidth() throws IOException{
+	public int getWidth(){
 		return img.getWidth();
 	}
 }

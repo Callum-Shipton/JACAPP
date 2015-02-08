@@ -15,7 +15,7 @@ public class ShootEmUp {
 	// Will be moved to LEVEL
 	Player p;
 
-	public void run() throws IOException {
+	public void run() {
 		try {
 			init();
 			loop();

@@ -12,7 +12,7 @@ public abstract class Entity {
 
 	// Constructors
 
-	public Entity(int posX, int posY, int speed, int health, String image) throws IOException {
+	public Entity(int posX, int posY, int speed, int health, String image){
 		this.posX = posX;
 		this.posY = posY;
 		this.speed = speed;
