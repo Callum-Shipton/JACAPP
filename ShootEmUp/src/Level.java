@@ -7,8 +7,8 @@ import javax.imageio.*;
 public class Level {
 	private BufferedImage img = null;
 	
-	public Level(String file){
-		loadLevel(new File(file));
+	public Level(File file){
+		loadLevel(file);
 	}
 	
 	private void loadLevel(File file){
@@ -19,7 +19,7 @@ public class Level {
 		
 		for(int x = 0; x < img.getWidth(); x++){
 			for(int y = 0; y < img.getHeight(); y++){
-				//to-do adding images 
+				System.out.println(img.getRGB(x, y));
 			}
 		}				
 	}
