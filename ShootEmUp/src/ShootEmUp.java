@@ -7,7 +7,7 @@ public class ShootEmUp {
 
 	// Screen Width & Height
 	int WIDTH = 1024;
-	int HEIGHT = 800;
+	int HEIGHT = 720;
 
 	// Handle for monitor/window funcs
 	private Display d;

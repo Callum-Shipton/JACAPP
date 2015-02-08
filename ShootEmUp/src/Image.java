@@ -17,7 +17,7 @@ public class Image {
 		try {
 		    img = ImageIO.read(file);
 		} catch (IOException e) {
-		}				
+		}			
 	}
 	
 	public ByteBuffer byteBuffer(File file) throws IOException{
