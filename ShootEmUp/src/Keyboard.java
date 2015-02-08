@@ -12,7 +12,7 @@ public class Keyboard {
 			@Override
 			
 			// Polling key method, keypress calls callback which stores the most recent event for each key.
-			// allows multiple simultaneous key presses and reduced need for references for everything that
+			// allows simultaneous key presses and reduced need for references for everything that
 			// needs input handling.
 			public void invoke(long window, int key, int scancode, int action,
 					int mods) {
