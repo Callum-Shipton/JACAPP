@@ -11,11 +11,15 @@ public class Image {
 	
 	private static File grass = new File("res/grass.png");
 	
-	public static ByteBuffer loadImage(File file) throws IOException{
+	private static void loadImage(File file) throws IOException{
 		try {
 		    img = ImageIO.read(file);
 		} catch (IOException e) {
-		}
+		}				
+	}
+	
+	public static ByteBuffer byteBuffer(File file) throws IOException{
+		loadImage(file);
 		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ImageIO.write( img, "png", baos );
@@ -23,6 +27,16 @@ public class Image {
 		byte[] imageInByte = baos.toByteArray();
 		baos.close();
 		
-		return ByteBuffer.wrap(imageInByte);				
+		return ByteBuffer.wrap(imageInByte);
+	}
+	
+	public int getHeight(File file) throws IOException{
+		loadImage(file);
+		return img.getHeight();
+	}
+	
+	public int getWidth(File file) throws IOException{
+		loadImage(file);
+		return img.getWidth();
 	}
 }
