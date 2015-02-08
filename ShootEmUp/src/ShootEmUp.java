@@ -62,7 +62,6 @@ public class ShootEmUp {
 	}
 
 	private void render() {
-
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the
 		// framebuffer
 		glfwSwapBuffers(d.getWindow()); // Swaps front and back buffers to render changes

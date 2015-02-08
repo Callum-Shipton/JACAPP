@@ -18,7 +18,7 @@ public class Player extends Entity {
 	private void checkMove() {
 		if (Keyboard.getKey(GLFW_KEY_W) == 1
 				|| Keyboard.getKey(GLFW_KEY_W) == 2) {
-			moveVertically(1);
+			moveVertically(-1);
 		}
 		if (Keyboard.getKey(GLFW_KEY_A) == 1
 				|| Keyboard.getKey(GLFW_KEY_A) == 2) {
@@ -26,7 +26,7 @@ public class Player extends Entity {
 		}
 		if (Keyboard.getKey(GLFW_KEY_S) == 1
 				|| Keyboard.getKey(GLFW_KEY_S) == 2) {
-			moveVertically(-1);
+			moveVertically(1);
 		}
 		if (Keyboard.getKey(GLFW_KEY_D) == 1
 				|| Keyboard.getKey(GLFW_KEY_D) == 2) {
