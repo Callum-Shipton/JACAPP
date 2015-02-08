@@ -10,10 +10,11 @@ public class Player extends Entity {
 		super(posX, posY, speed, health);
 	}
 
+	// called every update
 	public void update() {
 		checkMove();
 	}
-
+	
 	private void checkMove() {
 		if (Keyboard.getKey(GLFW_KEY_W) == 1
 				|| Keyboard.getKey(GLFW_KEY_W) == 2) {

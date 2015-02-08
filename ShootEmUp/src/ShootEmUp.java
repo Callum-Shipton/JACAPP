@@ -7,8 +7,10 @@ public class ShootEmUp {
 	int WIDTH = 1024;
 	int HEIGHT = 800;
 
+	// Handle for monitor/window funcs
 	private Display d;
 
+	// Will be moved to LEVEL
 	Player p;
 
 	public void run() {
@@ -31,6 +33,8 @@ public class ShootEmUp {
 		d.initGLFW();
 
 		p = new Player(100, 100, 1, 10);
+		
+		// Initialise key handling
 		Keyboard.keyCheck(d.getWindow());
 
 	}
