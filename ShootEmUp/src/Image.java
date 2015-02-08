@@ -7,18 +7,20 @@ import java.nio.ByteBuffer;
 import javax.imageio.*;
 
 public class Image {
-	private static BufferedImage img = null;
+	private BufferedImage img = null;
 	
-	private static File grass = new File("res/grass.png");
+	public Image(File file) throws IOException{
+		loadImage(file);
+	}
 	
-	private static void loadImage(File file) throws IOException{
+	private void loadImage(File file) throws IOException{
 		try {
 		    img = ImageIO.read(file);
 		} catch (IOException e) {
 		}				
 	}
 	
-	public static ByteBuffer byteBuffer(File file) throws IOException{
+	public ByteBuffer byteBuffer(File file) throws IOException{
 		loadImage(file);
 		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -30,13 +32,11 @@ public class Image {
 		return ByteBuffer.wrap(imageInByte);
 	}
 	
-	public int getHeight(File file) throws IOException{
-		loadImage(file);
+	public int getHeight()throws IOException{
 		return img.getHeight();
 	}
 	
-	public int getWidth(File file) throws IOException{
-		loadImage(file);
+	public int getWidth() throws IOException{
 		return img.getWidth();
 	}
 }
