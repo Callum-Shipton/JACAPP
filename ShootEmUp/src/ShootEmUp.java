@@ -1,8 +1,6 @@
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
-import java.io.IOException;
-
 public class ShootEmUp {
 
 	// Screen Width & Height

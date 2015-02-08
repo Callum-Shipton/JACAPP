@@ -1,6 +1,3 @@
-import java.io.File;
-import java.io.IOException;
-
 public abstract class Entity {
 
 	private int posX;
@@ -63,5 +60,13 @@ public abstract class Entity {
 
 	public void setHealth(int health) {
 		this.health = health;
+	}
+	
+	public Image getImage(){
+		return image;
+	}
+	
+	public void setImage(Image image){
+		this.image = image;
 	}
 }

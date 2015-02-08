@@ -1,5 +1,3 @@
-import java.io.File;
-
 public class Art {
 	public static String grass = "res/img/grass.png";
 	
