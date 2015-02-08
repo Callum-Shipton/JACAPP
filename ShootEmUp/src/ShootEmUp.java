@@ -50,8 +50,8 @@ public class ShootEmUp {
 		// invoked during this call.
 		glfwPollEvents();
 
-		d.tick();
-		p.tick();
+		d.update();
+		p.update();
 
 	}
 

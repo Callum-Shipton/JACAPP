@@ -10,7 +10,7 @@ public class Player extends Entity {
 		super(posX, posY, speed, health);
 	}
 
-	public void tick() {
+	public void update() {
 		checkMove();
 	}
 
