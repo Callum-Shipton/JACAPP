@@ -76,6 +76,13 @@ public class Display {
 		// creates the ContextCapabilities instance and makes the OpenGL
 		// bindings available for use.
 		GLContext.createFromCurrent();
+		
+		initGL();
+	}
+
+	private void initGL() {
+		GL11.glClearColor(0.4f, 0.6f, 0.9f, 1.0f);
+		
 	}
 
 	public void destroyGLFW() {

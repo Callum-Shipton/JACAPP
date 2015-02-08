@@ -1,6 +1,8 @@
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
+import org.lwjgl.opengl.GL11;
+
 public class ShootEmUp {
 
 	// Screen Width & Height
@@ -60,8 +62,12 @@ public class ShootEmUp {
 	}
 
 	private void render() {
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the
 		// framebuffer
+		glfwSwapBuffers(d.getWindow());
+		
+
 
 	}
 
