@@ -1,6 +1,10 @@
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
+import javax.vecmath.Vector2f;
+
+import org.lwjgl.opengl.GL11;
+
 public class ShootEmUp {
 
 	// Screen Width & Height
@@ -12,6 +16,7 @@ public class ShootEmUp {
 
 	// Will be moved to LEVEL
 	Player p;
+	Renderer r;
 
 	public void run() {
 		try {
@@ -22,8 +27,8 @@ public class ShootEmUp {
 
 			// Release window and window callbacks Terminate GLFW and release
 			// the GLFWerrorfun
-			d.destroyGLFW();
 			Keyboard.destroy();
+			d.destroyGLFW();
 
 		}
 	}
@@ -33,6 +38,8 @@ public class ShootEmUp {
 		d.initGLFW();
 
 		p = new Player(100, 100, 1, 10, Art.grass);
+		
+		r = new Renderer(d.getSID());
 		
 		// Initialise key handling
 		Keyboard.keyCheck(d.getWindow());
@@ -60,12 +67,13 @@ public class ShootEmUp {
 	}
 
 	private void render() {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the
-		// framebuffer
-		glfwSwapBuffers(d.getWindow()); // Swaps front and back buffers to render changes
+		 glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	        glClear(GL_COLOR_BUFFER_BIT);
+
 		
-
-
+		
+		r.draw(d.getTID(), new Vector2f(100.0f, 100.0f), new Vector2f(100.0f,100.0f), 0.0f);
+		glfwSwapBuffers(d.getWindow()); // Swaps front and back buffers to render changes
 	}
 
 	public static void main(String[] args){

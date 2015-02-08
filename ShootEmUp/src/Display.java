@@ -8,10 +8,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 import javax.vecmath.Matrix4f;
 
+import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWvidmode;
 import org.lwjgl.opengl.GL11;
@@ -34,8 +36,10 @@ public class Display {
 	private int height;
 
 	private int[] texIds = new int[] {0};
+	private int pId = 0;
 	
 	Matrix4f projectionMatrix;
+	int projectionMatrixLocation = 0;
 
 	public Display(int width, int height) {
 		this.width = width;
@@ -98,8 +102,32 @@ public class Display {
 	}
 	
 	private void setupMatrices() {
-		projectionMatrix = new Matrix4f();
 		
+		
+		GL20.glUseProgram(pId);
+		projectionMatrixLocation = GL20.glGetUniformLocation(pId, "projection");
+		projectionMatrix = new Matrix4f();
+		projectionMatrix.m00 = 2.0f/(width-0);
+		projectionMatrix.m11 = 2.0f/(height-0);
+		projectionMatrix.m22 = -2.0f/(1000.0f-0.1f);
+		projectionMatrix.m30 = -(width+0)/(width-0);
+		projectionMatrix.m31 = -(0+height)/(height-0);
+		projectionMatrix.m32 = -(1000.0f+0.1f)/(1000.0f-0.1f);
+		projectionMatrix.m33 = 1.0f;
+		
+		FloatBuffer matrix44Buffer = BufferUtils.createFloatBuffer(16);
+		float[] row = new float[4];
+		projectionMatrix.getColumn(0, row);
+		matrix44Buffer.put(row, 0, 4);
+		projectionMatrix.getColumn(1, row);
+		matrix44Buffer.put(row, 0, 4);
+		projectionMatrix.getColumn(2, row);
+		matrix44Buffer.put(row, 0, 4);
+		projectionMatrix.getColumn(3, row);
+		matrix44Buffer.put(row, 0, 4);
+		matrix44Buffer.flip();
+		
+		GL20.glUniformMatrix4(projectionMatrixLocation, true, matrix44Buffer);
 	}
 
 	private void setupTextures() {
@@ -139,7 +167,7 @@ public class Display {
         int fsId = this.loadShader("src/FragmentShader.glsl", GL20.GL_FRAGMENT_SHADER);
          
         // Create a new shader program that links both shaders
-        int pId = GL20.glCreateProgram();
+        pId = GL20.glCreateProgram();
         GL20.glAttachShader(pId, vsId);
         GL20.glAttachShader(pId, fsId);
  
@@ -150,6 +178,8 @@ public class Display {
          
         GL20.glLinkProgram(pId);
         GL20.glValidateProgram(pId);
+        
+        
 		
 	}
 
@@ -179,7 +209,7 @@ public class Display {
 
 	private void initGL() {
 		GL11.glClearColor(0.4f, 0.6f, 0.9f, 1.0f);
-		
+		GL11.glViewport(0, 0, width, height);
 	}
 
 	public void destroyGLFW() {
@@ -190,6 +220,13 @@ public class Display {
 
 	public long getWindow() {
 		return window;
+	}
+	
+	public int getSID() {
+		return pId;
+	}
+	public int getTID() {
+		return texIds[0];
 	}
 
 	public void update() {
