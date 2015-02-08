@@ -42,7 +42,7 @@ public class TexturedVertex {
 		float[] out = new float[TexturedVertex.elementCount];
 		int i = 0;
 		
-		// Insert XYZW elements
+		// Insert XY elements
 		out[i++] = this.xy[0];
 		out[i++] = this.xy[1];
 
