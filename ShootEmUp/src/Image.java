@@ -22,9 +22,7 @@ public class Image {
 		}			
 	}
 	
-	public ByteBuffer byteBuffer(File file) throws IOException{
-		loadImage(file);
-	
+	public ByteBuffer byteBuffer() throws IOException{
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ImageIO.write( img, "png", baos );
 		baos.flush();
