@@ -3,8 +3,6 @@ import static org.lwjgl.opengl.GL11.*;
 
 import java.io.IOException;
 
-import org.lwjgl.opengl.GL11;
-
 public class ShootEmUp {
 
 	// Screen Width & Height
@@ -32,7 +30,7 @@ public class ShootEmUp {
 		}
 	}
 
-	private void init() throws IOException {
+	private void init() {
 		d = new Display(WIDTH, HEIGHT);
 		d.initGLFW();
 
@@ -72,7 +70,7 @@ public class ShootEmUp {
 
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args){
 		new ShootEmUp().run();
 	}
 

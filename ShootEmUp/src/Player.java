@@ -1,6 +1,5 @@
 import static org.lwjgl.glfw.GLFW.*;
 
-import java.io.File;
 import java.io.IOException;
 
 public class Player extends Entity {
@@ -9,8 +8,8 @@ public class Player extends Entity {
 		super(10, 10, 10, 10, Art.grass);
 	}
 
-	public Player(int posX, int posY, int speed, int health, File file) throws IOException {
-		super(posX, posY, speed, health, file);
+	public Player(int posX, int posY, int speed, int health, String image) {
+		super(posX, posY, speed, health, image);
 	}
 
 	// called every update

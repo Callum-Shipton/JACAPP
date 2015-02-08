@@ -8,12 +8,14 @@ import javax.imageio.*;
 
 public class Image {
 	private BufferedImage img = null;
+	private File image;
 	
-	public Image(File file) throws IOException{
-		loadImage(file);
+	public Image(String file) throws IOException{
+		image = new File(file);
+		loadImage(image);
 	}
 	
-	private void loadImage(File file) throws IOException{
+	private void loadImage(File file){
 		try {
 		    img = ImageIO.read(file);
 		} catch (IOException e) {
@@ -22,7 +24,7 @@ public class Image {
 	
 	public ByteBuffer byteBuffer(File file) throws IOException{
 		loadImage(file);
-		
+	
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ImageIO.write( img, "png", baos );
 		baos.flush();

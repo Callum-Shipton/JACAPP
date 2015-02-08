@@ -28,7 +28,7 @@ public class Level {
 			for(int y = 0; y < map.getHeight(); y++){
 				System.out.println(map.getRGB(x, y));
 				switch(map.getRGB(x, y)){
-				case -1: tiles[x][y] = Art.grass;
+				case -1: tiles[x][y] = new File(Art.grass);
 				}
 			}
 		}	
