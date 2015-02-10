@@ -42,13 +42,16 @@ public class Image {
                     4 * decoder.getWidth() * decoder.getHeight());
             decoder.decode(buf, decoder.getWidth() * 4, Format.RGBA);
             buf.flip();
-             
+
+    
             in.close();
+    		return buf;
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(-1);
         }
 		return null;
+
 	}
 	
 	public int getHeight(){

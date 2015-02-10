@@ -25,7 +25,11 @@ public class ShootEmUp {
 			init();
 			loop();
 
-		} finally {
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+			finally {
 
 			// Release window and window callbacks Terminate GLFW and release
 			// the GLFWerrorfun
