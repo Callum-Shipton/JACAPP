@@ -3,13 +3,15 @@ import static org.lwjgl.glfw.GLFW.*;
 import java.io.IOException;
 
 public class Player extends Entity {
-
+	
+	private Weapon weapon;
+	
 	public Player() throws IOException {
-		super(10, 10, 10, 10, Art.grass);
+		super(10, 10, 10, Art.grass);
 	}
 
-	public Player(int posX, int posY, int speed, int health, String image) {
-		super(posX, posY, speed, health, image);
+	public Player(int posX, int posY, int speed, String image) {
+		super(posX, posY, speed, image);
 	}
 
 	// called every update
@@ -37,4 +39,11 @@ public class Player extends Entity {
 
 	}
 
+	public Weapon getWeapon(){
+		return weapon;
+	}
+	
+	public void setWeapon(Weapon weapon){
+		this.weapon = weapon;
+	}
 }

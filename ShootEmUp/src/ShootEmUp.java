@@ -39,7 +39,7 @@ public class ShootEmUp {
 		d = new Display(WIDTH, HEIGHT);
 		d.initGLFW();
 
-		p = new Player(100, 100, 1, 10, Art.grass);
+		p = new Player(100, 100, 1, Art.grass);
 		
 		r = new Renderer(d.getSID());
 		
