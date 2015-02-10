@@ -4,8 +4,8 @@ public class TexturedVertex {
 	/* Vertex data: [pos.x,pos.y,tex.s,tex.t] */
 	
 	// Vertex data
-	private float[] xy = new float[] {0f, 1f};
-	private float[] st = new float[] {0f, 0f};
+	private float[] xy = new float[] {0.0f, 0.0f};
+	private float[] st = new float[] {0.0f, 0.0f};
 	
 	// The amount of bytes an element has
 	public static final int elementBytes = 4;
