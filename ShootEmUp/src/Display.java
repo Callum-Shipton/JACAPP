@@ -11,9 +11,8 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-import javax.vecmath.Matrix4f;
-
 import org.lwjgl.BufferUtils;
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWvidmode;
 import org.lwjgl.opengl.GL11;
@@ -21,6 +20,8 @@ import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 import org.lwjgl.opengl.GLContext;
+
+import Math.Matrix4;
 
 public class Display {
 
@@ -38,7 +39,7 @@ public class Display {
 	private int[] texIds = new int[] {0};
 	private int pId = 0;
 	
-	Matrix4f projectionMatrix;
+	Matrix4 projectionMatrix;
 	int projectionMatrixLocation = 0;
 
 	public Display(int width, int height) {
@@ -103,36 +104,22 @@ public class Display {
 	
 	private void setupMatrices() {
 		
-		
+		projectionMatrixLocation = GL20.glGetUniformLocation(pId, "projectionMatrix");
 		GL20.glUseProgram(pId);
-		projectionMatrixLocation = GL20.glGetUniformLocation(pId, "projection");
-		projectionMatrix = new Matrix4f();
-		projectionMatrix.m00 = 2.0f/(width-0);
-		projectionMatrix.m11 = 2.0f/(height-0);
-		projectionMatrix.m22 = -2.0f/(1000.0f-0.1f);
-		projectionMatrix.m30 = -(width+0)/(width-0);
-		projectionMatrix.m31 = -(0+height)/(height-0);
-		projectionMatrix.m32 = -(1000.0f+0.1f)/(1000.0f-0.1f);
-		projectionMatrix.m33 = 1.0f;
-		
+
+		projectionMatrix = new Matrix4();
+		projectionMatrix.clearToOrtho(0.0f, 800.0f, 600.0f, 0.0f, 0.1f, 100.0f);
 		FloatBuffer matrix44Buffer = BufferUtils.createFloatBuffer(16);
-		float[] row = new float[4];
-		projectionMatrix.getColumn(0, row);
-		matrix44Buffer.put(row, 0, 4);
-		projectionMatrix.getColumn(1, row);
-		matrix44Buffer.put(row, 0, 4);
-		projectionMatrix.getColumn(2, row);
-		matrix44Buffer.put(row, 0, 4);
-		projectionMatrix.getColumn(3, row);
-		matrix44Buffer.put(row, 0, 4);
-		matrix44Buffer.flip();
+		matrix44Buffer = projectionMatrix.toBuffer();
 		
 		GL20.glUniformMatrix4(projectionMatrixLocation, true, matrix44Buffer);
+        
+
 	}
 
 	private void setupTextures() {
 		
-		Image texIm = new Image(Art.level1);
+		Image texIm = new Image(Art.face);
 		ByteBuffer buf = texIm.byteBuffer();
 		texIds[0] = GL11.glGenTextures();
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
@@ -203,6 +190,19 @@ public class Display {
         shaderID = GL20.glCreateShader(type);
         GL20.glShaderSource(shaderID, shaderSource);
         GL20.glCompileShader(shaderID);
+        
+        String infoLog = GL20.glGetShaderInfoLog(shaderID, GL20.glGetShaderi(shaderID, GL20.GL_INFO_LOG_LENGTH));
+		
+		if(GL20.glGetShaderi(shaderID, GL20.GL_COMPILE_STATUS) == GL_FALSE)
+			throw new RuntimeException("Failure in compiling " + filename + " shader. Error log:\n" + infoLog);
+		else {
+			System.out.print("Compiling " + filename + " shader successful.");
+			if(infoLog != null && !(infoLog = infoLog.trim()).isEmpty())
+				System.out.println(" Log:\n" + infoLog);
+			else
+				System.out.println();
+		}
+		
          
         return shaderID;
     }

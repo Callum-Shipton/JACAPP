@@ -1,9 +1,11 @@
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
-import javax.vecmath.Vector2f;
-
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
+
+import Math.Vector2;
 
 public class ShootEmUp {
 
@@ -70,9 +72,9 @@ public class ShootEmUp {
 		 glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	        glClear(GL_COLOR_BUFFER_BIT);
 
-		
-		
-		r.draw(d.getTID(), new Vector2f(100.0f, 100.0f), new Vector2f(100.0f,100.0f), 0.0f);
+	        
+
+		r.draw(d.getTID(), new Vector2(100.0f, 100.0f), new Vector2(100.0f,100.0f), 0.0f);
 		glfwSwapBuffers(d.getWindow()); // Swaps front and back buffers to render changes
 	}
 

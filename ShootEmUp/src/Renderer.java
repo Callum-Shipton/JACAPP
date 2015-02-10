@@ -1,16 +1,16 @@
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 
-import javax.vecmath.Matrix4f;
-import javax.vecmath.Vector2f;
-import javax.vecmath.Vector3f;
-
 import org.lwjgl.BufferUtils;
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
+
+import Math.Matrix4;
+import Math.Vector2;
 
 
 public class Renderer {
@@ -25,13 +25,15 @@ public class Renderer {
 		initRenderData();
 	}
 	
-	public void draw(int Texid, Vector2f pos, Vector2f size, float rotate){
-		//GL20.glUseProgram(shaderProgramID);
-		Matrix4f model = new Matrix4f();
-		model.setIdentity();
+	public void draw(int Texid, Vector2 pos, Vector2 size, float rotate){
+		GL20.glUseProgram(shaderProgramID);
 		
+
+		  
+		  
+		Matrix4 model = new Matrix4();
+		model.clearToIdentity();
 		
-	
 		//model.m03 += pos.x;
 		//model.m13 += pos.y;
 		//model.m23 += -5.0f; 
@@ -40,30 +42,26 @@ public class Renderer {
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, Texid);
         
         FloatBuffer matrix44Buffer = BufferUtils.createFloatBuffer(16);
-		float[] row = new float[4];
-		model.getColumn(0, row);
-		matrix44Buffer.put(row, 0, 4);
-		model.getColumn(1, row);
-		matrix44Buffer.put(row, 0, 4);
-		model.getColumn(2, row);
-		matrix44Buffer.put(row, 0, 4);
-		model.getColumn(3, row);
-		matrix44Buffer.put(row, 0, 4);
-		matrix44Buffer.flip();
+        matrix44Buffer = model.toBuffer();
+
+
 		
-		int modelMatrixLocation = GL20.glGetUniformLocation(shaderProgramID, "model");
+		int modelMatrixLocation = GL20.glGetUniformLocation(shaderProgramID, "modelMatrix");
 		
 		GL20.glUniformMatrix4(modelMatrixLocation, true, matrix44Buffer);
+		
+		
+
         
         GL30.glBindVertexArray(VAO);
         GL20.glEnableVertexAttribArray(0);
-        GL20.glEnableVertexAttribArray(1);
+        //GL20.glEnableVertexAttribArray(1);
         
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, EBO);
         
         GL11.glDrawElements(GL11.GL_TRIANGLES, 6, GL11.GL_UNSIGNED_BYTE, 0);
         GL30.glBindVertexArray(0);
-      //  GL20.glUseProgram(0);
+        GL20.glUseProgram(0);
 	}
 	private void initRenderData(){
 		
@@ -103,11 +101,6 @@ public class Renderer {
 		    GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, VBO);
 		    GL15.glBufferData(GL15.GL_ARRAY_BUFFER, verticesFloatBuffer, GL15.GL_STATIC_DRAW);
 		    
-		    EBO = GL15.glGenBuffers();
-		    GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, EBO);
-	        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, 
-	                GL15.GL_STATIC_DRAW);
-	        
 	        GL20.glEnableVertexAttribArray(0);
 	        GL20.glEnableVertexAttribArray(1);
 	        
@@ -117,10 +110,15 @@ public class Renderer {
 	        // Put the texture coordinates in attribute list 1
 	        GL20.glVertexAttribPointer(1, TexturedVertex.textureElementCount, GL11.GL_FLOAT, 
 	                false, TexturedVertex.stride, TexturedVertex.textureByteOffset);
+		    
+		    EBO = GL15.glGenBuffers();
+		    GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, EBO);
+	        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, 
+	                GL15.GL_STATIC_DRAW);
 	        
-
-	        
-		    GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);  
 		    GL30.glBindVertexArray(0);
+		    
+			GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+			GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 }

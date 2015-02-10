@@ -1,15 +1,17 @@
-#version 150 core
+#version 330
 
-in vec2 pos;
-in vec2 tex;
+layout(location = 0) in vec2 pos;
+layout (location = 1) in vec2 tex;
 
-out vec2 TexCoords;
 
-uniform mat4 model;
-uniform mat4 projection;
+uniform mat4 modelMatrix;
+uniform mat4 projectionMatrix;
+
+out vec2 TexCoord;
 
 void main()
 {
-    TexCoords = tex.xy;
-    gl_Position =  model * vec4(pos.xy, 0.0, 1.0);
+    
+    gl_Position =  modelMatrix * vec4(pos.xy, 0.0f, 1.0f);
+    TexCoord = tex;
 }
