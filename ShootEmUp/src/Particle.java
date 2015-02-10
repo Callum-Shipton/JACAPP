@@ -1,10 +1,18 @@
 
-public class Particle extends Entity{
+public class Particle extends Entity implements Collidable{
 	private int damage;
+	private int range;
 	
-	public Particle(int xPos, int yPos, int speed, String image, int damage){
-		super(xPos, yPos, speed, image);
+	public Particle(int posX, int posY, int speed, String image, int damage){
+		super(posX, posY, speed, image);
 		this.damage = damage;
+	}
+	
+	@Override
+	public void onCollision(Collidable c) {
+		// TODO Auto-generated method stub
+		
+		// Despawn and do damage;
 	}
 	
 	public int getDamage(){
@@ -13,5 +21,13 @@ public class Particle extends Entity{
 	
 	public void setDamage(int damage){
 		this.damage = damage;
+	}
+
+	public int getRange() {
+		return range;
+	}
+
+	public void setRange(int range) {
+		this.range = range;
 	}
 }

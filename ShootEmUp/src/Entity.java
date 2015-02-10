@@ -1,8 +1,8 @@
 public abstract class Entity {
 
-	private int posX;
-	private int posY;
-	private int speed;
+	protected int posX;
+	protected int posY;
+	protected int speed;
 	
 	private Image image;
 

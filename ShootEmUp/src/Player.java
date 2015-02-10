@@ -4,6 +4,9 @@ import java.io.IOException;
 
 public class Player extends Entity {
 	
+	private int health;
+	
+	private int lives; 
 	private Weapon weapon;
 	
 	public Player() throws IOException {
@@ -17,6 +20,7 @@ public class Player extends Entity {
 	// called every update
 	public void update() {
 		checkMove();
+		deathCheck();
 	}
 	
 	private void checkMove() {
@@ -37,6 +41,34 @@ public class Player extends Entity {
 			moveHorizontally(1);
 		}
 
+	}
+	
+	private void deathCheck(){
+		if(health <= 0){
+			respawn();
+		}
+	}
+
+	private void respawn(){
+		lives--;
+		posX = 10;
+		posY = 10;
+	}
+	
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+
+	public int getLives() {
+		return lives;
+	}
+
+	public void setLives(int lives) {
+		this.lives = lives;
 	}
 
 	public Weapon getWeapon(){
