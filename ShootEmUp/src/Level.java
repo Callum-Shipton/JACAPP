@@ -5,17 +5,22 @@ import java.io.IOException;
 import javax.imageio.*;
 
 import Display.Art;
+import Display.Renderer;
+import Object.Player;
 
 public class Level {
 	private BufferedImage map = null;
 	private File file;
 	private File[][] tiles;
+	private int[] spawn = new int[2];
+	private Player player;
 	
-	public Level(File file){
-		this.file = file;
+	public Level(String file){
+		this.file = new File(file);
 		loadLevel();
 		tiles = new File[map.getWidth()][map.getHeight()];
 		setTiles();
+		addStuff();
 		renderTiles();
 	}
 	
@@ -37,7 +42,21 @@ public class Level {
 		}	
 	}
 	
+	private void addStuff(){
+		r = new Renderer(d.getSID());
+		
+		player = new Player(spawn[0], spawn[1], 1, 0, Art.player);
+	}
+	
 	private void renderTiles(){
 		// TODO Render tiles from the tiles array
+	}
+
+	public int[] getSpawn() {
+		return spawn;
+	}
+
+	public void setSpawn(int[] spawn) {
+		this.spawn = spawn;
 	}
 }

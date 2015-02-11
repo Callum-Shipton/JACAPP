@@ -4,6 +4,8 @@ import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 
+
+
 import Display.Art;
 import Display.Display;
 import Display.Renderer;
@@ -21,8 +23,9 @@ public class ShootEmUp {
 	private Display d;
 
 	// Will be moved to LEVEL
-	Player p;
 	Renderer r;
+	
+	Level level1;
 
 	public void run() {
 		try {
@@ -46,10 +49,8 @@ public class ShootEmUp {
 	private void init() {
 		d = new Display(WIDTH, HEIGHT);
 		d.initGLFW();
-
-		p = new Player(100, 100, 1, 0, Art.player);
 		
-		r = new Renderer(d.getSID());
+		level1 = new Level(Art.level1);
 		
 		// Initialise key handling
 		Keyboard.keyCheck(d.getWindow());
