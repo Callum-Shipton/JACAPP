@@ -82,9 +82,6 @@ public class ShootEmUp {
 			GL13.glActiveTexture(GL13.GL_TEXTURE0);
 	        GL11.glBindTexture(GL11.GL_TEXTURE_2D, d.textureIDs[0]);
 
-	        
-
-		r.draw(d.textureIDs[0], new Vector2(100.0f, 100.0f), new Vector2(100.0f, 100.0f), 90.0f);
 		glfwSwapBuffers(d.getWindow()); // Swaps front and back buffers to render changes
 	}
 

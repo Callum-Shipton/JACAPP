@@ -51,7 +51,11 @@ public class Level {
 	}
 	
 	private void renderTiles(){
-		// TODO Render tiles from the tiles array
+		//for(int i = 0; i < map.getWidth() i++){
+		//	for(int j = 0; j < map.getHeight(), j++){
+		//		r.draw(Display.Display., pos, size, rotate);
+		//	}
+	//	}
 	}
 
 	public int[] getSpawn() {
