@@ -67,11 +67,11 @@ public class Renderer {
 		TexturedVertex vertices[];
 		
 		TexturedVertex v0 = new TexturedVertex(); 
-        v0.setXY(-0.5f, 0.5f);  v0.setST(1.0f, 0.0f);
+        v0.setXY(-0.5f, 0.5f);  v0.setST(0.0f, 0.0f);
         TexturedVertex v1 = new TexturedVertex(); 
         v1.setXY(-0.5f, -0.5f);  v1.setST(0.0f, 1.0f);
         TexturedVertex v2 = new TexturedVertex(); 
-        v2.setXY(0.5f, -0.5f);  v2.setST(0.0f, 0.0f);
+        v2.setXY(0.5f, -0.5f);  v2.setST(1.0f, 1.0f);
         TexturedVertex v3 = new TexturedVertex(); 
         v3.setXY(0.5f, 0.5f);  v3.setST(1.0f, 0.0f);
         
