@@ -157,9 +157,9 @@ public class Display {
 
 	private void loadShaders() {
 		// Load the vertex shader
-        int vsId = this.loadShader("src/VertexShader.glsl", GL20.GL_VERTEX_SHADER);
+        int vsId = this.loadShader("src/Display/VertexShader.glsl", GL20.GL_VERTEX_SHADER);
         // Load the fragment shader
-        int fsId = this.loadShader("src/FragmentShader.glsl", GL20.GL_FRAGMENT_SHADER);
+        int fsId = this.loadShader("src/Display/FragmentShader.glsl", GL20.GL_FRAGMENT_SHADER);
          
         // Create a new shader program that links both shaders
         pId = GL20.glCreateProgram();
