@@ -103,9 +103,9 @@ public class Display {
 	}
 	
 	private void setupMatrices() {
-		
-		projectionMatrixLocation = GL20.glGetUniformLocation(pId, "projectionMatrix");
 		GL20.glUseProgram(pId);
+		projectionMatrixLocation = GL20.glGetUniformLocation(pId, "projectionMatrix");
+		
 
 		projectionMatrix = new Matrix4();
 		projectionMatrix.clearToOrtho(0.0f, 800.0f, 600.0f, 0.0f, 0.1f, 100.0f);
@@ -113,20 +113,28 @@ public class Display {
 		matrix44Buffer = projectionMatrix.toBuffer();
 		
 		GL20.glUniformMatrix4(projectionMatrixLocation, true, matrix44Buffer);
+		
+		GL20.glUseProgram(0);
         
 
 	}
 
 	private void setupTextures() {
+        
+		GL20.glUseProgram(pId);
+	
+		
 		texIds[0] = GL11.glGenTextures();
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, texIds[0]);
+
+		
 		Image texIm = new Image(Art.face);
 		ByteBuffer buf = texIm.byteBuffer();
 
          
         // All RGB bytes are aligned to each other and each component is 1 byte
-       // GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
+       GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
          
         // Upload the texture data and generate mip maps (for scaling)
         GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGB, texIm.getWidth(), texIm.getHeight(), 0, 
@@ -134,13 +142,14 @@ public class Display {
        GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
          
         // Setup the ST coordinate system
-      //  GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL11.GL_REPEAT);
-      //  GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_REPEAT);
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL11.GL_REPEAT);
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_REPEAT);
          
         // Setup what to do when the texture has to be scaled
-      //  GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
-       // GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR_MIPMAP_LINEAR);
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR_MIPMAP_LINEAR);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+        GL20.glUseProgram(0);
         }
 
 	private void loadShaders() {

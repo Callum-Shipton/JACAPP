@@ -3,6 +3,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 
 import Math.Vector2;
@@ -75,6 +76,9 @@ public class ShootEmUp {
 	private void render() {
 		 glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	        glClear(GL_COLOR_BUFFER_BIT);
+	        
+			GL13.glActiveTexture(GL13.GL_TEXTURE0);
+	        GL11.glBindTexture(GL11.GL_TEXTURE_2D, d.getTID());
 
 	        
 

@@ -35,8 +35,14 @@ public class Renderer {
 		//model.m13 += pos.y;
 		//model.m23 += -5.0f;
 		
-		GL13.glActiveTexture(GL13.GL_TEXTURE0);
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, Texid);
+		/*
+		 * 
+		double timeValue = GLFW.glfwGetTime();
+		double greenValue = ((Math.sin(timeValue) / 2) + 0.5);
+		int vertexColorLocation = GL20.glGetUniformLocation(shaderProgramID, "ourColor");
+		GL20.glUniform2f(vertexColorLocation, 0.0f, (float) greenValue);
+		
+		*/
         
         FloatBuffer matrix44Buffer = BufferUtils.createFloatBuffer(16);
         matrix44Buffer = model.toBuffer();
