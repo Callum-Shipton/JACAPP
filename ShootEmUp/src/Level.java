@@ -14,6 +14,7 @@ public class Level {
 	private File[][] tiles;
 	private int[] spawn = new int[2];
 	private Player player;
+	private Renderer r;
 	
 	public Level(String file){
 		this.file = new File(file);
@@ -43,7 +44,8 @@ public class Level {
 	}
 	
 	private void addStuff(){
-		r = new Renderer(d.getSID());
+		
+		r = new Renderer(Display.Display.currentShader);
 		
 		player = new Player(spawn[0], spawn[1], 1, 0, Art.player);
 	}

@@ -10,10 +10,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWvidmode;
 import org.lwjgl.opengl.GL11;
@@ -38,11 +36,13 @@ public class Display {
 	private int width;
 	private int height;
 
-	private int[] texIds = new int[] {0};
-	private int pId = 0;
+	public static int[] textureIDs = new int[10];
+	public static int[] shaderProgramIDs = new int[3];
 	
-	Matrix4 projectionMatrix;
-	int projectionMatrixLocation = 0;
+	public static int currentShader = 0;
+	
+	private Matrix4 projectionMatrix;
+	private int projectionMatrixLocation = 0;
 
 	public Display(int width, int height) {
 		this.width = width;
@@ -99,14 +99,14 @@ public class Display {
 		
 		initGL();
 		
-		loadShaders();
-		setupTextures();
-		setupMatrices();
+		initShaders();
+		initTextures();
+		initMatrices();
 	}
 	
-	private void setupMatrices() {
-		GL20.glUseProgram(pId);
-		projectionMatrixLocation = GL20.glGetUniformLocation(pId, "projectionMatrix");
+	private void initMatrices() {
+		GL20.glUseProgram(currentShader);
+		projectionMatrixLocation = GL20.glGetUniformLocation(currentShader, "projectionMatrix");
 		
 
 		projectionMatrix = new Matrix4();
@@ -122,14 +122,13 @@ public class Display {
 
 	}
 
-	private void setupTextures() {
+	private void initTextures() {
         
-		GL20.glUseProgram(pId);
-	
+		GL20.glUseProgram(currentShader);
 		
-		texIds[0] = GL11.glGenTextures();
+		textureIDs[0] = GL11.glGenTextures();
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, texIds[0]);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureIDs[0]);
 
 		
 		Image texIm = new Image(Art.face);
@@ -155,30 +154,30 @@ public class Display {
         GL20.glUseProgram(0);
         }
 
-	private void loadShaders() {
+	private void initShaders() {
 		// Load the vertex shader
-        int vsId = this.loadShader("src/Display/VertexShader.glsl", GL20.GL_VERTEX_SHADER);
+        int vsId = loadShader("src/Display/VertexShader.glsl", GL20.GL_VERTEX_SHADER);
         // Load the fragment shader
-        int fsId = this.loadShader("src/Display/FragmentShader.glsl", GL20.GL_FRAGMENT_SHADER);
+        int fsId = loadShader("src/Display/FragmentShader.glsl", GL20.GL_FRAGMENT_SHADER);
          
         // Create a new shader program that links both shaders
-        pId = GL20.glCreateProgram();
-        GL20.glAttachShader(pId, vsId);
-        GL20.glAttachShader(pId, fsId);
+        currentShader = GL20.glCreateProgram();
+        GL20.glAttachShader(currentShader, vsId);
+        GL20.glAttachShader(currentShader, fsId);
  
         // Position information will be attribute 0
-        GL20.glBindAttribLocation(pId, 0, "pos");
+        GL20.glBindAttribLocation(currentShader, 0, "pos");
         // Textute information will be attribute 1
-        GL20.glBindAttribLocation(pId, 1, "tex");
+        GL20.glBindAttribLocation(currentShader, 1, "tex");
          
-        GL20.glLinkProgram(pId);
-        GL20.glValidateProgram(pId);
+        GL20.glLinkProgram(currentShader);
+        GL20.glValidateProgram(currentShader);
         
+        shaderProgramIDs[0] = currentShader;
         
-		
 	}
 
-	private int loadShader(String filename, int type) {
+	public static int loadShader(String filename, int type) {
         StringBuilder shaderSource = new StringBuilder();
         int shaderID = 0;
          
@@ -229,18 +228,11 @@ public class Display {
 	public long getWindow() {
 		return window;
 	}
-	
-	public int getSID() {
-		return pId;
-	}
-	public int getTID() {
-		return texIds[0];
-	}
 
 	public void update() {
 		if (Keyboard.getKey(GLFW_KEY_ESCAPE) == 1) {
 			glfwSetWindowShouldClose(window, GL_TRUE); // We will detect this in
-			// our rendering loop
+			// our update loop
 		}
 
 	}
