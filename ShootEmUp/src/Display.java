@@ -108,7 +108,7 @@ public class Display {
 		
 
 		projectionMatrix = new Matrix4();
-		projectionMatrix.clearToOrtho(0.0f, 800.0f, 600.0f, 0.0f, 0.1f, 100.0f);
+		projectionMatrix.clearToOrtho(0.0f, 1024.0f, 720.0f, 0.0f, -1.0f, 1.0f);
 		FloatBuffer matrix44Buffer = BufferUtils.createFloatBuffer(16);
 		matrix44Buffer = projectionMatrix.toBuffer();
 		
@@ -129,7 +129,7 @@ public class Display {
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, texIds[0]);
 
 		
-		Image texIm = new Image(Art.face);
+		Image texIm = new Image(Art.grass);
 		ByteBuffer buf = texIm.byteBuffer();
 
          

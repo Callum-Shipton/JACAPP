@@ -30,7 +30,8 @@ public class Renderer {
 		
 		Matrix4 model = new Matrix4();
 		model.clearToIdentity();
-		
+		model.translate(pos.x(), pos.y(), 0.0f);
+		model.scale(size.x(), size.y(), 1.0f);
 		//model.m03 += pos.x;
 		//model.m13 += pos.y;
 		//model.m23 += -5.0f;
