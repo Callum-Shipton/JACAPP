@@ -1,10 +1,8 @@
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
-import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GL20;
 
 import Math.Vector2;
 
@@ -44,7 +42,7 @@ public class ShootEmUp {
 		d = new Display(WIDTH, HEIGHT);
 		d.initGLFW();
 
-		p = new Player(100, 100, 1, Art.player);
+		p = new Player(100, 100, 1, 0, Art.player);
 		
 		r = new Renderer(d.getSID());
 		
@@ -82,7 +80,7 @@ public class ShootEmUp {
 
 	        
 
-		r.draw(d.getTID(), new Vector2(100.0f, 100.0f), new Vector2(100.0f,100.0f), 0.0f);
+		r.draw(d.getTID(), new Vector2(0.0f, 0.0f), new Vector2(1.0f, 1.0f), 0.0f);
 		glfwSwapBuffers(d.getWindow()); // Swaps front and back buffers to render changes
 	}
 

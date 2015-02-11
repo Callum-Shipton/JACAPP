@@ -10,37 +10,45 @@ public class Player extends Entity {
 	private Weapon weapon;
 	
 	public Player() throws IOException {
-		super(10, 10, 10, Art.grass);
+		super(10, 10, 10, 0, Art.grass);
 	}
 
-	public Player(int posX, int posY, int speed, String image) {
-		super(posX, posY, speed, image);
+	public Player(int posX, int posY, int speed, int direction, String image) {
+		super(posX, posY, speed, direction, image);
 	}
 
 	// called every update
 	public void update() {
-		checkMove();
+		checkKeys();
 		deathCheck();
 	}
 	
-	private void checkMove() {
+	private void checkKeys() {
 		if (Keyboard.getKey(GLFW_KEY_W) == 1
 				|| Keyboard.getKey(GLFW_KEY_W) == 2) {
 			moveVertically(-1);
+			direction = 0;
 		}
 		if (Keyboard.getKey(GLFW_KEY_A) == 1
 				|| Keyboard.getKey(GLFW_KEY_A) == 2) {
 			moveHorizontally(-1);
+			direction = 2;
 		}
 		if (Keyboard.getKey(GLFW_KEY_S) == 1
 				|| Keyboard.getKey(GLFW_KEY_S) == 2) {
 			moveVertically(1);
+			direction = 4;
 		}
 		if (Keyboard.getKey(GLFW_KEY_D) == 1
 				|| Keyboard.getKey(GLFW_KEY_D) == 2) {
 			moveHorizontally(1);
+			direction = 6;
 		}
-
+		
+		if (Keyboard.getKey(GLFW_KEY_SPACE) == 1
+				|| Keyboard.getKey(GLFW_KEY_SPACE) == 2) {
+			shoot();
+		}
 	}
 	
 	private void deathCheck(){
@@ -53,6 +61,10 @@ public class Player extends Entity {
 		lives--;
 		posX = 10;
 		posY = 10;
+	}
+	
+	private void shoot(){
+		weapon.getParticle().generate(posX, posY, direction);
 	}
 	
 	public int getHealth() {
