@@ -2,6 +2,7 @@
 public class Particle extends Entity implements Collidable{
 	private int damage;
 	private int range;
+	private int distance;
 	
 	public Particle(int posX, int posY, int speed, String image, int damage){
 		super(posX, posY, speed, image);
@@ -29,5 +30,13 @@ public class Particle extends Entity implements Collidable{
 
 	public void setRange(int range) {
 		this.range = range;
+	}
+
+	public int getDistance() {
+		return distance;
+	}
+
+	public void setDistance(int distance) {
+		this.distance = distance;
 	}
 }

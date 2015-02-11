@@ -14,6 +14,7 @@ public class Level {
 		loadLevel();
 		tiles = new File[map.getWidth()][map.getHeight()];
 		setTiles();
+		renderTiles();
 	}
 	
 	private void loadLevel(){
@@ -32,5 +33,9 @@ public class Level {
 				}
 			}
 		}	
+	}
+	
+	private void renderTiles(){
+		// TODO Render tiles from the tiles array
 	}
 }
