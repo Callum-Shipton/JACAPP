@@ -27,6 +27,10 @@ public class Player extends Entity {
 		deathCheck();
 	}
 	
+	public void render() {
+		// TODO render stuff
+	}
+	
 	private void checkKeys() {
 		if (Keyboard.getKey(GLFW_KEY_W) == 1
 				|| Keyboard.getKey(GLFW_KEY_W) == 2) {
