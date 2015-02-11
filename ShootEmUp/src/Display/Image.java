@@ -1,3 +1,4 @@
+package Display;
 import java.awt.image.*;
 import java.io.ByteArrayOutputStream;
 import java.io.File;

@@ -1,3 +1,4 @@
+package Display;
 import static org.lwjgl.glfw.Callbacks.errorCallbackPrint;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
@@ -21,6 +22,7 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 import org.lwjgl.opengl.GLContext;
 
+import Input.Keyboard;
 import Math.Matrix4;
 
 public class Display {
@@ -108,7 +110,8 @@ public class Display {
 		
 
 		projectionMatrix = new Matrix4();
-		projectionMatrix.clearToOrtho(0.0f, 1024.0f, 720.0f, 0.0f, -1.0f, 1.0f);
+		projectionMatrix.clearToOrtho(0, width, height, 0, -1.0f, 1.0f);
+		projectionMatrix.transpose();
 		FloatBuffer matrix44Buffer = BufferUtils.createFloatBuffer(16);
 		matrix44Buffer = projectionMatrix.toBuffer();
 		
@@ -129,7 +132,7 @@ public class Display {
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, texIds[0]);
 
 		
-		Image texIm = new Image(Art.grass);
+		Image texIm = new Image(Art.face);
 		ByteBuffer buf = texIm.byteBuffer();
 
          

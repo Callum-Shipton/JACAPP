@@ -4,13 +4,18 @@ import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 
+import Display.Art;
+import Display.Display;
+import Display.Renderer;
+import Input.Keyboard;
 import Math.Vector2;
+import Object.Player;
 
 public class ShootEmUp {
 
 	// Screen Width & Height
 	int WIDTH = 1024;
-	int HEIGHT = 720;
+	int HEIGHT = 512;
 
 	// Handle for monitor/window funcs
 	private Display d;
@@ -80,7 +85,7 @@ public class ShootEmUp {
 
 	        
 
-		r.draw(d.getTID(), new Vector2(0.0f, 0.0f), new Vector2(1.0f, 1.0f), 0.0f);
+		r.draw(d.getTID(), new Vector2(100.0f, 100.0f), new Vector2(100.0f, 100.0f), 90.0f);
 		glfwSwapBuffers(d.getWindow()); // Swaps front and back buffers to render changes
 	}
 

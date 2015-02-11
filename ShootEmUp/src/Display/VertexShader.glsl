@@ -12,6 +12,6 @@ out vec2 texCoords;
 
 void main()
 {
-    gl_Position =  modelMatrix * vec4(pos.x,pos.y, 0.0f, 1.0f);
+    gl_Position = projectionMatrix * modelMatrix * vec4(pos.x,pos.y, 0.0f, 1.0f);
     texCoords = tex;
 }

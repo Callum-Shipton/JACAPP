@@ -1,3 +1,5 @@
+package Object;
+
 
 public class Weapon {
 	

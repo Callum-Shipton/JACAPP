@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import javax.imageio.*;
 
+import Display.Art;
+
 public class Level {
 	private BufferedImage map = null;
 	private File file;

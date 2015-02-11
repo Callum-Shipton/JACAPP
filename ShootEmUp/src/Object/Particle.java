@@ -1,3 +1,5 @@
+package Object;
+
 
 public class Particle extends Entity implements Collidable{
 	private int damage;

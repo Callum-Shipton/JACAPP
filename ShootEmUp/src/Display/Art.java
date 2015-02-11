@@ -1,3 +1,4 @@
+package Display;
 public class Art {
 	public static String grass = "res/img/grass.png";
 	

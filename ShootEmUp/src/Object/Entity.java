@@ -1,3 +1,6 @@
+package Object;
+import Display.Image;
+
 public abstract class Entity {
 
 	protected int posX;

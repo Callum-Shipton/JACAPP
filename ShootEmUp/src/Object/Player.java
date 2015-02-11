@@ -1,6 +1,10 @@
+package Object;
 import static org.lwjgl.glfw.GLFW.*;
 
 import java.io.IOException;
+
+import Display.Art;
+import Input.Keyboard;
 
 public class Player extends Entity {
 	

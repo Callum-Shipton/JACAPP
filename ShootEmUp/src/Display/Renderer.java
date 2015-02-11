@@ -1,3 +1,4 @@
+package Display;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 
@@ -31,7 +32,14 @@ public class Renderer {
 		Matrix4 model = new Matrix4();
 		model.clearToIdentity();
 		model.translate(pos.x(), pos.y(), 0.0f);
+		model.translate(0.5f*size.x(), 0.5f*size.y(), 0.0f);
+		model.rotateDeg(rotate, 0.0f, 0.0f, 1.0f);
+		model.translate(-0.5f*size.x(), -0.5f*size.y(), 0.0f);
 		model.scale(size.x(), size.y(), 1.0f);
+
+		model.transpose();
+		
+		
 		//model.m03 += pos.x;
 		//model.m13 += pos.y;
 		//model.m23 += -5.0f;
@@ -64,17 +72,17 @@ public class Renderer {
 	}
 	private void initRenderData(){
 		
-
+		
 		TexturedVertex vertices[];
 		
 		TexturedVertex v0 = new TexturedVertex(); 
-        v0.setXY(-0.5f, 0.5f);  v0.setST(0.0f, 0.0f);
+        v0.setXY(0.0f, 1.0f);  v0.setST(0.0f, 1.0f);
         TexturedVertex v1 = new TexturedVertex(); 
-        v1.setXY(-0.5f, -0.5f);  v1.setST(0.0f, 1.0f);
+        v1.setXY(0.0f, 0.0f);  v1.setST(0.0f, 0.0f);
         TexturedVertex v2 = new TexturedVertex(); 
-        v2.setXY(0.5f, -0.5f);  v2.setST(1.0f, 1.0f);
+        v2.setXY(1.0f, 0.0f);  v2.setST(1.0f, 0.0f);
         TexturedVertex v3 = new TexturedVertex(); 
-        v3.setXY(0.5f, 0.5f);  v3.setST(1.0f, 0.0f);
+        v3.setXY(1.0f, 1.0f);  v3.setST(1.0f, 1.0f);
         
         vertices = new TexturedVertex[] {v0,v1,v2,v3};
         FloatBuffer verticesFloatBuffer = BufferUtils.createByteBuffer(vertices.length * TexturedVertex.stride).asFloatBuffer();
