@@ -4,6 +4,7 @@ import java.nio.FloatBuffer;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
@@ -68,6 +69,9 @@ public class Renderer {
 		
 		int textureMatrixLocation = GL20.glGetUniformLocation(shaderProgramID, "textureMatrix");
 		GL20.glUniformMatrix4(textureMatrixLocation, true, matrix44Buffer);
+		
+		GL13.glActiveTexture(GL13.GL_TEXTURE0);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, Texid);
 		
         GL30.glBindVertexArray(VAO);
         GL20.glEnableVertexAttribArray(0);
