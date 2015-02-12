@@ -5,8 +5,8 @@ public class Weapon {
 	
 	private Particle particle;
 	
-	public Weapon(Particle particle){
-		this.particle = particle;
+	public Weapon(){
+		
 	}
 	
 	public Particle getParticle(){

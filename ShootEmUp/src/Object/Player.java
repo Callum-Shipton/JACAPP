@@ -20,6 +20,7 @@ public class Player extends Entity {
 	public Player(int posX, int posY, int speed, int direction, String image) {
 		super(posX, posY, speed, direction, image);
 		health = 10;
+		weapon = new Weapon();
 	}
 
 	// called every update
@@ -55,8 +56,6 @@ public class Player extends Entity {
 				|| Keyboard.getKey(GLFW_KEY_SPACE) == 2) {
 			shoot();
 		}
-		System.out.println(posX);
-		System.out.println(posX);
 	}
 	
 	private void deathCheck(){
@@ -72,7 +71,7 @@ public class Player extends Entity {
 	}
 	
 	private void shoot(){
-		weapon.getParticle().generate(posX, posY, direction);
+		new Particle(posX, posY, 10, direction, Art.particle, 1, 50);
 	}
 	
 	public int getHealth() {
