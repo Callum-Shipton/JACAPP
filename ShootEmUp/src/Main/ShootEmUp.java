@@ -76,17 +76,11 @@ public class ShootEmUp {
 	}
 
 	private void render() {
-		 glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	        glClear(GL_COLOR_BUFFER_BIT);
-	        
-			GL13.glActiveTexture(GL13.GL_TEXTURE0);
-	        GL11.glBindTexture(GL11.GL_TEXTURE_2D, Art.faceID);
 	        
 	        level1.render();
 
 		glfwSwapBuffers(d.getWindow()); // Swaps front and back buffers to render changes
-		
-		
 	}
 
 	public static void main(String[] args){

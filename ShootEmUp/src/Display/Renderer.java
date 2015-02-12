@@ -80,6 +80,7 @@ public class Renderer {
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, EBO);
         
         GL11.glDrawElements(GL11.GL_TRIANGLES, 6, GL11.GL_UNSIGNED_BYTE, 0);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
         GL30.glBindVertexArray(0);
         GL20.glUseProgram(0);
 	}
