@@ -1,5 +1,7 @@
 package Object;
 import Display.Image;
+import Display.Renderer;
+import Math.Vector2;
 
 public abstract class Entity {
 
@@ -31,6 +33,10 @@ public abstract class Entity {
 		posY += (speed * direction);
 	}
 
+	public void render(Renderer r){
+		r.draw(0,new Vector2((float)posX, (float)posY),new Vector2(1.0f, 1.0f), 0.0f);
+	}
+	
 	// Setters and getters
 
 	public int getX() {

@@ -57,6 +57,14 @@ public class Level {
 		//	}
 	//	}
 	}
+	
+	public void update(){
+		player.update();
+	}
+	
+	public void render(){
+		player.render(r);
+	}
 
 	public int[] getSpawn() {
 		return spawn;

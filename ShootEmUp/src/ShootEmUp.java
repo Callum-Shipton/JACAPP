@@ -10,8 +10,6 @@ import Display.Art;
 import Display.Display;
 import Display.Renderer;
 import Input.Keyboard;
-import Math.Vector2;
-import Object.Player;
 
 public class ShootEmUp {
 
@@ -71,7 +69,8 @@ public class ShootEmUp {
 		// Poll for window events. The key callback above will only be
 		// invoked during this call.
 		glfwPollEvents();
-
+		
+		level1.update();
 		d.update();
 	}
 
@@ -83,6 +82,8 @@ public class ShootEmUp {
 	        GL11.glBindTexture(GL11.GL_TEXTURE_2D, d.textureIDs[0]);
 
 		glfwSwapBuffers(d.getWindow()); // Swaps front and back buffers to render changes
+		
+		level1.render();
 	}
 
 	public static void main(String[] args){
