@@ -1,3 +1,4 @@
+package Main;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
@@ -45,9 +46,9 @@ public class Level {
 	
 	private void addStuff(){
 		
-		r = new Renderer(Display.Display.currentShader);
+		r = new Renderer(Art.ShaderBase);
 		
-		player = new Player(spawn[0], spawn[1], 1, 0, Art.player);
+		player = new Player(spawn[0], spawn[1], 5, 0, Art.player);
 	}
 	
 	private void renderTiles(){

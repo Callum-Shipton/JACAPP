@@ -5,23 +5,15 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
 import static org.lwjgl.opengl.GL11.GL_FALSE;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
 
-import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWvidmode;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GL20;
-import org.lwjgl.opengl.GL30;
+
 import org.lwjgl.opengl.GLContext;
 
 import Input.Keyboard;
-import Math.Matrix4;
 
 public class Display {
 
@@ -35,14 +27,6 @@ public class Display {
 
 	private int width;
 	private int height;
-
-	public static int[] textureIDs = new int[10];
-	public static int[] shaderProgramIDs = new int[3];
-	
-	public static int currentShader = 0;
-	
-	private Matrix4 projectionMatrix;
-	private int projectionMatrixLocation = 0;
 
 	public Display(int width, int height) {
 		this.width = width;
@@ -98,122 +82,9 @@ public class Display {
 		GLContext.createFromCurrent();
 		
 		initGL();
-		
-		initShaders();
-		initTextures();
-		initMatrices();
+		Art.init();
 	}
 	
-	private void initMatrices() {
-		GL20.glUseProgram(currentShader);
-		projectionMatrixLocation = GL20.glGetUniformLocation(currentShader, "projectionMatrix");
-		
-
-		projectionMatrix = new Matrix4();
-		projectionMatrix.clearToOrtho(0, width, height, 0, -1.0f, 1.0f);
-		projectionMatrix.transpose();
-		FloatBuffer matrix44Buffer = BufferUtils.createFloatBuffer(16);
-		matrix44Buffer = projectionMatrix.toBuffer();
-		
-		GL20.glUniformMatrix4(projectionMatrixLocation, true, matrix44Buffer);
-		
-		GL20.glUseProgram(0);
-        
-
-	}
-
-	private void initTextures() {
-        
-		GL20.glUseProgram(currentShader);
-		
-		textureIDs[0] = GL11.glGenTextures();
-        GL13.glActiveTexture(GL13.GL_TEXTURE0);
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureIDs[0]);
-
-		
-		Image texIm = new Image(Art.face);
-		ByteBuffer buf = texIm.byteBuffer();
-
-         
-        // All RGB bytes are aligned to each other and each component is 1 byte
-       GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
-         
-        // Upload the texture data and generate mip maps (for scaling)
-        GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGB, texIm.getWidth(), texIm.getHeight(), 0, 
-                GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buf);
-       GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
-         
-        // Setup the ST coordinate system
-        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL11.GL_REPEAT);
-        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_REPEAT);
-         
-        // Setup what to do when the texture has to be scaled
-        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
-        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR_MIPMAP_LINEAR);
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
-        GL20.glUseProgram(0);
-        }
-
-	private void initShaders() {
-		// Load the vertex shader
-        int vsId = loadShader("src/Display/VertexShader.glsl", GL20.GL_VERTEX_SHADER);
-        // Load the fragment shader
-        int fsId = loadShader("src/Display/FragmentShader.glsl", GL20.GL_FRAGMENT_SHADER);
-         
-        // Create a new shader program that links both shaders
-        currentShader = GL20.glCreateProgram();
-        GL20.glAttachShader(currentShader, vsId);
-        GL20.glAttachShader(currentShader, fsId);
- 
-        // Position information will be attribute 0
-        GL20.glBindAttribLocation(currentShader, 0, "pos");
-        // Textute information will be attribute 1
-        GL20.glBindAttribLocation(currentShader, 1, "tex");
-         
-        GL20.glLinkProgram(currentShader);
-        GL20.glValidateProgram(currentShader);
-        
-        shaderProgramIDs[0] = currentShader;
-        
-	}
-
-	public static int loadShader(String filename, int type) {
-        StringBuilder shaderSource = new StringBuilder();
-        int shaderID = 0;
-         
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(filename));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                shaderSource.append(line).append("\n");
-            }
-            reader.close();
-        } catch (IOException e) {
-            System.err.println("Could not read file.");
-            e.printStackTrace();
-            System.exit(-1);
-        }
-         
-        shaderID = GL20.glCreateShader(type);
-        GL20.glShaderSource(shaderID, shaderSource);
-        GL20.glCompileShader(shaderID);
-        
-        String infoLog = GL20.glGetShaderInfoLog(shaderID, GL20.glGetShaderi(shaderID, GL20.GL_INFO_LOG_LENGTH));
-		
-		if(GL20.glGetShaderi(shaderID, GL20.GL_COMPILE_STATUS) == GL_FALSE)
-			throw new RuntimeException("Failure in compiling " + filename + " shader. Error log:\n" + infoLog);
-		else {
-			System.out.print("Compiling " + filename + " shader successful.");
-			if(infoLog != null && !(infoLog = infoLog.trim()).isEmpty())
-				System.out.println(" Log:\n" + infoLog);
-			else
-				System.out.println();
-		}
-		
-         
-        return shaderID;
-    }
-
 	private void initGL() {
 		GL11.glClearColor(0.4f, 0.6f, 0.9f, 1.0f);
 		GL11.glViewport(0, 0, width, height);

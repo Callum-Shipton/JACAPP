@@ -19,6 +19,7 @@ public class Player extends Entity {
 
 	public Player(int posX, int posY, int speed, int direction, String image) {
 		super(posX, posY, speed, direction, image);
+		health = 10;
 	}
 
 	// called every update
@@ -31,6 +32,7 @@ public class Player extends Entity {
 		if (Keyboard.getKey(GLFW_KEY_W) == 1
 				|| Keyboard.getKey(GLFW_KEY_W) == 2) {
 			moveVertically(-1);
+
 			direction = 0;
 		}
 		if (Keyboard.getKey(GLFW_KEY_A) == 1
@@ -53,6 +55,8 @@ public class Player extends Entity {
 				|| Keyboard.getKey(GLFW_KEY_SPACE) == 2) {
 			shoot();
 		}
+		System.out.println(posX);
+		System.out.println(posX);
 	}
 	
 	private void deathCheck(){

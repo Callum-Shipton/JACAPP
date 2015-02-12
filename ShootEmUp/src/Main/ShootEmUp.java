@@ -1,3 +1,4 @@
+package Main;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
@@ -14,8 +15,8 @@ import Input.Keyboard;
 public class ShootEmUp {
 
 	// Screen Width & Height
-	int WIDTH = 1024;
-	int HEIGHT = 512;
+	public static int WIDTH = 1024;
+	public static int HEIGHT = 512;
 
 	// Handle for monitor/window funcs
 	private Display d;
@@ -79,7 +80,7 @@ public class ShootEmUp {
 	        glClear(GL_COLOR_BUFFER_BIT);
 	        
 			GL13.glActiveTexture(GL13.GL_TEXTURE0);
-	        GL11.glBindTexture(GL11.GL_TEXTURE_2D, d.textureIDs[0]);
+	        GL11.glBindTexture(GL11.GL_TEXTURE_2D, Art.faceID);
 	        
 	        level1.render();
 
