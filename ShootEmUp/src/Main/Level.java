@@ -51,7 +51,7 @@ public class Level {
 		
 		r = new Renderer(Art.ShaderBase);
 		
-		player = new Player(spawn[0], spawn[1], 5, 0, Art.player);
+		player = new Player(spawn[0], spawn[1], 5, 0, Art.playerID);
 	}
 	
 	private void renderTiles(){
