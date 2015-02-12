@@ -102,6 +102,11 @@ public class Art {
 		ByteBuffer buf = texIm.byteBuffer();
 		bindTexture(faceID, texIm, buf);
 		
+		grassID = GL11.glGenTextures();
+		texIm = new Image(Art.grass);
+		buf = texIm.byteBuffer();
+		bindTexture(grassID, texIm, buf);
+		
 		playerID = GL11.glGenTextures();
 		texIm = new Image(Art.player);
 		buf = texIm.byteBuffer();

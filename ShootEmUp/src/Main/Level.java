@@ -7,13 +7,14 @@ import javax.imageio.*;
 
 import Display.Art;
 import Display.Renderer;
+import Math.Vector2;
 import Object.Particle;
 import Object.Player;
 
 public class Level {
 	private BufferedImage map = null;
 	private File file;
-	private File[][] tiles;
+	private int[][] tiles;
 	private int[] spawn = new int[] {50, 50};
 	private Player player;
 	private Renderer r;
@@ -23,7 +24,7 @@ public class Level {
 	public Level(String file){
 		this.file = new File(file);
 		loadLevel();
-		tiles = new File[map.getWidth()][map.getHeight()];
+		tiles = new int[map.getWidth()][map.getHeight()];
 		setTiles();
 		addStuff();
 		renderTiles();
@@ -41,7 +42,7 @@ public class Level {
 			for(int y = 0; y < map.getHeight(); y++){
 				System.out.println(map.getRGB(x, y));
 				switch(map.getRGB(x, y)){
-				case -1: tiles[x][y] = new File(Art.grass);
+				case -1: tiles[x][y] = Art.grassID;
 				}
 			}
 		}	
@@ -55,11 +56,11 @@ public class Level {
 	}
 	
 	private void renderTiles(){
-		//for(int i = 0; i < map.getWidth() i++){
-		//	for(int j = 0; j < map.getHeight(), j++){
-		//		r.draw(Display.Display., pos, size, rotate);
-		//	}
-	//	}
+		for(int i = 0; i < map.getWidth(); i++){
+			for(int j = 0; j < map.getHeight(); j++){
+				r.draw(tiles[i][j], new Vector2((float)(i*64),(float)(j*64)), new Vector2(64.0f,64.0f), 0.0f, new Vector2(1.0f,1.0f), new Vector2(1.0f,1.0f));
+			}
+		}
 	}
 	
 	public void update(){
@@ -70,6 +71,7 @@ public class Level {
 	}
 	
 	public void render(){
+		renderTiles();
 		player.render(r);
 		if(p != null){
 			p.render(r);
