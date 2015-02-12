@@ -14,7 +14,7 @@ public class Level {
 	private BufferedImage map = null;
 	private File file;
 	private File[][] tiles;
-	private int[] spawn = new int[2];
+	private int[] spawn = new int[] {50, 50};
 	private Player player;
 	private Renderer r;
 	

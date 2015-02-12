@@ -40,10 +40,14 @@ public class Renderer {
 		
 		Matrix4 texture = new Matrix4();
 		texture.clearToIdentity();
-		texture.translate(texPos.x(), texPos.y(), 0.0f);
+		texture.translate(texPos.x()/texMax.x(), texPos.y()/texMax.y(), 0.0f);
 		texture.scale(1/texMax.x(), 1/texMax.y(), 1.0f);
-		
+
 		texture.transpose();
+		
+		System.out.println(texture.get(3));
+		System.out.println(texture.get(7));
+	//	System.out.println(texPos.y());
 		
 		//model.m03 += pos.x;
 		//model.m13 += pos.y;
@@ -64,11 +68,11 @@ public class Renderer {
 		int modelMatrixLocation = GL20.glGetUniformLocation(shaderProgramID, "modelMatrix");
 		GL20.glUniformMatrix4(modelMatrixLocation, true, matrix44Buffer);
 	
-		matrix44Buffer = BufferUtils.createFloatBuffer(16);
-		matrix44Buffer = texture.toBuffer();
+		FloatBuffer Tmatrix44Buffer = BufferUtils.createFloatBuffer(16);
+		Tmatrix44Buffer = texture.toBuffer();
 		
 		int textureMatrixLocation = GL20.glGetUniformLocation(shaderProgramID, "textureMatrix");
-		GL20.glUniformMatrix4(textureMatrixLocation, true, matrix44Buffer);
+		GL20.glUniformMatrix4(textureMatrixLocation, true, Tmatrix44Buffer);
 		
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, Texid);

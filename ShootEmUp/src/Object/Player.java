@@ -39,7 +39,7 @@ public class Player extends Entity {
 		if (Keyboard.getKey(GLFW_KEY_A) == 1
 				|| Keyboard.getKey(GLFW_KEY_A) == 2) {
 			moveHorizontally(-1);
-			direction = 2;
+			direction = 6;
 		}
 		if (Keyboard.getKey(GLFW_KEY_S) == 1
 				|| Keyboard.getKey(GLFW_KEY_S) == 2) {
@@ -49,7 +49,7 @@ public class Player extends Entity {
 		if (Keyboard.getKey(GLFW_KEY_D) == 1
 				|| Keyboard.getKey(GLFW_KEY_D) == 2) {
 			moveHorizontally(1);
-			direction = 6;
+			direction = 2;
 		}
 		
 		if (Keyboard.getKey(GLFW_KEY_SPACE) == 1
