@@ -9,7 +9,7 @@ public class Particle extends Entity implements Collidable{
 	private int range;
 	private int distance;
 	
-	public Particle(int posX, int posY, int speed, int direction, String image, int damage, int range){
+	public Particle(int posX, int posY, int speed, int direction, int image, int damage, int range){
 		super(posX, posY, speed, direction, image);
 		this.damage = damage;
 		this.range = range;
@@ -17,31 +17,31 @@ public class Particle extends Entity implements Collidable{
 	}
 	
 	public void update(){
-		if(direction == 0){
-			posY += speed;
-		}
-		if(direction == 1){
-			posY += speed;
-			posX -= speed;
-		}
-		if(direction == 2){
-			posX -= speed;
-		}
-		if(direction == 3){
-			posX -= speed;
+		if(direction == 8){
 			posY -= speed;
+		}
+		if(direction == 12){
+			posY -= speed;
+			posX -= speed;
 		}
 		if(direction == 4){
-			posY -= speed;
-		}
-		if(direction == 5){
-			posY -= speed;
-			posX += speed;
+			posX -= speed;
 		}
 		if(direction == 6){
+			posX -= speed;
+			posY += speed;
+		}
+		if(direction == 2){
+			posY += speed;
+		}
+		if(direction == 18){
+			posY += speed;
 			posX += speed;
 		}
-		if(direction == 7){
+		if(direction == 16){
+			posX += speed;
+		}
+		if(direction == 20){
 			posX += speed;
 			posY -= speed;
 		}
