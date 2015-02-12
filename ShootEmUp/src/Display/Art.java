@@ -20,12 +20,12 @@ public class Art {
 	public static String grass = "res/img/grass.png";
 	public static int grassID;
 
-	public static String face = "res/img/awesomeface.png";
-	public static int faceID;
+	public static String enemy = "res/img/Enemy.png";
+	public static int enemyID;
 
 	public static String player = "res/img/Player.png";
 	public static int playerID;
-
+	
 	public static String particle = "res/img/Particle.png";
 	public static int particleID;
 
@@ -96,21 +96,21 @@ public class Art {
 	}
 
 	private static void initTextures() {
-
-		faceID = GL11.glGenTextures();
-		Image texIm = new Image(Art.face);
-		ByteBuffer buf = texIm.byteBuffer();
-		bindTexture(faceID, texIm, buf);
 		
 		grassID = GL11.glGenTextures();
-		texIm = new Image(Art.grass);
-		buf = texIm.byteBuffer();
+		Image texIm = new Image(Art.grass);
+		ByteBuffer buf = texIm.byteBuffer();
 		bindTexture(grassID, texIm, buf);
 		
 		playerID = GL11.glGenTextures();
 		texIm = new Image(Art.player);
 		buf = texIm.byteBuffer();
 		bindTexture(playerID, texIm, buf);
+		
+		enemyID = GL11.glGenTextures();
+		texIm = new Image(Art.enemy);
+		buf = texIm.byteBuffer();
+		bindTexture(enemyID, texIm, buf);
 		
 		particleID = GL11.glGenTextures();
 		texIm = new Image(Art.particle);

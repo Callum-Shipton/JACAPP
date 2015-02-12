@@ -8,6 +8,7 @@ import javax.imageio.*;
 import Display.Art;
 import Display.Renderer;
 import Math.Vector2;
+import Object.Enemy;
 import Object.Particle;
 import Object.Player;
 
@@ -17,6 +18,8 @@ public class Level {
 	private int[][] tiles;
 	private int[] spawn = new int[] {50, 50};
 	private Player player;
+	private Enemy enemy;
+	
 	private Renderer r;
 	
 	public static Particle p;
@@ -53,6 +56,7 @@ public class Level {
 		r = new Renderer(Art.ShaderBase);
 		
 		player = new Player(spawn[0], spawn[1], 5, 0, Art.playerID);
+		enemy = new Enemy(300, 300, 5, 0, Art.enemyID);
 	}
 	
 	private void renderTiles(){
@@ -65,6 +69,7 @@ public class Level {
 	
 	public void update(){
 		player.update();
+		enemy.update();
 		if(p != null){
 			p.update();
 		}
@@ -73,6 +78,7 @@ public class Level {
 	public void render(){
 		renderTiles();
 		player.render(r);
+		enemy.render(r);
 		if(p != null){
 			p.render(r);
 		}
