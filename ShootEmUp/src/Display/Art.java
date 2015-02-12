@@ -99,33 +99,46 @@ public class Art {
 	private static void initTextures() {
 
 		faceID = GL11.glGenTextures();
-		GL13.glActiveTexture(GL13.GL_TEXTURE0);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, faceID);
-
 		Image texIm = new Image(Art.face);
 		ByteBuffer buf = texIm.byteBuffer();
+		bindTexture(faceID, texIm, buf);
+		
+		/* Template for other Texs
+		
+		faceID = GL11.glGenTextures();
+		texIm = new Image(Art.face);
+		buf = texIm.byteBuffer();
+		bindTexture(faceID, texIm, buf);
+
+		*/
+	}
+
+	private static void bindTexture(int ID, Image texIm, ByteBuffer buf) {
+		
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, ID);
 
 		// All RGB bytes are aligned to each other and each component is 1 byte
-		GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
+				GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
 
-		// Upload the texture data and generate mip maps (for scaling)
-		GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGB, texIm.getWidth(),
-				texIm.getHeight(), 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buf);
-		GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
+				// Upload the texture data and generate mip maps (for scaling)
+				GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGB, texIm.getWidth(),
+						texIm.getHeight(), 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buf);
+				GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
 
-		// Setup the ST coordinate system
-		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S,
-				GL11.GL_REPEAT);
-		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T,
-				GL11.GL_REPEAT);
+				// Setup the ST coordinate system
+				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S,
+						GL11.GL_REPEAT);
+				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T,
+						GL11.GL_REPEAT);
 
-		// Setup what to do when the texture has to be scaled
-		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER,
-				GL11.GL_LINEAR);
-		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER,
-				GL11.GL_LINEAR_MIPMAP_LINEAR);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+				// Setup what to do when the texture has to be scaled
+				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER,
+						GL11.GL_LINEAR);
+				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER,
+						GL11.GL_LINEAR_MIPMAP_LINEAR);
+				GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 
+		
 	}
 
 	private static void initShaderUniforms() {

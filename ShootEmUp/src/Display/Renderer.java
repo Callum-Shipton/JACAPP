@@ -24,7 +24,7 @@ public class Renderer {
 		initRenderData();
 	}
 	
-	public void draw(int Texid, Vector2 pos, Vector2 size, float rotate){
+	public void draw(int Texid, Vector2 pos, Vector2 size, float rotate, Vector2 texPos, Vector2 texMax){
 		GL20.glUseProgram(shaderProgramID);
 		
 		Matrix4 model = new Matrix4();
@@ -37,6 +37,12 @@ public class Renderer {
 
 		model.transpose();
 		
+		Matrix4 texture = new Matrix4();
+		texture.clearToIdentity();
+		texture.translate(texPos.x(), texPos.y(), 0.0f);
+		texture.scale(1/texMax.x(), 1/texMax.y(), 1.0f);
+		
+		texture.transpose();
 		
 		//model.m03 += pos.x;
 		//model.m13 += pos.y;
@@ -55,9 +61,14 @@ public class Renderer {
         matrix44Buffer = model.toBuffer();
 		
 		int modelMatrixLocation = GL20.glGetUniformLocation(shaderProgramID, "modelMatrix");
-		
 		GL20.glUniformMatrix4(modelMatrixLocation, true, matrix44Buffer);
 	
+		matrix44Buffer = BufferUtils.createFloatBuffer(16);
+		matrix44Buffer = texture.toBuffer();
+		
+		int textureMatrixLocation = GL20.glGetUniformLocation(shaderProgramID, "textureMatrix");
+		GL20.glUniformMatrix4(textureMatrixLocation, true, matrix44Buffer);
+		
         GL30.glBindVertexArray(VAO);
         GL20.glEnableVertexAttribArray(0);
         GL20.glEnableVertexAttribArray(1);
