@@ -34,7 +34,7 @@ public abstract class Entity {
 	}
 
 	public void render(Renderer r){
-		r.draw(0,new Vector2((float)posX, (float)posY),new Vector2(100.0f, 100.0f), 0.0f);
+		r.draw(0,new Vector2((float)posX, (float)posY),new Vector2(100.0f, 100.0f), (float)direction*45);
 	}
 	
 	// Setters and getters

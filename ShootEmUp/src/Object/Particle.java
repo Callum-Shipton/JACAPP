@@ -1,5 +1,8 @@
 package Object;
 
+import Display.Renderer;
+import Math.Vector2;
+
 
 public class Particle extends Entity implements Collidable{
 	private int damage;
@@ -13,8 +16,40 @@ public class Particle extends Entity implements Collidable{
 		distance = 0;
 	}
 	
-	public void render(){
-		
+	public void update(){
+		if(direction == 0){
+			posY += speed;
+		}
+		if(direction == 1){
+			posY += speed;
+			posX -= speed;
+		}
+		if(direction == 2){
+			posX -= speed;
+		}
+		if(direction == 3){
+			posX -= speed;
+			posY -= speed;
+		}
+		if(direction == 4){
+			posY -= speed;
+		}
+		if(direction == 5){
+			posY -= speed;
+			posX += speed;
+		}
+		if(direction == 6){
+			posX += speed;
+		}
+		if(direction == 7){
+			posX += speed;
+			posY -= speed;
+		}
+	}
+	
+	@Override
+	public void render(Renderer r){
+		r.draw(0,new Vector2((float)posX, (float)posY),new Vector2(100.0f, 100.0f), (float)direction*45);
 	}
 	
 	@Override
