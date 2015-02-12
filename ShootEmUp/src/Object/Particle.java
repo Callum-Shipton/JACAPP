@@ -23,13 +23,13 @@ public class Particle extends Entity implements Collidable{
 		}
 		if(direction == 1){
 			posY -= speed;
-			posX -= speed;
+			posX += speed;
 		}
 		if(direction == 2){
-			posX -= speed;
+			posX += speed;
 		}
 		if(direction == 3){
-			posX -= speed;
+			posX += speed;
 			posY += speed;
 		}
 		if(direction == 4){
@@ -37,13 +37,13 @@ public class Particle extends Entity implements Collidable{
 		}
 		if(direction == 5){
 			posY += speed;
-			posX += speed;
+			posX -= speed;
 		}
 		if(direction == 6){
-			posX += speed;
+			posX -= speed;
 		}
 		if(direction == 7){
-			posX += speed;
+			posX -= speed;
 			posY -= speed;
 		}
 	}
