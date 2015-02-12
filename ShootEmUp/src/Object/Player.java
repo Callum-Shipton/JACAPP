@@ -31,27 +31,25 @@ public class Player extends Entity {
 	}
 	
 	private void checkKeys() {
-		direction = 0;
 		if (Keyboard.getKey(GLFW_KEY_W) == 1
 				|| Keyboard.getKey(GLFW_KEY_W) == 2) {
 			moveVertically(-1);
-
-			direction += 4;
+			direction = 8;
 		}
 		if (Keyboard.getKey(GLFW_KEY_A) == 1
 				|| Keyboard.getKey(GLFW_KEY_A) == 2) {
 			moveHorizontally(-1);
-			direction += 2;
+			direction = 4;
 		}
 		if (Keyboard.getKey(GLFW_KEY_S) == 1
 				|| Keyboard.getKey(GLFW_KEY_S) == 2) {
 			moveVertically(1);
-			direction += 1;
+			direction = 2;
 		}
 		if (Keyboard.getKey(GLFW_KEY_D) == 1
 				|| Keyboard.getKey(GLFW_KEY_D) == 2) {
 			moveHorizontally(1);
-			direction += 8;
+			direction = 16;
 		}
 		
 		if (Keyboard.getKey(GLFW_KEY_SPACE) == 1
