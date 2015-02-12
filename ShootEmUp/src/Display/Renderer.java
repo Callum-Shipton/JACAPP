@@ -45,10 +45,6 @@ public class Renderer {
 
 		texture.transpose();
 		
-		System.out.println(texture.get(3));
-		System.out.println(texture.get(7));
-	//	System.out.println(texPos.y());
-		
 		//model.m03 += pos.x;
 		//model.m13 += pos.y;
 		//model.m23 += -5.0f;
