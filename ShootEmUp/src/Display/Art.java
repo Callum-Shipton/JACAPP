@@ -103,12 +103,23 @@ public class Art {
 		ByteBuffer buf = texIm.byteBuffer();
 		bindTexture(faceID, texIm, buf);
 		
+		
+		faceID = GL11.glGenTextures();
+		texIm = new Image(Art.player);
+		buf = texIm.byteBuffer();
+		bindTexture(playerID, texIm, buf);
+		
+		faceID = GL11.glGenTextures();
+		texIm = new Image(Art.particle);
+		buf = texIm.byteBuffer();
+		bindTexture(particleID, texIm, buf);
+		
 		/* Template for other Texs
 		
 		faceID = GL11.glGenTextures();
-		texIm = new Image(Art.face);
+		texIm = new Image(Art.player);
 		buf = texIm.byteBuffer();
-		bindTexture(faceID, texIm, buf);
+		bindTexture(playerID, texIm, buf);
 
 		*/
 	}
