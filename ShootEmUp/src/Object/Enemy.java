@@ -7,6 +7,11 @@ public class Enemy extends Entity {
 	}
 
 	public void update() {
-		posX--;
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void stuff(){
+		
 	}
 }

@@ -17,9 +17,12 @@ import Main.ShootEmUp;
 import Math.Matrix4;
 
 public class Art {
-	public static String grass = "res/img/grass.png";
-	public static int grassID;
+	public static String floor = "res/img/floor.png";
+	public static int floorID;
 
+	public static String wall = "res/img/wall.png";
+	public static int wallID;
+	
 	public static String enemy = "res/img/Enemy.png";
 	public static int enemyID;
 
@@ -97,10 +100,15 @@ public class Art {
 
 	private static void initTextures() {
 		
-		grassID = GL11.glGenTextures();
-		Image texIm = new Image(Art.grass);
+		floorID = GL11.glGenTextures();
+		Image texIm = new Image(Art.floor);
 		ByteBuffer buf = texIm.byteBuffer();
-		bindTexture(grassID, texIm, buf);
+		bindTexture(floorID, texIm, buf);
+		
+		wallID = GL11.glGenTextures();
+		texIm = new Image(Art.wall);
+		buf = texIm.byteBuffer();
+		bindTexture(wallID, texIm, buf);
 		
 		playerID = GL11.glGenTextures();
 		texIm = new Image(Art.player);
