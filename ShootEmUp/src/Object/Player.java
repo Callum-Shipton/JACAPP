@@ -15,10 +15,10 @@ public class Player extends Entity {
 	private Weapon weapon;
 	
 	public Player() throws IOException {
-		super(10, 10, 10, 0, Art.grass);
+		super(10, 10, 10, 0, Art.playerID);
 	}
 
-	public Player(int posX, int posY, int speed, int direction, String image) {
+	public Player(int posX, int posY, int speed, int direction, int image) {
 		super(posX, posY, speed, direction, image);
 		health = 10;
 		weapon = new Weapon();

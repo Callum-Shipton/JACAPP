@@ -1,5 +1,4 @@
 package Object;
-import Display.Image;
 import Display.Renderer;
 import Math.Vector2;
 
@@ -9,18 +8,16 @@ public abstract class Entity {
 	protected int posY;
 	protected int speed;
 	protected int direction;
-	
-	private Image image;
+	protected int image;
 
 	// Constructors
 
-	public Entity(int posX, int posY, int speed, int direction, String image){
+	public Entity(int posX, int posY, int speed, int direction, int image){
 		this.posX = posX;
 		this.posY = posY;
 		this.speed = speed;
 		this.direction = direction;
-		
-		this.image = new Image(image);
+		this.image = image;
 	}
 
 	// Methods
@@ -34,7 +31,7 @@ public abstract class Entity {
 	}
 
 	public void render(Renderer r){
-		r.draw(0,new Vector2((float)posX, (float)posY),new Vector2(100.0f, 100.0f), (float)direction*45, new Vector2(1.0f,1.0f),new Vector2(1.0f,1.0f));
+		r.draw(image,new Vector2((float)posX, (float)posY),new Vector2(100.0f, 100.0f), (float)direction*45, new Vector2(1.0f,1.0f),new Vector2(1.0f,1.0f));
 	}
 	
 	// Setters and getters
@@ -61,13 +58,5 @@ public abstract class Entity {
 
 	public void setSpeed(int speed) {
 		this.speed = speed;
-	}
-	
-	public Image getImage(){
-		return image;
-	}
-	
-	public void setImage(Image image){
-		this.image = image;
 	}
 }

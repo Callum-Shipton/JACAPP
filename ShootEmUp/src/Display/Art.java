@@ -10,7 +10,6 @@ import java.nio.FloatBuffer;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
@@ -103,13 +102,12 @@ public class Art {
 		ByteBuffer buf = texIm.byteBuffer();
 		bindTexture(faceID, texIm, buf);
 		
-		
-		faceID = GL11.glGenTextures();
+		playerID = GL11.glGenTextures();
 		texIm = new Image(Art.player);
 		buf = texIm.byteBuffer();
 		bindTexture(playerID, texIm, buf);
 		
-		faceID = GL11.glGenTextures();
+		particleID = GL11.glGenTextures();
 		texIm = new Image(Art.particle);
 		buf = texIm.byteBuffer();
 		bindTexture(particleID, texIm, buf);
