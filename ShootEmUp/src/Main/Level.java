@@ -7,6 +7,7 @@ import javax.imageio.*;
 
 import Display.Art;
 import Display.Renderer;
+import Object.Particle;
 import Object.Player;
 
 public class Level {
@@ -16,6 +17,8 @@ public class Level {
 	private int[] spawn = new int[2];
 	private Player player;
 	private Renderer r;
+	
+	public static Particle p;
 	
 	public Level(String file){
 		this.file = new File(file);
@@ -61,10 +64,16 @@ public class Level {
 	
 	public void update(){
 		player.update();
+		if(p != null){
+			p.update();
+		}
 	}
 	
 	public void render(){
 		player.render(r);
+		if(p != null){
+			p.render(r);
+		}
 	}
 
 	public int[] getSpawn() {

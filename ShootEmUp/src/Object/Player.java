@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import Display.Art;
 import Input.Keyboard;
+import Main.Level;
+import Main.ShootEmUp;
 
 public class Player extends Entity {
 	
@@ -71,7 +73,7 @@ public class Player extends Entity {
 	}
 	
 	private void shoot(){
-		new Particle(posX, posY, 10, direction, Art.particle, 1, 50);
+		Level.p = new Particle(posX, posY, 10, direction, Art.particle, 1, 50);
 	}
 	
 	public int getHealth() {
