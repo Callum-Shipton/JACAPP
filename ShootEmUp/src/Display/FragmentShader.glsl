@@ -8,5 +8,5 @@ uniform mat4 textureMatrix;
 
 void main()
 {
-    color = texture(image, textureMatrix * texCoords);
+    color = texture(image, (textureMatrix * vec4(texCoords, 0.0f, 0.0f)).xy);
 }
