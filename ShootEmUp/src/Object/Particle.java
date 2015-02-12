@@ -17,31 +17,31 @@ public class Particle extends Entity implements Collidable{
 	}
 	
 	public void update(){
-		if(direction == 8){
+		if(direction == 0){
 			posY -= speed;
 		}
-		if(direction == 12){
+		if(direction == 1){
 			posY -= speed;
 			posX -= speed;
-		}
-		if(direction == 4){
-			posX -= speed;
-		}
-		if(direction == 6){
-			posX -= speed;
-			posY += speed;
 		}
 		if(direction == 2){
+			posX -= speed;
+		}
+		if(direction == 3){
+			posX -= speed;
 			posY += speed;
 		}
-		if(direction == 18){
+		if(direction == 4){
+			posY += speed;
+		}
+		if(direction == 5){
 			posY += speed;
 			posX += speed;
 		}
-		if(direction == 16){
+		if(direction == 6){
 			posX += speed;
 		}
-		if(direction == 20){
+		if(direction == 7){
 			posX += speed;
 			posY -= speed;
 		}
