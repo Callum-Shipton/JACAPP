@@ -48,7 +48,7 @@ public class Particle extends Entity implements Collidable{
 	}
 	
 	public void render(Renderer r){
-		r.draw(0,new Vector2((float)posX, (float)posY),new Vector2(100.0f, 100.0f), (float)direction*45, new Vector2(1.0f,1.0f), new Vector2(1.0f,1.0f));
+		r.draw(0,new Vector2((float)posX, (float)posY),new Vector2(100.0f, 100.0f), 0.0f, new Vector2(1.0f,(float)direction), new Vector2(1.0f,8.0f));
 	}
 	
 	@Override
