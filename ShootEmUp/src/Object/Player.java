@@ -6,6 +6,7 @@ import java.io.IOException;
 import Display.Art;
 import Input.Keyboard;
 import Main.Level;
+import Math.Vector2;
 
 public class Player extends Entity {
 	
@@ -15,11 +16,11 @@ public class Player extends Entity {
 	private Weapon weapon;
 	
 	public Player() throws IOException {
-		super(10, 10, 10, 0, Art.playerID);
+		super(10.0f, 10.0f, 10, 0, Art.playerID);
 	}
 
-	public Player(int posX, int posY, int speed, int direction, int image) {
-		super(posX, posY, speed, direction, image);
+	public Player(float spawn, float spawn2, int speed, int direction, int image) {
+		super(spawn, spawn2, speed, direction, image);
 		health = 10;
 		weapon = new Weapon();
 	}
@@ -31,26 +32,26 @@ public class Player extends Entity {
 	}
 	
 	private void checkKeys() {
+		Vector2 movement = new Vector2(0.0f,0.0f);
 		if (Keyboard.getKey(GLFW_KEY_W) == 1
 				|| Keyboard.getKey(GLFW_KEY_W) == 2) {
-			moveVertically(-1);
-			direction = 0;
+			movement.add(0.0f, -1.0f);
 		}
 		if (Keyboard.getKey(GLFW_KEY_A) == 1
 				|| Keyboard.getKey(GLFW_KEY_A) == 2) {
-			moveHorizontally(-1);
-			direction = 6;
+			movement.add(-1.0f, 0.0f);
 		}
 		if (Keyboard.getKey(GLFW_KEY_S) == 1
 				|| Keyboard.getKey(GLFW_KEY_S) == 2) {
-			moveVertically(1);
-			direction = 4;
+			movement.add(0.0f, 1.0f);
 		}
 		if (Keyboard.getKey(GLFW_KEY_D) == 1
 				|| Keyboard.getKey(GLFW_KEY_D) == 2) {
-			moveHorizontally(1);
-			direction = 2;
+			movement.add(1.0f, 0.0f);
 		}
+		if(movement.length() > 1) movement.normalize();
+		move(movement);
+		direction =  (int) (Math.round(movement.Angle()) / 45);
 		
 		if (Keyboard.getKey(GLFW_KEY_SPACE) == 1
 				|| Keyboard.getKey(GLFW_KEY_SPACE) == 2) {
@@ -66,8 +67,8 @@ public class Player extends Entity {
 
 	private void respawn(){
 		lives--;
-		posX = 10;
-		posY = 10;
+		posX = 10.0f;
+		posY = 10.0f;
 	}
 	
 	private void shoot(){

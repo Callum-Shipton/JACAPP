@@ -4,17 +4,17 @@ import Math.Vector2;
 
 public abstract class Entity {
 
-	protected int posX;
-	protected int posY;
+	protected float posX;
+	protected float posY;
 	protected int speed;
 	protected int direction;
 	protected int image;
 
 	// Constructors
 
-	public Entity(int posX, int posY, int speed, int direction, int image){
-		this.posX = posX;
-		this.posY = posY;
+	public Entity(float spawn, float spawn2, int speed, int direction, int image){
+		this.posX = spawn;
+		this.posY = spawn2;
 		this.speed = speed;
 		this.direction = direction;
 		this.image = image;
@@ -22,12 +22,10 @@ public abstract class Entity {
 
 	// Methods
 
-	public void moveHorizontally(int direction) {
-		posX += (speed * direction);
-	}
-
-	public void moveVertically(int direction) {
-		posY += (speed * direction);
+	public void move(Vector2 moveVec) {
+		System.out.println(moveVec.x());
+		posX += moveVec.x() * speed;
+		posY += moveVec.y() * speed;
 	}
 
 	public void render(Renderer r){
@@ -36,19 +34,19 @@ public abstract class Entity {
 	
 	// Setters and getters
 
-	public int getX() {
+	public float getX() {
 		return posX;
 	}
 
-	public void setX(int posX) {
+	public void setX(float posX) {
 		this.posX = posX;
 	}
 
-	public int getY() {
+	public float getY() {
 		return posY;
 	}
 
-	public void setY(int posY) {
+	public void setY(float posY) {
 		this.posY = posY;
 	}
 

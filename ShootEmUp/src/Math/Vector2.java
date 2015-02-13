@@ -166,4 +166,15 @@ public class Vector2 implements Vector<Vector2> {
 		direct.flip();
 		return direct;
 	}
+	
+	public double Angle(){
+		double a = Math.asin(x);
+		if(y > 0){
+			a = Math.PI - a;
+		}
+		else if(x < 0){
+			a = 2*Math.PI +a;
+		}
+		return a * (180/ Math.PI);
+	}
 }

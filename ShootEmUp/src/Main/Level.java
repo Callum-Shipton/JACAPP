@@ -16,7 +16,7 @@ public class Level {
 	private BufferedImage map = null;
 	private File file;
 	private int[][] tiles;
-	private int[] spawn = new int[] {50, 50};
+	private float[] spawn = new float[] {50.0f, 50.0f};
 	private Player player;
 	private Enemy enemy;
 	
@@ -58,7 +58,7 @@ public class Level {
 		r = new Renderer(Art.ShaderBase);
 		
 		player = new Player(spawn[0], spawn[1], 5, 0, Art.playerID);
-		enemy = new Enemy(300, 300, 5, 0, Art.enemyID);
+		enemy = new Enemy(300.0f, 300.0f, 5, 0, Art.enemyID);
 	}
 	
 	private void renderTiles(){
@@ -86,11 +86,11 @@ public class Level {
 		}
 	}
 
-	public int[] getSpawn() {
+	public float[] getSpawn() {
 		return spawn;
 	}
 
-	public void setSpawn(int[] spawn) {
+	public void setSpawn(float[] spawn) {
 		this.spawn = spawn;
 	}
 }
