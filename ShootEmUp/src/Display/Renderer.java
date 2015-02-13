@@ -26,6 +26,10 @@ public class Renderer {
 	}
 	
 	public void draw(int Texid, Vector2 pos, Vector2 size, float rotate, Vector2 texPos, Vector2 texMax){
+		
+		GL13.glActiveTexture(GL13.GL_TEXTURE0);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, Texid);
+		
 		GL20.glUseProgram(shaderProgramID);
 		
 		Matrix4 model = new Matrix4();
@@ -70,8 +74,7 @@ public class Renderer {
 		int textureMatrixLocation = GL20.glGetUniformLocation(shaderProgramID, "textureMatrix");
 		GL20.glUniformMatrix4(textureMatrixLocation, true, Tmatrix44Buffer);
 		
-		GL13.glActiveTexture(GL13.GL_TEXTURE0);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, Texid);
+
 		
         GL30.glBindVertexArray(VAO);
         GL20.glEnableVertexAttribArray(0);
@@ -141,9 +144,9 @@ public class Renderer {
 	        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, 
 	                GL15.GL_STATIC_DRAW);
 	        
-		    GL30.glBindVertexArray(0);
+		   // GL30.glBindVertexArray(0);
 		    
-			GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
-			GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
+			//GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+			//GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 }

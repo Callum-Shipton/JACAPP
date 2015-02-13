@@ -8,7 +8,7 @@ import Math.Vector2;
 public class Particle extends Entity implements Collidable{
 	private int distance = 0;
 	
-	public Particle(float posX, float posY, int speed, int direction, int image, int damage, int range){
+	public Particle(float posX, float posY, int speed, int direction, int image){
 		super(posX, posY, speed, direction, image);
 	}
 	
