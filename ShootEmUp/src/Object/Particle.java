@@ -6,15 +6,10 @@ import Math.Vector2;
 
 
 public class Particle extends Entity implements Collidable{
-	private int damage;
-	private int range;
-	private int distance;
+	private int distance = 0;
 	
 	public Particle(float posX, float posY, int speed, int direction, int image, int damage, int range){
 		super(posX, posY, speed, direction, image);
-		this.damage = damage;
-		this.range = range;
-		distance = 0;
 	}
 	
 	public void update(){
@@ -45,22 +40,6 @@ public class Particle extends Entity implements Collidable{
 		// TODO Auto-generated method stub
 		
 		// Despawn and do damage;
-	}
-	
-	public int getDamage(){
-		return damage;
-	}
-	
-	public void setDamage(int damage){
-		this.damage = damage;
-	}
-
-	public int getRange() {
-		return range;
-	}
-
-	public void setRange(int range) {
-		this.range = range;
 	}
 
 	public int getDistance() {
