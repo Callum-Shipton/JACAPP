@@ -43,7 +43,7 @@ public class Level {
 	private void setTiles(){
 		for(int x = 0; x < map.getWidth(); x++){
 			for(int y = 0; y < map.getHeight(); y++){
-				System.out.println(map.getRGB(x, y));
+			//	System.out.println(map.getRGB(x, y));
 				switch(map.getRGB(x, y)){
 				case -1: tiles[x][y] = Art.floorID;
 						break;

@@ -23,7 +23,6 @@ public abstract class Entity {
 	// Methods
 
 	public void move(Vector2 moveVec) {
-		System.out.println(moveVec.x());
 		posX += moveVec.x() * speed;
 		posY += moveVec.y() * speed;
 	}
