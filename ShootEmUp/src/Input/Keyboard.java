@@ -32,7 +32,8 @@ public class Keyboard {
 	}
 
 	public static void destroy() {
+		if(keyCallback != null){
 		keyCallback.release();
-
+		}
 	}
 }

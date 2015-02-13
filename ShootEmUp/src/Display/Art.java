@@ -140,12 +140,9 @@ public class Art {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, ID);
 
 		// All RGB bytes are aligned to each other and each component is 1 byte
-				GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
+				//GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
 
-				// Upload the texture data and generate mip maps (for scaling)
-				GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, texIm.getWidth(),
-						texIm.getHeight(), 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buf);
-				GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
+
 
 				// Setup the ST coordinate system
 				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S,
@@ -158,6 +155,11 @@ public class Art {
 						GL11.GL_LINEAR);
 				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER,
 						GL11.GL_LINEAR_MIPMAP_LINEAR);
+				
+				// Upload the texture data and generate mip maps (for scaling)
+				GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, texIm.getWidth(),
+						texIm.getHeight(), 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buf);
+				GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
 				GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 
 		

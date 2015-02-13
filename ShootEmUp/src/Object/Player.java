@@ -6,6 +6,7 @@ import java.io.IOException;
 import Display.Art;
 import Input.Keyboard;
 import Main.Level;
+import Main.ShootEmUp;
 import Math.Vector2;
 
 public class Player extends Entity {
@@ -27,8 +28,12 @@ public class Player extends Entity {
 
 	// called every update
 	public void update() {
-		checkKeys();
-		deathCheck();
+		if(posX < 0 || posX > ShootEmUp.WIDTH) speed *= -1;
+		
+		move(new Vector2(2.0f, 0.0f));
+		
+		//checkKeys();
+		//deathCheck();
 	}
 	
 	private void checkKeys() {

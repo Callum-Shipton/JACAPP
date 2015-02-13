@@ -59,6 +59,8 @@ public class ShootEmUp {
 			render();
 
 		}
+		
+		glfwTerminate();
 	}
 
 	private void update() {
@@ -71,7 +73,8 @@ public class ShootEmUp {
 	}
 
 	private void render() {
-	        glClear(GL_COLOR_BUFFER_BIT);
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	    glClear(GL_COLOR_BUFFER_BIT);
 	        
 	        level1.render();
 
