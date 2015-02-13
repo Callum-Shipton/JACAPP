@@ -49,9 +49,11 @@ public class Player extends Entity {
 				|| Keyboard.getKey(GLFW_KEY_D) == 2) {
 			movement.add(1.0f, 0.0f);
 		}
+		if(movement.length() > 0){
 		if(movement.length() > 1) movement.normalize();
 		move(movement);
 		direction =  (int) (Math.round(movement.Angle()) / 45);
+		}
 		
 		if (Keyboard.getKey(GLFW_KEY_SPACE) == 1
 				|| Keyboard.getKey(GLFW_KEY_SPACE) == 2) {

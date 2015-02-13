@@ -18,38 +18,26 @@ public class Particle extends Entity implements Collidable{
 	}
 	
 	public void update(){
-		if(direction == 0){
-			posY -= speed;
+		Vector2 movement = new Vector2(0.0f,0.0f);
+		if(direction >= 1 && direction <= 3){
+			movement.add(1.0f,0.0f);
 		}
-		if(direction == 1){
-			posY -= speed;
-			posX += speed;
+		if(direction >= 5){
+			movement.add(-1.0f,0.0f);
 		}
-		if(direction == 2){
-			posX += speed;
+		if(direction <= 1 || direction >= 7){
+			movement.add(0.0f,-1.0f);
 		}
-		if(direction == 3){
-			posX += speed;
-			posY += speed;
+		if(direction >= 3 && direction <= 5){
+			movement.add(0.0f,1.0f);
 		}
-		if(direction == 4){
-			posY += speed;
-		}
-		if(direction == 5){
-			posY += speed;
-			posX -= speed;
-		}
-		if(direction == 6){
-			posX -= speed;
-		}
-		if(direction == 7){
-			posX -= speed;
-			posY -= speed;
-		}
+		movement.normalize();
+		move(movement);
+
 	}
 	
 	public void render(Renderer r){
-		r.draw(Art.particleID,new Vector2((float)(posX + 16), (float)(posY + 16)),new Vector2(32.0f, 32.0f), 0.0f, new Vector2(1.0f,(float)direction), new Vector2(1.0f,8.0f));
+		r.draw(Art.particleID,new Vector2((posX + 16), (posY + 16)),new Vector2(32.0f, 32.0f), 0.0f, new Vector2(1.0f,(float)direction), new Vector2(1.0f,8.0f));
 	}
 	
 	@Override

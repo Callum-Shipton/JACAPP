@@ -29,7 +29,7 @@ public abstract class Entity {
 	}
 
 	public void render(Renderer r){
-		r.draw(image,new Vector2((float)posX, (float)posY),new Vector2(64.0f, 64.0f), 0.0f, new Vector2(0.0f,(float)direction),new Vector2(1.0f,8.0f));
+		r.draw(image,new Vector2(posX, posY),new Vector2(64.0f, 64.0f), 0.0f, new Vector2(0.0f,(float)direction),new Vector2(1.0f,8.0f));
 	}
 	
 	// Setters and getters
