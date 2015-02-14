@@ -51,15 +51,12 @@ public class Display {
 
 		// Configure our window
 		glfwDefaultWindowHints(); // optional, the current window hints are
-		
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); // We want OpenGL 3.1
-	    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	
 		// already the default
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE); // the window will stay hidden
 		// after creation
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE); // the window will be
 		// resizable
-		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 		// Find primary monitor
 		monitor = glfwGetPrimaryMonitor();
