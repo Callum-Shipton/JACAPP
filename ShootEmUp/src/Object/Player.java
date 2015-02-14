@@ -23,7 +23,7 @@ public class Player extends Entity {
 	public Player(float spawn, float spawn2, int speed, int direction, int image) {
 		super(spawn, spawn2, speed, direction, image);
 		health = 10;
-		weapon = new Weapon();
+		weapon = new Weapon(10, 10);
 	}
 
 	// called every update
@@ -76,7 +76,7 @@ public class Player extends Entity {
 	}
 	
 	private void shoot(){
-		Level.p = new Particle(posX, posY, 10, direction, Art.particleID, 1, 50);
+		Level.p = new Particle(posX, posY, 10, direction, Art.particleID);
 	}
 	
 	public int getHealth() {

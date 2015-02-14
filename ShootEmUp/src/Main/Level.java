@@ -17,7 +17,8 @@ import Object.Player;
 public class Level {
 	private BufferedImage map = null;
 	private String file;
-	private int[][] tiles;
+	private Vector2[][] backgroundTiles;
+	private Vector2[][] foregroundTiles;
 	private float[] spawn = new float[] {50.0f, 50.0f};
 	private Player player;
 	private Enemy enemy;
@@ -29,7 +30,8 @@ public class Level {
 	public Level(String file){
 		this.file = file;
 		loadLevel();
-		tiles = new int[map.getWidth()][map.getHeight()];
+		backgroundTiles = new Vector2[map.getWidth()/2][map.getHeight()];
+		foregroundTiles = new Vector2[map.getWidth()/2][map.getHeight()];
 		setTiles();
 		addStuff();
 		renderTiles();
@@ -43,13 +45,17 @@ public class Level {
 	}
 	
 	private void setTiles(){
-		for(int x = 0; x < map.getWidth(); x++){
+		for(int x = 0; x < map.getWidth()/2; x++){
 			for(int y = 0; y < map.getHeight(); y++){
-			//	System.out.println(map.getRGB(x, y));
+				System.out.println(map.getRGB(x, y));
 				switch(map.getRGB(x, y)){
-				case -1: tiles[x][y] = Art.floorID;
-						break;
-				case -16777216: tiles[x][y] = Art.wallID;
+					case -1: backgroundTiles[x][y] = new Vector2(0.0f,0.0f);
+							break;
+					case -16777216: backgroundTiles[x][y] = new Vector2(1.0f,0.0f);
+				}
+				switch(map.getRGB(x + (map.getWidth()/2), y)){
+					case -1: break;
+					case -16777216: foregroundTiles[x][y] = new Vector2(2.0f,1.0f);
 				}
 			}
 		}	
@@ -64,9 +70,12 @@ public class Level {
 	}
 	
 	private void renderTiles(){
-		for(int i = 0; i < map.getWidth(); i++){
+		for(int i = 0; i < map.getWidth()/2; i++){
 			for(int j = 0; j < map.getHeight(); j++){
-				r.draw(tiles[i][j], new Vector2((float)(i*64),(float)(j*64)), new Vector2(64.0f,64.0f), 0.0f, new Vector2(0.0f,0.0f), new Vector2(1.0f,1.0f));
+				r.draw(Art.floorID, new Vector2((float)(i*64),(float)(j*64)), new Vector2(64.0f,64.0f), 0.0f, backgroundTiles[i][j], new Vector2(4.0f,4.0f));
+				if(foregroundTiles[i][j] != null){
+					r.draw(Art.wallID, new Vector2((float)(i*64),(float)(j*64)), new Vector2(64.0f,64.0f), 0.0f, foregroundTiles[i][j], new Vector2(4.0f,4.0f));
+				}
 			}
 		}
 	}
