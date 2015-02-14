@@ -21,6 +21,7 @@ public class DPDTRenderer implements Renderer {
 	private int EBO;
 	private int modelMatrixLocation;
 	private int textureMatrixLocation;
+	private FloatBuffer matrix44Buffer;
 	
 	public DPDTRenderer(int pID){
 		shaderProgramID = pID;
@@ -62,17 +63,17 @@ public class DPDTRenderer implements Renderer {
 		
 		*/
         
-        FloatBuffer matrix44Buffer = BufferUtils.createFloatBuffer(16);
+        
         matrix44Buffer = model.toBuffer();
 		
 		
 		GL20.glUniformMatrix4(modelMatrixLocation, true, matrix44Buffer);
-	
-		FloatBuffer Tmatrix44Buffer = BufferUtils.createFloatBuffer(16);
-		Tmatrix44Buffer = texture.toBuffer();
+
+		matrix44Buffer.clear();
 		
+		matrix44Buffer = texture.toBuffer();
 		
-		GL20.glUniformMatrix4(textureMatrixLocation, true, Tmatrix44Buffer);
+		GL20.glUniformMatrix4(textureMatrixLocation, true, matrix44Buffer);
 		
 
 		
@@ -87,6 +88,8 @@ public class DPDTRenderer implements Renderer {
         GL30.glBindVertexArray(0);
 	}
 	private void initRenderData(){
+		
+		matrix44Buffer = BufferUtils.createFloatBuffer(16);
 		
 		GL20.glUseProgram(shaderProgramID);
 		
