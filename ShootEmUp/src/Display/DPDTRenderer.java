@@ -77,7 +77,7 @@ public class DPDTRenderer implements Renderer {
 		
 
 		
-        GL30.glBindVertexArray(VAO);
+        
        // GL20.glEnableVertexAttribArray(0);
        // GL20.glEnableVertexAttribArray(1);
         
@@ -85,7 +85,7 @@ public class DPDTRenderer implements Renderer {
         
         GL11.glDrawElements(GL11.GL_TRIANGLES, 6, GL11.GL_UNSIGNED_BYTE, 0);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
-        GL30.glBindVertexArray(0);
+     //   GL30.glBindVertexArray(0);
 	}
 	private void initRenderData(){
 		
@@ -126,8 +126,8 @@ public class DPDTRenderer implements Renderer {
         indicesBuffer.put(indices);
         indicesBuffer.flip();
 
-		    VAO = GL30.glGenVertexArrays();
-		    GL30.glBindVertexArray(VAO);
+		    setVAO(GL30.glGenVertexArrays());
+		    GL30.glBindVertexArray(getVAO());
 		    
 		    VBO = GL15.glGenBuffers();
 		    GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, VBO);
@@ -153,5 +153,13 @@ public class DPDTRenderer implements Renderer {
 		    
 			//GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 			//GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+
+	public int getVAO() {
+		return VAO;
+	}
+
+	private void setVAO(int vAO) {
+		VAO = vAO;
 	}
 }

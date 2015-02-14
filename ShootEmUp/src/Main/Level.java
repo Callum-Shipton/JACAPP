@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.*;
 
 import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL30;
 
 import Display.Art;
 import Display.DPDTRenderer;
@@ -90,12 +91,14 @@ public class Level {
 	
 	public void render(){
 		GL20.glUseProgram(Art.ShaderBase);
+		GL30.glBindVertexArray(r.getVAO());
 		renderTiles();
 		player.render(r);
 		enemy.render(r);
 		if(p != null){
 			p.render(r);
 		}
+		GL30.glBindVertexArray(0);
 		GL20.glUseProgram(0);
 	}
 
