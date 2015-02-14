@@ -5,8 +5,10 @@ import java.io.IOException;
 
 import javax.imageio.*;
 
+import org.lwjgl.opengl.GL20;
+
 import Display.Art;
-import Display.Renderer;
+import Display.DPDTRenderer;
 import Math.Vector2;
 import Object.Enemy;
 import Object.Particle;
@@ -14,18 +16,18 @@ import Object.Player;
 
 public class Level {
 	private BufferedImage map = null;
-	private File file;
+	private String file;
 	private int[][] tiles;
 	private float[] spawn = new float[] {50.0f, 50.0f};
 	private Player player;
 	private Enemy enemy;
 	
-	private Renderer r;
+	private DPDTRenderer r;
 	
 	public static Particle p;
 	
 	public Level(String file){
-		this.file = new File(file);
+		this.file = file;
 		loadLevel();
 		tiles = new int[map.getWidth()][map.getHeight()];
 		setTiles();
@@ -35,7 +37,7 @@ public class Level {
 	
 	private void loadLevel(){
 		try {
-		    map = ImageIO.read(file);
+		    map = ImageIO.read(getClass().getResource(file));
 		} catch (IOException e) {
 		}			
 	}
@@ -55,7 +57,7 @@ public class Level {
 	
 	private void addStuff(){
 		
-		r = new Renderer(Art.ShaderBase);
+		r = new DPDTRenderer(Art.ShaderBase);
 		
 		player = new Player(spawn[0], spawn[1], 5, 0, Art.playerID);
 		enemy = new Enemy(300.0f, 300.0f, 5, 0, Art.enemyID);
@@ -64,7 +66,7 @@ public class Level {
 	private void renderTiles(){
 		for(int i = 0; i < map.getWidth(); i++){
 			for(int j = 0; j < map.getHeight(); j++){
-				r.draw(tiles[i][j], new Vector2((float)(i*64),(float)(j*64)), new Vector2(64.0f,64.0f), 0.0f, new Vector2(1.0f,1.0f), new Vector2(1.0f,1.0f));
+				r.draw(tiles[i][j], new Vector2((float)(i*64),(float)(j*64)), new Vector2(64.0f,64.0f), 0.0f, new Vector2(0.0f,0.0f), new Vector2(1.0f,1.0f));
 			}
 		}
 	}
@@ -78,12 +80,14 @@ public class Level {
 	}
 	
 	public void render(){
+		GL20.glUseProgram(Art.ShaderBase);
 		renderTiles();
 		player.render(r);
 		enemy.render(r);
 		if(p != null){
 			p.render(r);
 		}
+		GL20.glUseProgram(0);
 	}
 
 	public float[] getSpawn() {

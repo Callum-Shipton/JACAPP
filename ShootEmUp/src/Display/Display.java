@@ -10,7 +10,12 @@ import java.nio.ByteBuffer;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWvidmode;
 import org.lwjgl.opengl.GL11;
-
+import org.lwjgl.opengl.GL12;
+import org.lwjgl.opengl.GL13;
+import org.lwjgl.opengl.GL15;
+import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL21;
+import org.lwjgl.opengl.GL30;
 import org.lwjgl.opengl.GLContext;
 
 import Input.Keyboard;
@@ -36,19 +41,25 @@ public class Display {
 	public void initGLFW() {
 		// Setup an error callback. The default implementation
 		// will print the error message in System.err.
-		//glfwSetErrorCallback(errorCallback = errorCallbackPrint(System.err));
+		
 
 		// Initialise GLFW. Most GLFW functions will not work before doing this.
-		if (glfwInit() != GL_TRUE)
+		if (glfwInit() != GL11.GL_TRUE)
 			throw new IllegalStateException("Unable to initialize GLFW");
+		
+		glfwSetErrorCallback(errorCallback = errorCallbackPrint(System.err));
 
 		// Configure our window
 		glfwDefaultWindowHints(); // optional, the current window hints are
+		
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); // We want OpenGL 3.1
+	    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		// already the default
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE); // the window will stay hidden
 		// after creation
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE); // the window will be
 		// resizable
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 		// Find primary monitor
 		monitor = glfwGetPrimaryMonitor();
@@ -68,9 +79,9 @@ public class Display {
 
 		// Make the GLFW OpenGL context current
 		glfwMakeContextCurrent(window);
+		
 		// Enable v-sync
 		glfwSwapInterval(1);
-
 		// Make the window visible
 		glfwShowWindow(window);
 
@@ -82,12 +93,13 @@ public class Display {
 		GLContext.createFromCurrent();
 		
 		initGL();
-		Art.init();
+		Art a = new Art();
+		a.init();
 	}
 	
 	private void initGL() {
 		GL11.glClearColor(0.4f, 0.6f, 0.9f, 1.0f);
-		//GL11.glViewport(0, 0, width, height);
+		GL11.glViewport(0, 0, width, height);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 	}

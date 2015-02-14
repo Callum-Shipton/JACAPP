@@ -5,6 +5,7 @@ import static org.lwjgl.opengl.GL11.GL_FALSE;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 
@@ -17,32 +18,32 @@ import Main.ShootEmUp;
 import Math.Matrix4;
 
 public class Art {
-	public static String floor = "res/img/floor.png";
+	public static String floor = "/img/floor.png";
 	public static int floorID;
 
-	public static String wall = "res/img/wall.png";
+	public static String wall = "/img/wall.png";
 	public static int wallID;
 	
-	public static String enemy = "res/img/Enemy.png";
+	public static String enemy = "/img/Enemy.png";
 	public static int enemyID;
 
-	public static String player = "res/img/Player.png";
+	public static String player = "/img/Player.png";
 	public static int playerID;
 	
-	public static String particle = "res/img/Particle.png";
+	public static String particle = "/img/Particle.png";
 	public static int particleID;
 
-	public static String level1 = "res/levels/level1.png";
+	public static String level1 = "/levels/level1.png";
 	public static int levelID;
 	
 	public static int ShaderBase;
 
-	private static void initShaders() {
+	private void initShaders() {
 		// Load the vertex shader
-		int vsId = loadShader("src/Display/VertexShader.glsl",
+		int vsId = loadShader("/shaders/VertexShader.glsl",
 				GL20.GL_VERTEX_SHADER);
 		// Load the fragment shader
-		int fsId = loadShader("src/Display/FragmentShader.glsl",
+		int fsId = loadShader("/shaders/FragmentShader.glsl",
 				GL20.GL_FRAGMENT_SHADER);
 
 		// Create a new shader program that links both shaders
@@ -60,12 +61,12 @@ public class Art {
 
 	}
 
-	public static int loadShader(String filename, int type) {
+	public int loadShader(String filename, int type) {
 		StringBuilder shaderSource = new StringBuilder();
 		int shaderID = 0;
 
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(filename));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(filename)));
 			String line;
 			while ((line = reader.readLine()) != null) {
 				shaderSource.append(line).append("\n");
@@ -182,7 +183,7 @@ public class Art {
 
 	}
 
-	public static void init() {
+	public void init() {
 		initShaders();
 		initShaderUniforms();
 		initTextures();

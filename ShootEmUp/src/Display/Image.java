@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 
 import de.matthiasmann.twl.utils.PNGDecoder;
@@ -12,20 +13,17 @@ public class Image {
 	private ByteBuffer buf;
 	private int texWidth;
 	private int texHeight;
-	private File image;
+	private String file;
 	
 	public Image(String file){
-		loadImage(file);
+		this.file = file;
 	}
 	
-	private void loadImage(String file){
-		image = new File(file);			
-	}
 	
 	public ByteBuffer byteBuffer() {
 		try {
             // Open the PNG file as an InputStream
-            InputStream in = new FileInputStream(image);
+            InputStream in = getClass().getResourceAsStream(file);
             // Link the PNG decoder to this stream
             PNGDecoder decoder = new PNGDecoder(in);
              

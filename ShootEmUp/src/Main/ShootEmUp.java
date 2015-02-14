@@ -2,9 +2,11 @@ package Main;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
+import org.lwjgl.glfw.GLFW;
+
 import Display.Art;
 import Display.Display;
-import Display.Renderer;
+import Display.DPDTRenderer;
 import Input.Keyboard;
 
 public class ShootEmUp {
@@ -17,7 +19,7 @@ public class ShootEmUp {
 	private Display d;
 
 	// Will be moved to LEVEL
-	Renderer r;
+	DPDTRenderer r;
 	
 	Level level1;
 
@@ -54,13 +56,31 @@ public class ShootEmUp {
 	private void loop() {
 		// Run the rendering loop until the user has attempted to close
 		// the window or has pressed the ESCAPE key.
+		
+		double FPS = 60.0;  
+		double oldTime = GLFW.glfwGetTime();
+		double newTime = GLFW.glfwGetTime();
+		double delta = newTime - oldTime;
+		double sleepTime = (1.0/FPS) - delta;
+		
 		while (glfwWindowShouldClose(d.getWindow()) == GL_FALSE) {
+			
+			 delta = newTime - oldTime;
+			 oldTime = newTime;
+			 sleepTime = (1.0/FPS) - delta;
+			 if(sleepTime > 0)
+			 try {
+				 Thread.sleep((long) (sleepTime*1000));
+			 System.out.println("I slept for " + 1000*sleepTime + " seconds." );
+			 } catch (InterruptedException e) {
+				 e.printStackTrace();
+			 }
 			update();
 			render();
+			
+			newTime = GLFW.glfwGetTime();
 
 		}
-		
-		glfwTerminate();
 	}
 
 	private void update() {

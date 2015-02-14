@@ -28,12 +28,9 @@ public class Player extends Entity {
 
 	// called every update
 	public void update() {
-		if(posX < 0 || posX > ShootEmUp.WIDTH) speed *= -1;
 		
-		move(new Vector2(2.0f, 0.0f));
-		
-		//checkKeys();
-		//deathCheck();
+		checkKeys();
+		deathCheck();
 	}
 	
 	private void checkKeys() {
