@@ -91,8 +91,8 @@ public class Level {
 	public void update(){
 		player.update();
 		enemy.update();
-		for (Entity particle : particles) {
-			particle.render(r);
+		for (Particle particle : particles) {
+			particle.update();
 		}
 	}
 	
