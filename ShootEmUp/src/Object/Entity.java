@@ -1,5 +1,6 @@
 package Object;
 import Display.DPDTRenderer;
+import Main.ShootEmUp;
 import Math.Vector2;
 
 public abstract class Entity implements Collidable{
@@ -9,6 +10,7 @@ public abstract class Entity implements Collidable{
 	protected int speed;
 	protected int direction;
 	protected int image;
+	protected boolean collide;
 
 	// Constructors
 
@@ -23,8 +25,16 @@ public abstract class Entity implements Collidable{
 	// Methods
 
 	public void move(Vector2 moveVec) {
-		posX += moveVec.x() * speed;
-		posY += moveVec.y() * speed;
+		collide = false;
+		for (Entity collidable : ShootEmUp.level1.collidables) {
+			if(collidable.doesCollide(posX, posY) && (collidable != this)){
+				collide = true;
+			};
+		}
+		if(collide == false){
+			posX += moveVec.x() * speed;
+			posY += moveVec.y() * speed;
+		}
 	}
 
 	public void render(DPDTRenderer r){

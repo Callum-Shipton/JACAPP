@@ -21,7 +21,7 @@ public class ShootEmUp {
 	// Will be moved to LEVEL
 	DPDTRenderer r;
 	
-	Level level1;
+	public static Level level1;
 
 	public void run() {
 		try {
