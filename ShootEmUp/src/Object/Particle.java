@@ -34,13 +34,6 @@ public class Particle extends Entity implements Collidable{
 	public void render(DPDTRenderer r){
 		r.draw(Art.particleID,new Vector2((posX + 16), (posY + 16)),new Vector2(32.0f, 32.0f), 0.0f, new Vector2(1.0f,(float)direction), new Vector2(1.0f,8.0f));
 	}
-	
-	@Override
-	public void onCollision(Collidable c) {
-		// TODO Auto-generated method stub
-		
-		// Despawn and do damage;
-	}
 
 	public int getDistance() {
 		return distance;
