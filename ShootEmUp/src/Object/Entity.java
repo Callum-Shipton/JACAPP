@@ -2,7 +2,7 @@ package Object;
 import Display.DPDTRenderer;
 import Math.Vector2;
 
-public abstract class Entity {
+public abstract class Entity implements Collidable{
 
 	protected float posX;
 	protected float posY;
@@ -29,6 +29,40 @@ public abstract class Entity {
 
 	public void render(DPDTRenderer r){
 		r.draw(image,new Vector2(posX, posY),new Vector2(64.0f, 64.0f), 0.0f, new Vector2(0.0f,(float)direction),new Vector2(1.0f,8.0f));
+	}
+	
+	//implemented methods
+	
+	public boolean doesCollide(float x, float y){
+		if(collideFunction(x, y)){
+			return true;
+		}
+		
+		x += 64.0f;
+		
+		if(collideFunction(x, y)){
+			return true;
+		}
+		
+		y += 64.0f;
+		
+		if(collideFunction(x, y)){
+			return true;
+		}
+		
+		x -= 64.0f;
+		
+		if(collideFunction(x, y)){
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean collideFunction(float x, float y){
+		if(((x >= posX) && (x <= (posX + 64.0f))) && ((y >= posY) && (y <= (posY + 64.0f)))){
+			return true;
+		}
+		return false;
 	}
 	
 	// Setters and getters
