@@ -76,7 +76,7 @@ public class Player extends Entity {
 	}
 	
 	private void shoot(){
-		Level.p = new Particle(posX, posY, 10, direction, Art.particleID);
+		weapon.shoot(posX, posY, direction);
 	}
 	
 	public int getHealth() {

@@ -1,7 +1,7 @@
 package Main;
 import java.awt.image.*;
-import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.*;
 
@@ -12,6 +12,7 @@ import Display.Art;
 import Display.DPDTRenderer;
 import Math.Vector2;
 import Object.Enemy;
+import Object.Entity;
 import Object.Particle;
 import Object.Player;
 
@@ -26,7 +27,8 @@ public class Level {
 	
 	private DPDTRenderer r;
 	
-	public static Particle p;
+	public static ArrayList<Entity> collidables;
+	public static ArrayList<Particle> particles;
 	
 	public Level(String file){
 		this.file = file;
@@ -68,6 +70,9 @@ public class Level {
 		
 		player = new Player(spawn[0], spawn[1], 5, 0, Art.playerID);
 		enemy = new Enemy(300.0f, 300.0f, 5, 0, Art.enemyID);
+		
+		collidables.add(player);
+		collidables.add(enemy);
 	}
 	
 	private void renderTiles(){
@@ -84,8 +89,8 @@ public class Level {
 	public void update(){
 		player.update();
 		enemy.update();
-		if(p != null){
-			p.update();
+		for (Entity particle : particles) {
+			particle.render(r);
 		}
 	}
 	
@@ -95,8 +100,8 @@ public class Level {
 		renderTiles();
 		player.render(r);
 		enemy.render(r);
-		if(p != null){
-			p.render(r);
+		for (Particle particle : particles) {
+			particle.render(r);
 		}
 		GL30.glBindVertexArray(0);
 		GL20.glUseProgram(0);
