@@ -65,6 +65,8 @@ public class Level {
 	}
 	
 	private void addStuff(){
+		collidables = new ArrayList<Entity>();
+		particles = new ArrayList<Particle>();
 		
 		r = new DPDTRenderer(Art.ShaderBase);
 		
