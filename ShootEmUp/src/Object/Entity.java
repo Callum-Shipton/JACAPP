@@ -42,7 +42,7 @@ public abstract class Entity implements Collidable{
 	}
 
 	public void render(DPDTRenderer r){
-		r.draw(image,new Vector2(posX, posY),new Vector2(64.0f, 64.0f), 0.0f, new Vector2(0.0f,(float)direction),new Vector2(1.0f,8.0f));
+		r.draw(image,new Vector2(posX, posY),new Vector2(width, height), 0.0f, new Vector2(0.0f,(float)direction),new Vector2(1.0f,8.0f));
 	}
 	
 	//implemented methods

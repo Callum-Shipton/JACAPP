@@ -34,10 +34,6 @@ public class Particle extends Entity implements Collidable{
 		
 	}
 	
-	public void render(DPDTRenderer r){
-		r.draw(Art.particleID,new Vector2(posX, posY),new Vector2(32.0f, 32.0f), 0.0f, new Vector2(1.0f,(float)direction), new Vector2(1.0f,8.0f));
-	}
-	
 	@Override
 	public void onCollide(){
 		ShootEmUp.level1.particles.remove(this);
