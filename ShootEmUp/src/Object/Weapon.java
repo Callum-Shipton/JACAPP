@@ -1,7 +1,7 @@
 package Object;
 
 import Display.Art;
-import Main.Level;
+import Main.ShootEmUp;
 
 
 public class Weapon {
@@ -15,6 +15,6 @@ public class Weapon {
 	}
 	
 	public void shoot(float posX, float posY, int direction){
-		Level.particles.add(new Particle(posX, posY, 10, direction, Art.particleID));
+		ShootEmUp.level1.particles.add(new Particle(posX, posY, 10, direction, Art.particleID));
 	}
 }

@@ -27,8 +27,8 @@ public class Level {
 	
 	private DPDTRenderer r;
 	
-	public static ArrayList<Entity> collidables;
-	public static ArrayList<Particle> particles;
+	public ArrayList<Entity> collidables;
+	public ArrayList<Particle> particles;
 	
 	public Level(String file){
 		this.file = file;

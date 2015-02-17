@@ -27,7 +27,7 @@ public abstract class Entity implements Collidable{
 	public void move(Vector2 moveVec) {
 		collide = false;
 		for (Entity collidable : ShootEmUp.level1.collidables) {
-			if(collidable.doesCollide(posX, posY) && (collidable != this)){
+			if(collidable.doesCollide(posX + (moveVec.x() * speed), posY + (moveVec.y() * speed)) && (collidable != this)){
 				collide = true;
 			};
 		}
