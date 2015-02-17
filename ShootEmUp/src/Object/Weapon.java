@@ -22,10 +22,10 @@ public class Weapon {
 			posX -= 44;
 		}
 		if(direction <= 1 || direction >= 7){
-			posY -= 44;
+			posY -= 49;
 		}
 		if(direction >= 3 && direction <= 5){
-			posY += 44;
+			posY += 49;
 		}
 		ShootEmUp.level1.particles.add(new Particle(posX + 16, posY + 16, 32.0f, 32.0f, 10, direction, Art.particleID));
 	}
