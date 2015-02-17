@@ -70,8 +70,8 @@ public class Level {
 		
 		r = new DPDTRenderer(Art.ShaderBase);
 		
-		player = new Player(spawn[0], spawn[1], 5, 0, Art.playerID);
-		enemy = new Enemy(300.0f, 300.0f, 5, 0, Art.enemyID);
+		player = new Player(spawn[0], spawn[1], 64.0f, 64.0f, 5, 0, Art.playerID);
+		enemy = new Enemy(300.0f, 300.0f, 64.0f, 64.0f, 5, 0, Art.enemyID);
 		
 		collidables.add(player);
 		collidables.add(enemy);

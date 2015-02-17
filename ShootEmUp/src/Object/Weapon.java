@@ -16,18 +16,18 @@ public class Weapon {
 	
 	public void shoot(float posX, float posY, int direction){
 		if(direction >= 1 && direction <= 3){
-			posX += 39;
+			posX += 44;
 		}
 		if(direction >= 5){
-			posX -= 71;
+			posX -= 44;
 		}
 		if(direction <= 1 || direction >= 7){
-			posY -= 71;
+			posY -= 44;
 		}
 		if(direction >= 3 && direction <= 5){
-			posY += 39;
+			posY += 44;
 		}
-		ShootEmUp.level1.particles.add(new Particle(posX + 16, posY + 16, 10, direction, Art.particleID));
+		ShootEmUp.level1.particles.add(new Particle(posX + 16, posY + 16, 32.0f, 32.0f, 10, direction, Art.particleID));
 	}
 
 	public int getDamage() {

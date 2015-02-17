@@ -3,12 +3,7 @@ import Display.DPDTRenderer;
 import Main.ShootEmUp;
 import Math.Vector2;
 
-public abstract class Entity implements Collidable{
-
-	protected float posX;
-	protected float posY;
-	protected float width;
-	protected float height;
+public abstract class Entity extends Collidable{
 	protected int speed;
 	protected int direction;
 	protected int image;
@@ -16,9 +11,8 @@ public abstract class Entity implements Collidable{
 
 	// Constructors
 
-	public Entity(float spawn, float spawn2, int speed, int direction, int image){
-		this.posX = spawn;
-		this.posY = spawn2;
+	public Entity(float x, float y, float width, float height, int speed, int direction, int image){
+		super(x, y, width, height);
 		this.speed = speed;
 		this.direction = direction;
 		this.image = image;
@@ -29,7 +23,7 @@ public abstract class Entity implements Collidable{
 	public void move(Vector2 moveVec) {
 		collide = false;
 		for (Entity collidable : ShootEmUp.level1.collidables) {
-			if(collidable.doesCollide(posX + (moveVec.x() * speed), posY + (moveVec.y() * speed)) && (collidable != this)){
+			if(collidable.doesCollide(posX + (moveVec.x() * speed), posY + (moveVec.y() * speed), width, height) && (collidable != this)){
 				collide = true;
 			};
 		}
@@ -43,44 +37,6 @@ public abstract class Entity implements Collidable{
 
 	public void render(DPDTRenderer r){
 		r.draw(image,new Vector2(posX, posY),new Vector2(width, height), 0.0f, new Vector2(0.0f,(float)direction),new Vector2(1.0f,8.0f));
-	}
-	
-	//implemented methods
-	
-	public boolean doesCollide(float x, float y){
-		if(collideFunction(x, y)){
-			return true;
-		}
-		
-		x += width;
-		
-		if(collideFunction(x, y)){
-			return true;
-		}
-		
-		y += height;
-		
-		if(collideFunction(x, y)){
-			return true;
-		}
-		
-		x -= width;
-		
-		if(collideFunction(x, y)){
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean collideFunction(float x, float y){
-		if(((x >= posX) && (x <= (posX + width))) && ((y >= posY) && (y <= (posY + height)))){
-			return true;
-		}
-		return false;
-	}
-	
-	public void onCollide(){
-		return;
 	}
 	
 	// Setters and getters

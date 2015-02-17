@@ -1,16 +1,14 @@
 package Object;
 
-import Display.Art;
-import Display.DPDTRenderer;
 import Main.ShootEmUp;
 import Math.Vector2;
 
 
-public class Particle extends Entity implements Collidable{
+public class Particle extends Entity{
 	private float distance = 0.0f;
 	
-	public Particle(float posX, float posY, int speed, int direction, int image){
-		super(posX, posY, speed, direction, image);
+	public Particle(float posX, float posY, float w, float h, int speed, int direction, int image){
+		super(posX, posY, w, h, speed, direction, image);
 		width = 32f;
 		height = 32f;
 	}

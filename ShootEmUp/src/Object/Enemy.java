@@ -2,8 +2,8 @@ package Object;
 
 public class Enemy extends Entity {
 
-	public Enemy(float f, float g, int speed, int direction, int image) {
-		super(f, g, speed, direction, image);
+	public Enemy(float x, float y, float w, float h, int speed, int direction, int image) {
+		super(x, y, w, h, speed, direction, image);
 		width = 64;
 		height = 64;
 	}
