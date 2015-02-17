@@ -5,8 +5,6 @@ import java.io.IOException;
 
 import Display.Art;
 import Input.Keyboard;
-import Main.Level;
-import Main.ShootEmUp;
 import Math.Vector2;
 
 public class Player extends Entity {

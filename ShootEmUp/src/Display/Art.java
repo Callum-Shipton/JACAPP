@@ -3,7 +3,6 @@ package Display;
 import static org.lwjgl.opengl.GL11.GL_FALSE;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.ByteBuffer;

@@ -15,7 +15,7 @@ public class Weapon {
 	}
 	
 	public void shoot(float posX, float posY, int direction){
-		ShootEmUp.level1.particles.add(new Particle(posX, posY, 10, direction, Art.particleID));
+		ShootEmUp.level1.particles.add(new Particle(posX + 16, posY + 16, 10, direction, Art.particleID));
 	}
 
 	public int getDamage() {

@@ -1,7 +1,7 @@
 package Main;
 import java.awt.image.*;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.imageio.*;
 
@@ -27,8 +27,8 @@ public class Level {
 	
 	private DPDTRenderer r;
 	
-	public ArrayList<Entity> collidables;
-	public ArrayList<Particle> particles;
+	public CopyOnWriteArrayList<Entity> collidables;
+	public CopyOnWriteArrayList<Particle> particles;
 	
 	public Level(String file){
 		this.file = file;
@@ -65,8 +65,8 @@ public class Level {
 	}
 	
 	private void addStuff(){
-		collidables = new ArrayList<Entity>();
-		particles = new ArrayList<Particle>();
+		collidables = new CopyOnWriteArrayList<Entity>();
+		particles = new CopyOnWriteArrayList<Particle>();
 		
 		r = new DPDTRenderer(Art.ShaderBase);
 		
