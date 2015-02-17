@@ -68,10 +68,10 @@ public class ShootEmUp {
 			 delta = newTime - oldTime;
 			 oldTime = newTime;
 			 sleepTime = (1.0/FPS) - delta;
-			 if(sleepTime > 0)
+			 if(sleepTime > 0.01)
 			 try {
 				 Thread.sleep((long) (sleepTime*1000));
-			 System.out.println("I slept for " + 1000*sleepTime + " seconds." );
+			// System.out.println("I slept for " + 1000*sleepTime + " seconds." );
 			 } catch (InterruptedException e) {
 				 e.printStackTrace();
 			 }
