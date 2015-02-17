@@ -49,10 +49,31 @@ public class Player extends Character {
 				|| Keyboard.getKey(GLFW_KEY_D) == 2) {
 			movement.add(1.0f, 0.0f);
 		}
+		
 		if(movement.length() > 0){
-		if(movement.length() > 1) movement.normalize();
-		move(movement);
-		direction =  (int) (Math.round(movement.Angle()) / 45);
+			if(movement.length() > 1) movement.normalize();
+			move(movement);
+		}
+		Vector2 dir = new Vector2(0.0f,0.0f);
+		if (Keyboard.getKey(GLFW_KEY_UP) == 1
+				|| Keyboard.getKey(GLFW_KEY_UP) == 2) {
+			dir.add(0.0f, -1.0f);
+		}
+		if (Keyboard.getKey(GLFW_KEY_LEFT) == 1
+				|| Keyboard.getKey(GLFW_KEY_LEFT) == 2) {
+			dir.add(-1.0f, 0.0f);
+		}
+		if (Keyboard.getKey(GLFW_KEY_DOWN) == 1
+				|| Keyboard.getKey(GLFW_KEY_DOWN) == 2) {
+			dir.add(0.0f, 1.0f);
+		}
+		if (Keyboard.getKey(GLFW_KEY_RIGHT) == 1
+				|| Keyboard.getKey(GLFW_KEY_RIGHT) == 2) {
+			dir.add(1.0f, 0.0f);
+		}
+		if(dir.length() > 0){
+		if(dir.length() > 1) dir.normalize();
+		direction =  (int) (Math.round(dir.Angle()) / 45);
 		}
 		
 		if (Keyboard.getKey(GLFW_KEY_SPACE) == 1
