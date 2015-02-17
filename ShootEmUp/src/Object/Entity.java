@@ -22,8 +22,13 @@ public abstract class Entity extends Collidable{
 
 	public void move(Vector2 moveVec) {
 		collide = false;
-		for (Entity collidable : ShootEmUp.level1.collidables) {
-			if(collidable.doesCollide(posX + (moveVec.x() * speed), posY + (moveVec.y() * speed), width, height) && (collidable != this)){
+		for (NPC character : ShootEmUp.level1.characters) {
+			if(character.doesCollide(posX + (moveVec.x() * speed), posY + (moveVec.y() * speed), width, height) && (character != this)){
+				collide = true;
+			};
+		}
+		for (Collidable wall : ShootEmUp.level1.walls) {
+			if(wall.doesCollide(posX + (moveVec.x() * speed), posY + (moveVec.y() * speed), width, height)){
 				collide = true;
 			};
 		}

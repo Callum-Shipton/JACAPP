@@ -11,8 +11,9 @@ import org.lwjgl.opengl.GL30;
 import Display.Art;
 import Display.DPDTRenderer;
 import Math.Vector2;
+import Object.Collidable;
 import Object.Enemy;
-import Object.Entity;
+import Object.NPC;
 import Object.Particle;
 import Object.Player;
 
@@ -27,7 +28,8 @@ public class Level {
 	
 	private DPDTRenderer r;
 	
-	public CopyOnWriteArrayList<Entity> collidables;
+	public CopyOnWriteArrayList<Collidable> walls;
+	public CopyOnWriteArrayList<NPC> characters;
 	public CopyOnWriteArrayList<Particle> particles;
 	
 	public Level(String file){
@@ -59,13 +61,15 @@ public class Level {
 				switch(map.getRGB(x + (map.getWidth()/2), y)){
 					case -1: break;
 					case -16777216: foregroundTiles[x][y] = new Vector2(2.0f,1.0f);
+									walls.add(new Collidable(x*64.0f, y*64.0f, 64.0f, 64.0f));
 				}
 			}
 		}	
 	}
 	
 	private void addStuff(){
-		collidables = new CopyOnWriteArrayList<Entity>();
+		walls = new CopyOnWriteArrayList<Collidable>();
+		characters = new CopyOnWriteArrayList<NPC>();
 		particles = new CopyOnWriteArrayList<Particle>();
 		
 		r = new DPDTRenderer(Art.ShaderBase);
@@ -73,8 +77,8 @@ public class Level {
 		player = new Player(spawn[0], spawn[1], 64.0f, 64.0f, 5, 0, Art.playerID);
 		enemy = new Enemy(300.0f, 300.0f, 64.0f, 64.0f, 5, 0, Art.enemyID);
 		
-		collidables.add(player);
-		collidables.add(enemy);
+		characters.add(player);
+		characters.add(enemy);
 	}
 	
 	private void renderTiles(){

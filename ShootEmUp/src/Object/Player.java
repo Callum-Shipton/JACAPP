@@ -7,7 +7,7 @@ import Display.Art;
 import Input.Keyboard;
 import Math.Vector2;
 
-public class Player extends Character {
+public class Player extends NPC {
 	
 	private int health;
 	

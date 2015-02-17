@@ -1,6 +1,6 @@
 package Object;
 
-public abstract class Collidable {
+public class Collidable {
 	protected float posX;
 	protected float posY;
 	protected float width;
