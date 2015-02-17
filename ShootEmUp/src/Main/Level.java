@@ -37,8 +37,8 @@ public class Level {
 		loadLevel();
 		backgroundTiles = new Vector2[map.getWidth()/2][map.getHeight()];
 		foregroundTiles = new Vector2[map.getWidth()/2][map.getHeight()];
-		setTiles();
 		addStuff();
+		setTiles();
 		renderTiles();
 	}
 	
