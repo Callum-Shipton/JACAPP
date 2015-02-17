@@ -20,6 +20,8 @@ public class Player extends Entity {
 
 	public Player(float spawn, float spawn2, int speed, int direction, int image) {
 		super(spawn, spawn2, speed, direction, image);
+		width = 64;
+		height = 64;
 		health = 10;
 		weapon = new Weapon(10, 10);
 	}

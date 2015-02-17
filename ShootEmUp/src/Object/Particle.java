@@ -11,6 +11,8 @@ public class Particle extends Entity implements Collidable{
 	
 	public Particle(float posX, float posY, int speed, int direction, int image){
 		super(posX, posY, speed, direction, image);
+		width = 32f;
+		height = 32f;
 	}
 	
 	public void update(){

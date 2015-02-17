@@ -7,6 +7,8 @@ public abstract class Entity implements Collidable{
 
 	protected float posX;
 	protected float posY;
+	protected float width;
+	protected float height;
 	protected int speed;
 	protected int direction;
 	protected int image;
@@ -48,22 +50,21 @@ public abstract class Entity implements Collidable{
 	public boolean doesCollide(float x, float y){
 		if(collideFunction(x, y)){
 			return true;
-			
 		}
 		
-		x += 64.0f;
+		x += width;
 		
 		if(collideFunction(x, y)){
 			return true;
 		}
 		
-		y += 64.0f;
+		y += height;
 		
 		if(collideFunction(x, y)){
 			return true;
 		}
 		
-		x -= 64.0f;
+		x -= width;
 		
 		if(collideFunction(x, y)){
 			return true;
@@ -72,7 +73,7 @@ public abstract class Entity implements Collidable{
 	}
 	
 	public boolean collideFunction(float x, float y){
-		if(((x >= posX) && (x <= (posX + 64.0f))) && ((y >= posY) && (y <= (posY + 64.0f)))){
+		if(((x >= posX) && (x <= (posX + width))) && ((y >= posY) && (y <= (posY + height)))){
 			return true;
 		}
 		return false;
