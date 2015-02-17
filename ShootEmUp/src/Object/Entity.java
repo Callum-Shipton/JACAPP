@@ -34,6 +34,8 @@ public abstract class Entity implements Collidable{
 		if(collide == false){
 			posX += moveVec.x() * speed;
 			posY += moveVec.y() * speed;
+		} else {
+			onCollide();
 		}
 	}
 
@@ -46,6 +48,7 @@ public abstract class Entity implements Collidable{
 	public boolean doesCollide(float x, float y){
 		if(collideFunction(x, y)){
 			return true;
+			
 		}
 		
 		x += 64.0f;
@@ -73,6 +76,10 @@ public abstract class Entity implements Collidable{
 			return true;
 		}
 		return false;
+	}
+	
+	public void onCollide(){
+		return;
 	}
 	
 	// Setters and getters

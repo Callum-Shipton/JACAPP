@@ -2,11 +2,12 @@ package Object;
 
 import Display.Art;
 import Display.DPDTRenderer;
+import Main.ShootEmUp;
 import Math.Vector2;
 
 
 public class Particle extends Entity implements Collidable{
-	private int distance = 0;
+	private float distance = 0.0f;
 	
 	public Particle(float posX, float posY, int speed, int direction, int image){
 		super(posX, posY, speed, direction, image);
@@ -28,18 +29,23 @@ public class Particle extends Entity implements Collidable{
 		}
 		movement.normalize();
 		move(movement);
-
+		
 	}
 	
 	public void render(DPDTRenderer r){
 		r.draw(Art.particleID,new Vector2((posX + 16), (posY + 16)),new Vector2(32.0f, 32.0f), 0.0f, new Vector2(1.0f,(float)direction), new Vector2(1.0f,8.0f));
 	}
+	
+	@Override
+	public void onCollide(){
+		ShootEmUp.level1.particles.remove(this);
+	}
 
-	public int getDistance() {
+	public float getDistance() {
 		return distance;
 	}
 
-	public void setDistance(int distance) {
+	public void setDistance(float distance) {
 		this.distance = distance;
 	}
 }
