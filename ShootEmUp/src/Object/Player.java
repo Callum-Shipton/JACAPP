@@ -73,7 +73,6 @@ public class Player extends NPC {
 		}
 		if(dir.length() > 0){
 		if(dir.length() > 1) dir.normalize();
-		System.out.println(dir.Angle());
 		direction =  (int) (Math.round(dir.Angle()) / 45);
 		}
 		

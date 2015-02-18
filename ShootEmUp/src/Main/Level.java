@@ -76,7 +76,7 @@ public class Level {
 		player = new Player(spawn[0], spawn[1], 64.0f, 64.0f, 5, 0, Art.playerID);
 		
 		characters.add(player);
-		characters.add(new Enemy(800.0f, 10.0f, 64.0f, 64.0f, 5, 0, Art.enemyID));
+		characters.add(new Enemy(800.0f, 50.0f, 64.0f, 64.0f, 5, 0, Art.enemyID));
 	}
 	
 	private void renderTiles(){

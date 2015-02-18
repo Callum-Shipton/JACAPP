@@ -14,21 +14,22 @@ public abstract class NPC extends Entity {
 	public void update(){
 		checkDead();
 		Vector2 movement = new Vector2(0.0f,0.0f);
-		if(ShootEmUp.currentLevel.getPlayer().getY() <= posY){
+		if(ShootEmUp.currentLevel.getPlayer().getY() < posY){
 			movement.add(0.0f, -1.0f);
 		}
-		if(ShootEmUp.currentLevel.getPlayer().getX() <= posX){
+		if(ShootEmUp.currentLevel.getPlayer().getX() < posX){
 			movement.add(-1.0f, 0.0f);
 		}
-		if(ShootEmUp.currentLevel.getPlayer().getY() >= posY){
+		if(ShootEmUp.currentLevel.getPlayer().getY() > posY){
 			movement.add(0.0f, 1.0f);
 		}
-		if(ShootEmUp.currentLevel.getPlayer().getX() >= posX){
+		if(ShootEmUp.currentLevel.getPlayer().getX() > posX){
 			movement.add(1.0f, 0.0f);
 		}
 		if(movement.length() > 0){
 			if(movement.length() > 1) movement.normalize();
 			move(movement);
+			direction =  (int) (Math.round(movement.Angle()) / 45);
 		}
 	}
 	
