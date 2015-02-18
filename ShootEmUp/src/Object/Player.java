@@ -2,9 +2,15 @@ package Object;
 import static org.lwjgl.glfw.GLFW.*;
 
 import java.io.IOException;
+import java.nio.FloatBuffer;
+
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL20;
 
 import Display.Art;
 import Input.Keyboard;
+import Main.ShootEmUp;
+import Math.Matrix4;
 import Math.Vector2;
 
 public class Player extends NPC {
@@ -13,6 +19,9 @@ public class Player extends NPC {
 	
 	private int lives; 
 	private Weapon weapon;
+	private FloatBuffer matrix44Buffer;
+	private Matrix4 viewMatrix;
+	private int viewMatrixLocation;
 	
 	public Player() throws IOException {
 		super(10.0f, 10.0f, 64.0f, 64.0f, 10, 0, Art.playerID);
@@ -20,6 +29,17 @@ public class Player extends NPC {
 
 	public Player(float x, float y, float width, float height, int speed, int direction, int image) {
 		super(x, y, width, height, speed, direction, image);
+		GL20.glUseProgram(Art.ShaderBase);
+		viewMatrixLocation = GL20.glGetUniformLocation(Art.ShaderBase,
+				"viewMatrix");
+		viewMatrix = new Matrix4();
+		viewMatrix.clearToIdentity();
+		viewMatrix.translate(-x+(ShootEmUp.WIDTH - width)/2, -y+(ShootEmUp.HEIGHT-height)/2, 0);
+		viewMatrix.transpose();
+		matrix44Buffer = BufferUtils.createFloatBuffer(16);
+		matrix44Buffer = viewMatrix.toBuffer();
+		GL20.glUniformMatrix4(viewMatrixLocation, true, matrix44Buffer);
+		GL20.glUseProgram(0);
 		health = 10;
 		weapon = new Weapon(10, 10);
 	}
@@ -53,6 +73,14 @@ public class Player extends NPC {
 		if(movement.length() > 0){
 			if(movement.length() > 1) movement.normalize();
 			move(movement);
+			GL20.glUseProgram(Art.ShaderBase);
+			viewMatrix.clearToIdentity();
+			viewMatrix.translate(-posX+(ShootEmUp.WIDTH-width)/2, -posY+(ShootEmUp.HEIGHT-height)/2, 0);
+			viewMatrix.transpose();
+			matrix44Buffer.clear();
+			matrix44Buffer = viewMatrix.toBuffer();
+			GL20.glUniformMatrix4(viewMatrixLocation, true, matrix44Buffer);
+			GL20.glUseProgram(0);
 		}
 		Vector2 dir = new Vector2(0.0f,0.0f);
 		if (Keyboard.getKey(GLFW_KEY_UP) == 1

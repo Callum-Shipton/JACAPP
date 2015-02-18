@@ -1,4 +1,5 @@
 package Display;
+
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 
@@ -11,9 +12,8 @@ import org.lwjgl.opengl.GL30;
 import Math.Matrix4;
 import Math.Vector2;
 
+public class SPSTRenderer {
 
-public class DPDTRenderer {
-	
 	private int shaderProgramID;
 	private int VAO;
 	private int VBO;
@@ -22,15 +22,14 @@ public class DPDTRenderer {
 	private int textureMatrixLocation;
 	private FloatBuffer matrix44Buffer;
 	
-	public DPDTRenderer(int pID){
+	public SPSTRenderer(int pID){
 		shaderProgramID = pID;
 		initRenderData();
 	}
 	
-	public void draw(int Texid, Vector2 pos, Vector2 size, float rotate, Vector2 texPos, Vector2 texMax){
+	public void draw(int Texid, Vector2 pos, Vector2 size, float rotate){
 		
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, Texid);
-		
 		
 		Matrix4 model = new Matrix4();
 		model.clearToIdentity();
@@ -41,13 +40,6 @@ public class DPDTRenderer {
 		model.scale(size.x(), size.y(), 1.0f);
 
 		model.transpose();
-		
-		Matrix4 texture = new Matrix4();
-		texture.clearToIdentity();
-		texture.translate(texPos.x()/texMax.x(), texPos.y()/texMax.y(), 0.0f);
-		texture.scale(1/texMax.x(), 1/texMax.y(), 1.0f);
-
-		texture.transpose();
 		
 		//model.m03 += pos.x;
 		//model.m13 += pos.y;
@@ -62,21 +54,12 @@ public class DPDTRenderer {
 		
 		*/
         
-        
         matrix44Buffer = model.toBuffer();
-		
-		
+	
 		GL20.glUniformMatrix4(modelMatrixLocation, true, matrix44Buffer);
 
 		matrix44Buffer.clear();
-		
-		matrix44Buffer = texture.toBuffer();
-		
-		GL20.glUniformMatrix4(textureMatrixLocation, true, matrix44Buffer);
-		
 
-		
-        
        // GL20.glEnableVertexAttribArray(0);
        // GL20.glEnableVertexAttribArray(1);
         
@@ -93,7 +76,6 @@ public class DPDTRenderer {
 		GL20.glUseProgram(shaderProgramID);
 		
 		modelMatrixLocation = GL20.glGetUniformLocation(shaderProgramID, "modelMatrix");
-		textureMatrixLocation = GL20.glGetUniformLocation(shaderProgramID, "textureMatrix");
 		
 		GL20.glUseProgram(0);
 		
