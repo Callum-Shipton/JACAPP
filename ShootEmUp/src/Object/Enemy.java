@@ -7,12 +7,4 @@ public class Enemy extends NPC {
 		width = 64;
 		height = 64;
 	}
-
-	public void update() {
-		checkDead();
-	}
-	
-	public void stuff(){
-		
-	}
 }

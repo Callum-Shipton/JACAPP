@@ -24,7 +24,6 @@ public class Level {
 	private Vector2[][] foregroundTiles;
 	private float[] spawn = new float[] {50.0f, 50.0f};
 	private Player player;
-	private Enemy enemy;
 	
 	private DPDTRenderer r;
 	
@@ -75,10 +74,9 @@ public class Level {
 		r = new DPDTRenderer(Art.ShaderBase);
 		
 		player = new Player(spawn[0], spawn[1], 64.0f, 64.0f, 5, 0, Art.playerID);
-		enemy = new Enemy(800.0f, 10.0f, 64.0f, 64.0f, 5, 0, Art.enemyID);
 		
 		characters.add(player);
-		characters.add(enemy);
+		characters.add(new Enemy(800.0f, 10.0f, 64.0f, 64.0f, 5, 0, Art.enemyID));
 	}
 	
 	private void renderTiles(){
@@ -121,5 +119,9 @@ public class Level {
 
 	public void setSpawn(float[] spawn) {
 		this.spawn = spawn;
+	}
+	
+	public Player getPlayer(){
+		return player;
 	}
 }
