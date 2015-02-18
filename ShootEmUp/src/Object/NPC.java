@@ -1,5 +1,7 @@
 package Object;
 
+import Main.ShootEmUp;
+
 public abstract class NPC extends Entity {
 	protected int health;
 	
@@ -7,12 +9,22 @@ public abstract class NPC extends Entity {
 		super(x, y, width, height, speed, direction, image);
 		health = 100;
 	}
-
+	
+	public void update(){
+		
+	}
+	
+	public void checkDead(){
+		if(health <= 0){
+			ShootEmUp.currentLevel.characters.remove(this);
+		}
+	}
+	
 	public int getHealth() {
 		return health;
 	}
 
-	public void setHealth(int health) {
-		this.health = health;
+	public void damage(int damage) {
+		this.health -= damage;
 	}
 }

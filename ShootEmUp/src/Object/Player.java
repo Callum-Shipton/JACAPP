@@ -73,6 +73,7 @@ public class Player extends NPC {
 		}
 		if(dir.length() > 0){
 		if(dir.length() > 1) dir.normalize();
+		System.out.println(dir.Angle());
 		direction =  (int) (Math.round(dir.Angle()) / 45);
 		}
 		
@@ -89,7 +90,6 @@ public class Player extends NPC {
 	}
 
 	private void respawn(){
-		lives--;
 		posX = 10.0f;
 		posY = 10.0f;
 	}

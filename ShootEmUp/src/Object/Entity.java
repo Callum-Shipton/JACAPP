@@ -7,7 +7,7 @@ public abstract class Entity extends Collidable{
 	protected int speed;
 	protected int direction;
 	protected int image;
-	protected boolean collide;
+
 
 	// Constructors
 
@@ -21,13 +21,15 @@ public abstract class Entity extends Collidable{
 	// Methods
 
 	public void move(Vector2 moveVec) {
-		collide = false;
-		for (NPC character : ShootEmUp.level1.characters) {
+		boolean collide = false;
+		NPC hit = null;
+		for (NPC character : ShootEmUp.currentLevel.characters) {
 			if(character.doesCollide(posX + (moveVec.x() * speed), posY, width, height) && (character != this)){
 				collide = true;
+				hit = character;
 			};
 		}
-		for (Collidable wall : ShootEmUp.level1.walls) {
+		for (Collidable wall : ShootEmUp.currentLevel.walls) {
 			if(wall.doesCollide(posX + (moveVec.x() * speed), posY, width, height)){
 				collide = true;
 			};
@@ -35,15 +37,16 @@ public abstract class Entity extends Collidable{
 		if(collide == false){
 			posX += moveVec.x() * speed;
 		} else {
-			onCollide();
+			onCollide(hit);
 		}
 		collide = false;
-		for (NPC character : ShootEmUp.level1.characters) {
+		for (NPC character : ShootEmUp.currentLevel.characters) {
 			if(character.doesCollide(posX, posY + (moveVec.y() * speed), width, height) && (character != this)){
 				collide = true;
+				hit = character;
 			};
 		}
-		for (Collidable wall : ShootEmUp.level1.walls) {
+		for (Collidable wall : ShootEmUp.currentLevel.walls) {
 			if(wall.doesCollide(posX, posY + (moveVec.y() * speed), width, height)){
 				collide = true;
 			};
@@ -51,7 +54,7 @@ public abstract class Entity extends Collidable{
 		if(collide == false){
 			posY += moveVec.y() * speed;
 		} else {
-			onCollide();
+			onCollide(hit);
 		}
 	}
 

@@ -45,7 +45,7 @@ public class Collidable {
 		return false;
 	}
 	
-	public void onCollide(){
+	public void onCollide(NPC hit){
 		return;
 	}
 }

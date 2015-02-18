@@ -75,7 +75,7 @@ public class Level {
 		r = new DPDTRenderer(Art.ShaderBase);
 		
 		player = new Player(spawn[0], spawn[1], 64.0f, 64.0f, 5, 0, Art.playerID);
-		enemy = new Enemy(300.0f, 300.0f, 64.0f, 64.0f, 5, 0, Art.enemyID);
+		enemy = new Enemy(800.0f, 10.0f, 64.0f, 64.0f, 5, 0, Art.enemyID);
 		
 		characters.add(player);
 		characters.add(enemy);
@@ -93,8 +93,9 @@ public class Level {
 	}
 	
 	public void update(){
-		player.update();
-		enemy.update();
+		for (NPC character : characters) {
+			character.update();
+		}
 		for (Particle particle : particles) {
 			particle.update();
 		}
@@ -104,8 +105,9 @@ public class Level {
 		GL20.glUseProgram(Art.ShaderBase);
 		GL30.glBindVertexArray(r.getVAO());
 		renderTiles();
-		player.render(r);
-		enemy.render(r);
+		for (NPC character : characters) {
+			character.render(r);
+		}
 		for (Particle particle : particles) {
 			particle.render(r);
 		}

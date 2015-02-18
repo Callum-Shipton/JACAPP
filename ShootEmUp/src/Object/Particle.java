@@ -6,9 +6,11 @@ import Math.Vector2;
 
 public class Particle extends Entity{
 	private float distance = 0.0f;
+	private Weapon weapon; 
 	
-	public Particle(float posX, float posY, float w, float h, int speed, int direction, int image){
+	public Particle(float posX, float posY, float w, float h, int speed, int direction, int image, Weapon weapon){
 		super(posX, posY, w, h, speed, direction, image);
+		this.weapon = weapon;
 		width = 32f;
 		height = 32f;
 	}
@@ -33,8 +35,11 @@ public class Particle extends Entity{
 	}
 	
 	@Override
-	public void onCollide(){
-		ShootEmUp.level1.particles.remove(this);
+	public void onCollide(NPC hit){
+		ShootEmUp.currentLevel.particles.remove(this);
+		if(hit != null){
+			hit.damage(weapon.getDamage());
+		}
 	}
 
 	public float getDistance() {

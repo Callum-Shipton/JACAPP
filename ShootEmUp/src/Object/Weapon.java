@@ -3,7 +3,6 @@ package Object;
 import Display.Art;
 import Main.ShootEmUp;
 
-
 public class Weapon {
 	
 	private int damage;
@@ -27,7 +26,7 @@ public class Weapon {
 		if(direction >= 3 && direction <= 5){
 			posY += 49;
 		}
-		ShootEmUp.level1.particles.add(new Particle(posX + 16, posY + 16, 32.0f, 32.0f, 10, direction, Art.particleID));
+		ShootEmUp.currentLevel.particles.add(new Particle(posX + 16, posY + 16, 32.0f, 32.0f, 10, direction, Art.particleID, this));
 	}
 
 	public int getDamage() {

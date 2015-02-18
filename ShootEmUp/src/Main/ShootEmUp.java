@@ -21,7 +21,7 @@ public class ShootEmUp {
 	// Will be moved to LEVEL
 	DPDTRenderer r;
 	
-	public static Level level1;
+	public static Level currentLevel;
 
 	public void run() {
 		try {
@@ -46,7 +46,7 @@ public class ShootEmUp {
 		d = new Display(WIDTH, HEIGHT);
 		d.initGLFW();
 		
-		level1 = new Level(Art.level1);
+		currentLevel = new Level(Art.level1);
 		
 		// Initialise key handling
 		Keyboard.keyCheck(d.getWindow());
@@ -88,7 +88,7 @@ public class ShootEmUp {
 		// invoked during this call.
 		glfwPollEvents();
 		
-		level1.update();
+		currentLevel.update();
 		d.update();
 	}
 
@@ -96,7 +96,7 @@ public class ShootEmUp {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	    glClear(GL_COLOR_BUFFER_BIT);
 	        
-	        level1.render();
+	        currentLevel.render();
 
 		glfwSwapBuffers(d.getWindow()); // Swaps front and back buffers to render changes
 	}

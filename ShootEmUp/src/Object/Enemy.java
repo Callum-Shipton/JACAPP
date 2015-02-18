@@ -9,7 +9,7 @@ public class Enemy extends NPC {
 	}
 
 	public void update() {
-		
+		checkDead();
 	}
 	
 	public void stuff(){
