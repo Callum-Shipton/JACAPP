@@ -21,6 +21,7 @@ public class DPDTRenderer {
 	private int modelMatrixLocation;
 	private int textureMatrixLocation;
 	private FloatBuffer matrix44Buffer;
+	private Matrix4 model;
 	
 	public DPDTRenderer(int pID){
 		shaderProgramID = pID;
@@ -32,22 +33,18 @@ public class DPDTRenderer {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, Texid);
 		
 		
-		Matrix4 model = new Matrix4();
+		
 		model.clearToIdentity();
 		model.translate(pos.x(), pos.y(), 0.0f);
 		model.translate(0.5f*size.x(), 0.5f*size.y(), 0.0f);
 		model.rotateDeg(rotate, 0.0f, 0.0f, 1.0f);
 		model.translate(-0.5f*size.x(), -0.5f*size.y(), 0.0f);
 		model.scale(size.x(), size.y(), 1.0f);
-
-		model.transpose();
 		
 		Matrix4 texture = new Matrix4();
 		texture.clearToIdentity();
 		texture.translate(texPos.x()/texMax.x(), texPos.y()/texMax.y(), 0.0f);
 		texture.scale(1/texMax.x(), 1/texMax.y(), 1.0f);
-
-		texture.transpose();
 		
 		//model.m03 += pos.x;
 		//model.m13 += pos.y;
@@ -66,13 +63,13 @@ public class DPDTRenderer {
         matrix44Buffer = model.toBuffer();
 		
 		
-		GL20.glUniformMatrix4(modelMatrixLocation, true, matrix44Buffer);
+		GL20.glUniformMatrix4(modelMatrixLocation, false, matrix44Buffer);
 
 		matrix44Buffer.clear();
 		
 		matrix44Buffer = texture.toBuffer();
 		
-		GL20.glUniformMatrix4(textureMatrixLocation, true, matrix44Buffer);
+		GL20.glUniformMatrix4(textureMatrixLocation, false, matrix44Buffer);
 		
 
 		
@@ -89,6 +86,7 @@ public class DPDTRenderer {
 	private void initRenderData(){
 		
 		matrix44Buffer = BufferUtils.createFloatBuffer(16);
+		model = new Matrix4();
 		
 		GL20.glUseProgram(shaderProgramID);
 		

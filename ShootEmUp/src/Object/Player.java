@@ -76,10 +76,9 @@ public class Player extends NPC {
 			GL20.glUseProgram(Art.ShaderBase);
 			viewMatrix.clearToIdentity();
 			viewMatrix.translate(-posX+(ShootEmUp.WIDTH-width)/2, -posY+(ShootEmUp.HEIGHT-height)/2, 0);
-			viewMatrix.transpose();
 			matrix44Buffer.clear();
 			matrix44Buffer = viewMatrix.toBuffer();
-			GL20.glUniformMatrix4(viewMatrixLocation, true, matrix44Buffer);
+			GL20.glUniformMatrix4(viewMatrixLocation, false, matrix44Buffer);
 			GL20.glUseProgram(0);
 		}
 		Vector2 dir = new Vector2(0.0f,0.0f);
