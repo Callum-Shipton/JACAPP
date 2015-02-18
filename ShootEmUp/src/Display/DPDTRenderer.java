@@ -22,6 +22,7 @@ public class DPDTRenderer {
 	private int textureMatrixLocation;
 	private FloatBuffer matrix44Buffer;
 	private Matrix4 model;
+	private Matrix4 texture;
 	
 	public DPDTRenderer(int pID){
 		shaderProgramID = pID;
@@ -41,7 +42,6 @@ public class DPDTRenderer {
 		model.translate(-0.5f*size.x(), -0.5f*size.y(), 0.0f);
 		model.scale(size.x(), size.y(), 1.0f);
 		
-		Matrix4 texture = new Matrix4();
 		texture.clearToIdentity();
 		texture.translate(texPos.x()/texMax.x(), texPos.y()/texMax.y(), 0.0f);
 		texture.scale(1/texMax.x(), 1/texMax.y(), 1.0f);
@@ -87,6 +87,7 @@ public class DPDTRenderer {
 		
 		matrix44Buffer = BufferUtils.createFloatBuffer(16);
 		model = new Matrix4();
+		texture = new Matrix4();
 		
 		GL20.glUseProgram(shaderProgramID);
 		
@@ -123,8 +124,8 @@ public class DPDTRenderer {
         indicesBuffer.put(indices);
         indicesBuffer.flip();
 
-		    setVAO(GL30.glGenVertexArrays());
-		    GL30.glBindVertexArray(getVAO());
+		    VAO = GL30.glGenVertexArrays();
+		    GL30.glBindVertexArray(VAO);
 		    
 		    VBO = GL15.glGenBuffers();
 		    GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, VBO);
@@ -156,7 +157,4 @@ public class DPDTRenderer {
 		return VAO;
 	}
 
-	private void setVAO(int vAO) {
-		VAO = vAO;
-	}
 }

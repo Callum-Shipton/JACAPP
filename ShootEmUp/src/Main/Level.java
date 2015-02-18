@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL30;
 
 import Display.Art;
 import Display.DPDTRenderer;
+import Display.IRenderer;
 import Math.Vector2;
 import Object.Collidable;
 import Object.Enemy;
@@ -26,6 +27,8 @@ public class Level {
 	private Player player;
 	
 	private DPDTRenderer r;
+	private IRenderer irBack;
+	private IRenderer irFront;
 	
 	public CopyOnWriteArrayList<Collidable> walls;
 	public CopyOnWriteArrayList<NPC> characters;
@@ -64,6 +67,8 @@ public class Level {
 				}
 			}
 		}	
+		irBack = new IRenderer(Art.ShaderInst,backgroundTiles,new Vector2(4.0f,4.0f),64.0f,64.0f);
+		irFront = new IRenderer(Art.ShaderInst,foregroundTiles,new Vector2(4.0f,4.0f),64.0f,64.0f);
 	}
 	
 	private void addStuff(){
@@ -80,6 +85,10 @@ public class Level {
 	}
 	
 	private void renderTiles(){
+		irBack.draw(Art.floorID);
+		irFront.draw(Art.wallID);
+		
+		/*
 		for(int i = 0; i < map.getWidth()/2; i++){
 			for(int j = 0; j < map.getHeight(); j++){
 				r.draw(Art.floorID, new Vector2((float)(i*64),(float)(j*64)), new Vector2(64.0f,64.0f), 0.0f, backgroundTiles[i][j], new Vector2(4.0f,4.0f));
@@ -88,6 +97,7 @@ public class Level {
 				}
 			}
 		}
+		*/
 	}
 	
 	public void update(){
@@ -100,9 +110,13 @@ public class Level {
 	}
 	
 	public void render(){
+		GL20.glUseProgram(Art.ShaderInst);
+		renderTiles();
+		GL20.glUseProgram(0);
+		
 		GL20.glUseProgram(Art.ShaderBase);
 		GL30.glBindVertexArray(r.getVAO());
-		renderTiles();
+		
 		for (NPC character : characters) {
 			character.render(r);
 		}

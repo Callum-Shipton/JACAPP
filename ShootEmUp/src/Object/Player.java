@@ -22,6 +22,7 @@ public class Player extends NPC {
 	private FloatBuffer matrix44Buffer;
 	private Matrix4 viewMatrix;
 	private int viewMatrixLocation;
+	private int viewMatrixLocationInst;
 	
 	public Player() throws IOException {
 		super(10.0f, 10.0f, 64.0f, 64.0f, 10, 0, Art.playerID);
@@ -29,16 +30,22 @@ public class Player extends NPC {
 
 	public Player(float x, float y, float width, float height, int speed, int direction, int image) {
 		super(x, y, width, height, speed, direction, image);
-		GL20.glUseProgram(Art.ShaderBase);
-		viewMatrixLocation = GL20.glGetUniformLocation(Art.ShaderBase,
-				"viewMatrix");
+
 		viewMatrix = new Matrix4();
 		viewMatrix.clearToIdentity();
 		viewMatrix.translate(-x+(ShootEmUp.WIDTH - width)/2, -y+(ShootEmUp.HEIGHT-height)/2, 0);
 		viewMatrix.transpose();
 		matrix44Buffer = BufferUtils.createFloatBuffer(16);
 		matrix44Buffer = viewMatrix.toBuffer();
+		GL20.glUseProgram(Art.ShaderBase);
+		viewMatrixLocation = GL20.glGetUniformLocation(Art.ShaderBase,
+				"viewMatrix");
 		GL20.glUniformMatrix4(viewMatrixLocation, true, matrix44Buffer);
+		GL20.glUseProgram(0);	
+		GL20.glUseProgram(Art.ShaderInst);
+		viewMatrixLocationInst = GL20.glGetUniformLocation(Art.ShaderInst,
+				"viewMatrix");
+		GL20.glUniformMatrix4(viewMatrixLocationInst, true, matrix44Buffer);
 		GL20.glUseProgram(0);
 		health = 10;
 		weapon = new Weapon(10, 10);
@@ -73,12 +80,16 @@ public class Player extends NPC {
 		if(movement.length() > 0){
 			if(movement.length() > 1) movement.normalize();
 			move(movement);
-			GL20.glUseProgram(Art.ShaderBase);
+
 			viewMatrix.clearToIdentity();
 			viewMatrix.translate(-posX+(ShootEmUp.WIDTH-width)/2, -posY+(ShootEmUp.HEIGHT-height)/2, 0);
 			matrix44Buffer.clear();
 			matrix44Buffer = viewMatrix.toBuffer();
+			GL20.glUseProgram(Art.ShaderBase);
 			GL20.glUniformMatrix4(viewMatrixLocation, false, matrix44Buffer);
+			GL20.glUseProgram(0);
+			GL20.glUseProgram(Art.ShaderInst);
+			GL20.glUniformMatrix4(viewMatrixLocationInst, false, matrix44Buffer);
 			GL20.glUseProgram(0);
 		}
 		Vector2 dir = new Vector2(0.0f,0.0f);

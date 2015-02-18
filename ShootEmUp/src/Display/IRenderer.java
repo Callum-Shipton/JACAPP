@@ -8,111 +8,73 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
+import org.lwjgl.opengl.GL31;
+import org.lwjgl.opengl.GL33;
 
 import Math.Matrix4;
 import Math.Vector2;
 
 public class IRenderer {
-
-	Vector2[] translation;
-	Vector2[] texture;
 	
 		private int shaderProgramID;
 		private int VAO;
 		private int VBO;
 		private int EBO;
-		private int modelMatrixLocation;
-		private int textureMatrixLocation;
-		private FloatBuffer matrix44Buffer;
+		private float width;
+		private float height;
+		private int amount;
 		
-		public IRenderer(int pID){
+		
+		public IRenderer(int pID, Vector2[][] Textures, Vector2 texMax, float width, float height){
 			shaderProgramID = pID;
-
+			this.width = width;
+			this.height = height;
+			initRenderData(Textures, texMax);
 		}
 		
-		public void draw(int Texid, Vector2 pos, Vector2 size, float rotate, Vector2 texPos, Vector2 texMax){
-			
+		public void draw(int Texid){
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, Texid);
-			
-			
-			Matrix4 model = new Matrix4();
-			model.clearToIdentity();
-			model.translate(pos.x(), pos.y(), 0.0f);
-			model.translate(0.5f*size.x(), 0.5f*size.y(), 0.0f);
-			model.rotateDeg(rotate, 0.0f, 0.0f, 1.0f);
-			model.translate(-0.5f*size.x(), -0.5f*size.y(), 0.0f);
-			model.scale(size.x(), size.y(), 1.0f);
-
-			model.transpose();
-			
-			Matrix4 texture = new Matrix4();
-			texture.clearToIdentity();
-			texture.translate(texPos.x()/texMax.x(), texPos.y()/texMax.y(), 0.0f);
-			texture.scale(1/texMax.x(), 1/texMax.y(), 1.0f);
-
-			texture.transpose();
-			
-			//model.m03 += pos.x;
-			//model.m13 += pos.y;
-			//model.m23 += -5.0f;
-			
-			/*
-			 * 
-			double timeValue = GLFW.glfwGetTime();
-			double greenValue = ((Math.sin(timeValue) / 2) + 0.5);
-			int vertexColorLocation = GL20.glGetUniformLocation(shaderProgramID, "ourColor");
-			GL20.glUniform2f(vertexColorLocation, 0.0f, (float) greenValue);
-			
-			*/
-	        
-	        
-	        matrix44Buffer = model.toBuffer();
-			
-			
-			GL20.glUniformMatrix4(modelMatrixLocation, true, matrix44Buffer);
-
-			matrix44Buffer.clear();
-			
-			matrix44Buffer = texture.toBuffer();
-			
-			GL20.glUniformMatrix4(textureMatrixLocation, true, matrix44Buffer);
-			
-
-			
-	        
-	       // GL20.glEnableVertexAttribArray(0);
-	       // GL20.glEnableVertexAttribArray(1);
-	        
-	      //  GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, EBO);
-	        
-	        GL11.glDrawElements(GL11.GL_TRIANGLES, 6, GL11.GL_UNSIGNED_BYTE, 0);
-	        GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
-	     //   GL30.glBindVertexArray(0);
+			GL30.glBindVertexArray(VAO);
+            GL31.glDrawElementsInstanced(GL11.GL_TRIANGLES, 6, GL11.GL_UNSIGNED_BYTE, 0, amount);
+            GL30.glBindVertexArray(0);
 		}
-		private void initRenderData(int width, int height){
+		private void initRenderData(Vector2[][] textures, Vector2 texMax){
 			
-			translation = new Vector2[width*height];
-			texture = new Vector2[width*height];
+			amount = textures.length * textures[0].length;
 			
-			matrix44Buffer = BufferUtils.createFloatBuffer(16);
-			
-			GL20.glUseProgram(shaderProgramID);
-			
-			modelMatrixLocation = GL20.glGetUniformLocation(shaderProgramID, "modelMatrix");
-			textureMatrixLocation = GL20.glGetUniformLocation(shaderProgramID, "textureMatrix");
-			
-			GL20.glUseProgram(0);
+			float[] texture = new float[2];
+			float[] translation = new float[2];
+			FloatBuffer instanceFloatBuffer = BufferUtils.createByteBuffer(amount * 4 * 4).asFloatBuffer();
+			for(int i = 0; i<textures.length; i++){
+				for(int j = 0; j<textures[0].length; j++){
+					if(textures[i][j] != null){
+					texture[0] = textures[i][j].x()/texMax.x();
+					texture[1] = textures[i][j].y()/texMax.y();
+					translation[0] = j*width;
+					translation[1] = i*height;
+					}
+					else{
+						texture[0] = 0.0f;
+						texture[1] = 0.0f;
+						translation[0] = 0.0f;
+						translation[1] = 0.0f;
+					}
+					instanceFloatBuffer.put(translation);
+					instanceFloatBuffer.put(texture);
+				}
+			}
+			instanceFloatBuffer.flip();
 			
 			TexturedVertex vertices[];
 			
 			TexturedVertex v0 = new TexturedVertex(); 
-	        v0.setXY(0.0f, 1.0f);  v0.setST(0.0f, 1.0f);
+	        v0.setXY(0.0f, 1.0f*height);  v0.setST(0.0f, 1.0f/texMax.y());
 	        TexturedVertex v1 = new TexturedVertex(); 
 	        v1.setXY(0.0f, 0.0f);  v1.setST(0.0f, 0.0f);
 	        TexturedVertex v2 = new TexturedVertex(); 
-	        v2.setXY(1.0f, 0.0f);  v2.setST(1.0f, 0.0f);
+	        v2.setXY(1.0f*width, 0.0f);  v2.setST(1.0f/texMax.x(), 0.0f);
 	        TexturedVertex v3 = new TexturedVertex(); 
-	        v3.setXY(1.0f, 1.0f);  v3.setST(1.0f, 1.0f);
+	        v3.setXY(1.0f*width, 1.0f*height);  v3.setST(1.0f/texMax.x(), 1.0f/texMax.y());
 	        
 	        vertices = new TexturedVertex[] {v0,v1,v2,v3};
 	        FloatBuffer verticesFloatBuffer = BufferUtils.createByteBuffer(vertices.length * TexturedVertex.stride).asFloatBuffer();
@@ -131,12 +93,17 @@ public class IRenderer {
 	        indicesBuffer.put(indices);
 	        indicesBuffer.flip();
 
-			    setVAO(GL30.glGenVertexArrays());
-			    GL30.glBindVertexArray(getVAO());
+			    VAO = GL30.glGenVertexArrays();
+			    GL30.glBindVertexArray(VAO);
 			    
 			    VBO = GL15.glGenBuffers();
 			    GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, VBO);
-			    GL15.glBufferData(GL15.GL_ARRAY_BUFFER, verticesFloatBuffer, GL15.GL_DYNAMIC_DRAW);
+			    GL15.glBufferData(GL15.GL_ARRAY_BUFFER, verticesFloatBuffer, GL15.GL_STATIC_DRAW);
+			    
+			    EBO = GL15.glGenBuffers();
+			    GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, EBO);
+		        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, 
+		                GL15.GL_STATIC_DRAW);
 		        
 			    GL20.glVertexAttribPointer(0, TexturedVertex.positionElementCount, GL11.GL_FLOAT, 
 		                false, TexturedVertex.stride, TexturedVertex.positionByteOffset);
@@ -149,22 +116,24 @@ public class IRenderer {
 		        
 		        GL20.glEnableVertexAttribArray(1);
 			    
-			    EBO = GL15.glGenBuffers();
-			    GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, EBO);
-		        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, 
-		                GL15.GL_STATIC_DRAW);
+		        int IVBO = GL15.glGenBuffers();
+			    GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, IVBO);
+			    GL15.glBufferData(GL15.GL_ARRAY_BUFFER, instanceFloatBuffer, GL15.GL_STATIC_DRAW);
+			    
+			    GL20.glVertexAttribPointer(2, TexturedVertex.positionElementCount, GL11.GL_FLOAT, 
+		                false, TexturedVertex.stride, TexturedVertex.positionByteOffset);
+			    GL20.glEnableVertexAttribArray(2);
+			    
+			    GL20.glVertexAttribPointer(3, TexturedVertex.textureElementCount, GL11.GL_FLOAT, 
+		                false, TexturedVertex.stride, TexturedVertex.textureByteOffset);
+			    GL20.glEnableVertexAttribArray(3);
+			    
+			    GL33.glVertexAttribDivisor(2, 1);
+			    GL33.glVertexAttribDivisor(3, 1);
 		        
-			   // GL30.glBindVertexArray(0);
+			    GL30.glBindVertexArray(0);
 			    
 				//GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 				//GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
-		}
-
-		public int getVAO() {
-			return VAO;
-		}
-
-		private void setVAO(int vAO) {
-			VAO = vAO;
 		}
 	}

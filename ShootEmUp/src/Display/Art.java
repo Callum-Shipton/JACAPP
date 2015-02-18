@@ -17,6 +17,7 @@ import Main.ShootEmUp;
 import Math.Matrix4;
 
 public class Art {
+
 	public static String floor = "/img/floor.png";
 	public static int floorID;
 
@@ -36,6 +37,7 @@ public class Art {
 	public static int levelID;
 	
 	public static int ShaderBase;
+	public static  int ShaderInst;
 
 	private void initShaders() {
 		// Load the vertex shader
@@ -43,6 +45,12 @@ public class Art {
 				GL20.GL_VERTEX_SHADER);
 		// Load the fragment shader
 		int fsId = loadShader("/shaders/FragmentShader.glsl",
+				GL20.GL_FRAGMENT_SHADER);
+		
+		int IvsId = loadShader("/shaders/IVertexShader.glsl",
+				GL20.GL_VERTEX_SHADER);
+		// Load the fragment shader
+		int IfsId = loadShader("/shaders/IFragmentShader.glsl",
 				GL20.GL_FRAGMENT_SHADER);
 
 		// Create a new shader program that links both shaders
@@ -57,6 +65,20 @@ public class Art {
 
 		GL20.glLinkProgram(ShaderBase);
 		GL20.glValidateProgram(ShaderBase);
+		
+		ShaderInst = GL20.glCreateProgram();
+		GL20.glAttachShader(ShaderInst, IvsId);
+		GL20.glAttachShader(ShaderInst, IfsId);
+		
+		GL20.glBindAttribLocation(ShaderInst, 0, "pos");
+		// Textute information will be attribute 1
+		GL20.glBindAttribLocation(ShaderInst, 1, "tex");
+		GL20.glBindAttribLocation(ShaderInst, 2, "trans");
+		// Textute information will be attribute 1
+		GL20.glBindAttribLocation(ShaderInst, 3, "text");
+
+		GL20.glLinkProgram(ShaderInst);
+		GL20.glValidateProgram(ShaderInst);
 
 	}
 
@@ -166,17 +188,23 @@ public class Art {
 	}
 
 	private static void initShaderUniforms() {
-		GL20.glUseProgram(ShaderBase);
-		int projectionMatrixLocation = GL20.glGetUniformLocation(ShaderBase,
-				"projectionMatrix");
+
 
 		Matrix4 projectionMatrix = new Matrix4();
 		projectionMatrix.clearToOrtho(0, ShootEmUp.WIDTH, ShootEmUp.HEIGHT, 0, -1.0f, 1.0f);
 		FloatBuffer matrix44Buffer = BufferUtils.createFloatBuffer(16);
 		matrix44Buffer = projectionMatrix.toBuffer();
-
+		
+		GL20.glUseProgram(ShaderBase);
+		int projectionMatrixLocation = GL20.glGetUniformLocation(ShaderBase,
+				"projectionMatrix");
 		GL20.glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
-
+		GL20.glUseProgram(0);
+		
+		GL20.glUseProgram(ShaderInst);
+		projectionMatrixLocation = GL20.glGetUniformLocation(ShaderInst,
+				"projectionMatrix");
+		GL20.glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
 		GL20.glUseProgram(0);
 
 	}
