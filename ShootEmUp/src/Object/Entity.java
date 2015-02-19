@@ -7,6 +7,7 @@ public abstract class Entity extends Collidable{
 	protected int speed;
 	protected int direction;
 	protected int image;
+	protected boolean flying;
 
 
 	// Constructors
@@ -30,8 +31,10 @@ public abstract class Entity extends Collidable{
 			};
 		}
 		for (Collidable wall : ShootEmUp.currentLevel.walls) {
-			if(wall.doesCollide(posX + (moveVec.x() * speed), posY, width, height) && !wall.flat){
-				collide = true;
+			if(wall.doesCollide(posX + (moveVec.x() * speed), posY, width, height)){
+				if(!(wall.flat && flying)){
+					collide = true;
+				}
 			};
 		}
 		if(collide == false){
@@ -47,8 +50,10 @@ public abstract class Entity extends Collidable{
 			};
 		}
 		for (Collidable wall : ShootEmUp.currentLevel.walls) {
-			if(wall.doesCollide(posX, posY + (moveVec.y() * speed), width, height) && !wall.flat){
-				collide = true;
+			if(wall.doesCollide(posX, posY + (moveVec.y() * speed), width, height)){
+				if(!(wall.flat && flying)){
+					collide = true;
+				}
 			};
 		}
 		if(collide == false){

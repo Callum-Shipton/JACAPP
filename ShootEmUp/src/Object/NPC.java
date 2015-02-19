@@ -8,6 +8,7 @@ public abstract class NPC extends Entity {
 	
 	public NPC(float x, float y, float width, float height, int speed, int direction, int image){
 		super(x, y, width, height, speed, direction, image);
+		flying = false;
 		health = 100;
 	}
 	
