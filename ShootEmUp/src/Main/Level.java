@@ -23,7 +23,7 @@ public class Level {
 	private String file;
 	private Vector2[][] backgroundTiles;
 	private Vector2[][] foregroundTiles;
-	private float[] spawn = new float[] {50.0f, 50.0f};
+	private float[] spawn = new float[] {-100.0f, -100.0f};
 	private Player player;
 	
 	private DPDTRenderer r;
@@ -54,7 +54,7 @@ public class Level {
 	private void setTiles(){
 		for(int x = 0; x < map.getWidth()/2; x++){
 			for(int y = 0; y < map.getHeight(); y++){
-				System.out.println(map.getRGB(x, y));
+				System.out.println(map.getRGB(x + (map.getWidth()/2), y));
 				switch(map.getRGB(x, y)){
 					case -1: backgroundTiles[x][y] = new Vector2(0.0f,0.0f);
 							break;
@@ -62,6 +62,9 @@ public class Level {
 				}
 				switch(map.getRGB(x + (map.getWidth()/2), y)){
 					case -1: break;
+					case -12629812:	foregroundTiles[x][y] = new Vector2(1.0f,0.0f);
+									walls.add(new Collidable(x*64.0f, y*64.0f, 64.0f, 64.0f));
+									break;
 					case -16777216: foregroundTiles[x][y] = new Vector2(0.0f,0.0f);
 									walls.add(new Collidable(x*64.0f, y*64.0f, 64.0f, 64.0f));
 				}
