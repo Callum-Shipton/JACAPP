@@ -23,7 +23,7 @@ public class Level {
 	private String file;
 	private Vector2[][] backgroundTiles;
 	private Vector2[][] foregroundTiles;
-	private float[] spawn = new float[] {-100.0f, -100.0f};
+	private float[] spawn = new float[] {640.0f, 320.0f};
 	private Player player;
 	
 	private DPDTRenderer r;
@@ -84,7 +84,7 @@ public class Level {
 		player = new Player(spawn[0], spawn[1], 64.0f, 64.0f, 5, 0, Art.playerID);
 		
 		characters.add(player);
-		characters.add(new Enemy(800.0f, 50.0f, 64.0f, 64.0f, 5, 0, Art.enemyID));
+		characters.add(new Enemy(700.0f, 128.0f, 64.0f, 64.0f, 5, 0, Art.enemyID));
 	}
 	
 	private void renderTiles(){
