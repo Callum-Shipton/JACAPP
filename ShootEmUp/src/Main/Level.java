@@ -69,8 +69,8 @@ public class Level {
 				}
 			}
 		}	
-		irBack = new IRenderer(Art.ShaderInst,backgroundTiles,new Vector2(4.0f,4.0f),64.0f,64.0f);
-		irFront = new IRenderer(Art.ShaderInst,foregroundTiles,new Vector2(4.0f,4.0f),64.0f,64.0f);
+		irBack = new IRenderer(backgroundTiles,new Vector2(4.0f,4.0f),64.0f,64.0f);
+		irFront = new IRenderer(foregroundTiles,new Vector2(4.0f,4.0f),64.0f,64.0f);
 	}
 	
 	private void addStuff(){

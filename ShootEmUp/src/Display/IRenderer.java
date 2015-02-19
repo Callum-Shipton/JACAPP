@@ -15,7 +15,6 @@ import Math.Vector2;
 
 public class IRenderer {
 	
-		private int shaderProgramID;
 		private int VAO;
 		private int VBO;
 		private int EBO;
@@ -24,8 +23,7 @@ public class IRenderer {
 		private int amount;
 		
 		
-		public IRenderer(int pID, Vector2[][] Textures, Vector2 texMax, float width, float height){
-			shaderProgramID = pID;
+		public IRenderer(Vector2[][] Textures, Vector2 texMax, float width, float height){
 			this.width = width;
 			this.height = height;
 			initRenderData(Textures, texMax);
