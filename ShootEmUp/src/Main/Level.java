@@ -62,7 +62,7 @@ public class Level {
 				}
 				switch(map.getRGB(x + (map.getWidth()/2), y)){
 					case -1: break;
-					case -16777216: foregroundTiles[x][y] = new Vector2(2.0f,1.0f);
+					case -16777216: foregroundTiles[x][y] = new Vector2(0.0f,0.0f);
 									walls.add(new Collidable(x*64.0f, y*64.0f, 64.0f, 64.0f));
 				}
 			}
