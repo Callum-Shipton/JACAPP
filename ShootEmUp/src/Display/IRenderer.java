@@ -50,8 +50,8 @@ public class IRenderer {
 					if(textures[i][j] != null){
 					texture[0] = textures[i][j].x()/texMax.x();
 					texture[1] = textures[i][j].y()/texMax.y();
-					translation[0] = j*width;
-					translation[1] = i*height;
+					translation[0] = i*width;
+					translation[1] = j*height;
 					}
 					else{
 						texture[0] = texMax.x()-1.0f/texMax.x();
