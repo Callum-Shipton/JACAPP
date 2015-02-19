@@ -12,7 +12,7 @@ public abstract class Entity extends Collidable{
 	// Constructors
 
 	public Entity(float x, float y, float width, float height, int speed, int direction, int image){
-		super(x, y, width, height);
+		super(x, y, width, height, false);
 		this.speed = speed;
 		this.direction = direction;
 		this.image = image;
@@ -30,7 +30,7 @@ public abstract class Entity extends Collidable{
 			};
 		}
 		for (Collidable wall : ShootEmUp.currentLevel.walls) {
-			if(wall.doesCollide(posX + (moveVec.x() * speed), posY, width, height)){
+			if(wall.doesCollide(posX + (moveVec.x() * speed), posY, width, height) && !wall.flat){
 				collide = true;
 			};
 		}
@@ -47,7 +47,7 @@ public abstract class Entity extends Collidable{
 			};
 		}
 		for (Collidable wall : ShootEmUp.currentLevel.walls) {
-			if(wall.doesCollide(posX, posY + (moveVec.y() * speed), width, height)){
+			if(wall.doesCollide(posX, posY + (moveVec.y() * speed), width, height) && !wall.flat){
 				collide = true;
 			};
 		}

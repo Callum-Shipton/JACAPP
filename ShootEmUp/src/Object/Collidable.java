@@ -5,12 +5,14 @@ public class Collidable {
 	protected float posY;
 	protected float width;
 	protected float height;
+	protected boolean flat;
 	
-	public Collidable(float posX, float posY, float width, float height){
+	public Collidable(float posX, float posY, float width, float height, boolean flat){
 		this.posX = posX;
 		this.posY = posY;
 		this.width = width;
 		this.height = height;
+		this.flat = flat;
 	}
 	
 	public boolean doesCollide(float x, float y, float w, float h){
