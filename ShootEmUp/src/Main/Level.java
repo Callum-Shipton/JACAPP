@@ -54,7 +54,6 @@ public class Level {
 	private void setTiles(){
 		for(int x = 0; x < map.getWidth()/2; x++){
 			for(int y = 0; y < map.getHeight(); y++){
-				System.out.println(map.getRGB(x + (map.getWidth()/2), y));
 				switch(map.getRGB(x, y)){
 					case -1: backgroundTiles[x][y] = new Vector2(0.0f,0.0f);
 							break;
@@ -90,17 +89,6 @@ public class Level {
 	private void renderTiles(){
 		irBack.draw(Art.floorID);
 		irFront.draw(Art.wallID);
-		
-		/*
-		for(int i = 0; i < map.getWidth()/2; i++){
-			for(int j = 0; j < map.getHeight(); j++){
-				r.draw(Art.floorID, new Vector2((float)(i*64),(float)(j*64)), new Vector2(64.0f,64.0f), 0.0f, backgroundTiles[i][j], new Vector2(4.0f,4.0f));
-				if(foregroundTiles[i][j] != null){
-					r.draw(Art.wallID, new Vector2((float)(i*64),(float)(j*64)), new Vector2(64.0f,64.0f), 0.0f, foregroundTiles[i][j], new Vector2(4.0f,4.0f));
-				}
-			}
-		}
-		*/
 	}
 	
 	public void update(){

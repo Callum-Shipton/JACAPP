@@ -11,7 +11,6 @@ import org.lwjgl.opengl.GL30;
 import org.lwjgl.opengl.GL31;
 import org.lwjgl.opengl.GL33;
 
-import Math.Matrix4;
 import Math.Vector2;
 
 public class IRenderer {

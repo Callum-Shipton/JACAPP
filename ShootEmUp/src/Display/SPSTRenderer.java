@@ -19,7 +19,6 @@ public class SPSTRenderer {
 	private int VBO;
 	private int EBO;
 	private int modelMatrixLocation;
-	private int textureMatrixLocation;
 	private FloatBuffer matrix44Buffer;
 	
 	public SPSTRenderer(int pID){
