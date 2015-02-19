@@ -54,8 +54,8 @@ public class IRenderer {
 					translation[1] = i*height;
 					}
 					else{
-						texture[0] = 0.0f;
-						texture[1] = 0.0f;
+						texture[0] = texMax.x()-1.0f/texMax.x();
+						texture[1] = texMax.y()-1.0f/texMax.y();
 						translation[0] = 0.0f;
 						translation[1] = 0.0f;
 					}

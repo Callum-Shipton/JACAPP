@@ -52,7 +52,7 @@ public class Display {
 		// after creation
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE); // the window will be
 		// resizable
-		glfwWindowHint(GLFW_SAMPLES, 4);
+		
 		// Find primary monitor
 		monitor = glfwGetPrimaryMonitor();
 		if (monitor == NULL)
@@ -93,7 +93,6 @@ public class Display {
 		GL11.glClearColor(0.4f, 0.6f, 0.9f, 1.0f);
 		GL11.glViewport(0, 0, width, height);
 		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glEnable(GL13.GL_MULTISAMPLE);  
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 	}
 
