@@ -42,7 +42,7 @@ public class Collidable {
 
 	public float collideFunction(float x, float y) {
 		if (((x >= posX) && (x <= (posX + width))) && ((y >= posY) && (y <= (posY + height)))) {
-			if(Math.abs(x - posX) < Math.abs(y -posY)){
+			if(((x >= posX) && (x <= (posX + width)))){
 				return (x - posX);
 			} else {
 				return (y - posY);
