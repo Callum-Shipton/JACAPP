@@ -4,6 +4,7 @@ import Display.DPDTRenderer;
 import Display.Image;
 import Main.ShootEmUp;
 import Math.Vector2;
+import Math.Vector4;
 
 public abstract class Entity extends Collidable {
 	protected int speed;
@@ -25,7 +26,7 @@ public abstract class Entity extends Collidable {
 	// Methods
 
 	public void move(Vector2 moveVec) {
-		Vector2 vec = new Vector2(0.0f, 0.0f);
+		Vector4 vec = new Vector4(0.0f, 0.0f,0.0f,0.0f);
 		boolean collide = false;
 		NPC hit = null;
 		for (NPC character : ShootEmUp.currentLevel.characters) {
@@ -35,6 +36,7 @@ public abstract class Entity extends Collidable {
 				vec = character.doesCollide(posX + (moveVec.x() * speed), posY,
 						width, height);
 				hit = character;
+				break;
 			}
 		}
 		for (Collidable wall : ShootEmUp.currentLevel.walls) {
@@ -44,13 +46,19 @@ public abstract class Entity extends Collidable {
 					collide = true;
 					vec = wall.doesCollide(posX + (moveVec.x() * speed), posY,
 							width, height);
+					break;
 				}
 			}
 		}
 		if (collide == false) {
 			posX += moveVec.x() * speed;
 		} else {
-			posX += vec.x();
+			if(vec.x() < speed){
+				posX += (moveVec.x()*speed) - vec.x() - (vec.x()/Math.abs(vec.x()));
+			}
+			else if(vec.z() < speed){
+				posX += (moveVec.x()*speed) - vec.z() - (vec.z()/Math.abs(vec.z()));
+			}
 			onCollide(hit);
 		}
 		collide = false;
@@ -61,6 +69,7 @@ public abstract class Entity extends Collidable {
 				hit = character;
 				vec = character.doesCollide(posX, posY + (moveVec.y() * speed), width,
 						height);
+				break;
 			}
 		}
 		for (Collidable wall : ShootEmUp.currentLevel.walls) {
@@ -70,6 +79,7 @@ public abstract class Entity extends Collidable {
 					collide = true;
 					vec = wall.doesCollide(posX, posY + (moveVec.y() * speed), width,
 							height);
+					break;
 				}
 			}
 		}
@@ -77,7 +87,12 @@ public abstract class Entity extends Collidable {
 			posY += moveVec.y() * speed;
 		} else {
 			onCollide(hit);
-			posY += vec.y();
+			if(vec.y() < speed){
+				posY += (moveVec.y()* speed) - vec.y() - (vec.y()/Math.abs(vec.y()));
+			}
+			else if(vec.w() < speed){
+				posY += (moveVec.y()* speed) - vec.w() - (vec.w()/Math.abs(vec.w()));
+			}
 		}
 	}
 

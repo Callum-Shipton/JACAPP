@@ -1,6 +1,7 @@
 package Object;
 
 import Math.Vector2;
+import Math.Vector4;
 
 public class Collidable {
 	protected float posX;
@@ -17,7 +18,7 @@ public class Collidable {
 		this.flat = flat;
 	}
 
-	public Vector2 doesCollide(float x, float y, float w, float h) {
+	public Vector4 doesCollide(float x, float y, float w, float h) {
 		if (collideFunction(x, y) != null) {
 			return collideFunction(x, y);
 		}
@@ -42,9 +43,9 @@ public class Collidable {
 		return null;
 	}
 
-	public Vector2 collideFunction(float x, float y) {
+	public Vector4 collideFunction(float x, float y) {
 		if (((x >= posX) && (x <= (posX + width))) && ((y >= posY) && (y <= (posY + height)))) {
-			return new Vector2(x - posX, y - posY);	
+			return new Vector4(x - posX, y - posY, x -(posX + width), y - (posY + height));	
 		}
 		return null;
 	}
