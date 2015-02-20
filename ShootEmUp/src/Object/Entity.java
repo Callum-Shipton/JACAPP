@@ -25,52 +25,60 @@ public abstract class Entity extends Collidable {
 	// Methods
 
 	public void move(Vector2 moveVec) {
+		float collideY = 0;
+		float collideX = 0;
 		boolean collide = false;
 		NPC hit = null;
 		for (NPC character : ShootEmUp.currentLevel.characters) {
-			if (character.doesCollide(posX + (moveVec.x() * speed), posY,
-					width, height) && (character != this)) {
+			if ((character.doesCollide(posX + (moveVec.x() * speed), posY,
+					width, height) != 0) && (character != this)) {
 				collide = true;
+				collideX = character.doesCollide(posX + (moveVec.x() * speed), posY,
+						width, height);
 				hit = character;
 			}
-			;
 		}
 		for (Collidable wall : ShootEmUp.currentLevel.walls) {
 			if (wall.doesCollide(posX + (moveVec.x() * speed), posY, width,
-					height)) {
+					height) != 0) {
 				if (!(wall.flat && flying)) {
 					collide = true;
+					collideX = wall.doesCollide(posX + (moveVec.x() * speed), posY,
+							width, height);
 				}
 			}
-			;
 		}
 		if (collide == false) {
 			posX += moveVec.x() * speed;
 		} else {
+			posX += collideX;
 			onCollide(hit);
 		}
 		collide = false;
 		for (NPC character : ShootEmUp.currentLevel.characters) {
-			if (character.doesCollide(posX, posY + (moveVec.y() * speed),
-					width, height) && (character != this)) {
+			if ((character.doesCollide(posX, posY + (moveVec.y() * speed),
+					width, height) != 0) && (character != this)) {
 				collide = true;
 				hit = character;
+				collideY = character.doesCollide(posX, posY + (moveVec.y() * speed), width,
+						height);
 			}
-			;
 		}
 		for (Collidable wall : ShootEmUp.currentLevel.walls) {
 			if (wall.doesCollide(posX, posY + (moveVec.y() * speed), width,
-					height)) {
+					height) != 0) {
 				if (!(wall.flat && flying)) {
 					collide = true;
+					collideY = wall.doesCollide(posX, posY + (moveVec.y() * speed), width,
+							height);
 				}
 			}
-			;
 		}
 		if (collide == false) {
 			posY += moveVec.y() * speed;
 		} else {
 			onCollide(hit);
+			posY += collideY;
 		}
 	}
 

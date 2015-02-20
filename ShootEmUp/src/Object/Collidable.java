@@ -7,8 +7,7 @@ public class Collidable {
 	protected float height;
 	protected boolean flat;
 
-	public Collidable(float posX, float posY, float width, float height,
-			boolean flat) {
+	public Collidable(float posX, float posY, float width, float height, boolean flat) {
 		this.posX = posX;
 		this.posY = posY;
 		this.width = width;
@@ -16,37 +15,38 @@ public class Collidable {
 		this.flat = flat;
 	}
 
-	public boolean doesCollide(float x, float y, float w, float h) {
-		if (collideFunction(x, y)) {
-			return true;
+	public float doesCollide(float x, float y, float w, float h) {
+		if (collideFunction(x, y) != 0) {
+			return collideFunction(x, y);
 		}
 
 		x += w;
 
-		if (collideFunction(x, y)) {
-			return true;
+		if (collideFunction(x, y) != 0) {
+			return collideFunction(x, y);
 		}
 
 		y += h;
 
-		if (collideFunction(x, y)) {
-			return true;
+		if (collideFunction(x, y) != 0) {
+			return collideFunction(x, y);
 		}
 
 		x -= w;
 
-		if (collideFunction(x, y)) {
-			return true;
+		if (collideFunction(x, y) != 0) {
+			return collideFunction(x, y);
 		}
-		return false;
+		return 0;
 	}
 
-	public boolean collideFunction(float x, float y) {
-		if (((x >= posX) && (x <= (posX + width)))
-				&& ((y >= posY) && (y <= (posY + height)))) {
-			return true;
+	public float collideFunction(float x, float y) {
+		if ((x >= posX) && (x <= (posX + width))) {
+			return x - posX;
+		} else if ((y >= posY) && (y <= (posY + height))){
+			return y - posY;
 		}
-		return false;
+		return 0;
 	}
 
 	public void onCollide(NPC hit) {
