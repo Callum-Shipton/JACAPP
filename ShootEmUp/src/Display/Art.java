@@ -18,26 +18,31 @@ import Math.Matrix4;
 
 public class Art {
 
-	public static String floor = "/img/floor.png";
-	public static int floorID;
+	public static Image floor;
 
-	public static String wall = "/img/wall.png";
-	public static int wallID;
+	public static Image wall;
+
+	public static Image enemy;
+
+	public static Image player;
+
+	public static Image particle;
+
+	public static Image infoBox;
+
+	public static Image healthBar;
+
+	public static Image manaBar;
+
+	public static Image xpBar;
 	
-	public static String enemy = "/img/Enemy.png";
-	public static int enemyID;
-
-	public static String player = "/img/Player.png";
-	public static int playerID;
-	
-	public static String particle = "/img/Particle.png";
-	public static int particleID;
-
 	public static String level1 = "/levels/level1.png";
-	public static int levelID;
-	
+
 	public static int ShaderBase;
-	public static  int ShaderInst;
+	public static int ShaderInst;
+	public static int ShaderStat;
+
+	public static Image BarCoin;
 
 	private void initShaders() {
 		// Load the vertex shader
@@ -46,12 +51,15 @@ public class Art {
 		// Load the fragment shader
 		int fsId = loadShader("/shaders/FragmentShader.glsl",
 				GL20.GL_FRAGMENT_SHADER);
-		
+
 		int IvsId = loadShader("/shaders/IVertexShader.glsl",
 				GL20.GL_VERTEX_SHADER);
 		// Load the fragment shader
 		int IfsId = loadShader("/shaders/IFragmentShader.glsl",
 				GL20.GL_FRAGMENT_SHADER);
+		
+		int SvsId = loadShader("/shaders/StatVertexShader.glsl",
+				GL20.GL_VERTEX_SHADER);
 
 		// Create a new shader program that links both shaders
 		ShaderBase = GL20.glCreateProgram();
@@ -65,11 +73,11 @@ public class Art {
 
 		GL20.glLinkProgram(ShaderBase);
 		GL20.glValidateProgram(ShaderBase);
-		
+
 		ShaderInst = GL20.glCreateProgram();
 		GL20.glAttachShader(ShaderInst, IvsId);
 		GL20.glAttachShader(ShaderInst, IfsId);
-		
+
 		GL20.glBindAttribLocation(ShaderInst, 0, "pos");
 		// Textute information will be attribute 1
 		GL20.glBindAttribLocation(ShaderInst, 1, "tex");
@@ -79,6 +87,19 @@ public class Art {
 
 		GL20.glLinkProgram(ShaderInst);
 		GL20.glValidateProgram(ShaderInst);
+		
+		ShaderStat = GL20.glCreateProgram();
+		GL20.glAttachShader(ShaderStat, SvsId);
+		GL20.glAttachShader(ShaderStat, fsId);
+
+		// Position information will be attribute 0
+		GL20.glBindAttribLocation(ShaderStat, 0, "pos");
+		// Textute information will be attribute 1
+		GL20.glBindAttribLocation(ShaderStat, 1, "tex");
+
+		GL20.glLinkProgram(ShaderStat);
+		GL20.glValidateProgram(ShaderStat);
+		
 
 	}
 
@@ -87,7 +108,8 @@ public class Art {
 		int shaderID = 0;
 
 		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(filename)));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					getClass().getResourceAsStream(filename)));
 			String line;
 			while ((line = reader.readLine()) != null) {
 				shaderSource.append(line).append("\n");
@@ -122,87 +144,56 @@ public class Art {
 
 	private static void initTextures() {
 		
-		floorID = GL11.glGenTextures();
-		Image texIm = new Image(Art.floor);
-		ByteBuffer buf = texIm.byteBuffer();
-		bindTexture(floorID, texIm, buf);
-		
-		wallID = GL11.glGenTextures();
-		texIm = new Image(Art.wall);
-		buf = texIm.byteBuffer();
-		bindTexture(wallID, texIm, buf);
-		
-		playerID = GL11.glGenTextures();
-		texIm = new Image(Art.player);
-		buf = texIm.byteBuffer();
-		bindTexture(playerID, texIm, buf);
-		
-		enemyID = GL11.glGenTextures();
-		texIm = new Image(Art.enemy);
-		buf = texIm.byteBuffer();
-		bindTexture(enemyID, texIm, buf);
-		
-		particleID = GL11.glGenTextures();
-		texIm = new Image(Art.particle);
-		buf = texIm.byteBuffer();
-		bindTexture(particleID, texIm, buf);
-		
-		/* Template for other Texs
-		
-		faceID = GL11.glGenTextures();
-		texIm = new Image(Art.player);
-		buf = texIm.byteBuffer();
-		bindTexture(playerID, texIm, buf);
+		floor = new Image("/img/floor.png",4,4);
 
-		*/
+		wall = new Image("/img/wall.png",4,4);
+
+		player = new Image("/img/Player.png",1,8);
+
+		enemy = new Image("/img/Enemy.png",1,8);
+
+		particle = new Image("/img/Particle.png",1,8);
+		
+		infoBox = new Image("/HUD/BarInfo.png",1,1);
+
+		healthBar = new Image("/HUD/BarHealth.png",1,19);			
+
+		manaBar = new Image("/HUD/BarMana.png",1,19);
+
+		xpBar = new Image("/HUD/BarXP.png",1,19);
+		
+		BarCoin = new Image("/HUD/BarCoin.png",1,1);
+
+		/*
+		 * Template for other Texs
+		floor = new Image("/img/floor.png");
+		 */
 	}
 
-	private static void bindTexture(int ID, Image texIm, ByteBuffer buf) {
-		
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, ID);
-
-		// All RGB bytes are aligned to each other and each component is 1 byte
-				//GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
-
-
-
-				// Setup the ST coordinate system
-				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S,
-						GL11.GL_REPEAT);
-				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T,
-						GL11.GL_REPEAT);
-
-				// Setup what to do when the texture has to be scaled
-				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER,
-						GL11.GL_NEAREST);
-				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER,
-						GL11.GL_NEAREST);
-				
-				// Upload the texture data and generate mip maps (for scaling)
-				GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, texIm.getWidth(),
-						texIm.getHeight(), 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buf);
-				GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
-				GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
-
-		
-	}
+	
 
 	private static void initShaderUniforms() {
 
-
 		Matrix4 projectionMatrix = new Matrix4();
-		projectionMatrix.clearToOrtho(0, ShootEmUp.WIDTH, ShootEmUp.HEIGHT, 0, -1.0f, 1.0f);
+		projectionMatrix.clearToOrtho(0, ShootEmUp.WIDTH, ShootEmUp.HEIGHT, 0,
+				-1.0f, 1.0f);
 		FloatBuffer matrix44Buffer = BufferUtils.createFloatBuffer(16);
 		matrix44Buffer = projectionMatrix.toBuffer();
-		
+
 		GL20.glUseProgram(ShaderBase);
 		int projectionMatrixLocation = GL20.glGetUniformLocation(ShaderBase,
 				"projectionMatrix");
 		GL20.glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
 		GL20.glUseProgram(0);
-		
+
 		GL20.glUseProgram(ShaderInst);
 		projectionMatrixLocation = GL20.glGetUniformLocation(ShaderInst,
+				"projectionMatrix");
+		GL20.glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
+		GL20.glUseProgram(0);
+		
+		GL20.glUseProgram(ShaderStat);
+		projectionMatrixLocation = GL20.glGetUniformLocation(ShaderStat,
 				"projectionMatrix");
 		GL20.glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
 		GL20.glUseProgram(0);

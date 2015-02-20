@@ -1,4 +1,5 @@
 package Display;
+
 import static org.lwjgl.glfw.Callbacks.errorCallbackPrint;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
@@ -35,23 +36,22 @@ public class Display {
 	public void initGLFW() {
 		// Setup an error callback. The default implementation
 		// will print the error message in System.err.
-		
 
 		// Initialise GLFW. Most GLFW functions will not work before doing this.
 		if (glfwInit() != GL11.GL_TRUE)
 			throw new IllegalStateException("Unable to initialize GLFW");
-		
+
 		glfwSetErrorCallback(errorCallback = errorCallbackPrint(System.err));
 
 		// Configure our window
 		glfwDefaultWindowHints(); // optional, the current window hints are
-	
+
 		// already the default
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE); // the window will stay hidden
 		// after creation
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE); // the window will be
 		// resizable
-		
+
 		// Find primary monitor
 		monitor = glfwGetPrimaryMonitor();
 		if (monitor == NULL)
@@ -70,7 +70,7 @@ public class Display {
 
 		// Make the GLFW OpenGL context current
 		glfwMakeContextCurrent(window);
-		
+
 		// Enable v-sync
 		glfwSwapInterval(1);
 		// Make the window visible
@@ -82,12 +82,12 @@ public class Display {
 		// creates the ContextCapabilities instance and makes the OpenGL
 		// bindings available for use.
 		GLContext.createFromCurrent();
-		
+
 		initGL();
 		Art a = new Art();
 		a.init();
 	}
-	
+
 	private void initGL() {
 		GL11.glClearColor(0.4f, 0.6f, 0.9f, 1.0f);
 		GL11.glViewport(0, 0, width, height);

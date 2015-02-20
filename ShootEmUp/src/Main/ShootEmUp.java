@@ -1,4 +1,5 @@
 package Main;
+
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
@@ -20,7 +21,7 @@ public class ShootEmUp {
 
 	// Will be moved to LEVEL
 	DPDTRenderer r;
-	
+
 	public static Level currentLevel;
 
 	public void run() {
@@ -28,11 +29,9 @@ public class ShootEmUp {
 			init();
 			loop();
 
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
-			finally {
+		} finally {
 
 			// Release window and window callbacks Terminate GLFW and release
 			// the GLFWerrorfun
@@ -45,9 +44,9 @@ public class ShootEmUp {
 	private void init() {
 		d = new Display(WIDTH, HEIGHT);
 		d.initGLFW();
-		
+
 		currentLevel = new Level(Art.level1);
-		
+
 		// Initialise key handling
 		Keyboard.keyCheck(d.getWindow());
 
@@ -56,28 +55,29 @@ public class ShootEmUp {
 	private void loop() {
 		// Run the rendering loop until the user has attempted to close
 		// the window or has pressed the ESCAPE key.
-		
-		double FPS = 60.0;  
+
+		double FPS = 60.0;
 		double oldTime = GLFW.glfwGetTime();
 		double newTime = GLFW.glfwGetTime();
 		double delta = newTime - oldTime;
-		double sleepTime = (1.0/FPS) - delta;
-		
+		double sleepTime = (1.0 / FPS) - delta;
+
 		while (glfwWindowShouldClose(d.getWindow()) == GL_FALSE) {
-			
-			 delta = newTime - oldTime;
-			 oldTime = newTime;
-			 sleepTime = (1.0/FPS) - delta;
-			 if(sleepTime > 0.01)
-			 try {
-				 Thread.sleep((long) (sleepTime*1000));
-			// System.out.println("I slept for " + 1000*sleepTime + " seconds." );
-			 } catch (InterruptedException e) {
-				 e.printStackTrace();
-			 }
+
+			delta = newTime - oldTime;
+			oldTime = newTime;
+			sleepTime = (1.0 / FPS) - delta;
+			if (sleepTime > 0.01)
+				try {
+					Thread.sleep((long) (sleepTime * 1000));
+					// System.out.println("I slept for " + 1000*sleepTime +
+					// " seconds." );
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			update();
 			render();
-			
+
 			newTime = GLFW.glfwGetTime();
 
 		}
@@ -87,21 +87,22 @@ public class ShootEmUp {
 		// Poll for window events. The key callback above will only be
 		// invoked during this call.
 		glfwPollEvents();
-		
+
 		currentLevel.update();
 		d.update();
 	}
 
 	private void render() {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-	    glClear(GL_COLOR_BUFFER_BIT);
-	        
-	        currentLevel.render();
+		glClear(GL_COLOR_BUFFER_BIT);
 
-		glfwSwapBuffers(d.getWindow()); // Swaps front and back buffers to render changes
+		currentLevel.render();
+
+		glfwSwapBuffers(d.getWindow()); // Swaps front and back buffers to
+										// render changes
 	}
 
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		new ShootEmUp().run();
 	}
 

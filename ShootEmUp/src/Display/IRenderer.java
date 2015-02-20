@@ -15,7 +15,7 @@ import Math.Vector2;
 
 public class IRenderer {
 	
-		private int VAO;
+	private int VAO;
 		private int VBO;
 		private int EBO;
 		private float width;
