@@ -13,7 +13,7 @@ public class Weapon {
 		this.range = range;
 	}
 	
-	public void shoot(float posX, float posY, int direction){
+	public void shoot(float posX, float posY, int direction, int team){
 		if(direction >= 1 && direction <= 3){
 			posX += 44;
 		}
@@ -26,7 +26,7 @@ public class Weapon {
 		if(direction >= 3 && direction <= 5){
 			posY += 49;
 		}
-		ShootEmUp.currentLevel.particles.add(new Particle(posX + 16, posY + 16, 32.0f, 32.0f, 10, direction, Art.particleID, this));
+		ShootEmUp.currentLevel.particles.add(new Particle(posX + 16, posY + 16, 32.0f, 32.0f, 10, direction, Art.particleID, this, team));
 	}
 
 	public int getDamage() {

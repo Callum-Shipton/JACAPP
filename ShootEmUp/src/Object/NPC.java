@@ -34,7 +34,7 @@ public abstract class NPC extends Entity {
 			move(movement);
 			direction =  (int) (Math.round(movement.Angle()) / 45);
 		}
-		weapon.shoot(posX, posY, direction);
+		weapon.shoot(posX, posY, direction, team);
 	}
 	
 	public void checkDead(){

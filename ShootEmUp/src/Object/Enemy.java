@@ -6,5 +6,6 @@ public class Enemy extends NPC {
 		super(x, y, w, h, speed, direction, image);
 		width = 64;
 		height = 64;
+		team = 1;
 	}
 }

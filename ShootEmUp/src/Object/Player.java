@@ -34,19 +34,14 @@ public class Player extends NPC {
 		viewMatrix.translate(-x+(ShootEmUp.WIDTH - width)/2, -y+(ShootEmUp.HEIGHT-height)/2, 0);
 		viewMatrix.transpose();
 		matrix44Buffer = BufferUtils.createFloatBuffer(16);
-		matrix44Buffer = viewMatrix.toBuffer();
-		GL20.glUseProgram(Art.ShaderBase);
 		viewMatrixLocation = GL20.glGetUniformLocation(Art.ShaderBase,
 				"viewMatrix");
-		GL20.glUniformMatrix4(viewMatrixLocation, true, matrix44Buffer);
-		GL20.glUseProgram(0);	
-		GL20.glUseProgram(Art.ShaderInst);
 		viewMatrixLocationInst = GL20.glGetUniformLocation(Art.ShaderInst,
 				"viewMatrix");
-		GL20.glUniformMatrix4(viewMatrixLocationInst, true, matrix44Buffer);
-		GL20.glUseProgram(0);
+		scrollScreen();
 		health = 10;
 		weapon = new Weapon(10, 10);
+		team = 0;
 	}
 
 	// called every update
@@ -77,17 +72,9 @@ public class Player extends NPC {
 		if(movement.length() > 0){
 			if(movement.length() > 1) movement.normalize();
 			move(movement);
+			scrollScreen();
 
-			viewMatrix.clearToIdentity();
-			viewMatrix.translate(-posX+(ShootEmUp.WIDTH-width)/2, -posY+(ShootEmUp.HEIGHT-height)/2, 0);
-			matrix44Buffer.clear();
-			matrix44Buffer = viewMatrix.toBuffer();
-			GL20.glUseProgram(Art.ShaderBase);
-			GL20.glUniformMatrix4(viewMatrixLocation, false, matrix44Buffer);
-			GL20.glUseProgram(0);
-			GL20.glUseProgram(Art.ShaderInst);
-			GL20.glUniformMatrix4(viewMatrixLocationInst, false, matrix44Buffer);
-			GL20.glUseProgram(0);
+
 		}
 		Vector2 dir = new Vector2(0.0f,0.0f);
 		if (Keyboard.getKey(GLFW_KEY_UP) == 1
@@ -117,6 +104,19 @@ public class Player extends NPC {
 		}
 	}
 	
+	private void scrollScreen() {
+		viewMatrix.clearToIdentity();
+		viewMatrix.translate(-posX+(ShootEmUp.WIDTH-width)/2, -posY+(ShootEmUp.HEIGHT-height)/2, 0);
+		matrix44Buffer.clear();
+		matrix44Buffer = viewMatrix.toBuffer();
+		GL20.glUseProgram(Art.ShaderBase);
+		GL20.glUniformMatrix4(viewMatrixLocation, false, matrix44Buffer);
+		GL20.glUseProgram(0);
+		GL20.glUseProgram(Art.ShaderInst);
+		GL20.glUniformMatrix4(viewMatrixLocationInst, false, matrix44Buffer);
+		GL20.glUseProgram(0);
+	}
+
 	public void checkDead(){
 		if(health <= 0){
 			respawn();
@@ -126,10 +126,12 @@ public class Player extends NPC {
 	private void respawn(){
 		posX = ShootEmUp.currentLevel.spawn[0];
 		posY = ShootEmUp.currentLevel.spawn[1];
+		scrollScreen();
+		health = 10;
 	}
 	
 	private void shoot(){
-		weapon.shoot(posX, posY, direction);
+		weapon.shoot(posX, posY, direction, team);
 	}
 	
 	public int getHealth() {

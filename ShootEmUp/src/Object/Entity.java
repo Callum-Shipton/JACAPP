@@ -8,6 +8,7 @@ public abstract class Entity extends Collidable{
 	protected int direction;
 	protected int image;
 	protected boolean flying;
+	protected int team;
 
 
 	// Constructors
