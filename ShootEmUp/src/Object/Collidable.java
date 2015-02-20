@@ -1,5 +1,7 @@
 package Object;
 
+import Math.Vector2;
+
 public class Collidable {
 	protected float posX;
 	protected float posY;
@@ -15,41 +17,36 @@ public class Collidable {
 		this.flat = flat;
 	}
 
-	public float doesCollide(float x, float y, float w, float h) {
-		if (collideFunction(x, y) != 0) {
+	public Vector2 doesCollide(float x, float y, float w, float h) {
+		if (collideFunction(x, y) != null) {
 			return collideFunction(x, y);
 		}
 
 		x += w;
 
-		if (collideFunction(x, y) != 0) {
+		if (collideFunction(x, y) != null) {
 			return collideFunction(x, y);
 		}
 
 		y += h;
 
-		if (collideFunction(x, y) != 0) {
+		if (collideFunction(x, y) != null) {
 			return collideFunction(x, y);
 		}
 
 		x -= w;
 
-		if (collideFunction(x, y) != 0) {
+		if (collideFunction(x, y) != null) {
 			return collideFunction(x, y);
 		}
-		return 0;
+		return null;
 	}
 
-	public float collideFunction(float x, float y) {
+	public Vector2 collideFunction(float x, float y) {
 		if (((x >= posX) && (x <= (posX + width))) && ((y >= posY) && (y <= (posY + height)))) {
-			if(((x >= posX) && (x <= (posX + width)))){
-				return (x - posX);
-			} else {
-				return (y - posY);
-			}
-				
+			return new Vector2(posX - x, posY - y);	
 		}
-		return 0;
+		return null;
 	}
 
 	public void onCollide(NPC hit) {

@@ -25,25 +25,24 @@ public abstract class Entity extends Collidable {
 	// Methods
 
 	public void move(Vector2 moveVec) {
-		float collideY = 0;
-		float collideX = 0;
+		Vector2 vec = new Vector2(0.0f, 0.0f);
 		boolean collide = false;
 		NPC hit = null;
 		for (NPC character : ShootEmUp.currentLevel.characters) {
 			if ((character.doesCollide(posX + (moveVec.x() * speed), posY,
-					width, height) != 0) && (character != this)) {
+					width, height) != null) && (character != this)) {
 				collide = true;
-				collideX = character.doesCollide(posX + (moveVec.x() * speed), posY,
+				vec = character.doesCollide(posX + (moveVec.x() * speed), posY,
 						width, height);
 				hit = character;
 			}
 		}
 		for (Collidable wall : ShootEmUp.currentLevel.walls) {
 			if (wall.doesCollide(posX + (moveVec.x() * speed), posY, width,
-					height) != 0) {
+					height) != null) {
 				if (!(wall.flat && flying)) {
 					collide = true;
-					collideX = wall.doesCollide(posX + (moveVec.x() * speed), posY,
+					vec = wall.doesCollide(posX + (moveVec.x() * speed), posY,
 							width, height);
 				}
 			}
@@ -51,25 +50,25 @@ public abstract class Entity extends Collidable {
 		if (collide == false) {
 			posX += moveVec.x() * speed;
 		} else {
-			posX += collideX;
+			posX += vec.x();
 			onCollide(hit);
 		}
 		collide = false;
 		for (NPC character : ShootEmUp.currentLevel.characters) {
 			if ((character.doesCollide(posX, posY + (moveVec.y() * speed),
-					width, height) != 0) && (character != this)) {
+					width, height) != null) && (character != this)) {
 				collide = true;
 				hit = character;
-				collideY = character.doesCollide(posX, posY + (moveVec.y() * speed), width,
+				vec = character.doesCollide(posX, posY + (moveVec.y() * speed), width,
 						height);
 			}
 		}
 		for (Collidable wall : ShootEmUp.currentLevel.walls) {
 			if (wall.doesCollide(posX, posY + (moveVec.y() * speed), width,
-					height) != 0) {
+					height) != null) {
 				if (!(wall.flat && flying)) {
 					collide = true;
-					collideY = wall.doesCollide(posX, posY + (moveVec.y() * speed), width,
+					vec = wall.doesCollide(posX, posY + (moveVec.y() * speed), width,
 							height);
 				}
 			}
@@ -78,7 +77,7 @@ public abstract class Entity extends Collidable {
 			posY += moveVec.y() * speed;
 		} else {
 			onCollide(hit);
-			posY += collideY;
+			posY += vec.y();
 		}
 	}
 
