@@ -23,7 +23,7 @@ public class Level {
 	private String file;
 	private Vector2[][] backgroundTiles;
 	private Vector2[][] foregroundTiles;
-	private float[] spawn = new float[] {640.0f, 320.0f};
+	public float[] spawn = new float[] {550.0f, 600.0f};
 	private Player player;
 	
 	private DPDTRenderer r;

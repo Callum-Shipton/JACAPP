@@ -15,8 +15,6 @@ import Math.Vector2;
 
 public class Player extends NPC {
 	
-	private int health;
-	
 	private int lives; 
 	private Weapon weapon;
 	private FloatBuffer matrix44Buffer;
@@ -53,9 +51,8 @@ public class Player extends NPC {
 
 	// called every update
 	public void update() {
-		
 		checkKeys();
-		deathCheck();
+		checkDead();
 	}
 	
 	private void checkKeys() {
@@ -120,15 +117,15 @@ public class Player extends NPC {
 		}
 	}
 	
-	private void deathCheck(){
+	public void checkDead(){
 		if(health <= 0){
 			respawn();
 		}
 	}
 
 	private void respawn(){
-		posX = 10.0f;
-		posY = 10.0f;
+		posX = ShootEmUp.currentLevel.spawn[0];
+		posY = ShootEmUp.currentLevel.spawn[1];
 	}
 	
 	private void shoot(){

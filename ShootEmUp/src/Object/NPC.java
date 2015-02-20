@@ -5,11 +5,13 @@ import Math.Vector2;
 
 public abstract class NPC extends Entity {
 	protected int health;
+	private Weapon weapon;
 	
 	public NPC(float x, float y, float width, float height, int speed, int direction, int image){
 		super(x, y, width, height, speed, direction, image);
 		flying = false;
 		health = 100;
+		weapon = new Weapon(10, 10);
 	}
 	
 	public void update(){
@@ -32,6 +34,7 @@ public abstract class NPC extends Entity {
 			move(movement);
 			direction =  (int) (Math.round(movement.Angle()) / 45);
 		}
+		weapon.shoot(posX, posY, direction);
 	}
 	
 	public void checkDead(){
