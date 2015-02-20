@@ -52,6 +52,7 @@ public class Player extends NPC {
 	public void update() {
 		checkKeys();
 		checkDead();
+		System.out.println(posX);
 	}
 
 	private void checkKeys() {
