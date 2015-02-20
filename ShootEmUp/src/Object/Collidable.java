@@ -44,7 +44,7 @@ public class Collidable {
 
 	public Vector2 collideFunction(float x, float y) {
 		if (((x >= posX) && (x <= (posX + width))) && ((y >= posY) && (y <= (posY + height)))) {
-			return new Vector2(posX - x, posY - y);	
+			return new Vector2(x - posX, y - posY);	
 		}
 		return null;
 	}
