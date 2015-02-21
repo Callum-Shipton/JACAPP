@@ -96,11 +96,10 @@ public class Level {
 
 		r = new DPDTRenderer(Art.ShaderBase);
 		stat = new DPDTRenderer(Art.ShaderStat);
-		hud = new Hud();
-
+		
 		player = new Player(spawn[0], spawn[1], 64.0f, 64.0f, 5, 0,
 				Art.player);
-
+		hud = new Hud(player);
 		characters.add(player);
 	}
 

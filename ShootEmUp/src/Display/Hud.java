@@ -2,6 +2,8 @@ package Display;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import Object.Player;
+
 public class Hud {
 	
 	public CopyOnWriteArrayList<HudElement> hudElems;
@@ -10,8 +12,11 @@ public class Hud {
 	private HudElement manaBar;
 	private HudElement xpBar;
 	private HudElement moneyCounter;
+	private Player player;
 
-	public Hud(){
+	public Hud(Player player){
+		this.player = player;
+		
 		hudElems = new CopyOnWriteArrayList<HudElement>();
 		infoBox = new HudElement(0.0f,0.0f,189.0f,110.0f, Art.infoBox);
 		hudElems.add(infoBox);
@@ -34,6 +39,7 @@ public class Hud {
 	}
 
 	public void update() {
+		healthBar.update(player.getHealth()-1);
 	}
 
 }
