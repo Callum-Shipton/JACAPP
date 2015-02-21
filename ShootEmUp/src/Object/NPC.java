@@ -6,10 +6,9 @@ import Math.Vector2;
 
 public abstract class NPC extends Entity {
 	protected int health;
-	private Weapon weapon;
+	protected Weapon weapon;
 
-	public NPC(float x, float y, float width, float height, int speed,
-			int direction, Image image) {
+	public NPC(float x, float y, float width, float height, int speed, int direction, Image image) {
 		super(x, y, width, height, speed, direction, image);
 		flying = false;
 		health = 100;

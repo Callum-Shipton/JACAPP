@@ -119,8 +119,8 @@ public class Level {
 			Random rand = new Random();
 				do {
 					collide = false;
-					X = rand.nextFloat() * (576.0f - 64.0f) + 64.0f;
-					Y = rand.nextFloat() * (576.0f - 64.0f) + 64.0f;
+					X = rand.nextFloat() * ((float)(backgroundTiles.length * 64) - 64.0f) + 64.0f;
+					Y = rand.nextFloat() * ((float)(backgroundTiles[0].length * 64) - 64.0f) + 64.0f;
 					
 					for (NPC character : ShootEmUp.currentLevel.characters) {
 						if ((character.doesCollide(X, Y, 64.0f, 64.0f) != null)) {

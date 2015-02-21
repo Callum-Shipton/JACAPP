@@ -18,7 +18,6 @@ import Math.Vector2;
 public class Player extends NPC {
 
 	private int lives;
-	private Weapon weapon;
 	private FloatBuffer matrix44Buffer;
 	private Matrix4 viewMatrix;
 	private int viewMatrixLocation;
@@ -28,8 +27,7 @@ public class Player extends NPC {
 		super(10.0f, 10.0f, 64.0f, 64.0f, 10, 0, Art.player);
 	}
 
-	public Player(float x, float y, float width, float height, int speed,
-			int direction, Image image) {
+	public Player(float x, float y, float width, float height, int speed, int direction, Image image) {
 		super(x, y, width, height, speed, direction, image);
 
 		viewMatrix = new Matrix4();
@@ -43,8 +41,6 @@ public class Player extends NPC {
 		viewMatrixLocationInst = GL20.glGetUniformLocation(Art.ShaderInst,
 				"viewMatrix");
 		scrollScreen();
-		health = 10;
-		weapon = new Weapon(10, 10);
 		team = 0;
 	}
 
@@ -52,7 +48,6 @@ public class Player extends NPC {
 	public void update() {
 		checkKeys();
 		checkDead();
-		System.out.println(posX);
 	}
 
 	private void checkKeys() {
@@ -106,7 +101,7 @@ public class Player extends NPC {
 
 		if (Keyboard.getKey(GLFW_KEY_SPACE) == 1
 				|| Keyboard.getKey(GLFW_KEY_SPACE) == 2) {
-			shoot();
+			weapon.shoot(posX, posY, direction, team);
 		}
 	}
 
@@ -136,11 +131,7 @@ public class Player extends NPC {
 		scrollScreen();
 		health = 10;
 	}
-
-	private void shoot() {
-		weapon.shoot(posX, posY, direction, team);
-	}
-
+	
 	public int getHealth() {
 		return health;
 	}
@@ -155,13 +146,5 @@ public class Player extends NPC {
 
 	public void setLives(int lives) {
 		this.lives = lives;
-	}
-
-	public Weapon getWeapon() {
-		return weapon;
-	}
-
-	public void setWeapon(Weapon weapon) {
-		this.weapon = weapon;
 	}
 }
