@@ -22,7 +22,8 @@ public class Hud {
 		hudElems.add(infoBox);
 		healthBar = new HudElement(10.0f, 10.0f, 170.0f, 19.0f, Art.healthBar);
 		hudElems.add(healthBar);
-		healthBar.update(18);
+		healthBar.setVal(18);
+		healthBar.setMFrame(player.getMaxHealth()/player.getHealth(), Art.healthBar.getFHeight() );
 		manaBar = new HudElement(10.0f, 35.0f, 170.0f, 19.0f, Art.manaBar);
 		hudElems.add(manaBar);
 		manaBar.update(18);
@@ -39,7 +40,9 @@ public class Hud {
 	}
 
 	public void update() {
-		healthBar.update(player.getHealth()-1);
+		healthBar.setVal(player.getHealth()-1);
+	//	healthBar.setMFrame((player.getMaxHealth()+1)/(player.getHealth()+1), Art.healthBar.getFHeight());
+		//healthBar.setSize((((float)player.getHealth())/((float)player.getMaxHealth())) * Art.healthBar.getWidth(), healthBar.getSize().y());
 	}
 
 }

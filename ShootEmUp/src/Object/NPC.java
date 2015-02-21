@@ -6,13 +6,15 @@ import Math.Vector2;
 
 public abstract class NPC extends Entity {
 	protected int health;
+	private int maxHealth;
 	protected Weapon weapon;
 	private int counter = 0;
 
 	public NPC(float x, float y, float width, float height, int speed, int direction, Image image) {
 		super(x, y, width, height, speed, direction, image);
 		flying = false;
-		health = 19;
+		setMaxHealth(19);
+		health = getMaxHealth();
 		weapon = new Weapon(1, 10);
 	}
 
@@ -56,5 +58,13 @@ public abstract class NPC extends Entity {
 
 	public void damage(int damage) {
 		this.health -= damage;
+	}
+
+	public int getMaxHealth() {
+		return maxHealth;
+	}
+
+	public void setMaxHealth(int maxHealth) {
+		this.maxHealth = maxHealth;
 	}
 }
