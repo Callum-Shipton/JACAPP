@@ -1,6 +1,5 @@
 package Object;
 
-import Math.Vector2;
 import Math.Vector4;
 
 public class Collidable {
