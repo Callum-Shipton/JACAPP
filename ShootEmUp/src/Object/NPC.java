@@ -7,11 +7,12 @@ import Math.Vector2;
 public abstract class NPC extends Entity {
 	protected int health;
 	protected Weapon weapon;
+	private int counter = 0;
 
 	public NPC(float x, float y, float width, float height, int speed, int direction, Image image) {
 		super(x, y, width, height, speed, direction, image);
 		flying = false;
-		health = 20;
+		health = 19;
 		weapon = new Weapon(1, 10);
 	}
 
@@ -36,7 +37,11 @@ public abstract class NPC extends Entity {
 			move(movement);
 			direction = (int) (Math.round(movement.Angle()) / 45);
 		}
-		weapon.shoot(posX, posY, direction, team);
+		counter++;
+		if (counter == 30){
+			weapon.shoot(posX, posY, direction, team);
+			counter = 0;
+		}
 	}
 
 	public void checkDead() {
