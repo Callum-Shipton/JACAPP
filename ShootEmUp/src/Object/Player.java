@@ -129,7 +129,7 @@ public class Player extends NPC {
 		posX = ShootEmUp.currentLevel.spawn[0];
 		posY = ShootEmUp.currentLevel.spawn[1];
 		scrollScreen();
-		health = 10;
+		health = 19;
 	}
 	
 	public int getHealth() {
