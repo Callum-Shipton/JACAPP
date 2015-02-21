@@ -2,6 +2,7 @@ package Main;
 
 import java.awt.image.*;
 import java.io.IOException;
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.imageio.*;
@@ -25,7 +26,7 @@ public class Level {
 	private String file;
 	private Vector2[][] backgroundTiles;
 	private Vector2[][] foregroundTiles;
-	public float[] spawn = new float[] { 550.0f, 600.0f };
+	public float[] spawn = new float[] { 320.0f, 320.0f };
 	private Player player;
 	private Hud hud;
 
@@ -33,6 +34,8 @@ public class Level {
 	private DPDTRenderer stat;
 	private IRenderer irBack;
 	private IRenderer irFront;
+	
+	private int counter = 0;
 
 	public CopyOnWriteArrayList<Collidable> walls;
 	public CopyOnWriteArrayList<NPC> characters;
@@ -99,8 +102,6 @@ public class Level {
 				Art.player);
 
 		characters.add(player);
-		characters.add(new Enemy(700.0f, 128.0f, 64.0f, 64.0f, 5, 0,
-				Art.enemy));
 	}
 
 	private void renderTiles() {
@@ -109,6 +110,35 @@ public class Level {
 	}
 
 	public void update() {
+		float X = 0.0f;
+		float Y = 0.0f;
+		boolean collide = false;
+		
+		counter++;
+		if(counter == 150){
+			Random rand = new Random();
+				do {
+					collide = false;
+					X = rand.nextFloat() * (576.0f - 64.0f) + 64.0f;
+					Y = rand.nextFloat() * (576.0f - 64.0f) + 64.0f;
+					
+					for (NPC character : ShootEmUp.currentLevel.characters) {
+						if ((character.doesCollide(X, Y, 64.0f, 64.0f) != null)) {
+							collide = true;
+							break;
+						}
+					}
+					for (Collidable wall : ShootEmUp.currentLevel.walls) {
+						if (wall.doesCollide(X, Y, 64.0f, 64.0f) != null) {
+							collide = true;
+							break;
+						}
+					}
+				} while(collide == true);	
+			characters.add(new Enemy(X, Y, 64.0f, 64.0f, 5, 0, Art.enemy));
+			counter = 0;
+		}
+		
 		for (NPC character : characters) {
 			character.update();
 		}
