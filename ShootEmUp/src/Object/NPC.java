@@ -11,8 +11,8 @@ public abstract class NPC extends Entity {
 	public NPC(float x, float y, float width, float height, int speed, int direction, Image image) {
 		super(x, y, width, height, speed, direction, image);
 		flying = false;
-		health = 100;
-		weapon = new Weapon(10, 10);
+		health = 20;
+		weapon = new Weapon(1, 10);
 	}
 
 	public void update() {
