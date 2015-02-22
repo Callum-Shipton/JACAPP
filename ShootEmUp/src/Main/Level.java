@@ -65,8 +65,22 @@ public class Level {
 				case -1:
 					backgroundTiles[x][y] = new Vector2(0.0f, 0.0f);
 					break;
+				case -14066:
+					backgroundTiles[x][y] = new Vector2(2.0f, 0.0f);
+					break;
+				case -32985:
+					backgroundTiles[x][y] = new Vector2(0.0f, 1.0f);
+					break;
+				case -1055568: 
+					backgroundTiles[x][y] = new Vector2(3.0f, 0.0f);
+					break;
+				case -1237980: 
+					backgroundTiles[x][y] = new Vector2(1.0f, 1.0f);
+					break;
 				case -16777216:
 					backgroundTiles[x][y] = new Vector2(1.0f, 0.0f);
+					break;
+				default: System.out.println(map.getRGB(x, y));
 				}
 				switch (map.getRGB(x + (map.getWidth() / 2), y)) {
 				case -1:
