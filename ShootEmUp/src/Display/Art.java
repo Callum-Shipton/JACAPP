@@ -141,9 +141,9 @@ public class Art {
 
 	private static void initTextures() {
 		
-		floor = new Image("/img/floor.png",4,4);
+		floor = new Image("/Tiles/floor.png",4,4);
 
-		wall = new Image("/img/wall.png",4,4);
+		wall = new Image("/Tiles/wall.png",4,4);
 
 		player = new Image("/img/Player.png",1,8);
 
