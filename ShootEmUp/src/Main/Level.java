@@ -132,7 +132,7 @@ public class Level {
 				default: System.out.println(map.getRGB(x + (map.getWidth()/2), y));
 				}
 				
-				switch (map.getRGB(x + (map.getWidth() / 3), y)) {
+				switch (map.getRGB(x + ((map.getWidth() / 3) *2), y)) {
 				case -1: break;
 				case -7864299:
 					foregroundTiles[x][y] = new Vector2(0.0f, 0.0f);
