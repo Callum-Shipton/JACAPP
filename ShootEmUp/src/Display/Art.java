@@ -15,7 +15,7 @@ import Math.Matrix4;
 
 public class Art {
 
-	public static Image floor;
+	public static Image background;
 
 	public static Image wall;
 
@@ -141,7 +141,7 @@ public class Art {
 
 	private static void initTextures() {
 		
-		floor = new Image("/Tiles/floor.png",4,4);
+		background = new Image("/Tiles/background.png",4,4);
 
 		wall = new Image("/Tiles/wall.png",4,4);
 

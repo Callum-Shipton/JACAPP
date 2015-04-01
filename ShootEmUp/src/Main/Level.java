@@ -150,7 +150,7 @@ public class Level {
 	}
 
 	private void renderTiles() {
-		irBack.draw(Art.floor.getID());
+		irBack.draw(Art.background.getID());
 		irFront.draw(Art.wall.getID());
 	}
 
