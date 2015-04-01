@@ -68,18 +68,6 @@ public class Level {
 				case -1:
 					backgroundTiles[x][y] = new Vector2(0.0f, 0.0f);
 					break;
-				case -14066:
-					backgroundTiles[x][y] = new Vector2(2.0f, 0.0f);
-					break;
-				case -32985:
-					backgroundTiles[x][y] = new Vector2(0.0f, 1.0f);
-					break;
-				case -1055568: 
-					backgroundTiles[x][y] = new Vector2(3.0f, 0.0f);
-					break;
-				case -1237980: 
-					backgroundTiles[x][y] = new Vector2(1.0f, 1.0f);
-					break;
 				case -16777216:
 					backgroundTiles[x][y] = new Vector2(1.0f, 0.0f);
 					break;
@@ -88,42 +76,6 @@ public class Level {
 				
 				switch (map.getRGB(x + (map.getWidth() / 3), y)) {
 				case -1:
-					break;
-				case -32985: 
-					wallTiles[x][y] = new Vector2(0.0f, 1.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
-					break;
-				case -1237980: 
-					wallTiles[x][y] = new Vector2(3.0f, 0.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
-					break;
-				case -3620889:
-					wallTiles[x][y] = new Vector2(0.0f, 2.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, true));
-					break;
-				case -6075996:
-					wallTiles[x][y] = new Vector2(1.0f, 2.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, true));
-					break;
-				case -6694422:
-					wallTiles[x][y] = new Vector2(3.0f, 1.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, true));
-					break;
-				case -7864299: 
-					wallTiles[x][y] = new Vector2(1.0f, 0.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
-					break;
-				case -8421505: 
-					wallTiles[x][y] = new Vector2(2.0f, 0.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
-					break;
-				case -12629812:
-					wallTiles[x][y] = new Vector2(1.0f, 1.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, true));
-					break;
-				case -16735512:
-					wallTiles[x][y] = new Vector2(2.0f, 1.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, true));
 					break;
 				case -16777216:
 					wallTiles[x][y] = new Vector2(0.0f, 0.0f);

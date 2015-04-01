@@ -18,32 +18,23 @@ public class Collidable {
 	}
 
 	public Vector4 doesCollide(float x, float y, float w, float h) {
-		if (collideFunction(x, y) != null) {
-			return collideFunction(x, y);
+		if (collideFunction(x, y, w, h, posX, posY) != null) {
+			return collideFunction(x, y, w, h, posX, posY);
 		}
-
-		x += w;
-
-		if (collideFunction(x, y) != null) {
-			return collideFunction(x, y);
+		if (collideFunction(x, y, w, h, posX + width, posY) != null) {
+			return collideFunction(x, y, w, h, posX + width, posY);
 		}
-
-		y += h;
-
-		if (collideFunction(x, y) != null) {
-			return collideFunction(x, y);
+		if (collideFunction(x, y, w, h, posX + width, posY + height) != null) {
+			return collideFunction(x, y, w, h, posX + width, posY + height);
 		}
-
-		x -= w;
-
-		if (collideFunction(x, y) != null) {
-			return collideFunction(x, y);
+		if (collideFunction(x, y, w, h, posX , posY + height) != null) {
+			return collideFunction(x, y, w, h, posX, posY + height);
 		}
 		return null;
 	}
 
-	public Vector4 collideFunction(float x, float y) {
-		if (((x >= posX) && (x <= (posX + width))) && ((y >= posY) && (y <= (posY + height)))) {
+	public Vector4 collideFunction(float x, float y, float w, float h, float X, float Y) { //float X and Y are the x and y of the current collidable
+		if (((X >= x) && (X <= (x + w))) && ((Y >= y) && (Y <= (y + h)))) {
 			return new Vector4(x - posX, y - posY, x -(posX + width), y - (posY + height));	
 		}
 		return null;
