@@ -7,7 +7,6 @@ import org.lwjgl.glfw.GLFW;
 
 import Display.Art;
 import Display.Display;
-import Display.DPDTRenderer;
 import Input.Keyboard;
 
 public class ShootEmUp {
