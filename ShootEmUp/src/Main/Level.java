@@ -25,6 +25,7 @@ public class Level {
 	private BufferedImage map = null;
 	private String file;
 	private Vector2[][] backgroundTiles;
+	private Vector2[][] wallTiles;
 	private Vector2[][] foregroundTiles;
 	public float[] spawn = new float[] { 320.0f, 320.0f };
 	private Player player;
@@ -33,7 +34,8 @@ public class Level {
 	private DPDTRenderer r;
 	private DPDTRenderer stat;
 	private IRenderer irBack;
-	private IRenderer irFront;
+	private IRenderer irWall;
+	private IRenderer irFore;
 	
 	private int counter = 0;
 
@@ -45,10 +47,11 @@ public class Level {
 		this.file = file;
 		loadLevel();
 		backgroundTiles = new Vector2[map.getWidth() / 2][map.getHeight()];
+		wallTiles = new Vector2[map.getWidth() / 2][map.getHeight()];
 		foregroundTiles = new Vector2[map.getWidth() / 2][map.getHeight()];
 		addStuff();
 		setTiles();
-		renderTiles();
+		renderLowTiles();
 	}
 
 	private void loadLevel() {
@@ -86,43 +89,43 @@ public class Level {
 				case -1:
 					break;
 				case -32985: 
-					foregroundTiles[x][y] = new Vector2(0.0f, 1.0f);
+					wallTiles[x][y] = new Vector2(0.0f, 1.0f);
 					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
 					break;
 				case -1237980: 
-					foregroundTiles[x][y] = new Vector2(3.0f, 0.0f);
+					wallTiles[x][y] = new Vector2(3.0f, 0.0f);
 					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
 					break;
 				case -3620889:
-					foregroundTiles[x][y] = new Vector2(0.0f, 2.0f);
+					wallTiles[x][y] = new Vector2(0.0f, 2.0f);
 					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, true));
 					break;
 				case -6075996:
-					foregroundTiles[x][y] = new Vector2(1.0f, 2.0f);
+					wallTiles[x][y] = new Vector2(1.0f, 2.0f);
 					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, true));
 					break;
 				case -6694422:
-					foregroundTiles[x][y] = new Vector2(3.0f, 1.0f);
+					wallTiles[x][y] = new Vector2(3.0f, 1.0f);
 					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, true));
 					break;
 				case -7864299: 
-					foregroundTiles[x][y] = new Vector2(1.0f, 0.0f);
+					wallTiles[x][y] = new Vector2(1.0f, 0.0f);
 					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
 					break;
 				case -8421505: 
-					foregroundTiles[x][y] = new Vector2(2.0f, 0.0f);
+					wallTiles[x][y] = new Vector2(2.0f, 0.0f);
 					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
 					break;
 				case -12629812:
-					foregroundTiles[x][y] = new Vector2(1.0f, 1.0f);
+					wallTiles[x][y] = new Vector2(1.0f, 1.0f);
 					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, true));
 					break;
 				case -16735512:
-					foregroundTiles[x][y] = new Vector2(2.0f, 1.0f);
+					wallTiles[x][y] = new Vector2(2.0f, 1.0f);
 					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, true));
 					break;
 				case -16777216:
-					foregroundTiles[x][y] = new Vector2(0.0f, 0.0f);
+					wallTiles[x][y] = new Vector2(0.0f, 0.0f);
 					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
 					break;
 				default: System.out.println(map.getRGB(x + (map.getWidth()/2), y));
@@ -131,8 +134,10 @@ public class Level {
 		}
 		irBack = new IRenderer(backgroundTiles, new Vector2(4.0f, 4.0f), 32.0f,
 				32.0f);
-		irFront = new IRenderer(foregroundTiles, new Vector2(4.0f, 4.0f),
+		irWall = new IRenderer(wallTiles, new Vector2(8.0f, 8.0f),
 				32.0f, 32.0f);
+		irFore = new IRenderer(foregroundTiles, new Vector2(4.0f, 4.0f), 32.0f,
+				32.0f);
 	}
 
 	private void addStuff() {
@@ -149,11 +154,15 @@ public class Level {
 		characters.add(player);
 	}
 
-	private void renderTiles() {
+	private void renderLowTiles() {
 		irBack.draw(Art.background.getID());
-		irFront.draw(Art.wall.getID());
+		irWall.draw(Art.wall.getID());
 	}
 
+	private void renderHighTiles() {
+		irFore.draw(Art.foreground.getID());
+	}
+	
 	public void update() {
 		float X = 0.0f;
 		float Y = 0.0f;
@@ -195,7 +204,7 @@ public class Level {
 
 	public void render() {
 		GL20.glUseProgram(Art.ShaderInst);
-		renderTiles();
+		renderLowTiles();
 		GL20.glUseProgram(0);
 
 		GL20.glUseProgram(Art.ShaderBase);
