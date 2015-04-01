@@ -85,6 +85,7 @@ public class Level {
 					break;
 				default: System.out.println(map.getRGB(x, y));
 				}
+				
 				switch (map.getRGB(x + (map.getWidth() / 3), y)) {
 				case -1:
 					break;
@@ -129,6 +130,14 @@ public class Level {
 					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
 					break;
 				default: System.out.println(map.getRGB(x + (map.getWidth()/2), y));
+				}
+				
+				switch (map.getRGB(x + (map.getWidth() / 3), y)) {
+				case -1: break;
+				case -7864299:
+					foregroundTiles[x][y] = new Vector2(0.0f, 0.0f);
+					break;
+				default: break;
 				}
 			}
 		}
@@ -216,7 +225,8 @@ public class Level {
 		for (Particle particle : particles) {
 			particle.render(r);
 		}
-
+		renderHighTiles();
+		
 		GL20.glUseProgram(0);
 		GL20.glUseProgram(Art.ShaderStat);
 		hud.render(stat);
