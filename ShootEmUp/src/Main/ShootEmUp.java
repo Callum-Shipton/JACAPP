@@ -18,9 +18,8 @@ public class ShootEmUp {
 
 	// Handle for monitor/window funcs
 	private Display d;
-
-	// Will be moved to LEVEL
-	DPDTRenderer r;
+	
+	private boolean paused;
 
 	public static Level currentLevel;
 
@@ -87,9 +86,16 @@ public class ShootEmUp {
 		// Poll for window events. The key callback above will only be
 		// invoked during this call.
 		glfwPollEvents();
+		if(Keyboard.getKey(GLFW_KEY_P) == 1 || Keyboard.getKey(GLFW_KEY_P) == 2){
+				paused = !paused;
+		}
+		
 
-		currentLevel.update();
+		if(!paused){
+			currentLevel.update();
+		}
 		d.update();
+
 	}
 
 	private void render() {
