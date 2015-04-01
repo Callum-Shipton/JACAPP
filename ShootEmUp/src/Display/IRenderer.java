@@ -53,8 +53,8 @@ public class IRenderer {
 					else{
 						texture[0] = texMax.x()-1.0f/texMax.x();
 						texture[1] = texMax.y()-1.0f/texMax.y();
-						translation[0] = 0.0f;
-						translation[1] = 0.0f;
+						translation[0] = 1000*width;
+						translation[1] = 1000*width;
 					}
 					instanceFloatBuffer.put(translation);
 					instanceFloatBuffer.put(texture);
