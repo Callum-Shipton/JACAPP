@@ -27,7 +27,7 @@ public class Level {
 	private Vector2[][] backgroundTiles;
 	private Vector2[][] wallTiles;
 	private Vector2[][] foregroundTiles;
-	public float[] spawn = new float[] { 320.0f, 320.0f };
+	public float[] spawn = new float[] { 480.0f, 480.0f };
 	private Player player;
 	private Hud hud;
 
@@ -46,9 +46,9 @@ public class Level {
 	public Level(String file) {
 		this.file = file;
 		loadLevel();
-		backgroundTiles = new Vector2[map.getWidth() / 2][map.getHeight()];
-		wallTiles = new Vector2[map.getWidth() / 2][map.getHeight()];
-		foregroundTiles = new Vector2[map.getWidth() / 2][map.getHeight()];
+		backgroundTiles = new Vector2[map.getWidth() / 3][map.getHeight()];
+		wallTiles = new Vector2[map.getWidth() / 3][map.getHeight()];
+		foregroundTiles = new Vector2[map.getWidth() / 3][map.getHeight()];
 		addStuff();
 		setTiles();
 		renderLowTiles();
@@ -62,7 +62,7 @@ public class Level {
 	}
 
 	private void setTiles() {
-		for (int x = 0; x < map.getWidth() / 2; x++) {
+		for (int x = 0; x < map.getWidth() / 3; x++) {
 			for (int y = 0; y < map.getHeight(); y++) {
 				switch (map.getRGB(x, y)) {
 				case -1:
@@ -85,7 +85,7 @@ public class Level {
 					break;
 				default: System.out.println(map.getRGB(x, y));
 				}
-				switch (map.getRGB(x + (map.getWidth() / 2), y)) {
+				switch (map.getRGB(x + (map.getWidth() / 3), y)) {
 				case -1:
 					break;
 				case -32985: 
