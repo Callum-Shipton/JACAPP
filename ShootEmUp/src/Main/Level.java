@@ -87,52 +87,52 @@ public class Level {
 					break;
 				case -32985: 
 					foregroundTiles[x][y] = new Vector2(0.0f, 1.0f);
-					walls.add(new Collidable(x * 64.0f, y * 64.0f, 64.0f, 64.0f, false));
+					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
 					break;
 				case -1237980: 
 					foregroundTiles[x][y] = new Vector2(3.0f, 0.0f);
-					walls.add(new Collidable(x * 64.0f, y * 64.0f, 64.0f, 64.0f, false));
+					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
 					break;
 				case -3620889:
 					foregroundTiles[x][y] = new Vector2(0.0f, 2.0f);
-					walls.add(new Collidable(x * 64.0f, y * 64.0f, 64.0f, 64.0f, true));
+					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, true));
 					break;
 				case -6075996:
 					foregroundTiles[x][y] = new Vector2(1.0f, 2.0f);
-					walls.add(new Collidable(x * 64.0f, y * 64.0f, 64.0f, 64.0f, true));
+					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, true));
 					break;
 				case -6694422:
 					foregroundTiles[x][y] = new Vector2(3.0f, 1.0f);
-					walls.add(new Collidable(x * 64.0f, y * 64.0f, 64.0f, 64.0f, true));
+					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, true));
 					break;
 				case -7864299: 
 					foregroundTiles[x][y] = new Vector2(1.0f, 0.0f);
-					walls.add(new Collidable(x * 64.0f, y * 64.0f, 64.0f, 64.0f, false));
+					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
 					break;
 				case -8421505: 
 					foregroundTiles[x][y] = new Vector2(2.0f, 0.0f);
-					walls.add(new Collidable(x * 64.0f, y * 64.0f, 64.0f, 64.0f, false));
+					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
 					break;
 				case -12629812:
 					foregroundTiles[x][y] = new Vector2(1.0f, 1.0f);
-					walls.add(new Collidable(x * 64.0f, y * 64.0f, 64.0f, 64.0f, true));
+					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, true));
 					break;
 				case -16735512:
 					foregroundTiles[x][y] = new Vector2(2.0f, 1.0f);
-					walls.add(new Collidable(x * 64.0f, y * 64.0f, 64.0f, 64.0f, true));
+					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, true));
 					break;
 				case -16777216:
 					foregroundTiles[x][y] = new Vector2(0.0f, 0.0f);
-					walls.add(new Collidable(x * 64.0f, y * 64.0f, 64.0f, 64.0f, false));
+					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
 					break;
 				default: System.out.println(map.getRGB(x + (map.getWidth()/2), y));
 				}
 			}
 		}
-		irBack = new IRenderer(backgroundTiles, new Vector2(4.0f, 4.0f), 64.0f,
-				64.0f);
+		irBack = new IRenderer(backgroundTiles, new Vector2(4.0f, 4.0f), 32.0f,
+				32.0f);
 		irFront = new IRenderer(foregroundTiles, new Vector2(4.0f, 4.0f),
-				64.0f, 64.0f);
+				32.0f, 32.0f);
 	}
 
 	private void addStuff() {
@@ -164,8 +164,8 @@ public class Level {
 			Random rand = new Random();
 				do {
 					collide = false;
-					X = rand.nextFloat() * ((float)(backgroundTiles.length * 64) - 64.0f) + 64.0f;
-					Y = rand.nextFloat() * ((float)(backgroundTiles[0].length * 64) - 64.0f) + 64.0f;
+					X = rand.nextFloat() * ((float)(backgroundTiles.length * 32) - 32.0f) + 32.0f;
+					Y = rand.nextFloat() * ((float)(backgroundTiles[0].length * 32) - 32.0f) + 32.0f;
 					
 					for (NPC character : ShootEmUp.currentLevel.characters) {
 						if ((character.doesCollide(X, Y, 64.0f, 64.0f) != null)) {
@@ -174,7 +174,7 @@ public class Level {
 						}
 					}
 					for (Collidable wall : ShootEmUp.currentLevel.walls) {
-						if (wall.doesCollide(X, Y, 64.0f, 64.0f) != null) {
+						if (wall.doesCollide(X, Y, 32.0f, 32.0f) != null) {
 							collide = true;
 							break;
 						}
