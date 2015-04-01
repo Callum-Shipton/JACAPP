@@ -214,6 +214,7 @@ public class Level {
 	public void render() {
 		GL20.glUseProgram(Art.ShaderInst);
 		renderLowTiles();
+		renderHighTiles();
 		GL20.glUseProgram(0);
 
 		GL20.glUseProgram(Art.ShaderBase);
@@ -225,13 +226,20 @@ public class Level {
 		for (Particle particle : particles) {
 			particle.render(r);
 		}
-		renderHighTiles();
-		
-		GL20.glUseProgram(0);
-		GL20.glUseProgram(Art.ShaderStat);
-		hud.render(stat);
-		GL20.glUseProgram(0);
 		GL30.glBindVertexArray(0);
+		GL20.glUseProgram(0);
+		
+		GL20.glUseProgram(Art.ShaderInst);
+		renderHighTiles();
+		GL20.glUseProgram(0);
+		
+		
+		GL20.glUseProgram(Art.ShaderStat);
+		GL30.glBindVertexArray(r.getVAO());
+		hud.render(stat);
+		GL30.glBindVertexArray(0);
+		GL20.glUseProgram(0);
+
 	}
 
 	public float[] getSpawn() {
