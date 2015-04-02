@@ -105,6 +105,14 @@ public class Level {
 					wallTiles[x][y] = new Vector2(2.0f, 1.0f);
 					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, true));
 					break;
+				case -3947581:
+					wallTiles[x][y] = new Vector2(2.0f, 2.0f);
+					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
+					break;
+				case -4621737:
+					wallTiles[x][y] = new Vector2(1.0f, 2.0f);
+					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
+					break;
 				case -4856291:
 					wallTiles[x][y] = new Vector2(5.0f, 1.0f);
 					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, true));
@@ -119,6 +127,10 @@ public class Level {
 					break;
 				case -7864299:
 					wallTiles[x][y] = new Vector2(2.0f, 0.0f);
+					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
+					break;
+				case -8355840:
+					wallTiles[x][y] = new Vector2(3.0f, 2.0f);
 					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
 					break;
 				case -8421505:
