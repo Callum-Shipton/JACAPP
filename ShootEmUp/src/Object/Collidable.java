@@ -18,6 +18,7 @@ public class Collidable {
 	}
 
 	public Vector4 doesCollide(float x, float y, float w, float h) {
+		
 		if (collideFunction(x, y) != null) {
 			return collideFunction(x, y);
 		}

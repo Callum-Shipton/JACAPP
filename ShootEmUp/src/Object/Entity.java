@@ -39,17 +39,29 @@ public abstract class Entity extends Collidable {
 				break;
 			}
 		}
-		for (Collidable wall : ShootEmUp.currentLevel.walls) {
-			if (wall.doesCollide(posX + (moveVec.x() * speed), posY, width,
-					height) != null) {
-				if (!(wall.flat && flying)) {
-					collide = true;
-					vec = wall.doesCollide(posX + (moveVec.x() * speed), posY,
-							width, height);
-					break;
+		int maxX = 1 + (int) Math.ceil((posX + (moveVec.x() * speed)) / 32);
+		int minX = -1 + (int) Math.floor((posX - (moveVec.x() * speed)) / 32);
+		int maxY = 1 + (int) Math.ceil((posY + (moveVec.y() * speed)) / 32);
+		int minY = -1 + (int) Math.floor((posY - (moveVec.y() * speed)) / 32);
+		
+		for(int i = minX; i <= maxX; i++){
+			for(int j = minY; j <= maxY; j++){
+				if(i >= 0 && j >= 0 && i <= 79 && j <= 80){
+					if(ShootEmUp.currentLevel.walls.get((j * ShootEmUp.currentLevel.backgroundTiles.length) + i) != null){
+						if (ShootEmUp.currentLevel.walls.get((j * ShootEmUp.currentLevel.backgroundTiles.length) + i).doesCollide(posX + (moveVec.x() * speed), posY, width,
+								height) != null) {
+							if (!(ShootEmUp.currentLevel.walls.get((j * ShootEmUp.currentLevel.backgroundTiles.length) + i).flat && flying)) {
+								collide = true;
+								vec = ShootEmUp.currentLevel.walls.get((j * ShootEmUp.currentLevel.backgroundTiles.length) + i).doesCollide(posX + (moveVec.x() * speed), posY,
+										width, height);
+								break;
+							}
+						}
+					}
 				}
 			}
 		}
+		
 		if (collide == false) {
 			posX += moveVec.x() * speed;
 		} else {
@@ -72,17 +84,25 @@ public abstract class Entity extends Collidable {
 				break;
 			}
 		}
-		for (Collidable wall : ShootEmUp.currentLevel.walls) {
-			if (wall.doesCollide(posX, posY + (moveVec.y() * speed), width,
-					height) != null) {
-				if (!(wall.flat && flying)) {
-					collide = true;
-					vec = wall.doesCollide(posX, posY + (moveVec.y() * speed), width,
-							height);
-					break;
+
+		for(int i = minX; i <= maxX; i++){
+			for(int j = minY; j <= maxY; j++){
+				if(i >= 0 && j >= 0 && i <= 79 && j <= 80){
+					if(ShootEmUp.currentLevel.walls.get((j * ShootEmUp.currentLevel.backgroundTiles.length) + i) != null){
+						if (ShootEmUp.currentLevel.walls.get((j * ShootEmUp.currentLevel.backgroundTiles.length) + i).doesCollide(posX, posY + (moveVec.y() * speed), width,
+								height) != null) {
+							if (!(ShootEmUp.currentLevel.walls.get((j * ShootEmUp.currentLevel.backgroundTiles.length) + i).flat && flying)) {
+								collide = true;
+								vec = ShootEmUp.currentLevel.walls.get((j * ShootEmUp.currentLevel.backgroundTiles.length) + i) .doesCollide(posX, posY + (moveVec.y() * speed), width,
+										height);
+								break;
+							}
+						}
+					}
 				}
 			}
 		}
+
 		if (collide == false) {
 			posY += moveVec.y() * speed;
 		} else {

@@ -24,7 +24,7 @@ import Object.Player;
 public class Level {
 	private BufferedImage map = null;
 	private String file;
-	private Vector2[][] backgroundTiles;
+	public Vector2[][] backgroundTiles;
 	private Vector2[][] wallTiles;
 	private Vector2[][] foregroundTiles;
 	public float[] spawn = new float[] { 480.0f, 480.0f };
@@ -62,8 +62,9 @@ public class Level {
 	}
 
 	private void setTiles() {
-		for (int x = 0; x < map.getWidth() / 3; x++) {
-			for (int y = 0; y < map.getHeight(); y++) {
+		
+		for (int y = 0; y < map.getHeight(); y++) {
+			for (int x = 0; x < map.getWidth() / 3; x++) {
 				switch (map.getRGB(x, y)) {
 				case -1:
 					backgroundTiles[x][y] = new Vector2(0.0f, 0.0f);
@@ -76,6 +77,7 @@ public class Level {
 				
 				switch (map.getRGB(x + (map.getWidth() / 3), y)) {
 				case -1:
+					walls.add(null);
 					break;
 				case -3584:
 					wallTiles[x][y] = new Vector2(5.0f, 0.0f);
@@ -157,7 +159,9 @@ public class Level {
 					wallTiles[x][y] = new Vector2(0.0f, 0.0f);
 					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f, 32.0f, false));
 					break;
-				default: System.out.println(map.getRGB(x + (map.getWidth()/3), y));
+				default:
+					walls.add(null);
+					System.out.println(map.getRGB(x + (map.getWidth()/3), y));
 				}
 				
 				switch (map.getRGB(x + ((map.getWidth() / 3) *2), y)) {
@@ -226,9 +230,11 @@ public class Level {
 						}
 					}
 					for (Collidable wall : ShootEmUp.currentLevel.walls) {
-						if (wall.doesCollide(X, Y, 32.0f, 32.0f) != null) {
-							collide = true;
-							break;
+						if(wall != null){
+							if (wall.doesCollide(X, Y, 32.0f, 32.0f) != null) {
+								collide = true;
+								break;
+							}
 						}
 					}
 				} while(collide == true);	
