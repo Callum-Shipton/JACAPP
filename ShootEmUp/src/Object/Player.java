@@ -22,6 +22,7 @@ public class Player extends NPC {
 	private Matrix4 viewMatrix;
 	private int viewMatrixLocation;
 	private int viewMatrixLocationInst;
+	private int fireRate = 0;
 
 	public Player() throws IOException {
 		super(10.0f, 10.0f, 64.0f, 64.0f, 10, 0, Art.player);
@@ -101,8 +102,12 @@ public class Player extends NPC {
 
 		if (Keyboard.getKey(GLFW_KEY_SPACE) == 1
 				|| Keyboard.getKey(GLFW_KEY_SPACE) == 2) {
-			weapon.shoot(posX, posY, direction, team);
+			if(fireRate >= 10){
+				weapon.shoot(posX, posY, direction, team);
+				fireRate = 0;
+			}
 		}
+		fireRate++;
 	}
 
 	private void scrollScreen() {
