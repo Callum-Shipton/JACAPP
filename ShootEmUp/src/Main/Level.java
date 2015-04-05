@@ -17,7 +17,7 @@ import Display.IRenderer;
 import Math.Vector2;
 import Object.Collidable;
 import Object.Enemy;
-import Object.NPC;
+import Object.Character;
 import Object.Particle;
 import Object.Player;
 
@@ -40,7 +40,7 @@ public class Level {
 	private int counter = 0;
 
 	public CopyOnWriteArrayList<Collidable> walls;
-	public CopyOnWriteArrayList<NPC> characters;
+	public CopyOnWriteArrayList<Character> characters;
 	public CopyOnWriteArrayList<Particle> particles;
 
 	public Level(String file) {
@@ -189,7 +189,7 @@ public class Level {
 
 	private void addStuff() {
 		walls = new CopyOnWriteArrayList<Collidable>();
-		characters = new CopyOnWriteArrayList<NPC>();
+		characters = new CopyOnWriteArrayList<Character>();
 		particles = new CopyOnWriteArrayList<Particle>();
 
 		r = new DPDTRenderer(Art.ShaderBase);
@@ -223,7 +223,7 @@ public class Level {
 					X = rand.nextFloat() * ((float)(backgroundTiles.length * 32) - 32.0f) + 32.0f;
 					Y = rand.nextFloat() * ((float)(backgroundTiles[0].length * 32) - 32.0f) + 32.0f;
 					
-					for (NPC character : ShootEmUp.currentLevel.characters) {
+					for (Character character : ShootEmUp.currentLevel.characters) {
 						if ((character.doesCollide(X, Y, 64.0f, 64.0f) != null)) {
 							collide = true;
 							break;
@@ -242,7 +242,7 @@ public class Level {
 			counter = 0;
 		}
 		
-		for (NPC character : characters) {
+		for (Character character : characters) {
 			character.update();
 		}
 		for (Particle particle : particles) {
@@ -260,7 +260,7 @@ public class Level {
 		GL20.glUseProgram(Art.ShaderBase);
 		GL30.glBindVertexArray(r.getVAO());
 
-		for (NPC character : characters) {
+		for (Character character : characters) {
 			character.render(r);
 		}
 		for (Particle particle : particles) {

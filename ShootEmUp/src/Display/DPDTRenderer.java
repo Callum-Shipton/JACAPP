@@ -29,8 +29,7 @@ public class DPDTRenderer {
 		initRenderData();
 	}
 
-	public void draw(int Texid, Vector2 pos, Vector2 size, float rotate,
-			Vector2 texPos, Vector2 texMax) {
+	public void draw(int Texid, Vector2 pos, Vector2 size, float rotate, Vector2 texPos, Vector2 texMax) {
 
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, Texid);
 
@@ -42,8 +41,7 @@ public class DPDTRenderer {
 		model.scale(size.x(), size.y(), 1.0f);
 
 		texture.clearToIdentity();
-		texture.translate(texPos.x() / texMax.x(), texPos.y() / texMax.y(),
-				0.0f);
+		texture.translate(texPos.x() / texMax.x(), texPos.y() / texMax.y(), 0.0f);
 		texture.scale(1 / texMax.x(), 1 / texMax.y(), 1.0f);
 
 		// model.m03 += pos.x;
@@ -86,10 +84,8 @@ public class DPDTRenderer {
 
 		GL20.glUseProgram(shaderProgramID);
 
-		modelMatrixLocation = GL20.glGetUniformLocation(shaderProgramID,
-				"modelMatrix");
-		textureMatrixLocation = GL20.glGetUniformLocation(shaderProgramID,
-				"textureMatrix");
+		modelMatrixLocation = GL20.glGetUniformLocation(shaderProgramID, "modelMatrix");
+		textureMatrixLocation = GL20.glGetUniformLocation(shaderProgramID, "textureMatrix");
 
 		GL20.glUseProgram(0);
 
@@ -109,8 +105,7 @@ public class DPDTRenderer {
 		v3.setST(1.0f, 1.0f);
 
 		vertices = new TexturedVertex[] { v0, v1, v2, v3 };
-		FloatBuffer verticesFloatBuffer = BufferUtils.createByteBuffer(
-				vertices.length * TexturedVertex.stride).asFloatBuffer();
+		FloatBuffer verticesFloatBuffer = BufferUtils.createByteBuffer(vertices.length * TexturedVertex.stride).asFloatBuffer();
 		for (int i = 0; i < vertices.length; i++) {
 			// Add position, color and texture floats to the buffer
 			verticesFloatBuffer.put(vertices[i].getElements());
@@ -128,26 +123,20 @@ public class DPDTRenderer {
 
 		VBO = GL15.glGenBuffers();
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, VBO);
-		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, verticesFloatBuffer,
-				GL15.GL_DYNAMIC_DRAW);
+		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, verticesFloatBuffer, GL15.GL_DYNAMIC_DRAW);
 
-		GL20.glVertexAttribPointer(0, TexturedVertex.positionElementCount,
-				GL11.GL_FLOAT, false, TexturedVertex.stride,
-				TexturedVertex.positionByteOffset);
+		GL20.glVertexAttribPointer(0, TexturedVertex.positionElementCount, GL11.GL_FLOAT, false, TexturedVertex.stride, TexturedVertex.positionByteOffset);
 
 		GL20.glEnableVertexAttribArray(0);
 
 		// Put the texture coordinates in attribute list 1
-		GL20.glVertexAttribPointer(1, TexturedVertex.textureElementCount,
-				GL11.GL_FLOAT, false, TexturedVertex.stride,
-				TexturedVertex.textureByteOffset);
+		GL20.glVertexAttribPointer(1, TexturedVertex.textureElementCount, GL11.GL_FLOAT, false, TexturedVertex.stride, TexturedVertex.textureByteOffset);
 
 		GL20.glEnableVertexAttribArray(1);
 
 		EBO = GL15.glGenBuffers();
 		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, EBO);
-		GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indicesBuffer,
-				GL15.GL_STATIC_DRAW);
+		GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL15.GL_STATIC_DRAW);
 
 		// GL30.glBindVertexArray(0);
 
@@ -158,5 +147,4 @@ public class DPDTRenderer {
 	public int getVAO() {
 		return VAO;
 	}
-
 }

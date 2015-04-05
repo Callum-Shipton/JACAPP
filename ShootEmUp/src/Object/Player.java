@@ -15,7 +15,7 @@ import Main.ShootEmUp;
 import Math.Matrix4;
 import Math.Vector2;
 
-public class Player extends NPC {
+public class Player extends Character {
 
 	private int lives;
 	private FloatBuffer matrix44Buffer;

@@ -28,8 +28,8 @@ public abstract class Entity extends Collidable {
 	public void move(Vector2 moveVec) {
 		Vector4 vec = new Vector4(0.0f, 0.0f,0.0f,0.0f);
 		boolean collide = false;
-		NPC hit = null;
-		for (NPC character : ShootEmUp.currentLevel.characters) {
+		Character hit = null;
+		for (Character character : ShootEmUp.currentLevel.characters) {
 			if ((character.doesCollide(posX + (moveVec.x() * speed), posY,
 					width, height) != null) && (character != this)) {
 				collide = true;
@@ -76,7 +76,7 @@ public abstract class Entity extends Collidable {
 			onCollide(hit);
 		}
 		collide = false;
-		for (NPC character : ShootEmUp.currentLevel.characters) {
+		for (Character character : ShootEmUp.currentLevel.characters) {
 			if ((character.doesCollide(posX, posY + (moveVec.y() * speed),
 					width, height) != null) && (character != this)) {
 				collide = true;

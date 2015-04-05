@@ -14,24 +14,29 @@ import Main.ShootEmUp;
 import Math.Matrix4;
 
 public class Art {
-
+	//Tile maps
 	public static Image background;
 	public static Image wall;
 	public static Image foreground;
 	
+	//Character maps
 	public static Image enemy;
 	public static Image player;
-
+	
+	//Particle maps
 	public static Image particle;
-
+	
+	//HUD Textures
 	public static Image infoBox;
 	public static Image healthBar;
 	public static Image manaBar;
 	public static Image xpBar;
-	public static Image BarCoin; 
+	public static Image BarCoin;
 	
+	//Level map file locations
 	public static String level1 = "/levels/level1.png";
-
+	
+	//Texture.....stuff
 	public static int ShaderBase;
 	public static int ShaderInst;
 	public static int ShaderStat;
@@ -135,26 +140,24 @@ public class Art {
 	}
 
 	private static void initTextures() {
-		
+		//Load tile maps
 		background = new Image("/Tiles/background.png",4,4);
 		wall = new Image("/Tiles/wall.png",8,8);
 		foreground = new Image("/Tiles/foreground.png",4,4);
-
+		
+		//Load character maps
 		player = new Image("/img/Player.png",1,8);
 		enemy = new Image("/img/Enemy.png",1,8);
-
+		
+		//Load particle maps
 		particle = new Image("/img/Particle.png",1,8);
 		
+		//Load HUD textures 
 		infoBox = new Image("/HUD/BarInfo.png",1,1);
 		healthBar = new Image("/HUD/BarHealth.png",1,19);			
 		manaBar = new Image("/HUD/BarMana.png",1,19);
 		xpBar = new Image("/HUD/BarXP.png",1,19);
 		BarCoin = new Image("/HUD/BarCoin.png",1,1);
-
-		/*
-		 * Template for other Texs
-		floor = new Image("/img/floor.png");
-		 */
 	}
 
 	

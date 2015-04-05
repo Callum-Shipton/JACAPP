@@ -110,6 +110,5 @@ public class Display {
 			glfwSetWindowShouldClose(window, GL_TRUE); // We will detect this in
 			// our update loop
 		}
-
 	}
 }

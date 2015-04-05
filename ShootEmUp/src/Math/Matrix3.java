@@ -54,9 +54,7 @@ public class Matrix3 {
 
 	public Matrix3 put(float[] m) {
 		if (m.length < matrix.length)
-			throw new IllegalArgumentException(
-					"float array must have at least " + matrix.length
-							+ " values.");
+			throw new IllegalArgumentException("float array must have at least " + matrix.length + " values.");
 
 		System.arraycopy(m, 0, matrix, 0, matrix.length);
 

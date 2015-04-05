@@ -41,8 +41,8 @@ public class Matrix4 {
 	}
 
 	public Matrix4 clearToOrtho(float left, float right, float bottom,
-			float top, float near, float far) {
-		return clear().put(0, 2 / (right - left)).put(5, 2 / (top - bottom))
+		float top, float near, float far) {
+			return clear().put(0, 2 / (right - left)).put(5, 2 / (top - bottom))
 				.put(10, -2 / (far - near))
 				.put(12, -(right + left) / (right - left))
 				.put(13, -(top + bottom) / (top - bottom))
@@ -50,17 +50,15 @@ public class Matrix4 {
 	}
 
 	public Matrix4 clearToPerspective(float fovRad, float width, float height,
-			float near, float far) {
-		float fov = 1 / (float) Math.tan(fovRad / 2);
-		return clear().put(0, fov / (width / height)).put(5, fov)
+		float near, float far) {
+			float fov = 1 / (float) Math.tan(fovRad / 2);
+			return clear().put(0, fov / (width / height)).put(5, fov)
 				.put(10, (far + near) / (near - far))
 				.put(14, (2 * far * near) / (near - far)).put(11, -1);
 	}
 
-	public Matrix4 clearToPerspectiveDeg(float fov, float width, float height,
-			float near, float far) {
-		return clearToPerspective((float) Math.toRadians(fov), width, height,
-				near, far);
+	public Matrix4 clearToPerspectiveDeg(float fov, float width, float height, float near, float far) {
+		return clearToPerspective((float) Math.toRadians(fov), width, height, near, far);
 	}
 
 	public float get(int index) {
@@ -68,8 +66,7 @@ public class Matrix4 {
 	}
 
 	public Vector4 getColumn(int index) {
-		return new Vector4(get(index * 4 + 0), get(index * 4 + 1),
-				get(index * 4 + 2), get(index * 4 + 3));
+		return new Vector4(get(index * 4 + 0), get(index * 4 + 1), get(index * 4 + 2), get(index * 4 + 3));
 	}
 
 	public Matrix4 put(int index, float f) {
@@ -102,9 +99,7 @@ public class Matrix4 {
 
 	public Matrix4 set(float[] m) {
 		if (m.length < matrix.length)
-			throw new IllegalArgumentException(
-					"float array must have at least " + matrix.length
-							+ " values.");
+			throw new IllegalArgumentException("float array must have at least " + matrix.length + " values.");
 
 		System.arraycopy(m, 0, matrix, 0, matrix.length);
 
@@ -136,14 +131,10 @@ public class Matrix4 {
 		float[] newm = new float[matrix.length];
 
 		for (int a = 0; a < matrix.length; a += 4) {
-			newm[a + 0] = get(0) * m[a] + get(4) * m[a + 1] + get(8) * m[a + 2]
-					+ get(12) * m[a + 3];
-			newm[a + 1] = get(1) * m[a] + get(5) * m[a + 1] + get(9) * m[a + 2]
-					+ get(13) * m[a + 3];
-			newm[a + 2] = get(2) * m[a] + get(6) * m[a + 1] + get(10)
-					* m[a + 2] + get(14) * m[a + 3];
-			newm[a + 3] = get(3) * m[a] + get(7) * m[a + 1] + get(11)
-					* m[a + 2] + get(15) * m[a + 3];
+			newm[a + 0] = get(0) * m[a] + get(4) * m[a + 1] + get(8) * m[a + 2] + get(12) * m[a + 3];
+			newm[a + 1] = get(1) * m[a] + get(5) * m[a + 1] + get(9) * m[a + 2] + get(13) * m[a + 3];
+			newm[a + 2] = get(2) * m[a] + get(6) * m[a + 1] + get(10) * m[a + 2] + get(14) * m[a + 3];
+			newm[a + 3] = get(3) * m[a] + get(7) * m[a + 1] + get(11) * m[a + 2] + get(15) * m[a + 3];
 		}
 
 		set(newm);
@@ -158,14 +149,10 @@ public class Matrix4 {
 	public Vector4 mult(Vector4 vec) {
 		Vector4 v = new Vector4();
 
-		v.x(get(0) * vec.x() + get(4) * vec.y() + get(8) * vec.z() + get(12)
-				* vec.w());
-		v.y(get(1) * vec.x() + get(5) * vec.y() + get(9) * vec.z() + get(13)
-				* vec.w());
-		v.z(get(2) * vec.x() + get(6) * vec.y() + get(10) * vec.z() + get(14)
-				* vec.w());
-		v.w(get(3) * vec.x() + get(7) * vec.y() + get(11) * vec.z() + get(15)
-				* vec.w());
+		v.x(get(0) * vec.x() + get(4) * vec.y() + get(8) * vec.z() + get(12) * vec.w());
+		v.y(get(1) * vec.x() + get(5) * vec.y() + get(9) * vec.z() + get(13) * vec.w());
+		v.z(get(2) * vec.x() + get(6) * vec.y() + get(10) * vec.z() + get(14) * vec.w());
+		v.w(get(3) * vec.x() + get(7) * vec.y() + get(11) * vec.z() + get(15) * vec.w());
 
 		return v;
 	}

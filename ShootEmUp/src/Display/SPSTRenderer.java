@@ -74,8 +74,7 @@ public class SPSTRenderer {
 
 		GL20.glUseProgram(shaderProgramID);
 
-		modelMatrixLocation = GL20.glGetUniformLocation(shaderProgramID,
-				"modelMatrix");
+		modelMatrixLocation = GL20.glGetUniformLocation(shaderProgramID, "modelMatrix");
 
 		GL20.glUseProgram(0);
 
@@ -95,8 +94,7 @@ public class SPSTRenderer {
 		v3.setST(1.0f, 1.0f);
 
 		vertices = new TexturedVertex[] { v0, v1, v2, v3 };
-		FloatBuffer verticesFloatBuffer = BufferUtils.createByteBuffer(
-				vertices.length * TexturedVertex.stride).asFloatBuffer();
+		FloatBuffer verticesFloatBuffer = BufferUtils.createByteBuffer(vertices.length * TexturedVertex.stride).asFloatBuffer();
 		for (int i = 0; i < vertices.length; i++) {
 			// Add position, color and texture floats to the buffer
 			verticesFloatBuffer.put(vertices[i].getElements());
@@ -114,26 +112,20 @@ public class SPSTRenderer {
 
 		VBO = GL15.glGenBuffers();
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, VBO);
-		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, verticesFloatBuffer,
-				GL15.GL_DYNAMIC_DRAW);
+		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, verticesFloatBuffer, GL15.GL_DYNAMIC_DRAW);
 
-		GL20.glVertexAttribPointer(0, TexturedVertex.positionElementCount,
-				GL11.GL_FLOAT, false, TexturedVertex.stride,
-				TexturedVertex.positionByteOffset);
+		GL20.glVertexAttribPointer(0, TexturedVertex.positionElementCount, GL11.GL_FLOAT, false, TexturedVertex.stride, TexturedVertex.positionByteOffset);
 
 		GL20.glEnableVertexAttribArray(0);
 
 		// Put the texture coordinates in attribute list 1
-		GL20.glVertexAttribPointer(1, TexturedVertex.textureElementCount,
-				GL11.GL_FLOAT, false, TexturedVertex.stride,
-				TexturedVertex.textureByteOffset);
+		GL20.glVertexAttribPointer(1, TexturedVertex.textureElementCount, GL11.GL_FLOAT, false, TexturedVertex.stride, TexturedVertex.textureByteOffset);
 
 		GL20.glEnableVertexAttribArray(1);
 
 		EBO = GL15.glGenBuffers();
 		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, EBO);
-		GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indicesBuffer,
-				GL15.GL_STATIC_DRAW);
+		GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL15.GL_STATIC_DRAW);
 
 		// GL30.glBindVertexArray(0);
 

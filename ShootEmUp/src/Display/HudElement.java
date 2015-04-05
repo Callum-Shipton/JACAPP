@@ -23,9 +23,7 @@ public class HudElement {
 		d.draw(i.getID(), pos, getSize(), 0.0f, currFrame, maxFrame);
 	}
 
-	public void update(float v) {
-		
-	}
+	public void update(float v){}
 	
 	public void setVal(float v){
 		value = v;
