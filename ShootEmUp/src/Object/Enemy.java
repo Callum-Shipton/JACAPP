@@ -36,9 +36,11 @@ public class Enemy extends Character {
 		if (movement.length() > 0) {
 			if (movement.length() > 1)
 				movement.normalize();
+			animating = true;
 			move(movement);
 			direction = (int) (Math.round(movement.Angle()) / 45);
 		}
+		else animating = false;
 		counter++;
 		if (counter == 30){
 			weapon.shoot(posX, posY, direction, team);

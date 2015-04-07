@@ -153,8 +153,8 @@ public class Art {
 		
 		//Load particle maps
 		particle = new Image("/img/Particle.png",1,8);
-		exp = new Image("/img/Exp.png",1,6);
-		coin = new Image("/img/Coin.png",1,6);
+		exp = new Image("/img/Exp.png",6,1);
+		coin = new Image("/img/Coin.png",6,1);
 		
 		//Load HUD textures 
 		infoBox = new Image("/HUD/BarInfo.png",1,1);

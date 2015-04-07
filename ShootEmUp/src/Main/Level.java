@@ -256,6 +256,9 @@ public class Level {
 		for (Particle particle : particles) {
 			particle.update();
 		}
+		for (Exp exp : experience) {
+			exp.update();
+		}
 		hud.update();
 	}
 

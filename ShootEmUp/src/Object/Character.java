@@ -10,7 +10,7 @@ public abstract class Character extends Entity {
 
 	public Character(float x, float y, float width, float height, int speed, int direction, Image image) {
 		super(x, y, width, height, speed, direction, image);
-		flying = false;
+		canfly = false;
 		setMaxHealth(18);
 		health = getMaxHealth();
 		weapon = new Weapon(1, 10);

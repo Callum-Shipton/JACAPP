@@ -11,7 +11,7 @@ public class Particle extends Entity {
 	public Particle(float posX, float posY, float w, float h, int speed,
 			int direction, Image image, Weapon weapon, int team) {
 		super(posX, posY, w, h, speed, direction, image);
-		flying = true;
+		canfly = true;
 		this.weapon = weapon;
 		width = 32f;
 		height = 32f;

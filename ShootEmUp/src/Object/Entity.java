@@ -10,7 +10,10 @@ public abstract class Entity extends Collidable {
 	protected int speed;
 	protected int direction;
 	protected Image image;
-	protected boolean flying;
+	protected boolean canfly;
+	protected boolean animating;
+	protected int animID;
+	protected int animTime;
 	protected int team;
 
 	// Constructors
@@ -20,7 +23,17 @@ public abstract class Entity extends Collidable {
 		super(x, y, width, height, false);
 		this.speed = speed;
 		this.direction = direction;
+		this.animID = 0;
+		this.animating = false;
+		this.animTime = 6;
 		this.image = image;
+	}
+	
+	public void update(){
+		if(animating){
+			animID++;
+			if(animID == (image.getWidth()/image.getFWidth())*animTime) animID = 0;
+		}
 	}
 
 	// Methods
@@ -52,7 +65,7 @@ public abstract class Entity extends Collidable {
 					wall = ShootEmUp.currentLevel.walls.get((j * (ShootEmUp.currentLevel.getHeight()-1)) + i);
 					if(wall != null){
 						if (wall.doesCollide(posX + (moveVec.x() * speed), posY, width, height) != null) {
-							if (!(wall.flat && flying)) {
+							if (!(wall.flat && canfly)) {
 								collide = true;
 								vec = wall.doesCollide(posX + (moveVec.x() * speed), posY,
 										width, height);
@@ -93,7 +106,7 @@ public abstract class Entity extends Collidable {
 					wall = ShootEmUp.currentLevel.walls.get((j * (ShootEmUp.currentLevel.getHeight()-1) ) + i);
 					if(wall != null){
 						if (wall.doesCollide(posX, posY + (moveVec.y() * speed), width, height) != null) {
-							if (!(wall.flat && flying)) {
+							if (!(wall.flat && canfly)) {
 								collide = true;
 								vec = wall.doesCollide(posX, posY + (moveVec.y() * speed), width, height);
 								break;
@@ -119,7 +132,7 @@ public abstract class Entity extends Collidable {
 
 	public void render(DPDTRenderer r) {
 		r.draw(image.getID(), new Vector2(posX, posY), new Vector2(width, height),
-				0.0f, new Vector2(0.0f, (float) direction), new Vector2(image.getFWidth(),
+				0.0f, new Vector2((float) Math.floor(animID/animTime), (float) direction), new Vector2(image.getFWidth(),
 						image.getFHeight()));
 	}
 

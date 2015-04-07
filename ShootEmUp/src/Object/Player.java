@@ -100,10 +100,12 @@ public class Player extends Character {
 		if (movement.length() > 0) {
 			if (movement.length() > 1)
 				movement.normalize();
+			animating = true;
 			move(movement);
 			scrollScreen();
 
 		}
+		else animating = false;
 		Vector2 dir = new Vector2(0.0f, 0.0f);
 		if (Keyboard.getKey(GLFW_KEY_UP) == 1
 				|| Keyboard.getKey(GLFW_KEY_UP) == 2) {
