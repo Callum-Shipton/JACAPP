@@ -48,8 +48,8 @@ public abstract class Entity extends Collidable {
 		
 		for(int i = minX; i <= maxX; i++){
 			for(int j = minY; j <= maxY; j++){
-				if(i >= 0 && j >= 0 && i <= ShootEmUp.currentLevel.backgroundTiles[0].length && j <= ShootEmUp.currentLevel.backgroundTiles.length){
-					wall = ShootEmUp.currentLevel.walls.get((j * ShootEmUp.currentLevel.backgroundTiles.length) + i);
+				if(i >= 0 && j >= 0 && i <= ShootEmUp.currentLevel.getWidth()-1 && j <= ShootEmUp.currentLevel.getHeight()-1){
+					wall = ShootEmUp.currentLevel.walls.get((j * (ShootEmUp.currentLevel.getHeight()-1)) + i);
 					if(wall != null){
 						if (wall.doesCollide(posX + (moveVec.x() * speed), posY, width, height) != null) {
 							if (!(wall.flat && flying)) {
@@ -89,8 +89,8 @@ public abstract class Entity extends Collidable {
 
 		for(int i = minX; i <= maxX; i++){
 			for(int j = minY; j <= maxY; j++){
-				if(i >= 0 && j >= 0 && i <= ShootEmUp.currentLevel.backgroundTiles[0].length && j <= ShootEmUp.currentLevel.backgroundTiles.length){
-					wall = ShootEmUp.currentLevel.walls.get((j * ShootEmUp.currentLevel.backgroundTiles.length) + i);
+				if(i >= 0 && j >= 0 && i <= ShootEmUp.currentLevel.getWidth()-1 && j <= ShootEmUp.currentLevel.getHeight()-1){
+					wall = ShootEmUp.currentLevel.walls.get((j * (ShootEmUp.currentLevel.getHeight()-1) ) + i);
 					if(wall != null){
 						if (wall.doesCollide(posX, posY + (moveVec.y() * speed), width, height) != null) {
 							if (!(wall.flat && flying)) {
