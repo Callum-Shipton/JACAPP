@@ -198,7 +198,8 @@ public class Level {
 		walls = new CopyOnWriteArrayList<Collidable>();
 		characters = new CopyOnWriteArrayList<Character>();
 		particles = new CopyOnWriteArrayList<Particle>();
-
+		experience = new CopyOnWriteArrayList<Exp>();
+		
 		r = new DPDTRenderer(Art.ShaderBase);
 		stat = new DPDTRenderer(Art.ShaderStat);
 		
