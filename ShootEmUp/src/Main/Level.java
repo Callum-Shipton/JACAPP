@@ -224,7 +224,7 @@ public class Level {
 		boolean collide = false;
 		
 		counter++;
-		if((counter == 150) && (characters.size() <= 16)){
+		if(counter == 150){
 			Random rand = new Random();
 				do {
 					collide = false;

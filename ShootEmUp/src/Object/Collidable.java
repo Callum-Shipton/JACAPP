@@ -18,6 +18,9 @@ public class Collidable {
 	}
 
 	public Vector4 doesCollide(float x, float y, float w, float h) {
+		if((Math.abs(posX - x) > 74) && (Math.abs(posY - y) > 74)){
+			return null;
+		}
 		
 		if (collideFunction(x, y) != null) {
 			return collideFunction(x, y);
