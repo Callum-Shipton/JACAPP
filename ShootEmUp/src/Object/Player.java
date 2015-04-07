@@ -33,8 +33,8 @@ public class Player extends Character {
 
 	public Player() throws IOException {
 		super(10.0f, 10.0f, 64.0f, 64.0f, 10, 0, Art.player);
-		mana = 19;
-		maxMana = 19;
+		mana = 18;
+		maxMana = 18;
 		manaRegen = 50;
 		team = 0;
 		level = 0;
@@ -58,8 +58,8 @@ public class Player extends Character {
 		scrollScreen();
 		
 		team = 0;
-		mana = 19;
-		maxMana = 19;
+		mana = 18;
+		maxMana = 18;
 		manaRegen = 50;
 		level = 0;
 		currentExp = 0;
