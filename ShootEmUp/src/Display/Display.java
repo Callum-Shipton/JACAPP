@@ -109,6 +109,7 @@ public class Display {
 		if (Keyboard.getKey(GLFW_KEY_ESCAPE) == 1) {
 			glfwSetWindowShouldClose(window, GL_TRUE); // We will detect this in
 			// our update loop
+			Keyboard.setKey(GLFW_KEY_ESCAPE);
 		}
 	}
 }

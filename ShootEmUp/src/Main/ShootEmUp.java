@@ -85,8 +85,9 @@ public class ShootEmUp {
 		// Poll for window events. The key callback above will only be
 		// invoked during this call.
 		glfwPollEvents();
-		if(Keyboard.getKey(GLFW_KEY_P) == 1 || Keyboard.getKey(GLFW_KEY_P) == 2){
+		if(Keyboard.getKey(GLFW_KEY_P) == 1){
 				paused = !paused;
+				Keyboard.setKey(GLFW_KEY_P);
 		}
 		
 

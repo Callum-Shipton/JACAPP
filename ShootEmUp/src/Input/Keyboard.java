@@ -38,4 +38,8 @@ public class Keyboard {
 			keyCallback.release();
 		}
 	}
+
+	public static void setKey(int key) {
+		keys[key] = 0;
+	}
 }
