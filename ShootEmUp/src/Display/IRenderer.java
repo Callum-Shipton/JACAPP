@@ -5,6 +5,8 @@ import java.nio.FloatBuffer;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
@@ -30,10 +32,12 @@ public class IRenderer {
 	}
 	
 	public void draw(int Texid){
+		GL20.glUseProgram(Art.ShaderInst);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, Texid);
 		GL30.glBindVertexArray(VAO);
         GL31.glDrawElementsInstanced(GL11.GL_TRIANGLES, 6, GL11.GL_UNSIGNED_BYTE, 0, amount);
         GL30.glBindVertexArray(0);
+        GL20.glUseProgram(0);
 	}
 	private void initRenderData(Vector2[][] textures, Vector2 texMax){
 			

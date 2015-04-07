@@ -130,26 +130,22 @@ public class Art {
 		if (GL20.glGetShaderi(shaderID, GL20.GL_COMPILE_STATUS) == GL_FALSE)
 			throw new RuntimeException("Failure in compiling " + filename
 					+ " shader. Error log:\n" + infoLog);
-		else {
-			System.out.print("Compiling " + filename + " shader successful.");
-			if (infoLog != null && !(infoLog = infoLog.trim()).isEmpty())
-				System.out.println(" Log:\n" + infoLog);
-			else
-				System.out.println();
-		}
 
 		return shaderID;
 	}
 
 	private static void initTextures() {
+		
+		//new Image("/filepath.png", maxFrameWidth, maxFrameHeight);
+		
 		//Load tile maps
 		background = new Image("/Tiles/background.png",4,4);
 		wall = new Image("/Tiles/wall.png",8,8);
 		foreground = new Image("/Tiles/foreground.png",4,4);
 		
 		//Load character maps
-		player = new Image("/img/Player.png",1,8);
-		enemy = new Image("/img/Enemy.png",1,8);
+		player = new Image("/img/Player.png",6,8);
+		enemy = new Image("/img/Enemy.png",6,8);
 		
 		//Load particle maps
 		particle = new Image("/img/Particle.png",1,8);

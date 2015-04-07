@@ -89,7 +89,6 @@ public class ShootEmUp {
 				paused = !paused;
 				Keyboard.setKey(GLFW_KEY_P);
 		}
-		
 
 		if(!paused){
 			currentLevel.update();

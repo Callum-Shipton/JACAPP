@@ -263,10 +263,8 @@ public class Level {
 	}
 
 	public void render() {
-		GL20.glUseProgram(Art.ShaderInst);
 		renderLowTiles();
 		renderHighTiles();
-		GL20.glUseProgram(0);
 
 		GL20.glUseProgram(Art.ShaderBase);
 		GL30.glBindVertexArray(r.getVAO());
@@ -283,9 +281,8 @@ public class Level {
 		GL30.glBindVertexArray(0);
 		GL20.glUseProgram(0);
 		
-		GL20.glUseProgram(Art.ShaderInst);
+
 		renderHighTiles();
-		GL20.glUseProgram(0);
 		
 		
 		GL20.glUseProgram(Art.ShaderStat);

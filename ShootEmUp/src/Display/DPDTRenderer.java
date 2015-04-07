@@ -44,18 +44,6 @@ public class DPDTRenderer {
 		texture.translate(texPos.x() / texMax.x(), texPos.y() / texMax.y(), 0.0f);
 		texture.scale(1 / texMax.x(), 1 / texMax.y(), 1.0f);
 
-		// model.m03 += pos.x;
-		// model.m13 += pos.y;
-		// model.m23 += -5.0f;
-
-		/*
-		 * 
-		 * double timeValue = GLFW.glfwGetTime(); double greenValue =
-		 * ((Math.sin(timeValue) / 2) + 0.5); int vertexColorLocation =
-		 * GL20.glGetUniformLocation(shaderProgramID, "ourColor");
-		 * GL20.glUniform2f(vertexColorLocation, 0.0f, (float) greenValue);
-		 */
-
 		matrix44Buffer = model.toBuffer();
 
 		GL20.glUniformMatrix4(modelMatrixLocation, false, matrix44Buffer);
