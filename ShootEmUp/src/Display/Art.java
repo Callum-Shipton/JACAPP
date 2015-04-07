@@ -25,6 +25,8 @@ public class Art {
 	
 	//Particle maps
 	public static Image particle;
+	public static Image exp;
+	public static Image coin;
 	
 	//HUD Textures
 	public static Image infoBox;
@@ -151,6 +153,8 @@ public class Art {
 		
 		//Load particle maps
 		particle = new Image("/img/Particle.png",1,8);
+		exp = new Image("/img/Exp.png",1,6);
+		coin = new Image("/img/Coin.png",1,6);
 		
 		//Load HUD textures 
 		infoBox = new Image("/HUD/BarInfo.png",1,1);

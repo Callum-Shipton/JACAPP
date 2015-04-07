@@ -1,5 +1,6 @@
 package Object;
 
+import Display.Art;
 import Display.Image;
 import Main.ShootEmUp;
 import Math.Vector2;
@@ -42,6 +43,13 @@ public class Enemy extends Character {
 		if (counter == 30){
 			weapon.shoot(posX, posY, direction, team);
 			counter = 0;
+		}
+	}
+	
+	public void checkDead() {
+		if (health <= 0) {
+			ShootEmUp.currentLevel.characters.remove(this);
+			Exp drop = new Exp(posX, posY, width, height, flat, Art.exp);
 		}
 	}
 }
