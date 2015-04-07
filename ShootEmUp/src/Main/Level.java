@@ -18,6 +18,7 @@ import Math.Vector2;
 import Object.Collidable;
 import Object.Enemy;
 import Object.Character;
+import Object.Exp;
 import Object.Particle;
 import Object.Player;
 
@@ -45,6 +46,7 @@ public class Level {
 	public CopyOnWriteArrayList<Collidable> walls;
 	public CopyOnWriteArrayList<Character> characters;
 	public CopyOnWriteArrayList<Particle> particles;
+	public CopyOnWriteArrayList<Exp> experience;
 
 	public Level(String file) {
 		this.file = file;
@@ -270,6 +272,9 @@ public class Level {
 		}
 		for (Particle particle : particles) {
 			particle.render(r);
+		}
+		for (Exp exp : experience) {
+			exp.render(r);
 		}
 		GL30.glBindVertexArray(0);
 		GL20.glUseProgram(0);
