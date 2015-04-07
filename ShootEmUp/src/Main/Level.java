@@ -15,6 +15,7 @@ import Display.DPDTRenderer;
 import Display.Hud;
 import Display.IRenderer;
 import Math.Vector2;
+import Object.Coin;
 import Object.Collidable;
 import Object.Enemy;
 import Object.Character;
@@ -47,7 +48,8 @@ public class Level {
 	public CopyOnWriteArrayList<Character> characters;
 	public CopyOnWriteArrayList<Particle> particles;
 	public CopyOnWriteArrayList<Exp> experience;
-
+	public CopyOnWriteArrayList<Coin> coins;
+	
 	public Level(String file) {
 		this.file = file;
 		loadLevel();
@@ -199,6 +201,7 @@ public class Level {
 		characters = new CopyOnWriteArrayList<Character>();
 		particles = new CopyOnWriteArrayList<Particle>();
 		experience = new CopyOnWriteArrayList<Exp>();
+		coins = new CopyOnWriteArrayList<Coin>();
 		
 		r = new DPDTRenderer(Art.ShaderBase);
 		stat = new DPDTRenderer(Art.ShaderStat);
@@ -259,6 +262,9 @@ public class Level {
 		for (Exp exp : experience) {
 			exp.update();
 		}
+		for (Coin coin : coins) {
+			coin.update();
+		}
 		hud.update();
 	}
 
@@ -271,6 +277,9 @@ public class Level {
 		
 		for (Exp exp : experience) {
 			exp.render(r);
+		}
+		for (Coin coin : coins) {
+			coin.render(r);
 		}
 		for (Character character : characters) {
 			character.render(r);

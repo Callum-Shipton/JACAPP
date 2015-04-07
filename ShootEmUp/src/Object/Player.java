@@ -24,6 +24,7 @@ public class Player extends Character {
 	private int manaRegen;
 	private int healthRegen;
 	private int lives;
+	private int coins;
 	
 	private FloatBuffer matrix44Buffer;
 	private Matrix4 viewMatrix;
@@ -54,6 +55,7 @@ public class Player extends Character {
 		level = 0;
 		currentExp = 0;
 		expBound = 1;
+		coins = 0;
 	}
 
 	// called every update
@@ -76,6 +78,13 @@ public class Player extends Character {
 			}
 		}
 		healthRegen--;
+		
+		for (Coin coin : ShootEmUp.currentLevel.coins) {
+			if (coin.doesCollide(posX, posY, width, height) != null) {
+				ShootEmUp.currentLevel.coins.remove(coin);
+				coins++;
+			}
+		}
 		
 		for (Exp exp : ShootEmUp.currentLevel.experience) {
 			if (exp.doesCollide(posX, posY, width, height) != null) {
@@ -183,6 +192,7 @@ public class Player extends Character {
 		currentExp = 0;
 		expBound = 1;
 		level = 0;
+		coins = 0;
 	}
 	
 	public int getHealth() {
