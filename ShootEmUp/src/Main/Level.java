@@ -268,15 +268,15 @@ public class Level {
 
 		GL20.glUseProgram(Art.ShaderBase);
 		GL30.glBindVertexArray(r.getVAO());
-
+		
+		for (Exp exp : experience) {
+			exp.render(r);
+		}
 		for (Character character : characters) {
 			character.render(r);
 		}
 		for (Particle particle : particles) {
 			particle.render(r);
-		}
-		for (Exp exp : experience) {
-			exp.render(r);
 		}
 		GL30.glBindVertexArray(0);
 		GL20.glUseProgram(0);
