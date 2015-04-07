@@ -32,7 +32,7 @@ public abstract class Entity extends Collidable {
 	public void update(){
 		if(animating){
 			animID++;
-			if(animID == (image.getWidth()/image.getFWidth())*animTime) animID = 0;
+			if(animID >= image.getFWidth()*animTime) animID = 0;
 		}
 	}
 
