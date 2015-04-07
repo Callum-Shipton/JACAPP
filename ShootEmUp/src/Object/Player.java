@@ -2,7 +2,6 @@ package Object;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-import java.io.IOException;
 import java.nio.FloatBuffer;
 
 import org.lwjgl.BufferUtils;

@@ -224,20 +224,20 @@ public class Level {
 		boolean collide = false;
 		
 		counter++;
-		if(counter == 150){
+		if((counter == 150) && (characters.size() <= 16)){
 			Random rand = new Random();
 				do {
 					collide = false;
 					X = rand.nextFloat() * ((float)(backgroundTiles.length * 32) - 32.0f) + 32.0f;
 					Y = rand.nextFloat() * ((float)(backgroundTiles[0].length * 32) - 32.0f) + 32.0f;
 					
-					for (Character character : ShootEmUp.currentLevel.characters) {
+					for (Character character : characters) {
 						if ((character.doesCollide(X, Y, 64.0f, 64.0f) != null)) {
 							collide = true;
 							break;
 						}
 					}
-					for (Collidable wall : ShootEmUp.currentLevel.walls) {
+					for (Collidable wall : walls) {
 						if(wall != null){
 							if (wall.doesCollide(X, Y, 32.0f, 32.0f) != null) {
 								collide = true;
