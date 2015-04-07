@@ -17,6 +17,7 @@ public abstract class Character extends Entity {
 	}
 	
 	public void update(){
+		super.update();
 	}
 
 	public void checkDead() {
