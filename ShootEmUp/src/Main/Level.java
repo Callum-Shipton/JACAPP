@@ -22,9 +22,12 @@ import Object.Particle;
 import Object.Player;
 
 public class Level {
+	
+	private int width;
+	private int height;
 	private BufferedImage map = null;
 	private String file;
-	public Vector2[][] backgroundTiles;
+	private Vector2[][] backgroundTiles;
 	private Vector2[][] wallTiles;
 	private Vector2[][] foregroundTiles;
 	public float[] spawn = new float[] { 480.0f, 480.0f };
@@ -46,6 +49,8 @@ public class Level {
 	public Level(String file) {
 		this.file = file;
 		loadLevel();
+		width = (map.getWidth() / 3);
+		height = map.getHeight();
 		backgroundTiles = new Vector2[map.getWidth() / 3][map.getHeight()];
 		wallTiles = new Vector2[map.getWidth() / 3][map.getHeight()];
 		foregroundTiles = new Vector2[map.getWidth() / 3][map.getHeight()];
@@ -292,5 +297,13 @@ public class Level {
 
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public int getWidth(){
+		return width;
+	}
+	
+	public int getHeight(){
+		return height;
 	}
 }
