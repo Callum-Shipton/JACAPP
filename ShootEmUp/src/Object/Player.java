@@ -52,7 +52,7 @@ public class Player extends Character {
 		manaRegen = 50;
 		level = 0;
 		currentExp = 0;
-		expBound = 6;
+		expBound = 1;
 	}
 
 	// called every update
@@ -75,6 +75,9 @@ public class Player extends Character {
 		if(currentExp >= expBound){
 			currentExp = 0;
 			level++;
+			if(expBound < 18){
+				expBound++;
+			}
 		}
 	}
 
@@ -167,6 +170,7 @@ public class Player extends Character {
 		health = getMaxHealth();
 		mana = getMaxMana();
 		currentExp = 0;
+		expBound = 1;
 		level = 0;
 	}
 	
