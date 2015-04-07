@@ -68,6 +68,7 @@ public class Player extends Character {
 
 	// called every update
 	public void update() {
+		super.update();
 		checkKeys();
 		checkDead();
 		if((manaRegen <= 0) && (mana < maxMana)){

@@ -19,6 +19,7 @@ public class Enemy extends Character {
 	}
 	
 	public void update() {
+		super.update();
 		checkDead();
 		Vector2 movement = new Vector2(0.0f, 0.0f);
 		if (ShootEmUp.currentLevel.getPlayer().getY() < posY - speed) {
