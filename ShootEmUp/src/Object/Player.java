@@ -62,18 +62,22 @@ public class Player extends Character {
 		super.update();
 		checkKeys();
 		checkDead();
-		if((manaRegen <= 0) && (mana < maxMana)){
-			mana++;
+		if(manaRegen <= 0){
 			manaRegen = 50;
-		}else{
-			manaRegen--;
+			if(mana < maxMana){
+				mana++;
+			}
 		}
-		if((healthRegen <= 0) && (health < maxHealth)){
-			health++;
+		manaRegen--;
+		
+		if(healthRegen <= 0){
 			healthRegen = 100;
-		}else{
-			healthRegen--;
+			if(health < maxHealth){
+				health++;
+			}
 		}
+		healthRegen--;
+		
 		for (Exp exp : ShootEmUp.currentLevel.experience) {
 			if (exp.doesCollide(posX, posY, width, height) != null) {
 				ShootEmUp.currentLevel.experience.remove(exp);
