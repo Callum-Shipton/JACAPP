@@ -27,6 +27,7 @@ public class Hud {
 		manaBar = new HudElement(10.0f, 35.0f, 170.0f, 19.0f, Art.manaBar);
 		hudElems.add(manaBar);
 		manaBar.setVal(18);
+		manaBar.setMFrame(player.getMaxMana()/player.getMana(), Art.manaBar.getFHeight() );
 		xpBar = new HudElement(10.0f, 60.0f, 170.0f, 19.0f, Art.xpBar);
 		hudElems.add(xpBar);
 		moneyCounter = new HudElement(10.0f, 85.0f, 18.0f, 18.0f, Art.BarCoin);
@@ -41,6 +42,7 @@ public class Hud {
 
 	public void update() {
 		healthBar.setVal(player.getHealth()-1);
+		manaBar.setVal(player.getMana()-1);
 		//healthBar.setMFrame((player.getMaxHealth()+1)/(player.getHealth()+1), Art.healthBar.getFHeight());
 		//healthBar.setSize((((float)player.getHealth())/((float)player.getMaxHealth())) * Art.healthBar.getWidth(), healthBar.getSize().y());
 	}

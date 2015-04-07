@@ -16,16 +16,30 @@ import Math.Matrix4;
 import Math.Vector2;
 
 public class Player extends Character {
-
+	
+	private int level;
+	private int currentExp;
+	private int expBound;
+	private int mana;
+	private int maxMana;
+	private int manaRegen;
 	private int lives;
+	
 	private FloatBuffer matrix44Buffer;
 	private Matrix4 viewMatrix;
 	private int viewMatrixLocation;
 	private int viewMatrixLocationInst;
-	private int fireRate = 0;
+	private int fireRate = 10;
 
 	public Player() throws IOException {
 		super(10.0f, 10.0f, 64.0f, 64.0f, 10, 0, Art.player);
+		mana = 19;
+		maxMana = 19;
+		manaRegen = 50;
+		team = 0;
+		level = 0;
+		currentExp = 0;
+		expBound = 5;
 	}
 
 	public Player(float x, float y, float width, float height, int speed, int direction, Image image) {
@@ -42,13 +56,26 @@ public class Player extends Character {
 		viewMatrixLocationInst = GL20.glGetUniformLocation(Art.ShaderInst,
 				"viewMatrix");
 		scrollScreen();
+		
 		team = 0;
+		mana = 19;
+		maxMana = 19;
+		manaRegen = 50;
+		level = 0;
+		currentExp = 0;
+		expBound = 5;
 	}
 
 	// called every update
 	public void update() {
 		checkKeys();
 		checkDead();
+		if((manaRegen <= 0) && (mana < maxMana)){
+			mana++;
+			manaRegen = 50;
+		}else{
+			manaRegen--;
+		}
 	}
 
 	private void checkKeys() {
@@ -102,12 +129,13 @@ public class Player extends Character {
 
 		if (Keyboard.getKey(GLFW_KEY_SPACE) == 1
 				|| Keyboard.getKey(GLFW_KEY_SPACE) == 2) {
-			if(fireRate >= 10){
+			if((fireRate <= 0) && (mana >= 1)){
 				weapon.shoot(posX, posY, direction, team);
-				fireRate = 0;
+				mana--;
+				fireRate = 10;
 			}
 		}
-		fireRate++;
+		fireRate--;
 	}
 
 	private void scrollScreen() {
@@ -151,5 +179,13 @@ public class Player extends Character {
 
 	public void setLives(int lives) {
 		this.lives = lives;
+	}
+	
+	public int getMaxMana(){
+		return maxMana;
+	}
+	
+	public int getMana(){
+		return mana;
 	}
 }
