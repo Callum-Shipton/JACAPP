@@ -23,6 +23,7 @@ public class Player extends Character {
 	private int mana;
 	private int maxMana;
 	private int manaRegen;
+	private int healthRegen;
 	private int lives;
 	
 	private FloatBuffer matrix44Buffer;
@@ -50,6 +51,7 @@ public class Player extends Character {
 		mana = 18;
 		maxMana = 18;
 		manaRegen = 50;
+		healthRegen = 100;
 		level = 0;
 		currentExp = 0;
 		expBound = 1;
@@ -65,6 +67,12 @@ public class Player extends Character {
 			manaRegen = 50;
 		}else{
 			manaRegen--;
+		}
+		if((healthRegen <= 0) && (health < maxHealth)){
+			health++;
+			healthRegen = 100;
+		}else{
+			healthRegen--;
 		}
 		for (Exp exp : ShootEmUp.currentLevel.experience) {
 			if (exp.doesCollide(posX, posY, width, height) != null) {

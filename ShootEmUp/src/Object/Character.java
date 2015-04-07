@@ -5,7 +5,7 @@ import Main.ShootEmUp;
 
 public abstract class Character extends Entity {
 	protected int health;
-	private int maxHealth;
+	protected int maxHealth;
 	protected Weapon weapon;
 
 	public Character(float x, float y, float width, float height, int speed, int direction, Image image) {
