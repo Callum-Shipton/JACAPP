@@ -31,17 +31,6 @@ public class Player extends Character {
 	private int viewMatrixLocationInst;
 	private int fireRate = 10;
 
-	public Player() throws IOException {
-		super(10.0f, 10.0f, 64.0f, 64.0f, 10, 0, Art.player);
-		mana = 18;
-		maxMana = 18;
-		manaRegen = 50;
-		team = 0;
-		level = 0;
-		currentExp = 0;
-		expBound = 5;
-	}
-
 	public Player(float x, float y, float width, float height, int speed, int direction, Image image) {
 		super(x, y, width, height, speed, direction, image);
 
@@ -63,7 +52,7 @@ public class Player extends Character {
 		manaRegen = 50;
 		level = 0;
 		currentExp = 0;
-		expBound = 5;
+		expBound = 6;
 	}
 
 	// called every update
@@ -76,6 +65,16 @@ public class Player extends Character {
 			manaRegen = 50;
 		}else{
 			manaRegen--;
+		}
+		for (Exp exp : ShootEmUp.currentLevel.experience) {
+			if (exp.doesCollide(posX, posY, width, height) != null) {
+				ShootEmUp.currentLevel.experience.remove(exp);
+				currentExp++;
+			}
+		}
+		if(currentExp >= expBound){
+			currentExp = 0;
+			level++;
 		}
 	}
 
@@ -166,6 +165,9 @@ public class Player extends Character {
 		posY = ShootEmUp.currentLevel.spawn[1];
 		scrollScreen();
 		health = getMaxHealth();
+		mana = getMaxMana();
+		currentExp = 0;
+		level = 0;
 	}
 	
 	public int getHealth() {
@@ -190,5 +192,13 @@ public class Player extends Character {
 	
 	public int getMana(){
 		return mana;
+	}
+	
+	public int getCurrentExp(){
+		return currentExp;
+	}
+	
+	public int getExpBound(){
+		return expBound;
 	}
 }

@@ -45,6 +45,9 @@ public class Hud {
 		manaBar.setVal(player.getMana());
 		manaBar.setSize(player.getMaxMana()*Art.manaBar.getWidth()/((Art.manaBar.getHeight()/Art.manaBar.getFHeight())-1), Art.manaBar.getHeight()/Art.manaBar.getFHeight());
 		manaBar.setMFrame(18.0f/player.getMaxMana(), Art.manaBar.getFHeight() );
+		xpBar.setVal(player.getCurrentExp());
+		xpBar.setSize(player.getExpBound()*Art.xpBar.getWidth()/((Art.xpBar.getHeight()/Art.xpBar.getFHeight())-1), Art.xpBar.getHeight()/Art.xpBar.getFHeight());
+		xpBar.setMFrame(18.0f/player.getExpBound(), Art.xpBar.getFHeight() );
 		//healthBar.setMFrame((player.getMaxHealth()+1)/(player.getHealth()+1), Art.healthBar.getFHeight());
 		//healthBar.setSize((((float)player.getHealth())/((float)player.getMaxHealth())) * Art.healthBar.getWidth(), healthBar.getSize().y());
 	}

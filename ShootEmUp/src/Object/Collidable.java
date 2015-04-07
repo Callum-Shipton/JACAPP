@@ -23,43 +23,91 @@ public class Collidable {
 			return collideFunction(x, y);
 		}
 
-		x += w/2;
+		x += w/4;
 
 		if (collideFunction(x, y) != null) {
 			return collideFunction(x, y);
 		}
 
-		x += w/2;
-
-		if (collideFunction(x, y) != null) {
-			return collideFunction(x, y);
-		}
-
-		y += h/2;
-
-		if (collideFunction(x, y) != null) {
-			return collideFunction(x, y);
-		}
-		
-		y += h/2;
+		x += w/4;
 		
 		if (collideFunction(x, y) != null) {
 			return collideFunction(x, y);
 		}
 
-		x -= w/2;
+		x += w/4;
+		
+		if (collideFunction(x, y) != null) {
+			return collideFunction(x, y);
+		}
+
+		x += w/4;
 
 		if (collideFunction(x, y) != null) {
 			return collideFunction(x, y);
 		}
 
-		x -= w/2;
+		y += h/4;
+		
+		if (collideFunction(x, y) != null) {
+			return collideFunction(x, y);
+		}
+
+		y += h/4;
+		
+		if (collideFunction(x, y) != null) {
+			return collideFunction(x, y);
+		}
+
+		y += h/4;
+		
+		if (collideFunction(x, y) != null) {
+			return collideFunction(x, y);
+		}
+
+		y += h/4;
+		
+		if (collideFunction(x, y) != null) {
+			return collideFunction(x, y);
+		}
+
+		x -= w/4;
+		
+		if (collideFunction(x, y) != null) {
+			return collideFunction(x, y);
+		}
+
+		x -= w/4;
+		
+		if (collideFunction(x, y) != null) {
+			return collideFunction(x, y);
+		}
+
+		x -= w/4;
+		
+		if (collideFunction(x, y) != null) {
+			return collideFunction(x, y);
+		}
+
+		x -= w/4;
 
 		if (collideFunction(x, y) != null) {
 			return collideFunction(x, y);
 		}
 
-		y -= h/2;
+		y -= h/4;
+		
+		if (collideFunction(x, y) != null) {
+			return collideFunction(x, y);
+		}
+
+		y -= h/4;
+		
+		if (collideFunction(x, y) != null) {
+			return collideFunction(x, y);
+		}
+
+		y -= h/4;
 
 		if (collideFunction(x, y) != null) {
 			return collideFunction(x, y);
