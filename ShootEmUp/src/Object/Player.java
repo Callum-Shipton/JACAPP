@@ -52,7 +52,7 @@ public class Player extends Character {
 		maxMana = 18;
 		manaRegen = 50;
 		healthRegen = 100;
-		level = 0;
+		level = 1;
 		currentExp = 0;
 		expBound = 1;
 		coins = 0;
@@ -79,10 +79,12 @@ public class Player extends Character {
 		}
 		healthRegen--;
 		
-		for (Coin coin : ShootEmUp.currentLevel.coins) {
-			if (coin.doesCollide(posX, posY, width, height) != null) {
-				ShootEmUp.currentLevel.coins.remove(coin);
-				coins++;
+		if(coins < 99){
+			for (Coin coin : ShootEmUp.currentLevel.coins) {
+				if (coin.doesCollide(posX, posY, width, height) != null) {
+					ShootEmUp.currentLevel.coins.remove(coin);
+					coins++;
+				}
 			}
 		}
 		
@@ -94,7 +96,9 @@ public class Player extends Character {
 		}
 		if(currentExp >= expBound){
 			currentExp = 0;
-			level++;
+			if(level < 99){
+				level++;
+			}
 			if(expBound < 18){
 				expBound++;
 			}
@@ -191,7 +195,7 @@ public class Player extends Character {
 		mana = getMaxMana();
 		currentExp = 0;
 		expBound = 1;
-		level = 0;
+		level = 1;
 		coins = 0;
 	}
 	
@@ -225,5 +229,13 @@ public class Player extends Character {
 	
 	public int getExpBound(){
 		return expBound;
+	}
+	
+	public int getLevel(){
+		return level;
+	}
+	
+	public int getCoins(){
+		return coins;
 	}
 }

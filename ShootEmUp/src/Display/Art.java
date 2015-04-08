@@ -34,6 +34,7 @@ public class Art {
 	public static Image manaBar;
 	public static Image xpBar;
 	public static Image BarCoin;
+	public static Image numbers;
 	
 	//Level map file locations
 	public static String level1 = "/levels/level1.png";
@@ -158,6 +159,7 @@ public class Art {
 		manaBar = new Image("/HUD/BarMana.png",1,19);
 		xpBar = new Image("/HUD/BarXP.png",1,19);
 		BarCoin = new Image("/HUD/BarCoin.png",1,1);
+		numbers = new Image("/HUD/Numbers.png",10,1);
 	}
 
 	

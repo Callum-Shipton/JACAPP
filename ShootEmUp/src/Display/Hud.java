@@ -2,6 +2,7 @@ package Display;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import Math.Vector2;
 import Object.Player;
 
 public class Hud {
@@ -26,13 +27,27 @@ public class Hud {
 		hudElems.add(manaBar);
 		xpBar = new HudElement(10.0f, 60.0f, Art.xpBar.getWidth(), Art.xpBar.getHeight()/Art.xpBar.getFHeight(), Art.xpBar);
 		hudElems.add(xpBar);
-		moneyCounter = new HudElement(10.0f, 85.0f, Art.BarCoin.getWidth(), Art.BarCoin.getHeight(), Art.BarCoin);
+		moneyCounter = new HudElement(10.0f, 82.0f, Art.BarCoin.getWidth(), Art.BarCoin.getHeight(), Art.BarCoin);
 		hudElems.add(moneyCounter);
 	}
 	
 	public void render(DPDTRenderer r) {
 		for (HudElement h : hudElems){
 			h.render(r);
+		}
+		
+		if(player.getLevel() < 10){
+			r.draw(Art.numbers.getID(), new Vector2(140,82), new Vector2(16,16), 0.0f, new Vector2(player.getLevel(),1), new Vector2(10,1));
+		} else {
+			r.draw(Art.numbers.getID(), new Vector2(140,82), new Vector2(16,16), 0.0f, new Vector2((int) Math.floor(player.getLevel() / 10),1), new Vector2(10,1));
+			r.draw(Art.numbers.getID(), new Vector2(160,82), new Vector2(16,16), 0.0f, new Vector2((player.getLevel() % 10),1), new Vector2(10,1));
+		}
+		
+		if(player.getCoins() < 10){
+			r.draw(Art.numbers.getID(), new Vector2(45,82), new Vector2(16,16), 0.0f, new Vector2(player.getCoins(),1), new Vector2(10,1));
+		} else {
+			r.draw(Art.numbers.getID(), new Vector2(45,82), new Vector2(16,16), 0.0f, new Vector2((int) Math.floor(player.getCoins() / 10),1), new Vector2(10,1));
+			r.draw(Art.numbers.getID(), new Vector2(65,82), new Vector2(16,16), 0.0f, new Vector2(player.getCoins() % 10,1), new Vector2(10,1));
 		}
 	}
 
