@@ -2,6 +2,7 @@ package GUI.Menus;
 
 import java.util.*;
 
+import Display.Art;
 import Display.DPDTRenderer;
 import GUI.Button;
 import GUI.GuiComponent;
@@ -10,7 +11,7 @@ import Main.ShootEmUp;
 public abstract class GuiMenu extends GuiComponent {
 
     protected List<Button> buttons = new ArrayList<Button>();
-    protected DPDTRenderer r;
+    protected DPDTRenderer r = new DPDTRenderer(Art.ShaderStat);
 
     protected Button addButton(Button button) {
         buttons.add(button);
