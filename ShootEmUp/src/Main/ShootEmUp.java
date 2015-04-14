@@ -3,6 +3,8 @@ package Main;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
+import java.io.File;
+
 import org.lwjgl.glfw.GLFW;
 
 import Display.Art;
@@ -42,6 +44,8 @@ public class ShootEmUp {
 	private void init() {
 		d = new Display(WIDTH, HEIGHT);
 		d.initGLFW();
+		
+
 
 		currentLevel = new Level(Art.level1);
 
@@ -108,6 +112,7 @@ public class ShootEmUp {
 	}
 
 	public static void main(String[] args) {
+		System.setProperty("org.lwjgl.librarypath", new File("natives").getAbsolutePath());
 		new ShootEmUp().run();
 	}
 
