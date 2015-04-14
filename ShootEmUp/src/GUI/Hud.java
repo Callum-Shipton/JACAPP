@@ -39,17 +39,17 @@ public class Hud extends GuiComponent{
 		}
 		
 		if(player.getLevel() < 10){
-			r.draw(Art.numbers.getID(), new Vector2(140,82), new Vector2(16,16), 0.0f, new Vector2(player.getLevel(),1), new Vector2(10,1));
+			r.draw(Art.numbers, new Vector2(140,82), new Vector2(16,16), 0.0f, new Vector2(player.getLevel(),1), new Vector2(10,1));
 		} else {
-			r.draw(Art.numbers.getID(), new Vector2(140,82), new Vector2(16,16), 0.0f, new Vector2((int) Math.floor(player.getLevel() / 10),1), new Vector2(10,1));
-			r.draw(Art.numbers.getID(), new Vector2(160,82), new Vector2(16,16), 0.0f, new Vector2((player.getLevel() % 10),1), new Vector2(10,1));
+			r.draw(Art.numbers, new Vector2(140,82), new Vector2(16,16), 0.0f, new Vector2((int) Math.floor(player.getLevel() / 10),1), new Vector2(10,1));
+			r.draw(Art.numbers, new Vector2(160,82), new Vector2(16,16), 0.0f, new Vector2((player.getLevel() % 10),1), new Vector2(10,1));
 		}
 		
 		if(player.getCoins() < 10){
-			r.draw(Art.numbers.getID(), new Vector2(45,82), new Vector2(16,16), 0.0f, new Vector2(player.getCoins(),1), new Vector2(10,1));
+			r.draw(Art.numbers, new Vector2(45,82), new Vector2(16,16), 0.0f, new Vector2(player.getCoins(),1), new Vector2(10,1));
 		} else {
-			r.draw(Art.numbers.getID(), new Vector2(45,82), new Vector2(16,16), 0.0f, new Vector2((int) Math.floor(player.getCoins() / 10),1), new Vector2(10,1));
-			r.draw(Art.numbers.getID(), new Vector2(65,82), new Vector2(16,16), 0.0f, new Vector2(player.getCoins() % 10,1), new Vector2(10,1));
+			r.draw(Art.numbers, new Vector2(45,82), new Vector2(16,16), 0.0f, new Vector2((int) Math.floor(player.getCoins() / 10),1), new Vector2(10,1));
+			r.draw(Art.numbers, new Vector2(65,82), new Vector2(16,16), 0.0f, new Vector2(player.getCoins() % 10,1), new Vector2(10,1));
 		}
 	}
 

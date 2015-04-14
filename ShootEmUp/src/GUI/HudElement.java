@@ -13,6 +13,7 @@ public class HudElement extends GuiComponent {
 	private Vector2 maxFrame;
 	private float value = 0;
 	
+	
 	public HudElement(float x, float y, float w, float h, Image i){
 		pos = new Vector2(x,y);
 		size = new Vector2(w,h);
@@ -22,7 +23,7 @@ public class HudElement extends GuiComponent {
 	}
 	
 	public void render(DPDTRenderer d) {		
-		d.draw(i.getID(), pos, getSize(), 0.0f, currFrame, maxFrame);
+		d.draw(i, pos, getSize(), 0.0f, currFrame, maxFrame);
 	}
 
 	public void update(float v){}

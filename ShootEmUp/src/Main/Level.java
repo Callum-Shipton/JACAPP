@@ -36,7 +36,7 @@ public class Level {
 	private Player player;
 	private Hud hud;
 
-	private DPDTRenderer r;
+	private DPDTRenderer base;
 	private DPDTRenderer stat;
 	private IRenderer irBack;
 	private IRenderer irWall;
@@ -203,7 +203,7 @@ public class Level {
 		experience = new CopyOnWriteArrayList<Exp>();
 		coins = new CopyOnWriteArrayList<Coin>();
 		
-		r = new DPDTRenderer(Art.ShaderBase);
+		base = new DPDTRenderer(Art.ShaderBase);
 		stat = new DPDTRenderer(Art.ShaderStat);
 		
 		player = new Player(spawn[0], spawn[1], 64.0f, 64.0f, 5, 0,
@@ -273,16 +273,16 @@ public class Level {
 		renderHighTiles();
 		
 		for (Exp exp : experience) {
-			exp.render(r);
+			exp.render(base);
 		}
 		for (Coin coin : coins) {
-			coin.render(r);
+			coin.render(base);
 		}
 		for (Character character : characters) {
-			character.render(r);
+			character.render(base);
 		}
 		for (Particle particle : particles) {
-			particle.render(r);
+			particle.render(base);
 		}
 		
 

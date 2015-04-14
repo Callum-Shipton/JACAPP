@@ -4,13 +4,11 @@ import java.nio.DoubleBuffer;
 
 import org.lwjgl.BufferUtils;
 
+import Display.DPDTRenderer;
+import Display.Image;
 import Main.ShootEmUp;
-
+import Math.Vector2;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL15.*;
-import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.opengl.GL30.*;
 
 public class Button extends GuiComponent {
 
@@ -23,11 +21,11 @@ public class Button extends GuiComponent {
 	private final int w;
 	private final int h;
 
-	private final int id;
+	private final Image id;
 
-	private int ix;
+	private int texID;
 
-	private int iy;
+	
 	private boolean performClick = false;
 	
 	DoubleBuffer Bx = BufferUtils.createDoubleBuffer(1);
@@ -35,28 +33,27 @@ public class Button extends GuiComponent {
 
 
 
-	public Button(int id, int buttonImageIndex, int x, int y, int w, int h) {
+	public Button(Image id, int x, int y, int w, int h) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
 		this.w = w;
 		this.h = h;
-		this.ix = buttonImageIndex % 2;
-		this.iy = buttonImageIndex / 2;
-		if (buttonImageIndex > 13) {
-			tabs = true;
-		}
 		window = ShootEmUp.d.getWindow();
 	}
 
 	@Override
 	public void update() {
 		super.update();
+		Bx.clear();
+		By.clear();
 		
 	    glfwGetCursorPos(window, Bx, By);
+	    
+	    double mx = Bx.get();
+	    double my = By.get();
 
-		isPressed = false;
-		if (Bx.get() >= x && By.get() >= y && Bx.get() < (x + w) && By.get() < (y + h)) {
+		if (mx >= x && my >= y && mx < (x + w) && my < (y + h)) {
 			/*
 			if (!tabs) {
 				if (RpgComponent.menuStack.search(new TitleMenu(
@@ -82,24 +79,27 @@ public class Button extends GuiComponent {
 
 			*/
 			
-			if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE) {
+			if (isPressed && glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE) {
 				performClick = true;
+				isPressed = false;
 			} else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
 				isPressed = true;
 			}
 		}
+		if (isPressed && glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE) {
+			isPressed = false;
+		} 
 	}
 
 	public void postAction() {
 		performClick = false;
 	}
 
-	@Override
-	public void render() {
+	public void render(DPDTRenderer stat) {
 			if (isPressed) {
-				//Render pressed button
+				stat.draw(id, new Vector2(x,y), new Vector2(w,h), 0, new Vector2(0,0), new Vector2(1,2));
 			} else {
-				//Render normal button
+				stat.draw(id, new Vector2(x,y), new Vector2(w,h), 0, new Vector2(0,1), new Vector2(1,2));
 			}
 	}
 
@@ -107,7 +107,7 @@ public class Button extends GuiComponent {
 		return performClick;
 	}
 
-	public int getId() {
+	public Image getId() {
 		return id;
 	}
 

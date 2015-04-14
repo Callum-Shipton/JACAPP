@@ -29,11 +29,11 @@ public class DPDTRenderer {
 		initRenderData();
 	}
 
-	public void draw(int Texid, Vector2 pos, Vector2 size, float rotate, Vector2 texPos, Vector2 texMax) {
+	public void draw(Image Texid, Vector2 pos, Vector2 size, float rotate, Vector2 texPos) {
 
 		glUseProgram(shaderProgramID);
 		glBindVertexArray(VAO);
-		glBindTexture(GL_TEXTURE_2D, Texid);
+		glBindTexture(GL_TEXTURE_2D, Texid.getID());
 
 		model.clearToIdentity();
 		model.translate(pos.x(), pos.y(), 0.0f);
@@ -43,8 +43,8 @@ public class DPDTRenderer {
 		model.scale(size.x(), size.y(), 1.0f);
 
 		texture.clearToIdentity();
-		texture.translate(texPos.x() / texMax.x(), texPos.y() / texMax.y(), 0.0f);
-		texture.scale(1 / texMax.x(), 1 / texMax.y(), 1.0f);
+		texture.translate(texPos.x() / Texid.getFWidth(), texPos.y() / Texid.getFHeight(), 0.0f);
+		texture.scale(1 / Texid.getFWidth(), 1 / Texid.getFHeight(), 1.0f);
 
 		matrix44Buffer = model.toBuffer();
 
@@ -137,5 +137,44 @@ public class DPDTRenderer {
 
 	public int getVAO() {
 		return VAO;
+	}
+
+	public void draw(Image Texid, Vector2 pos, Vector2 size, float rotate,
+			Vector2 texPos, Vector2 maxFrame) {
+		glUseProgram(shaderProgramID);
+		glBindVertexArray(VAO);
+		glBindTexture(GL_TEXTURE_2D, Texid.getID());
+
+		model.clearToIdentity();
+		model.translate(pos.x(), pos.y(), 0.0f);
+		model.translate(0.5f * size.x(), 0.5f * size.y(), 0.0f);
+		model.rotateDeg(rotate, 0.0f, 0.0f, 1.0f);
+		model.translate(-0.5f * size.x(), -0.5f * size.y(), 0.0f);
+		model.scale(size.x(), size.y(), 1.0f);
+
+		texture.clearToIdentity();
+		texture.translate(texPos.x() / maxFrame.x(), texPos.y() / maxFrame.y(), 0.0f);
+		texture.scale(1 / maxFrame.x(), 1 / maxFrame.y(), 1.0f);
+
+		matrix44Buffer = model.toBuffer();
+
+		glUniformMatrix4(modelMatrixLocation, false, matrix44Buffer);
+
+		matrix44Buffer.clear();
+
+		matrix44Buffer = texture.toBuffer();
+
+		glUniformMatrix4(textureMatrixLocation, false, matrix44Buffer);
+
+		// glEnableVertexAttribArray(0);
+		// glEnableVertexAttribArray(1);
+
+		// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, 0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glBindVertexArray(0);
+		glUseProgram(0);
+		
 	}
 }

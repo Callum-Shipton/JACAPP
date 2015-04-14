@@ -131,7 +131,7 @@ public abstract class Entity extends Collidable {
 	}
 
 	public void render(DPDTRenderer r) {
-		r.draw(image.getID(), new Vector2(posX, posY), new Vector2(width, height),
+		r.draw(image, new Vector2(posX, posY), new Vector2(width, height),
 				0.0f, new Vector2((float) Math.floor(animID/animTime), (float) direction), new Vector2(image.getFWidth(),
 						image.getFHeight()));
 	}

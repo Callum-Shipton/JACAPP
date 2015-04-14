@@ -11,6 +11,7 @@ import org.lwjgl.glfw.GLFW;
 import Display.Art;
 import Display.Display;
 import GUI.Menus.GuiMenu;
+import GUI.Menus.PauseMenu;
 import Input.Keyboard;
 
 public class ShootEmUp {
@@ -22,7 +23,7 @@ public class ShootEmUp {
 	// Handle for monitor/window funcs
 	public static Display d;
 	
-	private boolean paused;
+	public static boolean paused;
 
 	public static Level currentLevel;
 	public static Stack<GuiMenu> menuStack = new Stack<GuiMenu>();
@@ -95,10 +96,15 @@ public class ShootEmUp {
 		if(Keyboard.getKey(GLFW_KEY_P) == 1){
 				paused = !paused;
 				Keyboard.setKey(GLFW_KEY_P);
+				if(paused) addMenu(new PauseMenu(Art.invScreen));
+				else clearMenus();
 		}
 
 		if(!paused){
 			currentLevel.update();
+		}
+		if (!menuStack.isEmpty()) {
+			menuStack.peek().update();
 		}
 		d.update();
 
@@ -109,6 +115,9 @@ public class ShootEmUp {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		currentLevel.render();
+		if (!menuStack.isEmpty()) {
+			menuStack.peek().render();
+		}
 
 		glfwSwapBuffers(d.getWindow()); // Swaps front and back buffers to
 										// render changes
@@ -117,6 +126,16 @@ public class ShootEmUp {
 	public static void main(String[] args) {
 		System.setProperty("org.lwjgl.librarypath", new File("natives").getAbsolutePath());
 		new ShootEmUp().run();
+	}
+	
+	public static void clearMenus() {
+		while (!menuStack.isEmpty()) {
+			menuStack.pop();
+		}
+	}
+
+	public static void addMenu(GuiMenu menu) {
+		menuStack.add(menu);
 	}
 
 }

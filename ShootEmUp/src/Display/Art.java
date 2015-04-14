@@ -15,6 +15,8 @@ import Main.ShootEmUp;
 import Math.Matrix4;
 
 public class Art {
+	public static Image back;
+	public static Image invScreen;
 	//Tile maps
 	public static Image background;
 	public static Image wall;
@@ -44,6 +46,7 @@ public class Art {
 	public static int ShaderBase;
 	public static int ShaderInst;
 	public static int ShaderStat;
+
 
 	private void initShaders() {
 		// Load the vertex shader
@@ -140,6 +143,8 @@ public class Art {
 		
 		//new Image("/filepath.png", maxFrameWidth, maxFrameHeight);
 		
+		invScreen = new Image("/Menus/invScreen.png", 1, 1);
+		back = new Image("/Buttons/back.png",1,2);
 		//Load tile maps
 		background = new Image("/Tiles/background.png",4,4);
 		wall = new Image("/Tiles/wall.png",8,8);
