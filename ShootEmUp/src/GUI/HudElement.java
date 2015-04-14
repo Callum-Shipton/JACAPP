@@ -1,5 +1,7 @@
-package Display;
+package GUI;
 
+import Display.DPDTRenderer;
+import Display.Image;
 import Math.Vector2;
 
 public class HudElement {

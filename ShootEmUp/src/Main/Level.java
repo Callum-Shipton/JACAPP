@@ -12,8 +12,8 @@ import org.lwjgl.opengl.GL30;
 
 import Display.Art;
 import Display.DPDTRenderer;
-import Display.Hud;
 import Display.IRenderer;
+import GUI.Hud;
 import Math.Vector2;
 import Object.Coin;
 import Object.Collidable;
