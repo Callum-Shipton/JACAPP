@@ -4,11 +4,13 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
 import java.io.File;
+import java.util.Stack;
 
 import org.lwjgl.glfw.GLFW;
 
 import Display.Art;
 import Display.Display;
+import GUI.Menus.GuiMenu;
 import Input.Keyboard;
 
 public class ShootEmUp {
@@ -18,11 +20,12 @@ public class ShootEmUp {
 	public static int HEIGHT = 512;
 
 	// Handle for monitor/window funcs
-	private Display d;
+	public static Display d;
 	
 	private boolean paused;
 
 	public static Level currentLevel;
+	public static Stack<GuiMenu> menuStack = new Stack<GuiMenu>();
 
 	public void run() {
 		try {

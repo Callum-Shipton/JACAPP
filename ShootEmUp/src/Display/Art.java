@@ -1,14 +1,15 @@
 package Display;
 
-import static org.lwjgl.opengl.GL11.GL_FALSE;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.FloatBuffer;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL20;
+
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL20.*;
+
 
 import Main.ShootEmUp;
 import Math.Matrix4;
@@ -47,58 +48,58 @@ public class Art {
 	private void initShaders() {
 		// Load the vertex shader
 		int vsId = loadShader("/shaders/VertexShader.glsl",
-				GL20.GL_VERTEX_SHADER);
+				GL_VERTEX_SHADER);
 		// Load the fragment shader
 		int fsId = loadShader("/shaders/FragmentShader.glsl",
-				GL20.GL_FRAGMENT_SHADER);
+				GL_FRAGMENT_SHADER);
 
 		int IvsId = loadShader("/shaders/IVertexShader.glsl",
-				GL20.GL_VERTEX_SHADER);
+				GL_VERTEX_SHADER);
 		// Load the fragment shader
 		int IfsId = loadShader("/shaders/IFragmentShader.glsl",
-				GL20.GL_FRAGMENT_SHADER);
+				GL_FRAGMENT_SHADER);
 		
 		int SvsId = loadShader("/shaders/StatVertexShader.glsl",
-				GL20.GL_VERTEX_SHADER);
+				GL_VERTEX_SHADER);
 
 		// Create a new shader program that links both shaders
-		ShaderBase = GL20.glCreateProgram();
-		GL20.glAttachShader(ShaderBase, vsId);
-		GL20.glAttachShader(ShaderBase, fsId);
+		ShaderBase = glCreateProgram();
+		glAttachShader(ShaderBase, vsId);
+		glAttachShader(ShaderBase, fsId);
 
 		// Position information will be attribute 0
-		GL20.glBindAttribLocation(ShaderBase, 0, "pos");
+		glBindAttribLocation(ShaderBase, 0, "pos");
 		// Textute information will be attribute 1
-		GL20.glBindAttribLocation(ShaderBase, 1, "tex");
+		glBindAttribLocation(ShaderBase, 1, "tex");
 
-		GL20.glLinkProgram(ShaderBase);
-		GL20.glValidateProgram(ShaderBase);
+		glLinkProgram(ShaderBase);
+		glValidateProgram(ShaderBase);
 
-		ShaderInst = GL20.glCreateProgram();
-		GL20.glAttachShader(ShaderInst, IvsId);
-		GL20.glAttachShader(ShaderInst, IfsId);
+		ShaderInst = glCreateProgram();
+		glAttachShader(ShaderInst, IvsId);
+		glAttachShader(ShaderInst, IfsId);
 
-		GL20.glBindAttribLocation(ShaderInst, 0, "pos");
+		glBindAttribLocation(ShaderInst, 0, "pos");
 		// Textute information will be attribute 1
-		GL20.glBindAttribLocation(ShaderInst, 1, "tex");
-		GL20.glBindAttribLocation(ShaderInst, 2, "trans");
+		glBindAttribLocation(ShaderInst, 1, "tex");
+		glBindAttribLocation(ShaderInst, 2, "trans");
 		// Textute information will be attribute 1
-		GL20.glBindAttribLocation(ShaderInst, 3, "text");
+		glBindAttribLocation(ShaderInst, 3, "text");
 
-		GL20.glLinkProgram(ShaderInst);
-		GL20.glValidateProgram(ShaderInst);
+		glLinkProgram(ShaderInst);
+		glValidateProgram(ShaderInst);
 		
-		ShaderStat = GL20.glCreateProgram();
-		GL20.glAttachShader(ShaderStat, SvsId);
-		GL20.glAttachShader(ShaderStat, fsId);
+		ShaderStat = glCreateProgram();
+		glAttachShader(ShaderStat, SvsId);
+		glAttachShader(ShaderStat, fsId);
 
 		// Position information will be attribute 0
-		GL20.glBindAttribLocation(ShaderStat, 0, "pos");
+		glBindAttribLocation(ShaderStat, 0, "pos");
 		// Textute information will be attribute 1
-		GL20.glBindAttribLocation(ShaderStat, 1, "tex");
+		glBindAttribLocation(ShaderStat, 1, "tex");
 
-		GL20.glLinkProgram(ShaderStat);
-		GL20.glValidateProgram(ShaderStat);
+		glLinkProgram(ShaderStat);
+		glValidateProgram(ShaderStat);
 		
 
 	}
@@ -121,14 +122,14 @@ public class Art {
 			System.exit(-1);
 		}
 
-		shaderID = GL20.glCreateShader(type);
-		GL20.glShaderSource(shaderID, shaderSource);
-		GL20.glCompileShader(shaderID);
+		shaderID = glCreateShader(type);
+		glShaderSource(shaderID, shaderSource);
+		glCompileShader(shaderID);
 
-		String infoLog = GL20.glGetShaderInfoLog(shaderID,
-				GL20.glGetShaderi(shaderID, GL20.GL_INFO_LOG_LENGTH));
+		String infoLog = glGetShaderInfoLog(shaderID,
+				glGetShaderi(shaderID, GL_INFO_LOG_LENGTH));
 
-		if (GL20.glGetShaderi(shaderID, GL20.GL_COMPILE_STATUS) == GL_FALSE)
+		if (glGetShaderi(shaderID, GL_COMPILE_STATUS) == GL_FALSE)
 			throw new RuntimeException("Failure in compiling " + filename
 					+ " shader. Error log:\n" + infoLog);
 
@@ -172,23 +173,23 @@ public class Art {
 		FloatBuffer matrix44Buffer = BufferUtils.createFloatBuffer(16);
 		matrix44Buffer = projectionMatrix.toBuffer();
 
-		GL20.glUseProgram(ShaderBase);
-		int projectionMatrixLocation = GL20.glGetUniformLocation(ShaderBase,
+		glUseProgram(ShaderBase);
+		int projectionMatrixLocation = glGetUniformLocation(ShaderBase,
 				"projectionMatrix");
-		GL20.glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
-		GL20.glUseProgram(0);
+		glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
+		glUseProgram(0);
 
-		GL20.glUseProgram(ShaderInst);
-		projectionMatrixLocation = GL20.glGetUniformLocation(ShaderInst,
+		glUseProgram(ShaderInst);
+		projectionMatrixLocation = glGetUniformLocation(ShaderInst,
 				"projectionMatrix");
-		GL20.glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
-		GL20.glUseProgram(0);
+		glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
+		glUseProgram(0);
 		
-		GL20.glUseProgram(ShaderStat);
-		projectionMatrixLocation = GL20.glGetUniformLocation(ShaderStat,
+		glUseProgram(ShaderStat);
+		projectionMatrixLocation = glGetUniformLocation(ShaderStat,
 				"projectionMatrix");
-		GL20.glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
-		GL20.glUseProgram(0);
+		glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
+		glUseProgram(0);
 
 	}
 

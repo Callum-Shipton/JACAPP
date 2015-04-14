@@ -4,7 +4,7 @@ import Display.DPDTRenderer;
 import Display.Image;
 import Math.Vector2;
 
-public class HudElement {
+public class HudElement extends GuiComponent {
 	
 	private Vector2 pos;
 	private Vector2 size;

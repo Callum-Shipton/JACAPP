@@ -4,12 +4,16 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 
 import org.lwjgl.BufferUtils;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
-import org.lwjgl.opengl.GL20;
-import org.lwjgl.opengl.GL30;
-import org.lwjgl.opengl.GL31;
-import org.lwjgl.opengl.GL33;
+
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL15.*;
+import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL30.*;
+import static org.lwjgl.opengl.GL31.*;
+import static org.lwjgl.opengl.GL33.*;
 
 import Math.Vector2;
 
@@ -30,12 +34,12 @@ public class IRenderer {
 	}
 	
 	public void draw(int Texid){
-		GL20.glUseProgram(Art.ShaderInst);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, Texid);
-		GL30.glBindVertexArray(VAO);
-        GL31.glDrawElementsInstanced(GL11.GL_TRIANGLES, 6, GL11.GL_UNSIGNED_BYTE, 0, amount);
-        GL30.glBindVertexArray(0);
-        GL20.glUseProgram(0);
+		glUseProgram(Art.ShaderInst);
+		glBindTexture(GL11.GL_TEXTURE_2D, Texid);
+		glBindVertexArray(VAO);
+        glDrawElementsInstanced(GL11.GL_TRIANGLES, 6, GL11.GL_UNSIGNED_BYTE, 0, amount);
+        glBindVertexArray(0);
+        glUseProgram(0);
 	}
 	private void initRenderData(Vector2[][] textures, Vector2 texMax){
 			
@@ -90,40 +94,40 @@ public class IRenderer {
         ByteBuffer indicesBuffer = BufferUtils.createByteBuffer(indicesCount);
         indicesBuffer.put(indices);
         indicesBuffer.flip();
-        VAO = GL30.glGenVertexArrays();
-		GL30.glBindVertexArray(VAO);
+        VAO = glGenVertexArrays();
+		glBindVertexArray(VAO);
 			    
-	    VBO = GL15.glGenBuffers();
-	    GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, VBO);
-	    GL15.glBufferData(GL15.GL_ARRAY_BUFFER, verticesFloatBuffer, GL15.GL_STATIC_DRAW);
+	    VBO = glGenBuffers();
+	    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	    glBufferData(GL_ARRAY_BUFFER, verticesFloatBuffer, GL_STATIC_DRAW);
 			    
-	    EBO = GL15.glGenBuffers();
-	    GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, EBO);
-        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL15.GL_STATIC_DRAW);
+	    EBO = glGenBuffers();
+	    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL_STATIC_DRAW);
 		        
-	    GL20.glVertexAttribPointer(0, TexturedVertex.positionElementCount, GL11.GL_FLOAT, false, TexturedVertex.stride, TexturedVertex.positionByteOffset);
+	    glVertexAttribPointer(0, TexturedVertex.positionElementCount, GL_FLOAT, false, TexturedVertex.stride, TexturedVertex.positionByteOffset);
 			    
-        GL20.glEnableVertexAttribArray(0);
+        glEnableVertexAttribArray(0);
 		    
         // Put the texture coordinates in attribute list 1
-        GL20.glVertexAttribPointer(1, TexturedVertex.textureElementCount, GL11.GL_FLOAT, false, TexturedVertex.stride, TexturedVertex.textureByteOffset);
+        glVertexAttribPointer(1, TexturedVertex.textureElementCount, GL_FLOAT, false, TexturedVertex.stride, TexturedVertex.textureByteOffset);
 	        
-        GL20.glEnableVertexAttribArray(1);
+        glEnableVertexAttribArray(1);
 			    
-        int IVBO = GL15.glGenBuffers();
-	    GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, IVBO);
-	    GL15.glBufferData(GL15.GL_ARRAY_BUFFER, instanceFloatBuffer, GL15.GL_STATIC_DRAW);
+        int IVBO = glGenBuffers();
+	    glBindBuffer(GL15.GL_ARRAY_BUFFER, IVBO);
+	    glBufferData(GL15.GL_ARRAY_BUFFER, instanceFloatBuffer, GL_STATIC_DRAW);
 			    
-	    GL20.glVertexAttribPointer(2, TexturedVertex.positionElementCount, GL11.GL_FLOAT, false, TexturedVertex.stride, TexturedVertex.positionByteOffset);
-	    GL20.glEnableVertexAttribArray(2);
+	    glVertexAttribPointer(2, TexturedVertex.positionElementCount, GL_FLOAT, false, TexturedVertex.stride, TexturedVertex.positionByteOffset);
+	    glEnableVertexAttribArray(2);
 			    
-	    GL20.glVertexAttribPointer(3, TexturedVertex.textureElementCount, GL11.GL_FLOAT, false, TexturedVertex.stride, TexturedVertex.textureByteOffset);
-	    GL20.glEnableVertexAttribArray(3);
+	    glVertexAttribPointer(3, TexturedVertex.textureElementCount, GL_FLOAT, false, TexturedVertex.stride, TexturedVertex.textureByteOffset);
+	    glEnableVertexAttribArray(3);
 			    
-	    GL33.glVertexAttribDivisor(2, 1);
-		GL33.glVertexAttribDivisor(3, 1);
+	    glVertexAttribDivisor(2, 1);
+		glVertexAttribDivisor(3, 1);
 		        
-		GL30.glBindVertexArray(0);
+		glBindVertexArray(0);
 			    
 		//GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 		//GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);

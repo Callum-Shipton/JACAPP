@@ -7,7 +7,7 @@ import Display.DPDTRenderer;
 import Math.Vector2;
 import Object.Player;
 
-public class Hud {
+public class Hud extends GuiComponent{
 	
 	public CopyOnWriteArrayList<HudElement> hudElems;
 	private HudElement infoBox;

@@ -7,8 +7,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.imageio.*;
 
-import org.lwjgl.opengl.GL20;
-import org.lwjgl.opengl.GL30;
+import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL30.*;
 
 import Display.Art;
 import Display.DPDTRenderer;
@@ -272,8 +272,8 @@ public class Level {
 		renderLowTiles();
 		renderHighTiles();
 
-		GL20.glUseProgram(Art.ShaderBase);
-		GL30.glBindVertexArray(r.getVAO());
+		glUseProgram(Art.ShaderBase);
+		glBindVertexArray(r.getVAO());
 		
 		for (Exp exp : experience) {
 			exp.render(r);
@@ -287,18 +287,18 @@ public class Level {
 		for (Particle particle : particles) {
 			particle.render(r);
 		}
-		GL30.glBindVertexArray(0);
-		GL20.glUseProgram(0);
+		glBindVertexArray(0);
+		glUseProgram(0);
 		
 
 		renderHighTiles();
 		
 		
-		GL20.glUseProgram(Art.ShaderStat);
-		GL30.glBindVertexArray(r.getVAO());
+		glUseProgram(Art.ShaderStat);
+		glBindVertexArray(r.getVAO());
 		hud.render(stat);
-		GL30.glBindVertexArray(0);
-		GL20.glUseProgram(0);
+		glBindVertexArray(0);
+		glUseProgram(0);
 
 	}
 

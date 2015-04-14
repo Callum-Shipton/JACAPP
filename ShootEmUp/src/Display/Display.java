@@ -2,8 +2,7 @@ package Display;
 
 import static org.lwjgl.glfw.Callbacks.errorCallbackPrint;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.GL_TRUE;
-import static org.lwjgl.opengl.GL11.GL_FALSE;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 import java.nio.ByteBuffer;
@@ -38,7 +37,7 @@ public class Display {
 		// will print the error message in System.err.
 
 		// Initialise GLFW. Most GLFW functions will not work before doing this.
-		if (glfwInit() != GL11.GL_TRUE)
+		if (glfwInit() != GL_TRUE)
 			throw new IllegalStateException("Unable to initialize GLFW");
 
 		glfwSetErrorCallback(errorCallback = errorCallbackPrint(System.err));
@@ -89,10 +88,10 @@ public class Display {
 	}
 
 	private void initGL() {
-		GL11.glClearColor(0.4f, 0.6f, 0.9f, 1.0f);
-		GL11.glViewport(0, 0, width, height);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		glClearColor(0.4f, 0.6f, 0.9f, 1.0f);
+		glViewport(0, 0, width, height);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
 	public void destroyGLFW() {
