@@ -9,8 +9,6 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
-
-
 import Math.Matrix4;
 import Math.Vector2;
 
@@ -33,6 +31,8 @@ public class DPDTRenderer {
 
 	public void draw(int Texid, Vector2 pos, Vector2 size, float rotate, Vector2 texPos, Vector2 texMax) {
 
+		glUseProgram(shaderProgramID);
+		glBindVertexArray(VAO);
 		glBindTexture(GL_TEXTURE_2D, Texid);
 
 		model.clearToIdentity();
@@ -63,7 +63,8 @@ public class DPDTRenderer {
 
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, 0);
 		glBindTexture(GL_TEXTURE_2D, 0);
-		// glBindVertexArray(0);
+		glBindVertexArray(0);
+		glUseProgram(0);
 	}
 
 	private void initRenderData() {

@@ -271,9 +271,6 @@ public class Level {
 	public void render() {
 		renderLowTiles();
 		renderHighTiles();
-
-		glUseProgram(Art.ShaderBase);
-		glBindVertexArray(r.getVAO());
 		
 		for (Exp exp : experience) {
 			exp.render(r);
@@ -287,18 +284,12 @@ public class Level {
 		for (Particle particle : particles) {
 			particle.render(r);
 		}
-		glBindVertexArray(0);
-		glUseProgram(0);
 		
 
 		renderHighTiles();
 		
 		
-		glUseProgram(Art.ShaderStat);
-		glBindVertexArray(r.getVAO());
 		hud.render(stat);
-		glBindVertexArray(0);
-		glUseProgram(0);
 
 	}
 
