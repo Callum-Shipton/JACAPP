@@ -1,5 +1,6 @@
 package Object;
 
+import Display.Art;
 import Display.Image;
 import Main.ShootEmUp;
 import Math.Vector2;
@@ -8,11 +9,13 @@ public class Particle extends Entity {
 	private float distance = 0.0f;
 	private Weapon weapon;
 
-	public Particle(float posX, float posY, float w, float h, int speed,
-			int direction, Image image, Weapon weapon, int team) {
-		super(posX, posY, w, h, speed, direction, image);
+	public Particle(float posX, float posY, Weapon weapon, int team) {
+		super(posX, posY);
 		canfly = true;
 		this.weapon = weapon;
+		speed = 10;
+		direction = 0;
+		image = Art.particle;
 		width = 32f;
 		height = 32f;
 		this.team = team;

@@ -32,9 +32,17 @@ public class Player extends Character {
 	private int viewMatrixLocationInst;
 	private int fireRate = 10;
 
-	public Player(float x, float y, float width, float height, int speed, int direction, Image image) {
-		super(x, y, width, height, speed, direction, image);
-
+	public Player(float x, float y) {
+		super(x, y);
+		
+		width = 64.0f;
+		height = 64.0f;
+		speed = 5;
+		direction = 0;
+		image = Art.player;
+		
+		weapon = new Weapon(1,10);
+		
 		viewMatrix = new Matrix4();
 		viewMatrix.clearToIdentity();
 		viewMatrix.translate(-x + (ShootEmUp.WIDTH - width) / 2, -y

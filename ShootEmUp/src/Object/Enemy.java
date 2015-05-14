@@ -9,13 +9,8 @@ public class Enemy extends Character {
 
 	private int counter = 0;
 	
-	public Enemy(float x, float y, float w, float h, int speed, int direction,
-			Image image) {
-		super(x, y, w, h, speed, direction, image);
-		width = 64;
-		height = 64;
-		health = 5;
-		team = 1;
+	public Enemy(float x, float y) {
+		super(x, y);
 	}
 	
 	public void update() {
@@ -52,8 +47,8 @@ public class Enemy extends Character {
 	public void checkDead() {
 		if (health <= 0) {
 			ShootEmUp.currentLevel.characters.remove(this);
-			ShootEmUp.currentLevel.experience.add(new Exp(posX, posY, 16, 16, Art.exp));
-			ShootEmUp.currentLevel.coins.add(new Coin(posX + 32, posY + 32, 32, 32, Art.coin));
+			ShootEmUp.currentLevel.experience.add(new Exp(posX, posY));
+			ShootEmUp.currentLevel.coins.add(new Coin(posX + 32, posY + 32));
 		}
 	}
 }

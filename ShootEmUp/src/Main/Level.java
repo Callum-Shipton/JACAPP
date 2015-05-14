@@ -229,7 +229,7 @@ public class Level {
 		base = new DPDTRenderer(Art.ShaderBase);
 		stat = new DPDTRenderer(Art.ShaderStat);
 
-		player = new Player(spawn[0], spawn[1], 64.0f, 64.0f, 5, 0, Art.player);
+		player = new Player(spawn[0], spawn[1]);
 		hud = new Hud(player);
 		characters.add(player);
 	}
@@ -275,7 +275,7 @@ public class Level {
 					}
 				}
 			} while (collide == true);
-			characters.add(new Enemy(X, Y, 64.0f, 64.0f, 5, 0, Art.enemy));
+			characters.add(new Enemy(X, Y));
 			counter = 0;
 		}
 

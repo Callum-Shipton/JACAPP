@@ -51,22 +51,19 @@ public class PauseMenu extends GuiMenu {
         	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	}
     	else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
-    		ShootEmUp.clearMenus(); 
-    		ShootEmUp.currentLevel = null;
-    		@SuppressWarnings("unused")
-			ShootEmUp Sh = new ShootEmUp();
+    		glfwSetWindowShouldClose(ShootEmUp.d.getWindow(), GL_TRUE);
     	}
     	
         else if (Keyboard.getKey(GLFW.GLFW_KEY_DOWN) == 1) {
             selectedItem++;
-            if (selectedItem > 2) {
+            if (selectedItem > 1) {
                 selectedItem = 0;
             }
         }
         else if (Keyboard.getKey(GLFW.GLFW_KEY_UP) == 1) {
             selectedItem--;
             if (selectedItem < 0) {
-                selectedItem = 2;
+                selectedItem = 1;
             }
         }
     }

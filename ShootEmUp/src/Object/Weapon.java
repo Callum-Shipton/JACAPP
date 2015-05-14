@@ -26,8 +26,7 @@ public class Weapon {
 		if (direction >= 3 && direction <= 5) {
 			posY += 49;
 		}
-		ShootEmUp.currentLevel.particles.add(new Particle(posX + 16, posY + 16,
-				32.0f, 32.0f, 10, direction, Art.particle, this, team));
+		ShootEmUp.currentLevel.particles.add(new Particle(posX + 16, posY + 16, this , team));
 	}
 
 	public int getDamage() {

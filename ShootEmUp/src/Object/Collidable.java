@@ -17,6 +17,12 @@ public class Collidable {
 		this.flat = flat;
 	}
 
+	public Collidable(float posX, float posY, boolean flat) {
+		this.posX = posX;
+		this.posY = posY;
+		this.flat = flat;
+	}
+
 	public Vector4 doesCollide(float x, float y, float w, float h) {
 		if((Math.abs(posX - x) > 74) && (Math.abs(posY - y) > 74)){
 			return null;

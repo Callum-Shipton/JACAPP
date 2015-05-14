@@ -18,15 +18,11 @@ public abstract class Entity extends Collidable {
 
 	// Constructors
 
-	public Entity(float x, float y, float width, float height, int speed,
-			int direction, Image image) {
-		super(x, y, width, height, false);
-		this.speed = speed;
-		this.direction = direction;
+	public Entity(float x, float y) {
+		super(x, y, false);
 		this.animID = 0;
 		this.animating = false;
 		this.animTime = 6;
-		this.image = image;
 	}
 	
 	public void update(){
