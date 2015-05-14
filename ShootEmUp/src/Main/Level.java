@@ -9,10 +9,10 @@ import javax.imageio.*;
 
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
-
 import Display.Art;
 import Display.DPDTRenderer;
 import Display.IRenderer;
+import Enemies.RedSquare;
 import GUI.Hud;
 import Math.Vector2;
 import Object.Coin;
@@ -275,7 +275,7 @@ public class Level {
 					}
 				}
 			} while (collide == true);
-			characters.add(new Enemy(X, Y));
+			characters.add(new RedSquare(X, Y));
 			counter = 0;
 		}
 
