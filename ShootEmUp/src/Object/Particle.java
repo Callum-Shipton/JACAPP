@@ -9,12 +9,12 @@ public class Particle extends Entity {
 	private float distance = 0.0f;
 	private Weapon weapon;
 
-	public Particle(float posX, float posY, Weapon weapon, int team) {
+	public Particle(float posX, float posY, int direction,  Weapon weapon, int team) {
 		super(posX, posY);
 		canfly = true;
 		this.weapon = weapon;
 		speed = 10;
-		direction = 0;
+		this.direction = direction;
 		image = Art.particle;
 		width = 32f;
 		height = 32f;
