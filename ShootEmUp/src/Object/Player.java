@@ -34,7 +34,9 @@ public class Player extends Character {
 
 	public Player(float x, float y) {
 		super(x, y);
-		
+		canfly = false;
+		setMaxHealth(18);
+		health = maxHealth;
 		width = 64.0f;
 		height = 64.0f;
 		speed = 5;
