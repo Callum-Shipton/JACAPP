@@ -6,7 +6,7 @@ import Math.Vector2;
 public class Tile implements Comparable<Tile> {
 
 	private Vector2 position;
-	private Vector2 playerPos = new Vector2((float)Math.floor(ShootEmUp.currentLevel.getPlayer().getX() / 64), (float)Math.floor(ShootEmUp.currentLevel.getPlayer().getY()/64));
+	private Vector2 playerPos = new Vector2((float)Math.floor(ShootEmUp.currentLevel.getPlayer().getX() / 32), (float)Math.floor(ShootEmUp.currentLevel.getPlayer().getY()/32));
 	private Vector2 distanceV;
 	private float distanceF;
 	

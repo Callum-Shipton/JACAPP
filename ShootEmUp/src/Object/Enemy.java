@@ -56,7 +56,7 @@ public class Enemy extends Character {
 	
 	public Vector2 ai(){
 		PriorityQueue<Tile> queue = new PriorityQueue<Tile>();
-		Tile start = new Tile((float)Math.floor(posX/64), (float)Math.floor(posY/64));
+		Tile start = new Tile((float)Math.floor(posX/32), (float)Math.floor(posY/32));
 		boolean flagged[][] = new boolean[81][81];
 		flagged[(int) start.getX()][(int) start.getY()] = true;
 		Tile current = null;
@@ -122,11 +122,11 @@ public class Enemy extends Character {
 					}
 				}
 			}
-			if((current.getX() == (Math.floor(ShootEmUp.currentLevel.getPlayer().getX() / 64))) && (current.getY() == (Math.floor(ShootEmUp.currentLevel.getPlayer().getY() / 64)))){
+			if((current.getX() == (Math.floor(ShootEmUp.currentLevel.getPlayer().getX() / 32))) && (current.getY() == (Math.floor(ShootEmUp.currentLevel.getPlayer().getY() / 32)))){
 				found = true;
 			}
 		}
 		queue.clear();
-		return new Vector2(next.getX()*64, next.getY()*64);
+		return new Vector2(next.getX()*32, next.getY()*32);
 	}
 }
