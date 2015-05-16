@@ -57,6 +57,7 @@ public class Enemy extends Character {
 	public Vector2 ai(){
 		PriorityQueue<Tile> queue = new PriorityQueue<Tile>();
 		Tile start = new Tile((float)Math.floor(posX/64), (float)Math.floor(posY/64));
+		boolean flagged[][] = new boolean[81][81];
 		Tile current = null;
 		boolean found = false;
 		queue.add(start);
@@ -68,28 +69,52 @@ public class Enemy extends Character {
 			}
 			if(current.getX() > 0 && current.getX() < 81 && current.getY() > 0 && current.getY() < 81){
 				if(ShootEmUp.currentLevel.wallTiles[(int)(current.getX() + 1)][(int)current.getY()] == null){
-					queue.add(new Tile((current.getX() + 1),(current.getY())));
+					if(flagged[(int) (current.getX() + 1)][(int) current.getY()] == false){
+						queue.add(new Tile((current.getX() + 1),(current.getY())));
+						flagged[(int) (current.getX() + 1)][(int) current.getY()] = true;
+					}
 				}
 				if(ShootEmUp.currentLevel.wallTiles[(int)(current.getX() + 1)][(int)current.getY() + 1] == null){
-					queue.add(new Tile((current.getX() + 1),(current.getY() + 1)));
+					if(flagged[(int) (current.getX() + 1)][(int) current.getY() + 1] == false){
+						queue.add(new Tile((current.getX() + 1),(current.getY() + 1)));
+						flagged[(int) (current.getX() + 1)][(int) current.getY() + 1] = true;
+					}
 				} 
 				if(ShootEmUp.currentLevel.wallTiles[(int)(current.getX())][(int)current.getY() + 1] == null){
-					queue.add(new Tile((current.getX()),(current.getY() + 1)));
+					if(flagged[(int) (current.getX())][(int) current.getY() + 1] == false){
+						queue.add(new Tile((current.getX() + 1),(current.getY() + 1)));
+						flagged[(int) (current.getX())][(int) current.getY() + 1] = true;
+					}
 				}
 				if(ShootEmUp.currentLevel.wallTiles[(int)(current.getX() - 1)][(int)current.getY() + 1] == null){
-					queue.add(new Tile((current.getX() - 1),(current.getY() + 1)));
+					if(flagged[(int) (current.getX() - 1)][(int) current.getY() + 1] == false){
+						queue.add(new Tile((current.getX() - 1),(current.getY() + 1)));
+						flagged[(int) (current.getX() - 1)][(int) current.getY() + 1] = true;
+					}
 				}
 				if(ShootEmUp.currentLevel.wallTiles[(int)(current.getX() - 1)][(int)current.getY()] == null){
-					queue.add(new Tile((current.getX() - 1),(current.getY())));
+					if(flagged[(int) (current.getX() - 1)][(int) current.getY()] == false){
+						queue.add(new Tile((current.getX() - 1),(current.getY())));
+						flagged[(int) (current.getX() - 1)][(int) current.getY()] = true;
+					}
 				}
 				if(ShootEmUp.currentLevel.wallTiles[(int)(current.getX() - 1)][(int)current.getY() - 1] == null){
-					queue.add(new Tile((current.getX() - 1),(current.getY() - 1)));
+					if(flagged[(int) (current.getX() - 1)][(int) current.getY() - 1] == false){
+						queue.add(new Tile((current.getX() - 1),(current.getY() - 1)));
+						flagged[(int) (current.getX() - 1)][(int) current.getY() - 1] = true;
+					}
 				}
 				if(ShootEmUp.currentLevel.wallTiles[(int)(current.getX())][(int)current.getY() - 1] == null){
-					queue.add(new Tile((current.getX()),(current.getY() - 1)));
+					if(flagged[(int) (current.getX())][(int) current.getY() - 1] == false){
+						queue.add(new Tile((current.getX()),(current.getY() - 1)));
+						flagged[(int) (current.getX())][(int) current.getY() -1] = true;
+					}
 				}
 				if(ShootEmUp.currentLevel.wallTiles[(int)(current.getX() + 1)][(int)current.getY() - 1] == null){
-					queue.add(new Tile((current.getX() + 1),(current.getY() - 1)));
+					if(flagged[(int) (current.getX() + 1)][(int) current.getY() - 1] == false){
+						queue.add(new Tile((current.getX() + 1),(current.getY() - 1)));
+						flagged[(int) (current.getX() + 1)][(int) current.getY() - 1] = true;
+					}
 				}
 			}
 			if((current.getX() == (Math.floor(ShootEmUp.currentLevel.getPlayer().getX() / 64))) && (current.getY() == (Math.floor(ShootEmUp.currentLevel.getPlayer().getY() / 64)))){

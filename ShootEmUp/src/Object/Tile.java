@@ -13,7 +13,7 @@ public class Tile implements Comparable<Tile> {
 	public Tile(float X, float Y){
 		position = new Vector2(X,Y);
 		distanceV = new Vector2();
-		distanceV = position;
+		distanceV = new Vector2(position);
 		distanceV.sub(playerPos);
 		distanceF = distanceV.length();
 	}
