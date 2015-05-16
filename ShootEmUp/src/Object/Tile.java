@@ -18,6 +18,14 @@ public class Tile implements Comparable<Tile> {
 		distanceF = distanceV.length();
 	}
 	
+	public Tile(Tile tile){
+		position = new Vector2(tile.getX(), tile.getY());
+		distanceV = new Vector2();
+		distanceV = new Vector2(position);
+		distanceV.sub(playerPos);
+		distanceF = distanceV.length();
+	}
+	
 	public float getDistance(){
 		return distanceF;
 	}

@@ -59,10 +59,14 @@ public class Enemy extends Character {
 		Tile start = new Tile((float)Math.floor(posX/64), (float)Math.floor(posY/64));
 		boolean flagged[][] = new boolean[81][81];
 		Tile current = null;
+		Tile next = null;
 		boolean found = false;
 		queue.add(start);
 		while(!found){
 			current = queue.poll();
+			if(Math.abs(current.getX() - start.getX()) == 1 || Math.abs(current.getY() - start.getY()) == 1){
+				next = new Tile(current);
+			}
 			if(current == null){
 				System.out.println("Cannot Find Player");
 				return new Vector2(0,0);
@@ -122,6 +126,6 @@ public class Enemy extends Character {
 			}
 		}
 		queue.clear();
-		return new Vector2(current.getX()*64 + 32, current.getY()*64 + 32);
+		return new Vector2(next.getX()*64 + 32, next.getY()*64 + 32);
 	}
 }
