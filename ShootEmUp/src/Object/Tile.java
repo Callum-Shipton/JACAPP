@@ -6,7 +6,7 @@ import Math.Vector2;
 public class Tile implements Comparable<Tile> {
 
 	private Vector2 position;
-	private Vector2 playerPos = new Vector2(ShootEmUp.currentLevel.getPlayer().getX(), ShootEmUp.currentLevel.getPlayer().getY());
+	private Vector2 playerPos = new Vector2((float)Math.floor(ShootEmUp.currentLevel.getPlayer().getX() / 64), (float)Math.floor(ShootEmUp.currentLevel.getPlayer().getY()/64));
 	private Vector2 distanceV;
 	private float distanceF;
 	
@@ -40,11 +40,6 @@ public class Tile implements Comparable<Tile> {
 
 	@Override
 	public int compareTo(Tile t) {
-		if(t.distanceF < distanceF){
-			return 1;
-		} else if(t.distanceF == distanceF){
-			return 0;
-		}
-			return -1;
+		return Float.compare(distanceF,t.getDistance());
 	}
 }

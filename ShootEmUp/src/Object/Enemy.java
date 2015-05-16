@@ -58,6 +58,7 @@ public class Enemy extends Character {
 		PriorityQueue<Tile> queue = new PriorityQueue<Tile>();
 		Tile start = new Tile((float)Math.floor(posX/64), (float)Math.floor(posY/64));
 		boolean flagged[][] = new boolean[81][81];
+		flagged[(int) start.getX()][(int) start.getY()] = true;
 		Tile current = null;
 		Tile next = null;
 		boolean found = false;
@@ -86,7 +87,7 @@ public class Enemy extends Character {
 				} 
 				if(ShootEmUp.currentLevel.wallTiles[(int)(current.getX())][(int)current.getY() + 1] == null){
 					if(flagged[(int) (current.getX())][(int) current.getY() + 1] == false){
-						queue.add(new Tile((current.getX() + 1),(current.getY() + 1)));
+						queue.add(new Tile((current.getX()),(current.getY() + 1)));
 						flagged[(int) (current.getX())][(int) current.getY() + 1] = true;
 					}
 				}
@@ -126,6 +127,6 @@ public class Enemy extends Character {
 			}
 		}
 		queue.clear();
-		return new Vector2(next.getX()*64 + 32, next.getY()*64 + 32);
+		return new Vector2(next.getX()*64, next.getY()*64);
 	}
 }
