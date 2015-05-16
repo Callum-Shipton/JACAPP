@@ -64,12 +64,12 @@ public class Enemy extends Character {
 		queue.add(start);
 		while(!found){
 			current = queue.poll();
-			if(Math.abs(current.getX() - start.getX()) == 1 || Math.abs(current.getY() - start.getY()) == 1){
-				next = new Tile(current);
-			}
 			if(current == null){
 				System.out.println("Cannot Find Player");
 				return new Vector2(0,0);
+			}
+			if(Math.abs(current.getX() - start.getX()) <= 1 && Math.abs(current.getY() - start.getY()) <= 1){
+				next = new Tile(current);
 			}
 			if(current.getX() > 0 && current.getX() < 81 && current.getY() > 0 && current.getY() < 81){
 				if(ShootEmUp.currentLevel.wallTiles[(int)(current.getX() + 1)][(int)current.getY()] == null){
