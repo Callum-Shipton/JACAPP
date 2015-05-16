@@ -1,4 +1,4 @@
-package Enemies;
+package Object.Enemies;
 
 import Display.Art;
 import Display.Image;
