@@ -30,7 +30,7 @@ public class Level {
 	private BufferedImage map = null;
 	private String file;
 	private Vector2[][] backgroundTiles;
-	private Vector2[][] wallTiles;
+	public Vector2[][] wallTiles;
 	private Vector2[][] foregroundTiles;
 	public float[] spawn = new float[] { 480.0f, 480.0f };
 	private Player player;
