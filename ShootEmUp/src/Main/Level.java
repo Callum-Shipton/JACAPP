@@ -7,8 +7,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.imageio.*;
 
-import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.opengl.GL30.*;
 import Display.Art;
 import Display.DPDTRenderer;
 import Display.IRenderer;
@@ -17,7 +15,6 @@ import GUI.Hud;
 import Math.Vector2;
 import Object.Coin;
 import Object.Collidable;
-import Object.Enemy;
 import Object.Character;
 import Object.Exp;
 import Object.Particle;
@@ -254,10 +251,10 @@ public class Level {
 			do {
 				collide = false;
 				X = rand.nextFloat()
-						* ((float) (backgroundTiles.length * 32) - 32.0f)
+						* ((float) ((backgroundTiles.length - 1) * 32) - 32.0f)
 						+ 32.0f;
 				Y = rand.nextFloat()
-						* ((float) (backgroundTiles[0].length * 32) - 32.0f)
+						* ((float) ((backgroundTiles[0].length - 1) * 32) - 32.0f)
 						+ 32.0f;
 
 				for (Character character : characters) {
