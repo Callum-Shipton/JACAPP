@@ -191,10 +191,12 @@ public class Player extends Character {
 		GL20.glUseProgram(0);
 	}
 
-	public void checkDead() {
+	public boolean checkDead() {
 		if (health <= 0) {
 			respawn();
+			return true;
 		}
+		return false;
 	}
 
 	private void respawn() {

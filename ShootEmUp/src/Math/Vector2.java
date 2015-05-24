@@ -176,4 +176,11 @@ public class Vector2 implements Vector<Vector2> {
 		}
 		return a * (180 / Math.PI);
 	}
+	@Override
+	public int hashCode() {
+	    int hash = 139;
+	    hash = (int) (467 * hash + this.x);
+	    hash = (int) (467 * hash + this.y);
+	    return hash;
+	}
 }

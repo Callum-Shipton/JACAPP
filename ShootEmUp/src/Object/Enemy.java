@@ -16,7 +16,7 @@ public class Enemy extends Character {
 	
 	public void update() {
 		super.update();
-		checkDead();
+		if (checkDead()) return;
 		
 		target = ai();
 		
@@ -50,12 +50,15 @@ public class Enemy extends Character {
 		}
 	}
 	
-	public void checkDead() {
+	public boolean checkDead() {
 		if (health <= 0) {
 			ShootEmUp.currentLevel.characters.remove(this);
+			ShootEmUp.currentLevel.eMap.removeEntity(gridPos, this);
 			ShootEmUp.currentLevel.experience.add(new Exp(posX, posY));
 			ShootEmUp.currentLevel.coins.add(new Coin(posX + 32, posY + 32));
+			return true;
 		}
+		return false;
 	}
 	
 	public Vector2 ai(){

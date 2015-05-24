@@ -16,10 +16,13 @@ public abstract class Character extends Entity {
 		super.update();
 	}
 
-	public void checkDead() {
+	public boolean checkDead() {
 		if (health <= 0) {
 			ShootEmUp.currentLevel.characters.remove(this);
+			ShootEmUp.currentLevel.eMap.removeEntity(gridPos, this);
+			return true;
 		}
+		return false;
 	}
 
 	public int getHealth() {

@@ -42,6 +42,7 @@ public class Particle extends Entity {
 	@Override
 	public void onCollide(Character hit) {
 		ShootEmUp.currentLevel.particles.remove(this);
+		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, this);
 		if (hit != null && team != hit.team) {
 			hit.damage(weapon.getDamage());
 		}

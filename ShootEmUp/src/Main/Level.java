@@ -16,6 +16,7 @@ import Math.Vector2;
 import Object.Coin;
 import Object.Collidable;
 import Object.Character;
+import Object.EntityMap;
 import Object.Exp;
 import Object.Particle;
 import Object.Player;
@@ -40,6 +41,8 @@ public class Level {
 	private IRenderer irFore;
 
 	private int counter = 0;
+	
+	public EntityMap eMap;
 
 	public CopyOnWriteArrayList<Collidable> walls;
 	public CopyOnWriteArrayList<Character> characters;
@@ -55,9 +58,7 @@ public class Level {
 		backgroundTiles = new Vector2[map.getWidth() / 3][map.getHeight()];
 		wallTiles = new Vector2[map.getWidth() / 3][map.getHeight()];
 		foregroundTiles = new Vector2[map.getWidth() / 3][map.getHeight()];
-		addStuff();
-		setTiles();
-		renderLowTiles();
+		eMap = new EntityMap(width,height);
 	}
 
 	private void loadLevel() {
@@ -65,6 +66,12 @@ public class Level {
 			map = ImageIO.read(getClass().getResource(file));
 		} catch (IOException e) {
 		}
+	}
+	
+	public void init(){
+		addStuff();
+		setTiles();
+		renderLowTiles();
 	}
 
 	private void setTiles() {

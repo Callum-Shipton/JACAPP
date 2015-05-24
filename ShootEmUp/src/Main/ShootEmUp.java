@@ -52,6 +52,7 @@ public class ShootEmUp {
 
 
 		currentLevel = new Level(Art.level1);
+		currentLevel.init();
 
 		// Initialise key handling
 		Keyboard.keyCheck(d.getWindow());
