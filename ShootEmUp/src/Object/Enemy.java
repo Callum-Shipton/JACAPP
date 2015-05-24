@@ -1,5 +1,6 @@
 package Object;
 
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 import Main.ShootEmUp;
@@ -18,27 +19,30 @@ public class Enemy extends Character {
 		checkDead();
 		
 		target = ai();
-		Vector2 movement = new Vector2(0.0f, 0.0f);
-		if (target.y() < posY) {
-			movement.add(0.0f, -1.0f);
+		
+		if(target != null){
+			Vector2 movement = new Vector2(0.0f, 0.0f);
+			if (target.y() < posY) {
+				movement.add(0.0f, -1.0f);
+			}
+			if (target.x() < posX) {
+				movement.add(-1.0f, 0.0f);
+			}
+			if (target.y() > posY) {
+				movement.add(0.0f, 1.0f);
+			}
+			if (target.x() > posX) {
+				movement.add(1.0f, 0.0f);
+			}
+			if (movement.length() > 0) {
+				if (movement.length() > 1)
+					movement.normalize();
+				animating = true;
+				move(movement);
+				direction = (int) (Math.round(movement.Angle()) / 45);
+			}
+			else animating = false;
 		}
-		if (target.x() < posX) {
-			movement.add(-1.0f, 0.0f);
-		}
-		if (target.y() > posY) {
-			movement.add(0.0f, 1.0f);
-		}
-		if (target.x() > posX) {
-			movement.add(1.0f, 0.0f);
-		}
-		if (movement.length() > 0) {
-			if (movement.length() > 1)
-				movement.normalize();
-			animating = true;
-			move(movement);
-			direction = (int) (Math.round(movement.Angle()) / 45);
-		}
-		else animating = false;
 		counter++;
 		if (counter == 30){
 			weapon.shoot(posX, posY, direction, team);
@@ -55,78 +59,66 @@ public class Enemy extends Character {
 	}
 	
 	public Vector2 ai(){
-		PriorityQueue<Tile> queue = new PriorityQueue<Tile>();
-		Tile start = new Tile((float)Math.floor(posX/32), (float)Math.floor(posY/32));
-		boolean flagged[][] = new boolean[81][81];
-		flagged[(int) start.getX()][(int) start.getY()] = true;
-		Tile current = null;
-		Tile next = null;
-		boolean found = false;
-		queue.add(start);
-		while(!found){
-			current = queue.poll();
-			if(current == null){
-				System.out.println("Cannot Find Player");
-				return new Vector2(0,0);
-			}
-			if(Math.abs(current.getX() - start.getX()) <= 1 && Math.abs(current.getY() - start.getY()) <= 1){
-				next = new Tile(current);
-			}
-			if(current.getX() > 0 && current.getX() < 81 && current.getY() > 0 && current.getY() < 81){
-				if(ShootEmUp.currentLevel.wallTiles[(int)(current.getX() + 1)][(int)current.getY()] == null){
-					if(flagged[(int) (current.getX() + 1)][(int) current.getY()] == false){
-						queue.add(new Tile((current.getX() + 1),(current.getY())));
-						flagged[(int) (current.getX() + 1)][(int) current.getY()] = true;
+		PriorityQueue<Tile> open = new PriorityQueue<Tile>(); //queue for tiles to be looked at
+		ArrayList<Tile> closed = new ArrayList<Tile>(); //list of already viewed tiles
+		ArrayList<Tile> children = new ArrayList<Tile>();
+		Tile start = new Tile((float)Math.floor(posX / 32),(float)Math.floor(posY / 32), null); //makes a tile for the enemy position
+		Tile goal = new Tile((float)Math.floor(ShootEmUp.currentLevel.getPlayer().getX() / 32),(float)Math.floor(ShootEmUp.currentLevel.getPlayer().getY() / 32), null); // makes a tile for the player
+		open.add(start);
+		
+		while(open.size() != 0){
+			Tile current = open.poll(); //Tile currently being checked
+			
+			if((current.getX() == goal.getX()) && (current.getY() == goal.getY())){ //if goal is reached
+				Tile tile = current;
+				while(true){
+					if(tile.getParent() == start){
+						return tile.getPositionVector();
+					} else {
+						tile = tile.getParent();
 					}
 				}
-				if(ShootEmUp.currentLevel.wallTiles[(int)(current.getX() + 1)][(int)current.getY() + 1] == null){
-					if(flagged[(int) (current.getX() + 1)][(int) current.getY() + 1] == false){
-						queue.add(new Tile((current.getX() + 1),(current.getY() + 1)));
-						flagged[(int) (current.getX() + 1)][(int) current.getY() + 1] = true;
-					}
-				} 
-				if(ShootEmUp.currentLevel.wallTiles[(int)(current.getX())][(int)current.getY() + 1] == null){
-					if(flagged[(int) (current.getX())][(int) current.getY() + 1] == false){
-						queue.add(new Tile((current.getX()),(current.getY() + 1)));
-						flagged[(int) (current.getX())][(int) current.getY() + 1] = true;
-					}
-				}
-				if(ShootEmUp.currentLevel.wallTiles[(int)(current.getX() - 1)][(int)current.getY() + 1] == null){
-					if(flagged[(int) (current.getX() - 1)][(int) current.getY() + 1] == false){
-						queue.add(new Tile((current.getX() - 1),(current.getY() + 1)));
-						flagged[(int) (current.getX() - 1)][(int) current.getY() + 1] = true;
-					}
-				}
-				if(ShootEmUp.currentLevel.wallTiles[(int)(current.getX() - 1)][(int)current.getY()] == null){
-					if(flagged[(int) (current.getX() - 1)][(int) current.getY()] == false){
-						queue.add(new Tile((current.getX() - 1),(current.getY())));
-						flagged[(int) (current.getX() - 1)][(int) current.getY()] = true;
+			} 
+			
+			//add children
+			children.add(new Tile(current.getX() + 1, current.getY(), current)); 
+			children.add(new Tile(current.getX() + 1, current.getY() + 1, current));
+			children.add(new Tile(current.getX(), current.getY() + 1, current));
+			children.add(new Tile(current.getX() - 1, current.getY() + 1, current));
+			children.add(new Tile(current.getX() - 1, current.getY(), current));
+			children.add(new Tile(current.getX() - 1, current.getY() - 1, current));
+			children.add(new Tile(current.getX(), current.getY() - 1, current));
+			children.add(new Tile(current.getX() + 1, current.getY() - 1, current));
+			
+			//check if children have been used before
+			boolean used;
+			for(Tile child : children){
+				used = false;
+				for(Tile tile : closed){
+					if((tile.getX() == child.getX()) && (tile.getY() == child.getY())){
+						used = true;
 					}
 				}
-				if(ShootEmUp.currentLevel.wallTiles[(int)(current.getX() - 1)][(int)current.getY() - 1] == null){
-					if(flagged[(int) (current.getX() - 1)][(int) current.getY() - 1] == false){
-						queue.add(new Tile((current.getX() - 1),(current.getY() - 1)));
-						flagged[(int) (current.getX() - 1)][(int) current.getY() - 1] = true;
+				for(Tile tile : open){
+					if((tile.getX() == child.getX()) && (tile.getY() == child.getY())){
+						used = true;
 					}
 				}
-				if(ShootEmUp.currentLevel.wallTiles[(int)(current.getX())][(int)current.getY() - 1] == null){
-					if(flagged[(int) (current.getX())][(int) current.getY() - 1] == false){
-						queue.add(new Tile((current.getX()),(current.getY() - 1)));
-						flagged[(int) (current.getX())][(int) current.getY() -1] = true;
-					}
-				}
-				if(ShootEmUp.currentLevel.wallTiles[(int)(current.getX() + 1)][(int)current.getY() - 1] == null){
-					if(flagged[(int) (current.getX() + 1)][(int) current.getY() - 1] == false){
-						queue.add(new Tile((current.getX() + 1),(current.getY() - 1)));
-						flagged[(int) (current.getX() + 1)][(int) current.getY() - 1] = true;
+				if(used != true){
+					if((ShootEmUp.currentLevel.wallTiles[(int)child.getX()][(int)child.getY()] == null) && 
+							(ShootEmUp.currentLevel.wallTiles[(int)child.getX()+1][(int)child.getY()] == null) && 
+							(ShootEmUp.currentLevel.wallTiles[(int)child.getX()+1][(int)child.getY()+1] == null) &&
+							(ShootEmUp.currentLevel.wallTiles[(int)child.getX()][(int)child.getY()+1] == null)){
+						open.add(child);
 					}
 				}
 			}
-			if((current.getX() == (Math.floor(ShootEmUp.currentLevel.getPlayer().getX() / 32))) && (current.getY() == (Math.floor(ShootEmUp.currentLevel.getPlayer().getY() / 32)))){
-				found = true;
-			}
+			
+			children.clear(); //empties children 
+			
+			closed.add(current); //adds the current tile to the used tiles list
 		}
-		queue.clear();
-		return new Vector2(next.getX()*32, next.getY()*32);
+		
+		return null;
 	}
 }
