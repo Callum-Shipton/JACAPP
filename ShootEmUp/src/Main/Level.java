@@ -340,4 +340,8 @@ public class Level {
 	public int getHeight() {
 		return height;
 	}
+	
+	public Vector2 getWall(Vector2 vec){
+		return wallTiles[(int)vec.x()][(int)vec.y()];
+	}
 }

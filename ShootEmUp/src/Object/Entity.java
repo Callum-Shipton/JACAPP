@@ -92,10 +92,11 @@ public abstract class Entity extends Collidable {
 		if (collide == false) {
 			posX += moveVec.x() * speed;
 		} else {
-			if (vec.x() < speed) {
+			if (Math.abs(vec.x()) < speed) {
 				posX += (moveVec.x() * speed) - vec.x()
 						- (moveVec.x() / Math.abs(moveVec.x()));
-			} else if (vec.z() < speed) {
+			} else if(Math.abs(vec.x()) >= speed); 
+			else if (Math.abs(vec.z()) < speed) {
 				posX += (moveVec.x() * speed) - vec.z()
 						- (moveVec.x() / Math.abs(moveVec.x()));
 			}
@@ -143,10 +144,11 @@ public abstract class Entity extends Collidable {
 			posY += moveVec.y() * speed;
 		} else {
 			onCollide(hit);
-			if (vec.y() < speed) {
+			if (Math.abs(vec.y()) < speed) {
 				posY += (moveVec.y() * speed) - vec.y()
 						- (moveVec.y() / Math.abs(moveVec.y()));
-			} else if (vec.w() < speed) {
+			} else if(Math.abs(vec.y()) >= speed); 
+			else if (Math.abs(vec.w()) < speed) {
 				posY += (moveVec.y() * speed) - vec.w()
 						- (moveVec.y() / Math.abs(moveVec.y()));
 			}
