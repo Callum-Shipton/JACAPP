@@ -145,8 +145,8 @@ public class Art {
 		//new Image("/filepath.png", maxFrameWidth, maxFrameHeight);
 		
 		invScreen = new Image("/Menus/invScreen.png", 1, 1);
-		back = new Image("/Buttons/back.png",1,2);
-		exit = new Image("/Buttons/exit.png",1,2);
+		back = new Image("/buttons/back.png",1,2);
+		exit = new Image("/buttons/exit.png",1,2);
 		//Load tile maps
 		background = new Image("/Tiles/background.png",4,4);
 		wall = new Image("/Tiles/wall.png",8,8);
