@@ -272,7 +272,7 @@ public class Level {
 				}
 				for (Collidable wall : walls) {
 					if (wall != null) {
-						if (wall.doesCollide(X, Y, 32.0f, 32.0f) != null) {
+						if (wall.doesCollide(X, Y, 64.0f, 64.0f) != null) {
 							collide = true;
 							break;
 						}
