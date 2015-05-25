@@ -2,6 +2,12 @@ package Main;
 
 import java.awt.image.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -20,6 +26,7 @@ import Object.EntityMap;
 import Object.Exp;
 import Object.Particle;
 import Object.Player;
+import Object.Tile;
 
 public class Level {
 
@@ -27,9 +34,9 @@ public class Level {
 	private int height;
 	private BufferedImage map = null;
 	private String file;
-	private Vector2[][] backgroundTiles;
-	public Vector2[][] wallTiles;
-	private Vector2[][] foregroundTiles;
+	private Vector2[][] backgroundTiles; //Replace with Irenderer changes
+	public Vector2[][] wallTiles; // ^^
+	private Vector2[][] foregroundTiles; // ^^
 	public float[] spawn = new float[] { 480.0f, 480.0f };
 	private Player player;
 	private Hud hud;
@@ -44,11 +51,11 @@ public class Level {
 	
 	public EntityMap eMap;
 
-	public CopyOnWriteArrayList<Collidable> walls;
-	public CopyOnWriteArrayList<Character> characters;
-	public CopyOnWriteArrayList<Particle> particles;
-	public CopyOnWriteArrayList<Exp> experience;
-	public CopyOnWriteArrayList<Coin> coins;
+	public HashMap<Vector2,Collidable> walls;
+	public HashSet<Character> characters;
+	public HashSet<Particle> particles;
+	public HashSet<Exp> experience;
+	public HashSet<Coin> coins;
 
 	public Level(String file) {
 		this.file = file;
@@ -91,110 +98,108 @@ public class Level {
 
 				switch (map.getRGB(x + (map.getWidth() / 3), y)) {
 				case -1:
-					walls.add(null);
 					break;
 				case -3584:
 					wallTiles[x][y] = new Vector2(5.0f, 0.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, false));
 					break;
 				case -14066:
 					wallTiles[x][y] = new Vector2(7.0f, 1.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, true));
 					break;
 				case -20791:
 					wallTiles[x][y] = new Vector2(0.0f, 2.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, true));
 					break;
 				case -32985:
 					wallTiles[x][y] = new Vector2(4.0f, 0.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, false));
 					break;
 				case -1055568:
 					wallTiles[x][y] = new Vector2(6.0f, 1.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, true));
 					break;
 				case -1237980:
 					wallTiles[x][y] = new Vector2(3.0f, 0.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, false));
 					break;
 				case -3620889:
 					wallTiles[x][y] = new Vector2(2.0f, 1.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, true));
 					break;
 				case -3947581:
 					wallTiles[x][y] = new Vector2(2.0f, 2.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, false));
 					break;
 				case -4621737:
 					wallTiles[x][y] = new Vector2(1.0f, 2.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, false));
 					break;
 				case -4856291:
 					wallTiles[x][y] = new Vector2(5.0f, 1.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, true));
 					break;
 				case -6075996:
 					wallTiles[x][y] = new Vector2(1.0f, 1.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, true));
 					break;
 				case -6694422:
 					wallTiles[x][y] = new Vector2(4.0f, 1.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, true));
 					break;
 				case -7864299:
 					wallTiles[x][y] = new Vector2(2.0f, 0.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, false));
 					break;
 				case -8355840:
 					wallTiles[x][y] = new Vector2(3.0f, 2.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, false));
 					break;
 				case -8421505:
 					wallTiles[x][y] = new Vector2(1.0f, 0.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, false));
 					break;
 				case -9399618:
 					wallTiles[x][y] = new Vector2(3.0f, 1.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, true));
 					break;
 				case -14503604:
 					wallTiles[x][y] = new Vector2(6.0f, 0.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, false));
 					break;
 				case -12629812:
 					wallTiles[x][y] = new Vector2(0.0f, 1.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, true));
 					break;
 				case -16735512:
 					wallTiles[x][y] = new Vector2(7.0f, 0.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, false));
 					break;
 				case -16777216:
 					wallTiles[x][y] = new Vector2(0.0f, 0.0f);
-					walls.add(new Collidable(x * 32.0f, y * 32.0f, 32.0f,
+					walls.put(new Vector2(x,y),new Collidable(x * 32.0f, y * 32.0f, 32.0f,
 							32.0f, false));
 					break;
 				default:
-					walls.add(null);
 					System.out.println(map.getRGB(x + (map.getWidth() / 3), y));
 				}
 
@@ -224,11 +229,11 @@ public class Level {
 	}
 
 	private void addStuff() {
-		walls = new CopyOnWriteArrayList<Collidable>();
-		characters = new CopyOnWriteArrayList<Character>();
-		particles = new CopyOnWriteArrayList<Particle>();
-		experience = new CopyOnWriteArrayList<Exp>();
-		coins = new CopyOnWriteArrayList<Coin>();
+		walls = new HashMap<Vector2,Collidable>();
+		characters = new HashSet<Character>();
+		particles = new HashSet<Particle>();
+		experience = new HashSet<Exp>();
+		coins = new HashSet<Coin>();
 
 		base = new DPDTRenderer(Art.ShaderBase);
 		stat = new DPDTRenderer(Art.ShaderStat);
@@ -270,24 +275,30 @@ public class Level {
 						break;
 					}
 				}
-				for (Collidable wall : walls) {
-					if (wall != null) {
-						if (wall.doesCollide(X, Y, 64.0f, 64.0f) != null) {
+				Iterator<Entry<Vector2, Collidable>> iterator = walls.entrySet().iterator() ;
+				while(iterator.hasNext()){
+					Entry<Vector2, Collidable> wall = iterator.next();
+						if (wall.getValue().doesCollide(X, Y, 64.0f, 64.0f) != null) {
 							collide = true;
 							break;
 						}
 					}
-				}
 			} while (collide == true);
 			characters.add(new RedSquare(X, Y));
 			counter = 0;
 		}
 
-		for (Character character : characters) {
-			character.update();
+		Iterator<Character> charIter = characters.iterator();
+		while(charIter.hasNext()){
+			Character c = charIter.next();
+			c.update();
+			if (c.destroy) charIter.remove();
 		}
-		for (Particle particle : particles) {
-			particle.update();
+		Iterator<Particle> partIter = particles.iterator();
+		while(partIter.hasNext()){
+			Particle p = partIter.next();
+			p.update();
+			if (p.destroy) partIter.remove();
 		}
 		for (Exp exp : experience) {
 			exp.update();
@@ -341,7 +352,7 @@ public class Level {
 		return height;
 	}
 	
-	public Vector2 getWall(Vector2 vec){
-		return wallTiles[(int)vec.x()][(int)vec.y()];
+	public Collidable getWall(Vector2 vec){
+		return  walls.get(vec);
 	}
 }

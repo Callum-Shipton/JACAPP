@@ -3,6 +3,7 @@ package Object;
 import static org.lwjgl.glfw.GLFW.*;
 
 import java.nio.FloatBuffer;
+import java.util.HashSet;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL20;
@@ -15,7 +16,7 @@ import Math.Matrix4;
 import Math.Vector2;
 
 public class Player extends Character {
-	
+
 	private int level;
 	private int currentExp;
 	private int expBound;
@@ -25,7 +26,7 @@ public class Player extends Character {
 	private int healthRegen;
 	private int lives;
 	private int coins;
-	
+
 	private FloatBuffer matrix44Buffer;
 	private Matrix4 viewMatrix;
 	private int viewMatrixLocation;
@@ -42,9 +43,9 @@ public class Player extends Character {
 		speed = 5;
 		direction = 0;
 		image = Art.player;
-		
-		weapon = new Weapon(1,10);
-		
+
+		weapon = new Weapon(1, 10);
+
 		viewMatrix = new Matrix4();
 		viewMatrix.clearToIdentity();
 		viewMatrix.translate(-x + (ShootEmUp.WIDTH - width) / 2, -y
@@ -56,7 +57,7 @@ public class Player extends Character {
 		viewMatrixLocationInst = GL20.glGetUniformLocation(Art.ShaderInst,
 				"viewMatrix");
 		scrollScreen();
-		
+
 		team = 0;
 		mana = 18;
 		maxMana = 18;
@@ -73,43 +74,49 @@ public class Player extends Character {
 		super.update();
 		checkKeys();
 		checkDead();
-		if(manaRegen <= 0){
+		if (manaRegen <= 0) {
 			manaRegen = 50;
-			if(mana < maxMana){
+			if (mana < maxMana) {
 				mana++;
 			}
 		}
 		manaRegen--;
-		
-		if(healthRegen <= 0){
+
+		if (healthRegen <= 0) {
 			healthRegen = 100;
-			if(health < maxHealth){
+			if (health < maxHealth) {
 				health++;
 			}
 		}
 		healthRegen--;
 		
-		if(coins < 99){
-			for (Coin coin : ShootEmUp.currentLevel.coins) {
-				if (coin.doesCollide(posX, posY, width, height) != null) {
-					ShootEmUp.currentLevel.coins.remove(coin);
-					coins++;
+		HashSet<Entity> entities = ShootEmUp.currentLevel.eMap
+				.getEntites(gridPos);
+
+		if (coins < 99) {
+			for (Entity coin : entities) {
+				if (coin instanceof Coin) {
+					if (coin.doesCollide(posX, posY, width, height) != null) {
+						((Coin) coin).remove();
+						coins++;
+					}
 				}
 			}
 		}
-		
-		for (Exp exp : ShootEmUp.currentLevel.experience) {
-			if (exp.doesCollide(posX, posY, width, height) != null) {
-				ShootEmUp.currentLevel.experience.remove(exp);
-				currentExp++;
+		for (Entity exp : entities) {
+			if (exp instanceof Exp) {
+				if (exp.doesCollide(posX, posY, width, height) != null) {
+					((Exp) exp).remove();
+					currentExp++;
+				}
 			}
 		}
-		if(currentExp >= expBound){
+		if (currentExp >= expBound) {
 			currentExp = 0;
-			if(level < 99){
+			if (level < 99) {
 				level++;
 			}
-			if(expBound < 18){
+			if (expBound < 18) {
 				expBound++;
 			}
 		}
@@ -141,8 +148,8 @@ public class Player extends Character {
 			move(movement);
 			scrollScreen();
 
-		}
-		else animating = false;
+		} else
+			animating = false;
 		Vector2 dir = new Vector2(0.0f, 0.0f);
 		if (Keyboard.getKey(GLFW_KEY_UP) == 1
 				|| Keyboard.getKey(GLFW_KEY_UP) == 2) {
@@ -168,7 +175,7 @@ public class Player extends Character {
 
 		if (Keyboard.getKey(GLFW_KEY_SPACE) == 1
 				|| Keyboard.getKey(GLFW_KEY_SPACE) == 2) {
-			if((fireRate <= 0) && (mana >= 1)){
+			if ((fireRate <= 0) && (mana >= 1)) {
 				weapon.shoot(posX, posY, direction, team);
 				mana--;
 				fireRate = 10;
@@ -210,7 +217,7 @@ public class Player extends Character {
 		level = 1;
 		coins = 0;
 	}
-	
+
 	public int getHealth() {
 		return health;
 	}
@@ -226,28 +233,28 @@ public class Player extends Character {
 	public void setLives(int lives) {
 		this.lives = lives;
 	}
-	
-	public int getMaxMana(){
+
+	public int getMaxMana() {
 		return maxMana;
 	}
-	
-	public int getMana(){
+
+	public int getMana() {
 		return mana;
 	}
-	
-	public int getCurrentExp(){
+
+	public int getCurrentExp() {
 		return currentExp;
 	}
-	
-	public int getExpBound(){
+
+	public int getExpBound() {
 		return expBound;
 	}
-	
-	public int getLevel(){
+
+	public int getLevel() {
 		return level;
 	}
-	
-	public int getCoins(){
+
+	public int getCoins() {
 		return coins;
 	}
 }

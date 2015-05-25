@@ -52,7 +52,7 @@ public class Enemy extends Character {
 	
 	public boolean checkDead() {
 		if (health <= 0) {
-			ShootEmUp.currentLevel.characters.remove(this);
+			destroy = true;
 			ShootEmUp.currentLevel.eMap.removeEntity(gridPos, this);
 			ShootEmUp.currentLevel.experience.add(new Exp(posX, posY));
 			ShootEmUp.currentLevel.coins.add(new Coin(posX + 32, posY + 32));

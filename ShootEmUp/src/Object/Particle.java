@@ -8,6 +8,7 @@ import Math.Vector2;
 public class Particle extends Entity {
 	private float distance = 0.0f;
 	private Weapon weapon;
+	
 
 	public Particle(float posX, float posY, int direction,  Weapon weapon, int team) {
 		super(posX, posY);
@@ -41,7 +42,7 @@ public class Particle extends Entity {
 
 	@Override
 	public void onCollide(Character hit) {
-		ShootEmUp.currentLevel.particles.remove(this);
+		destroy = true;
 		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, this);
 		if (hit != null && team != hit.team) {
 			hit.damage(weapon.getDamage());

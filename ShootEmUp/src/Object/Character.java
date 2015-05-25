@@ -18,7 +18,7 @@ public abstract class Character extends Entity {
 
 	public boolean checkDead() {
 		if (health <= 0) {
-			ShootEmUp.currentLevel.characters.remove(this);
+			destroy = true;
 			ShootEmUp.currentLevel.eMap.removeEntity(gridPos, this);
 			return true;
 		}

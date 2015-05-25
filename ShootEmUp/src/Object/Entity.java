@@ -18,6 +18,7 @@ public abstract class Entity extends Collidable {
 	protected int animTime;
 	protected int team;
 	protected HashSet<Vector2> gridPos;
+	public boolean destroy = false;
 
 	// Constructors
 
@@ -71,8 +72,7 @@ public abstract class Entity extends Collidable {
 						&& i <= ShootEmUp.currentLevel.getWidth() - 1
 						&& j <= ShootEmUp.currentLevel.getHeight() - 1) {
 					wall = ShootEmUp.currentLevel.walls
-							.get((j * (ShootEmUp.currentLevel.getHeight() - 1))
-									+ i);
+							.get(new Vector2(i,j));
 					if (wall != null) {
 						if (wall.doesCollide(posX + (moveVec.x() * speed),
 								posY, width, height) != null) {
@@ -122,8 +122,7 @@ public abstract class Entity extends Collidable {
 						&& i <= ShootEmUp.currentLevel.getWidth() - 1
 						&& j <= ShootEmUp.currentLevel.getHeight() - 1) {
 					wall = ShootEmUp.currentLevel.walls
-							.get((j * (ShootEmUp.currentLevel.getHeight() - 1))
-									+ i);
+							.get(new Vector2(i,j));
 					if (wall != null) {
 						if (wall.doesCollide(posX,
 								posY + (moveVec.y() * speed), width, height) != null) {

@@ -2,6 +2,7 @@ package Object;
 
 import Display.Art;
 import Display.Image;
+import Main.ShootEmUp;
 
 public class Exp extends Entity{	
 
@@ -12,5 +13,10 @@ public class Exp extends Entity{
 		height = 16;
 		image = Art.exp;
 		animating = true;
+	}
+	
+	public void remove(){
+		ShootEmUp.currentLevel.experience.remove(this);
+		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, this);
 	}
 }
