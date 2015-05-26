@@ -22,16 +22,16 @@ public class Enemy extends Character {
 		
 		if(target != null){
 			Vector2 movement = new Vector2(0.0f, 0.0f);
-			if (target.y() < posY) {
+			if (target.y() - posY < (float)(speed * -1)) {
 				movement.add(0.0f, -1.0f);
 			}
-			if (target.x() < posX) {
+			if (target.x() - posX < (float)(speed * -1)) {
 				movement.add(-1.0f, 0.0f);
 			}
-			if (target.y() > posY) {
+			if (target.y() - posY > (float)speed) {
 				movement.add(0.0f, 1.0f);
 			}
-			if (target.x() > posX) {
+			if (target.x() - posX > (float)speed) {
 				movement.add(1.0f, 0.0f);
 			}
 			if (movement.length() > 0) {
