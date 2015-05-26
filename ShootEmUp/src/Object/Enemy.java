@@ -1,6 +1,7 @@
 package Object;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.PriorityQueue;
 
 import Main.ShootEmUp;
@@ -22,16 +23,16 @@ public class Enemy extends Character {
 		
 		if(target != null){
 			Vector2 movement = new Vector2(0.0f, 0.0f);
-			if ((target.y() < posY)){
+			if (target.y() < posY) {
 				movement.add(0.0f, -1.0f);
 			}
-			if ((target.x() < posX)){
+			if (target.x() < posX) {
 				movement.add(-1.0f, 0.0f);
 			}
-			if ((target.y() > posY)){
+			if (target.y() > posY) {
 				movement.add(0.0f, 1.0f);
 			}
-			if ((target.x() > posX)){
+			if (target.x() > posX) {
 				movement.add(1.0f, 0.0f);
 			}
 			if (movement.length() > 0) {
@@ -63,11 +64,11 @@ public class Enemy extends Character {
 	
 	public Vector2 ai(){
 		PriorityQueue<Tile> open = new PriorityQueue<Tile>(); //queue for tiles to be looked at
-		ArrayList<Tile> closed = new ArrayList<Tile>(); //list of already viewed tiles
-		ArrayList<Tile> children = new ArrayList<Tile>();
+		HashSet<Vector2> closed = new HashSet<Vector2>(); //list of already viewed tiles
 		Tile start = new Tile((float)Math.floor(posX / 32),(float)Math.floor(posY / 32), null); //makes a tile for the enemy position
 		Tile goal = new Tile((float)Math.floor(ShootEmUp.currentLevel.getPlayer().getX() / 32),(float)Math.floor(ShootEmUp.currentLevel.getPlayer().getY() / 32), null); // makes a tile for the player
 		open.add(start);
+		closed.add(new Vector2(start.getX(),start.getY()));
 		
 		while(open.size() != 0){
 			Tile current = open.poll(); //Tile currently being checked
@@ -84,42 +85,73 @@ public class Enemy extends Character {
 			} 
 			
 			//add children
-			children.add(new Tile(current.getX() + 1, current.getY(), current)); 
-			children.add(new Tile(current.getX() + 1, current.getY() + 1, current));
-			children.add(new Tile(current.getX(), current.getY() + 1, current));
-			children.add(new Tile(current.getX() - 1, current.getY() + 1, current));
-			children.add(new Tile(current.getX() - 1, current.getY(), current));
-			children.add(new Tile(current.getX() - 1, current.getY() - 1, current));
-			children.add(new Tile(current.getX(), current.getY() - 1, current));
-			children.add(new Tile(current.getX() + 1, current.getY() - 1, current));
+			Vector2 N = new Vector2(current.getX(), current.getY()-1);
+			Vector2 NW = new Vector2(current.getX()-1, current.getY()-1);
+			Vector2 W = new Vector2(current.getX()-1, current.getY());
+			Vector2 SW = new Vector2(current.getX()-1, current.getY()+1);
+			Vector2 SSW = new Vector2(current.getX()-1, current.getY()+2);
+			Vector2 S = new Vector2(current.getX(), current.getY()+1);
+			Vector2 SS = new Vector2(current.getX(), current.getY()+2);
+			Vector2 SSE = new Vector2(current.getX()+1, current.getY()+2);
+			Vector2 SSEE = new Vector2(current.getX()+2, current.getY()+2);
+			Vector2 SE = new Vector2(current.getX()+1, current.getY()+1);
+			Vector2 SEE = new Vector2(current.getX()+2, current.getY()+1);
+			Vector2 EE = new Vector2(current.getX()+2, current.getY());
+			Vector2 NEE = new Vector2(current.getX()+2, current.getY()-1);
+			Vector2 E = new Vector2(current.getX()+1, current.getY());
+			Vector2 NE = new Vector2(current.getX()+1, current.getY()-1);
 			
-			//check if children have been used before
-			boolean used;
-			for(Tile child : children){
-				used = false;
-				for(Tile tile : closed){
-					if((tile.getX() == child.getX()) && (tile.getY() == child.getY())){
-						used = true;
-					}
+			if(!closed.contains(N)){
+				if(ShootEmUp.currentLevel.getWall(N) == null && ShootEmUp.currentLevel.getWall(NE) == null ){
+					open.add(new Tile(current.getX(), current.getY() - 1, current));
+					closed.add(N);
 				}
-				for(Tile tile : open){
-					if((tile.getX() == child.getX()) && (tile.getY() == child.getY())){
-						used = true;
-					}
+			}
+			if(!closed.contains(NW)){
+				if(ShootEmUp.currentLevel.getWall(NW) == null && ShootEmUp.currentLevel.getWall(N) == null && ShootEmUp.currentLevel.getWall(W) == null && (ShootEmUp.currentLevel.getWall(SW) == null && ShootEmUp.currentLevel.getWall(NE) == null) ){
+					open.add(new Tile(current.getX()-1, current.getY() - 1, current));
+					closed.add(NW);
 				}
-				if(used != true){
-					if((ShootEmUp.currentLevel.wallTiles[(int)child.getX()][(int)child.getY()] == null) && 
-							(ShootEmUp.currentLevel.wallTiles[(int)child.getX()+1][(int)child.getY()] == null) && 
-							(ShootEmUp.currentLevel.wallTiles[(int)child.getX()+1][(int)child.getY()+1] == null) &&
-							(ShootEmUp.currentLevel.wallTiles[(int)child.getX()][(int)child.getY()+1] == null)){
-						open.add(child);
-					}
+			}
+			if(!closed.contains(W)){
+				if(ShootEmUp.currentLevel.getWall(W) == null && ShootEmUp.currentLevel.getWall(SW) == null ){
+					open.add(new Tile(current.getX()-1, current.getY(), current));
+					closed.add(W);
+				}
+			}
+			if(!closed.contains(SW)){
+				if(ShootEmUp.currentLevel.getWall(SW) == null && ShootEmUp.currentLevel.getWall(SSW) == null && ShootEmUp.currentLevel.getWall(SS) == null && (ShootEmUp.currentLevel.getWall(W) == null && ShootEmUp.currentLevel.getWall(SSE) == null) ){
+					open.add(new Tile(current.getX()-1, current.getY() + 1, current));
+					closed.add(SW);
+				}
+			}
+			if(!closed.contains(S)){
+				if(ShootEmUp.currentLevel.getWall(SS) == null && ShootEmUp.currentLevel.getWall(SSE) == null ){
+					open.add(new Tile(current.getX(), current.getY() + 1, current));
+					closed.add(S);
+				}
+			}
+			if(!closed.contains(SE)){
+				if(ShootEmUp.currentLevel.getWall(SSE) == null && ShootEmUp.currentLevel.getWall(SSEE) == null && ShootEmUp.currentLevel.getWall(SEE) == null && (ShootEmUp.currentLevel.getWall(EE) == null && ShootEmUp.currentLevel.getWall(SS) == null) ){
+					open.add(new Tile(current.getX()+1, current.getY() + 1, current));
+					closed.add(SE);
+				}
+			}
+			if(!closed.contains(E)){
+				if(ShootEmUp.currentLevel.getWall(EE) == null && ShootEmUp.currentLevel.getWall(SEE) == null ){
+					open.add(new Tile(current.getX()+1, current.getY(), current));
+					closed.add(E);
+				}
+			}
+			if(!closed.contains(NE)){
+				if(ShootEmUp.currentLevel.getWall(NE) == null && ShootEmUp.currentLevel.getWall(NEE) == null && ShootEmUp.currentLevel.getWall(EE) == null && (ShootEmUp.currentLevel.getWall(SEE) == null && ShootEmUp.currentLevel.getWall(N) == null) ){
+					open.add(new Tile(current.getX()+1, current.getY() - 1, current));
+					closed.add(NE);
 				}
 			}
 			
-			children.clear(); //empties children 
+			//check if children have been used before
 			
-			closed.add(current); //adds the current tile to the used tiles list
 		}
 		
 		return null;
