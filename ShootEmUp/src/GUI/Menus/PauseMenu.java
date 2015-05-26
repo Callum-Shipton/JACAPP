@@ -3,8 +3,6 @@ package GUI.Menus;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
 
-import java.awt.event.KeyEvent;
-
 import org.lwjgl.glfw.GLFW;
 
 import Display.Art;

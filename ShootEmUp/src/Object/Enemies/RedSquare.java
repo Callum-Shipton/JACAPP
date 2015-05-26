@@ -1,7 +1,6 @@
 package Object.Enemies;
 
 import Display.Art;
-import Display.Image;
 import Object.Enemy;
 import Object.Weapon;
 

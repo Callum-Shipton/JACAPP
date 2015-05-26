@@ -8,8 +8,6 @@ import java.util.HashSet;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL20;
 
-import Display.Art;
-import Display.Image;
 import Input.Keyboard;
 import Main.ShootEmUp;
 import Math.Matrix4;

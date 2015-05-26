@@ -1,7 +1,6 @@
 package Object;
 
 import Display.Art;
-import Display.Image;
 import Main.ShootEmUp;
 import Math.Vector2;
 

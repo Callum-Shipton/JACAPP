@@ -1,6 +1,5 @@
 package Object;
 
-import Display.Art;
 import Main.ShootEmUp;
 
 public class Weapon {

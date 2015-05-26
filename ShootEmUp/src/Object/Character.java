@@ -1,6 +1,5 @@
 package Object;
 
-import Display.Image;
 import Main.ShootEmUp;
 
 public abstract class Character extends Entity {
