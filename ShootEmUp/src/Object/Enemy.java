@@ -24,16 +24,32 @@ public class Enemy extends Character {
 		if(target != null){
 			Vector2 movement = new Vector2(0.0f, 0.0f);
 			if (target.y() < posY) {
-				movement.add(0.0f, -1.0f);
+				if(target.y() - posY > -speed){
+					movement.add(0.0f, ((1 / speed) * target.y() - posY));
+				} else {
+					movement.add(0.0f, -1.0f);
+				}
 			}
 			if (target.x() < posX) {
-				movement.add(-1.0f, 0.0f);
+				if(target.x() - posX > -speed){
+					movement.add(((1 / speed) * target.x() - posX), 0.0f);
+				} else {
+					movement.add(-1.0f, 0.0f);
+				}
 			}
 			if (target.y() > posY) {
-				movement.add(0.0f, 1.0f);
+				if(target.y() - posY < speed){
+					movement.add(0.0f, ((1 / speed) * target.y() - posY));
+				} else {
+					movement.add(0.0f, 1.0f);
+				}
 			}
 			if (target.x() > posX) {
-				movement.add(1.0f, 0.0f);
+				if(target.x() - posX < speed){
+					movement.add(((1 / speed) * target.x() - posX), 0.0f);
+				} else {
+					movement.add(1.0f, 0.0f);
+				}
 			}
 			if (movement.length() > 0) {
 				if (movement.length() > 1)
