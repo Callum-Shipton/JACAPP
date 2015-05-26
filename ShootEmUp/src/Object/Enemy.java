@@ -22,16 +22,16 @@ public class Enemy extends Character {
 		
 		if(target != null){
 			Vector2 movement = new Vector2(0.0f, 0.0f);
-			if ((target.y() < posY) && (ShootEmUp.currentLevel.getPlayer().getY() - posY < -speed)) {
+			if ((target.y() < posY)){
 				movement.add(0.0f, -1.0f);
 			}
-			if ((target.x() < posX) && (ShootEmUp.currentLevel.getPlayer().getX() - posX < -speed)) {
+			if ((target.x() < posX)){
 				movement.add(-1.0f, 0.0f);
 			}
-			if ((target.y() > posY) && (ShootEmUp.currentLevel.getPlayer().getY() - posY > speed)) {
+			if ((target.y() > posY)){
 				movement.add(0.0f, 1.0f);
 			}
-			if ((target.x() > posX) && (ShootEmUp.currentLevel.getPlayer().getX() - posX > speed)) {
+			if ((target.x() > posX)){
 				movement.add(1.0f, 0.0f);
 			}
 			if (movement.length() > 0) {
