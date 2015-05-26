@@ -2,14 +2,11 @@ package Main;
 
 import java.awt.image.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.imageio.*;
 
@@ -26,7 +23,6 @@ import Object.EntityMap;
 import Object.Exp;
 import Object.Particle;
 import Object.Player;
-import Object.Tile;
 
 public class Level {
 
