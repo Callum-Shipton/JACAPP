@@ -15,15 +15,12 @@ public class Button extends GuiComponent {
 	private long window;
 
 	private boolean isPressed;
-	private boolean tabs = false;
 	private final int x;
 	private final int y;
 	private final int w;
 	private final int h;
 
 	private final Image id;
-
-	private int texID;
 
 	
 	private boolean performClick = false;
