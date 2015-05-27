@@ -103,84 +103,84 @@ public class Level {
 				case -1:
 					break;
 				case -3584:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							31.0f, false, new Vector2(5.0f, 0.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, false, new Vector2(5.0f, 0.0f)));
 					break;
 				case -14066:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							31.0f, true,  new Vector2(7.0f, 1.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, true,  new Vector2(7.0f, 1.0f)));
 					break;
 				case -20791:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							32.0f, true,  new Vector2(0.0f, 2.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, true,  new Vector2(0.0f, 2.0f)));
 					break;
 				case -32985:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							31.0f, false,  new Vector2(4.0f, 0.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, false,  new Vector2(4.0f, 0.0f)));
 					break;
 				case -1055568:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							32.0f, true,  new Vector2(6.0f, 1.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, true,  new Vector2(6.0f, 1.0f)));
 					break;
 				case -1237980:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							31.0f, false, new Vector2(3.0f, 0.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, false, new Vector2(3.0f, 0.0f)));
 					break;
 				case -3620889:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							32.0f, true, new Vector2(2.0f, 1.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, true, new Vector2(2.0f, 1.0f)));
 					break;
 				case -3947581:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							31.0f, false,new Vector2(2.0f, 2.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, false,new Vector2(2.0f, 2.0f)));
 					break;
 				case -4621737:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							31.0f, false, new Vector2(1.0f, 2.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, false, new Vector2(1.0f, 2.0f)));
 					break;
 				case -4856291:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							32.0f, true,new Vector2(5.0f, 1.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, true,new Vector2(5.0f, 1.0f)));
 					break;
 				case -6075996:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							32.0f, true,new Vector2(1.0f, 1.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, true,new Vector2(1.0f, 1.0f)));
 					break;
 				case -6694422:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							32.0f, true,new Vector2(4.0f, 1.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, true,new Vector2(4.0f, 1.0f)));
 					break;
 				case -7864299:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							31.0f, false,new Vector2(2.0f, 0.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, false,new Vector2(2.0f, 0.0f)));
 					break;
 				case -8355840:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							31.0f, false, new Vector2(3.0f, 2.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, false, new Vector2(3.0f, 2.0f)));
 					break;
 				case -8421505:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							31.0f, false,new Vector2(1.0f, 0.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, false,new Vector2(1.0f, 0.0f)));
 					break;
 				case -9399618:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							32.0f, true, new Vector2(3.0f, 1.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, true, new Vector2(3.0f, 1.0f)));
 					break;
 				case -14503604:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							31.0f, false, new Vector2(6.0f, 0.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, false, new Vector2(6.0f, 0.0f)));
 					break;
 				case -12629812:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							32.0f, true,new Vector2(0.0f, 1.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, true,new Vector2(0.0f, 1.0f)));
 					break;
 				case -16735512:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							31.0f, false,new Vector2(7.0f, 0.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, false,new Vector2(7.0f, 0.0f)));
 					break;
 				case -16777216:
-					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.0f,
-							31.0f, false,new Vector2(0.0f, 0.0f)));
+					walls.put(new Vector2(x,y),new Tile(x * 32.0f, y * 32.0f, 31.99f,
+							31.99f, false,new Vector2(0.0f, 0.0f)));
 					break;
 				default:
 					System.out.println(map.getRGB(x + (map.getWidth() / 3), y));
