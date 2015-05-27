@@ -196,7 +196,7 @@ public class Enemy extends Character {
 			//check if children have been used before
 			
 		}
-		
+		System.out.println("cannot find player");
 		return null;
 	}
 }

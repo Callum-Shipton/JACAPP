@@ -248,12 +248,8 @@ public class Level {
 			Random rand = new Random();
 			do {
 				collide = false;
-				X = rand.nextFloat()
-						* ((float) ((backgroundTiles.length - 1) * 32) - 32.0f)
-						+ 32.0f;
-				Y = rand.nextFloat()
-						* ((float) ((backgroundTiles[0].length - 1) * 32) - 32.0f)
-						+ 32.0f;
+				X = rand.nextInt((backgroundTiles.length - 1) * 32);
+				Y = rand.nextInt((backgroundTiles[0].length - 1) * 32);
 
 				for (Character character : characters) {
 					if ((character.doesCollide(X, Y, 64.0f, 64.0f) != null)) {
