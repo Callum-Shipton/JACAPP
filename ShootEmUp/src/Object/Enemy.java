@@ -78,9 +78,25 @@ public class Enemy extends Character {
 			Random rand = new Random();
 			int prob = rand.nextInt(3);
 			if(prob == 0 ) {
-				ShootEmUp.currentLevel.armour.add(new Armour(posX + 32, posY, Art.shoes));
+				int armour = rand.nextInt(5);
+				if(armour == 0){
+					ShootEmUp.currentLevel.armour.add(new Armour(posX + 32, posY, Art.shoes));
+				} else if(armour == 1){
+					ShootEmUp.currentLevel.armour.add(new Armour(posX + 32, posY, Art.legs));
+				} else if(armour == 2){
+					ShootEmUp.currentLevel.armour.add(new Armour(posX + 32, posY, Art.chest));
+				} else if(armour == 3){
+					ShootEmUp.currentLevel.armour.add(new Armour(posX + 32, posY, Art.helmet));
+				} else {
+					ShootEmUp.currentLevel.armour.add(new Armour(posX + 32, posY, Art.ring));
+				}
 			} else if(prob == 1) {
-				ShootEmUp.currentLevel.items.add(new Item(posX + 32, posY, Art.healthPotion));
+				int item = rand.nextInt(2);
+				if(item == 0) {
+					ShootEmUp.currentLevel.items.add(new Item(posX + 32, posY, Art.healthPotion));
+				} else {
+					ShootEmUp.currentLevel.items.add(new Item(posX + 32, posY, Art.manaPotion));
+				}
 			} else {	
 				ShootEmUp.currentLevel.weapons.add(new Weapon(posX + 32, posY, Art.bow, 5, 5));
 			}
