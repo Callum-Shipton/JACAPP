@@ -37,8 +37,8 @@ public class Player extends Character {
 		canfly = false;
 		setMaxHealth(18);
 		health = maxHealth;
-		width = 63.0f;
-		height = 63.0f;
+		width = 64.0f;
+		height = 64.0f;
 		speed = 5;
 		direction = 0;
 		image = Art.player;
