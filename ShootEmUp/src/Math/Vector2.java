@@ -183,4 +183,9 @@ public class Vector2 implements Vector<Vector2> {
 	    hash = (int) (467 * hash + this.y);
 	    return hash;
 	}
+
+	public void floor() {
+		x = (float) Math.floor(x);
+		y = (float) Math.floor(y);
+	}
 }

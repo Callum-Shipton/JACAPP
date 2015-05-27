@@ -169,6 +169,8 @@ public class Player extends Character {
 		if (movement.length() > 0) {
 			if (movement.length() > 1)
 				movement.normalize();
+			System.out.println("X: " + posX);
+			System.out.println("Y: " + posY);
 			animating = true;
 			move(movement);
 			scrollScreen();

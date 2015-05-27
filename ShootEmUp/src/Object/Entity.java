@@ -47,18 +47,18 @@ public abstract class Entity extends Collidable {
 				.getEntites(gridPos);
 		boolean collide = false;
 		Character hit = null;
-		int maxX = 1 + (int) Math.ceil((posX + (moveVec.x() * speed)) / 32);
-		int minX = -1 + (int) Math.floor((posX - (moveVec.x() * speed)) / 32);
-		int maxY = 1 + (int) Math.ceil((posY + (moveVec.y() * speed)) / 32);
-		int minY = -1 + (int) Math.floor((posY - (moveVec.y() * speed)) / 32);
+		int maxX = 1 + (int) Math.ceil((posX + (Math.round(moveVec.x() * speed))) / 32);
+		int minX = -1 + (int) Math.floor((posX - (Math.round(moveVec.x() * speed))) / 32);
+		int maxY = 1 + (int) Math.ceil((posY + (Math.round(moveVec.y() * speed))) / 32);
+		int minY = -1 + (int) Math.floor((posY - (Math.round(moveVec.y() * speed))) / 32);
 		Collidable wall;
 		if(Math.abs(moveVec.x()) > 0){
 		for (Entity character : entities) {
 			if (character instanceof Character) {
-				if ((character.doesCollide(posX + (moveVec.x() * speed), posY,
+				if ((character.doesCollide(posX + (Math.round(moveVec.x() * speed)), posY,
 						width, height) != null) && (character != this)) {
 					collide = true;
-					vec = character.doesCollide(posX + (moveVec.x() * speed),
+					vec = character.doesCollide(posX + (Math.round(moveVec.x() * speed)),
 							posY, width, height);
 					hit = (Character) character;
 					break;
@@ -74,12 +74,12 @@ public abstract class Entity extends Collidable {
 					wall = ShootEmUp.currentLevel.walls
 							.get(new Vector2(i,j));
 					if (wall != null) {
-						if (wall.doesCollide(posX + (moveVec.x() * speed),
+						if (wall.doesCollide(posX + (Math.round(moveVec.x() * speed)),
 								posY, width, height) != null) {
 							if (!(wall.flat && canfly)) {
 								collide = true;
 								vec = wall.doesCollide(posX
-										+ (moveVec.x() * speed), posY, width,
+										+ (Math.round(moveVec.x() * speed)), posY, width,
 										height);
 								break;
 							}
@@ -90,14 +90,14 @@ public abstract class Entity extends Collidable {
 		}
 
 		if (collide == false) {
-			posX += moveVec.x() * speed;
+			posX += Math.round(moveVec.x() * speed);
 		} else {
 			if (Math.abs(vec.x()) < speed) {
-				posX += (moveVec.x() * speed) - vec.x()
+				posX += (Math.round(moveVec.x() * speed)) - vec.x()
 						- (moveVec.x() / Math.abs(moveVec.x()));
 			} else if(Math.abs(vec.x()) >= speed); 
 			else if (Math.abs(vec.z()) < speed) {
-				posX += (moveVec.x() * speed) - vec.z()
+				posX += (Math.round(moveVec.x() * speed)) - vec.z()
 						- (moveVec.x() / Math.abs(moveVec.x()));
 			}
 			onCollide(hit);
@@ -107,12 +107,12 @@ public abstract class Entity extends Collidable {
 		if(Math.abs(moveVec.y()) > 0){
 		for (Entity character : entities) {
 			if (character instanceof Character) {
-				if ((character.doesCollide(posX, posY + (moveVec.y() * speed),
+				if ((character.doesCollide(posX, posY + (Math.round(moveVec.y() * speed)),
 						width, height) != null) && (character != this)) {
 					collide = true;
 					hit = (Character) character;
 					vec = character.doesCollide(posX, posY
-							+ (moveVec.y() * speed), width, height);
+							+ (Math.round(moveVec.y() * speed)), width, height);
 					break;
 				}
 			}
@@ -127,11 +127,11 @@ public abstract class Entity extends Collidable {
 							.get(new Vector2(i,j));
 					if (wall != null) {
 						if (wall.doesCollide(posX,
-								posY + (moveVec.y() * speed), width, height) != null) {
+								posY + (Math.round(moveVec.y() * speed)), width, height) != null) {
 							if (!(wall.flat && canfly)) {
 								collide = true;
 								vec = wall.doesCollide(posX,
-										posY + (moveVec.y() * speed), width,
+										posY + (Math.round(moveVec.y() * speed)), width,
 										height);
 								break;
 							}
@@ -142,15 +142,15 @@ public abstract class Entity extends Collidable {
 		}
 
 		if (collide == false) {
-			posY += moveVec.y() * speed;
+			posY += Math.round(moveVec.y() * speed);
 		} else {
 			onCollide(hit);
 			if (Math.abs(vec.y()) < speed) {
-				posY += (moveVec.y() * speed) - vec.y()
+				posY += (Math.round(moveVec.y() * speed)) - vec.y()
 						- (moveVec.y() / Math.abs(moveVec.y()));
 			} else if(Math.abs(vec.y()) >= speed); 
 			else if (Math.abs(vec.w()) < speed) {
-				posY += (moveVec.y() * speed) - vec.w()
+				posY += (Math.round(moveVec.y() * speed)) - vec.w()
 						- (moveVec.y() / Math.abs(moveVec.y()));
 			}
 		}
