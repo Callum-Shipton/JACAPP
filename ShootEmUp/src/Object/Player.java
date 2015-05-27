@@ -103,10 +103,26 @@ public class Player extends Character {
 			}
 		}
 		
-		for (Entity pickup : entities) {
-			if (pickup instanceof Armour) {
-				if (pickup.doesCollide(posX, posY, width, height) != null) {
-					((Armour) pickup).remove();
+		for (Entity armour : entities) {
+			if (armour instanceof Armour) {
+				if (armour.doesCollide(posX, posY, width, height) != null) {
+					((Armour) armour).remove();
+					//add pickup to inventory
+				}
+			}
+		}
+		for (Entity item : entities) {
+			if (item instanceof Item) {
+				if (item.doesCollide(posX, posY, width, height) != null) {
+					((Item) item).remove();
+					//add pickup to inventory
+				}
+			}
+		}
+		for (Entity weapon : entities) {
+			if (weapon instanceof Weapon) {
+				if (weapon.doesCollide(posX, posY, width, height) != null) {
+					((Weapon) weapon).remove();
 					//add pickup to inventory
 				}
 			}
