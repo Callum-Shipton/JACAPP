@@ -21,10 +21,12 @@ import Object.Collidable;
 import Object.Character;
 import Object.EntityMap;
 import Object.Exp;
+import Object.Item;
 import Object.Particle;
-import Object.Pickup;
+import Object.Armour;
 import Object.Player;
 import Object.Tile;
+import Object.Weapon;
 
 public class Level {
 
@@ -54,7 +56,9 @@ public class Level {
 	public HashSet<Particle> particles;
 	public HashSet<Exp> experience;
 	public HashSet<Coin> coins;
-	public HashSet<Pickup> pickups;
+	public HashSet<Armour> armour;
+	public HashSet<Item> items;
+	public HashSet<Weapon> weapons;
 	
 	public Level(String file) {
 		this.file = file;
@@ -213,7 +217,9 @@ public class Level {
 		particles = new HashSet<Particle>();
 		experience = new HashSet<Exp>();
 		coins = new HashSet<Coin>();
-		pickups = new HashSet<Pickup>();
+		armour = new HashSet<Armour>();
+		items = new HashSet<Item>();
+		weapons = new HashSet<Weapon>();
 
 		base = new DPDTRenderer(Art.ShaderBase);
 		stat = new DPDTRenderer(Art.ShaderStat);
@@ -286,8 +292,14 @@ public class Level {
 		for (Coin coin : coins) {
 			coin.update();
 		}
-		for (Pickup pickup : pickups) {
-			pickup.update();
+		for (Armour arm : armour) {
+			arm.update();
+		}
+		for (Item item : items) {
+			item.update();
+		}
+		for (Weapon weapon : weapons) {
+			weapon.update();
 		}
 		hud.update();
 	}
@@ -302,8 +314,14 @@ public class Level {
 		for (Coin coin : coins) {
 			coin.render(base);
 		}
-		for (Pickup pickup : pickups) {
-			pickup.render(base);
+		for (Armour arm : armour) {
+			arm.render(base);
+		}
+		for (Item item : items) {
+			item.render(base);
+		}
+		for (Weapon weapon : weapons) {
+			weapon.render(base);
 		}
 		for (Character character : characters) {
 			character.render(base);

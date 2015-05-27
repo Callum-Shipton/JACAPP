@@ -18,7 +18,7 @@ public class RedSquare extends Enemy {
 		canfly = false;
 		setMaxHealth(5);
 		health = maxHealth;
-		weapon = new Weapon(1,10);
+		weapon = new Weapon(0,0,null,1,10);
 	}
 
 }

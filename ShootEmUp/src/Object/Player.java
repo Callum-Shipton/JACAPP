@@ -43,7 +43,7 @@ public class Player extends Character {
 		direction = 0;
 		image = Art.player;
 
-		weapon = new Weapon(1, 10);
+		weapon = new Weapon(0, 0, null, 1, 10);
 
 		viewMatrix = new Matrix4();
 		viewMatrix.clearToIdentity();
@@ -104,9 +104,9 @@ public class Player extends Character {
 		}
 		
 		for (Entity pickup : entities) {
-			if (pickup instanceof Pickup) {
+			if (pickup instanceof Armour) {
 				if (pickup.doesCollide(posX, posY, width, height) != null) {
-					((Pickup) pickup).remove();
+					((Armour) pickup).remove();
 					//add pickup to inventory
 				}
 			}

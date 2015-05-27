@@ -3,7 +3,9 @@ package Object;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.PriorityQueue;
+import java.util.Random;
 
+import Display.Art;
 import Main.ShootEmUp;
 import Math.Vector2;
 
@@ -73,7 +75,16 @@ public class Enemy extends Character {
 			ShootEmUp.currentLevel.eMap.removeEntity(gridPos, this);
 			ShootEmUp.currentLevel.experience.add(new Exp(posX, posY));
 			ShootEmUp.currentLevel.coins.add(new Coin(posX + 32, posY + 32));
-			ShootEmUp.currentLevel.pickups.add(new Pickup(posX + 32, posY));
+			
+			Random rand = new Random();
+			int prob = rand.nextInt(3);
+			if(prob == 0 ) {
+				ShootEmUp.currentLevel.armour.add(new Armour(posX + 32, posY, Art.shoes));
+			} else if(prob == 1) {
+				ShootEmUp.currentLevel.items.add(new Item(posX + 32, posY, Art.healthPotion));
+			} else {	
+				ShootEmUp.currentLevel.weapons.add(new Weapon(posX + 32, posY, Art.bow, 5, 5));
+			}
 			return true;
 		}
 		return false;

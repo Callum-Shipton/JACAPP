@@ -32,8 +32,14 @@ public class Art {
 	public static Image exp;
 	public static Image coin;
 	
-	//Pickup maps
+	//Armour maps
 	public static Image shoes;
+	
+	//Item maps
+	public static Image healthPotion;
+	
+	//Weapon maps
+	public static Image bow;
 	
 	//HUD Textures
 	public static Image infoBox;
@@ -164,8 +170,14 @@ public class Art {
 		exp = new Image("/img/Exp.png",6,1);
 		coin = new Image("/img/Coin.png",6,1);
 		
-		//Load pickup maps
+		//Load Armour maps
 		shoes = new Image("/img/Shoes.png",8,1);
+		
+		//Load Item maps
+		healthPotion = new Image("/img/HealthPotion.png",3,1);
+		
+		//Load Weapon maps
+		bow = new Image("/img/Bow.png",8,1);
 		
 		//Load HUD textures 
 		infoBox = new Image("/HUD/BarInfo.png",1,1);
