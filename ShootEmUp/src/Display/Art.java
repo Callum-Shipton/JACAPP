@@ -32,6 +32,9 @@ public class Art {
 	public static Image exp;
 	public static Image coin;
 	
+	//Pickup maps
+	public static Image shoes;
+	
 	//HUD Textures
 	public static Image infoBox;
 	public static Image healthBar;
@@ -160,6 +163,9 @@ public class Art {
 		particle = new Image("/img/Particle.png",1,8);
 		exp = new Image("/img/Exp.png",6,1);
 		coin = new Image("/img/Coin.png",6,1);
+		
+		//Load pickup maps
+		shoes = new Image("/img/Shoes.png",8,1);
 		
 		//Load HUD textures 
 		infoBox = new Image("/HUD/BarInfo.png",1,1);

@@ -73,6 +73,7 @@ public class Enemy extends Character {
 			ShootEmUp.currentLevel.eMap.removeEntity(gridPos, this);
 			ShootEmUp.currentLevel.experience.add(new Exp(posX, posY));
 			ShootEmUp.currentLevel.coins.add(new Coin(posX + 32, posY + 32));
+			ShootEmUp.currentLevel.pickups.add(new Pickup(posX + 32, posY));
 			return true;
 		}
 		return false;

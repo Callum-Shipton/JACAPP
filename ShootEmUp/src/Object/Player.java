@@ -102,6 +102,16 @@ public class Player extends Character {
 				}
 			}
 		}
+		
+		for (Entity pickup : entities) {
+			if (pickup instanceof Pickup) {
+				if (pickup.doesCollide(posX, posY, width, height) != null) {
+					((Pickup) pickup).remove();
+					//add pickup to inventory
+				}
+			}
+		}
+		
 		for (Entity exp : entities) {
 			if (exp instanceof Exp) {
 				if (exp.doesCollide(posX, posY, width, height) != null) {

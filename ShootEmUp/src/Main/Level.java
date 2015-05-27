@@ -22,6 +22,7 @@ import Object.Character;
 import Object.EntityMap;
 import Object.Exp;
 import Object.Particle;
+import Object.Pickup;
 import Object.Player;
 import Object.Tile;
 
@@ -53,7 +54,8 @@ public class Level {
 	public HashSet<Particle> particles;
 	public HashSet<Exp> experience;
 	public HashSet<Coin> coins;
-
+	public HashSet<Pickup> pickups;
+	
 	public Level(String file) {
 		this.file = file;
 		loadLevel();
@@ -211,6 +213,7 @@ public class Level {
 		particles = new HashSet<Particle>();
 		experience = new HashSet<Exp>();
 		coins = new HashSet<Coin>();
+		pickups = new HashSet<Pickup>();
 
 		base = new DPDTRenderer(Art.ShaderBase);
 		stat = new DPDTRenderer(Art.ShaderStat);
@@ -283,6 +286,9 @@ public class Level {
 		for (Coin coin : coins) {
 			coin.update();
 		}
+		for (Pickup pickup : pickups) {
+			pickup.update();
+		}
 		hud.update();
 	}
 
@@ -295,6 +301,9 @@ public class Level {
 		}
 		for (Coin coin : coins) {
 			coin.render(base);
+		}
+		for (Pickup pickup : pickups) {
+			pickup.render(base);
 		}
 		for (Character character : characters) {
 			character.render(base);
