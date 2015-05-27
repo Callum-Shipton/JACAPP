@@ -13,7 +13,7 @@ public class Tile extends Collidable implements Comparable<Tile> {
 	private Vector2 texture;
 	
 	public Tile(float X, float Y, Tile parent){
-		super(X*32.0f, Y*32.0f, 32.0f, 32.0f, false);
+		super(X*32.0f, Y*32.0f, 31.0f, 31.0f, false);
 		position = new Vector2(X,Y);
 		distanceV = new Vector2();
 		distanceV = new Vector2(position);
