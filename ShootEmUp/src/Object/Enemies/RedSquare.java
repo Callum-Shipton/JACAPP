@@ -8,8 +8,8 @@ public class RedSquare extends Enemy {
 
 	public RedSquare(float x, float y) {
 		super(x, y);
-		width = 63.99f;
-		height = 63.99f;
+		width = 64.0f;
+		height = 64.0f;
 		health = 5;
 		team = 1;
 		speed = 5;
