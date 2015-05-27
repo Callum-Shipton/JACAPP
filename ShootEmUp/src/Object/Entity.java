@@ -47,6 +47,12 @@ public abstract class Entity extends Collidable {
 				.getEntites(gridPos);
 		boolean collide = false;
 		Character hit = null;
+		int maxX = 1 + (int) Math.ceil((posX + (moveVec.x() * speed)) / 32);
+		int minX = -1 + (int) Math.floor((posX - (moveVec.x() * speed)) / 32);
+		int maxY = 1 + (int) Math.ceil((posY + (moveVec.y() * speed)) / 32);
+		int minY = -1 + (int) Math.floor((posY - (moveVec.y() * speed)) / 32);
+		Collidable wall;
+		if(Math.abs(moveVec.x()) > 0){
 		for (Entity character : entities) {
 			if (character instanceof Character) {
 				if ((character.doesCollide(posX + (moveVec.x() * speed), posY,
@@ -59,12 +65,6 @@ public abstract class Entity extends Collidable {
 				}
 			}
 		}
-		int maxX = 1 + (int) Math.ceil((posX + (moveVec.x() * speed)) / 32);
-		int minX = -1 + (int) Math.floor((posX - (moveVec.x() * speed)) / 32);
-		int maxY = 1 + (int) Math.ceil((posY + (moveVec.y() * speed)) / 32);
-		int minY = -1 + (int) Math.floor((posY - (moveVec.y() * speed)) / 32);
-
-		Collidable wall;
 
 		for (int i = minX; i <= maxX; i++) {
 			for (int j = minY; j <= maxY; j++) {
@@ -102,7 +102,9 @@ public abstract class Entity extends Collidable {
 			}
 			onCollide(hit);
 		}
+		}
 		collide = false;
+		if(Math.abs(moveVec.y()) > 0){
 		for (Entity character : entities) {
 			if (character instanceof Character) {
 				if ((character.doesCollide(posX, posY + (moveVec.y() * speed),
@@ -151,6 +153,7 @@ public abstract class Entity extends Collidable {
 				posY += (moveVec.y() * speed) - vec.w()
 						- (moveVec.y() / Math.abs(moveVec.y()));
 			}
+		}
 		}
 		HashSet<Vector2> newGrid = ShootEmUp.currentLevel.eMap.getGridPos(this);
 		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, this);
