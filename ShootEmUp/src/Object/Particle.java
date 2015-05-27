@@ -15,7 +15,7 @@ public class Particle extends Entity {
 		this.weapon = weapon;
 		speed = 10;
 		this.direction = direction;
-		image = Art.particle;
+		image = Art.earthMagic;
 		width = 32f;
 		height = 32f;
 		this.team = team;

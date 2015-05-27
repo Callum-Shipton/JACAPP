@@ -18,6 +18,7 @@ public class Art {
 	public static Image back;
 	public static Image exit;
 	public static Image invScreen;
+	
 	//Tile maps
 	public static Image background;
 	public static Image wall;
@@ -27,16 +28,25 @@ public class Art {
 	public static Image enemy;
 	public static Image player;
 	
-	//Particle maps
-	public static Image particle;
+	//Drop maps
 	public static Image exp;
 	public static Image coin;
 	
+	//Magic maps
+	public static Image earthMagic;
+	public static Image fireMagic;
+	public static Image iceMagic;
+	
 	//Armour maps
 	public static Image shoes;
+	public static Image legs;
+	public static Image chest;
+	public static Image helmet;
+	public static Image ring;
 	
 	//Item maps
 	public static Image healthPotion;
+	public static Image manaPotion;
 	
 	//Weapon maps
 	public static Image bow;
@@ -156,28 +166,38 @@ public class Art {
 		invScreen = new Image("/Menus/invScreen.png", 1, 1);
 		back = new Image("/buttons/back.png",1,2);
 		exit = new Image("/buttons/exit.png",1,2);
+		
 		//Load tile maps
 		background = new Image("/Tiles/background.png",4,4);
 		wall = new Image("/Tiles/wall.png",8,8);
 		foreground = new Image("/Tiles/foreground.png",4,4);
 		
 		//Load character maps
-		player = new Image("/img/Player.png",6,8);
-		enemy = new Image("/img/Enemy.png",6,8);
+		player = new Image("/Characters/Player.png",6,8);
+		enemy = new Image("/Characters/Enemy.png",6,8);
 		
 		//Load particle maps
-		particle = new Image("/img/Particle.png",1,8);
 		exp = new Image("/img/Exp.png",6,1);
 		coin = new Image("/img/Coin.png",6,1);
 		
+		//Load Magic maps
+		earthMagic = new Image("/Magic/EarthMagic.png",1,8);
+		fireMagic = new Image("/Magic/FireMagic.png",1,8);
+		iceMagic = new Image("/Magic/IceMagic.png",1,8);
+		
 		//Load Armour maps
-		shoes = new Image("/img/Shoes.png",8,1);
+		shoes = new Image("/Armour/Shoes.png",8,1);
+		legs = new Image("/Armour/Legs.png",8,1);
+		chest = new Image("/Armour/Chest.png",8,1);
+		helmet = new Image("/Armour/Helmet.png",8,1);
+		ring = new Image("/Armour/Ring.png",8,1);
 		
 		//Load Item maps
-		healthPotion = new Image("/img/HealthPotion.png",3,1);
+		healthPotion = new Image("/Items/HealthPotion.png",3,1);
+		manaPotion = new Image("/Items/ManaPotion.png",3,1);
 		
 		//Load Weapon maps
-		bow = new Image("/img/Bow.png",8,1);
+		bow = new Image("/Weapons/Bow.png",8,1);
 		
 		//Load HUD textures 
 		infoBox = new Image("/HUD/BarInfo.png",1,1);
