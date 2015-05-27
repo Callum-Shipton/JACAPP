@@ -187,10 +187,10 @@ public class Art {
 		
 		//Load Armour maps
 		shoes = new Image("/Armour/Shoes.png",8,1);
-		legs = new Image("/Armour/Legs.png",8,1);
-		chest = new Image("/Armour/Chest.png",8,1);
-		helmet = new Image("/Armour/Helmet.png",8,1);
-		ring = new Image("/Armour/Ring.png",8,1);
+		legs = new Image("/Armour/Legs.png",3,1);
+		chest = new Image("/Armour/Chest.png",3,1);
+		helmet = new Image("/Armour/Helmet.png",3,1);
+		ring = new Image("/Armour/Ring.png",6,1);
 		
 		//Load Item maps
 		healthPotion = new Image("/Items/HealthPotion.png",3,1);
