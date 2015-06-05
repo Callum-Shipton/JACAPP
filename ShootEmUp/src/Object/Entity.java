@@ -155,10 +155,12 @@ public abstract class Entity extends Collidable {
 			}
 		}
 		}
+		if(!destroy){
 		HashSet<Vector2> newGrid = ShootEmUp.currentLevel.eMap.getGridPos(this);
 		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, this);
 		ShootEmUp.currentLevel.eMap.addEntity(newGrid, this);
 		gridPos = newGrid;
+		}
 	}
 
 	public void render(DPDTRenderer r) {
