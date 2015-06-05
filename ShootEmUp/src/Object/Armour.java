@@ -8,8 +8,8 @@ public class Armour extends Entity {
 	public Armour(float posX, float posY, Image image){
 		super(posX, posY);
 		
-		width = 16;
-		height = 16;
+		setWidth(16);
+		setHeight(16);
 		this.image = image;
 		setAnimating(true);
 	}

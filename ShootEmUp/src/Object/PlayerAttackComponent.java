@@ -2,7 +2,7 @@ package Object;
 
 public class PlayerAttackComponent implements AttackComponent {
 
-	PlayerSpawnComponent PSC;
+	PointSpawnComponent PSC;
 	
 	private Weapon weapon = new Weapon(1, 10, 10, false, 1);
 	private int fireRate = 10;
@@ -11,7 +11,7 @@ public class PlayerAttackComponent implements AttackComponent {
 	private int maxMana = 18;
 	private int maxHealth = 18;
 	
-	public PlayerAttackComponent(PlayerSpawnComponent PSC){
+	public PlayerAttackComponent(PointSpawnComponent PSC){
 		this.PSC = PSC;
 	}
 	

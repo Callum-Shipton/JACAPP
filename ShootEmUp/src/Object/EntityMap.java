@@ -30,9 +30,9 @@ public class EntityMap {
 	public HashSet<Vector2> getGridPos(Entity e){
 		HashSet<Vector2> gridPos = new HashSet<Vector2>();
 		gridPos.add(new Vector2((float)Math.floor((e.getX()/32)/6),(float)Math.floor((e.getY()/32)/6)));
-		gridPos.add(new Vector2((float)Math.floor(((e.getX()+e.width)/32)/6),(float)Math.floor((e.getY()/32)/6)));
-		gridPos.add(new Vector2((float)Math.floor(((e.getX()+e.width)/32)/6),(float)Math.floor(((e.getY()+e.width)/32)/6)));
-		gridPos.add(new Vector2((float)Math.floor((e.getX()/32)/6),(float)Math.floor(((e.getY()+e.width)/32)/6)));
+		gridPos.add(new Vector2((float)Math.floor(((e.getX()+e.getWidth())/32)/6),(float)Math.floor((e.getY()/32)/6)));
+		gridPos.add(new Vector2((float)Math.floor(((e.getX()+e.getWidth())/32)/6),(float)Math.floor(((e.getY()+e.getWidth())/32)/6)));
+		gridPos.add(new Vector2((float)Math.floor((e.getX()/32)/6),(float)Math.floor(((e.getY()+e.getWidth())/32)/6)));
 		return gridPos;
 	}
 	

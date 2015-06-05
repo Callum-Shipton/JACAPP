@@ -16,8 +16,8 @@ public class Particle extends Entity {
 		speed = 10;
 		this.setDirection(direction);
 		image = Art.earthMagic;
-		width = 32f;
-		height = 32f;
+		setWidth(32f);
+		setHeight(32f);
 		this.setTeam(team);
 	}
 

@@ -24,8 +24,8 @@ public class PlayerGraphicsComponent implements GraphicsComponent {
 	public PlayerGraphicsComponent(Entity e){
 		viewMatrix = new Matrix4();
 		viewMatrix.clearToIdentity();
-		viewMatrix.translate(-e.getPosX() + (ShootEmUp.WIDTH - width) / 2, -e.getPosY()
-				+ (ShootEmUp.HEIGHT - height) / 2, 0);
+		viewMatrix.translate(-e.getPosX() + (ShootEmUp.WIDTH - e.getWidth()) / 2, -e.getPosY()
+				+ (ShootEmUp.HEIGHT - e.getHeight()) / 2, 0);
 		viewMatrix.transpose();
 		matrix44Buffer = BufferUtils.createFloatBuffer(16);
 		viewMatrixLocation = GL20.glGetUniformLocation(Art.ShaderBase,
@@ -88,8 +88,8 @@ public class PlayerGraphicsComponent implements GraphicsComponent {
 
 	public void scrollScreen(Entity e) {
 		viewMatrix.clearToIdentity();
-		viewMatrix.translate(-e.getPosX() + (ShootEmUp.WIDTH - width) / 2, -e.getPosY()
-				+ (ShootEmUp.HEIGHT - height) / 2, 0);
+		viewMatrix.translate(-e.getPosX() + (ShootEmUp.WIDTH - e.getWidth()) / 2, -e.getPosY()
+				+ (ShootEmUp.HEIGHT - e.getHeight()) / 2, 0);
 		matrix44Buffer.clear();
 		matrix44Buffer = viewMatrix.toBuffer();
 		GL20.glUseProgram(Art.ShaderBase);

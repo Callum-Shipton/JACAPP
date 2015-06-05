@@ -1,6 +1,6 @@
 package Object;
 
-public class PlayerRegenComponent implements RegenComponent {
+public class MageRegenComponent implements RegenComponent {
 
 	private int manaRegen = 50;
 
@@ -8,7 +8,7 @@ public class PlayerRegenComponent implements RegenComponent {
 	
 	PlayerAttackComponent PAC;
 	
-	public PlayerRegenComponent(PlayerAttackComponent PAC){
+	public MageRegenComponent(PlayerAttackComponent PAC){
 		this.PAC = PAC;
 	}
 	

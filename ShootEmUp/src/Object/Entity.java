@@ -48,10 +48,10 @@ public abstract class Entity extends Collidable {
 		for (Entity character : entities) {
 			if (character instanceof Character) {
 				if ((character.doesCollide(getPosX() + (Math.round(moveVec.x() * speed)), getPosY(),
-						width, height) != null) && (character != this)) {
+						getWidth(), getHeight()) != null) && (character != this)) {
 					collide = true;
 					vec = character.doesCollide(getPosX() + (Math.round(moveVec.x() * speed)),
-							getPosY(), width, height);
+							getPosY(), getWidth(), getHeight());
 					hit = (Character) character;
 					break;
 				}
@@ -67,12 +67,12 @@ public abstract class Entity extends Collidable {
 							.get(new Vector2(i,j));
 					if (wall != null) {
 						if (wall.doesCollide(getPosX() + (Math.round(moveVec.x() * speed)),
-								getPosY(), width, height) != null) {
+								getPosY(), getWidth(), getHeight()) != null) {
 							if (!(wall.flat && canfly)) {
 								collide = true;
 								vec = wall.doesCollide(getPosX()
-										+ (Math.round(moveVec.x() * speed)), getPosY(), width,
-										height);
+										+ (Math.round(moveVec.x() * speed)), getPosY(), getWidth(),
+										getHeight());
 								break;
 							}
 						}
@@ -100,11 +100,11 @@ public abstract class Entity extends Collidable {
 		for (Entity character : entities) {
 			if (character instanceof Character) {
 				if ((character.doesCollide(getPosX(), getPosY() + (Math.round(moveVec.y() * speed)),
-						width, height) != null) && (character != this)) {
+						getWidth(), getHeight()) != null) && (character != this)) {
 					collide = true;
 					hit = (Character) character;
 					vec = character.doesCollide(getPosX(), getPosY()
-							+ (Math.round(moveVec.y() * speed)), width, height);
+							+ (Math.round(moveVec.y() * speed)), getWidth(), getHeight());
 					break;
 				}
 			}
@@ -119,12 +119,12 @@ public abstract class Entity extends Collidable {
 							.get(new Vector2(i,j));
 					if (wall != null) {
 						if (wall.doesCollide(getPosX(),
-								getPosY() + (Math.round(moveVec.y() * speed)), width, height) != null) {
+								getPosY() + (Math.round(moveVec.y() * speed)), getWidth(), getHeight()) != null) {
 							if (!(wall.flat && canfly)) {
 								collide = true;
 								vec = wall.doesCollide(getPosX(),
-										getPosY() + (Math.round(moveVec.y() * speed)), width,
-										height);
+										getPosY() + (Math.round(moveVec.y() * speed)), getWidth(),
+										getHeight());
 								break;
 							}
 						}
@@ -156,7 +156,7 @@ public abstract class Entity extends Collidable {
 	}
 
 	public void render(DPDTRenderer r) {
-		r.draw(image, new Vector2(getPosX(), getPosY()), new Vector2(width, height),
+		r.draw(image, new Vector2(getPosX(), getPosY()), new Vector2(getWidth(), getHeight()),
 				0.0f, new Vector2((float) Math.floor(animID / animTime),
 						(float) getDirection()), new Vector2(image.getFWidth(),
 						image.getFHeight()));
@@ -195,5 +195,21 @@ public abstract class Entity extends Collidable {
 
 	public void setTeam(int team) {
 		this.team = team;
+	}
+
+	public float getWidth() {
+		return width;
+	}
+
+	public void setWidth(float width) {
+		this.width = width;
+	}
+
+	public float getHeight() {
+		return height;
+	}
+
+	public void setHeight(float height) {
+		this.height = height;
 	}
 }

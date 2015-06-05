@@ -3,7 +3,7 @@ package Object;
 import Main.ShootEmUp;
 import Math.Vector2;
 
-public class PlayerSpawnComponent implements SpawnComponent {
+public class PointSpawnComponent implements SpawnComponent {
 
 	private Vector2 spawnLoc = new Vector2(480.0f, 480.0f);
 	

@@ -55,7 +55,7 @@ public class Player extends Character {
 		if (coins < 99) {
 			for (Entity coin : entities) {
 				if (coin instanceof Coin) {
-					if (coin.doesCollide(getPosX(), getPosY(), width, height) != null) {
+					if (coin.doesCollide(getPosX(), getPosY(), getWidth(), getHeight()) != null) {
 						((Coin) coin).remove();
 						coins++;
 					}
@@ -65,7 +65,7 @@ public class Player extends Character {
 		
 		for (Entity armour : entities) {
 			if (armour instanceof Armour) {
-				if (armour.doesCollide(getPosX(), getPosY(), width, height) != null) {
+				if (armour.doesCollide(getPosX(), getPosY(), getWidth(), getHeight()) != null) {
 					((Armour) armour).remove();
 					//add pickup to inventory
 				}
@@ -73,7 +73,7 @@ public class Player extends Character {
 		}
 		for (Entity item : entities) {
 			if (item instanceof Item) {
-				if (item.doesCollide(getPosX(), getPosY(), width, height) != null) {
+				if (item.doesCollide(getPosX(), getPosY(), getWidth(), getHeight()) != null) {
 					((Item) item).remove();
 					//add pickup to inventory
 				}
@@ -81,7 +81,7 @@ public class Player extends Character {
 		}
 		for (Entity weapon : entities) {
 			if (weapon instanceof Weapon) {
-				if (weapon.doesCollide(getPosX(), getPosY(), width, height) != null) {
+				if (weapon.doesCollide(getPosX(), getPosY(), getWidth(), getHeight()) != null) {
 					((Weapon) weapon).remove();
 					//add pickup to inventory
 				}
@@ -90,7 +90,7 @@ public class Player extends Character {
 		
 		for (Entity exp : entities) {
 			if (exp instanceof Exp) {
-				if (exp.doesCollide(getPosX(), getPosY(), width, height) != null) {
+				if (exp.doesCollide(getPosX(), getPosY(), getWidth(), getHeight()) != null) {
 					((Exp) exp).remove();
 					currentExp++;
 				}

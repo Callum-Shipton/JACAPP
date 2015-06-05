@@ -8,8 +8,8 @@ public class Exp extends Entity{
 	public Exp(float posX, float posY){
 		super(posX, posY);
 		
-		width = 16;
-		height = 16;
+		setWidth(16);
+		setHeight(16);
 		image = Art.exp;
 		setAnimating(true);
 	}
