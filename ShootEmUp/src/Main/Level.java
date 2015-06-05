@@ -37,7 +37,6 @@ public class Level {
 	private Vector2[][] backgroundTiles; //Replace with Irenderer changes
 	public Vector2[][] wallTiles; // ^^
 	private Vector2[][] foregroundTiles; // ^^
-	public float[] spawn = new float[] { 480.0f, 480.0f };
 	private Player player;
 	private Hud hud;
 

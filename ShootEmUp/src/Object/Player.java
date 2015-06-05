@@ -19,49 +19,23 @@ public class Player extends Character {
 	private int level;
 	private int currentExp;
 	private int expBound;
-	private int mana;
-	private int maxMana;
-	private int manaRegen;
-	private int healthRegen;
+
 	private int lives;
 	private int coins;
 
-	private FloatBuffer matrix44Buffer;
-	private Matrix4 viewMatrix;
-	private int viewMatrixLocation;
-	private int viewMatrixLocationInst;
-	private int fireRate = 10;
+
 
 	public Player(float x, float y) {
 		super(x, y);
 		canfly = false;
-		setMaxHealth(18);
-		health = maxHealth;
-		width = 64.0f;
-		height = 64.0f;
-		speed = 5;
-		direction = 0;
-		image = Art.player;
 
-		weapon = new Weapon(0, 0, null, 1, 10);
+		
 
-		viewMatrix = new Matrix4();
-		viewMatrix.clearToIdentity();
-		viewMatrix.translate(-x + (ShootEmUp.WIDTH - width) / 2, -y
-				+ (ShootEmUp.HEIGHT - height) / 2, 0);
-		viewMatrix.transpose();
-		matrix44Buffer = BufferUtils.createFloatBuffer(16);
-		viewMatrixLocation = GL20.glGetUniformLocation(Art.ShaderBase,
-				"viewMatrix");
-		viewMatrixLocationInst = GL20.glGetUniformLocation(Art.ShaderInst,
-				"viewMatrix");
-		scrollScreen();
+		
 
-		team = 0;
-		mana = 18;
-		maxMana = 18;
-		manaRegen = 50;
-		healthRegen = 100;
+		setTeam(0);
+
+
 		level = 1;
 		currentExp = 0;
 		expBound = 1;
@@ -73,21 +47,7 @@ public class Player extends Character {
 		super.update();
 		checkKeys();
 		checkDead();
-		if (manaRegen <= 0) {
-			manaRegen = 50;
-			if (mana < maxMana) {
-				mana++;
-			}
-		}
-		manaRegen--;
-
-		if (healthRegen <= 0) {
-			healthRegen = 100;
-			if (health < maxHealth) {
-				health++;
-			}
-		}
-		healthRegen--;
+		
 		
 		HashSet<Entity> entities = ShootEmUp.currentLevel.eMap
 				.getEntites(gridPos);
@@ -95,7 +55,7 @@ public class Player extends Character {
 		if (coins < 99) {
 			for (Entity coin : entities) {
 				if (coin instanceof Coin) {
-					if (coin.doesCollide(posX, posY, width, height) != null) {
+					if (coin.doesCollide(getPosX(), getPosY(), width, height) != null) {
 						((Coin) coin).remove();
 						coins++;
 					}
@@ -105,7 +65,7 @@ public class Player extends Character {
 		
 		for (Entity armour : entities) {
 			if (armour instanceof Armour) {
-				if (armour.doesCollide(posX, posY, width, height) != null) {
+				if (armour.doesCollide(getPosX(), getPosY(), width, height) != null) {
 					((Armour) armour).remove();
 					//add pickup to inventory
 				}
@@ -113,7 +73,7 @@ public class Player extends Character {
 		}
 		for (Entity item : entities) {
 			if (item instanceof Item) {
-				if (item.doesCollide(posX, posY, width, height) != null) {
+				if (item.doesCollide(getPosX(), getPosY(), width, height) != null) {
 					((Item) item).remove();
 					//add pickup to inventory
 				}
@@ -121,7 +81,7 @@ public class Player extends Character {
 		}
 		for (Entity weapon : entities) {
 			if (weapon instanceof Weapon) {
-				if (weapon.doesCollide(posX, posY, width, height) != null) {
+				if (weapon.doesCollide(getPosX(), getPosY(), width, height) != null) {
 					((Weapon) weapon).remove();
 					//add pickup to inventory
 				}
@@ -130,7 +90,7 @@ public class Player extends Character {
 		
 		for (Entity exp : entities) {
 			if (exp instanceof Exp) {
-				if (exp.doesCollide(posX, posY, width, height) != null) {
+				if (exp.doesCollide(getPosX(), getPosY(), width, height) != null) {
 					((Exp) exp).remove();
 					currentExp++;
 				}
@@ -148,82 +108,10 @@ public class Player extends Character {
 	}
 
 	private void checkKeys() {
-		Vector2 movement = new Vector2(0.0f, 0.0f);
-		if (Keyboard.getKey(GLFW_KEY_W) == 1
-				|| Keyboard.getKey(GLFW_KEY_W) == 2) {
-			movement.add(0.0f, -1.0f);
-		}
-		if (Keyboard.getKey(GLFW_KEY_A) == 1
-				|| Keyboard.getKey(GLFW_KEY_A) == 2) {
-			movement.add(-1.0f, 0.0f);
-		}
-		if (Keyboard.getKey(GLFW_KEY_S) == 1
-				|| Keyboard.getKey(GLFW_KEY_S) == 2) {
-			movement.add(0.0f, 1.0f);
-		}
-		if (Keyboard.getKey(GLFW_KEY_D) == 1
-				|| Keyboard.getKey(GLFW_KEY_D) == 2) {
-			movement.add(1.0f, 0.0f);
-		}
-
-		if (movement.length() > 0) {
-			if (movement.length() > 1)
-				movement.normalize();
-			System.out.println("X: " + posX);
-			System.out.println("Y: " + posY);
-			animating = true;
-			move(movement);
-			scrollScreen();
-
-		} else
-			animating = false;
-		Vector2 dir = new Vector2(0.0f, 0.0f);
-		if (Keyboard.getKey(GLFW_KEY_UP) == 1
-				|| Keyboard.getKey(GLFW_KEY_UP) == 2) {
-			dir.add(0.0f, -1.0f);
-		}
-		if (Keyboard.getKey(GLFW_KEY_LEFT) == 1
-				|| Keyboard.getKey(GLFW_KEY_LEFT) == 2) {
-			dir.add(-1.0f, 0.0f);
-		}
-		if (Keyboard.getKey(GLFW_KEY_DOWN) == 1
-				|| Keyboard.getKey(GLFW_KEY_DOWN) == 2) {
-			dir.add(0.0f, 1.0f);
-		}
-		if (Keyboard.getKey(GLFW_KEY_RIGHT) == 1
-				|| Keyboard.getKey(GLFW_KEY_RIGHT) == 2) {
-			dir.add(1.0f, 0.0f);
-		}
-		if (dir.length() > 0) {
-			if (dir.length() > 1)
-				dir.normalize();
-			direction = (int) (Math.round(dir.Angle()) / 45);
-		}
-
-		if (Keyboard.getKey(GLFW_KEY_SPACE) == 1
-				|| Keyboard.getKey(GLFW_KEY_SPACE) == 2) {
-			if ((fireRate <= 0) && (mana >= 1)) {
-				weapon.shoot(posX, posY, direction, team);
-				mana--;
-				fireRate = 10;
-			}
-		}
-		fireRate--;
+		
 	}
 
-	private void scrollScreen() {
-		viewMatrix.clearToIdentity();
-		viewMatrix.translate(-posX + (ShootEmUp.WIDTH - width) / 2, -posY
-				+ (ShootEmUp.HEIGHT - height) / 2, 0);
-		matrix44Buffer.clear();
-		matrix44Buffer = viewMatrix.toBuffer();
-		GL20.glUseProgram(Art.ShaderBase);
-		GL20.glUniformMatrix4(viewMatrixLocation, false, matrix44Buffer);
-		GL20.glUseProgram(0);
-		GL20.glUseProgram(Art.ShaderInst);
-		GL20.glUniformMatrix4(viewMatrixLocationInst, false, matrix44Buffer);
-		GL20.glUseProgram(0);
-	}
+
 
 	public boolean checkDead() {
 		if (health <= 0) {
@@ -234,11 +122,8 @@ public class Player extends Character {
 	}
 
 	private void respawn() {
-		posX = ShootEmUp.currentLevel.spawn[0];
-		posY = ShootEmUp.currentLevel.spawn[1];
+
 		scrollScreen();
-		health = getMaxHealth();
-		mana = getMaxMana();
 		currentExp = 0;
 		expBound = 1;
 		level = 1;

@@ -3,9 +3,9 @@ package Object;
 import Main.ShootEmUp;
 
 public abstract class Character extends Entity {
-	protected int health;
-	protected int maxHealth;
-	protected Weapon weapon;
+
+	
+
 
 	public Character(float x, float y) {
 		super(x, y);

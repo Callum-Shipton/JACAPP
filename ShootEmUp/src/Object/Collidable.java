@@ -3,10 +3,8 @@ package Object;
 import Math.Vector4;
 
 public class Collidable {
-	protected float posX;
-	protected float posY;
-	protected float width;
-	protected float height;
+
+
 	protected boolean flat;
 
 	public Collidable(float posX, float posY, float width, float height, boolean flat) {

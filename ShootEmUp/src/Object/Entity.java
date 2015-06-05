@@ -10,13 +10,12 @@ import Math.Vector4;
 
 public abstract class Entity extends Collidable {
 	protected int speed;
-	protected int direction;
-	protected Image image;
 	protected boolean canfly;
-	protected boolean animating;
-	protected int animID;
-	protected int animTime;
-	protected int team;
+	private float posX;
+	private float posY;
+	private float width;
+	private float height;
+	private int team;
 	protected HashSet<Vector2> gridPos;
 	public boolean destroy = false;
 
@@ -24,19 +23,12 @@ public abstract class Entity extends Collidable {
 
 	public Entity(float x, float y) {
 		super(x, y, false);
-		this.animID = 0;
-		this.animating = false;
-		this.animTime = 6;
 		gridPos = ShootEmUp.currentLevel.eMap.getGridPos(this);
 		ShootEmUp.currentLevel.eMap.addEntity(gridPos, this);
 	}
 
 	public void update() {
-		if (animating) {
-			animID++;
-			if (animID >= image.getFWidth() * animTime)
-				animID = 0;
-		}
+
 	}
 
 	// Methods
@@ -47,19 +39,19 @@ public abstract class Entity extends Collidable {
 				.getEntites(gridPos);
 		boolean collide = false;
 		Character hit = null;
-		int maxX = 1 + (int) Math.ceil((posX + (Math.round(moveVec.x() * speed))) / 32);
-		int minX = -1 + (int) Math.floor((posX - (Math.round(moveVec.x() * speed))) / 32);
-		int maxY = 1 + (int) Math.ceil((posY + (Math.round(moveVec.y() * speed))) / 32);
-		int minY = -1 + (int) Math.floor((posY - (Math.round(moveVec.y() * speed))) / 32);
+		int maxX = 1 + (int) Math.ceil((getPosX() + (Math.round(moveVec.x() * speed))) / 32);
+		int minX = -1 + (int) Math.floor((getPosX() - (Math.round(moveVec.x() * speed))) / 32);
+		int maxY = 1 + (int) Math.ceil((getPosY() + (Math.round(moveVec.y() * speed))) / 32);
+		int minY = -1 + (int) Math.floor((getPosY() - (Math.round(moveVec.y() * speed))) / 32);
 		Collidable wall;
 		if(Math.abs(moveVec.x()) > 0){
 		for (Entity character : entities) {
 			if (character instanceof Character) {
-				if ((character.doesCollide(posX + (Math.round(moveVec.x() * speed)), posY,
+				if ((character.doesCollide(getPosX() + (Math.round(moveVec.x() * speed)), getPosY(),
 						width, height) != null) && (character != this)) {
 					collide = true;
-					vec = character.doesCollide(posX + (Math.round(moveVec.x() * speed)),
-							posY, width, height);
+					vec = character.doesCollide(getPosX() + (Math.round(moveVec.x() * speed)),
+							getPosY(), width, height);
 					hit = (Character) character;
 					break;
 				}
@@ -74,12 +66,12 @@ public abstract class Entity extends Collidable {
 					wall = ShootEmUp.currentLevel.walls
 							.get(new Vector2(i,j));
 					if (wall != null) {
-						if (wall.doesCollide(posX + (Math.round(moveVec.x() * speed)),
-								posY, width, height) != null) {
+						if (wall.doesCollide(getPosX() + (Math.round(moveVec.x() * speed)),
+								getPosY(), width, height) != null) {
 							if (!(wall.flat && canfly)) {
 								collide = true;
-								vec = wall.doesCollide(posX
-										+ (Math.round(moveVec.x() * speed)), posY, width,
+								vec = wall.doesCollide(getPosX()
+										+ (Math.round(moveVec.x() * speed)), getPosY(), width,
 										height);
 								break;
 							}
@@ -90,15 +82,15 @@ public abstract class Entity extends Collidable {
 		}
 
 		if (collide == false) {
-			posX += Math.round(moveVec.x() * speed);
+			setPosX(getPosX() + Math.round(moveVec.x() * speed));
 		} else {
 			if (Math.abs(vec.x()) < speed) {
-				posX += (Math.round(moveVec.x() * speed)) - vec.x()
-						- (moveVec.x() / Math.abs(moveVec.x()));
+				setPosX(getPosX() + ((Math.round(moveVec.x() * speed)) - vec.x()
+						- (moveVec.x() / Math.abs(moveVec.x()))));
 			} else if(Math.abs(vec.x()) >= speed); 
 			else if (Math.abs(vec.z()) < speed) {
-				posX += (Math.round(moveVec.x() * speed)) - vec.z()
-						- (moveVec.x() / Math.abs(moveVec.x()));
+				setPosX(getPosX() + ((Math.round(moveVec.x() * speed)) - vec.z()
+						- (moveVec.x() / Math.abs(moveVec.x()))));
 			}
 			onCollide(hit);
 		}
@@ -107,11 +99,11 @@ public abstract class Entity extends Collidable {
 		if(Math.abs(moveVec.y()) > 0){
 		for (Entity character : entities) {
 			if (character instanceof Character) {
-				if ((character.doesCollide(posX, posY + (Math.round(moveVec.y() * speed)),
+				if ((character.doesCollide(getPosX(), getPosY() + (Math.round(moveVec.y() * speed)),
 						width, height) != null) && (character != this)) {
 					collide = true;
 					hit = (Character) character;
-					vec = character.doesCollide(posX, posY
+					vec = character.doesCollide(getPosX(), getPosY()
 							+ (Math.round(moveVec.y() * speed)), width, height);
 					break;
 				}
@@ -126,12 +118,12 @@ public abstract class Entity extends Collidable {
 					wall = ShootEmUp.currentLevel.walls
 							.get(new Vector2(i,j));
 					if (wall != null) {
-						if (wall.doesCollide(posX,
-								posY + (Math.round(moveVec.y() * speed)), width, height) != null) {
+						if (wall.doesCollide(getPosX(),
+								getPosY() + (Math.round(moveVec.y() * speed)), width, height) != null) {
 							if (!(wall.flat && canfly)) {
 								collide = true;
-								vec = wall.doesCollide(posX,
-										posY + (Math.round(moveVec.y() * speed)), width,
+								vec = wall.doesCollide(getPosX(),
+										getPosY() + (Math.round(moveVec.y() * speed)), width,
 										height);
 								break;
 							}
@@ -142,16 +134,16 @@ public abstract class Entity extends Collidable {
 		}
 
 		if (collide == false) {
-			posY += Math.round(moveVec.y() * speed);
+			setPosY(getPosY() + Math.round(moveVec.y() * speed));
 		} else {
 			onCollide(hit);
 			if (Math.abs(vec.y()) < speed) {
-				posY += (Math.round(moveVec.y() * speed)) - vec.y()
-						- (moveVec.y() / Math.abs(moveVec.y()));
+				setPosY(getPosY() + ((Math.round(moveVec.y() * speed)) - vec.y()
+						- (moveVec.y() / Math.abs(moveVec.y()))));
 			} else if(Math.abs(vec.y()) >= speed); 
 			else if (Math.abs(vec.w()) < speed) {
-				posY += (Math.round(moveVec.y() * speed)) - vec.w()
-						- (moveVec.y() / Math.abs(moveVec.y()));
+				setPosY(getPosY() + ((Math.round(moveVec.y() * speed)) - vec.w()
+						- (moveVec.y() / Math.abs(moveVec.y()))));
 			}
 		}
 		}
@@ -164,29 +156,14 @@ public abstract class Entity extends Collidable {
 	}
 
 	public void render(DPDTRenderer r) {
-		r.draw(image, new Vector2(posX, posY), new Vector2(width, height),
+		r.draw(image, new Vector2(getPosX(), getPosY()), new Vector2(width, height),
 				0.0f, new Vector2((float) Math.floor(animID / animTime),
-						(float) direction), new Vector2(image.getFWidth(),
+						(float) getDirection()), new Vector2(image.getFWidth(),
 						image.getFHeight()));
 	}
 
 	// Setters and getters
 
-	public float getX() {
-		return posX;
-	}
-
-	public void setX(float posX) {
-		this.posX = posX;
-	}
-
-	public float getY() {
-		return posY;
-	}
-
-	public void setY(float posY) {
-		this.posY = posY;
-	}
 
 	public int getSpeed() {
 		return speed;
@@ -194,5 +171,29 @@ public abstract class Entity extends Collidable {
 
 	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+
+	public float getPosX() {
+		return posX;
+	}
+
+	public void setPosX(float posX) {
+		this.posX = posX;
+	}
+
+	public float getPosY() {
+		return posY;
+	}
+
+	public void setPosY(float posY) {
+		this.posY = posY;
+	}
+
+	public int getTeam() {
+		return team;
+	}
+
+	public void setTeam(int team) {
+		this.team = team;
 	}
 }

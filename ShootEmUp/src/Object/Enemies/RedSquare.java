@@ -11,9 +11,9 @@ public class RedSquare extends Enemy {
 		width = 64.0f;
 		height = 64.0f;
 		health = 5;
-		team = 1;
+		setTeam(1);
 		speed = 5;
-		direction = 0;
+		setDirection(0);
 		image = Art.enemy;
 		canfly = false;
 		setMaxHealth(5);

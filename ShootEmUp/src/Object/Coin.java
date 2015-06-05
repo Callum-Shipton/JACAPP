@@ -11,7 +11,7 @@ public class Coin extends Entity{
 		width = 32;
 		height = 32;
 		image = Art.coin;
-		animating = true;
+		setAnimating(true);
 		
 	}
 	

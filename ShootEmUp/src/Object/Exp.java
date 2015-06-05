@@ -11,7 +11,7 @@ public class Exp extends Entity{
 		width = 16;
 		height = 16;
 		image = Art.exp;
-		animating = true;
+		setAnimating(true);
 	}
 	
 	public void remove(){

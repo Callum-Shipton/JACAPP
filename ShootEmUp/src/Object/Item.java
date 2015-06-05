@@ -11,7 +11,7 @@ public class Item extends Entity {
 		width = 16;
 		height = 16;
 		this.image = image;
-		animating = true;
+		setAnimating(true);
 	}
 	
 	public void remove(){

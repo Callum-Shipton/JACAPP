@@ -14,25 +14,25 @@ public class Particle extends Entity {
 		canfly = true;
 		this.weapon = weapon;
 		speed = 10;
-		this.direction = direction;
+		this.setDirection(direction);
 		image = Art.earthMagic;
 		width = 32f;
 		height = 32f;
-		this.team = team;
+		this.setTeam(team);
 	}
 
 	public void update() {
 		Vector2 movement = new Vector2(0.0f, 0.0f);
-		if (direction >= 1 && direction <= 3) {
+		if (getDirection() >= 1 && getDirection() <= 3) {
 			movement.add(1.0f, 0.0f);
 		}
-		if (direction >= 5) {
+		if (getDirection() >= 5) {
 			movement.add(-1.0f, 0.0f);
 		}
-		if (direction <= 1 || direction >= 7) {
+		if (getDirection() <= 1 || getDirection() >= 7) {
 			movement.add(0.0f, -1.0f);
 		}
-		if (direction >= 3 && direction <= 5) {
+		if (getDirection() >= 3 && getDirection() <= 5) {
 			movement.add(0.0f, 1.0f);
 		}
 		movement.normalize();
@@ -43,7 +43,7 @@ public class Particle extends Entity {
 	public void onCollide(Character hit) {
 		destroy = true;
 		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, this);
-		if (hit != null && team != hit.team) {
+		if (hit != null && getTeam() != hit.getTeam()) {
 			hit.damage(weapon.getDamage());
 		}
 	}

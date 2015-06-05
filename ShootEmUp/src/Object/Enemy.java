@@ -24,30 +24,30 @@ public class Enemy extends Character {
 		
 		if(target != null){
 			Vector2 movement = new Vector2(0.0f, 0.0f);
-			if (target.y() < posY) {
-				if(target.y() - posY > -speed){
-					movement.add(0.0f, ((1.0f / speed) * (target.y() - posY)));
+			if (target.y() < getPosY()) {
+				if(target.y() - getPosY() > -speed){
+					movement.add(0.0f, ((1.0f / speed) * (target.y() - getPosY())));
 				} else {
 					movement.add(0.0f, -1.0f);
 				}
 			}
-			if (target.x() < posX) {
-				if(target.x() - posX > -speed){
-					movement.add(((1.0f / speed) * (target.x() - posX)), 0.0f);
+			if (target.x() < getPosX()) {
+				if(target.x() - getPosX() > -speed){
+					movement.add(((1.0f / speed) * (target.x() - getPosX())), 0.0f);
 				} else {
 					movement.add(-1.0f, 0.0f);
 				}
 			}
-			if (target.y() > posY) {
-				if(target.y() - posY < speed){
-					movement.add(0.0f, ((1.0f / speed) * (target.y() - posY)));
+			if (target.y() > getPosY()) {
+				if(target.y() - getPosY() < speed){
+					movement.add(0.0f, ((1.0f / speed) * (target.y() - getPosY())));
 				} else {
 					movement.add(0.0f, 1.0f);
 				}
 			}
-			if (target.x() > posX) {
-				if(target.x() - posX < speed){
-					movement.add(((1.0f / speed) * (target.x() - posX)), 0.0f);
+			if (target.x() > getPosX()) {
+				if(target.x() - getPosX() < speed){
+					movement.add(((1.0f / speed) * (target.x() - getPosX())), 0.0f);
 				} else {
 					movement.add(1.0f, 0.0f);
 				}
@@ -55,15 +55,15 @@ public class Enemy extends Character {
 			if (movement.length() > 0) {
 				if (movement.length() > 1)
 					movement.normalize();
-				animating = true;
+				setAnimating(true);
 				move(movement);
-				direction = (int) (Math.round(movement.Angle()) / 45);
+				setDirection((int) (Math.round(movement.Angle()) / 45));
 			}
-			else animating = false;
+			else setAnimating(false);
 		}
 		counter++;
 		if (counter == 30){
-			weapon.shoot(posX, posY, direction, team);
+			weapon.attack(getPosX(), getPosY(), getDirection(), getTeam());
 			counter = 0;
 		}
 	}
@@ -72,33 +72,33 @@ public class Enemy extends Character {
 		if (health <= 0) {
 			destroy = true;
 			ShootEmUp.currentLevel.eMap.removeEntity(gridPos, this);
-			ShootEmUp.currentLevel.experience.add(new Exp(posX, posY));
-			ShootEmUp.currentLevel.coins.add(new Coin(posX + 32, posY + 32));
+			ShootEmUp.currentLevel.experience.add(new Exp(getPosX(), getPosY()));
+			ShootEmUp.currentLevel.coins.add(new Coin(getPosX() + 32, getPosY() + 32));
 			
 			Random rand = new Random();
 			int prob = rand.nextInt(3);
 			if(prob == 0 ) {
 				int armour = rand.nextInt(5);
 				if(armour == 0){
-					ShootEmUp.currentLevel.armour.add(new Armour(posX + 32, posY, Art.shoes));
+					ShootEmUp.currentLevel.armour.add(new Armour(getPosX() + 32, getPosY(), Art.shoes));
 				} else if(armour == 1){
-					ShootEmUp.currentLevel.armour.add(new Armour(posX + 32, posY, Art.legs));
+					ShootEmUp.currentLevel.armour.add(new Armour(getPosX() + 32, getPosY(), Art.legs));
 				} else if(armour == 2){
-					ShootEmUp.currentLevel.armour.add(new Armour(posX + 32, posY, Art.chest));
+					ShootEmUp.currentLevel.armour.add(new Armour(getPosX() + 32, getPosY(), Art.chest));
 				} else if(armour == 3){
-					ShootEmUp.currentLevel.armour.add(new Armour(posX + 32, posY, Art.helmet));
+					ShootEmUp.currentLevel.armour.add(new Armour(getPosX() + 32, getPosY(), Art.helmet));
 				} else {
-					ShootEmUp.currentLevel.armour.add(new Armour(posX + 32, posY, Art.ring));
+					ShootEmUp.currentLevel.armour.add(new Armour(getPosX() + 32, getPosY(), Art.ring));
 				}
 			} else if(prob == 1) {
 				int item = rand.nextInt(2);
 				if(item == 0) {
-					ShootEmUp.currentLevel.items.add(new Item(posX + 32, posY, Art.healthPotion));
+					ShootEmUp.currentLevel.items.add(new Item(getPosX() + 32, getPosY(), Art.healthPotion));
 				} else {
-					ShootEmUp.currentLevel.items.add(new Item(posX + 32, posY, Art.manaPotion));
+					ShootEmUp.currentLevel.items.add(new Item(getPosX() + 32, getPosY(), Art.manaPotion));
 				}
 			} else {	
-				ShootEmUp.currentLevel.weapons.add(new Weapon(posX + 32, posY, Art.bow, 5, 5));
+				ShootEmUp.currentLevel.weapons.add(new Weapon(getPosX() + 32, getPosY(), Art.bow, 5, 5));
 			}
 			return true;
 		}
@@ -108,7 +108,7 @@ public class Enemy extends Character {
 	public Vector2 ai(){
 		PriorityQueue<Tile> open = new PriorityQueue<Tile>(); //queue for tiles to be looked at
 		HashSet<Vector2> closed = new HashSet<Vector2>(); //list of already viewed tiles
-		Tile start = new Tile((float)Math.floor(posX / 32),(float)Math.floor(posY / 32), null); //makes a tile for the enemy position
+		Tile start = new Tile((float)Math.floor(getPosX() / 32),(float)Math.floor(getPosY() / 32), null); //makes a tile for the enemy position
 		Tile goal = new Tile((float)Math.floor(ShootEmUp.currentLevel.getPlayer().getX() / 32),(float)Math.floor(ShootEmUp.currentLevel.getPlayer().getY() / 32), null); // makes a tile for the player
 		open.add(start);
 		closed.add(new Vector2(start.getX(),start.getY()));
