@@ -1,4 +1,6 @@
-package Object;
+package Components.Spawn;
+
+import Object.Entity;
 
 public interface SpawnComponent {
 

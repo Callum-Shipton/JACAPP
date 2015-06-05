@@ -1,4 +1,4 @@
-package Object;
+package Components.Physics;
 
 public class PlayerPhysicsComponent {
 

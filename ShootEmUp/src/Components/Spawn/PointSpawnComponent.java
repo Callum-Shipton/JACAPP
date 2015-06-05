@@ -1,7 +1,8 @@
-package Object;
+package Components.Spawn;
 
 import Main.ShootEmUp;
 import Math.Vector2;
+import Object.Entity;
 
 public class PointSpawnComponent implements SpawnComponent {
 

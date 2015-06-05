@@ -1,8 +1,15 @@
-package Object;
+package Components.Attack;
 
-public class PlayerAttackComponent implements AttackComponent {
+import Components.Graphical.PlayerGraphicsComponent;
+import Components.Spawn.PointSpawnComponent;
+import Object.Entity;
+import Object.Weapon;
+
+public class PlayerAttack extends BaseAttack {
 
 	PointSpawnComponent PSC;
+	PlayerGraphicsComponent PGC;
+	BasicLevelComponent BLC; 
 	
 	private Weapon weapon = new Weapon(1, 10, 10, false, 1);
 	private int fireRate = 10;
@@ -11,8 +18,9 @@ public class PlayerAttackComponent implements AttackComponent {
 	private int maxMana = 18;
 	private int maxHealth = 18;
 	
-	public PlayerAttackComponent(PointSpawnComponent PSC){
+	public PlayerAttack(PlayerGraphicsComponent PGC, PointSpawnComponent PSC){
 		this.PSC = PSC;
+		this.PGC = PGC;
 	}
 	
 	@Override
@@ -36,6 +44,8 @@ public class PlayerAttackComponent implements AttackComponent {
 			PSC.spawn(e);
 			health = getMaxHealth();
 			mana = getMaxMana();
+			PGC.scrollScreen(e);
+			
 		}
 	}
 
@@ -47,28 +57,12 @@ public class PlayerAttackComponent implements AttackComponent {
 		this.mana = mana;
 	}
 
-	public int getHealth() {
-		return health;
-	}
-
-	public void setHealth(int health) {
-		this.health = health;
-	}
-
 	public int getMaxMana() {
 		return maxMana;
 	}
 
 	public void setMaxMana(int maxMana) {
 		this.maxMana = maxMana;
-	}
-
-	public int getMaxHealth() {
-		return maxHealth;
-	}
-
-	public void setMaxHealth(int maxHealth) {
-		this.maxHealth = maxHealth;
 	}
 
 }

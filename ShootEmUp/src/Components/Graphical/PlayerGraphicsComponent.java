@@ -1,10 +1,13 @@
-package Display;
+package Components.Graphical;
 
 import java.nio.FloatBuffer;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL20;
 
+import Display.Art;
+import Display.DPDTRenderer;
+import Display.Image;
 import Main.ShootEmUp;
 import Math.Matrix4;
 import Object.Entity;

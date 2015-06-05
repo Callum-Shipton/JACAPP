@@ -1,4 +1,6 @@
-package Object;
+package Components.Attack;
+
+import Object.Entity;
 
 public interface AttackComponent {
 	

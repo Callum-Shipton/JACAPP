@@ -1,4 +1,4 @@
-package Input;
+package Components.Input;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_A;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_D;
@@ -9,18 +9,19 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_S;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
-import Display.PlayerGraphicsComponent;
+import Components.Attack.PlayerAttack;
+import Components.Graphical.PlayerGraphicsComponent;
+import Input.Keyboard;
 import Math.Vector2;
 import Object.Entity;
-import Object.PlayerAttackComponent;
 import Object.Weapon;
 
 public class PlayerInputComponent implements InputComponent {
 	
 	PlayerGraphicsComponent PGC;
-	PlayerAttackComponent PAC;
+	PlayerAttack PAC;
 	
-	PlayerInputComponent(PlayerGraphicsComponent PGC, PlayerAttackComponent PAC){
+	PlayerInputComponent(PlayerGraphicsComponent PGC, PlayerAttack PAC){
 		this.PGC = PGC;
 		this.PAC = PAC;
 	}

@@ -1,4 +1,4 @@
-package Input;
+package Components.Input;
 
 import Object.Entity;
 
