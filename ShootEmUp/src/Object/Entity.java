@@ -8,21 +8,17 @@ import Main.ShootEmUp;
 import Math.Vector2;
 import Math.Vector4;
 
-public abstract class Entity extends Collidable {
-	protected int speed;
-	protected boolean canfly;
+public abstract class Entity{
 	private float posX;
 	private float posY;
 	private float width;
 	private float height;
 	private int team;
-	protected HashSet<Vector2> gridPos;
 	public boolean destroy = false;
 
 	// Constructors
 
 	public Entity(float x, float y) {
-		super(x, y, false);
 		gridPos = ShootEmUp.currentLevel.eMap.getGridPos(this);
 		ShootEmUp.currentLevel.eMap.addEntity(gridPos, this);
 	}

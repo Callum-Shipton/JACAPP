@@ -4,6 +4,7 @@ import Math.Vector4;
 import Object.Entity;
 
 public class GroundCollision extends BaseCollision{
+	
 	@Override
 	public Vector4 doesCollide(Entity e, float x, float y) {
 		if((Math.abs(e.getPosX() - x) > 74) && (Math.abs(e.getPosY() - y) > 74)){
@@ -118,5 +119,4 @@ public class GroundCollision extends BaseCollision{
 	public void onCollide(Entity hit) {
 		return;
 	}
-
 }
