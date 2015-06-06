@@ -10,7 +10,6 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
 import Components.Attack.BaseAttack;
-import Components.Attack.PlayerAttack;
 import Components.Graphical.PlayerGraphicsComponent;
 import Input.Keyboard;
 import Math.Vector2;
