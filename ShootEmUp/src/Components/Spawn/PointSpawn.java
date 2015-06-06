@@ -1,10 +1,9 @@
 package Components.Spawn;
 
-import Main.ShootEmUp;
 import Math.Vector2;
 import Object.Entity;
 
-public class PointSpawnComponent implements SpawnComponent {
+public class PointSpawn extends BaseSpawn implements SpawnComponent {
 
 	private Vector2 spawnLoc = new Vector2(480.0f, 480.0f);
 	
