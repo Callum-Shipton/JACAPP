@@ -10,7 +10,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
 import Components.Attack.BaseAttack;
-import Components.Graphical.PlayerGraphicsComponent;
+import Components.Graphical.PlayerGraphics;
 import Input.Keyboard;
 import Math.Vector2;
 import Object.Entity;
@@ -18,10 +18,10 @@ import Object.Weapon;
 
 public class PlayerInputComponent implements InputComponent {
 	
-	PlayerGraphicsComponent PGC;
+	PlayerGraphics PGC;
 	BaseAttack BA;
 	
-	PlayerInputComponent(PlayerGraphicsComponent PGC, BaseAttack BA){
+	PlayerInputComponent(PlayerGraphics PGC, BaseAttack BA){
 		this.PGC = PGC;
 		this.BA = BA;
 	}

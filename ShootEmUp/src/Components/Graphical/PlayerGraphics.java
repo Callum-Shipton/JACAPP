@@ -12,10 +12,9 @@ import Main.ShootEmUp;
 import Math.Matrix4;
 import Object.Entity;
 
-public class PlayerGraphicsComponent implements GraphicsComponent {
+public class PlayerGraphics extends BaseGraphics implements GraphicsComponent {
 
 	private int direction;
-	private Image image = Art.player;
 	private boolean animating;
 	private int animID = 0;
 	private int animTime = 6;
@@ -24,7 +23,7 @@ public class PlayerGraphicsComponent implements GraphicsComponent {
 	private int viewMatrixLocation;
 	private int viewMatrixLocationInst;
 	
-	public PlayerGraphicsComponent(Entity e){
+	public PlayerGraphics(Entity e){
 		viewMatrix = new Matrix4();
 		viewMatrix.clearToIdentity();
 		viewMatrix.translate(-e.getPosX() + (ShootEmUp.WIDTH - e.getWidth()) / 2, -e.getPosY()
@@ -39,7 +38,7 @@ public class PlayerGraphicsComponent implements GraphicsComponent {
 	}
 	
 	@Override
-	public void update(Entity e, DPDTRenderer r) {
+	public void update(Entity e) {
 		
 		if (isAnimating()) {
 			animID++;
