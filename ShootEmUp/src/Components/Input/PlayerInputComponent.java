@@ -9,6 +9,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_S;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
+import Components.Attack.BaseAttack;
 import Components.Attack.PlayerAttack;
 import Components.Graphical.PlayerGraphicsComponent;
 import Input.Keyboard;
@@ -19,11 +20,11 @@ import Object.Weapon;
 public class PlayerInputComponent implements InputComponent {
 	
 	PlayerGraphicsComponent PGC;
-	PlayerAttack PAC;
+	BaseAttack BA;
 	
-	PlayerInputComponent(PlayerGraphicsComponent PGC, PlayerAttack PAC){
+	PlayerInputComponent(PlayerGraphicsComponent PGC, BaseAttack BA){
 		this.PGC = PGC;
-		this.PAC = PAC;
+		this.BA = BA;
 	}
 
 	@Override
@@ -80,7 +81,7 @@ public class PlayerInputComponent implements InputComponent {
 
 		if (Keyboard.getKey(GLFW_KEY_SPACE) == 1
 				|| Keyboard.getKey(GLFW_KEY_SPACE) == 2) {
-			PAC.attack(e, PGC.getDirection());
+			BA.attack(e, PGC.getDirection());
 		}
 
 	}
