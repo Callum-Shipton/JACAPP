@@ -32,7 +32,7 @@ public class Collidable {
 			return collideFunction(x, y);
 		}
 
-		x += w/4;
+		x += (w/4) - 1;
 
 		if (collideFunction(x, y) != null) {
 			return collideFunction(x, y);
@@ -56,7 +56,7 @@ public class Collidable {
 			return collideFunction(x, y);
 		}
 
-		y += h/4;
+		y += (h/4) - 1;
 		
 		if (collideFunction(x, y) != null) {
 			return collideFunction(x, y);
@@ -98,7 +98,7 @@ public class Collidable {
 			return collideFunction(x, y);
 		}
 
-		x -= w/4;
+		x -= (w/4) + 1;
 
 		if (collideFunction(x, y) != null) {
 			return collideFunction(x, y);
@@ -125,8 +125,8 @@ public class Collidable {
 	}
 
 	public Vector4 collideFunction(float x, float y) {
-		if (((x >= posX) && (x <= (posX + width))) && ((y >= posY) && (y <= (posY + height)))) {
-			return new Vector4(x - posX, y - posY, x -(posX + width), y - (posY + height));	
+		if (((x >= posX) && (x <= (posX + width - 1))) && ((y >= posY) && (y <= (posY + height - 1)))) {
+			return new Vector4(x - posX, y - posY, x -(posX + width - 1), y - (posY + height - 1));	
 		}
 		return null;
 	}
