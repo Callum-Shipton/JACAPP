@@ -58,7 +58,7 @@ public class MageAttack extends BaseAttack implements AttackComponent {
 	}
 
 	@Override
-	public void receive(Message m) {
+	public void receive(Message m, Entity e) {
 		// TODO Auto-generated method stub
 		
 	}

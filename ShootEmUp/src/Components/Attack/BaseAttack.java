@@ -29,6 +29,10 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		this.health = health;
 	}
 	
+	public void damage(int damage) {
+		this.health -= damage;
+	}
+	
 	public int getMaxHealth() {
 		return maxHealth;
 	}

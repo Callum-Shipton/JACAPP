@@ -15,9 +15,10 @@ public class PointSpawn extends BaseSpawn implements SpawnComponent {
 	}
 
 	@Override
-	public void receive(Message m) {
-		// TODO Auto-generated method stub
+	public void receive(Message m, Entity e) {
+		if(m == Message.ENTITY_DIED){
+			spawn(e);
+		}
 		
 	}
-
 }

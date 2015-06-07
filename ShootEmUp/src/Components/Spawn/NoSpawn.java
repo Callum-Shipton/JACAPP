@@ -11,8 +11,7 @@ public class NoSpawn extends BaseSpawn implements SpawnComponent {
 	}
 
 	@Override
-	public void receive(Message m) {
-		// TODO Auto-generated method stub
+	public void receive(Message m, Entity e) {
 		
 	}
 

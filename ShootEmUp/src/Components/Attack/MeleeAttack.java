@@ -27,8 +27,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 		if(fireRate > 0)fireRate--;
 		
 		if(health <= 0) {
-			health = maxHealth;
-			BS.spawn(e);
+			e.send(Message.ENTITY_DIED);
 		}
 		
 		if (healthRegen <= 0) {
@@ -41,7 +40,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 	}
 
 	@Override
-	public void receive(Message m) {
+	public void receive(Message m, Entity e) {
 		// TODO Auto-generated method stub
 		
 	}

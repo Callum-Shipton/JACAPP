@@ -12,7 +12,7 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	protected boolean flat;
 	
 	@Override
-	public abstract Vector4 doesCollide(Entity e, float x, float y);
+	public abstract Vector4 doesCollide(Entity moving, Entity checked);
 
 	@Override
 	public abstract Vector4 collideFunction(Entity e, float x, float y);

@@ -1,5 +1,7 @@
 package Components;
 
+import Object.Entity;
+
 public abstract class Component {
 	
 	private static final ComponentType type = ComponentType.COMPONENT;
@@ -8,6 +10,6 @@ public abstract class Component {
 		return type;
 	}
 	
-	public abstract void receive(Message m);
+	public abstract void receive(Message m, Entity e);
 
 }

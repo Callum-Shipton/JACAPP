@@ -8,102 +8,105 @@ public class NoMovement extends BaseMovement{
 
 	@Override
 	public Vector4 doesCollide(Entity moving, Entity checked) {
-		if((Math.abs(e.getPosX() - x) > 74) && (Math.abs(e.getPosY() - y) > 74)){
+		if((Math.abs(checked.getPosX() - moving.getPosX()) > 74) && (Math.abs(moving.getPosY() - checked.getPosY()) > 74)){
 			return null;
 		}
 		
-		if (collideFunction(e, x, y) != null) {
-			return collideFunction(e, x, y);
+		float x = moving.getPosX();
+		float y = moving.getPosY();
+		
+		if (collideFunction(checked, moving.getPosX(), moving.getPosY()) != null) {
+			return collideFunction(checked, moving.getPosX(), moving.getPosY());
 		}
 		
-		x += e.getWidth()/4;
+		x += checked.getWidth()/4;
 
-		if (collideFunction(e, x, y) != null) {
-			return collideFunction(e, x, y);
+		if (collideFunction(checked, moving.getPosX(), moving.getPosY()) != null) {
+			return collideFunction(checked, moving.getPosX(), moving.getPosY());
 		}
 
-		x += e.getWidth()/4;
+		x += checked.getWidth()/4;
 		
-		if (collideFunction(e, x, y) != null) {
-			return collideFunction(e, x, y);
+		if (collideFunction(checked, moving.getPosX(), moving.getPosY()) != null) {
+			return collideFunction(checked, moving.getPosX(), moving.getPosY());
 		}
 
-		x += e.getWidth()/4;
+		x += checked.getWidth()/4;
 		
-		if (collideFunction(e, x, y) != null) {
-			return collideFunction(e, x, y);
+		if (collideFunction(checked, moving.getPosX(), moving.getPosY()) != null) {
+			return collideFunction(checked, moving.getPosX(), moving.getPosY());
 		}
 
-		x += e.getWidth()/4;
+		x += checked.getWidth()/4;
 
-		if (collideFunction(e, x, y) != null) {
-			return collideFunction(e, x, y);
+		if (collideFunction(checked, moving.getPosX(), moving.getPosY()) != null) {
+			return collideFunction(checked, moving.getPosX(), moving.getPosY());
 		}
 
-		y += e.getHeight()/4;
+		y += checked.getHeight()/4;
 		
-		if (collideFunction(e, x, y) != null) {
-			return collideFunction(e, x, y);
+		if (collideFunction(checked, moving.getPosX(), moving.getPosY()) != null) {
+			return collideFunction(checked, moving.getPosX(), moving.getPosY());
 		}
 
-		y += e.getHeight()/4;
+		y += checked.getHeight()/4;
 		
-		if (collideFunction(e, x, y) != null) {
-			return collideFunction(e, x, y);
+		if (collideFunction(checked, moving.getPosX(), moving.getPosY()) != null) {
+			return collideFunction(checked, moving.getPosX(), moving.getPosY());
 		}
 
-		y += e.getHeight()/4;
+		y += checked.getHeight()/4;
 		
-		if (collideFunction(e, x, y) != null) {
-			return collideFunction(e, x, y);
+		if (collideFunction(checked, moving.getPosX(), moving.getPosY()) != null) {
+			return collideFunction(checked, moving.getPosX(), moving.getPosY());
 		}
 
-		y += e.getHeight()/4;
+		y += checked.getHeight()/4;
 		
-		if (collideFunction(e, x, y) != null) {
-			return collideFunction(e, x, y);
+		if (collideFunction(checked, moving.getPosX(), moving.getPosY()) != null) {
+			return collideFunction(checked, moving.getPosX(), moving.getPosY());
 		}
 
-		x -= e.getWidth()/4;
+		x -= checked.getWidth()/4;
 		
-		if (collideFunction(e, x, y) != null) {
-			return collideFunction(e, x, y);
+		if (collideFunction(checked, moving.getPosX(), moving.getPosY()) != null) {
+			return collideFunction(checked, moving.getPosX(), moving.getPosY());
 		}
 
-		x -= e.getWidth()/4;
+		x -= checked.getWidth()/4;
 		
-		if (collideFunction(e, x, y) != null) {
-			return collideFunction(e, x, y);
+		if (collideFunction(checked, moving.getPosX(), moving.getPosY()) != null) {
+			return collideFunction(checked, moving.getPosX(), moving.getPosY());
 		}
 
-		x -= e.getWidth()/4;
+		x -= checked.getWidth()/4;
 		
-		if (collideFunction(e, x, y) != null) {
-			return collideFunction(e, x, y);
+		if (collideFunction(checked, moving.getPosX(), moving.getPosY()) != null) {
+			return collideFunction(checked, moving.getPosX(), moving.getPosY());
 		}
 
-		x -= e.getWidth()/4;
+		x -= checked.getWidth()/4;
 
-		if (collideFunction(e, x, y) != null) {
-			return collideFunction(e, x, y);
+		if (collideFunction(checked, moving.getPosX(), moving.getPosY()) != null) {
+			return collideFunction(checked, moving.getPosX(), moving.getPosY());
 		}
 
-		y -= e.getHeight()/4;
+		y -= checked.getHeight()/4;
 		
-		if (collideFunction(e, x, y) != null) {
-			return collideFunction(e, x, y);
+		if (collideFunction(checked, moving.getPosX(), moving.getPosY()) != null) {
+			return collideFunction(checked, moving.getPosX(), moving.getPosY());
 		}
 
-		y -= e.getHeight()/4;
+		y -= checked.getHeight()/4;
 		
-		if (collideFunction(e, x, y) != null) {
-			return collideFunction(e, x, y);
+		if (collideFunction(checked, moving.getPosX(), moving.getPosY()) != null) {
+			return collideFunction(checked, moving.getPosX(), moving.getPosY());
 		}
 
-		y -= e.getHeight()/4;
+		y -= checked.getHeight()/4;
 
-		if (collideFunction(e, x, y) != null) {
-			return collideFunction(e, x, y);
+		if (collideFunction(checked, moving.getPosX(), moving.getPosY()) != null) {
+			return collideFunction(checked, moving.getPosX(), moving.getPosY());
 		}
 		return null;
 	}
@@ -117,13 +120,7 @@ public class NoMovement extends BaseMovement{
 	}
 
 	@Override
-	public Vector4 doesCollide(Entity e, float x, float y) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void receive(Message m) {
+	public void receive(Message m, Entity e) {
 		// TODO Auto-generated method stub
 		
 	}

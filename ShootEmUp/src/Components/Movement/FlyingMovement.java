@@ -5,10 +5,10 @@ import Object.Entity;
 
 public class FlyingMovement extends BasicMovement {
 	
-	public Vector4 doesCollide(Entity e, float x, float y) {
+	public Vector4 doesCollide(Entity moving, Entity checked) {
 		if(flat == true){
 			return null;
 		}
-		return super.doesCollide(e, x, y);
+		return super.doesCollide(moving, checked);
 	}
 }

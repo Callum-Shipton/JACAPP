@@ -77,7 +77,7 @@ public abstract class Entity{
 	
 	public void send(Message m){
 		for(Component c : components.values()){
-			c.receive(m);
+			c.receive(m, this);
 		}
 	}
 }

@@ -1,11 +1,12 @@
 package Components.Collision;
 
+import Components.Message;
 import Object.Entity;
 
 public class MoveCollision extends BaseCollision {
 
 	@Override
-	public void Collision(Entity hitter, Entity hit) {
+	public void collision(Entity hitter, Entity hit) {
 		/*
 		 * if (Math.abs(vec.x()) < speed) {
 			e.setPosX(e.getPosX() + ((Math.round(moveVec.x())) - vec.x()
@@ -17,6 +18,12 @@ public class MoveCollision extends BaseCollision {
 		}
 		onCollide(hit); 
 		*/
+	}
+
+	@Override
+	public void receive(Message m, Entity e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
