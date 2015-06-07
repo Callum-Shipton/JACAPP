@@ -27,14 +27,7 @@ public class Player extends Character {
 
 	public Player(float x, float y) {
 		super(x, y);
-		canfly = false;
-
-		
-
-		
-
 		setTeam(0);
-
 
 		level = 1;
 		currentExp = 0;
@@ -111,8 +104,6 @@ public class Player extends Character {
 		
 	}
 
-
-
 	public boolean checkDead() {
 		if (health <= 0) {
 			respawn();
@@ -130,28 +121,12 @@ public class Player extends Character {
 		coins = 0;
 	}
 
-	public int getHealth() {
-		return health;
-	}
-
-	public void setHealth(int health) {
-		this.health = health;
-	}
-
 	public int getLives() {
 		return lives;
 	}
 
 	public void setLives(int lives) {
 		this.lives = lives;
-	}
-
-	public int getMaxMana() {
-		return maxMana;
-	}
-
-	public int getMana() {
-		return mana;
 	}
 
 	public int getCurrentExp() {

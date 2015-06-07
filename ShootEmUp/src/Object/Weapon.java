@@ -1,6 +1,5 @@
 package Object;
 
-import Display.Image;
 import Main.ShootEmUp;
 
 public class Weapon{
@@ -10,6 +9,7 @@ public class Weapon{
 	private int firerate;
 	private boolean melee;
 	private int manaCost;
+	private int team;
 
 	public Weapon(int damage, int range, int firerate, boolean melee, int manaCost) {
 		this.damage = damage;
@@ -75,5 +75,13 @@ public class Weapon{
 
 	public void setManaCost(int manaCost) {
 		this.manaCost = manaCost;
+	}
+	
+	public int getTeam(){
+		return team;
+	}
+	
+	public void setTeam(int team){
+		this.team = team;
 	}
 }

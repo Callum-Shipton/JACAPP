@@ -13,7 +13,6 @@ public abstract class Entity{
 	private float posY;
 	private float width;
 	private float height;
-	private int team;
 	public boolean destroy = false;
 
 	// Constructors
@@ -52,14 +51,6 @@ public abstract class Entity{
 
 	public void setPosY(float posY) {
 		this.posY = posY;
-	}
-
-	public int getTeam() {
-		return team;
-	}
-
-	public void setTeam(int team) {
-		this.team = team;
 	}
 
 	public float getWidth() {
