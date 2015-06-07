@@ -17,7 +17,6 @@ import Object.Enemies.*;
 import GUI.Hud;
 import Math.Vector2;
 import Object.Coin;
-import Object.Character;
 import Object.EntityMap;
 import Object.Exp;
 import Object.Item;
@@ -328,14 +327,6 @@ public class Level {
 
 		hud.render(stat);
 
-	}
-
-	public float[] getSpawn() {
-		return spawn;
-	}
-
-	public void setSpawn(float[] spawn) {
-		this.spawn = spawn;
 	}
 
 	public Player getPlayer() {
