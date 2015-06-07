@@ -1,9 +1,13 @@
 package Components.Movement;
 
+import Components.Component;
+import Components.ComponentType;
 import Math.Vector4;
 import Object.Entity;
 
-public abstract class BaseMovement implements MovementComponent {
+public abstract class BaseMovement extends Component implements MovementComponent {
+	
+	private static final ComponentType type = ComponentType.MOVEMENT;
 	
 	protected boolean flat;
 	

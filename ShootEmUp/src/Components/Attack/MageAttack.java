@@ -1,5 +1,6 @@
 package Components.Attack;
 
+import Components.Message;
 import Components.Spawn.BaseSpawn;
 import Object.Entity;
 
@@ -54,6 +55,12 @@ public class MageAttack extends BaseAttack implements AttackComponent {
 			}
 		}
 		manaRegen--;
+	}
+
+	@Override
+	public void receive(Message m) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

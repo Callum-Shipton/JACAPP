@@ -1,5 +1,6 @@
 package Components.Attack;
 
+import Components.Message;
 import Components.Spawn.BaseSpawn;
 import Object.Entity;
 
@@ -37,6 +38,12 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 			}
 		}
 		healthRegen--;
+	}
+
+	@Override
+	public void receive(Message m) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

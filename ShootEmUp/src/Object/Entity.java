@@ -1,7 +1,11 @@
 package Object;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
+import Components.Component;
+import Components.ComponentType;
+import Components.Message;
 import Display.DPDTRenderer;
 import Display.Image;
 import Main.ShootEmUp;
@@ -14,6 +18,8 @@ public abstract class Entity{
 	private float width;
 	private float height;
 	public boolean destroy = false;
+	
+	public HashMap<ComponentType,Component> components;
 
 	// Constructors
 
@@ -67,5 +73,11 @@ public abstract class Entity{
 
 	public void setHeight(float height) {
 		this.height = height;
+	}
+	
+	public void send(Message m){
+		for(Component c : components.values()){
+			c.receive(m);
+		}
 	}
 }
