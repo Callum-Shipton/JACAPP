@@ -1,9 +1,9 @@
-package Components.Input;
+package Components.Control;
 
 import java.util.HashSet;
 
 import Components.Component;
-import Components.Physics.BaseCollision;
+import Components.Collision.BaseCollision;
 import Math.Vector2;
 import Object.Entity;
 

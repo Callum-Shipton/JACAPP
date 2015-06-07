@@ -1,4 +1,4 @@
-package Components.Input;
+package Components.Control;
 
 import Math.Vector2;
 import Object.Entity;

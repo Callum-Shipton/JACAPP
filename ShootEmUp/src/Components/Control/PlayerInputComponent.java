@@ -1,4 +1,4 @@
-package Components.Input;
+package Components.Control;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_A;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_D;

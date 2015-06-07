@@ -1,4 +1,4 @@
-package Components.Input;
+package Components.Control;
 
 import java.util.HashSet;
 

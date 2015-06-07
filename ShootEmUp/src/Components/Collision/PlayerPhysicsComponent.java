@@ -1,4 +1,4 @@
-package Components.Physics;
+package Components.Collision;
 
 public class PlayerPhysicsComponent {
 

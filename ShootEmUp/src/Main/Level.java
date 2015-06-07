@@ -17,7 +17,6 @@ import Object.Enemies.*;
 import GUI.Hud;
 import Math.Vector2;
 import Object.Coin;
-import Object.Collidable;
 import Object.Character;
 import Object.EntityMap;
 import Object.Exp;

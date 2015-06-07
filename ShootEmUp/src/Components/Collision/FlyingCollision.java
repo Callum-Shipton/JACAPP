@@ -1,4 +1,4 @@
-package Components.Physics;
+package Components.Collision;
 
 import Math.Vector4;
 import Object.Entity;
