@@ -22,32 +22,22 @@ public class BasicMovement extends NoMovement{
 		Vector4 vec = new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
 		HashSet<Entity> entities = ShootEmUp.currentLevel.eMap.getEntites(gridPos);
 		boolean collision = false;
-		Character hit = null;
-		Entity wall;
+		Entity hit = null;
 		for (Entity character : entities) {
 			if (character instanceof Character) {
 				if (((doesCollide(e, character) != null) && (character != e))) {
 					collision = true;
 					vec = doesCollide(e, character);
-					hit = (Character) character;
+					hit = character;
 					break;
 				}
 			}
 		}
 
 		if (collision == true) {
-			//code for moving back away from enemy;
-			/*
-			 * if (Math.abs(vec.x()) < speed) {
-				e.setPosX(e.getPosX() + ((Math.round(moveVec.x())) - vec.x()
-						- (moveVec.x() / Math.abs(moveVec.x()))));
-			} else if(Math.abs(vec.x()) >= speed); 
-			else if (Math.abs(vec.z()) < speed) {
-				e.setPosX(e.getPosX() + ((Math.round(moveVec.x())) - vec.z()
-						- (moveVec.x() / Math.abs(moveVec.x()))));
-			}
-			onCollide(hit); 
-			*/
+			
+			//code for sending the two entitys to the collision component;
+		
 		}
 		
 		
