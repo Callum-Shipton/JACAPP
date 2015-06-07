@@ -1,9 +1,10 @@
 package Components.Physics;
 
+import Components.Component;
 import Math.Vector4;
 import Object.Entity;
 
-public abstract class BaseCollision implements PhysicsComponent {
+public abstract class BaseCollision extends Component implements PhysicsComponent {
 
 	protected boolean flat;
 	

@@ -1,9 +1,10 @@
 package Components.Attack;
 
+import Components.Component;
 import Object.Entity;
 import Object.Weapon;
 
-public abstract class BaseAttack implements AttackComponent {
+public abstract class BaseAttack extends Component implements AttackComponent {
 	
 	protected Weapon weapon;
 	protected int fireRate;
@@ -32,5 +33,4 @@ public abstract class BaseAttack implements AttackComponent {
 	public void setMaxHealth(int maxHealth) {
 		this.maxHealth = maxHealth;
 	}
-
 }
