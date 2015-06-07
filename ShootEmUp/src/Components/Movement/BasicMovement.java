@@ -13,10 +13,12 @@ public class BasicMovement extends NoMovement{
 	protected HashSet<Vector2> gridPos;
 	
 	public void move(Entity e, Vector2 moveVec) {
-		
+		e.setPosX(e.getPosX() + Math.round(moveVec.x()));
+		e.setPosY(e.getPosY() + Math.round(moveVec.y()));
+		checkCollision(e);
 	}
 	
-	public boolean checkCollision(Entity e){
+	public void checkCollision(Entity e){
 		Vector4 vec = new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
 		HashSet<Entity> entities = ShootEmUp.currentLevel.eMap.getEntites(gridPos);
 		boolean collision = false;
@@ -33,10 +35,10 @@ public class BasicMovement extends NoMovement{
 			}
 		}
 
-		if (collide == false) {
-			e.setPosX(e.getPosX() + Math.round(moveVec.x()));
-		} else {
-			if (Math.abs(vec.x()) < speed) {
+		if (collision == true) {
+			//code for moving back away from enemy;
+			/*
+			 * if (Math.abs(vec.x()) < speed) {
 				e.setPosX(e.getPosX() + ((Math.round(moveVec.x())) - vec.x()
 						- (moveVec.x() / Math.abs(moveVec.x()))));
 			} else if(Math.abs(vec.x()) >= speed); 
@@ -44,44 +46,20 @@ public class BasicMovement extends NoMovement{
 				e.setPosX(e.getPosX() + ((Math.round(moveVec.x())) - vec.z()
 						- (moveVec.x() / Math.abs(moveVec.x()))));
 			}
-			onCollide(hit);
+			onCollide(hit); 
+			*/
 		}
-		collide = false;
-		if(Math.abs(moveVec.y()) > 0){
-		for (Entity character : entities) {
-			if (character instanceof Character) {
-				if ((character.doesCollide(e.getPosX(), e.getPosY() + (Math.round(moveVec.y())),
-						e.getWidth(), e.getHeight()) != null) && (character != e)) {
-					collide = true;
-					hit = (Character) character;
-					vec = character.doesCollide(e.getPosX(), e.getPosY()
-							+ (Math.round(moveVec.y())), e.getWidth(), e.getHeight());
-					break;
-				}
-			}
-		}
-
-		if (collide == false) {
-			e.setPosY(e.getPosY() + Math.round(moveVec.y()));
-		} else {
-			onCollide(hit);
-			if (Math.abs(vec.y()) < speed) {
-				e.setPosY(e.getPosY() + ((Math.round(moveVec.y())) - vec.y()
-						- (moveVec.y() / Math.abs(moveVec.y()))));
-			} else if(Math.abs(vec.y()) >= speed); 
-			else if (Math.abs(vec.w()) < speed) {
-				e.setPosY(e.getPosY() + ((Math.round(moveVec.y())) - vec.w()
-						- (moveVec.y() / Math.abs(moveVec.y()))));
-			}
-		}
-		}
+		
+		
+		//code for destroying the entity?
+		/*
 		if(!destroy){
 		HashSet<Vector2> newGrid = ShootEmUp.currentLevel.eMap.getGridPos(this);
 		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, this);
 		ShootEmUp.currentLevel.eMap.addEntity(newGrid, this);
 		gridPos = newGrid;
 		}
-		return collision;
+		*/
 	}
 	
 	public int getSpeed(){
