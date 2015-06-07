@@ -16,7 +16,7 @@ import Math.Vector2;
 import Object.Entity;
 import Object.Weapon;
 
-public class PlayerInputComponent implements InputComponent {
+public class PlayerInputComponent implements ControlComponent {
 	
 	PlayerGraphics PGC;
 	BaseAttack BA;

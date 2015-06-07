@@ -1,12 +1,12 @@
-package Components.Collision;
+package Components.Movement;
 
 import Math.Vector4;
 import Object.Entity;
 
-public class GroundCollision extends BaseCollision{
-	
+public class NoMovement extends BaseMovement{
+
 	@Override
-	public Vector4 doesCollide(Entity e, float x, float y) {
+	public Vector4 doesCollide(Entity moving, Entity checked) {
 		if((Math.abs(e.getPosX() - x) > 74) && (Math.abs(e.getPosY() - y) > 74)){
 			return null;
 		}
@@ -113,10 +113,5 @@ public class GroundCollision extends BaseCollision{
 			return new Vector4(x - e.getPosX(), y - e.getPosY(), x -(e.getPosX() + e.getWidth()), y - (e.getPosY() + e.getHeight()));	
 		}
 		return null;
-	}
-
-	@Override
-	public void onCollide(Entity hit) {
-		return;
 	}
 }

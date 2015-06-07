@@ -7,7 +7,7 @@ import Components.Collision.BaseCollision;
 import Math.Vector2;
 import Object.Entity;
 
-public abstract class BaseInput extends Component implements InputComponent {
+public abstract class BaseControl extends Component implements ControlComponent {
 	protected int speed;
 	protected HashSet<Vector2> gridPos;
 	protected BaseCollision BC;

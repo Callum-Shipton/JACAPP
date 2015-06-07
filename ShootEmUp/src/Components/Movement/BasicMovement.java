@@ -1,36 +1,32 @@
-package Components.Control;
+package Components.Movement;
 
 import java.util.HashSet;
 
-import Display.DPDTRenderer;
 import Main.ShootEmUp;
 import Math.Vector2;
 import Math.Vector4;
 import Object.Character;
 import Object.Entity;
 
-public class BasicInput extends BaseInput {
-
-	@Override
-	public void update(Entity e) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
+public class BasicMovement extends NoMovement{
+	protected int speed;
+	protected HashSet<Vector2> gridPos;
+	
 	public void move(Entity e, Vector2 moveVec) {
+		
+	}
+	
+	public boolean checkCollision(Entity e){
 		Vector4 vec = new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
 		HashSet<Entity> entities = ShootEmUp.currentLevel.eMap.getEntites(gridPos);
-		boolean collide = false;
+		boolean collision = false;
 		Character hit = null;
 		Entity wall;
-		if(Math.abs(moveVec.x()) > 0){
 		for (Entity character : entities) {
 			if (character instanceof Character) {
-				if ((character.doesCollide(e.getPosX() + (Math.round(moveVec.x())), e.getPosY(),
-						e.getWidth(), e.getHeight()) != null) && (character != e)) {
-					collide = true;
-					vec = character.doesCollide(e.getPosX() + (Math.round(moveVec.x())),
-							e.getPosY(), e.getWidth(), e.getHeight());
+				if (((doesCollide(e, character) != null) && (character != e))) {
+					collision = true;
+					vec = doesCollide(e, character);
 					hit = (Character) character;
 					break;
 				}
@@ -49,7 +45,6 @@ public class BasicInput extends BaseInput {
 						- (moveVec.x() / Math.abs(moveVec.x()))));
 			}
 			onCollide(hit);
-		}
 		}
 		collide = false;
 		if(Math.abs(moveVec.y()) > 0){
@@ -86,5 +81,14 @@ public class BasicInput extends BaseInput {
 		ShootEmUp.currentLevel.eMap.addEntity(newGrid, this);
 		gridPos = newGrid;
 		}
+		return collision;
+	}
+	
+	public int getSpeed(){
+		return speed;
+	}
+	
+	public void setSpeed(int speed){
+		this.speed = speed;
 	}
 }
