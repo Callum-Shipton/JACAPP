@@ -3,11 +3,15 @@ package Components.Control;
 import java.util.HashSet;
 
 import Components.Component;
+import Components.ComponentType;
 import Components.Collision.BaseCollision;
 import Math.Vector2;
 import Object.Entity;
 
 public abstract class BaseControl extends Component implements ControlComponent {
+	
+	private static final ComponentType type = ComponentType.CONTROL;
+	
 	protected int speed;
 	protected HashSet<Vector2> gridPos;
 	protected BaseCollision BC;

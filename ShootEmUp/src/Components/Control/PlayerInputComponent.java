@@ -84,5 +84,11 @@ public class PlayerInputComponent implements ControlComponent {
 		}
 
 	}
+
+	@Override
+	public void move(Entity e, Vector2 moveVec) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

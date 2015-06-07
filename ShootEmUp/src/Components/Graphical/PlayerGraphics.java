@@ -102,6 +102,12 @@ public class PlayerGraphics extends BaseGraphics implements GraphicsComponent {
 		GL20.glUseProgram(0);
 	}
 
+	@Override
+	public void render(Entity e, DPDTRenderer r) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }

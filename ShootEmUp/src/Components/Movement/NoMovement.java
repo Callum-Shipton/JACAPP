@@ -1,5 +1,6 @@
 package Components.Movement;
 
+import Components.Message;
 import Math.Vector4;
 import Object.Entity;
 
@@ -113,5 +114,17 @@ public class NoMovement extends BaseMovement{
 			return new Vector4(x - e.getPosX(), y - e.getPosY(), x -(e.getPosX() + e.getWidth()), y - (e.getPosY() + e.getHeight()));	
 		}
 		return null;
+	}
+
+	@Override
+	public Vector4 doesCollide(Entity e, float x, float y) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void receive(Message m) {
+		// TODO Auto-generated method stub
+		
 	}
 }
