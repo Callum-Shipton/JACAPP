@@ -1,17 +1,23 @@
 package Components.Spawn;
 
 import Components.Message;
+import Components.Graphical.BaseGraphics;
 import Math.Vector2;
 import Object.Entity;
 
 public class PointSpawn extends BaseSpawn implements SpawnComponent {
 
 	private Vector2 spawnLoc = new Vector2(480.0f, 480.0f);
+	private BaseGraphics BG;
+	
+	public PointSpawn(BaseGraphics BG){
+		this.BG = BG;
+	}
 	
 	@Override
 	public void spawn(Entity e) {
-		e.setPosX(spawnLoc.x());
-		e.setPosY(spawnLoc.y());
+		BG.setX(spawnLoc.x());
+		BG.setY(spawnLoc.y());
 	}
 
 	@Override
