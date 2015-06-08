@@ -21,7 +21,8 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 	private int viewMatrixLocation;
 	private int viewMatrixLocationInst;
 	
-	public PlayerGraphics(Entity e){
+	public PlayerGraphics(Entity e, Image image){
+		super(image);
 		viewMatrix = new Matrix4();
 		viewMatrix.clearToIdentity();
 		viewMatrix.translate(getX() + (ShootEmUp.WIDTH - getWidth()) / 2, getY()

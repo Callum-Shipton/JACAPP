@@ -2,6 +2,7 @@ package Components.Graphical;
 
 import Components.Message;
 import Display.DPDTRenderer;
+import Display.Image;
 import Display.Renderer;
 import Math.Vector2;
 import Object.Entity;
@@ -11,10 +12,12 @@ public class AnimatedGraphics extends BaseGraphics {
 	protected boolean animating;
 	protected int animID = 0;
 	protected int animTime = 6;
-	protected int direction;
+	protected int direction = 0;
 
-	public AnimatedGraphics(){
-		
+	public AnimatedGraphics(Image image){
+		this.image = image;
+		this.width = image.getWidth();
+		this.height = image.getHeight();
 	}
 	
 	@Override
