@@ -14,9 +14,9 @@ import Math.Vector4;
 
 public class Entity{
 
-	public boolean destroy = false;
+	private boolean destroy = false;
 	
-	public HashMap<ComponentType,Component> components;
+	private HashMap<ComponentType,Component> components;
 
 	// Constructors
 
@@ -44,6 +44,10 @@ public class Entity{
 	
 	public Component getComponent(ComponentType type){
 		return components.get(type);
+	}
+	
+	public HashMap<ComponentType, Component> getComponents(){
+		return components;
 	}
 	
 	public void send(Message m){

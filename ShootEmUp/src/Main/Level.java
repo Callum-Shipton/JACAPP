@@ -10,6 +10,13 @@ import java.util.Random;
 
 import javax.imageio.*;
 
+import Components.ComponentType;
+import Components.Attack.MageAttack;
+import Components.Collision.MoveCollision;
+import Components.Graphical.PlayerGraphics;
+import Components.Movement.BasicMovement;
+import Components.Spawn.BaseSpawn;
+import Components.Spawn.PointSpawn;
 import Display.Art;
 import Display.DPDTRenderer;
 import Display.IRenderer;
@@ -39,7 +46,7 @@ public class Level {
 	
 	private Entity player;
 	
-	private Hud hud;
+	private Entity hud;
 
 	private DPDTRenderer base;
 	private DPDTRenderer stat;
@@ -226,8 +233,16 @@ public class Level {
 
 		//create player
 		player = new Entity();
+		player.addComponent(new PointSpawn());
+		player.addComponent(new MageAttack((BaseSpawn)player.getComponent(ComponentType.SPAWN)));
+		player.addComponent(new MoveCollision());
+		player.addComponent(new PlayerGraphics(player));
+		player.addComponent(new BasicMovement(player));
 		
-		hud = new Hud(player);
+		//create HUD
+		hud = new Entity();
+		hud.addComponent(new );
+		
 		characters.add(player);
 	}
 
