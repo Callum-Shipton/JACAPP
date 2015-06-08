@@ -50,10 +50,14 @@ public class Entity{
 	}
 	
 	public boolean getDestroy(){
-		return destroy;
+		return isDestroyed();
 	}
 	
 	public void setDestroy(boolean b){
 		destroy = b;
+	}
+
+	public boolean isDestroyed() {
+		return destroy;
 	}
 }

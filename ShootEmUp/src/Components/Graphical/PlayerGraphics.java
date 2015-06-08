@@ -29,7 +29,6 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 				"viewMatrix");
 		viewMatrixLocationInst = GL20.glGetUniformLocation(Art.ShaderInst,
 				"viewMatrix");
-		scrollScreen(e);
 	}
 
 	public int getDirection() {

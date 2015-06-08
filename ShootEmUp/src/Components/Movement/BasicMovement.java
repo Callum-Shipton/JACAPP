@@ -47,15 +47,13 @@ public class BasicMovement extends BaseMovement{
 			BC.collision(e, hit);
 		}
 		
-		//code for not destroying the entity?
-		/*
-		if(!destroy){
-		HashSet<Vector2> newGrid = ShootEmUp.currentLevel.eMap.getGridPos(this);
-		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, this);
-		ShootEmUp.currentLevel.eMap.addEntity(newGrid, this);
+
+		if(!e.getDestroy()){
+		HashSet<Vector2> newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
+		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, e);
+		ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
 		gridPos = newGrid;
 		}
-		*/
 	}
 	
 	public Vector4 doesCollide(Entity moving, Entity checked) {

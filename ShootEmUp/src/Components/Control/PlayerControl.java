@@ -25,7 +25,8 @@ public class PlayerControl extends BaseControl{
 	BaseAttack BA;
 	BaseMovement BM;
 	
-	public PlayerControl(PlayerGraphics PG, BaseAttack BA, BaseMovement BM){
+	public PlayerControl(Entity e, PlayerGraphics PG, BaseAttack BA, BaseMovement BM){
+		PG.scrollScreen(e);
 		this.PG = PG;
 		this.BA = BA;
 		this.BM = BM;
