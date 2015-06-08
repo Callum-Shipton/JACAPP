@@ -4,6 +4,7 @@ import Components.Component;
 import Components.ComponentType;
 import Display.DPDTRenderer;
 import Display.Image;
+import Display.Renderer;
 import Object.Entity;
 
 public abstract class BaseGraphics extends Component implements GraphicsComponent {
@@ -18,6 +19,9 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 	
 	@Override
 	public abstract void update(Entity e);
+	
+	@Override
+	public abstract void render(Entity e, Renderer r);
 	
 	public Image getImage() {
 		return image;

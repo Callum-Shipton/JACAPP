@@ -8,8 +8,10 @@ import org.lwjgl.opengl.GL20;
 import Display.Art;
 import Display.DPDTRenderer;
 import Display.Image;
+import Display.Renderer;
 import Main.ShootEmUp;
 import Math.Matrix4;
+import Math.Vector2;
 import Object.Entity;
 
 public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponent {
@@ -65,8 +67,11 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 	}
 
 	@Override
-	public void render(Entity e, DPDTRenderer r) {
-		// TODO Auto-generated method stub
+	public void render(Entity e, Renderer r) {
+		r.draw(image, new Vector2(getPosX(), getPosY()), new Vector2(getWidth(), getHeight()),
+				0.0f, new Vector2((float) Math.floor(animID / animTime),
+						(float) getDirection()), new Vector2(image.getFWidth(),
+						image.getFHeight()));
 		
 	}
 

@@ -2,6 +2,7 @@ package Components.Graphical;
 
 import Components.Message;
 import Display.DPDTRenderer;
+import Display.Renderer;
 import Object.Entity;
 
 public class AnimatedGraphics extends BaseGraphics {
@@ -11,7 +12,7 @@ public class AnimatedGraphics extends BaseGraphics {
 	protected int animTime = 6;
 	
 	@Override
-	public void render(Entity e, DPDTRenderer r) {
+	public void render(Entity e, Renderer r) {
 		// TODO Auto-generated method stub
 		
 	}

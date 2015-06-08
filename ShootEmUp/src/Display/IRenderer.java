@@ -19,11 +19,9 @@ import static org.lwjgl.opengl.GL33.*;
 import Math.Vector2;
 import Object.Tile;
 
-public class IRenderer {
+public class IRenderer extends Renderer {
 	
-	private int VAO;
-	private int VBO;
-	private int EBO;
+
 	private float width;
 	private float height;
 	private int amount;

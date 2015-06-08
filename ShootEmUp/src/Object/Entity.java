@@ -30,13 +30,6 @@ public class Entity{
 		}
 	}
 
-	public void render(DPDTRenderer r) {
-		r.draw(image, new Vector2(getPosX(), getPosY()), new Vector2(getWidth(), getHeight()),
-				0.0f, new Vector2((float) Math.floor(animID / animTime),
-						(float) getDirection()), new Vector2(image.getFWidth(),
-						image.getFHeight()));
-	}
-
 	//add components
 	public void addComponent(Component c){
 		components.put(c.getType(), c);
