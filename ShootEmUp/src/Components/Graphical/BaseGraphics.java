@@ -1,14 +1,19 @@
 package Components.Graphical;
 
+import Components.Component;
 import Components.ComponentType;
 import Display.DPDTRenderer;
 import Display.Image;
 import Object.Entity;
 
-public abstract class BaseGraphics implements GraphicsComponent {
+public abstract class BaseGraphics extends Component implements GraphicsComponent {
 
 	private static final ComponentType type = ComponentType.GRAPHICS;
 	
+	protected float xPos;
+	protected float yPos;
+	protected float width;
+	protected float height;
 	protected Image image;
 	
 	@Override

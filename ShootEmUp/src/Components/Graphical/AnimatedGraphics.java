@@ -1,5 +1,6 @@
 package Components.Graphical;
 
+import Components.Message;
 import Display.DPDTRenderer;
 import Object.Entity;
 
@@ -48,6 +49,12 @@ public class AnimatedGraphics extends BaseGraphics {
 
 	public void setAnimTime(int animTime) {
 		this.animTime = animTime;
+	}
+
+	@Override
+	public void receive(Message m, Entity e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

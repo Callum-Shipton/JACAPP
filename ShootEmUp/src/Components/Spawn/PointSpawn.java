@@ -21,4 +21,10 @@ public class PointSpawn extends BaseSpawn implements SpawnComponent {
 		}
 		
 	}
+
+	@Override
+	public void update(Entity e) {
+		// TODO Auto-generated method stub
+		
+	}
 }

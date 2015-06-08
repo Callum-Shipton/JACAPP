@@ -26,4 +26,10 @@ public class MoveCollision extends BaseCollision {
 		
 	}
 
+	@Override
+	public void update(Entity e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

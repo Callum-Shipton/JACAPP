@@ -175,4 +175,10 @@ public class BasicMovement extends BaseMovement{
 	public void setSpeed(int speed){
 		this.speed = speed;
 	}
+
+	@Override
+	public void update(Entity e) {
+		// TODO Auto-generated method stub
+		
+	}
 }
