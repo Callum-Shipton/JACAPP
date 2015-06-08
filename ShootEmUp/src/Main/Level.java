@@ -215,7 +215,7 @@ public class Level {
 
 		//create player
 		player = new Entity();
-		PlayerGraphics g = new PlayerGraphics(player, Art.player);
+		PlayerGraphics g = new PlayerGraphics(player, Art.player, base);
 		PointSpawn s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
 		MageAttack a = new MageAttack(s, new Weapon(5, 100, 10, false, 1), 18, 100, 18, 18, 50, 18);
 		MoveCollision c = new MoveCollision();
@@ -251,7 +251,10 @@ public class Level {
 		counter++;
 		if (counter == 150) {
 			Entity test = new Entity();
-			test.addComponent(new AnimatedGraphics(null));
+			AnimatedGraphics AG = new AnimatedGraphics(Art.player, base);
+			test.addComponent(AG);
+			MoveCollision MC = new MoveCollision();
+			test.addComponent(new BasicMovement(test, MC, AG, 5));
 			Random rand = new Random();
 			do {
 				collide = false;
@@ -268,13 +271,13 @@ public class Level {
 			
 			//creating new Enemy
 			Entity newEnemy = new Entity();
-			AnimatedGraphics enemyGraphics = new AnimatedGraphics(Art.enemy); 
+			AnimatedGraphics enemyGraphics = new AnimatedGraphics(Art.enemy, base); 
 			PointSpawn enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
 			MageAttack enemyAttack = new MageAttack(enemySpawn, new Weapon(5, 100, 10, false, 1), 10, 100, 10, 18, 50, 18);
 			MoveCollision enemyCollision = new MoveCollision();
 			//AIControl enemyControl = new AIControl();
-			BasicMovement enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 5);
 			newEnemy.addComponent(enemyGraphics);
+			BasicMovement enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 5);
 			newEnemy.addComponent(enemySpawn);
 			newEnemy.addComponent(enemyAttack);
 			newEnemy.addComponent(enemyCollision);

@@ -21,13 +21,9 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 	private int viewMatrixLocation;
 	private int viewMatrixLocationInst;
 	
-	public PlayerGraphics(Entity e, Image image){
-		super(image);
+	public PlayerGraphics(Entity e, Image image, Renderer r){
+		super(image, r);
 		viewMatrix = new Matrix4();
-		viewMatrix.clearToIdentity();
-		viewMatrix.translate(getX() + (ShootEmUp.WIDTH - getWidth()) / 2, getY()
-				+ (ShootEmUp.HEIGHT - getHeight()) / 2, 0);
-		viewMatrix.transpose();
 		matrix44Buffer = BufferUtils.createFloatBuffer(16);
 		viewMatrixLocation = GL20.glGetUniformLocation(Art.ShaderBase,
 				"viewMatrix");
@@ -46,7 +42,7 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 
 	public void scrollScreen(Entity e) {
 		viewMatrix.clearToIdentity();
-		viewMatrix.translate(getX() + (ShootEmUp.WIDTH - getWidth()) / 2, getY()
+		viewMatrix.translate(-getX() + (ShootEmUp.WIDTH - getWidth()) / 2, -getY()
 				+ (ShootEmUp.HEIGHT - getHeight()) / 2, 0);
 		matrix44Buffer.clear();
 		matrix44Buffer = viewMatrix.toBuffer();

@@ -14,10 +14,11 @@ public class AnimatedGraphics extends BaseGraphics {
 	protected int animTime = 6;
 	protected int direction = 0;
 
-	public AnimatedGraphics(Image image){
+	public AnimatedGraphics(Image image, Renderer r){
 		this.image = image;
 		this.width = image.getWidth()/image.getFWidth();
 		this.height = image.getHeight()/image.getFHeight();
+		this.r = r;
 	}
 	
 	@Override
@@ -28,6 +29,9 @@ public class AnimatedGraphics extends BaseGraphics {
 			if (animID >= image.getFWidth() * animTime)
 				animID = 0;
 		}
+		
+		System.out.println(x);
+		System.out.println(y);
 		
 	}
 	
