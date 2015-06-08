@@ -9,10 +9,9 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 
 	BaseSpawn BS;
 	
-	public MeleeAttack(BaseSpawn BS, Weapon weapon, int fireRate, int health, int healthRegen, int maxHealth){
+	public MeleeAttack(BaseSpawn BS, Weapon weapon, int health, int healthRegen, int maxHealth){
 		this.BS = BS;
 		this.weapon = weapon;
-		this.fireRate = fireRate;
 		this.health = health;
 		this.healthRegen = healthRegen;
 		this.maxHealth = maxHealth;
@@ -24,7 +23,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 			if(weapon.isMelee()){
 				weapon.attack(e, dir);
 			}
-			fireRate = weapon.getFirerate();
+			fireRate = weapon.getFireRate();
 		}
 	}
 

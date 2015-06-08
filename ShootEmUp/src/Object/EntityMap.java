@@ -3,6 +3,8 @@ package Object;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import Components.ComponentType;
+import Components.Graphical.BaseGraphics;
 import Math.Vector2;
 
 public class EntityMap {
@@ -29,10 +31,11 @@ public class EntityMap {
 	
 	public HashSet<Vector2> getGridPos(Entity e){
 		HashSet<Vector2> gridPos = new HashSet<Vector2>();
-		gridPos.add(new Vector2((float)Math.floor((e.getX()/32)/6),(float)Math.floor((e.getY()/32)/6)));
-		gridPos.add(new Vector2((float)Math.floor(((e.getX()+e.getWidth())/32)/6),(float)Math.floor((e.getY()/32)/6)));
-		gridPos.add(new Vector2((float)Math.floor(((e.getX()+e.getWidth())/32)/6),(float)Math.floor(((e.getY()+e.getWidth())/32)/6)));
-		gridPos.add(new Vector2((float)Math.floor((e.getX()/32)/6),(float)Math.floor(((e.getY()+e.getWidth())/32)/6)));
+		BaseGraphics BG = (BaseGraphics) e.getComponent(ComponentType.GRAPHICS);
+		gridPos.add(new Vector2((float)Math.floor((BG.getX()/32)/6),(float)Math.floor((BG.getY()/32)/6)));
+		gridPos.add(new Vector2((float)Math.floor(((BG.getX()+BG.getWidth())/32)/6),(float)Math.floor((BG.getY()/32)/6)));
+		gridPos.add(new Vector2((float)Math.floor(((BG.getX()+BG.getWidth())/32)/6),(float)Math.floor(((BG.getY()+BG.getWidth())/32)/6)));
+		gridPos.add(new Vector2((float)Math.floor((BG.getX()/32)/6),(float)Math.floor(((BG.getY()+BG.getWidth())/32)/6)));
 		return gridPos;
 	}
 	

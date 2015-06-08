@@ -9,7 +9,8 @@ import Object.Entity;
 
 public abstract class BaseGraphics extends Component implements GraphicsComponent {
 
-	private static final ComponentType type = ComponentType.GRAPHICS;
+	
+	protected ComponentType type = ComponentType.GRAPHICS;
 	
 	protected Renderer r;
 	
@@ -63,6 +64,10 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 
 	public void setHeight(float height) {
 		this.height = height;
+	}
+	
+	public ComponentType getType(){
+		return type;
 	}
 
 }

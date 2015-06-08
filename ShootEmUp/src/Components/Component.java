@@ -4,11 +4,7 @@ import Object.Entity;
 
 public abstract class Component {
 	
-	private static final ComponentType type = ComponentType.COMPONENT;
-	
-	public ComponentType getType() {
-		return type;
-	}
+	public abstract ComponentType getType();
 	
 	public abstract void update(Entity e);
 	

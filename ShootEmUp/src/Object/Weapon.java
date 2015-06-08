@@ -21,10 +21,12 @@ public class Weapon{
 	private boolean melee;
 	private int manaCost;
 	private int team;
+	private int fireRate;
 
-	public Weapon(int damage, int range, boolean melee, int manaCost) {
+	public Weapon(int damage, int range, int fireRate, boolean melee, int manaCost) {
 		this.damage = damage;
 		this.range = range;
+		this.setFireRate(fireRate);
 		this.melee = melee;
 		this.manaCost = manaCost;
 	}
@@ -98,5 +100,13 @@ public class Weapon{
 	
 	public void setTeam(int team){
 		this.team = team;
+	}
+
+	public int getFireRate() {
+		return fireRate;
+	}
+
+	public void setFireRate(int fireRate) {
+		this.fireRate = fireRate;
 	}
 }

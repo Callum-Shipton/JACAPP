@@ -220,10 +220,10 @@ public class Level {
 		player = new Entity();
 		PlayerGraphics g = new PlayerGraphics(player, Art.player);
 		PointSpawn s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
-		MageAttack a = new MageAttack(s, new Weapon(5, 100, false, 1), 10, 18, 100, 18, 18, 50, 18);
+		MageAttack a = new MageAttack(s, new Weapon(5, 100, 10, false, 1), 18, 100, 18, 18, 50, 18);
 		MoveCollision c = new MoveCollision();
-		BasicMovement m = new BasicMovement(player, c, g, 5);
 		player.addComponent(g);
+		BasicMovement m = new BasicMovement(player, c, g, 5);
 		player.addComponent(s);
 		player.addComponent(a);
 		player.addComponent(c);

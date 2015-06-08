@@ -16,8 +16,8 @@ public class AnimatedGraphics extends BaseGraphics {
 
 	public AnimatedGraphics(Image image){
 		this.image = image;
-		this.width = image.getWidth();
-		this.height = image.getHeight();
+		this.width = image.getWidth()/image.getFWidth();
+		this.height = image.getHeight()/image.getFHeight();
 	}
 	
 	@Override
@@ -35,7 +35,7 @@ public class AnimatedGraphics extends BaseGraphics {
 	public void render(Entity e) {
 		((DPDTRenderer) r).draw(image, new Vector2(getX(), getY()), new Vector2(getWidth(), getHeight()),
 				0.0f, new Vector2((float) Math.floor(animID / animTime),
-						(float) direction), new Vector2(image.getFWidth(),
+						(float) getDirection()), new Vector2(image.getFWidth(),
 						image.getFHeight()));
 	}
 	
@@ -67,6 +67,14 @@ public class AnimatedGraphics extends BaseGraphics {
 	public void receive(Message m, Entity e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	protected int getDirection() {
+		return direction;
+	}
+
+	protected void setDirection(int direction) {
+		this.direction = direction;
 	}
 
 }

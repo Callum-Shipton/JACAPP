@@ -13,10 +13,9 @@ public class MageAttack extends BaseAttack implements AttackComponent {
 	protected int manaRegen;
 	protected int maxMana;
 	
-	public MageAttack(BaseSpawn BS, Weapon weapon, int fireRate, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana){
+	public MageAttack(BaseSpawn BS, Weapon weapon, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana){
 		this.BS = BS;
 		this.weapon = weapon;
-		this.fireRate = fireRate;
 		this.health = health;
 		this.healthRegen = healthRegen;
 		this.maxHealth = maxHealth;
@@ -36,7 +35,7 @@ public class MageAttack extends BaseAttack implements AttackComponent {
 				weapon.attack(e, dir);
 				mana-=weapon.getManaCost();
 			}
-			fireRate = weapon.getFirerate();
+			fireRate = weapon.getFireRate();
 		}
 	}
 	

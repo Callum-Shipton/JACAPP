@@ -7,7 +7,7 @@ import Object.Weapon;
 
 public abstract class BaseAttack extends Component implements AttackComponent {
 	
-	private static final ComponentType type = ComponentType.ATTACK;
+	protected final ComponentType type = ComponentType.ATTACK;
 	
 	protected Weapon weapon;
 	protected int fireRate;
@@ -39,6 +39,10 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 	public void setMaxHealth(int maxHealth) {
 		this.maxHealth = maxHealth;
+	}
+
+	public ComponentType getType() {
+		return type;
 	}
 	
 }
