@@ -11,17 +11,19 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 
 	private static final ComponentType type = ComponentType.GRAPHICS;
 	
-	private float x;
-	private float y;
-	private float width;
-	private float height;
+	protected Renderer r;
+	
+	protected float x;
+	protected float y;
+	protected float width;
+	protected float height;
 	protected Image image;
 	
 	@Override
 	public abstract void update(Entity e);
 	
 	@Override
-	public abstract void render(Entity e, Renderer r);
+	public abstract void render(Entity e);
 	
 	public Image getImage() {
 		return image;

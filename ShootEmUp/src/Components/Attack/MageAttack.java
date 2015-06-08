@@ -3,17 +3,27 @@ package Components.Attack;
 import Components.Message;
 import Components.Spawn.BaseSpawn;
 import Object.Entity;
+import Object.Weapon;
 
 public class MageAttack extends BaseAttack implements AttackComponent {
 
 	BaseSpawn BS;
 	
 	protected int mana;
-	private int manaRegen;
+	protected int manaRegen;
 	protected int maxMana;
 	
-	public MageAttack(BaseSpawn BS){
+	public MageAttack(BaseSpawn BS, Weapon weapon, int fireRate, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana){
 		this.BS = BS;
+		this.weapon = weapon;
+		this.fireRate = fireRate;
+		this.health = health;
+		this.healthRegen = healthRegen;
+		this.maxHealth = maxHealth;
+		this.mana = mana;
+		this.manaRegen = manaRegen;
+		this.maxMana = maxMana;
+		
 	}
 	
 	@Override

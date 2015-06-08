@@ -16,8 +16,6 @@ import Object.Entity;
 
 public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponent {
 
-
-
 	private FloatBuffer matrix44Buffer;
 	private Matrix4 viewMatrix;
 	private int viewMatrixLocation;

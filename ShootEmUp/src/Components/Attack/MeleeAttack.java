@@ -3,13 +3,19 @@ package Components.Attack;
 import Components.Message;
 import Components.Spawn.BaseSpawn;
 import Object.Entity;
+import Object.Weapon;
 
 public class MeleeAttack extends BaseAttack implements AttackComponent {
 
 	BaseSpawn BS;
 	
-	public MeleeAttack(BaseSpawn BS){
+	public MeleeAttack(BaseSpawn BS, Weapon weapon, int fireRate, int health, int healthRegen, int maxHealth){
 		this.BS = BS;
+		this.weapon = weapon;
+		this.fireRate = fireRate;
+		this.health = health;
+		this.healthRegen = healthRegen;
+		this.maxHealth = maxHealth;
 	}
 	
 	@Override

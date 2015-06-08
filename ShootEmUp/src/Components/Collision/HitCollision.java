@@ -5,6 +5,10 @@ import Object.Entity;
 
 public class HitCollision extends BaseCollision{
 
+	public HitCollision(){
+		
+	}
+	
 	@Override
 	public void collision(Entity hitter, Entity hit) {
 		// TODO Auto-generated method stub

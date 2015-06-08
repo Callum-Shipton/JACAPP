@@ -10,8 +10,10 @@ public class PointSpawn extends BaseSpawn implements SpawnComponent {
 	private Vector2 spawnLoc = new Vector2(480.0f, 480.0f);
 	private BaseGraphics BG;
 	
-	public PointSpawn(BaseGraphics BG){
+	public PointSpawn(BaseGraphics BG, Vector2 spawnLoc, Entity e){
 		this.BG = BG;
+		this.spawnLoc = spawnLoc;
+		spawn(e);
 	}
 	
 	@Override

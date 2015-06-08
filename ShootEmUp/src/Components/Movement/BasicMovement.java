@@ -17,11 +17,12 @@ public class BasicMovement extends BaseMovement{
 	protected BaseCollision BC;
 	protected BaseGraphics BG;
 	
-	public BasicMovement(Entity e, BaseCollision BC, BaseGraphics BG){
+	public BasicMovement(Entity e, BaseCollision BC, BaseGraphics BG, int speed){
 		this.BC = BC;
 		this.BG = BG;
 		gridPos = ShootEmUp.currentLevel.eMap.getGridPos(e);
 		ShootEmUp.currentLevel.eMap.addEntity(gridPos, e);
+		this.speed = speed;
 	}
 	
 	public void move(Entity e, Vector2 moveVec) {

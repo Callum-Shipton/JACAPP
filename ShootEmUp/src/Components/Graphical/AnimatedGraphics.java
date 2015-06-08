@@ -13,6 +13,10 @@ public class AnimatedGraphics extends BaseGraphics {
 	protected int animTime = 6;
 	protected int direction;
 
+	public AnimatedGraphics(){
+		
+	}
+	
 	@Override
 	public void update(Entity e) {
 		
@@ -25,7 +29,7 @@ public class AnimatedGraphics extends BaseGraphics {
 	}
 	
 	@Override
-	public void render(Entity e, Renderer r) {
+	public void render(Entity e) {
 		((DPDTRenderer) r).draw(image, new Vector2(getX(), getY()), new Vector2(getWidth(), getHeight()),
 				0.0f, new Vector2((float) Math.floor(animID / animTime),
 						(float) direction), new Vector2(image.getFWidth(),

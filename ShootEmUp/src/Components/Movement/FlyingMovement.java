@@ -7,8 +7,8 @@ import Object.Entity;
 
 public class FlyingMovement extends BasicMovement {
 	
-	public FlyingMovement(Entity e, BaseCollision BC, BaseGraphics BG) {
-		super(e, BC, BG);
+	public FlyingMovement(Entity e, BaseCollision BC, BaseGraphics BG, int speed) {
+		super(e, BC, BG, speed);
 	}
 
 	public Vector4 doesCollide(Entity moving, Entity checked) {

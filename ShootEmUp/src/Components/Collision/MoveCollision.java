@@ -5,6 +5,11 @@ import Object.Entity;
 
 public class MoveCollision extends BaseCollision {
 
+
+	public MoveCollision(){
+		
+	}
+	
 	@Override
 	public void collision(Entity hitter, Entity hit) {
 		/*
