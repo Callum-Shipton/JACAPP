@@ -272,13 +272,13 @@ public class Level {
 			PointSpawn enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
 			MageAttack enemyAttack = new MageAttack(enemySpawn, new Weapon(5, 100, 10, false, 1), 10, 100, 10, 18, 50, 18);
 			MoveCollision enemyCollision = new MoveCollision();
-			AIControl enemyControl = new AIControl();
+			//AIControl enemyControl = new AIControl();
 			BasicMovement enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 5);
 			newEnemy.addComponent(enemyGraphics);
 			newEnemy.addComponent(enemySpawn);
 			newEnemy.addComponent(enemyAttack);
 			newEnemy.addComponent(enemyCollision);
-			newEnemy.addComponent(enemyControl);
+			//newEnemy.addComponent(enemyControl);
 			newEnemy.addComponent(enemyMovement);
 			
 			characters.add(newEnemy);
