@@ -12,7 +12,7 @@ import Main.ShootEmUp;
 import Math.Vector2;
 import Math.Vector4;
 
-public abstract class Entity{
+public class Entity{
 
 	public boolean destroy = false;
 	
