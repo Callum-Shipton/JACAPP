@@ -2,8 +2,10 @@ package Components.Movement;
 
 import java.util.HashSet;
 
+import Components.ComponentType;
 import Components.Message;
 import Components.Collision.BaseCollision;
+import Components.Graphical.BaseGraphics;
 import Main.ShootEmUp;
 import Math.Vector2;
 import Math.Vector4;
@@ -13,15 +15,18 @@ public class BasicMovement extends BaseMovement{
 	protected int speed;
 	protected HashSet<Vector2> gridPos;
 	protected BaseCollision BC;
+	protected BaseGraphics BG;
 	
-	public BasicMovement(Entity e){
+	public BasicMovement(Entity e, BaseCollision BC, BaseGraphics BG){
+		this.BC = BC;
+		this.BG = BG;
 		gridPos = ShootEmUp.currentLevel.eMap.getGridPos(e);
 		ShootEmUp.currentLevel.eMap.addEntity(gridPos, e);
 	}
 	
 	public void move(Entity e, Vector2 moveVec) {
-		e.setPosX(e.getPosX() + Math.round(moveVec.x()));
-		e.setPosY(e.getPosY() + Math.round(moveVec.y()));
+		BG.setX((BG.getX() + Math.round(moveVec.x())));
+		BG.setY(BG.getY() + Math.round(moveVec.y()));
 		checkCollision(e);
 	}
 	
@@ -53,112 +58,113 @@ public class BasicMovement extends BaseMovement{
 	}
 	
 	public Vector4 doesCollide(Entity moving, Entity checked) {
-		if((Math.abs(checked.getPosX() - moving.getPosX()) > 74) && (Math.abs(moving.getPosY() - checked.getPosY()) > 74)){
+		BaseGraphics CG = (BaseGraphics) checked.getComponent(ComponentType.GRAPHICS);
+		if((Math.abs(CG.getX() - BG.getX()) > 74) && (Math.abs(BG.getY() - CG.getY()) > 74)){
 			return null;
 		}
 		
-		float x = moving.getPosX();
-		float y = moving.getPosY();
+		float x = BG.getX();
+		float y = BG.getY();
 		
-		if (collideFunction(checked, x, y) != null) {
-			return collideFunction(checked, x, y);
+		if (collideFunction(CG, x, y) != null) {
+			return collideFunction(CG, x, y);
 		}
 		
-		x += checked.getWidth()/4;
+		x += CG.getWidth()/4;
 
-		if (collideFunction(checked, x, y) != null) {
-			return collideFunction(checked, x, y);
+		if (collideFunction(CG, x, y) != null) {
+			return collideFunction(CG, x, y);
 		}
 
-		x += checked.getWidth()/4;
+		x += CG.getWidth()/4;
 		
-		if (collideFunction(checked, x, y) != null) {
-			return collideFunction(checked, x, y);
+		if (collideFunction(CG, x, y) != null) {
+			return collideFunction(CG, x, y);
 		}
 
-		x += checked.getWidth()/4;
+		x += CG.getWidth()/4;
 		
-		if (collideFunction(checked, x, y) != null) {
-			return collideFunction(checked, x, y);
+		if (collideFunction(CG, x, y) != null) {
+			return collideFunction(CG, x, y);
 		}
 
-		x += checked.getWidth()/4;
+		x += CG.getWidth()/4;
 
-		if (collideFunction(checked, x, y) != null) {
-			return collideFunction(checked, x, y);
+		if (collideFunction(CG, x, y) != null) {
+			return collideFunction(CG, x, y);
 		}
 
-		y += checked.getHeight()/4;
+		y += CG.getHeight()/4;
 		
-		if (collideFunction(checked, x, y) != null) {
-			return collideFunction(checked, x, y);
+		if (collideFunction(CG, x, y) != null) {
+			return collideFunction(CG, x, y);
 		}
 
-		y += checked.getHeight()/4;
+		y += CG.getHeight()/4;
 		
-		if (collideFunction(checked, x, y) != null) {
-			return collideFunction(checked, x, y);
+		if (collideFunction(CG, x, y) != null) {
+			return collideFunction(CG, x, y);
 		}
 
-		y += checked.getHeight()/4;
+		y += CG.getHeight()/4;
 		
-		if (collideFunction(checked, x, y) != null) {
-			return collideFunction(checked, x, y);
+		if (collideFunction(CG, x, y) != null) {
+			return collideFunction(CG, x, y);
 		}
 
-		y += checked.getHeight()/4;
+		y += CG.getHeight()/4;
 		
-		if (collideFunction(checked, x, y) != null) {
-			return collideFunction(checked, x, y);
+		if (collideFunction(CG, x, y) != null) {
+			return collideFunction(CG, x, y);
 		}
 
-		x -= checked.getWidth()/4;
+		x -= CG.getWidth()/4;
 		
-		if (collideFunction(checked, x, y) != null) {
-			return collideFunction(checked, x, y);
+		if (collideFunction(CG, x, y) != null) {
+			return collideFunction(CG, x, y);
 		}
 
-		x -= checked.getWidth()/4;
+		x -= CG.getWidth()/4;
 		
-		if (collideFunction(checked, x, y) != null) {
-			return collideFunction(checked, x, y);
+		if (collideFunction(CG, x, y) != null) {
+			return collideFunction(CG, x, y);
 		}
 
-		x -= checked.getWidth()/4;
+		x -= CG.getWidth()/4;
 		
-		if (collideFunction(checked, x, y) != null) {
-			return collideFunction(checked, x, y);
+		if (collideFunction(CG, x, y) != null) {
+			return collideFunction(CG, x, y);
 		}
 
-		x -= checked.getWidth()/4;
+		x -= CG.getWidth()/4;
 
-		if (collideFunction(checked, x, y) != null) {
-			return collideFunction(checked, x, y);
+		if (collideFunction(CG, x, y) != null) {
+			return collideFunction(CG, x, y);
 		}
 
-		y -= checked.getHeight()/4;
+		y -= CG.getHeight()/4;
 		
-		if (collideFunction(checked, x, y) != null) {
-			return collideFunction(checked, x, y);
+		if (collideFunction(CG, x, y) != null) {
+			return collideFunction(CG, x, y);
 		}
 
-		y -= checked.getHeight()/4;
+		y -= CG.getHeight()/4;
 		
-		if (collideFunction(checked, x, y) != null) {
-			return collideFunction(checked, x, y);
+		if (collideFunction(CG, x, y) != null) {
+			return collideFunction(CG, x, y);
 		}
 
-		y -= checked.getHeight()/4;
+		y -= CG.getHeight()/4;
 
-		if (collideFunction(checked, x, y) != null) {
-			return collideFunction(checked, x, y);
+		if (collideFunction(CG, x, y) != null) {
+			return collideFunction(CG, x, y);
 		}
 		return null;
 	}
 
-	public Vector4 collideFunction(Entity e, float x, float y) {
-		if (((x >= e.getPosX()) && (x <= (e.getPosX() + e.getWidth()))) && ((y >= e.getPosY()) && (y <= (e.getPosY() + e.getHeight())))) {
-			return new Vector4(x - e.getPosX(), y - e.getPosY(), x -(e.getPosX() + e.getWidth()), y - (e.getPosY() + e.getHeight()));	
+	public Vector4 collideFunction(BaseGraphics BG, float x, float y) {
+		if (((x >= BG.getX()) && (x <= (BG.getX() + BG.getWidth()))) && ((y >= BG.getY()) && (y <= (BG.getY() + BG.getHeight())))) {
+			return new Vector4(x - BG.getX(), y - BG.getY(), x -(BG.getX() + BG.getWidth()), y - (BG.getY() + BG.getHeight()));	
 		}
 		return null;
 	}

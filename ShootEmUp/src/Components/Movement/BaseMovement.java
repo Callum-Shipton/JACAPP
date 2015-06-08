@@ -5,6 +5,7 @@ import java.util.HashSet;
 import Components.Component;
 import Components.ComponentType;
 import Components.Collision.BaseCollision;
+import Components.Graphical.BaseGraphics;
 import Math.Vector2;
 import Math.Vector4;
 import Object.Entity;
@@ -25,7 +26,7 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	public abstract Vector4 doesCollide(Entity moving, Entity checked);
 
 	@Override
-	public abstract Vector4 collideFunction(Entity e, float x, float y);
+	public abstract Vector4 collideFunction(BaseGraphics BG, float x, float y);
 	
 	//getter and setters
 	

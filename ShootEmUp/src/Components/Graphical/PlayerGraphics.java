@@ -16,7 +16,7 @@ import Object.Entity;
 
 public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponent {
 
-	private int direction;
+
 
 	private FloatBuffer matrix44Buffer;
 	private Matrix4 viewMatrix;
@@ -26,8 +26,8 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 	public PlayerGraphics(Entity e){
 		viewMatrix = new Matrix4();
 		viewMatrix.clearToIdentity();
-		viewMatrix.translate(-e.getPosX() + (ShootEmUp.WIDTH - e.getWidth()) / 2, -e.getPosY()
-				+ (ShootEmUp.HEIGHT - e.getHeight()) / 2, 0);
+		viewMatrix.translate(getX() + (ShootEmUp.WIDTH - getWidth()) / 2, getY()
+				+ (ShootEmUp.HEIGHT - getHeight()) / 2, 0);
 		viewMatrix.transpose();
 		matrix44Buffer = BufferUtils.createFloatBuffer(16);
 		viewMatrixLocation = GL20.glGetUniformLocation(Art.ShaderBase,
@@ -35,13 +35,6 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 		viewMatrixLocationInst = GL20.glGetUniformLocation(Art.ShaderInst,
 				"viewMatrix");
 		scrollScreen(e);
-	}
-	
-	@Override
-	public void update(Entity e) {
-		
-
-
 	}
 
 	public int getDirection() {
@@ -54,8 +47,8 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 
 	public void scrollScreen(Entity e) {
 		viewMatrix.clearToIdentity();
-		viewMatrix.translate(-e.getPosX() + (ShootEmUp.WIDTH - e.getWidth()) / 2, -e.getPosY()
-				+ (ShootEmUp.HEIGHT - e.getHeight()) / 2, 0);
+		viewMatrix.translate(getX() + (ShootEmUp.WIDTH - getWidth()) / 2, getY()
+				+ (ShootEmUp.HEIGHT - getHeight()) / 2, 0);
 		matrix44Buffer.clear();
 		matrix44Buffer = viewMatrix.toBuffer();
 		GL20.glUseProgram(Art.ShaderBase);
@@ -66,14 +59,7 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 		GL20.glUseProgram(0);
 	}
 
-	@Override
-	public void render(Entity e, Renderer r) {
-		r.draw(image, new Vector2(getPosX(), getPosY()), new Vector2(getWidth(), getHeight()),
-				0.0f, new Vector2((float) Math.floor(animID / animTime),
-						(float) getDirection()), new Vector2(image.getFWidth(),
-						image.getFHeight()));
-		
-	}
+
 
 
 
