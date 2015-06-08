@@ -55,7 +55,7 @@ public class Level {
 	
 	public EntityMap eMap;
 
-	public HashMap<Vector2,Tile> walls;
+	public HashMap<Vector2, Entity> walls;
 	public HashSet<Entity> characters;
 	
 	public Level(String file) {
@@ -78,10 +78,9 @@ public class Level {
 	
 	public void init(){
 		addStuff();
-		setTiles();
-		renderLowTiles();
+		//setTiles();
 	}
-
+	
 	private void setTiles() {
 
 		for (int y = 0; y < map.getHeight(); y++) {
@@ -202,15 +201,13 @@ public class Level {
 				}
 			}
 		}
-		irBack = new IRenderer(backgroundTiles, new Vector2(4.0f, 4.0f), 32.0f,
-				32.0f);
-		irWall = new IRenderer(walls, new Vector2(8.0f, 8.0f), 32.0f, 32.0f);
-		irFore = new IRenderer(foregroundTiles, new Vector2(4.0f, 4.0f), 32.0f,
-				32.0f);
+		//irBack = new IRenderer(backgroundTiles, new Vector2(4.0f, 4.0f), 32.0f, 32.0f);
+		//irWall = new IRenderer(walls, new Vector2(8.0f, 8.0f), 32.0f, 32.0f);
+		//irFore = new IRenderer(foregroundTiles, new Vector2(4.0f, 4.0f), 32.0f, 32.0f);
 	}
 
 	private void addStuff() {
-		walls = new HashMap<Vector2,Tile>();
+		walls = new HashMap<Vector2,Entity>();
 		characters = new HashSet<Entity>();
 
 		base = new DPDTRenderer(Art.ShaderBase);
