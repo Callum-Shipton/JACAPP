@@ -5,7 +5,6 @@ import java.util.HashSet;
 import Components.Collision.BaseCollision;
 import Main.ShootEmUp;
 import Math.Vector2;
-import Math.Vector4;
 import Object.Entity;
 
 public class BasicMovement extends NoMovement{

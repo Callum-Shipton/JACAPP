@@ -11,15 +11,16 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
 import Components.Attack.BaseAttack;
 import Components.Graphical.PlayerGraphics;
+import Components.Movement.BaseMovement;
 import Input.Keyboard;
 import Math.Vector2;
 import Object.Entity;
-import Object.Weapon;
 
 public class PlayerInputComponent implements ControlComponent {
 	
 	PlayerGraphics PGC;
 	BaseAttack BA;
+	BaseMovement BM;
 	
 	PlayerInputComponent(PlayerGraphics PGC, BaseAttack BA){
 		this.PGC = PGC;
@@ -50,7 +51,7 @@ public class PlayerInputComponent implements ControlComponent {
 			if (movement.length() > 1)
 				movement.normalize();
 			PGC.setAnimating(true);
-			e.move(movement);
+			BM.move(e, movement);
 			PGC.scrollScreen(e);
 
 		} else
