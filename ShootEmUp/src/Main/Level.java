@@ -295,14 +295,14 @@ public class Level {
 	}
 
 	public void render() {
-		renderLowTiles();
-		renderHighTiles();
+	//	renderLowTiles();
+	//	renderHighTiles();
 
 		for (Entity character : characters) {
 			((BaseGraphics)character.getComponent(ComponentType.GRAPHICS)).render(character);
 		}
 
-		renderHighTiles();
+		//renderHighTiles();
 
 		//hud.render(stat);
 

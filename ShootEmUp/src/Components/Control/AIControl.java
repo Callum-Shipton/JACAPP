@@ -23,7 +23,19 @@ import Object.Tile;
 import Object.Weapon;
 
 public class AIControl extends BaseControl{
-	
+
+	@Override
+	public void update(Entity e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void receive(Message m, Entity e) {
+		// TODO Auto-generated method stub
+		
+	}
+	/*
 	private AnimatedGraphics AG;
 	private BaseMovement BM;
 	private BaseAttack BA;
@@ -95,20 +107,19 @@ public class AIControl extends BaseControl{
 			
 			//create exp
 			Entity exp = new Entity();
-			AnimatedGraphics expG = new AnimatedGraphics(Art.coin);
-			PointSpawn expS = new PointSpawn(expG, new Vector2(480.0f, 480.0f), exp);
-			MoveCollision c = new MoveCollision();
-			player.addComponent(g);
-			BasicMovement m = new BasicMovement(player, c, g, 5);
-			player.addComponent(s);
-			player.addComponent(a);
-			player.addComponent(c);
-			player.addComponent(m);
-			player.addComponent(new PlayerControl(g, a, m));
+			AnimatedGraphics expG = new AnimatedGraphics(Art.exp);
+			PointSpawn expS = new PointSpawn(expG, new Vector2(AG.getX(),AG.getY()), exp);
+			exp.addComponent(expG);
+			exp.addComponent(expS);
 			ShootEmUp.currentLevel.characters.add(exp);
 			
 			//create coins
 			Entity coin = new Entity();
+			AnimatedGraphics coinG = new AnimatedGraphics(Art.coin);
+			PointSpawn coinS = new PointSpawn(expG, new Vector2(AG.getX(),AG.getY()), exp);
+			exp.addComponent(expG);
+			exp.addComponent(expS);
+			ShootEmUp.currentLevel.characters.add(exp);
 			
 			ShootEmUp.currentLevel.characters.add(coin);
 			
@@ -241,4 +252,5 @@ public class AIControl extends BaseControl{
 		// TODO Auto-generated method stub
 		
 	}
+	*/
 }
