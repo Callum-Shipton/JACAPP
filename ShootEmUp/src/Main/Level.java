@@ -225,7 +225,7 @@ public class Level {
 		player.addComponent(a);
 		player.addComponent(c);
 		player.addComponent(m);
-		player.addComponent(new PlayerControl(g, a, m));
+		player.addComponent(new PlayerControl(player, g, a, m));
 		
 		//create HUD
 		hud = new Entity();
