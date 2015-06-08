@@ -25,9 +25,10 @@ public class PlayerControl extends BaseControl{
 	BaseAttack BA;
 	BaseMovement BM;
 	
-	PlayerControl(PlayerGraphics PG, BaseAttack BA){
+	public PlayerControl(PlayerGraphics PG, BaseAttack BA, BaseMovement BM){
 		this.PG = PG;
 		this.BA = BA;
+		this.BM = BM;
 	}
 
 	@Override

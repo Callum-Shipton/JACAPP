@@ -48,4 +48,8 @@ public class Entity{
 			c.receive(m, this);
 		}
 	}
+	
+	public boolean getDestroy(){
+		return destroy;
+	}
 }

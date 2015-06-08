@@ -1,27 +1,33 @@
 package Object;
 
+import Components.Attack.MageAttack;
+import Components.Collision.MoveCollision;
+import Components.Control.PlayerControl;
+import Components.Graphical.AnimatedGraphics;
+import Components.Graphical.PlayerGraphics;
+import Components.Movement.BasicMovement;
+import Components.Spawn.PointSpawn;
 import Main.ShootEmUp;
+import Math.Vector2;
 
 public class Weapon{
 
 	private int damage;
 	private int range;
-	private int firerate;
 	private boolean melee;
 	private int manaCost;
 	private int team;
 
-	public Weapon(int damage, int range, int firerate, boolean melee, int manaCost) {
+	public Weapon(int damage, int range, boolean melee, int manaCost) {
 		this.damage = damage;
 		this.range = range;
-		this.firerate = firerate;
 		this.melee = melee;
 		this.manaCost = manaCost;
 	}
 	
 	public void attack(Entity e, int direction) {
-		float posX = e.getPosX();
-		float posY = e.getPosY();
+		float posX = e.getX();
+		float posY = e.getY();
 		if (direction >= 1 && direction <= 3) {
 			posX += 44;
 		}
@@ -34,7 +40,21 @@ public class Weapon{
 		if (direction >= 3 && direction <= 5) {
 			posY += 49;
 		}
-		ShootEmUp.currentLevel.particles.add(new Particle(posX + 16, posY + 16, direction, this, e.getTeam()));
+		//create particle
+		Entity particle = new Entity();
+		AnimatedGraphics g = new AnimatedGraphics();
+		PointSpawn s = new PointSpawn(g, new Vector2(80,80),particle);
+		MageAttack a = new MageAttack(s);
+		MoveCollision c = new MoveCollision();
+		BasicMovement m = new BasicMovement(player, c, g);
+		player.addComponent(g);
+		player.addComponent(s);
+		player.addComponent(a);
+		player.addComponent(c);
+		player.addComponent(m);
+		player.addComponent(new PlayerControl(g, a, m));
+		
+		ShootEmUp.currentLevel.characters.add(particle);
 	}
 
 	public int getDamage() {

@@ -11,9 +11,15 @@ import java.util.Random;
 import javax.imageio.*;
 
 import Components.ComponentType;
+import Components.Attack.BaseAttack;
 import Components.Attack.MageAttack;
 import Components.Collision.MoveCollision;
+import Components.Control.AIControl;
+import Components.Control.PlayerControl;
+import Components.Graphical.AnimatedGraphics;
+import Components.Graphical.BaseGraphics;
 import Components.Graphical.PlayerGraphics;
+import Components.Movement.BaseMovement;
 import Components.Movement.BasicMovement;
 import Components.Spawn.BaseSpawn;
 import Components.Spawn.PointSpawn;
@@ -59,13 +65,7 @@ public class Level {
 	public EntityMap eMap;
 
 	public HashMap<Vector2,Tile> walls;
-	public HashSet<Character> characters;
-	public HashSet<Particle> particles;
-	public HashSet<Exp> experience;
-	public HashSet<Coin> coins;
-	public HashSet<Armour> armour;
-	public HashSet<Item> items;
-	public HashSet<Weapon> weapons;
+	public HashSet<Entity> characters;
 	
 	public Level(String file) {
 		this.file = file;
@@ -220,28 +220,28 @@ public class Level {
 
 	private void addStuff() {
 		walls = new HashMap<Vector2,Tile>();
-		characters = new HashSet<Character>();
-		particles = new HashSet<Particle>();
-		experience = new HashSet<Exp>();
-		coins = new HashSet<Coin>();
-		armour = new HashSet<Armour>();
-		items = new HashSet<Item>();
-		weapons = new HashSet<Weapon>();
+		characters = new HashSet<Entity>();
 
 		base = new DPDTRenderer(Art.ShaderBase);
 		stat = new DPDTRenderer(Art.ShaderStat);
 
 		//create player
 		player = new Entity();
-		player.addComponent(new PointSpawn());
-		player.addComponent(new MageAttack((BaseSpawn)player.getComponent(ComponentType.SPAWN)));
-		player.addComponent(new MoveCollision());
-		player.addComponent(new PlayerGraphics(player));
-		player.addComponent(new BasicMovement(player));
+		PlayerGraphics g = new PlayerGraphics(player);
+		PointSpawn s = new PointSpawn(g);
+		MageAttack a = new MageAttack(s);
+		MoveCollision c = new MoveCollision();
+		BasicMovement m = new BasicMovement(player, c, g);
+		player.addComponent(g);
+		player.addComponent(s);
+		player.addComponent(a);
+		player.addComponent(c);
+		player.addComponent(m);
+		player.addComponent(new PlayerControl(g, a, m));
 		
 		//create HUD
 		hud = new Entity();
-		hud.addComponent(new );
+		//hud.addComponent(new );
 		
 		characters.add(player);
 	}
@@ -262,57 +262,46 @@ public class Level {
 
 		counter++;
 		if (counter == 150) {
+			Entity test = new Entity();
+			test.addComponent(new AnimatedGraphics());
 			Random rand = new Random();
 			do {
 				collide = false;
-				X = rand.nextInt((backgroundTiles.length - 1) * 32);
-				Y = rand.nextInt((backgroundTiles[0].length - 1) * 32);
+				((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).setX((float)rand.nextInt((backgroundTiles.length - 1) * 32));
+				((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).setY(rand.nextInt((backgroundTiles[0].length - 1) * 32));
 
-				for (Character character : characters) {
-					if ((character.doesCollide(X, Y, 64.0f, 64.0f) != null)) {
+				for (Entity character : characters) {
+					if ((((BaseMovement) test.getComponent(ComponentType.MOVEMENT)).doesCollide(test, character) != null)) {
 						collide = true;
 						break;
 					}
 				}
-				Iterator<Entry<Vector2, Tile>> iterator = walls.entrySet().iterator() ;
-				while(iterator.hasNext()){
-					Entry<Vector2, Tile> wall = iterator.next();
-						if (wall.getValue().doesCollide(X, Y, 64.0f, 64.0f) != null) {
-							collide = true;
-							break;
-						}
-					}
 			} while (collide == true);
-			characters.add(new RedSquare(X, Y));
+			
+			//creating new Enemy
+			Entity newEnemy = new Entity();
+			AnimatedGraphics enemyGraphics = new AnimatedGraphics(); 
+			PointSpawn enemySpawn = new PointSpawn(enemyGraphics);
+			MageAttack enemyAttack = new MageAttack(enemySpawn);
+			MoveCollision enemyCollision = new MoveCollision();
+			AIControl enemyControl = new AIControl();
+			BasicMovement enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics);
+			newEnemy.addComponent(enemyGraphics);
+			newEnemy.addComponent(enemySpawn);
+			newEnemy.addComponent(enemyAttack);
+			newEnemy.addComponent(enemyCollision);
+			newEnemy.addComponent(enemyControl);
+			newEnemy.addComponent(enemyMovement);
+			
+			characters.add(newEnemy);
 			counter = 0;
 		}
 
-		Iterator<Character> charIter = characters.iterator();
+		Iterator<Entity> charIter = characters.iterator();
 		while(charIter.hasNext()){
-			Character c = charIter.next();
+			Entity c = charIter.next();
 			c.update();
-			if (c.destroy) charIter.remove();
-		}
-		Iterator<Particle> partIter = particles.iterator();
-		while(partIter.hasNext()){
-			Particle p = partIter.next();
-			p.update();
-			if (p.destroy) partIter.remove();
-		}
-		for (Exp exp : experience) {
-			exp.update();
-		}
-		for (Coin coin : coins) {
-			coin.update();
-		}
-		for (Armour arm : armour) {
-			arm.update();
-		}
-		for (Item item : items) {
-			item.update();
-		}
-		for (Weapon weapon : weapons) {
-			weapon.update();
+			if (c.getDestroy()) charIter.remove();
 		}
 		hud.update();
 	}
@@ -321,35 +310,17 @@ public class Level {
 		renderLowTiles();
 		renderHighTiles();
 
-		for (Exp exp : experience) {
-			exp.render(base);
-		}
-		for (Coin coin : coins) {
-			coin.render(base);
-		}
-		for (Armour arm : armour) {
-			arm.render(base);
-		}
-		for (Item item : items) {
-			item.render(base);
-		}
-		for (Weapon weapon : weapons) {
-			weapon.render(base);
-		}
-		for (Character character : characters) {
-			character.render(base);
-		}
-		for (Particle particle : particles) {
-			particle.render(base);
+		for (Entity character : characters) {
+			((BaseGraphics)character.getComponent(ComponentType.GRAPHICS)).render(character);
 		}
 
 		renderHighTiles();
 
-		hud.render(stat);
+		//hud.render(stat);
 
 	}
 
-	public Player getPlayer() {
+	public Entity getPlayer() {
 		return player;
 	}
 
@@ -361,7 +332,9 @@ public class Level {
 		return height;
 	}
 	
-	public Collidable getWall(Vector2 vec){
+	/*
+	public Entity getWall(Vector2 vec){
 		return  walls.get(vec);
 	}
+	*/
 }
