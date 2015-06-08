@@ -1,12 +1,16 @@
 package Object;
 
+import Components.ComponentType;
 import Components.Attack.MageAttack;
 import Components.Collision.MoveCollision;
+import Components.Control.AIControl;
 import Components.Control.PlayerControl;
 import Components.Graphical.AnimatedGraphics;
+import Components.Graphical.BaseGraphics;
 import Components.Graphical.PlayerGraphics;
 import Components.Movement.BasicMovement;
 import Components.Spawn.PointSpawn;
+import Display.Art;
 import Main.ShootEmUp;
 import Math.Vector2;
 
@@ -26,8 +30,9 @@ public class Weapon{
 	}
 	
 	public void attack(Entity e, int direction) {
-		float posX = e.getX();
-		float posY = e.getY();
+		BaseGraphics BG = (BaseGraphics) e.getComponent(ComponentType.GRAPHICS);
+		float posX = BG.getX();
+		float posY = BG.getY();
 		if (direction >= 1 && direction <= 3) {
 			posX += 44;
 		}
@@ -42,17 +47,15 @@ public class Weapon{
 		}
 		//create particle
 		Entity particle = new Entity();
-		AnimatedGraphics g = new AnimatedGraphics();
-		PointSpawn s = new PointSpawn(g, new Vector2(80,80),particle);
-		MageAttack a = new MageAttack(s);
+		AnimatedGraphics g = new AnimatedGraphics(Art.fireMagic);
+		PointSpawn s = new PointSpawn(g, new Vector2(posX,posY),particle);
 		MoveCollision c = new MoveCollision();
-		BasicMovement m = new BasicMovement(player, c, g);
-		player.addComponent(g);
-		player.addComponent(s);
-		player.addComponent(a);
-		player.addComponent(c);
-		player.addComponent(m);
-		player.addComponent(new PlayerControl(g, a, m));
+		BasicMovement m = new BasicMovement(particle, c, g, 10);
+		particle.addComponent(g);
+		particle.addComponent(s);
+		particle.addComponent(c);
+		particle.addComponent(m);
+		particle.addComponent(new AIControl());
 		
 		ShootEmUp.currentLevel.characters.add(particle);
 	}
@@ -79,14 +82,6 @@ public class Weapon{
 
 	public void setMelee(boolean melee) {
 		this.melee = melee;
-	}
-
-	public int getFirerate() {
-		return firerate;
-	}
-
-	public void setFirerate(int firerate) {
-		this.firerate = firerate;
 	}
 
 	public int getManaCost() {
