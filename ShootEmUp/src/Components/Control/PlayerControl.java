@@ -9,21 +9,24 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_S;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
+import Components.Message;
 import Components.Attack.BaseAttack;
+import Components.Graphical.AnimatedGraphics;
+import Components.Graphical.BaseGraphics;
 import Components.Graphical.PlayerGraphics;
 import Components.Movement.BaseMovement;
 import Input.Keyboard;
 import Math.Vector2;
 import Object.Entity;
 
-public class PlayerInputComponent implements ControlComponent {
+public class PlayerControl extends BaseControl{
 	
-	PlayerGraphics PGC;
+	PlayerGraphics PG;
 	BaseAttack BA;
 	BaseMovement BM;
 	
-	PlayerInputComponent(PlayerGraphics PGC, BaseAttack BA){
-		this.PGC = PGC;
+	PlayerControl(PlayerGraphics PG, BaseAttack BA){
+		this.PG = PG;
 		this.BA = BA;
 	}
 
@@ -50,12 +53,12 @@ public class PlayerInputComponent implements ControlComponent {
 		if (movement.length() > 0) {
 			if (movement.length() > 1)
 				movement.normalize();
-			PGC.setAnimating(true);
+			PG.setAnimating(true);
 			BM.move(e, movement);
-			PGC.scrollScreen(e);
+			PG.scrollScreen(e);
 
 		} else
-			PGC.setAnimating(false);
+			PG.setAnimating(false);
 		Vector2 dir = new Vector2(0.0f, 0.0f);
 		if (Keyboard.getKey(GLFW_KEY_UP) == 1
 				|| Keyboard.getKey(GLFW_KEY_UP) == 2) {
@@ -76,20 +79,19 @@ public class PlayerInputComponent implements ControlComponent {
 		if (dir.length() > 0) {
 			if (dir.length() > 1)
 				dir.normalize();
-			PGC.setDirection((int) (Math.round(dir.Angle()) / 45));
+			PG.setDirection((int) (Math.round(dir.Angle()) / 45));
 		}
 
 		if (Keyboard.getKey(GLFW_KEY_SPACE) == 1
 				|| Keyboard.getKey(GLFW_KEY_SPACE) == 2) {
-			BA.attack(e, PGC.getDirection());
+			BA.attack(e, PG.getDirection());
 		}
 
 	}
 
 	@Override
-	public void move(Entity e, Vector2 moveVec) {
+	public void receive(Message m, Entity e) {
 		// TODO Auto-generated method stub
 		
 	}
-	
 }

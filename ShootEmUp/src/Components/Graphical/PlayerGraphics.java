@@ -12,12 +12,10 @@ import Main.ShootEmUp;
 import Math.Matrix4;
 import Object.Entity;
 
-public class PlayerGraphics extends BaseGraphics implements GraphicsComponent {
+public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponent {
 
 	private int direction;
-	private boolean animating;
-	private int animID = 0;
-	private int animTime = 6;
+
 	private FloatBuffer matrix44Buffer;
 	private Matrix4 viewMatrix;
 	private int viewMatrixLocation;
@@ -40,11 +38,7 @@ public class PlayerGraphics extends BaseGraphics implements GraphicsComponent {
 	@Override
 	public void update(Entity e) {
 		
-		if (isAnimating()) {
-			animID++;
-			if (animID >= image.getFWidth() * animTime)
-				animID = 0;
-		}
+
 
 	}
 
@@ -54,38 +48,6 @@ public class PlayerGraphics extends BaseGraphics implements GraphicsComponent {
 
 	public void setDirection(int direction) {
 		this.direction = direction;
-	}
-
-	public Image getImage() {
-		return image;
-	}
-
-	public void setImage(Image image) {
-		this.image = image;
-	}
-
-	public boolean isAnimating() {
-		return animating;
-	}
-
-	public void setAnimating(boolean animating) {
-		this.animating = animating;
-	}
-
-	public int getAnimID() {
-		return animID;
-	}
-
-	public void setAnimID(int animID) {
-		this.animID = animID;
-	}
-
-	public int getAnimTime() {
-		return animTime;
-	}
-
-	public void setAnimTime(int animTime) {
-		this.animTime = animTime;
 	}
 
 	public void scrollScreen(Entity e) {

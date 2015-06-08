@@ -13,5 +13,13 @@ public abstract class BaseGraphics implements GraphicsComponent {
 	
 	@Override
 	public abstract void update(Entity e);
+	
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
 
 }
