@@ -10,6 +10,8 @@ public abstract class Component {
 		return type;
 	}
 	
+	public abstract void update();
+	
 	public abstract void receive(Message m, Entity e);
 
 }

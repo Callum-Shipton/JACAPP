@@ -23,13 +23,14 @@ public abstract class Entity{
 
 	// Constructors
 
-	public Entity(float x, float y) {
-		gridPos = ShootEmUp.currentLevel.eMap.getGridPos(this);
-		ShootEmUp.currentLevel.eMap.addEntity(gridPos, this);
+	public Entity() {
+		components = new HashMap<ComponentType, Component>();
 	}
 
 	public void update() {
-
+		for(Component component : components.values()){
+			component.update();
+		}
 	}
 
 	// Methods
@@ -41,6 +42,15 @@ public abstract class Entity{
 						image.getFHeight()));
 	}
 
+	//add components
+	public void addComponent(Component c){
+		components.put(c.getType(), c);
+	}
+	
+	public Component getComponent(ComponentType type){
+		return components.get(type);
+	}
+	
 	// Setters and getters
 
 	public float getPosX() {

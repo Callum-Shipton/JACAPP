@@ -17,6 +17,7 @@ import Object.Enemies.*;
 import GUI.Hud;
 import Math.Vector2;
 import Object.Coin;
+import Object.Entity;
 import Object.EntityMap;
 import Object.Exp;
 import Object.Item;
@@ -35,7 +36,9 @@ public class Level {
 	private Vector2[][] backgroundTiles; //Replace with Irenderer changes
 	public Vector2[][] wallTiles; // ^^
 	private Vector2[][] foregroundTiles; // ^^
-	private Player player;
+	
+	private Entity player;
+	
 	private Hud hud;
 
 	private DPDTRenderer base;
@@ -221,7 +224,9 @@ public class Level {
 		base = new DPDTRenderer(Art.ShaderBase);
 		stat = new DPDTRenderer(Art.ShaderStat);
 
-		player = new Player(spawn[0], spawn[1]);
+		//create player
+		player = new Entity();
+		
 		hud = new Hud(player);
 		characters.add(player);
 	}
