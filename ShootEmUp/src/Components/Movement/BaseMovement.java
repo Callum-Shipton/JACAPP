@@ -45,4 +45,12 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	public void setFlat(boolean flat){
 		this.flat = flat;
 	}
+	
+	public HashSet<Vector2> getGridPos(){
+		return gridPos;
+	}
+	
+	public void setGridPos(HashSet<Vector2> gridPos){
+		this.gridPos = gridPos;
+	}
 }

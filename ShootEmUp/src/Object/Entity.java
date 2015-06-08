@@ -52,4 +52,8 @@ public class Entity{
 	public boolean getDestroy(){
 		return destroy;
 	}
+	
+	public void setDestroy(boolean b){
+		destroy = b;
+	}
 }
