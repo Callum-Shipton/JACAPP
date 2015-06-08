@@ -69,11 +69,11 @@ public class AnimatedGraphics extends BaseGraphics {
 		
 	}
 
-	protected int getDirection() {
+	public int getDirection() {
 		return direction;
 	}
 
-	protected void setDirection(int direction) {
+	public void setDirection(int direction) {
 		this.direction = direction;
 	}
 

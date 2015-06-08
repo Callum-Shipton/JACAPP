@@ -4,11 +4,17 @@ import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.Random;
 
+import Components.ComponentType;
 import Components.Message;
 import Components.Attack.BaseAttack;
+import Components.Attack.MageAttack;
+import Components.Collision.MoveCollision;
 import Components.Graphical.AnimatedGraphics;
 import Components.Graphical.BaseGraphics;
+import Components.Graphical.PlayerGraphics;
 import Components.Movement.BaseMovement;
+import Components.Movement.BasicMovement;
+import Components.Spawn.PointSpawn;
 import Display.Art;
 import Main.ShootEmUp;
 import Math.Vector2;
@@ -17,20 +23,7 @@ import Object.Tile;
 import Object.Weapon;
 
 public class AIControl extends BaseControl{
-
-	@Override
-	public void update(Entity e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void receive(Message m, Entity e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/*
+	
 	private AnimatedGraphics AG;
 	private BaseMovement BM;
 	private BaseAttack BA;
@@ -98,9 +91,26 @@ public class AIControl extends BaseControl{
 	public boolean checkDead(Entity e) {
 		if (BA.getHealth() <= 0) {
 			e.setDestroy(true);
-			ShootEmUp.currentLevel.eMap.removeEntity(BM.getGridPos(), this);
-			ShootEmUp.currentLevel.experience.add(new Exp(AG.getX(), AG.getY()));
-			ShootEmUp.currentLevel.coins.add(new Coin(AG.getX() + 32, AG.getY() + 32));
+			ShootEmUp.currentLevel.eMap.removeEntity(BM.getGridPos(), e);
+			
+			//create exp
+			Entity exp = new Entity();
+			AnimatedGraphics expG = new AnimatedGraphics(Art.coin);
+			PointSpawn expS = new PointSpawn(expG, new Vector2(480.0f, 480.0f), exp);
+			MoveCollision c = new MoveCollision();
+			player.addComponent(g);
+			BasicMovement m = new BasicMovement(player, c, g, 5);
+			player.addComponent(s);
+			player.addComponent(a);
+			player.addComponent(c);
+			player.addComponent(m);
+			player.addComponent(new PlayerControl(g, a, m));
+			ShootEmUp.currentLevel.characters.add(exp);
+			
+			//create coins
+			Entity coin = new Entity();
+			
+			ShootEmUp.currentLevel.characters.add(coin);
 			
 			Random rand = new Random();
 			int prob = rand.nextInt(3);
@@ -231,5 +241,4 @@ public class AIControl extends BaseControl{
 		// TODO Auto-generated method stub
 		
 	}
-	*/
 }
