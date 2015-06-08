@@ -8,7 +8,11 @@ import Object.Entity;
 
 public abstract class BaseCollision extends Component implements CollisionComponent{
 
-	private ComponentType type = ComponentType.COLLISION;
+	protected ComponentType type = ComponentType.COLLISION;
 	
 	public abstract void collision(Entity hitter, Entity hit);
+
+	public ComponentType getType() {
+		return type;
+	}
 }

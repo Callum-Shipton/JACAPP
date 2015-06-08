@@ -10,8 +10,12 @@ import Object.Entity;
 
 public abstract class BaseControl extends Component implements ControlComponent {
 	
-	private static final ComponentType type = ComponentType.CONTROL;
+	protected ComponentType type = ComponentType.CONTROL;
 	
 	@Override
 	public abstract void update(Entity e);
+
+	public ComponentType getType() {
+		return type;
+	}
 }

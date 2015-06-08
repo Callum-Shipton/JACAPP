@@ -12,7 +12,7 @@ import Object.Entity;
 
 public abstract class BaseMovement extends Component implements MovementComponent {
 	
-	private static final ComponentType type = ComponentType.MOVEMENT;
+	protected ComponentType type = ComponentType.MOVEMENT;
 	
 	protected int speed;
 	protected HashSet<Vector2> gridPos;
@@ -52,5 +52,9 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	
 	public void setGridPos(HashSet<Vector2> gridPos){
 		this.gridPos = gridPos;
+	}
+
+	public ComponentType getType() {
+		return type;
 	}
 }

@@ -9,7 +9,6 @@ import Object.Entity;
 
 public abstract class BaseGraphics extends Component implements GraphicsComponent {
 
-	
 	protected ComponentType type = ComponentType.GRAPHICS;
 	
 	protected Renderer r;

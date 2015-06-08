@@ -7,7 +7,7 @@ import Object.Weapon;
 
 public abstract class BaseAttack extends Component implements AttackComponent {
 	
-	protected final ComponentType type = ComponentType.ATTACK;
+	protected ComponentType type = ComponentType.ATTACK;
 	
 	protected Weapon weapon;
 	protected int fireRate;
