@@ -12,6 +12,10 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 	
 	public abstract void collision(Entity hitter, Entity hit);
 
+	public void destroy(Entity e){
+		
+	}
+	
 	public ComponentType getType() {
 		return type;
 	}

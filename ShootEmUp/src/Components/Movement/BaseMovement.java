@@ -6,6 +6,7 @@ import Components.Component;
 import Components.ComponentType;
 import Components.Collision.BaseCollision;
 import Components.Graphical.BaseGraphics;
+import Main.ShootEmUp;
 import Math.Vector2;
 import Math.Vector4;
 import Object.Entity;
@@ -28,6 +29,9 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	@Override
 	public abstract Vector4 collideFunction(BaseGraphics BG, float x, float y);
 	
+	public void destroy(Entity e){
+		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, e);
+	}
 	//getter and setters
 	
 	public int getSpeed(){

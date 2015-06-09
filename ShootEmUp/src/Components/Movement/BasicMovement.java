@@ -42,17 +42,14 @@ public class BasicMovement extends BaseMovement{
 				break;
 			}
 		}
-
-		if (collision == true) {
-			BC.collision(e, hit);
-		}
 		
-
-		if(!e.getDestroy()){
 		HashSet<Vector2> newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
 		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, e);
 		ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
 		gridPos = newGrid;
+		
+		if (collision == true) {
+			BC.collision(e, hit);
 		}
 	}
 	

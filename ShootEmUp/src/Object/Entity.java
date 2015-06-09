@@ -13,8 +13,6 @@ import Math.Vector2;
 import Math.Vector4;
 
 public class Entity{
-
-	private boolean destroy = false;
 	
 	private HashMap<ComponentType,Component> components;
 
@@ -27,6 +25,12 @@ public class Entity{
 	public void update() {
 		for(Component component : components.values()){
 			component.update(this);
+		}
+	}
+	
+	public void destroy(){
+		for(Component component : components.values()){
+			component.destroy(this);
 		}
 	}
 
@@ -47,17 +51,5 @@ public class Entity{
 		for(Component c : components.values()){
 			c.receive(m, this);
 		}
-	}
-	
-	public boolean getDestroy(){
-		return isDestroyed();
-	}
-	
-	public void setDestroy(boolean b){
-		destroy = b;
-	}
-
-	public boolean isDestroyed() {
-		return destroy;
 	}
 }

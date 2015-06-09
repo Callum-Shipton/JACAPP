@@ -51,6 +51,7 @@ public class Level {
 
 	public HashMap<Vector2, Entity> walls;
 	public HashSet<Entity> characters;
+	public HashSet<Entity> oldEntities;
 	public HashSet<Entity> newEntities;
 	
 	public Level(String file) {
@@ -199,6 +200,7 @@ public class Level {
 	private void addStuff() {
 		walls = new HashMap<Vector2,Entity>();
 		characters = new HashSet<Entity>();
+		oldEntities = new HashSet<Entity>();
 		newEntities = new HashSet<Entity>();
 		
 		//create player
@@ -280,8 +282,15 @@ public class Level {
 		while(charIter.hasNext()){
 			Entity c = charIter.next();
 			c.update();
-			if (c.getDestroy()) charIter.remove();
 		}
+		
+		Iterator<Entity> oldEntitiesIter = oldEntities.iterator();
+		while(oldEntitiesIter.hasNext()){
+			Entity n = oldEntitiesIter.next();
+			characters.remove(n);
+		}
+		oldEntities.clear();
+		
 		Iterator<Entity> newEntitiesIter = newEntities.iterator();
 		while(newEntitiesIter.hasNext()){
 			Entity n = newEntitiesIter.next();

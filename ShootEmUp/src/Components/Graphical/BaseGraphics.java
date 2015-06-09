@@ -25,6 +25,10 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 	@Override
 	public abstract void render(Entity e);
 	
+	public void destroy(Entity e){
+		
+	}
+	
 	public Image getImage() {
 		return image;
 	}

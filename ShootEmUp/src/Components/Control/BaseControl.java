@@ -15,6 +15,10 @@ public abstract class BaseControl extends Component implements ControlComponent 
 	@Override
 	public abstract void update(Entity e);
 
+	public void destroy(Entity e){
+		
+	}
+	
 	public ComponentType getType() {
 		return type;
 	}

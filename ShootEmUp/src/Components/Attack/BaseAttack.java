@@ -21,6 +21,10 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	@Override
 	public abstract void update(Entity e);
 	
+	public void destroy(Entity e){
+		
+	}
+	
 	public int getHealth() {
 		return health;
 	}

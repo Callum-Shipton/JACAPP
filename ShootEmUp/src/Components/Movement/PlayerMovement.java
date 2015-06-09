@@ -1,22 +1,17 @@
-package Components.Collision;
+package Components.Movement;
 
-import Components.Message;
-import Object.Armour;
-import Object.Coin;
+import Components.Collision.BaseCollision;
+import Components.Graphical.BaseGraphics;
 import Object.Entity;
-import Object.Exp;
-import Object.Item;
 import Object.Weapon;
 
-public class PickupCollision extends BaseCollision{
+public class PlayerMovement extends BasicMovement{
 
-	public PickupCollision(){
-		
+	public PlayerMovement(Entity e, BaseCollision BC, BaseGraphics BG, int speed) {
+		super(e, BC, BG, speed);
 	}
 	
-	@Override
-	public void collision(Entity hitter, Entity hit) {
-		if (coins < 99) {
+	/*if (coins < 99) {
 			for (Entity coin : entities) {
 				if (coin instanceof Coin) {
 					if (coin.doesCollide(getPosX(), getPosY(), getWidth(), getHeight()) != null) {
@@ -69,19 +64,6 @@ public class PickupCollision extends BaseCollision{
 				expBound++;
 			}
 		}
-		
-	}
-
-	@Override
-	public void receive(Message m, Entity e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update(Entity e) {
-		// TODO Auto-generated method stub
-		
-	}
+		*/
 
 }

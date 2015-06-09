@@ -12,11 +12,12 @@ public class HitCollision extends BaseCollision{
 	
 	@Override
 	public void collision(Entity hitter, Entity hit) {
-		hitter.setDestroy(true);
-		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, this);
+		hitter.destroy();
+		/*
 		if (hit != null && getTeam() != hit.getTeam()) {
 			hit.damage(weapon.getDamage());
 		}
+		*/
 	}
 
 	@Override
