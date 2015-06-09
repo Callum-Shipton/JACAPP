@@ -19,10 +19,21 @@ import Display.Art;
 import Main.ShootEmUp;
 import Math.Vector2;
 import Object.Entity;
-import Object.Tile;
 import Object.Weapon;
 
 public class AIControl extends BaseControl{
+
+	@Override
+	public void update(Entity e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void receive(Message m, Entity e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	/*
 	private AnimatedGraphics AG;
@@ -87,76 +98,6 @@ public class AIControl extends BaseControl{
 			//weapon.attack(AG.getX(), AG.getY(), getDirection(), getTeam());
 			counter = 0;
 		}
-	}
-	
-	public boolean checkDead(Entity e) {
-		if (BA.getHealth() <= 0) {
-			e.setDestroy(true);
-			ShootEmUp.currentLevel.eMap.removeEntity(BM.getGridPos(), e);
-			
-			//create exp
-			Entity exp = new Entity();
-			AnimatedGraphics expG = new AnimatedGraphics(Art.exp);
-			PointSpawn expS = new PointSpawn(expG, new Vector2(AG.getX(),AG.getY()), exp);
-			exp.addComponent(expG);
-			exp.addComponent(expS);
-			ShootEmUp.currentLevel.characters.add(exp);
-			
-			//create coins
-			Entity coin = new Entity();
-			AnimatedGraphics coinG = new AnimatedGraphics(Art.coin);
-			PointSpawn coinS = new PointSpawn(coinG, new Vector2(AG.getX(),AG.getY()), coin);
-			exp.addComponent(coinG);
-			exp.addComponent(coinS);
-			ShootEmUp.currentLevel.characters.add(coin);
-			
-			
-			//create armour, item or weapon
-			Random rand = new Random();
-			int prob = rand.nextInt(3);
-			if(prob == 0 ) {
-				int armourProb = rand.nextInt(5);
-				Entity armour = new Entity();
-				AnimatedGraphics armourG;
-				if(armourProb == 0){
-					armourG = new AnimatedGraphics(Art.shoes);
-				} else if(armourProb == 1){
-					armourG = new AnimatedGraphics(Art.legs);
-				} else if(armourProb == 2){
-					armourG = new AnimatedGraphics(Art.chest);
-				} else if(armourProb == 3){
-					armourG = new AnimatedGraphics(Art.helmet);
-				} else {
-					armourG = new AnimatedGraphics(Art.ring);
-				}
-				PointSpawn armourS = new PointSpawn(armourG, new Vector2(AG.getX(),AG.getY()), armour);
-				exp.addComponent(armourG);
-				exp.addComponent(armourS);
-				ShootEmUp.currentLevel.characters.add(armour);
-			} else if(prob == 1) {
-				int itemProb = rand.nextInt(2);
-				Entity item = new Entity();
-				AnimatedGraphics itemG;
-				if(itemProb == 0) {
-					itemG = new AnimatedGraphics(Art.healthPotion);
-				} else {
-					itemG = new AnimatedGraphics(Art.manaPotion);
-				}
-				PointSpawn itemS = new PointSpawn(itemG, new Vector2(AG.getX(),AG.getY()), item);
-				exp.addComponent(itemG);
-				exp.addComponent(itemS);
-				ShootEmUp.currentLevel.characters.add(item);
-			} else {	
-				Entity weapon = new Entity();
-				AnimatedGraphics weaponG = new AnimatedGraphics(Art.bow);
-				PointSpawn weaponS = new PointSpawn(weaponG, new Vector2(AG.getX(),AG.getY()), weapon);
-				exp.addComponent(weaponG);
-				exp.addComponent(weaponS);
-				ShootEmUp.currentLevel.characters.add(weapon);
-			}
-			return true;
-		}
-		return false;
 	}
 	
 	public Vector2 ai(){

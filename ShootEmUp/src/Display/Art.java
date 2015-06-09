@@ -9,8 +9,6 @@ import org.lwjgl.BufferUtils;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
-
-
 import Main.ShootEmUp;
 import Math.Matrix4;
 
@@ -66,7 +64,12 @@ public class Art {
 	public static int ShaderBase;
 	public static int ShaderInst;
 	public static int ShaderStat;
-
+	
+	public static DPDTRenderer base;
+	public static DPDTRenderer stat;
+	public static IRenderer irBack;
+	public static IRenderer irWall;
+	public static IRenderer irFore;
 
 	private void initShaders() {
 		// Load the vertex shader
@@ -237,11 +240,17 @@ public class Art {
 		glUseProgram(0);
 
 	}
+	
+	private void initRenderers(){
+		base = new DPDTRenderer(ShaderBase);
+		stat = new DPDTRenderer(ShaderStat);
+	}
 
 	public void init() {
 		initShaders();
 		initShaderUniforms();
 		initTextures();
+		initRenderers();
 	}
 
 }

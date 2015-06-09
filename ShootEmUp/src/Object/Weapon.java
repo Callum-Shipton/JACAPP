@@ -4,10 +4,12 @@ import Components.ComponentType;
 import Components.Attack.MageAttack;
 import Components.Collision.MoveCollision;
 import Components.Control.AIControl;
+import Components.Control.LineControl;
 import Components.Control.PlayerControl;
 import Components.Graphical.AnimatedGraphics;
 import Components.Graphical.BaseGraphics;
 import Components.Graphical.PlayerGraphics;
+import Components.Movement.BaseMovement;
 import Components.Movement.BasicMovement;
 import Components.Spawn.PointSpawn;
 import Display.Art;
@@ -49,17 +51,18 @@ public class Weapon{
 		}
 		//create particle
 		Entity particle = new Entity();
-		AnimatedGraphics g = new AnimatedGraphics(Art.fireMagic);
+		AnimatedGraphics g = new AnimatedGraphics(Art.fireMagic, Art.base);
+		g.setDirection(direction);
+		particle.addComponent(g);
 		PointSpawn s = new PointSpawn(g, new Vector2(posX,posY),particle);
 		MoveCollision c = new MoveCollision();
 		BasicMovement m = new BasicMovement(particle, c, g, 10);
-		particle.addComponent(g);
 		particle.addComponent(s);
 		particle.addComponent(c);
 		particle.addComponent(m);
-		particle.addComponent(new AIControl());
+		particle.addComponent(new LineControl(g, m));
 		
-		ShootEmUp.currentLevel.characters.add(particle);
+		ShootEmUp.currentLevel.newEntities.add(particle);
 	}
 
 	public int getDamage() {

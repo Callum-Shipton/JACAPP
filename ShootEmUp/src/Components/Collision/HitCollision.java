@@ -1,6 +1,7 @@
 package Components.Collision;
 
 import Components.Message;
+import Main.ShootEmUp;
 import Object.Entity;
 
 public class HitCollision extends BaseCollision{
@@ -11,8 +12,11 @@ public class HitCollision extends BaseCollision{
 	
 	@Override
 	public void collision(Entity hitter, Entity hit) {
-		// TODO Auto-generated method stub
-		
+		hitter.setDestroy(true);
+		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, this);
+		if (hit != null && getTeam() != hit.getTeam()) {
+			hit.damage(weapon.getDamage());
+		}
 	}
 
 	@Override
