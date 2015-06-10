@@ -5,11 +5,15 @@ import Components.Message;
 import Components.Attack.BaseAttack;
 import Main.ShootEmUp;
 import Object.Entity;
+import Object.Weapon;
 
 public class HitCollision extends BaseCollision{
+	
+	Weapon weapon;
 
-	public HitCollision(){
-		
+	public HitCollision(Weapon weapon){
+		this.weapon = weapon;
+		moveBack = false;
 	}
 	
 	@Override
@@ -19,7 +23,7 @@ public class HitCollision extends BaseCollision{
 		
 		if(hit.getComponent(ComponentType.ATTACK) != null){
 			System.out.println("hit");
-			((BaseAttack)hit.getComponent(ComponentType.ATTACK)).damage(2); //needs updating to take weapon damage
+			((BaseAttack)hit.getComponent(ComponentType.ATTACK)).damage(weapon.getDamage()); //needs updating to take weapon damage
 		}
 		/*
 		if (hit != null && getTeam() != hit.getTeam()) {

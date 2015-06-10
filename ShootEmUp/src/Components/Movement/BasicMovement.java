@@ -13,11 +13,9 @@ import Object.Entity;
 
 public class BasicMovement extends BaseMovement{
 	protected int speed;
-	protected BaseCollision BC;
 	protected BaseGraphics BG;
 	
-	public BasicMovement(Entity e, BaseCollision BC, BaseGraphics BG, int speed){
-		this.BC = BC;
+	public BasicMovement(Entity e, BaseGraphics BG, int speed){
 		this.BG = BG;
 		BC.setGridPos(ShootEmUp.currentLevel.eMap.getGridPos(e));
 		ShootEmUp.currentLevel.eMap.addEntity(BC.getGridPos(), e);
@@ -25,12 +23,13 @@ public class BasicMovement extends BaseMovement{
 	}
 	
 	public void move(Entity e, Vector2 moveVec) {
+		checkCollision(e, moveVec);
 		BG.setX((BG.getX() + Math.round(moveVec.x() * speed)));
+		checkCollision(e, moveVec);
 		BG.setY(BG.getY() + Math.round(moveVec.y() * speed));
-		checkCollision(e);
 	}
 	
-	public void checkCollision(Entity e){
+	public void checkCollision(Entity e, Vector2 moveVec){
 		HashSet<Entity> entities = ShootEmUp.currentLevel.eMap.getEntites(BC.getGridPos());
 		boolean collision = false;
 		Entity hit = null;
@@ -48,8 +47,23 @@ public class BasicMovement extends BaseMovement{
 		BC. setGridPos(newGrid);
 		
 		if (collision == true) {
-			BC.collision(e, hit);
+			if((((BaseCollision)e.getComponent(ComponentType.COLLISION)).getMoveBack() == false) || (e.getComponent(ComponentType.COLLISION) == null)){
+				moveBack(e, moveVec);
+			} else {
+				BC.collision(e, hit);
+			}
 		}
+	}
+	
+	public void moveBack(Entity e, Vector2 moveVec){
+		 if (Math.abs(vec.x()) < speed) {
+				e.setPosX(e.getPosX() + ((Math.round(moveVec.x())) - vec.x() - (moveVec.x() / Math.abs(moveVec.x()))));
+			} else if(Math.abs(vec.x()) >= speed); 
+			else if (Math.abs(vec.z()) < speed) {
+				e.setPosX(e.getPosX() + ((Math.round(moveVec.x())) - vec.z()
+						- (moveVec.x() / Math.abs(moveVec.x()))));
+			}
+			onCollide(hit); 
 	}
 	
 	public Vector4 doesCollide(Entity moving, Entity checked) {

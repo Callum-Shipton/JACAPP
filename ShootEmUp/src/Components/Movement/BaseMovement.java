@@ -1,12 +1,9 @@
 package Components.Movement;
 
-import java.util.HashSet;
-
 import Components.Component;
 import Components.ComponentType;
 import Components.Collision.BaseCollision;
 import Components.Graphical.BaseGraphics;
-import Main.ShootEmUp;
 import Math.Vector2;
 import Math.Vector4;
 import Object.Entity;

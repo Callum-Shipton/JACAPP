@@ -3,7 +3,6 @@ package Object;
 import Components.ComponentType;
 import Components.Attack.MageAttack;
 import Components.Collision.HitCollision;
-import Components.Collision.MoveCollision;
 import Components.Control.AIControl;
 import Components.Control.LineControl;
 import Components.Control.PlayerControl;
@@ -61,7 +60,7 @@ public class Weapon{
 			posX += (BG.getWidth() - g.getWidth())/2;
 		}
 		PointSpawn s = new PointSpawn(g, new Vector2(posX,posY),particle);
-		HitCollision c = new HitCollision();
+		HitCollision c = new HitCollision(this);
 		FlyingMovement m = new FlyingMovement(particle, c, g, 10);
 		particle.addComponent(s);
 		particle.addComponent(c);

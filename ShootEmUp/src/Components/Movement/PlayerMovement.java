@@ -3,7 +3,6 @@ package Components.Movement;
 import Components.Collision.BaseCollision;
 import Components.Graphical.BaseGraphics;
 import Object.Entity;
-import Object.Weapon;
 
 public class PlayerMovement extends BasicMovement{
 

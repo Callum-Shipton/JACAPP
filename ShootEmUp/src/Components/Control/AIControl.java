@@ -8,7 +8,6 @@ import Components.ComponentType;
 import Components.Message;
 import Components.Attack.BaseAttack;
 import Components.Attack.MageAttack;
-import Components.Collision.MoveCollision;
 import Components.Graphical.AnimatedGraphics;
 import Components.Graphical.BaseGraphics;
 import Components.Graphical.PlayerGraphics;

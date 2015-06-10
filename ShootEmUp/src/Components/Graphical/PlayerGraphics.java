@@ -6,12 +6,10 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL20;
 
 import Display.Art;
-import Display.DPDTRenderer;
 import Display.Image;
 import Display.Renderer;
 import Main.ShootEmUp;
 import Math.Matrix4;
-import Math.Vector2;
 import Object.Entity;
 
 public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponent {

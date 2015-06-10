@@ -2,7 +2,6 @@ package Components.Graphical;
 
 import Components.Component;
 import Components.ComponentType;
-import Display.DPDTRenderer;
 import Display.Image;
 import Display.Renderer;
 import Object.Entity;

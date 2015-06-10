@@ -2,7 +2,6 @@ package Components.Graphical;
 
 import Components.Message;
 import Display.Image;
-import Display.Renderer;
 import Math.Vector2;
 import Object.Entity;
 
