@@ -60,8 +60,7 @@ public class BasicMovement extends BaseMovement{
 				e.setPosX(e.getPosX() + ((Math.round(moveVec.x())) - vec.x() - (moveVec.x() / Math.abs(moveVec.x()))));
 			} else if(Math.abs(vec.x()) >= speed); 
 			else if (Math.abs(vec.z()) < speed) {
-				e.setPosX(e.getPosX() + ((Math.round(moveVec.x())) - vec.z()
-						- (moveVec.x() / Math.abs(moveVec.x()))));
+				e.setPosX(e.getPosX() + ((Math.round(moveVec.x())) - vec.z() - (moveVec.x() / Math.abs(moveVec.x()))));
 			}
 			onCollide(hit); 
 	}
