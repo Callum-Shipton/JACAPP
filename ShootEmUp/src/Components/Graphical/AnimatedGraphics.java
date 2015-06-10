@@ -29,10 +29,6 @@ public class AnimatedGraphics extends BaseGraphics {
 			if (animID >= image.getFWidth() * animTime)
 				animID = 0;
 		}
-		
-		System.out.println(x);
-		System.out.println(y);
-		
 	}
 	
 	@Override

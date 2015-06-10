@@ -170,6 +170,8 @@ public class Level {
 				if(!noWall){
 					wall.addComponent(wallG);
 					MoveCollision MC = new MoveCollision();
+					MC.setGridPos(ShootEmUp.currentLevel.eMap.getGridPos(wall));
+					ShootEmUp.currentLevel.eMap.addEntity(MC.getGridPos(), wall);
 					wall.addComponent(MC);
 					characters.add(wall);
 					walls.put(new Vector2(x,y), wall);

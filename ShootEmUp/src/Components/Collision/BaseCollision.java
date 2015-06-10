@@ -1,14 +1,17 @@
 package Components.Collision;
 
+import java.util.HashSet;
+
 import Components.Component;
 import Components.ComponentType;
-import Components.Message;
-import Math.Vector4;
+import Math.Vector2;
 import Object.Entity;
 
 public abstract class BaseCollision extends Component implements CollisionComponent{
 
 	protected ComponentType type = ComponentType.COLLISION;
+	
+	protected HashSet<Vector2> gridPos;
 	
 	public abstract void collision(Entity hitter, Entity hit);
 
@@ -18,5 +21,13 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 	
 	public ComponentType getType() {
 		return type;
+	}
+	
+	public HashSet<Vector2> getGridPos(){
+		return gridPos;
+	}
+	
+	public void setGridPos(HashSet<Vector2> gridPos){
+		this.gridPos = gridPos;
 	}
 }

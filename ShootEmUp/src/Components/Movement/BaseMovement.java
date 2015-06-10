@@ -16,7 +16,6 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	protected ComponentType type = ComponentType.MOVEMENT;
 	
 	protected int speed;
-	protected HashSet<Vector2> gridPos;
 	protected BaseCollision BC;
 	protected boolean flat;
 	
@@ -30,7 +29,7 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	public abstract Vector4 collideFunction(BaseGraphics BG, float x, float y);
 	
 	public void destroy(Entity e){
-		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, e);
+		
 	}
 	//getter and setters
 	
@@ -48,14 +47,6 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	
 	public void setFlat(boolean flat){
 		this.flat = flat;
-	}
-	
-	public HashSet<Vector2> getGridPos(){
-		return gridPos;
-	}
-	
-	public void setGridPos(HashSet<Vector2> gridPos){
-		this.gridPos = gridPos;
 	}
 
 	public ComponentType getType() {

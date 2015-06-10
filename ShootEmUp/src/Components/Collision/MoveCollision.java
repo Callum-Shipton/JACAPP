@@ -1,10 +1,11 @@
 package Components.Collision;
 
+import Components.ComponentType;
+import Components.Spawn.BaseSpawn;
 import Components.Message;
 import Object.Entity;
 
 public class MoveCollision extends BaseCollision {
-
 
 	public MoveCollision(){
 		
@@ -23,6 +24,7 @@ public class MoveCollision extends BaseCollision {
 		}
 		onCollide(hit); 
 		*/
+		((BaseSpawn)hitter.getComponent(ComponentType.SPAWN)).spawn(hitter);
 	}
 
 	@Override

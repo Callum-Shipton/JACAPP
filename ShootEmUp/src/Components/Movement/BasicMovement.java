@@ -13,15 +13,14 @@ import Object.Entity;
 
 public class BasicMovement extends BaseMovement{
 	protected int speed;
-	protected HashSet<Vector2> gridPos;
 	protected BaseCollision BC;
 	protected BaseGraphics BG;
 	
 	public BasicMovement(Entity e, BaseCollision BC, BaseGraphics BG, int speed){
 		this.BC = BC;
 		this.BG = BG;
-		gridPos = ShootEmUp.currentLevel.eMap.getGridPos(e);
-		ShootEmUp.currentLevel.eMap.addEntity(gridPos, e);
+		BC.setGridPos(ShootEmUp.currentLevel.eMap.getGridPos(e));
+		ShootEmUp.currentLevel.eMap.addEntity(BC.getGridPos(), e);
 		this.speed = speed;
 	}
 	
@@ -32,7 +31,7 @@ public class BasicMovement extends BaseMovement{
 	}
 	
 	public void checkCollision(Entity e){
-		HashSet<Entity> entities = ShootEmUp.currentLevel.eMap.getEntites(gridPos);
+		HashSet<Entity> entities = ShootEmUp.currentLevel.eMap.getEntites(BC.getGridPos());
 		boolean collision = false;
 		Entity hit = null;
 		for (Entity character : entities) {
@@ -44,9 +43,9 @@ public class BasicMovement extends BaseMovement{
 		}
 		
 		HashSet<Vector2> newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
-		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, e);
+		ShootEmUp.currentLevel.eMap.removeEntity(BC.getGridPos(), e);
 		ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
-		gridPos = newGrid;
+		BC. setGridPos(newGrid);
 		
 		if (collision == true) {
 			BC.collision(e, hit);
@@ -55,9 +54,6 @@ public class BasicMovement extends BaseMovement{
 	
 	public Vector4 doesCollide(Entity moving, Entity checked) {
 		BaseGraphics CG = (BaseGraphics) checked.getComponent(ComponentType.GRAPHICS);
-		if((Math.abs(CG.getX() - BG.getX()) > 74) && (Math.abs(BG.getY() - CG.getY()) > 74)){
-			return null;
-		}
 		
 		float x = BG.getX();
 		float y = BG.getY();
@@ -66,91 +62,91 @@ public class BasicMovement extends BaseMovement{
 			return collideFunction(CG, x, y);
 		}
 		
-		x += CG.getWidth()/4;
+		x += BG.getWidth()/4;
 
 		if (collideFunction(CG, x, y) != null) {
 			return collideFunction(CG, x, y);
 		}
 
-		x += CG.getWidth()/4;
+		x += BG.getWidth()/4;
 		
 		if (collideFunction(CG, x, y) != null) {
 			return collideFunction(CG, x, y);
 		}
 
-		x += CG.getWidth()/4;
+		x += BG.getWidth()/4;
 		
 		if (collideFunction(CG, x, y) != null) {
 			return collideFunction(CG, x, y);
 		}
 
-		x += CG.getWidth()/4;
+		x += BG.getWidth()/4;
 
 		if (collideFunction(CG, x, y) != null) {
 			return collideFunction(CG, x, y);
 		}
 
-		y += CG.getHeight()/4;
+		y += BG.getHeight()/4;
 		
 		if (collideFunction(CG, x, y) != null) {
 			return collideFunction(CG, x, y);
 		}
 
-		y += CG.getHeight()/4;
+		y += BG.getHeight()/4;
 		
 		if (collideFunction(CG, x, y) != null) {
 			return collideFunction(CG, x, y);
 		}
 
-		y += CG.getHeight()/4;
+		y += BG.getHeight()/4;
 		
 		if (collideFunction(CG, x, y) != null) {
 			return collideFunction(CG, x, y);
 		}
 
-		y += CG.getHeight()/4;
+		y += BG.getHeight()/4;
 		
 		if (collideFunction(CG, x, y) != null) {
 			return collideFunction(CG, x, y);
 		}
 
-		x -= CG.getWidth()/4;
+		x -= BG.getWidth()/4;
 		
 		if (collideFunction(CG, x, y) != null) {
 			return collideFunction(CG, x, y);
 		}
 
-		x -= CG.getWidth()/4;
+		x -= BG.getWidth()/4;
 		
 		if (collideFunction(CG, x, y) != null) {
 			return collideFunction(CG, x, y);
 		}
 
-		x -= CG.getWidth()/4;
+		x -= BG.getWidth()/4;
 		
 		if (collideFunction(CG, x, y) != null) {
 			return collideFunction(CG, x, y);
 		}
 
-		x -= CG.getWidth()/4;
+		x -= BG.getWidth()/4;
 
 		if (collideFunction(CG, x, y) != null) {
 			return collideFunction(CG, x, y);
 		}
 
-		y -= CG.getHeight()/4;
+		y -= BG.getHeight()/4;
 		
 		if (collideFunction(CG, x, y) != null) {
 			return collideFunction(CG, x, y);
 		}
 
-		y -= CG.getHeight()/4;
+		y -= BG.getHeight()/4;
 		
 		if (collideFunction(CG, x, y) != null) {
 			return collideFunction(CG, x, y);
 		}
 
-		y -= CG.getHeight()/4;
+		y -= BG.getHeight()/4;
 
 		if (collideFunction(CG, x, y) != null) {
 			return collideFunction(CG, x, y);

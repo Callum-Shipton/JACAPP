@@ -11,6 +11,9 @@ public class MapGraphics extends BaseGraphics{
 	private Vector2 mapPos;
 	
 	public MapGraphics(Image image, Vector2 mapPos, float x, float y){
+		this.image = image;
+		this.width = image.getWidth()/image.getFWidth();
+		this.height = image.getHeight()/image.getFHeight();
 		this.setMapPos(mapPos);
 		this.x = x;
 		this.y = y;

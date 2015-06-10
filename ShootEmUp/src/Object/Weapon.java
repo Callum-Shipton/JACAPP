@@ -12,6 +12,7 @@ import Components.Graphical.BaseGraphics;
 import Components.Graphical.PlayerGraphics;
 import Components.Movement.BaseMovement;
 import Components.Movement.BasicMovement;
+import Components.Movement.FlyingMovement;
 import Components.Spawn.PointSpawn;
 import Display.Art;
 import Main.ShootEmUp;
@@ -38,26 +39,30 @@ public class Weapon{
 		BaseGraphics BG = (BaseGraphics) e.getComponent(ComponentType.GRAPHICS);
 		float posX = BG.getX();
 		float posY = BG.getY();
-		if (direction >= 1 && direction <= 3) {
-			posX += 44;
-		}
-		if (direction >= 5) {
-			posX -= 44;
-		}
-		if (direction <= 1 || direction >= 7) {
-			posY -= 49;
-		}
-		if (direction >= 3 && direction <= 5) {
-			posY += 49;
-		}
 		//create particle
 		Entity particle = new Entity();
 		AnimatedGraphics g = new AnimatedGraphics(Art.fireMagic, Art.base);
 		g.setDirection(direction);
 		particle.addComponent(g);
+		if (direction >= 1 && direction <= 3) {
+			posX += BG.getWidth();
+			posY += (BG.getHeight() - g.getHeight())/2;
+		}
+		if (direction >= 5) {
+			posX -= (g.getWidth());
+			posY += (BG.getHeight() - g.getHeight())/2;
+		}
+		if (direction <= 1 || direction >= 7) {
+			posY -= (g.getHeight());
+			posX += (BG.getWidth() - g.getWidth())/2;
+		}
+		if (direction >= 3 && direction <= 5) {
+			posY += BG.getHeight();
+			posX += (BG.getWidth() - g.getWidth())/2;
+		}
 		PointSpawn s = new PointSpawn(g, new Vector2(posX,posY),particle);
 		HitCollision c = new HitCollision();
-		BasicMovement m = new BasicMovement(particle, c, g, 10);
+		FlyingMovement m = new FlyingMovement(particle, c, g, 10);
 		particle.addComponent(s);
 		particle.addComponent(c);
 		particle.addComponent(m);

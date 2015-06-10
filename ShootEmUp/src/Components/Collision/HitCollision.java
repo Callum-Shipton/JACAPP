@@ -1,6 +1,8 @@
 package Components.Collision;
 
+import Components.ComponentType;
 import Components.Message;
+import Components.Attack.BaseAttack;
 import Main.ShootEmUp;
 import Object.Entity;
 
@@ -12,7 +14,13 @@ public class HitCollision extends BaseCollision{
 	
 	@Override
 	public void collision(Entity hitter, Entity hit) {
-		hitter.destroy();
+		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, hitter);
+		ShootEmUp.currentLevel.oldEntities.add(hitter);
+		
+		if(hit.getComponent(ComponentType.ATTACK) != null){
+			System.out.println("hit");
+			((BaseAttack)hit.getComponent(ComponentType.ATTACK)).damage(2); //needs updating to take weapon damage
+		}
 		/*
 		if (hit != null && getTeam() != hit.getTeam()) {
 			hit.damage(weapon.getDamage());
