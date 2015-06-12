@@ -12,7 +12,7 @@ public class MageAttack extends BaseAttack implements AttackComponent {
 	protected int mana;
 	protected int manaRegen;
 	protected int maxMana;
-	
+
 	public MageAttack(BaseSpawn BS, Weapon weapon, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana){
 		this.BS = BS;
 		this.weapon = weapon;
@@ -112,13 +112,17 @@ public class MageAttack extends BaseAttack implements AttackComponent {
 				exp.addComponent(armourS);
 				ShootEmUp.currentLevel.characters.add(armour);
 			} else if(prob == 1) {
-				int itemProb = rand.nextInt(2);
+				int itemProb = rand.nextInt(4);
 				Entity item = new Entity();
 				AnimatedGraphics itemG;
 				if(itemProb == 0) {
 					itemG = new AnimatedGraphics(Art.healthPotion);
-				} else {
+				} else if(itemProb == 1){
 					itemG = new AnimatedGraphics(Art.manaPotion);
+				} else if(itemProb == 2){
+					itemG = new AnimatedGraphics(Art.speedPotion);
+				} else {
+					itemG = new AnimatedGraphics(Art.knockbackPotion);
 				}
 				PointSpawn itemS = new PointSpawn(itemG, new Vector2(AG.getX(),AG.getY()), item);
 				exp.addComponent(itemG);
@@ -138,12 +142,33 @@ public class MageAttack extends BaseAttack implements AttackComponent {
 	}
 	*/
 
+	public int getMana() {
+		return mana;
+	}
+
+	public void setMana(int mana) {
+		this.mana = mana;
+	}
+
+	public int getManaRegen() {
+		return manaRegen;
+	}
+
+	public void setManaRegen(int manaRegen) {
+		this.manaRegen = manaRegen;
+	}
+
+	public int getMaxMana() {
+		return maxMana;
+	}
+
+	public void setMaxMana(int maxMana) {
+		this.maxMana = maxMana;
+	}
+	
 	@Override
 	public void receive(Message m, Entity e) {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
-	
 }

@@ -6,10 +6,10 @@ import Object.Entity;
 
 public class BasicInventory extends BaseInventory{
 
-	public BasicInventory(int level, int exp, int coins){
+	public BasicInventory(int level){
 		this.level = level;
-		this.exp = exp;
-		this.coins = coins;
+		exp = 0;
+		coins = 0;
 		
 		equiped = new HashSet<Entity>();
 	}

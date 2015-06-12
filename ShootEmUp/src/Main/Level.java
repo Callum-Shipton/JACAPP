@@ -18,12 +18,14 @@ import Components.Graphical.AnimatedGraphics;
 import Components.Graphical.BaseGraphics;
 import Components.Graphical.MapGraphics;
 import Components.Graphical.PlayerGraphics;
+import Components.Inventory.PlayerInventory;
 import Components.Movement.BaseMovement;
 import Components.Movement.BasicMovement;
 import Components.Movement.FlyingMovement;
 import Components.Spawn.PointSpawn;
 import Display.Art;
 import Display.IRenderer;
+import GUI.Hud;
 import Math.Vector2;
 import Object.Entity;
 import Object.EntityMap;
@@ -41,7 +43,7 @@ public class Level {
 	
 	private Entity player;
 	
-	private Entity hud;
+	private Hud hud;
 
 	private int counter = 0;
 	
@@ -210,14 +212,15 @@ public class Level {
 		RigidCollision c = new RigidCollision(player);
 		player.addComponent(c);
 		BasicMovement m = new BasicMovement(player,c, g, 5);
+		PlayerInventory i = new PlayerInventory(0, 18, 3);
 		player.addComponent(s);
 		player.addComponent(a);
 		player.addComponent(m);
 		player.addComponent(new PlayerControl(player, g, a, m));
+		player.addComponent(i);
 		
 		//create HUD
-		hud = new Entity();
-		//hud.addComponent(new );
+		hud = new Hud(player);
 		
 		characters.add(player);
 	}
@@ -334,7 +337,7 @@ public class Level {
 
 		renderHighTiles();
 
-		//hud.render(stat);
+		hud.render(Art.stat);
 
 	}
 
