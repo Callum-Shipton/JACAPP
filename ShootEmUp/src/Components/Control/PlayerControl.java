@@ -11,8 +11,6 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
 import Components.Message;
 import Components.Attack.BaseAttack;
-import Components.Graphical.AnimatedGraphics;
-import Components.Graphical.BaseGraphics;
 import Components.Graphical.PlayerGraphics;
 import Components.Movement.BaseMovement;
 import Input.Keyboard;

@@ -23,8 +23,10 @@ public class Art {
 	public static Image foreground;
 	
 	//Character maps
-	public static Image enemy;
 	public static Image player;
+	public static Image enemy;
+	public static Image smallEnemy;
+	public static Image flyingEnemy;
 	
 	//Drop maps
 	public static Image exp;
@@ -45,6 +47,8 @@ public class Art {
 	//Item maps
 	public static Image healthPotion;
 	public static Image manaPotion;
+	public static Image speedPotion;
+	public static Image knockbackPotion;
 	
 	//Weapon maps
 	public static Image bow;
@@ -178,6 +182,8 @@ public class Art {
 		//Load character maps
 		player = new Image("/Characters/Player.png",6,8);
 		enemy = new Image("/Characters/Enemy.png",6,8);
+		smallEnemy = new Image("/Characters/SmallEnemy.png",6,8);
+		flyingEnemy = new Image("/Characters/FlyingEnemy.png",6,8);
 		
 		//Load particle maps
 		exp = new Image("/img/Exp.png",6,1);
@@ -198,6 +204,8 @@ public class Art {
 		//Load Item maps
 		healthPotion = new Image("/Items/HealthPotion.png",3,1);
 		manaPotion = new Image("/Items/ManaPotion.png",3,1);
+		speedPotion = new Image("/Items/SpeedPotion.png",3,1);
+		knockbackPotion = new Image("/Items/KnockbackPotion.png",3,1);
 		
 		//Load Weapon maps
 		bow = new Image("/Weapons/Bow.png",8,1);

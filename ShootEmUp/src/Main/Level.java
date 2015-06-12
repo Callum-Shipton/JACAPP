@@ -10,7 +10,6 @@ import java.util.Random;
 import javax.imageio.*;
 
 import Components.ComponentType;
-import Components.Attack.BaseAttack;
 import Components.Attack.MageAttack;
 import Components.Collision.RigidCollision;
 import Components.Control.AIControl;
@@ -21,10 +20,9 @@ import Components.Graphical.MapGraphics;
 import Components.Graphical.PlayerGraphics;
 import Components.Movement.BaseMovement;
 import Components.Movement.BasicMovement;
-import Components.Spawn.BaseSpawn;
+import Components.Movement.FlyingMovement;
 import Components.Spawn.PointSpawn;
 import Display.Art;
-import Display.DPDTRenderer;
 import Display.IRenderer;
 import Math.Vector2;
 import Object.Entity;
@@ -234,8 +232,6 @@ public class Level {
 	}
 
 	public void update() {
-		float X = 0.0f;
-		float Y = 0.0f;
 		boolean collide = false;
 
 		counter++;
@@ -262,13 +258,40 @@ public class Level {
 			
 			//creating new Enemy
 			Entity newEnemy = new Entity();
-			AnimatedGraphics enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base); 
-			PointSpawn enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-			MageAttack enemyAttack = new MageAttack(enemySpawn, new Weapon(5, 100, 10, false, 1), 10, 100, 10, 18, 50, 18);
-			AIControl enemyControl = new AIControl();
-			newEnemy.addComponent(enemyGraphics);
-			RigidCollision enemyCollision = new RigidCollision(newEnemy);
-			BasicMovement enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 5);
+			AnimatedGraphics enemyGraphics;
+			PointSpawn enemySpawn;
+			MageAttack enemyAttack;
+			AIControl enemyControl;
+			RigidCollision enemyCollision;
+			BaseMovement enemyMovement;
+			
+			int prob = rand.nextInt(3);
+			if(prob == 0){
+				enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base); 
+				enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
+				enemyAttack = new MageAttack(enemySpawn, new Weapon(10, 100, 10, false, 1), 10, 100, 10, 18, 50, 18);
+				enemyControl = new AIControl();
+				newEnemy.addComponent(enemyGraphics);
+				enemyCollision = new RigidCollision(newEnemy);
+				enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 2);
+			} else if(prob == 1){
+				enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base); 
+				enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
+				enemyAttack = new MageAttack(enemySpawn, new Weapon(2, 100, 10, false, 1), 10, 100, 10, 18, 50, 18);
+				enemyControl = new AIControl();
+				newEnemy.addComponent(enemyGraphics);
+				enemyCollision = new RigidCollision(newEnemy);
+				enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 10);
+			} else {
+				enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base); 
+				enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
+				enemyAttack = new MageAttack(enemySpawn, new Weapon(5, 100, 10, false, 1), 10, 100, 10, 18, 50, 18);
+				enemyControl = new AIControl();
+				newEnemy.addComponent(enemyGraphics);
+				enemyCollision = new RigidCollision(newEnemy);
+				enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);
+			}			
+			
 			newEnemy.addComponent(enemySpawn);
 			newEnemy.addComponent(enemyAttack);
 			newEnemy.addComponent(enemyCollision);

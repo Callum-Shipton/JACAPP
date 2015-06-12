@@ -2,7 +2,6 @@ package Components.Control;
 
 import Components.Message;
 import Components.Graphical.AnimatedGraphics;
-import Components.Graphical.BaseGraphics;
 import Components.Movement.BaseMovement;
 import Math.Vector2;
 import Object.Entity;

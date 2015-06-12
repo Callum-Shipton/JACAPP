@@ -1,16 +1,10 @@
 package Object;
 
 import Components.ComponentType;
-import Components.Attack.MageAttack;
 import Components.Collision.HitCollision;
-import Components.Control.AIControl;
 import Components.Control.LineControl;
-import Components.Control.PlayerControl;
 import Components.Graphical.AnimatedGraphics;
 import Components.Graphical.BaseGraphics;
-import Components.Graphical.PlayerGraphics;
-import Components.Movement.BaseMovement;
-import Components.Movement.BasicMovement;
 import Components.Movement.FlyingMovement;
 import Components.Spawn.PointSpawn;
 import Display.Art;

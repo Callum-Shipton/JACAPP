@@ -1,16 +1,10 @@
 package Object;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 import Components.Component;
 import Components.ComponentType;
 import Components.Message;
-import Display.DPDTRenderer;
-import Display.Image;
-import Main.ShootEmUp;
-import Math.Vector2;
-import Math.Vector4;
 
 public class Entity{
 	

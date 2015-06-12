@@ -5,7 +5,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import Display.Art;
 import Display.DPDTRenderer;
 import Math.Vector2;
-import Object.Player;
 
 public class Hud extends GuiComponent{
 	
