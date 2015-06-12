@@ -60,7 +60,7 @@ public class Weapon{
 			posX += (BG.getWidth() - g.getWidth())/2;
 		}
 		PointSpawn s = new PointSpawn(g, new Vector2(posX,posY),particle);
-		HitCollision c = new HitCollision(this);
+		HitCollision c = new HitCollision(particle, this);
 		FlyingMovement m = new FlyingMovement(particle, c, g, 10);
 		particle.addComponent(s);
 		particle.addComponent(c);

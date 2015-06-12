@@ -12,6 +12,7 @@ import javax.imageio.*;
 import Components.ComponentType;
 import Components.Attack.BaseAttack;
 import Components.Attack.MageAttack;
+import Components.Collision.RigidCollision;
 import Components.Control.AIControl;
 import Components.Control.PlayerControl;
 import Components.Graphical.AnimatedGraphics;
@@ -168,9 +169,7 @@ public class Level {
 				
 				if(!noWall){
 					wall.addComponent(wallG);
-					MoveCollision MC = new MoveCollision();
-					MC.setGridPos(ShootEmUp.currentLevel.eMap.getGridPos(wall));
-					ShootEmUp.currentLevel.eMap.addEntity(MC.getGridPos(), wall);
+					RigidCollision MC = new RigidCollision(wall);
 					wall.addComponent(MC);
 					characters.add(wall);
 					walls.put(new Vector2(x,y), wall);
@@ -210,7 +209,9 @@ public class Level {
 		PointSpawn s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
 		MageAttack a = new MageAttack(s, new Weapon(5, 100, 10, false, 1), 18, 100, 18, 18, 50, 18);
 		player.addComponent(g);
-		BasicMovement m = new BasicMovement(player, g, 5);
+		RigidCollision c = new RigidCollision(player);
+		player.addComponent(c);
+		BasicMovement m = new BasicMovement(player,c, g, 5);
 		player.addComponent(s);
 		player.addComponent(a);
 		player.addComponent(m);
@@ -242,7 +243,9 @@ public class Level {
 			Entity test = new Entity();
 			AnimatedGraphics AG = new AnimatedGraphics(Art.player, Art.base);
 			test.addComponent(AG);
-			test.addComponent(new BasicMovement(test, AG, 5));
+			RigidCollision RC = new RigidCollision(test);
+			test.addComponent(RC);
+			test.addComponent(new BasicMovement(test, RC, AG, 5));
 			Random rand = new Random();
 			do {
 				collide = false;
@@ -264,6 +267,7 @@ public class Level {
 			MageAttack enemyAttack = new MageAttack(enemySpawn, new Weapon(5, 100, 10, false, 1), 10, 100, 10, 18, 50, 18);
 			AIControl enemyControl = new AIControl();
 			newEnemy.addComponent(enemyGraphics);
+			RigidCollision enemyCollision = new RigidCollision(newEnemy);
 			BasicMovement enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 5);
 			newEnemy.addComponent(enemySpawn);
 			newEnemy.addComponent(enemyAttack);

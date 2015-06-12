@@ -11,9 +11,11 @@ public class HitCollision extends BaseCollision{
 	
 	Weapon weapon;
 
-	public HitCollision(Weapon weapon){
+	public HitCollision(Entity e, Weapon weapon){
 		this.weapon = weapon;
 		moveBack = false;
+		setGridPos(ShootEmUp.currentLevel.eMap.getGridPos(e));
+		ShootEmUp.currentLevel.eMap.addEntity(getGridPos(), e);
 	}
 	
 	@Override
@@ -21,9 +23,11 @@ public class HitCollision extends BaseCollision{
 		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, hitter);
 		ShootEmUp.currentLevel.oldEntities.add(hitter);
 		
-		if(hit.getComponent(ComponentType.ATTACK) != null){
+		BaseAttack hitAttack = (BaseAttack) hit.getComponent(ComponentType.ATTACK);
+		
+		if(hitAttack != null){
 			System.out.println("hit");
-			((BaseAttack)hit.getComponent(ComponentType.ATTACK)).damage(weapon.getDamage()); //needs updating to take weapon damage
+			hitAttack.damage(weapon.getDamage()); //needs updating to take weapon damage
 		}
 		/*
 		if (hit != null && getTeam() != hit.getTeam()) {
