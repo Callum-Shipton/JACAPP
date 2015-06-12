@@ -21,64 +21,51 @@ import Object.Entity;
 import Object.Weapon;
 
 public class AIControl extends BaseControl{
-
-	@Override
-	public void update(Entity e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void receive(Message m, Entity e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/*
+	
 	private AnimatedGraphics AG;
 	private BaseMovement BM;
-	private BaseAttack BA;
 	
 	private int counter = 0;
-	private Vector2 target = new Vector2();
+	private Entity target;
 	
-	public AIControl(AnimatedGraphics AG, BaseMovement BM, BaseAttack BA){
+	//private Vector2 target;
+	
+	public AIControl(AnimatedGraphics AG, BaseMovement BM){
 		this.AG = AG;
 		this.BM = BM;
-		this.BA = BA;
 	}
 	
-	public void update(Entity e) {
-		if (checkDead(e)) return;
-		
-		target = ai();
+	public void update(Entity e) {		
+		target = ShootEmUp.currentLevel.getPlayer();
+		float y = ((BaseGraphics)target.getComponent(ComponentType.GRAPHICS)).getY();
+		float x = ((BaseGraphics)target.getComponent(ComponentType.GRAPHICS)).getX();
 		
 		if(target != null){
 			Vector2 movement = new Vector2(0.0f, 0.0f);
-			if (target.y() < AG.getY()) {
-				if(target.y() - AG.getY() > -BM.getSpeed()){
-					movement.add(0.0f, ((1.0f / BM.getSpeed()) * (target.y() - AG.getY())));
+			if (y < AG.getY()) {
+				if(y - AG.getY() > -BM.getSpeed()){
+					movement.add(0.0f, ((1.0f / BM.getSpeed()) * (y - AG.getY())));
 				} else {
 					movement.add(0.0f, -1.0f);
 				}
 			}
-			if (target.x() < AG.getX()) {
-				if(target.x() - AG.getX() > -BM.getSpeed()){
-					movement.add(((1.0f / BM.getSpeed()) * (target.x() - AG.getX())), 0.0f);
+			if (x < AG.getX()) {
+				if(x - AG.getX() > -BM.getSpeed()){
+					movement.add(((1.0f / BM.getSpeed()) * (x - AG.getX())), 0.0f);
 				} else {
 					movement.add(-1.0f, 0.0f);
 				}
 			}
-			if (target.y() > AG.getY()) {
-				if(target.y() - AG.getY() < BM.getSpeed()){
-					movement.add(0.0f, ((1.0f / BM.getSpeed()) * (target.y() - AG.getY())));
+			if (y > AG.getY()) {
+				if(y - AG.getY() < BM.getSpeed()){
+					movement.add(0.0f, ((1.0f / BM.getSpeed()) * (y - AG.getY())));
 				} else {
 					movement.add(0.0f, 1.0f);
 				}
 			}
-			if (target.x() > AG.getX()) {
-				if(target.x() - AG.getX() < BM.getSpeed()){
-					movement.add(((1.0f / BM.getSpeed()) * (target.x() - AG.getX())), 0.0f);
+			if (x > AG.getX()) {
+				if(x - AG.getX() < BM.getSpeed()){
+					movement.add(((1.0f / BM.getSpeed()) * (x - AG.getX())), 0.0f);
 				} else {
 					movement.add(1.0f, 0.0f);
 				}
@@ -99,11 +86,12 @@ public class AIControl extends BaseControl{
 		}
 	}
 	
+	/*
 	public Vector2 ai(){
-		PriorityQueue<Tile> open = new PriorityQueue<Tile>(); //queue for tiles to be looked at
+		PriorityQueue<Entity> open = new PriorityQueue<Entity>(); //queue for tiles to be looked at
 		HashSet<Vector2> closed = new HashSet<Vector2>(); //list of already viewed tiles
-		Tile start = new Tile((float)Math.floor(AG.getX() / 32),(float)Math.floor(AG.getY() / 32), null); //makes a tile for the enemy position
-		Tile goal = new Tile((float)Math.floor(((BaseGraphics)ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getX() / 32),(float)Math.floor(((BaseGraphics)ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getY() / 32), null); // makes a tile for the player
+		Entity start = new Tile((float)Math.floor(AG.getX() / 32),(float)Math.floor(AG.getY() / 32), null); //makes a tile for the enemy position
+		Entity goal = new Tile((float)Math.floor(((BaseGraphics)ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getX() / 32),(float)Math.floor(((BaseGraphics)ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getY() / 32), null); // makes a tile for the player
 		open.add(start);
 		closed.add(new Vector2(start.getX(),start.getY()));
 		
@@ -193,10 +181,10 @@ public class AIControl extends BaseControl{
 		System.out.println("cannot find player");
 		return null;
 	}
+	*/
+	
 	@Override
 	public void receive(Message m, Entity e) {
-		// TODO Auto-generated method stub
 		
 	}
-	*/
 }

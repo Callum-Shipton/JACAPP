@@ -275,26 +275,26 @@ public class Level {
 				enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base); 
 				enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
 				enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(10, 100, 10, false, 1), 10, 100, 10);
-				enemyControl = new AIControl();
 				newEnemy.addComponent(enemyGraphics);
 				enemyCollision = new RigidCollision(newEnemy);
 				enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 2);
+				enemyControl = new AIControl(enemyGraphics, enemyMovement);
 			} else if(prob == 1){
 				enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base); 
 				enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
 				enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(2, 100, 10, false, 1), 10, 100, 10);
-				enemyControl = new AIControl();
 				newEnemy.addComponent(enemyGraphics);
 				enemyCollision = new RigidCollision(newEnemy);
 				enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 10);
+				enemyControl = new AIControl(enemyGraphics, enemyMovement);
 			} else {
 				enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base); 
 				enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
 				enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(5, 100, 10, false, 1), 10, 100, 10);
-				enemyControl = new AIControl();
 				newEnemy.addComponent(enemyGraphics);
 				enemyCollision = new RigidCollision(newEnemy);
 				enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);
+				enemyControl = new AIControl(enemyGraphics, enemyMovement);
 			}			
 			
 			newEnemy.addComponent(enemySpawn);
