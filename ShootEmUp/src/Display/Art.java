@@ -29,7 +29,6 @@ public class Art {
 	public static Image flyingEnemy;
 	
 	//Drop maps
-	public static Image exp;
 	public static Image coin;
 	
 	//Magic maps
@@ -42,7 +41,6 @@ public class Art {
 	public static Image legs;
 	public static Image chest;
 	public static Image helmet;
-	public static Image ring;
 	
 	//Item maps
 	public static Image healthPotion;
@@ -186,7 +184,6 @@ public class Art {
 		flyingEnemy = new Image("/Characters/FlyingEnemy.png",6,8);
 		
 		//Load particle maps
-		exp = new Image("/img/Exp.png",6,1);
 		coin = new Image("/img/Coin.png",6,1);
 		
 		//Load Magic maps
@@ -199,7 +196,6 @@ public class Art {
 		legs = new Image("/Armour/Legs.png",3,1);
 		chest = new Image("/Armour/Chest.png",3,1);
 		helmet = new Image("/Armour/Helmet.png",3,1);
-		ring = new Image("/Armour/Ring.png",6,1);
 		
 		//Load Item maps
 		healthPotion = new Image("/Items/HealthPotion.png",3,1);

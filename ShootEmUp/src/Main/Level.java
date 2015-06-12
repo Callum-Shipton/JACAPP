@@ -11,7 +11,9 @@ import javax.imageio.*;
 
 import Components.ComponentType;
 import Components.Attack.MageAttack;
+import Components.Attack.MeleeAttack;
 import Components.Collision.RigidCollision;
+import Components.Collision.BaseCollision;
 import Components.Control.AIControl;
 import Components.Control.PlayerControl;
 import Components.Graphical.AnimatedGraphics;
@@ -263,7 +265,7 @@ public class Level {
 			Entity newEnemy = new Entity();
 			AnimatedGraphics enemyGraphics;
 			PointSpawn enemySpawn;
-			MageAttack enemyAttack;
+			MeleeAttack enemyAttack;
 			AIControl enemyControl;
 			RigidCollision enemyCollision;
 			BaseMovement enemyMovement;
@@ -272,7 +274,7 @@ public class Level {
 			if(prob == 0){
 				enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base); 
 				enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-				enemyAttack = new MageAttack(enemySpawn, new Weapon(10, 100, 10, false, 1), 10, 100, 10, 18, 50, 18);
+				enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(10, 100, 10, false, 1), 10, 100, 10);
 				enemyControl = new AIControl();
 				newEnemy.addComponent(enemyGraphics);
 				enemyCollision = new RigidCollision(newEnemy);
@@ -280,7 +282,7 @@ public class Level {
 			} else if(prob == 1){
 				enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base); 
 				enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-				enemyAttack = new MageAttack(enemySpawn, new Weapon(2, 100, 10, false, 1), 10, 100, 10, 18, 50, 18);
+				enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(2, 100, 10, false, 1), 10, 100, 10);
 				enemyControl = new AIControl();
 				newEnemy.addComponent(enemyGraphics);
 				enemyCollision = new RigidCollision(newEnemy);
@@ -288,7 +290,7 @@ public class Level {
 			} else {
 				enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base); 
 				enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-				enemyAttack = new MageAttack(enemySpawn, new Weapon(5, 100, 10, false, 1), 10, 100, 10, 18, 50, 18);
+				enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(5, 100, 10, false, 1), 10, 100, 10);
 				enemyControl = new AIControl();
 				newEnemy.addComponent(enemyGraphics);
 				enemyCollision = new RigidCollision(newEnemy);
@@ -314,6 +316,7 @@ public class Level {
 		Iterator<Entity> oldEntitiesIter = oldEntities.iterator();
 		while(oldEntitiesIter.hasNext()){
 			Entity n = oldEntitiesIter.next();
+			ShootEmUp.currentLevel.eMap.removeEntity(((BaseCollision)n.getComponent(ComponentType.COLLISION)).getGridPos(), n);
 			characters.remove(n);
 		}
 		oldEntities.clear();

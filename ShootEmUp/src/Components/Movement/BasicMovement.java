@@ -23,13 +23,13 @@ public class BasicMovement extends BaseMovement{
 	
 	public void move(Entity e, Vector2 moveVec) {
 		if(Math.abs(moveVec.x()) > 0){
-		BG.setX((BG.getX() + Math.round(moveVec.x() * speed)));
-		checkCollisionX(e, moveVec);
+			BG.setX((BG.getX() + Math.round(moveVec.x() * speed)));
+			checkCollisionX(e, moveVec);
 		}
 		if(Math.abs(moveVec.y()) > 0){
-		BG.setY(BG.getY() + Math.round(moveVec.y() * speed));
-		checkCollisionY(e, moveVec);
-	}
+			BG.setY(BG.getY() + Math.round(moveVec.y() * speed));
+			checkCollisionY(e, moveVec);
+		}
 	}
 	
 	private void checkCollisionY(Entity e, Vector2 moveVec) {

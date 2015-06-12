@@ -1,6 +1,5 @@
 package Components.Collision;
 
-import Components.Message;
 import Main.ShootEmUp;
 import Object.Entity;
 
@@ -23,11 +22,4 @@ public class RigidCollision extends BaseCollision {
 		// TODO Auto-generated method stub
 
 	}
-
-	@Override
-	public void receive(Message m, Entity e) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

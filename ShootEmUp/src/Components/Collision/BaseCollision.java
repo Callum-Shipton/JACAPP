@@ -4,6 +4,7 @@ import java.util.HashSet;
 
 import Components.Component;
 import Components.ComponentType;
+import Components.Message;
 import Main.ShootEmUp;
 import Math.Vector2;
 import Object.Entity;
@@ -36,5 +37,12 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 	
 	public boolean getMoveBack(){
 		return moveBack;
+	}
+	
+	@Override
+	public void receive(Message m, Entity e) {
+		if(m == Message.ENTITY_DIED){
+			destroy(e);
+		}
 	}
 }
