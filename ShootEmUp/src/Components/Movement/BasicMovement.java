@@ -33,7 +33,8 @@ public class BasicMovement extends BaseMovement{
 	}
 	
 	private void checkCollisionY(Entity e, Vector2 moveVec) {
-		HashSet<Entity> entities = ShootEmUp.currentLevel.eMap.getEntites(BC.getGridPos());
+		HashSet<Vector2> newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
+		HashSet<Entity> entities = ShootEmUp.currentLevel.eMap.getEntites(newGrid);
 		boolean collision = false;
 		Vector4 collVec = null;
 		Entity hit = null;
@@ -53,13 +54,13 @@ public class BasicMovement extends BaseMovement{
 		if (collision == true) {
 			if(((BaseCollision)e.getComponent(ComponentType.COLLISION)).getMoveBack() == true){
 				moveBackY(e, moveVec, collVec);
+				newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
 			} 
 			if ((e.getComponent(ComponentType.COLLISION) != null)) {
 				BC.collision(e, hit);
 			}
 		}
 		
-		HashSet<Vector2> newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
 		ShootEmUp.currentLevel.eMap.removeEntity(BC.getGridPos(), e);
 		ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
 		BC.setGridPos(newGrid);
@@ -68,7 +69,8 @@ public class BasicMovement extends BaseMovement{
 	}
 
 	public void checkCollisionX(Entity e, Vector2 moveVec){
-		HashSet<Entity> entities = ShootEmUp.currentLevel.eMap.getEntites(BC.getGridPos());
+		HashSet<Vector2> newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
+		HashSet<Entity> entities = ShootEmUp.currentLevel.eMap.getEntites(newGrid);
 		boolean collision = false;
 		Vector4 collVec = null;
 		Entity hit = null;
@@ -88,13 +90,13 @@ public class BasicMovement extends BaseMovement{
 		if (collision == true) {
 			if(((BaseCollision)e.getComponent(ComponentType.COLLISION)).getMoveBack() == true){
 				moveBackX(e, moveVec, collVec);
+				newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
 			} 
 			if ((e.getComponent(ComponentType.COLLISION) != null)) {
 				BC.collision(e, hit);
 			}
 		}
 		
-		HashSet<Vector2> newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
 		ShootEmUp.currentLevel.eMap.removeEntity(BC.getGridPos(), e);
 		ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
 		BC.setGridPos(newGrid);
