@@ -2,10 +2,12 @@ package Components.Attack;
 
 import java.util.Random;
 
+import Components.ComponentType;
 import Components.Message;
 import Components.Graphical.AnimatedGraphics;
 import Components.Spawn.BaseSpawn;
 import Components.Spawn.PointSpawn;
+import Components.Inventory.BaseInventory;
 import Display.Art;
 import Main.ShootEmUp;
 import Math.Vector2;
@@ -62,10 +64,11 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 
 	public void drop(Entity e) {
 		//give player exp
+		((BaseInventory)ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY)).giveExp(1);
 	
 		//create coins
 		Entity coin = new Entity();
-		AnimatedGraphics coinG = new AnimatedGraphics(Art.coin, Art.base);
+		AnimatedGraphics coinG = new AnimatedGraphics(Art.coin, Art.base, true);
 		PointSpawn coinS = new PointSpawn(coinG, new Vector2(AG.getX() + AG.getWidth() - coinG.getWidth(), AG.getY() + AG.getHeight() - coinG.getHeight()), coin);
 		coin.addComponent(coinG);
 		coin.addComponent(coinS);
@@ -80,13 +83,13 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 			Entity armour = new Entity();
 			AnimatedGraphics armourG;
 			if(armourProb == 0){
-				armourG = new AnimatedGraphics(Art.shoes, Art.base);
+				armourG = new AnimatedGraphics(Art.shoes, Art.base, true);
 			} else if(armourProb == 1){
-				armourG = new AnimatedGraphics(Art.legs, Art.base);
+				armourG = new AnimatedGraphics(Art.legs, Art.base, true);
 			} else if(armourProb == 2){
-				armourG = new AnimatedGraphics(Art.chest, Art.base);
+				armourG = new AnimatedGraphics(Art.chest, Art.base, true);
 			} else {
-				armourG = new AnimatedGraphics(Art.helmet, Art.base);
+				armourG = new AnimatedGraphics(Art.helmet, Art.base, true);
 			}
 			PointSpawn armourS = new PointSpawn(armourG, new Vector2(AG.getX(), AG.getY()), armour);
 			armour.addComponent(armourG);
@@ -97,13 +100,13 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 			Entity item = new Entity();
 			AnimatedGraphics itemG;
 			if(itemProb == 0) {
-				itemG = new AnimatedGraphics(Art.healthPotion, Art.base);
+				itemG = new AnimatedGraphics(Art.healthPotion, Art.base, true);
 			} else if(itemProb == 1){
-				itemG = new AnimatedGraphics(Art.manaPotion, Art.base);
+				itemG = new AnimatedGraphics(Art.manaPotion, Art.base, true);
 			} else if(itemProb == 2){
-				itemG = new AnimatedGraphics(Art.speedPotion, Art.base);
+				itemG = new AnimatedGraphics(Art.speedPotion, Art.base, true);
 			} else {
-				itemG = new AnimatedGraphics(Art.knockbackPotion, Art.base);
+				itemG = new AnimatedGraphics(Art.knockbackPotion, Art.base, true);
 			}
 			PointSpawn itemS = new PointSpawn(itemG, new Vector2(AG.getX() + AG.getWidth() - itemG.getWidth(),AG.getY()), item);
 			item.addComponent(itemG);
@@ -111,7 +114,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 			ShootEmUp.currentLevel.newEntities.add(item);
 		} else {	
 			Entity weapon = new Entity();
-			AnimatedGraphics weaponG = new AnimatedGraphics(Art.bow, Art.base);
+			AnimatedGraphics weaponG = new AnimatedGraphics(Art.bow, Art.base, true);
 			PointSpawn weaponS = new PointSpawn(weaponG, new Vector2(AG.getX(), AG.getY() + AG.getHeight() - weaponG.getHeight()), weapon);
 			weapon.addComponent(weaponG);
 			weapon.addComponent(weaponS);

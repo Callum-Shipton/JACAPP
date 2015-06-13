@@ -34,24 +34,33 @@ public class Weapon{
 		float posY = BG.getY();
 		//create particle
 		Entity particle = new Entity();
-		AnimatedGraphics g = new AnimatedGraphics(Art.fireMagic, Art.base);
+		AnimatedGraphics g = new AnimatedGraphics(Art.fireMagic, Art.base, false);
 		g.setDirection(direction);
 		particle.addComponent(g);
-		if (direction >= 1 && direction <= 3) {
-			posX += BG.getWidth();
-			posY += (BG.getHeight() - g.getHeight())/2;
-		}
-		if (direction >= 5) {
-			posX -= (g.getWidth());
-			posY += (BG.getHeight() - g.getHeight())/2;
-		}
-		if (direction <= 1 || direction >= 7) {
-			posY -= (g.getHeight());
-			posX += (BG.getWidth() - g.getWidth())/2;
-		}
-		if (direction >= 3 && direction <= 5) {
-			posY += BG.getHeight();
-			posX += (BG.getWidth() - g.getWidth())/2;
+		switch(direction){
+		case 0:	posX += (BG.getWidth() - g.getWidth())/2;
+				posY -= g.getHeight();
+				break;
+		case 1: posX += BG.getWidth();
+				posY -= g.getHeight();
+				break;
+		case 2:	posX += BG.getWidth();
+				posY += (BG.getHeight() - g.getHeight())/2;
+				break;
+		case 3: posX += BG.getWidth();
+				posY += BG.getHeight();
+				break;
+		case 4: posX += (BG.getWidth() - g.getWidth())/2;
+				posY += BG.getHeight();
+				break;
+		case 5: posX -= g.getWidth(); 
+				posY += BG.getHeight();
+				break;
+		case 6: posX -= g.getWidth();
+				posY += (BG.getHeight() - g.getHeight())/2;
+				break;
+		case 7: posX -= g.getWidth();
+				posY -= g.getHeight();
 		}
 		PointSpawn s = new PointSpawn(g, new Vector2(posX,posY),particle);
 		HitCollision c = new HitCollision(particle, this);

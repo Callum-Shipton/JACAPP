@@ -35,6 +35,10 @@ public abstract class BaseInventory extends Component implements InventoryCompon
 	public void setExp(int exp) {
 		this.exp = exp;
 	}
+	
+	public void giveExp(int exp){
+		this.exp += exp;
+	}
 
 	public int getCoins() {
 		return coins;

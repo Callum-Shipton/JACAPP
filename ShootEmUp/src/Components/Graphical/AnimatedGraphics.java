@@ -14,11 +14,12 @@ public class AnimatedGraphics extends BaseGraphics {
 	protected int animTime = 6;
 	protected int direction = 0;
 
-	public AnimatedGraphics(Image image, Renderer r){
+	public AnimatedGraphics(Image image, Renderer r, boolean animating){
 		this.image = image;
 		this.width = image.getWidth()/image.getFWidth();
 		this.height = image.getHeight()/image.getFHeight();
 		this.r = r;
+		this.animating = animating;
 	}
 	
 	@Override
@@ -63,12 +64,6 @@ public class AnimatedGraphics extends BaseGraphics {
 		this.animTime = animTime;
 	}
 
-	@Override
-	public void receive(Message m, Entity e) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public int getDirection() {
 		return direction;
 	}
@@ -76,5 +71,10 @@ public class AnimatedGraphics extends BaseGraphics {
 	public void setDirection(int direction) {
 		this.direction = direction;
 	}
-
+	
+	@Override
+	public void receive(Message m, Entity e) {
+		// TODO Auto-generated method stub
+		
+	}
 }

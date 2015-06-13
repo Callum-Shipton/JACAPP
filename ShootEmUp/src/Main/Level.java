@@ -52,7 +52,7 @@ public class Level {
 	public EntityMap eMap;
 
 	public HashMap<Vector2, Entity> walls;
-	public HashSet<Entity> characters;
+	public HashSet<Entity> entities;
 	public HashSet<Entity> oldEntities;
 	public HashSet<Entity> newEntities;
 	
@@ -173,7 +173,7 @@ public class Level {
 					wall.addComponent(wallG);
 					RigidCollision MC = new RigidCollision(wall);
 					wall.addComponent(MC);
-					characters.add(wall);
+					entities.add(wall);
 					walls.put(new Vector2(x,y), wall);
 				}
 				
@@ -201,7 +201,7 @@ public class Level {
 
 	private void addStuff() {
 		walls = new HashMap<Vector2,Entity>();
-		characters = new HashSet<Entity>();
+		entities = new HashSet<Entity>();
 		oldEntities = new HashSet<Entity>();
 		newEntities = new HashSet<Entity>();
 		
@@ -224,7 +224,7 @@ public class Level {
 		//create HUD
 		hud = new Hud(player);
 		
-		characters.add(player);
+		entities.add(player);
 	}
 
 	private void renderLowTiles() {
@@ -242,7 +242,7 @@ public class Level {
 		counter++;
 		if (counter == 150) {
 			Entity test = new Entity();
-			AnimatedGraphics AG = new AnimatedGraphics(Art.player, Art.base);
+			AnimatedGraphics AG = new AnimatedGraphics(Art.player, Art.base, false);
 			test.addComponent(AG);
 			RigidCollision RC = new RigidCollision(test);
 			test.addComponent(RC);
@@ -253,7 +253,7 @@ public class Level {
 				((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).setX((float)rand.nextInt((backgroundTiles.length - 1) * 32));
 				((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).setY(rand.nextInt((backgroundTiles[0].length - 1) * 32));
 
-				for (Entity character : characters) {
+				for (Entity character : entities) {
 					if ((((BaseMovement) test.getComponent(ComponentType.MOVEMENT)).doesCollide(test, character) != null)) {
 						collide = true;
 						break;
@@ -272,7 +272,7 @@ public class Level {
 			
 			int prob = rand.nextInt(3);
 			if(prob == 0){
-				enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base); 
+				enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base, false); 
 				enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
 				enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(10, 100, 10, false, 1), 10, 100, 10);
 				newEnemy.addComponent(enemyGraphics);
@@ -280,15 +280,15 @@ public class Level {
 				enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 2);
 				enemyControl = new AIControl(enemyGraphics, enemyMovement);
 			} else if(prob == 1){
-				enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base); 
+				enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base, false); 
 				enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
 				enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(2, 100, 10, false, 1), 10, 100, 10);
 				newEnemy.addComponent(enemyGraphics);
 				enemyCollision = new RigidCollision(newEnemy);
-				enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 10);
+				enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 7);
 				enemyControl = new AIControl(enemyGraphics, enemyMovement);
 			} else {
-				enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base); 
+				enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base, false); 
 				enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
 				enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(5, 100, 10, false, 1), 10, 100, 10);
 				newEnemy.addComponent(enemyGraphics);
@@ -303,11 +303,11 @@ public class Level {
 			newEnemy.addComponent(enemyControl);
 			newEnemy.addComponent(enemyMovement);
 			
-			characters.add(newEnemy);
+			entities.add(newEnemy);
 			counter = 0;
 		}
 
-		Iterator<Entity> charIter = characters.iterator();
+		Iterator<Entity> charIter = entities.iterator();
 		while(charIter.hasNext()){
 			Entity c = charIter.next();
 			c.update();
@@ -317,14 +317,14 @@ public class Level {
 		while(oldEntitiesIter.hasNext()){
 			Entity n = oldEntitiesIter.next();
 			ShootEmUp.currentLevel.eMap.removeEntity(((BaseCollision)n.getComponent(ComponentType.COLLISION)).getGridPos(), n);
-			characters.remove(n);
+			entities.remove(n);
 		}
 		oldEntities.clear();
 		
 		Iterator<Entity> newEntitiesIter = newEntities.iterator();
 		while(newEntitiesIter.hasNext()){
 			Entity n = newEntitiesIter.next();
-			characters.add(n);
+			entities.add(n);
 		}
 		newEntities.clear();
 		hud.update();
@@ -334,7 +334,7 @@ public class Level {
 		renderLowTiles();
 		renderHighTiles();
 
-		for (Entity character : characters) {
+		for (Entity character : entities) {
 			((BaseGraphics)character.getComponent(ComponentType.GRAPHICS)).render(character);
 		}
 

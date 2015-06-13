@@ -13,9 +13,26 @@ import Main.ShootEmUp;
 import Math.Matrix4;
 
 public class Art {
-	public static Image back;
-	public static Image exit;
+	
+	//menu screens
+	public static Image mainMenuScreen;
 	public static Image invScreen;
+	public static Image skillScreen;
+	public static Image magicScreen;
+	public static Image mapScreen;
+	public static Image saveScreen;
+	
+	//buttons
+	public static Image newGameButton;
+	public static Image level1Button;
+	public static Image level2Button;
+	public static Image backButton;
+	public static Image exitButton;
+	public static Image invButton;
+	public static Image skillButton;
+	public static Image magicButton;
+	public static Image mapButton;
+	public static Image saveButton;
 	
 	//Tile maps
 	public static Image background;
@@ -61,6 +78,7 @@ public class Art {
 	
 	//Level map file locations
 	public static String level1 = "/levels/level1.png";
+	public static String level2 = "/levels/level2.png";
 	
 	//Texture.....stuff
 	public static int ShaderBase;
@@ -168,10 +186,26 @@ public class Art {
 		
 		//new Image("/filepath.png", maxFrameWidth, maxFrameHeight);
 		
+		//load menu screen art
+		mainMenuScreen = new Image("/Menus/mainMenuScreen.png", 1, 1);
 		invScreen = new Image("/Menus/invScreen.png", 1, 1);
-		back = new Image("/buttons/back.png",1,2);
-		exit = new Image("/buttons/exit.png",1,2);
+		skillScreen = new Image("/Menus/skillScreen.png", 1, 1);
+		magicScreen = new Image("/Menus/magicScreen.png", 1, 1);
+		mapScreen = new Image("/Menus/mapScreen.png", 1, 1);
+		saveScreen = new Image("/Menus/saveScreen.png", 1, 1);
 		
+		//load button art
+		newGameButton = new Image("/buttons/newGameButton.png",1,2);
+		level1Button = new Image("/buttons/level1Button.png",1,2);
+		level2Button = new Image("/buttons/level2Button.png",1,2);
+		backButton = new Image("/buttons/backButton.png",1,2);
+		exitButton = new Image("/buttons/exitButton.png",1,2);
+		invButton = new Image("/buttons/invButton.png",1,2);
+		skillButton = new Image("/buttons/skillButton.png",1,2);
+		magicButton = new Image("/buttons/magicButton.png",1,2);
+		mapButton = new Image("/buttons/mapButton.png",1,2);
+		saveButton = new Image("/buttons/saveButton.png",1,2);
+				
 		//Load tile maps
 		background = new Image("/Tiles/background.png",4,4);
 		wall = new Image("/Tiles/wall.png",8,8);

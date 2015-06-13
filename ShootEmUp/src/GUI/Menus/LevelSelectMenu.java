@@ -1,36 +1,28 @@
 package GUI.Menus;
 
-import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
-import static org.lwjgl.opengl.GL11.GL_TRUE;
-
 import org.lwjgl.glfw.GLFW;
 
 import Display.Art;
 import Display.Image;
 import GUI.Button;
 import Input.Keyboard;
+import Main.Level;
 import Main.ShootEmUp;
 
-public class PauseMenu extends GuiMenu {
+public class LevelSelectMenu extends GuiMenu {
 	
 	static int selectedItem = 0;
 	public static boolean saved;
+	private Button level1;
+	private Button level2;
 	private Button back;
-	private Button exit;
-	private Button skillButton;
-	private Button magicButton;
-	private Button mapButton;
-	private Button saveButton;
 
-    public PauseMenu(Image menuImage) {
+    public LevelSelectMenu(Image menuImage) {
         super(menuImage);
         selectedItem = 0;
-        back = addButton(new Button(Art.backButton, 30, 30, 128,24));
-        exit = addButton(new Button(Art.exitButton, 30, 64, 128,24));
-        skillButton = addButton(new Button(Art.skillButton, 922, 102, 101, 102));
-        magicButton = addButton(new Button(Art.magicButton, 922, 204, 101, 102));
-        mapButton = addButton(new Button(Art.mapButton, 922, 306, 101, 102));
-        saveButton = addButton(new Button(Art.saveButton, 922, 408, 101, 102));
+        level1 = addButton(new Button(Art.level1Button, (ShootEmUp.WIDTH / 2) - (Art.level1Button.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - Art.level1Button.getHeight(), 128,24));
+        level2 = addButton(new Button(Art.level2Button, (ShootEmUp.WIDTH / 2) - (Art.level1Button.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.level2Button.getHeight() / 4), 128,24));
+        back = addButton(new Button(Art.backButton, (ShootEmUp.WIDTH / 2) - (Art.level1Button.getWidth() / 2), (ShootEmUp.HEIGHT / 2) + Art.level1Button.getHeight(), 128,24));
     }
 
     @Override
@@ -41,18 +33,27 @@ public class PauseMenu extends GuiMenu {
 
     public void update() {
     	super.update();
+    	if(level1.hasClicked()){
+    		ShootEmUp.currentLevel = new Level(Art.level1);
+    		ShootEmUp.currentLevel.init();
+    		ShootEmUp.paused = false;
+    		ShootEmUp.clearMenus();
+    	}
+    	if(level2.hasClicked()){
+    		ShootEmUp.currentLevel = new Level(Art.level2);
+    		ShootEmUp.currentLevel.init();
+    		ShootEmUp.paused = false;
+    		ShootEmUp.clearMenus();
+    	}
     	if(back.hasClicked()){
     		popMenu();
-        	ShootEmUp.paused = false;
         	back.postAction();
     	}
-    	if(exit.hasClicked()){
-    		glfwSetWindowShouldClose(ShootEmUp.d.getWindow(), GL_TRUE);
-        	back.postAction();
-    	}
+    	//KEYBOARD SELECTION
+    	
+    	/*
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
         	popMenu();
-        	ShootEmUp.paused = false;
         	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	}
     	else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
@@ -71,6 +72,7 @@ public class PauseMenu extends GuiMenu {
                 selectedItem = 1;
             }
         }
+        */
     }
 
     public void addMenu(GuiMenu menu) {

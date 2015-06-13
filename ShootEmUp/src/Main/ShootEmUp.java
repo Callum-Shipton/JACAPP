@@ -11,6 +11,7 @@ import org.lwjgl.glfw.GLFW;
 import Display.Art;
 import Display.Display;
 import GUI.Menus.GuiMenu;
+import GUI.Menus.MainMenu;
 import GUI.Menus.PauseMenu;
 import Input.Keyboard;
 
@@ -49,8 +50,8 @@ public class ShootEmUp {
 		d = new Display(WIDTH, HEIGHT);
 		d.initGLFW();
 		
-
-
+		addMenu(new MainMenu(Art.mainMenuScreen));
+		
 		currentLevel = new Level(Art.level1);
 		currentLevel.init();
 
