@@ -49,7 +49,7 @@ public class IRenderer extends Renderer {
         glBindVertexArray(0);
         glUseProgram(0);
 	}
-	private void initRenderData(Vector2[][] textures, Vector2 texMax){
+	public void initRenderData(Vector2[][] textures, Vector2 texMax){
 			
 		amount = textures.length * textures[0].length;
 		
@@ -140,7 +140,7 @@ public class IRenderer extends Renderer {
 		//GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 		//GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
-	private void initRenderData(HashMap<Vector2, Entity> textures, Vector2 texMax){
+	public void initRenderData(HashMap<Vector2, Entity> textures, Vector2 texMax){
 		
 		amount = textures.size();
 		

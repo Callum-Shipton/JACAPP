@@ -39,9 +39,9 @@ public class Level {
 	private int height;
 	private BufferedImage map = null;
 	private String file;
-	private Vector2[][] backgroundTiles; //Replace with Irenderer changes
+	public Vector2[][] backgroundTiles; //Replace with Irenderer changes
 	public Vector2[][] wallTiles; // ^^
-	private Vector2[][] foregroundTiles; // ^^
+	public Vector2[][] foregroundTiles; // ^^
 	
 	private Entity player;
 	

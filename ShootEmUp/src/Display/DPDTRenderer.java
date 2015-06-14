@@ -64,7 +64,7 @@ public class DPDTRenderer extends Renderer {
 		glUseProgram(0);
 	}
 
-	private void initRenderData() {
+	public void initRenderData() {
 
 		matrix44Buffer = BufferUtils.createFloatBuffer(16);
 		model = new Matrix4();

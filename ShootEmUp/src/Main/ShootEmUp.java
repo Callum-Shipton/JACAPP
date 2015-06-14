@@ -55,8 +55,7 @@ public class ShootEmUp {
 		currentLevel = new Level(Art.level1);
 		currentLevel.init();
 
-		// Initialise key handling
-		Keyboard.keyCheck(d.getWindow());
+
 
 	}
 
@@ -70,16 +69,24 @@ public class ShootEmUp {
 		double delta = newTime - oldTime;
 		double sleepTime = (1.0 / FPS) - delta;
 
+		int Error = glGetError();
+		
 		while (glfwWindowShouldClose(d.getWindow()) == GL_FALSE) {
 
+			Error = glGetError();
+			
+			if(Error != GL_NO_ERROR){
+				System.out.println("OpenGL Error: " + Error);
+			}
+			
 			delta = newTime - oldTime;
 			oldTime = newTime;
 			sleepTime = (1.0 / FPS) - delta;
+			//System.out.println(1.0/delta);
 			if (sleepTime > 0.01)
 				try {
 					Thread.sleep((long) (sleepTime * 1000));
-					// System.out.println("I slept for " + 1000*sleepTime +
-					// " seconds." );
+					 //System.out.println("I slept for " + sleepTime + " seconds." );
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

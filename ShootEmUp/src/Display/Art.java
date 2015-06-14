@@ -11,6 +11,7 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
 import Main.ShootEmUp;
 import Math.Matrix4;
+import Math.Vector2;
 
 public class Art {
 	
@@ -251,7 +252,7 @@ public class Art {
 
 	
 
-	private static void initShaderUniforms() {
+	public static void initShaderUniforms() {
 
 		Matrix4 projectionMatrix = new Matrix4();
 		projectionMatrix.clearToOrtho(0, ShootEmUp.WIDTH, ShootEmUp.HEIGHT, 0,
@@ -290,5 +291,16 @@ public class Art {
 		initTextures();
 		initRenderers();
 	}
+	
+	public static void refreshRenderers(){
+		base.initRenderData();
+		stat.initRenderData();
+		irWall.initRenderData(ShootEmUp.currentLevel.walls, new Vector2(wall.getFWidth(), wall.getFHeight()));
+		irBack.initRenderData(ShootEmUp.currentLevel.backgroundTiles, new Vector2(background.getFWidth(),background.getFHeight()));
+		irFore.initRenderData(ShootEmUp.currentLevel.foregroundTiles, new Vector2(foreground.getFWidth(), foreground.getFHeight()));
+	
+	}
+	
+	
 
 }

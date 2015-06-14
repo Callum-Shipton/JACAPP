@@ -12,7 +12,6 @@ import Math.Vector2;
 public abstract class GuiMenu {
 
     protected List<Button> buttons = new ArrayList<Button>();
-    protected DPDTRenderer stat = new DPDTRenderer(Art.ShaderStat);
     protected Image menuImage;
     protected int x;
     protected int y;
@@ -34,9 +33,9 @@ public abstract class GuiMenu {
     }
 
     public void render() {
-    	stat.draw(menuImage, new Vector2(x,y), new Vector2(ShootEmUp.WIDTH,ShootEmUp.HEIGHT), 0, new Vector2(0,0));
+    	Art.stat.draw(menuImage, new Vector2(x,y), new Vector2(ShootEmUp.WIDTH,ShootEmUp.HEIGHT), 0, new Vector2(0,0));
         for (Button button : buttons) {
-            button.render(stat);
+            button.render(Art.stat);
         }
     }
 
