@@ -52,12 +52,16 @@ public class BasicMovement extends BaseMovement{
 
 		
 		if (collision == true) {
-			if(((BaseCollision)e.getComponent(ComponentType.COLLISION)).getMoveBack() == true){
+			if(((BaseCollision)hit.getComponent(ComponentType.COLLISION)).getMoveBack() == true){
 				moveBackY(e, moveVec, collVec);
 				newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
 			} 
 			if ((e.getComponent(ComponentType.COLLISION) != null)) {
 				BC.collision(e, hit);
+			}
+			BaseCollision EC = (BaseCollision) hit.getComponent(ComponentType.COLLISION);
+			if (EC != null) {
+				EC.collision(e, hit);
 			}
 		}
 		
@@ -88,12 +92,16 @@ public class BasicMovement extends BaseMovement{
 
 		
 		if (collision == true) {
-			if(((BaseCollision)e.getComponent(ComponentType.COLLISION)).getMoveBack() == true){
+			if(((BaseCollision)hit.getComponent(ComponentType.COLLISION)).getMoveBack() == true){
 				moveBackX(e, moveVec, collVec);
 				newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
 			} 
 			if ((e.getComponent(ComponentType.COLLISION) != null)) {
 				BC.collision(e, hit);
+			}
+			BaseCollision EC = (BaseCollision) hit.getComponent(ComponentType.COLLISION);
+			if (EC != null) {
+				EC.collision(e, hit);
 			}
 		}
 		
