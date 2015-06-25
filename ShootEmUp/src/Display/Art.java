@@ -25,10 +25,15 @@ public class Art {
 	
 	//buttons
 	public static Image newGameButton;
+	public static Image loadGameButton;
+	public static Image optionsButton;
+	public static Image exitButton;
+	
+	public static Image backButton;
+	
 	public static Image level1Button;
 	public static Image level2Button;
-	public static Image backButton;
-	public static Image exitButton;
+	
 	public static Image invButton;
 	public static Image skillButton;
 	public static Image magicButton;
@@ -197,10 +202,15 @@ public class Art {
 		
 		//load button art
 		newGameButton = new Image("/buttons/newGameButton.png",1,2);
+		loadGameButton = new Image("/buttons/loadGameButton.png",1,2);
+		optionsButton = new Image("/buttons/optionsButton.png",1,2);
+		exitButton = new Image("/buttons/exitButton.png",1,2);
+		
+		backButton = new Image("/buttons/backButton.png",1,2);
+		
 		level1Button = new Image("/buttons/level1Button.png",1,2);
 		level2Button = new Image("/buttons/level2Button.png",1,2);
-		backButton = new Image("/buttons/backButton.png",1,2);
-		exitButton = new Image("/buttons/exitButton.png",1,2);
+		
 		invButton = new Image("/buttons/invButton.png",1,2);
 		skillButton = new Image("/buttons/skillButton.png",1,2);
 		magicButton = new Image("/buttons/magicButton.png",1,2);

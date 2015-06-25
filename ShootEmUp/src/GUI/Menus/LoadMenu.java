@@ -1,36 +1,20 @@
 package GUI.Menus;
 
-import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
-import static org.lwjgl.opengl.GL11.GL_TRUE;
-
-import org.lwjgl.glfw.GLFW;
-
 import Display.Art;
 import Display.Image;
 import GUI.Button;
-import Input.Keyboard;
 import Main.ShootEmUp;
 
-public class PauseMenu extends GuiMenu {
-	
+public class LoadMenu extends GuiMenu{
+
 	static int selectedItem = 0;
 	public static boolean saved;
 	private Button back;
-	private Button exit;
-	private Button skillButton;
-	private Button magicButton;
-	private Button mapButton;
-	private Button saveButton;
 
-    public PauseMenu(Image menuImage) {
+    public LoadMenu(Image menuImage) {
         super(menuImage);
         selectedItem = 0;
-        back = addButton(new Button(Art.backButton, 30, 30, 128,24));
-        exit = addButton(new Button(Art.exitButton, 30, 64, 128,24));
-        skillButton = addButton(new Button(Art.skillButton, 922, 102, 101, 102));
-        magicButton = addButton(new Button(Art.magicButton, 922, 204, 101, 102));
-        mapButton = addButton(new Button(Art.mapButton, 922, 306, 101, 102));
-        saveButton = addButton(new Button(Art.saveButton, 922, 408, 101, 102));
+        back = addButton(new Button(Art.backButton, (ShootEmUp.WIDTH / 2) - (Art.backButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.backButton.getHeight() / 2), 128,24));
     }
 
     @Override
@@ -41,18 +25,16 @@ public class PauseMenu extends GuiMenu {
 
     public void update() {
     	super.update();
+    	
     	if(back.hasClicked()){
     		popMenu();
-        	ShootEmUp.paused = false;
         	back.postAction();
     	}
-    	if(exit.hasClicked()){
-    		glfwSetWindowShouldClose(ShootEmUp.d.getWindow(), GL_TRUE);
-        	back.postAction();
-    	}
+    	//KEYBOARD SELECTION
+    	
+    	/*
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
         	popMenu();
-        	ShootEmUp.paused = false;
         	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	}
     	else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
@@ -71,6 +53,7 @@ public class PauseMenu extends GuiMenu {
                 selectedItem = 1;
             }
         }
+        */
     }
 
     public void addMenu(GuiMenu menu) {

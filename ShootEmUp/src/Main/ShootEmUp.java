@@ -12,7 +12,7 @@ import Display.Art;
 import Display.Display;
 import GUI.Menus.GuiMenu;
 import GUI.Menus.MainMenu;
-import GUI.Menus.PauseMenu;
+import GUI.Menus.InventoryMenu;
 import Input.Keyboard;
 
 public class ShootEmUp {
@@ -50,12 +50,8 @@ public class ShootEmUp {
 		d = new Display(WIDTH, HEIGHT);
 		d.initGLFW();
 		
+		paused = true;
 		addMenu(new MainMenu(Art.mainMenuScreen));
-		
-		currentLevel = new Level(Art.level1);
-		currentLevel.init();
-
-
 
 	}
 
@@ -105,7 +101,7 @@ public class ShootEmUp {
 		if(Keyboard.getKey(GLFW_KEY_P) == 1){
 				paused = !paused;
 				Keyboard.setKey(GLFW_KEY_P);
-				if(paused) addMenu(new PauseMenu(Art.invScreen));
+				if(paused) addMenu(new InventoryMenu(Art.invScreen));
 				else clearMenus();
 		}
 
@@ -123,7 +119,9 @@ public class ShootEmUp {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		currentLevel.render();
+		if(!paused){
+			currentLevel.render();
+		}
 		if (!menuStack.isEmpty()) {
 			menuStack.peek().render();
 		}
