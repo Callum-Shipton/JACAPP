@@ -211,8 +211,8 @@ public class Art {
 		//load button art
 		newGameButton = new Image("/Buttons/newGameButton.png",1,2);
 		
-	//	loadGameButton = new Image("/buttons/loadGameButton.png",1,2);
-	//	optionsButton = new Image("/buttons/optionsButton.png",1,2);
+	//	loadGameButton = new Image("/Buttons/loadGameButton.png",1,2);
+	//	optionsButton = new Image("/Buttons/optionsButton.png",1,2);
 		exitButton = new Image("/Buttons/exitButton.png",1,2);
 		
 		backButton = new Image("/Buttons/backButton.png",1,2);
