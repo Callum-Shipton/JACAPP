@@ -18,6 +18,8 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 	private Matrix4 viewMatrix;
 	private int viewMatrixLocation;
 	private int viewMatrixLocationInst;
+	private int posLocation;
+	private int posLocationInst;
 	
 	public PlayerGraphics(Entity e, Image image, Renderer r){
 		super(image, r, false);
@@ -27,6 +29,10 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 				"viewMatrix");
 		viewMatrixLocationInst = GL20.glGetUniformLocation(Art.ShaderInst,
 				"viewMatrix");
+		posLocation = GL20.glGetUniformLocation(Art.ShaderBase,
+				"playerPos");
+		posLocationInst = GL20.glGetUniformLocation(Art.ShaderInst,
+				"playerPos");
 	}
 
 	public int getDirection() {
@@ -38,16 +44,22 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 	}
 
 	public void scrollScreen(Entity e) {
+
 		viewMatrix.clearToIdentity();
 		viewMatrix.translate(-getX() + (ShootEmUp.WIDTH - getWidth()) / 2, -getY()
 				+ (ShootEmUp.HEIGHT - getHeight()) / 2, 0);
 		matrix44Buffer.clear();
 		matrix44Buffer = viewMatrix.toBuffer();
+		
+
+
 		GL20.glUseProgram(Art.ShaderBase);
 		GL20.glUniformMatrix4(viewMatrixLocation, false, matrix44Buffer);
+		GL20.glUniform2f(posLocation, x+(width/2), y+(height/2));
 		GL20.glUseProgram(0);
 		GL20.glUseProgram(Art.ShaderInst);
 		GL20.glUniformMatrix4(viewMatrixLocationInst, false, matrix44Buffer);
+		GL20.glUniform2f(posLocationInst, x+(width/2), y+(height/2));
 		GL20.glUseProgram(0);
 	}
 

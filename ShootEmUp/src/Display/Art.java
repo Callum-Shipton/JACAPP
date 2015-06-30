@@ -25,10 +25,15 @@ public class Art {
 	
 	//buttons
 	public static Image newGameButton;
+	public static Image loadGameButton;
+	public static Image optionsButton;
+	public static Image exitButton;
+	
+	public static Image backButton;
+	
 	public static Image level1Button;
 	public static Image level2Button;
-	public static Image backButton;
-	public static Image exitButton;
+	
 	public static Image invButton;
 	public static Image skillButton;
 	public static Image magicButton;
@@ -93,6 +98,9 @@ public class Art {
 	public static IRenderer irFore;
 
 	private void initShaders() {
+		
+		
+		
 		// Load the vertex shader
 		int vsId = loadShader("/shaders/VertexShader.glsl",
 				GL_VERTEX_SHADER);
@@ -108,6 +116,9 @@ public class Art {
 		
 		int SvsId = loadShader("/shaders/StatVertexShader.glsl",
 				GL_VERTEX_SHADER);
+		
+		int SfsId = loadShader("/shaders/StatFragmentShader.glsl",
+				GL_FRAGMENT_SHADER);
 
 		// Create a new shader program that links both shaders
 		ShaderBase = glCreateProgram();
@@ -138,7 +149,7 @@ public class Art {
 		
 		ShaderStat = glCreateProgram();
 		glAttachShader(ShaderStat, SvsId);
-		glAttachShader(ShaderStat, fsId);
+		glAttachShader(ShaderStat, SfsId);
 
 		// Position information will be attribute 0
 		glBindAttribLocation(ShaderStat, 0, "pos");
@@ -197,10 +208,15 @@ public class Art {
 		
 		//load button art
 		newGameButton = new Image("/buttons/newGameButton.png",1,2);
+		loadGameButton = new Image("/buttons/loadGameButton.png",1,2);
+		optionsButton = new Image("/buttons/optionsButton.png",1,2);
+		exitButton = new Image("/buttons/exitButton.png",1,2);
+		
+		backButton = new Image("/buttons/backButton.png",1,2);
+		
 		level1Button = new Image("/buttons/level1Button.png",1,2);
 		level2Button = new Image("/buttons/level2Button.png",1,2);
-		backButton = new Image("/buttons/backButton.png",1,2);
-		exitButton = new Image("/buttons/exitButton.png",1,2);
+		
 		invButton = new Image("/buttons/invButton.png",1,2);
 		skillButton = new Image("/buttons/skillButton.png",1,2);
 		magicButton = new Image("/buttons/magicButton.png",1,2);
@@ -259,12 +275,22 @@ public class Art {
 				-1.0f, 1.0f);
 		FloatBuffer matrix44Buffer = BufferUtils.createFloatBuffer(16);
 		matrix44Buffer = projectionMatrix.toBuffer();
+		
+
 
 		glUseProgram(ShaderBase);
+		
+		int Error = glGetError();
+		
+		if(Error != GL_NO_ERROR){
+			System.out.println("OpenGL Error: " + Error);
+		}
 		int projectionMatrixLocation = glGetUniformLocation(ShaderBase,
 				"projectionMatrix");
 		glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
 		glUseProgram(0);
+		
+
 
 		glUseProgram(ShaderInst);
 		projectionMatrixLocation = glGetUniformLocation(ShaderInst,
@@ -286,10 +312,13 @@ public class Art {
 	}
 
 	public void init() {
+		
 		initShaders();
 		initShaderUniforms();
 		initTextures();
 		initRenderers();
+		
+
 	}
 	
 	public static void refreshRenderers(){
