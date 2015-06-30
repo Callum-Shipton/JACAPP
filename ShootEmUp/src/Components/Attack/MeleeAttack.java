@@ -4,6 +4,7 @@ import java.util.Random;
 
 import Components.ComponentType;
 import Components.Message;
+import Components.Collision.PickupCollision;
 import Components.Graphical.AnimatedGraphics;
 import Components.Spawn.BaseSpawn;
 import Components.Spawn.PointSpawn;
@@ -71,31 +72,16 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 		AnimatedGraphics coinG = new AnimatedGraphics(Art.coin, Art.base, true);
 		PointSpawn coinS = new PointSpawn(coinG, new Vector2(AG.getX() + AG.getWidth() - coinG.getWidth(), AG.getY() + AG.getHeight() - coinG.getHeight()), coin);
 		coin.addComponent(coinG);
+		PickupCollision coinC = new PickupCollision(coin);
 		coin.addComponent(coinS);
+		coin.addComponent(coinC);
 		ShootEmUp.currentLevel.newEntities.add(coin);
 		
 		
 		//create armour, item or weapon
 		Random rand = new Random();
-		int prob = rand.nextInt(3);
-		if(prob == 0 ) {
-			int armourProb = rand.nextInt(5);
-			Entity armour = new Entity();
-			AnimatedGraphics armourG;
-			if(armourProb == 0){
-				armourG = new AnimatedGraphics(Art.shoes, Art.base, true);
-			} else if(armourProb == 1){
-				armourG = new AnimatedGraphics(Art.legs, Art.base, true);
-			} else if(armourProb == 2){
-				armourG = new AnimatedGraphics(Art.chest, Art.base, true);
-			} else {
-				armourG = new AnimatedGraphics(Art.helmet, Art.base, true);
-			}
-			PointSpawn armourS = new PointSpawn(armourG, new Vector2(AG.getX(), AG.getY()), armour);
-			armour.addComponent(armourG);
-			armour.addComponent(armourS);
-			ShootEmUp.currentLevel.newEntities.add(armour);
-		} else if(prob == 1) {
+		int prob = rand.nextInt(100);
+		if(prob <= 25 ) {
 			int itemProb = rand.nextInt(4);
 			Entity item = new Entity();
 			AnimatedGraphics itemG;
@@ -110,14 +96,37 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 			}
 			PointSpawn itemS = new PointSpawn(itemG, new Vector2(AG.getX() + AG.getWidth() - itemG.getWidth(),AG.getY()), item);
 			item.addComponent(itemG);
+			PickupCollision itemC = new PickupCollision(item);
 			item.addComponent(itemS);
+			item.addComponent(itemC);
 			ShootEmUp.currentLevel.newEntities.add(item);
-		} else {	
+		} else if(prob <= 40) {
+			int armourProb = rand.nextInt(5);
+			Entity armour = new Entity();
+			AnimatedGraphics armourG;
+			if(armourProb == 0){
+				armourG = new AnimatedGraphics(Art.shoes, Art.base, true);
+			} else if(armourProb == 1){
+				armourG = new AnimatedGraphics(Art.legs, Art.base, true);
+			} else if(armourProb == 2){
+				armourG = new AnimatedGraphics(Art.chest, Art.base, true);
+			} else {
+				armourG = new AnimatedGraphics(Art.helmet, Art.base, true);
+			}
+			PointSpawn armourS = new PointSpawn(armourG, new Vector2(AG.getX(), AG.getY()), armour);
+			armour.addComponent(armourG);
+			PickupCollision armourC = new PickupCollision(armour);
+			armour.addComponent(armourS);
+			armour.addComponent(armourC);
+			ShootEmUp.currentLevel.newEntities.add(armour);
+		} else if(prob <= 50) {	
 			Entity weapon = new Entity();
 			AnimatedGraphics weaponG = new AnimatedGraphics(Art.bow, Art.base, true);
 			PointSpawn weaponS = new PointSpawn(weaponG, new Vector2(AG.getX(), AG.getY() + AG.getHeight() - weaponG.getHeight()), weapon);
 			weapon.addComponent(weaponG);
+			PickupCollision weaponC = new PickupCollision(weapon);
 			weapon.addComponent(weaponS);
+			weapon.addComponent(weaponC);
 			ShootEmUp.currentLevel.newEntities.add(weapon);
 		}
 	}

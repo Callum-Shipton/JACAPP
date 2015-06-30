@@ -11,22 +11,26 @@ import GUI.Button;
 import Input.Keyboard;
 import Main.ShootEmUp;
 
-public class MainMenu extends GuiMenu {
+public class InventoryMenu extends GuiMenu {
 	
 	static int selectedItem = 0;
 	public static boolean saved;
-	private Button newGame;
-	private Button loadGame;
-	private Button options;
+	private Button back;
 	private Button exit;
+	private Button skillButton;
+	private Button magicButton;
+	private Button mapButton;
+	private Button saveButton;
 
-    public MainMenu(Image menuImage) {
+    public InventoryMenu(Image menuImage) {
         super(menuImage);
         selectedItem = 0;
-        newGame = addButton(new Button(Art.newGameButton, (ShootEmUp.WIDTH / 2) - (Art.newGameButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.newGameButton.getHeight() * 2), 128,24));
-        loadGame = addButton(new Button(Art.loadGameButton, (ShootEmUp.WIDTH / 2) - (Art.loadGameButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - Art.loadGameButton.getHeight(), 128,24));
-        options = addButton(new Button(Art.optionsButton, (ShootEmUp.WIDTH / 2) - (Art.optionsButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2), 128,24));
-        exit = addButton(new Button(Art.exitButton,  (ShootEmUp.WIDTH /  2) - (Art.exitButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) + Art.exitButton.getHeight(), 128,24));
+        back = addButton(new Button(Art.backButton, 30, 30, 128,24));
+        exit = addButton(new Button(Art.exitButton, 30, 64, 128,24));
+        skillButton = addButton(new Button(Art.skillButton, 922, 102, 101, 102));
+        magicButton = addButton(new Button(Art.magicButton, 922, 204, 101, 102));
+        mapButton = addButton(new Button(Art.mapButton, 922, 306, 101, 102));
+        saveButton = addButton(new Button(Art.saveButton, 922, 408, 101, 102));
     }
 
     @Override
@@ -37,24 +41,18 @@ public class MainMenu extends GuiMenu {
 
     public void update() {
     	super.update();
-    	if(newGame.hasClicked()){
-    		addMenu(new LevelSelectMenu(Art.mainMenuScreen));
-        	newGame.postAction();
-    	}
-    	if(loadGame.hasClicked()){
-    		addMenu(new LoadMenu(Art.mainMenuScreen));
-        	loadGame.postAction();
-    	}
-    	if(options.hasClicked()){
-    		addMenu(new OptionsMenu(Art.mainMenuScreen));
-        	options.postAction();
+    	if(back.hasClicked()){
+    		popMenu();
+        	ShootEmUp.paused = false;
+        	back.postAction();
     	}
     	if(exit.hasClicked()){
     		glfwSetWindowShouldClose(ShootEmUp.d.getWindow(), GL_TRUE);
-        	newGame.postAction();
+        	back.postAction();
     	}
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
-    		addMenu(new LevelSelectMenu(Art.mainMenuScreen));
+        	popMenu();
+        	ShootEmUp.paused = false;
         	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	}
     	else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){

@@ -14,8 +14,8 @@ public class PickupCollision extends BaseCollision {
 	
 	@Override
 	public void collision(Entity hitter, Entity hit) {
-		// TODO Auto-generated method stub
-		
+		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, hitter);
+		ShootEmUp.currentLevel.oldEntities.add(hitter);
 	}
 
 	@Override
