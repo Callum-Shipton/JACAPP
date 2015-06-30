@@ -12,7 +12,7 @@ public class RigidCollision extends BaseCollision {
 	}
 
 	@Override
-	public void collision(Entity hitter, Entity hit) {
+	public void collision(Entity e, Entity hit) {
 		// TODO Auto-generated method stub
 
 	}

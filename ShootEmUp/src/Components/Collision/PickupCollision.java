@@ -1,6 +1,8 @@
 package Components.Collision;
 
+import Components.ComponentType;
 import Components.Message;
+import Components.Control.PlayerControl;
 import Main.ShootEmUp;
 import Object.Entity;
 
@@ -13,9 +15,11 @@ public class PickupCollision extends BaseCollision {
 	}
 	
 	@Override
-	public void collision(Entity hitter, Entity hit) {
-		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, hitter);
-		ShootEmUp.currentLevel.oldEntities.add(hitter);
+	public void collision(Entity e, Entity hit) {
+		if(hit.getComponent(ComponentType.CONTROL) instanceof PlayerControl){
+		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, e);
+		ShootEmUp.currentLevel.oldEntities.add(e);
+		}
 	}
 
 	@Override

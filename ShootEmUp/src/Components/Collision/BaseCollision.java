@@ -16,7 +16,7 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 	protected HashSet<Vector2> gridPos;
 	protected boolean moveBack;
 	
-	public abstract void collision(Entity hitter, Entity hit);
+	public abstract void collision(Entity e, Entity hit);
 
 	public void destroy(Entity e){
 		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, e);

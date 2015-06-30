@@ -52,7 +52,7 @@ public class MageAttack extends BaseAttack implements AttackComponent {
 		if (healthRegen <= 0) {
 			healthRegen = 100;
 			if (health < maxHealth) {
-				maxHealth++;
+				health++;
 			}
 		}
 		healthRegen--;
