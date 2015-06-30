@@ -206,22 +206,25 @@ public class Art {
 		mapScreen = new Image("/Menus/mapScreen.png", 1, 1);
 		saveScreen = new Image("/Menus/saveScreen.png", 1, 1);
 		
+
+		
 		//load button art
-		newGameButton = new Image("/buttons/newGameButton.png",1,2);
-		loadGameButton = new Image("/buttons/loadGameButton.png",1,2);
-		optionsButton = new Image("/buttons/optionsButton.png",1,2);
-		exitButton = new Image("/buttons/exitButton.png",1,2);
+		newGameButton = new Image("/Buttons/newGameButton.png",1,2);
 		
-		backButton = new Image("/buttons/backButton.png",1,2);
+	//	loadGameButton = new Image("/buttons/loadGameButton.png",1,2);
+	//	optionsButton = new Image("/buttons/optionsButton.png",1,2);
+		exitButton = new Image("/Buttons/exitButton.png",1,2);
 		
-		level1Button = new Image("/buttons/level1Button.png",1,2);
-		level2Button = new Image("/buttons/level2Button.png",1,2);
+		backButton = new Image("/Buttons/backButton.png",1,2);
 		
-		invButton = new Image("/buttons/invButton.png",1,2);
-		skillButton = new Image("/buttons/skillButton.png",1,2);
-		magicButton = new Image("/buttons/magicButton.png",1,2);
-		mapButton = new Image("/buttons/mapButton.png",1,2);
-		saveButton = new Image("/buttons/saveButton.png",1,2);
+		level1Button = new Image("/Buttons/level1Button.png",1,2);
+		level2Button = new Image("/Buttons/level2Button.png",1,2);
+		
+		invButton = new Image("/Buttons/invButton.png",1,2);
+		skillButton = new Image("/Buttons/skillButton.png",1,2);
+		magicButton = new Image("/Buttons/magicButton.png",1,2);
+		mapButton = new Image("/Buttons/mapButton.png",1,2);
+		saveButton = new Image("/Buttons/saveButton.png",1,2);
 				
 		//Load tile maps
 		background = new Image("/Tiles/background.png",4,4);
