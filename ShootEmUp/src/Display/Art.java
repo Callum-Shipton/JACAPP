@@ -321,16 +321,16 @@ public class Art {
 		initTextures();
 		initRenderers();
 		
-
 	}
 	
 	public static void refreshRenderers(){
 		base.initRenderData();
 		stat.initRenderData();
+		if(ShootEmUp.currentLevel != null){
 		irWall.initRenderData(ShootEmUp.currentLevel.walls, new Vector2(wall.getFWidth(), wall.getFHeight()));
 		irBack.initRenderData(ShootEmUp.currentLevel.backgroundTiles, new Vector2(background.getFWidth(),background.getFHeight()));
 		irFore.initRenderData(ShootEmUp.currentLevel.foregroundTiles, new Vector2(foreground.getFWidth(), foreground.getFHeight()));
-	
+		}
 	}
 	
 	

@@ -42,7 +42,7 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 	@Override
 	public void receive(Message m, Entity e) {
 		if(m == Message.ENTITY_DIED){
-			destroy(e);
+			e.destroy();
 		}
 	}
 }

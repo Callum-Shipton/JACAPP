@@ -51,7 +51,7 @@ public class MainMenu extends GuiMenu {
     	}
     	if(exit.hasClicked()){
     		glfwSetWindowShouldClose(ShootEmUp.d.getWindow(), GL_TRUE);
-        	newGame.postAction();
+        	exit.postAction();
     	}
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
     		addMenu(new LevelSelectMenu(Art.mainMenuScreen));

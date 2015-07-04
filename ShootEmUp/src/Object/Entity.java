@@ -25,6 +25,7 @@ public class Entity{
 	public void destroy(){
 		for(Component component : components.values()){
 			component.destroy(this);
+			components.remove(component);
 		}
 	}
 
