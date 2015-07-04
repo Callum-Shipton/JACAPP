@@ -214,7 +214,7 @@ public class Level {
 		RigidCollision c = new RigidCollision(player);
 		player.addComponent(c);
 		BasicMovement m = new BasicMovement(player,c, g, 5);
-		PlayerInventory i = new PlayerInventory(0, 18, 3);
+		PlayerInventory i = new PlayerInventory(0, 1, 3);
 		player.addComponent(s);
 		player.addComponent(a);
 		player.addComponent(m);

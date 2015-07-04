@@ -8,7 +8,7 @@ import Components.Collision.PickupCollision;
 import Components.Graphical.AnimatedGraphics;
 import Components.Spawn.BaseSpawn;
 import Components.Spawn.PointSpawn;
-import Components.Inventory.BaseInventory;
+import Components.Inventory.PlayerInventory;
 import Display.Art;
 import Main.ShootEmUp;
 import Math.Vector2;
@@ -65,7 +65,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 
 	public void drop(Entity e) {
 		//give player exp
-		((BaseInventory)ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY)).giveExp(1);
+		((PlayerInventory)ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY)).giveExp(1);
 	
 		//create coins
 		Entity coin = new Entity();
