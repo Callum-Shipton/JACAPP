@@ -3,7 +3,6 @@ package GUI.Menus;
 import java.util.*;
 
 import Display.Art;
-import Display.DPDTRenderer;
 import Display.Image;
 import GUI.Button;
 import Main.ShootEmUp;

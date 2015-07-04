@@ -24,8 +24,8 @@ public class MainMenu extends GuiMenu {
         super(menuImage);
         selectedItem = 0;
         newGame = addButton(new Button(Art.newGameButton, (ShootEmUp.WIDTH / 2) - (Art.newGameButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.newGameButton.getHeight() * 2), 128,24));
-      //  loadGame = addButton(new Button(Art.loadGameButton, (ShootEmUp.WIDTH / 2) - (Art.loadGameButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - Art.loadGameButton.getHeight(), 128,24));
-      //  options = addButton(new Button(Art.optionsButton, (ShootEmUp.WIDTH / 2) - (Art.optionsButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2), 128,24));
+        loadGame = addButton(new Button(Art.loadGameButton, (ShootEmUp.WIDTH / 2) - (Art.loadGameButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - Art.loadGameButton.getHeight(), 128,24));
+        options = addButton(new Button(Art.optionsButton, (ShootEmUp.WIDTH / 2) - (Art.optionsButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2), 128,24));
         exit = addButton(new Button(Art.exitButton,  (ShootEmUp.WIDTH /  2) - (Art.exitButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) + Art.exitButton.getHeight(), 128,24));
     }
 
@@ -41,7 +41,6 @@ public class MainMenu extends GuiMenu {
     		addMenu(new LevelSelectMenu(Art.mainMenuScreen));
         	newGame.postAction();
     	}
-    	/*
     	if(loadGame.hasClicked()){
     		addMenu(new LoadMenu(Art.mainMenuScreen));
         	loadGame.postAction();
@@ -50,7 +49,6 @@ public class MainMenu extends GuiMenu {
     		addMenu(new OptionsMenu(Art.mainMenuScreen));
         	options.postAction();
     	}
-    	*/
     	if(exit.hasClicked()){
     		glfwSetWindowShouldClose(ShootEmUp.d.getWindow(), GL_TRUE);
         	newGame.postAction();
