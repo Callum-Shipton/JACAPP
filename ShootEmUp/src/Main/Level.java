@@ -211,15 +211,15 @@ public class Level {
 		PointSpawn s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
 		PlayerInventory i = new PlayerInventory(0, 1, 3);
 		MageAttack a = new MageAttack(s, i, new Weapon(5, 100, 10, false, 1), 18, 100, 18, 18, 50, 18);
-		RigidCollision c = new RigidCollision(player);
-		BasicMovement m = new BasicMovement(player,c, g, 5);
-		player.addComponent(new PlayerControl(player, g, a, m));
 		player.addComponent(g);
-		player.addComponent(s);
-		player.addComponent(i);
-		player.addComponent(a);
+		RigidCollision c = new RigidCollision(player);
 		player.addComponent(c);
+		BasicMovement m = new BasicMovement(player,c, g, 5);
+		player.addComponent(s);
+		player.addComponent(a);
 		player.addComponent(m);
+		player.addComponent(new PlayerControl(player, g, a, m));
+		player.addComponent(i);
 		
 		//create HUD
 		hud = new Hud(player);
