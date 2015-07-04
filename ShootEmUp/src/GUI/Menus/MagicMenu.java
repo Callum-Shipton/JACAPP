@@ -63,7 +63,8 @@ public class MagicMenu extends GuiMenu {
         	back.postAction();
     	}
     	if(exit.hasClicked()){
-    		glfwSetWindowShouldClose(ShootEmUp.d.getWindow(), GL_TRUE);
+    		ShootEmUp.menuStack.clear();
+    		addMenu(new MainMenu(Art.mainMenuScreen));
         	back.postAction();
     	}
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
