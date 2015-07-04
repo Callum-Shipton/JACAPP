@@ -22,6 +22,7 @@ public class MainMenu extends GuiMenu {
 
     public MainMenu(Image menuImage) {
         super(menuImage);
+        ShootEmUp.currentLevel = null;
         selectedItem = 0;
         newGame = addButton(new Button(Art.newGameButton, (ShootEmUp.WIDTH / 2) - (Art.newGameButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.newGameButton.getHeight() * 2), 128,24));
         loadGame = addButton(new Button(Art.loadGameButton, (ShootEmUp.WIDTH / 2) - (Art.loadGameButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - Art.loadGameButton.getHeight(), 128,24));

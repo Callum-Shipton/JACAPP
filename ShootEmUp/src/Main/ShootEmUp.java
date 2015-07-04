@@ -98,15 +98,17 @@ public class ShootEmUp {
 		// Poll for window events. The key callback above will only be
 		// invoked during this call.
 		glfwPollEvents();
-		if(Keyboard.getKey(GLFW_KEY_P) == 1){
-				paused = !paused;
-				Keyboard.setKey(GLFW_KEY_P);
-				if(paused) addMenu(new InventoryMenu(Art.invScreen));
-				else clearMenus();
-		}
-
-		if(!paused && (currentLevel != null)){
-			currentLevel.update();
+		if(currentLevel != null){
+			if(Keyboard.getKey(GLFW_KEY_P) == 1){
+					paused = !paused;
+					Keyboard.setKey(GLFW_KEY_P);
+					if(paused) addMenu(new InventoryMenu(Art.invScreen));
+					else clearMenus();
+			}
+	
+			if(!paused){
+				currentLevel.update();
+			}
 		}
 		if (!menuStack.isEmpty()) {
 			menuStack.peek().update();
