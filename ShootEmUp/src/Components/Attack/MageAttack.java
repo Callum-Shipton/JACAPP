@@ -1,6 +1,7 @@
 package Components.Attack;
 
 import Components.Message;
+import Components.Inventory.PlayerInventory;
 import Components.Spawn.BaseSpawn;
 import Object.Entity;
 import Object.Weapon;
@@ -8,13 +9,15 @@ import Object.Weapon;
 public class MageAttack extends BaseAttack implements AttackComponent {
 
 	BaseSpawn BS;
+	PlayerInventory PI;
 	
 	protected int mana;
 	protected int manaRegen;
 	protected int maxMana;
 
-	public MageAttack(BaseSpawn BS, Weapon weapon, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana){
+	public MageAttack(BaseSpawn BS, PlayerInventory PI, Weapon weapon, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana){
 		this.BS = BS;
+		this.PI = PI;
 		this.weapon = weapon;
 		this.health = health;
 		this.healthRegen = healthRegen;
@@ -47,6 +50,7 @@ public class MageAttack extends BaseAttack implements AttackComponent {
 			health = maxHealth;
 			mana = maxMana;
 			BS.spawn(e);
+			PI.removeLife();
 		}
 		
 		if (healthRegen <= 0) {
