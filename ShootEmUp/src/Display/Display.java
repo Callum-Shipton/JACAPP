@@ -117,51 +117,50 @@ public class Display {
 
 	public void update() {
 		if (Keyboard.getKey(GLFW_KEY_ESCAPE) == 1) {
-			if(ShootEmUp.currentLevel != null){
-			ShootEmUp.paused = !ShootEmUp.paused;
+			if(fullscreen)toggleFullscreen();
+			glfwSetWindowShouldClose(window, GL_TRUE);
 			Keyboard.setKey(GLFW_KEY_ESCAPE);
-			if(ShootEmUp.paused) ShootEmUp.addMenu(new InventoryMenu(Art.invScreen));
-			else ShootEmUp.clearMenus();
-			}
 		}
 		if (Keyboard.getKey(GLFW_KEY_F) == 1) {
-			long newWindow;
-			if(fullscreen){
-				ShootEmUp.WIDTH =1024;
-				ShootEmUp.HEIGHT =512;
-				width = 1024;
-				height = 512;
-				newWindow = glfwCreateWindow(width, height, "Hello World!", NULL, window);
-				if (newWindow == NULL)
-					throw new RuntimeException("Failed to create the NEW GLFW window");
-
-				// Center our window
-				glfwSetWindowPos(newWindow, (GLFWvidmode.width(vidmode) - width) / 2,
-						(GLFWvidmode.height(vidmode) - height) / 2);
-			}else{
-				ShootEmUp.WIDTH = vm.getWidth();
-				ShootEmUp.HEIGHT = vm.getHeight();
-				width = vm.getWidth();
-				height = vm.getHeight();
-				newWindow = glfwCreateWindow(width, height, "Hello World!", monitor, window);
-				if (newWindow == NULL)
-					throw new RuntimeException("Failed to create the GLFW window");
-			}
-			glfwMakeContextCurrent(newWindow);
-			glfwSwapInterval(1);
-			glfwShowWindow(newWindow);
-			glfwDestroyWindow(window);
-			window = newWindow;
-			initGL();
-			Keyboard.keyCheck(window);
-			Art.initShaderUniforms();
-			Art.refreshRenderers();
-			if(ShootEmUp.currentLevel != null) ((PlayerGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).scrollScreen(null);
-			fullscreen = !fullscreen;
-				
+			toggleFullscreen();
 			 // We will detect this in
 			// our update loop
 			Keyboard.setKey(GLFW_KEY_F);
 		}
+	}
+	public void toggleFullscreen(){
+		long newWindow;
+		if(fullscreen){
+			ShootEmUp.WIDTH =1024;
+			ShootEmUp.HEIGHT =512;
+			width = 1024;
+			height = 512;
+			newWindow = glfwCreateWindow(width, height, "Hello World!", NULL, window);
+			if (newWindow == NULL)
+				throw new RuntimeException("Failed to create the NEW GLFW window");
+
+			// Center our window
+			glfwSetWindowPos(newWindow, (GLFWvidmode.width(vidmode) - width) / 2,
+					(GLFWvidmode.height(vidmode) - height) / 2);
+		}else{
+			ShootEmUp.WIDTH = vm.getWidth();
+			ShootEmUp.HEIGHT = vm.getHeight();
+			width = vm.getWidth();
+			height = vm.getHeight();
+			newWindow = glfwCreateWindow(width, height, "Hello World!", monitor, window);
+			if (newWindow == NULL)
+				throw new RuntimeException("Failed to create the GLFW window");
+		}
+		glfwMakeContextCurrent(newWindow);
+		glfwSwapInterval(1);
+		glfwShowWindow(newWindow);
+		glfwDestroyWindow(window);
+		window = newWindow;
+		initGL();
+		Keyboard.keyCheck(window);
+		Art.initShaderUniforms();
+		Art.refreshRenderers();
+		if(ShootEmUp.currentLevel != null) ((PlayerGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).scrollScreen(null);
+		fullscreen = !fullscreen;
 	}
 }
