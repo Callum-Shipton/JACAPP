@@ -105,7 +105,7 @@ public class ShootEmUp {
 				else clearMenus();
 		}
 
-		if(!paused){
+		if(!paused && (currentLevel != null)){
 			currentLevel.update();
 		}
 		if (!menuStack.isEmpty()) {
@@ -119,7 +119,7 @@ public class ShootEmUp {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		if(!paused){
+		if(!paused && (currentLevel != null)){
 			currentLevel.render();
 		}
 		if (!menuStack.isEmpty()) {
