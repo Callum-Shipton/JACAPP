@@ -1,5 +1,9 @@
 package Components.Inventory;
 
+import Display.Art;
+import GUI.Menus.GameOverMenu;
+import Main.ShootEmUp;
+
 public class PlayerInventory extends BasicInventory{
 	
 	private final int MAX_LEVEL = 99;
@@ -28,6 +32,15 @@ public class PlayerInventory extends BasicInventory{
 
 	public void setLives(int lives) {
 		this.lives = lives;
+	}
+	
+	public void removeLife() {
+		if(lives == 1){
+			ShootEmUp.paused = true;
+			ShootEmUp.menuStack.add(new GameOverMenu(Art.gameOverScreen))
+;		} else {
+			lives--;
+		}
 	}
 	
 	public void giveExp(int exp){

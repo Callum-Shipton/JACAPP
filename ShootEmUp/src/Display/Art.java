@@ -22,6 +22,7 @@ public class Art {
 	public static Image magicScreen;
 	public static Image mapScreen;
 	public static Image saveScreen;
+	public static Image gameOverScreen;
 	
 	//buttons
 	public static Image newGameButton;
@@ -205,8 +206,7 @@ public class Art {
 		magicScreen = new Image("/Menus/magicScreen.png", 1, 1);
 		mapScreen = new Image("/Menus/mapScreen.png", 1, 1);
 		saveScreen = new Image("/Menus/saveScreen.png", 1, 1);
-		
-
+		gameOverScreen = new Image("/Menus/gameOverScreen.png", 1, 1);
 		
 		//load button art
 		newGameButton = new Image("/Buttons/newGameButton.png",1,2);
