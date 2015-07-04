@@ -13,6 +13,7 @@ import org.lwjgl.opengl.GLContext;
 
 import Components.ComponentType;
 import Components.Graphical.PlayerGraphics;
+import GUI.Menus.InventoryMenu;
 import Input.Keyboard;
 import Main.ShootEmUp;
 
@@ -116,9 +117,12 @@ public class Display {
 
 	public void update() {
 		if (Keyboard.getKey(GLFW_KEY_ESCAPE) == 1) {
-			glfwSetWindowShouldClose(window, GL_TRUE); // We will detect this in
-			// our update loop
+			if(ShootEmUp.currentLevel != null){
+			ShootEmUp.paused = !ShootEmUp.paused;
 			Keyboard.setKey(GLFW_KEY_ESCAPE);
+			if(ShootEmUp.paused) ShootEmUp.addMenu(new InventoryMenu(Art.invScreen));
+			else ShootEmUp.clearMenus();
+			}
 		}
 		if (Keyboard.getKey(GLFW_KEY_F) == 1) {
 			long newWindow;
