@@ -152,7 +152,7 @@ public class Display {
 			Keyboard.keyCheck(window);
 			Art.initShaderUniforms();
 			Art.refreshRenderers();
-			((PlayerGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).scrollScreen(null);
+			if(ShootEmUp.currentLevel != null) ((PlayerGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).scrollScreen(null);
 			fullscreen = !fullscreen;
 				
 			 // We will detect this in
