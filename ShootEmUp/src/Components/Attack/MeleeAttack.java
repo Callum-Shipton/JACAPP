@@ -25,6 +25,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 		this.weapon = weapon;
 		this.health = health;
 		this.healthRegen = healthRegen;
+		this.maxHealthRegen = healthRegen;
 		this.maxHealth = maxHealth;
 	}
 	
@@ -48,7 +49,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 		}
 		
 		if (healthRegen <= 0) {
-			healthRegen = 100;
+			healthRegen = maxHealthRegen;
 			if (getHealth() < getMaxHealth()) {
 				setHealth(getHealth() + 1);
 			}

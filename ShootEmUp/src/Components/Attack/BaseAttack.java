@@ -16,6 +16,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	protected int health;
 	protected int healthRegen;
 	protected int maxHealth;
+	protected int maxHealthRegen;
 	
 	@Override
 	public abstract void attack(Entity e, int dir);
@@ -33,6 +34,22 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 	public void setHealth(int health) {
 		this.health = health;
+	}
+	
+	public int getHealthRegen() {
+		return healthRegen;
+	}
+
+	public void setHealthRegen(int healthRegen) {
+		this.healthRegen = healthRegen;
+	}
+	
+	public int getMaxHealthRegen() {
+		return maxHealthRegen;
+	}
+
+	public void setMaxHealthRegen(int maxHealthRegen) {
+		this.maxHealthRegen = maxHealthRegen;
 	}
 	
 	public void damage(int damage, Entity e) {

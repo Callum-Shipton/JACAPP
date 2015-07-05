@@ -14,10 +14,12 @@ public class ArcherAttack extends PlayerAttack implements AttackComponent {
 		this.weapon = weapon;
 		this.health = health;
 		this.healthRegen = healthRegen;
+		this.maxHealthRegen = healthRegen;
 		this.maxHealth = maxHealth;
 		this.mana = mana;
 		this.manaRegen = manaRegen;
 		this.maxMana = maxMana;
+		this.maxManaRegen = manaRegen;
 		
 	}
 	
@@ -47,7 +49,7 @@ public class ArcherAttack extends PlayerAttack implements AttackComponent {
 		}
 		
 		if (healthRegen <= 0) {
-			healthRegen = 100;
+			healthRegen = maxHealthRegen;
 			if (health < maxHealth) {
 				health++;
 			}
@@ -55,7 +57,7 @@ public class ArcherAttack extends PlayerAttack implements AttackComponent {
 		healthRegen--;
 		
 		if (manaRegen <= 0) {
-			manaRegen = 50;
+			manaRegen = maxManaRegen;
 			if (mana < maxMana) {
 				mana++;
 			}

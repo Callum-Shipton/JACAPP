@@ -8,6 +8,7 @@ public abstract class PlayerAttack extends BaseAttack {
 	protected int mana;
 	protected int manaRegen;
 	protected int maxMana;
+	protected int maxManaRegen;
 	
 	public int getMana() {
 		return mana;
@@ -31,5 +32,13 @@ public abstract class PlayerAttack extends BaseAttack {
 
 	public void setMaxMana(int maxMana) {
 		this.maxMana = maxMana;
+	}
+
+	public int getMaxManaRegen() {
+		return maxManaRegen;
+	}
+
+	public void setMaxManaRegen(int maxManaRegen) {
+		this.maxManaRegen = maxManaRegen;
 	}
 }

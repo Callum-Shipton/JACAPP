@@ -1,5 +1,8 @@
 package GUI.Menus;
 
+import Components.ComponentType;
+import Components.Attack.BaseAttack;
+import Components.Attack.PlayerAttack;
 import Display.Art;
 import Display.Image;
 import GUI.Button;
@@ -14,6 +17,10 @@ public class SkillMenu extends GuiMenu {
 	private Button magicButton;
 	private Button mapButton;
 	private Button saveButton;
+	private Button healthRegenButton;
+	private Button healthButton;
+	private Button manaRegenButton;
+	private Button manaButton;
 
     public SkillMenu(Image menuImage) {
         super(menuImage);
@@ -23,6 +30,10 @@ public class SkillMenu extends GuiMenu {
         magicButton = addButton(new Button(Art.magicButton, 922, 102, 101, 102));
         mapButton = addButton(new Button(Art.mapButton, 922, 306, 101, 102));
         saveButton = addButton(new Button(Art.saveButton, 922, 408, 101, 102));
+		healthRegenButton = addButton(new Button(Art.healthRegenButton,30, 98,128,24));
+		healthButton = addButton(new Button(Art.healthButton,30, 132,128,24));
+		manaRegenButton = addButton(new Button(Art.manaRegenButton,30, 166,128,24));
+		manaButton = addButton(new Button(Art.manaButton,30, 200,128,24));
     }
 
     @Override
@@ -58,6 +69,28 @@ public class SkillMenu extends GuiMenu {
     		ShootEmUp.menuStack.clear();
     		addMenu(new MainMenu(Art.mainMenuScreen));
         	back.postAction();
+    	}
+    	if(healthButton.hasClicked()){
+    		BaseAttack BA = (BaseAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
+    		BA.setMaxHealth(BA.getMaxHealth() + 1);
+    		BA.setHealth(BA.getHealth()+1);
+    		healthButton.postAction();
+    	}
+    	if(healthRegenButton.hasClicked()){
+    		BaseAttack BA = (BaseAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
+    		BA.setMaxHealthRegen((int)Math.ceil(BA.getMaxHealthRegen()/2));
+    		healthRegenButton.postAction();
+    	}
+    	if(manaButton.hasClicked()){
+    		PlayerAttack PA = (PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
+    		PA.setMaxMana(PA.getMaxMana() + 1);
+    		PA.setMana(PA.getMana() + 1);
+    		manaButton.postAction();
+    	}
+    	if(manaRegenButton.hasClicked()){
+    		PlayerAttack PA = (PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
+    		PA.setMaxManaRegen((int)Math.ceil(PA.getMaxManaRegen()/2));
+    		healthButton.postAction();
     	}
     }
 
