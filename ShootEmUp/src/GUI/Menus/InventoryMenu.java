@@ -57,7 +57,7 @@ public class InventoryMenu extends GuiMenu {
     	if(exit.hasClicked()){
     		ShootEmUp.menuStack.clear();
     		addMenu(new MainMenu(Art.mainMenuScreen));
-        	back.postAction();
+        	exit.postAction();
     	}
     }
 
