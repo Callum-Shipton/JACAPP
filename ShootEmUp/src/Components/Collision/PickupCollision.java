@@ -20,8 +20,6 @@ public class PickupCollision extends BaseCollision {
 		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, e);
 		ShootEmUp.currentLevel.oldEntities.add(e);
 		e.destroy();
-		System.out.println("Name: " + e.toString());
-		System.out.println("HC: " + e.hashCode());
 		}
 	}
 

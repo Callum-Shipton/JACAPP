@@ -55,7 +55,7 @@ public class Level {
 		while(newEntitiesIter.hasNext()){
 			Entity n = newEntitiesIter.next();
 			boolean res = entities.add(n);
-			if(res){
+			if(!res){
 				System.out.println("New entity not added. Name: " + n.toString() + ", HC: " + n.hashCode());
 			}
 		}

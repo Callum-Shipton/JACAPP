@@ -71,6 +71,7 @@ public class Weapon{
 		particle.addComponent(new LineControl(g, m));
 		
 		ShootEmUp.currentLevel.newEntities.add(particle);
+		
 	}
 
 	public int getDamage() {
