@@ -53,11 +53,11 @@ public class Spawner {
 		BaseAttack a;
 		
 		if(type == 0){
-			a = new WarriorAttack(s, i, new Weapon(5, 100, 10, false, 1, Art.earthMagic), 18, 100, 18, 18, 50, 18);
+			a = new WarriorAttack(s, i, new Weapon(5, 100, 10, false, 1, Art.earthMagic), 3, 100, 3, 3, 50, 3);
 		} else if (type == 1){
-			 a = new ArcherAttack(s, i, new Weapon(5, 100, 10, false, 1, Art.arrow), 18, 100, 18, 18, 50, 18);
+			 a = new ArcherAttack(s, i, new Weapon(5, 100, 10, false, 1, Art.arrow), 3, 100, 3, 3, 50, 3);
 		} else {
-			a = new MageAttack(s, i, new Weapon(5, 100, 10, false, 1, Art.fireMagic), 18, 100, 18, 18, 50, 18);
+			a = new MageAttack(s, i, new Weapon(5, 100, 10, false, 1, Art.fireMagic), 3, 100, 3, 3, 50, 3);
 		}
 		
 		player.addComponent(g);

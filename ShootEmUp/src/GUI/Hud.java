@@ -15,9 +15,9 @@ public class Hud extends GuiComponent{
 	
 	public CopyOnWriteArrayList<HudElement> hudElems;
 	private HudElement infoBox;
-	private HudElement healthBar;
-	private HudElement manaBar;
-	private HudElement xpBar;
+	private HudBar healthBar;
+	private HudBar manaBar;
+	private HudBar xpBar;
 	private HudElement moneyCounter;
 	private Entity player;
 	private float hudW;
@@ -27,11 +27,11 @@ public class Hud extends GuiComponent{
 		hudElems = new CopyOnWriteArrayList<HudElement>();
 		infoBox = new HudElement(0.0f,0.0f,189.0f,110.0f, Art.infoBox);
 		hudElems.add(infoBox);
-		healthBar = new HudElement(10.0f, 10.0f, Art.healthBar.getWidth(), Art.healthBar.getHeight()/Art.healthBar.getFHeight(), Art.healthBar);
+		healthBar = new HudBar(10.0f, 10.0f, Art.healthBar.getWidth()/Art.healthBar.getFWidth(), Art.healthBar.getHeight(), Art.healthBar);
 		hudElems.add(healthBar);
-		manaBar = new HudElement(10.0f, 35.0f, Art.manaBar.getWidth(), Art.manaBar.getHeight()/Art.manaBar.getFHeight(), Art.manaBar);
+		manaBar = new HudBar(10.0f, 35.0f, Art.manaBar.getWidth(), Art.manaBar.getHeight()/Art.manaBar.getFHeight(), Art.manaBar);
 		hudElems.add(manaBar);
-		xpBar = new HudElement(10.0f, 60.0f, Art.xpBar.getWidth(), Art.xpBar.getHeight()/Art.xpBar.getFHeight(), Art.xpBar);
+		xpBar = new HudBar(10.0f, 60.0f, Art.xpBar.getWidth(), Art.xpBar.getHeight()/Art.xpBar.getFHeight(), Art.xpBar);
 		hudElems.add(xpBar);
 		moneyCounter = new HudElement(10.0f, 82.0f, Art.BarCoin.getWidth(), Art.BarCoin.getHeight(), Art.BarCoin);
 		hudElems.add(moneyCounter);
@@ -67,17 +67,14 @@ public class Hud extends GuiComponent{
 		int expBound = ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getExpBound();
 		int exp = ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getExp();
 		
-		hudW = (Math.max(maxHealth, maxMana) - 18.0f)*10.0f + 189.0f;
+		hudW = (Math.max(maxHealth, maxMana))*10.0f + 189.0f;
 		infoBox.setSize(hudW, 110.0f);
-		healthBar.setVal(health);
-		healthBar.setSize(maxHealth*Art.healthBar.getWidth()/((Art.healthBar.getHeight()/Art.healthBar.getFHeight())-1), Art.healthBar.getHeight()/Art.healthBar.getFHeight());
-		healthBar.setMFrame(18.0f/maxHealth, Art.healthBar.getFHeight() );
-		manaBar.setVal(mana);
-		manaBar.setSize(maxMana*Art.manaBar.getWidth()/((Art.manaBar.getHeight()/Art.manaBar.getFHeight())-1), Art.manaBar.getHeight()/Art.manaBar.getFHeight());
-		manaBar.setMFrame(18.0f/maxMana, Art.manaBar.getFHeight() );
-		xpBar.setVal(exp);
-		xpBar.setSize(expBound*Art.xpBar.getWidth()/((Art.xpBar.getHeight()/Art.xpBar.getFHeight())-1), Art.xpBar.getHeight()/Art.xpBar.getFHeight());
-		xpBar.setMFrame(18.0f/expBound, Art.xpBar.getFHeight() );
+		healthBar.setValue(health);
+		healthBar.setMaxValue(maxHealth);
+		manaBar.setValue(mana);
+		manaBar.setMaxValue(maxMana);
+		xpBar.setValue(exp);
+		xpBar.setMaxValue(expBound);
 		//healthBar.setMFrame((player.getMaxHealth()+1)/(player.getHealth()+1), Art.healthBar.getFHeight());
 		//healthBar.setSize((((float)player.getHealth())/((float)player.getMaxHealth())) * Art.healthBar.getWidth(), healthBar.getSize().y());
 	}
