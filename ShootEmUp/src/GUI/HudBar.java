@@ -15,7 +15,7 @@ public class HudBar extends HudElement {
 	
 	public void render(DPDTRenderer r){
 		for(int j = 0; j < maxValue; j++){
-			r.draw(i, new Vector2(pos.x()+(j*10.0f),pos.y()), size, 0.0f, j > value ? currFrame : new Vector2(1.0f,0.0f), maxFrame);
+			r.draw(i, new Vector2(pos.x()+(j*10.0f),pos.y()), size, 0.0f, j > value ? currFrame : new Vector2(0.0f,1.0f), maxFrame);
 		}
 	}
 	public float getValue() {

@@ -282,9 +282,9 @@ public class Art {
 		
 		//Load HUD textures 
 		infoBox = new Image("/HUD/BarInfo.png",1,1);
-		healthBar = new Image("/HUD/BarHealth.png",2,1);			
-		manaBar = new Image("/HUD/BarMana.png",2,1);
-		xpBar = new Image("/HUD/BarXP.png",2,1);
+		healthBar = new Image("/HUD/BarHealth.png",1,2);			
+		manaBar = new Image("/HUD/BarMana.png",1,2);
+		xpBar = new Image("/HUD/BarXP.png",1,2);
 		BarCoin = new Image("/HUD/BarCoin.png",1,1);
 		numbers = new Image("/HUD/Numbers.png",10,1);
 	}
