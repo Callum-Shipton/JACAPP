@@ -239,10 +239,10 @@ public class Art {
 		mapButton = new Image("/Buttons/mapButton.png",1,2);
 		saveButton = new Image("/Buttons/saveButton.png",1,2);
 		
-		healthButton = new Image("/Buttons/warriorButton.png",1,2);
-		healthRegenButton = new Image("/Buttons/archerButton.png",1,2);
-		manaButton = new Image("/Buttons/mageButton.png",1,2);
-		manaRegenButton = new Image("/Buttons/warriorButton.png",1,2);
+		healthButton = new Image("/Buttons/healthButton.png",1,2);
+		healthRegenButton = new Image("/Buttons/healthRegenButton.png",1,2);
+		manaButton = new Image("/Buttons/manaButton.png",1,2);
+		manaRegenButton = new Image("/Buttons/manaRegenButton.png",1,2);
 		
 		
 		//Load tile maps
