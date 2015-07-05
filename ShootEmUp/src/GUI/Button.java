@@ -42,6 +42,7 @@ public class Button extends GuiComponent {
 	@Override
 	public void update() {
 		super.update();
+		window = ShootEmUp.d.getWindow();
 		Bx.clear();
 		By.clear();
 		
