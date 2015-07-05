@@ -8,7 +8,6 @@ import Object.Weapon;
 
 public class MageAttack extends BaseAttack implements AttackComponent {
 
-	BaseSpawn BS;
 	PlayerInventory PI;
 	
 	protected int mana;

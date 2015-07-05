@@ -9,7 +9,6 @@ import Object.Entity;
 public class LineControl extends BaseControl{
 	
 	private AnimatedGraphics AG;
-	private BaseMovement BM;
 	
 	public LineControl(AnimatedGraphics AG, BaseMovement BM){
 		this.AG = AG;

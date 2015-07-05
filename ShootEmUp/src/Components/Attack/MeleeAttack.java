@@ -18,7 +18,6 @@ import Object.Weapon;
 public class MeleeAttack extends BaseAttack implements AttackComponent {
 
 	AnimatedGraphics AG;
-	BaseSpawn BS;
 	
 	public MeleeAttack(BaseSpawn BS, AnimatedGraphics AG, Weapon weapon, int health, int healthRegen, int maxHealth){
 		this.AG = AG;

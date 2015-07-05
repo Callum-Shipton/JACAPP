@@ -2,12 +2,14 @@ package Components.Attack;
 
 import Components.Component;
 import Components.ComponentType;
+import Components.Spawn.BaseSpawn;
 import Object.Entity;
 import Object.Weapon;
 
 public abstract class BaseAttack extends Component implements AttackComponent {
 	
 	protected ComponentType type = ComponentType.ATTACK;
+	protected BaseSpawn BS;
 	
 	protected Weapon weapon;
 	protected int fireRate;

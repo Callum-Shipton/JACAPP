@@ -13,7 +13,6 @@ import org.lwjgl.opengl.GLContext;
 
 import Components.ComponentType;
 import Components.Graphical.PlayerGraphics;
-import GUI.Menus.InventoryMenu;
 import Input.Keyboard;
 import Main.ShootEmUp;
 
