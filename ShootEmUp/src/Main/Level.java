@@ -5,25 +5,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Random;
 
 import javax.imageio.*;
 
 import Components.ComponentType;
 import Components.Attack.MageAttack;
-import Components.Attack.MeleeAttack;
 import Components.Collision.RigidCollision;
 import Components.Collision.BaseCollision;
-import Components.Control.HomingControl;
 import Components.Control.PlayerControl;
-import Components.Graphical.AnimatedGraphics;
 import Components.Graphical.BaseGraphics;
 import Components.Graphical.MapGraphics;
 import Components.Graphical.PlayerGraphics;
 import Components.Inventory.PlayerInventory;
-import Components.Movement.BaseMovement;
 import Components.Movement.BasicMovement;
-import Components.Movement.FlyingMovement;
 import Components.Spawn.PointSpawn;
 import Display.Art;
 import Display.IRenderer;
@@ -46,8 +40,6 @@ public class Level {
 	private Entity player;
 	
 	private Hud hud;
-
-	private int counter = 0;
 	
 	public EntityMap eMap;
 
@@ -55,6 +47,8 @@ public class Level {
 	public HashSet<Entity> entities;
 	public HashSet<Entity> oldEntities;
 	public HashSet<Entity> newEntities;
+	
+	public Spawner spawner;
 	
 	public Level(String file) {
 		this.file = file;
@@ -65,6 +59,7 @@ public class Level {
 		wallTiles = new Vector2[map.getWidth() / 3][map.getHeight()];
 		foregroundTiles = new Vector2[map.getWidth() / 3][map.getHeight()];
 		eMap = new EntityMap(width,height);
+		spawner = new Spawner();
 	}
 
 	private void loadLevel() {
@@ -237,76 +232,8 @@ public class Level {
 	}
 
 	public void update() {
-		boolean collide = false;
-
-		counter++;
-		if (counter == 150) {
-			Entity test = new Entity();
-			AnimatedGraphics AG = new AnimatedGraphics(Art.player, Art.base, false);
-			test.addComponent(AG);
-			RigidCollision RC = new RigidCollision(test);
-			test.addComponent(RC);
-			test.addComponent(new BasicMovement(test, RC, AG, 5));
-			Random rand = new Random();
-			do {
-				collide = false;
-				((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).setX((float)rand.nextInt((backgroundTiles.length - 1) * 32));
-				((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).setY(rand.nextInt((backgroundTiles[0].length - 1) * 32));
-
-				for (Entity character : entities) {
-					if ((((BaseMovement) test.getComponent(ComponentType.MOVEMENT)).doesCollide(test, character) != null)) {
-						collide = true;
-						break;
-					}
-				}
-			} while (collide == true);
-			
-			//creating new Enemy
-			Entity newEnemy = new Entity();
-			AnimatedGraphics enemyGraphics;
-			PointSpawn enemySpawn;
-			MeleeAttack enemyAttack;
-			HomingControl enemyControl;
-			RigidCollision enemyCollision;
-			BaseMovement enemyMovement;
-			
-			int prob = rand.nextInt(3);
-			if(prob == 0){
-				enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base, false); 
-				enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-				enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(10, 100, 10, false, 1), 10, 100, 10);
-				newEnemy.addComponent(enemyGraphics);
-				enemyCollision = new RigidCollision(newEnemy);
-				enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 2);
-				enemyControl = new HomingControl(enemyGraphics, enemyMovement);
-			} else if(prob == 1){
-				enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base, false); 
-				enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-				enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(2, 100, 10, false, 1), 10, 100, 10);
-				newEnemy.addComponent(enemyGraphics);
-				enemyCollision = new RigidCollision(newEnemy);
-				enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 7);
-				enemyControl = new HomingControl(enemyGraphics, enemyMovement);
-			} else {
-				enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base, false); 
-				enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-				enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(5, 100, 10, false, 1), 10, 100, 10);
-				newEnemy.addComponent(enemyGraphics);
-				enemyCollision = new RigidCollision(newEnemy);
-				enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);
-				enemyControl = new HomingControl(enemyGraphics, enemyMovement);
-			}			
-			
-			newEnemy.addComponent(enemySpawn);
-			newEnemy.addComponent(enemyAttack);
-			newEnemy.addComponent(enemyCollision);
-			newEnemy.addComponent(enemyControl);
-			newEnemy.addComponent(enemyMovement);
-			
-			entities.add(newEnemy);
-			counter = 0;
-		}
-
+		spawner.update();
+		
 		Iterator<Entity> charIter = entities.iterator();
 		while(charIter.hasNext()){
 			Entity c = charIter.next();
