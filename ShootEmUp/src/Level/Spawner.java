@@ -3,11 +3,15 @@ package Level;
 import java.util.Random;
 
 import Components.ComponentType;
+import Components.Attack.MageAttack;
 import Components.Attack.MeleeAttack;
 import Components.Collision.RigidCollision;
 import Components.Control.HomingControl;
+import Components.Control.PlayerControl;
 import Components.Graphical.AnimatedGraphics;
 import Components.Graphical.BaseGraphics;
+import Components.Graphical.PlayerGraphics;
+import Components.Inventory.PlayerInventory;
 import Components.Movement.BaseMovement;
 import Components.Movement.BasicMovement;
 import Components.Movement.FlyingMovement;
@@ -36,6 +40,25 @@ public class Spawner {
 	
 	public Spawner(){
 		rand = new Random();
+	}
+	
+	public Entity createPlayer(){
+		Entity player = new Entity();
+		PlayerGraphics g = new PlayerGraphics(player, Art.player, Art.base);
+		PointSpawn s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
+		PlayerInventory i = new PlayerInventory(0, 1, 3);
+		MageAttack a = new MageAttack(s, i, new Weapon(5, 100, 10, false, 1), 18, 100, 18, 18, 50, 18);
+		player.addComponent(g);
+		RigidCollision c = new RigidCollision(player);
+		player.addComponent(c);
+		BasicMovement m = new BasicMovement(player,c, g, 5);
+		player.addComponent(s);
+		player.addComponent(a);
+		player.addComponent(m);
+		player.addComponent(new PlayerControl(player, g, a, m));
+		player.addComponent(i);
+		
+		return player;
 	}
 	
 	public void update(){
