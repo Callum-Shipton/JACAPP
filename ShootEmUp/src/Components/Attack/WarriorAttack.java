@@ -6,9 +6,9 @@ import Components.Spawn.BaseSpawn;
 import Object.Entity;
 import Object.Weapon;
 
-public class MageAttack extends PlayerAttack implements AttackComponent {
+public class WarriorAttack extends PlayerAttack implements AttackComponent {
 
-	public MageAttack(BaseSpawn BS, PlayerInventory PI, Weapon weapon, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana){
+	public WarriorAttack(BaseSpawn BS, PlayerInventory PI, Weapon weapon, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana){
 		this.BS = BS;
 		this.PI = PI;
 		this.weapon = weapon;
@@ -62,7 +62,7 @@ public class MageAttack extends PlayerAttack implements AttackComponent {
 		}
 		manaRegen--;
 	}
-	
+
 	@Override
 	public void receive(Message m, Entity e) {
 		// TODO Auto-generated method stub

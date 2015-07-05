@@ -8,6 +8,7 @@ import Components.Graphical.BaseGraphics;
 import Components.Movement.FlyingMovement;
 import Components.Spawn.PointSpawn;
 import Display.Art;
+import Display.Image;
 import Main.ShootEmUp;
 import Math.Vector2;
 
@@ -19,13 +20,15 @@ public class Weapon{
 	private int manaCost;
 	private int team;
 	private int fireRate;
+	private Image image;
 
-	public Weapon(int damage, int range, int fireRate, boolean melee, int manaCost) {
+	public Weapon(int damage, int range, int fireRate, boolean melee, int manaCost, Image image) {
 		this.damage = damage;
 		this.range = range;
 		this.setFireRate(fireRate);
 		this.melee = melee;
 		this.manaCost = manaCost;
+		this.image = image;
 	}
 	
 	public void attack(Entity e, int direction) {
@@ -34,7 +37,7 @@ public class Weapon{
 		float posY = BG.getY();
 		//create particle
 		Entity particle = new Entity();
-		AnimatedGraphics g = new AnimatedGraphics(Art.fireMagic, Art.base, false);
+		AnimatedGraphics g = new AnimatedGraphics(image, Art.base, false);
 		g.setDirection(direction);
 		particle.addComponent(g);
 		switch(direction){

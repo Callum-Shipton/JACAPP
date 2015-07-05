@@ -36,15 +36,13 @@ public class LevelSelectMenu extends GuiMenu {
     	if(level1.hasClicked()){
     		ShootEmUp.currentLevel = new Level(Art.level1);
     		ShootEmUp.currentLevel.init();
-    		ShootEmUp.paused = false;
-    		ShootEmUp.clearMenus();
+    		addMenu(new CharacterSelectMenu(Art.mainMenuScreen));
     		level1.postAction();
     	}
     	if(level2.hasClicked()){
     		ShootEmUp.currentLevel = new Level(Art.level2);
     		ShootEmUp.currentLevel.init();
-    		ShootEmUp.paused = false;
-    		ShootEmUp.clearMenus();
+    		addMenu(new CharacterSelectMenu(Art.mainMenuScreen));
     		level2.postAction();
     	}
     	if(back.hasClicked()){

@@ -35,6 +35,10 @@ public class Art {
 	public static Image level1Button;
 	public static Image level2Button;
 	
+	public static Image warriorButton;
+	public static Image archerButton;
+	public static Image mageButton;
+	
 	public static Image invButton;
 	public static Image skillButton;
 	public static Image magicButton;
@@ -59,6 +63,8 @@ public class Art {
 	public static Image earthMagic;
 	public static Image fireMagic;
 	public static Image iceMagic;
+	
+	public static Image arrow;
 	
 	//Armour maps
 	public static Image shoes;
@@ -99,8 +105,6 @@ public class Art {
 	public static IRenderer irFore;
 
 	private void initShaders() {
-		
-		
 		
 		// Load the vertex shader
 		int vsId = loadShader("/shaders/VertexShader.glsl",
@@ -220,6 +224,10 @@ public class Art {
 		level1Button = new Image("/Buttons/level1Button.png",1,2);
 		level2Button = new Image("/Buttons/level2Button.png",1,2);
 		
+		warriorButton = new Image("/Buttons/warriorButton.png",1,2);
+		archerButton = new Image("/Buttons/archerButton.png",1,2);
+		mageButton = new Image("/Buttons/mageButton.png",1,2);
+		
 		invButton = new Image("/Buttons/invButton.png",1,2);
 		skillButton = new Image("/Buttons/skillButton.png",1,2);
 		magicButton = new Image("/Buttons/magicButton.png",1,2);
@@ -244,6 +252,7 @@ public class Art {
 		earthMagic = new Image("/Magic/EarthMagic.png",1,8);
 		fireMagic = new Image("/Magic/FireMagic.png",1,8);
 		iceMagic = new Image("/Magic/IceMagic.png",1,8);
+		arrow = new Image("/Magic/Arrow.png",1,8);
 		
 		//Load Armour maps
 		shoes = new Image("/Armour/Shoes.png",8,1);

@@ -4,7 +4,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import Components.ComponentType;
 import Components.Attack.BaseAttack;
-import Components.Attack.MageAttack;
+import Components.Attack.PlayerAttack;
 import Components.Inventory.PlayerInventory;
 import Display.Art;
 import Display.DPDTRenderer;
@@ -62,8 +62,8 @@ public class Hud extends GuiComponent{
 	public void update() {
 		int maxHealth = ((BaseAttack)player.getComponent(ComponentType.ATTACK)).getMaxHealth();
 		int health = ((BaseAttack)player.getComponent(ComponentType.ATTACK)).getHealth();
-		int maxMana = ((MageAttack)player.getComponent(ComponentType.ATTACK)).getMaxMana();
-		int mana = ((MageAttack)player.getComponent(ComponentType.ATTACK)).getMana();
+		int maxMana = ((PlayerAttack)player.getComponent(ComponentType.ATTACK)).getMaxMana();
+		int mana = ((PlayerAttack)player.getComponent(ComponentType.ATTACK)).getMana();
 		int expBound = ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getExpBound();
 		int exp = ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getExp();
 		

@@ -37,7 +37,10 @@ public class Level {
 	
 	public void init(){
 		map.setTiles();
-		player = spawner.createPlayer();
+	}
+	
+	public void createPlayer(int type){
+		player = spawner.createPlayer(type);
 		entities.add(player);
 		hud = new Hud(player);
 	}
