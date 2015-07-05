@@ -170,7 +170,6 @@ public class BasicMovement extends BaseMovement{
 
 	@Override
 	public void update(Entity e) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(e.toString() + " : " + BG.getX() + ", " +BG.getY());
 	}
 }

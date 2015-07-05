@@ -33,7 +33,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		this.health = health;
 	}
 	
-	public void damage(int damage) {
+	public void damage(int damage, Entity e) {
 		this.health -= damage;
 	}
 	

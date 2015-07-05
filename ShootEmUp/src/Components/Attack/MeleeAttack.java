@@ -56,6 +56,15 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 		}
 		healthRegen--;
 	}
+	
+	@Override
+	public void damage(int damage, Entity e) {
+		this.health -= damage;
+		if(health <= 0) {
+			drop(e);
+			e.send(Message.ENTITY_DIED);
+		}
+	}
 
 	@Override
 	public void receive(Message m, Entity e) {

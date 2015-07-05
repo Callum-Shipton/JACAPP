@@ -10,6 +10,7 @@ public class Entity{
 	
 	private HashMap<ComponentType,Component> components;
 
+	private boolean destroy;
 	// Constructors
 
 	public Entity() {
@@ -18,15 +19,12 @@ public class Entity{
 
 	public void update() {
 		for(Component component : components.values()){
-			component.update(this);
+			if(!destroy)component.update(this);
 		}
 	}
 	
 	public void destroy(){
-		for(Component component : components.values()){
-			component.destroy(this);
-			components.remove(component);
-		}
+		destroy = true;
 	}
 
 	//add components

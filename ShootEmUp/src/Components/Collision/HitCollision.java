@@ -28,7 +28,7 @@ public class HitCollision extends BaseCollision{
 			BaseAttack hitAttack = (BaseAttack) hit.getComponent(ComponentType.ATTACK);
 			
 			if(hitAttack != null){
-				hitAttack.damage(weapon.getDamage()); //needs updating to take weapon damage
+				hitAttack.damage(weapon.getDamage(), hit); //needs updating to take weapon damage
 			}
 		}
 		/*
