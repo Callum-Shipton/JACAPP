@@ -19,6 +19,9 @@ public class PickupCollision extends BaseCollision {
 		if(hit.getComponent(ComponentType.CONTROL) instanceof PlayerControl){
 		ShootEmUp.currentLevel.eMap.removeEntity(gridPos, e);
 		ShootEmUp.currentLevel.oldEntities.add(e);
+		e.destroy();
+		System.out.println("Name: " + e.toString());
+		System.out.println("HC: " + e.hashCode());
 		}
 	}
 

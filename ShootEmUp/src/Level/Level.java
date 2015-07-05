@@ -6,7 +6,6 @@ import java.util.Iterator;
 import Components.ComponentType;
 import Components.Collision.BaseCollision;
 import Components.Graphical.BaseGraphics;
-
 import Display.Art;
 import GUI.Hud;
 import Main.ShootEmUp;
@@ -51,21 +50,27 @@ public class Level {
 			Entity c = charIter.next();
 			c.update();
 		}
+
+		Iterator<Entity> newEntitiesIter = newEntities.iterator();
+		while(newEntitiesIter.hasNext()){
+			Entity n = newEntitiesIter.next();
+			boolean res = entities.add(n);
+			if(res){
+				System.out.println("New entity not added. Name: " + n.toString() + ", HC: " + n.hashCode());
+			}
+		}
+		newEntities.clear();
 		
 		Iterator<Entity> oldEntitiesIter = oldEntities.iterator();
 		while(oldEntitiesIter.hasNext()){
 			Entity n = oldEntitiesIter.next();
 			ShootEmUp.currentLevel.eMap.removeEntity(((BaseCollision)n.getComponent(ComponentType.COLLISION)).getGridPos(), n);
-			entities.remove(n);
+			boolean res = entities.remove(n);
+			if(!res){
+			System.out.println("Old entity not removed. Name: " + n.toString() + ", HC: " + n.hashCode());
+			}
 		}
 		oldEntities.clear();
-		
-		Iterator<Entity> newEntitiesIter = newEntities.iterator();
-		while(newEntitiesIter.hasNext()){
-			Entity n = newEntitiesIter.next();
-			entities.add(n);
-		}
-		newEntities.clear();
 		hud.update();
 	}
 
