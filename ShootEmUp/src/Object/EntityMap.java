@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import Components.ComponentType;
+import Components.Collision.RigidCollision;
 import Components.Graphical.BaseGraphics;
 import Math.Vector2;
 
@@ -29,6 +30,16 @@ public class EntityMap {
 		return result;
 	}
 	
+	public HashSet<Entity> getRigidEntites(HashSet<Vector2> gridPos){
+		HashSet<Entity> result = new HashSet<Entity>();
+		for(Vector2 gridPosi : gridPos){
+			for(Entity e : map.get((int)gridPosi.x()).get((int)gridPosi.y())){
+				if(e.getComponent(ComponentType.COLLISION) instanceof RigidCollision)result.add(e);
+			}
+		}
+		return result;
+	}
+	
 	public HashSet<Vector2> getGridPos(Entity e){
 		HashSet<Vector2> gridPos = new HashSet<Vector2>();
 		BaseGraphics BG = (BaseGraphics) e.getComponent(ComponentType.GRAPHICS);
@@ -46,6 +57,7 @@ public class EntityMap {
 			ents.add(e);
 		}
 	}
+	
 	public void removeEntity(HashSet<Vector2> gridPos, Entity e){
 		for(Vector2 gridPosi : gridPos) {
 			((map.get((int)gridPosi.x())).get((int)gridPosi.y())).remove(e);
