@@ -14,7 +14,7 @@ import Components.Attack.MageAttack;
 import Components.Attack.MeleeAttack;
 import Components.Collision.RigidCollision;
 import Components.Collision.BaseCollision;
-import Components.Control.AIControl;
+import Components.Control.HomingControl;
 import Components.Control.PlayerControl;
 import Components.Graphical.AnimatedGraphics;
 import Components.Graphical.BaseGraphics;
@@ -266,7 +266,7 @@ public class Level {
 			AnimatedGraphics enemyGraphics;
 			PointSpawn enemySpawn;
 			MeleeAttack enemyAttack;
-			AIControl enemyControl;
+			HomingControl enemyControl;
 			RigidCollision enemyCollision;
 			BaseMovement enemyMovement;
 			
@@ -278,7 +278,7 @@ public class Level {
 				newEnemy.addComponent(enemyGraphics);
 				enemyCollision = new RigidCollision(newEnemy);
 				enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 2);
-				enemyControl = new AIControl(enemyGraphics, enemyMovement);
+				enemyControl = new HomingControl(enemyGraphics, enemyMovement);
 			} else if(prob == 1){
 				enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base, false); 
 				enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
@@ -286,7 +286,7 @@ public class Level {
 				newEnemy.addComponent(enemyGraphics);
 				enemyCollision = new RigidCollision(newEnemy);
 				enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 7);
-				enemyControl = new AIControl(enemyGraphics, enemyMovement);
+				enemyControl = new HomingControl(enemyGraphics, enemyMovement);
 			} else {
 				enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base, false); 
 				enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
@@ -294,7 +294,7 @@ public class Level {
 				newEnemy.addComponent(enemyGraphics);
 				enemyCollision = new RigidCollision(newEnemy);
 				enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);
-				enemyControl = new AIControl(enemyGraphics, enemyMovement);
+				enemyControl = new HomingControl(enemyGraphics, enemyMovement);
 			}			
 			
 			newEnemy.addComponent(enemySpawn);

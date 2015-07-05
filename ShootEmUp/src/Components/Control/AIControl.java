@@ -23,7 +23,6 @@ import Object.Weapon;
 public class AIControl extends BaseControl{
 	
 	private AnimatedGraphics AG;
-	private BaseMovement BM;
 	
 	private int counter = 0;
 	private Entity target;
@@ -85,7 +84,6 @@ public class AIControl extends BaseControl{
 			counter = 0;
 		}
 	}
-	
 	/*
 	public Vector2 ai(){
 		PriorityQueue<Entity> open = new PriorityQueue<Entity>(); //queue for tiles to be looked at
@@ -181,8 +179,8 @@ public class AIControl extends BaseControl{
 		System.out.println("cannot find player");
 		return null;
 	}
-	*/
 	
+	*/
 	@Override
 	public void receive(Message m, Entity e) {
 		
