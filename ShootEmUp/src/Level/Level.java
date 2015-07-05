@@ -42,8 +42,6 @@ public class Level {
 		entities.add(player);
 		hud = new Hud(player);
 	}
-
-	
 	
 	public void update() {
 		spawner.update();
