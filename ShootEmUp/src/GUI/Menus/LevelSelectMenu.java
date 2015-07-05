@@ -49,30 +49,34 @@ public class LevelSelectMenu extends GuiMenu {
     		popMenu();
         	back.postAction();
     	}
-    	//KEYBOARD SELECTION
     	
-    	/*
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
-        	popMenu();
+    		ShootEmUp.currentLevel = new Level(Art.level1);
+    		ShootEmUp.currentLevel.init();
+    		ShootEmUp.paused = false;
+    		ShootEmUp.clearMenus();
         	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
-    	}
-    	else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
-    		glfwSetWindowShouldClose(ShootEmUp.d.getWindow(), GL_TRUE);
+    	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
+    		ShootEmUp.currentLevel = new Level(Art.level2);
+    		ShootEmUp.currentLevel.init();
+    		ShootEmUp.paused = false;
+    		ShootEmUp.clearMenus();
+    	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
+    		popMenu();
     	}
     	
         else if (Keyboard.getKey(GLFW.GLFW_KEY_DOWN) == 1) {
             selectedItem++;
-            if (selectedItem > 1) {
+            if (selectedItem > 3) {
                 selectedItem = 0;
             }
         }
         else if (Keyboard.getKey(GLFW.GLFW_KEY_UP) == 1) {
             selectedItem--;
             if (selectedItem < 0) {
-                selectedItem = 1;
+                selectedItem = 3;
             }
         }
-        */
     }
 
     public void addMenu(GuiMenu menu) {

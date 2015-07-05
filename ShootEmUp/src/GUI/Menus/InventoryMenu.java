@@ -1,19 +1,12 @@
 package GUI.Menus;
 
-import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
-import static org.lwjgl.opengl.GL11.GL_TRUE;
-
-import org.lwjgl.glfw.GLFW;
-
 import Display.Art;
 import Display.Image;
 import GUI.Button;
-import Input.Keyboard;
 import Main.ShootEmUp;
 
 public class InventoryMenu extends GuiMenu {
 	
-	static int selectedItem = 0;
 	public static boolean saved;
 	private Button back;
 	private Button exit;
@@ -24,7 +17,6 @@ public class InventoryMenu extends GuiMenu {
 
     public InventoryMenu(Image menuImage) {
         super(menuImage);
-        selectedItem = 0;
         back = addButton(new Button(Art.backButton, 30, 30, 128,24));
         exit = addButton(new Button(Art.exitButton, 30, 64, 128,24));
         magicButton = addButton(new Button(Art.magicButton, 922, 102, 101, 102));
@@ -67,27 +59,6 @@ public class InventoryMenu extends GuiMenu {
     		addMenu(new MainMenu(Art.mainMenuScreen));
         	back.postAction();
     	}
-    	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
-        	popMenu();
-        	ShootEmUp.paused = false;
-        	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
-    	}
-    	else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
-    		glfwSetWindowShouldClose(ShootEmUp.d.getWindow(), GL_TRUE);
-    	}
-    	
-        else if (Keyboard.getKey(GLFW.GLFW_KEY_DOWN) == 1) {
-            selectedItem++;
-            if (selectedItem > 1) {
-                selectedItem = 0;
-            }
-        }
-        else if (Keyboard.getKey(GLFW.GLFW_KEY_UP) == 1) {
-            selectedItem--;
-            if (selectedItem < 0) {
-                selectedItem = 1;
-            }
-        }
     }
 
     public void addMenu(GuiMenu menu) {

@@ -1,8 +1,11 @@
 package GUI.Menus;
 
+import org.lwjgl.glfw.GLFW;
+
 import Display.Art;
 import Display.Image;
 import GUI.Button;
+import Input.Keyboard;
 import Main.ShootEmUp;
 
 public class OptionsMenu extends GuiMenu{
@@ -30,17 +33,12 @@ public class OptionsMenu extends GuiMenu{
     		popMenu();
         	back.postAction();
     	}
-    	//KEYBOARD SELECTION
-    	
-    	/*
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
         	popMenu();
         	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	}
-    	else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
-    		glfwSetWindowShouldClose(ShootEmUp.d.getWindow(), GL_TRUE);
-    	}
     	
+    	/*
         else if (Keyboard.getKey(GLFW.GLFW_KEY_DOWN) == 1) {
             selectedItem++;
             if (selectedItem > 1) {

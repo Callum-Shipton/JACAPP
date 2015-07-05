@@ -57,21 +57,26 @@ public class MainMenu extends GuiMenu {
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
     		addMenu(new LevelSelectMenu(Art.mainMenuScreen));
         	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
-    	}
-    	else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
+    	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
+    		addMenu(new LoadMenu(Art.mainMenuScreen));
+    		Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
+    	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 2){
+    		addMenu(new OptionsMenu(Art.mainMenuScreen));
+    		Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
+    	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 3){
     		glfwSetWindowShouldClose(ShootEmUp.d.getWindow(), GL_TRUE);
     	}
     	
         else if (Keyboard.getKey(GLFW.GLFW_KEY_DOWN) == 1) {
             selectedItem++;
-            if (selectedItem > 1) {
+            if (selectedItem > 3) {
                 selectedItem = 0;
             }
         }
         else if (Keyboard.getKey(GLFW.GLFW_KEY_UP) == 1) {
             selectedItem--;
             if (selectedItem < 0) {
-                selectedItem = 1;
+                selectedItem = 3;
             }
         }
     }
