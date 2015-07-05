@@ -1,5 +1,6 @@
 package Main;
 
+
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
@@ -14,6 +15,7 @@ import GUI.Menus.GuiMenu;
 import GUI.Menus.MainMenu;
 import GUI.Menus.InventoryMenu;
 import Input.Keyboard;
+import Level.Level;
 
 public class ShootEmUp {
 

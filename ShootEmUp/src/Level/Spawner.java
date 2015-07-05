@@ -1,4 +1,4 @@
-package Main;
+package Level;
 
 import java.util.Random;
 
@@ -13,6 +13,7 @@ import Components.Movement.BasicMovement;
 import Components.Movement.FlyingMovement;
 import Components.Spawn.PointSpawn;
 import Display.Art;
+import Main.ShootEmUp;
 import Math.Vector2;
 import Object.Entity;
 import Object.Weapon;

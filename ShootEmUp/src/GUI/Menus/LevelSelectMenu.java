@@ -6,7 +6,7 @@ import Display.Art;
 import Display.Image;
 import GUI.Button;
 import Input.Keyboard;
-import Main.Level;
+import Level.Level;
 import Main.ShootEmUp;
 
 public class LevelSelectMenu extends GuiMenu {

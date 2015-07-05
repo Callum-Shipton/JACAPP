@@ -1,4 +1,4 @@
-package Main;
+package Level;
 
 import java.awt.image.*;
 import java.io.IOException;
@@ -22,6 +22,7 @@ import Components.Spawn.PointSpawn;
 import Display.Art;
 import Display.IRenderer;
 import GUI.Hud;
+import Main.ShootEmUp;
 import Math.Vector2;
 import Object.Entity;
 import Object.EntityMap;
