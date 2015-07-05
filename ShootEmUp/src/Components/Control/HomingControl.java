@@ -10,7 +10,9 @@ import Math.Vector2;
 import Object.Entity;
 
 public class HomingControl extends BaseControl{
-private AnimatedGraphics AG;
+	
+	private BaseMovement BM;
+	private AnimatedGraphics AG;
 	
 	private int counter = 0;
 	private Entity target;

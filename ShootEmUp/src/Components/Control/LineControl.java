@@ -8,6 +8,7 @@ import Object.Entity;
 
 public class LineControl extends BaseControl{
 	
+	private BaseMovement BM;
 	private AnimatedGraphics AG;
 	
 	public LineControl(AnimatedGraphics AG, BaseMovement BM){

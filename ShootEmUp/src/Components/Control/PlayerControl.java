@@ -19,6 +19,7 @@ import Object.Entity;
 
 public class PlayerControl extends BaseControl{
 	
+	BaseMovement BM;
 	PlayerGraphics PG;
 	BaseAttack BA;
 	
@@ -85,7 +86,6 @@ public class PlayerControl extends BaseControl{
 				|| Keyboard.getKey(GLFW_KEY_SPACE) == 2) {
 			BA.attack(e, PG.getDirection());
 		}
-
 	}
 
 	@Override

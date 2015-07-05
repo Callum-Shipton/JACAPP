@@ -22,6 +22,7 @@ import Object.Weapon;
 
 public class AIControl extends BaseControl{
 	
+	private BaseMovement BM;
 	private AnimatedGraphics AG;
 	
 	private int counter = 0;

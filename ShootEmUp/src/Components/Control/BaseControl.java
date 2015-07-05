@@ -8,7 +8,6 @@ import Object.Entity;
 public abstract class BaseControl extends Component implements ControlComponent {
 	
 	protected ComponentType type = ComponentType.CONTROL;
-	protected BaseMovement BM;
 	
 	@Override
 	public abstract void update(Entity e);
