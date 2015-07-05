@@ -51,8 +51,7 @@ public class BasicMovement extends BaseMovement {
 					if ((e.getComponent(ComponentType.COLLISION) != null)) {
 						BC.collision(e, hit);
 					}
-					BaseCollision EC = (BaseCollision) hit
-							.getComponent(ComponentType.COLLISION);
+					BaseCollision EC = (BaseCollision) hit.getComponent(ComponentType.COLLISION);
 					if (EC != null) {
 						EC.collision(hit, e);
 					}

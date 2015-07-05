@@ -45,6 +45,11 @@ public class Art {
 	public static Image mapButton;
 	public static Image saveButton;
 	
+	public static Image healthButton;
+	public static Image healthRegenButton;
+	public static Image manaButton;
+	public static Image manaRegenButton;
+	
 	//Tile maps
 	public static Image background;
 	public static Image wall;
@@ -233,7 +238,12 @@ public class Art {
 		magicButton = new Image("/Buttons/magicButton.png",1,2);
 		mapButton = new Image("/Buttons/mapButton.png",1,2);
 		saveButton = new Image("/Buttons/saveButton.png",1,2);
-				
+		
+		healthButton = new Image("/Buttons/healthButton.png",1,2);
+		healthRegenButton = new Image("/Buttons/healthRegenButton.png",1,2);
+		manaButton = new Image("/Buttons/manaButton.png",1,2);
+		manaRegenButton = new Image("/Buttons/manaRegenButton.png",1,2);
+		
 		//Load tile maps
 		background = new Image("/Tiles/background.png",4,4);
 		wall = new Image("/Tiles/wall.png",8,8);
