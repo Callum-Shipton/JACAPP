@@ -42,14 +42,12 @@ public class BasicMovement extends BaseMovement{
 			if(character != e){
 				collVec = doesCollide(e, character);
 				if (collVec != null) {
-				collision = true;
-				hit = character;
-				break;
+					collision = true;
+					hit = character;
+					break;
 				}
 			}
 		}
-		
-
 		
 		if (collision == true) {
 			if(((BaseCollision)hit.getComponent(ComponentType.COLLISION)).getMoveBack() == true){

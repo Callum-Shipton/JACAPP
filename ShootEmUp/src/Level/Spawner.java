@@ -74,8 +74,8 @@ public class Spawner {
 		test.addComponent(new BasicMovement(test, RC, AG, 5));
 		do {
 			collide = false;
-			((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).setX((float)rand.nextInt((ShootEmUp.currentLevel.backgroundTiles.length - 1) * 32));
-			((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).setY(rand.nextInt((ShootEmUp.currentLevel.backgroundTiles[0].length - 1) * 32));
+			((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).setX((float)rand.nextInt((ShootEmUp.currentLevel.map.getBackgroundTiles().length - 1) * 32));
+			((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).setY(rand.nextInt((ShootEmUp.currentLevel.map.getBackgroundTiles()[0].length - 1) * 32));
 
 			for (Entity character : ShootEmUp.currentLevel.entities) {
 				if ((((BaseMovement) test.getComponent(ComponentType.MOVEMENT)).doesCollide(test, character) != null)) {

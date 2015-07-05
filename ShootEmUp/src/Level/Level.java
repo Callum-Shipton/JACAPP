@@ -1,12 +1,7 @@
 package Level;
 
-import java.awt.image.*;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-
-import javax.imageio.*;
 
 import Components.ComponentType;
 import Components.Attack.MageAttack;
@@ -14,13 +9,12 @@ import Components.Collision.RigidCollision;
 import Components.Collision.BaseCollision;
 import Components.Control.PlayerControl;
 import Components.Graphical.BaseGraphics;
-import Components.Graphical.MapGraphics;
 import Components.Graphical.PlayerGraphics;
 import Components.Inventory.PlayerInventory;
 import Components.Movement.BasicMovement;
 import Components.Spawn.PointSpawn;
+
 import Display.Art;
-import Display.IRenderer;
 import GUI.Hud;
 import Main.ShootEmUp;
 import Math.Vector2;
@@ -29,179 +23,33 @@ import Object.EntityMap;
 import Object.Weapon;
 
 public class Level {
-
-	private int width;
-	private int height;
-	private BufferedImage map = null;
-	private String file;
-	public Vector2[][] backgroundTiles; //Replace with Irenderer changes
-	public Vector2[][] wallTiles; // ^^
-	public Vector2[][] foregroundTiles; // ^^
 	
 	private Entity player;
-	
 	private Hud hud;
-	
 	public EntityMap eMap;
 
-	public HashMap<Vector2, Entity> walls;
 	public HashSet<Entity> entities;
 	public HashSet<Entity> oldEntities;
 	public HashSet<Entity> newEntities;
 	
 	public Spawner spawner;
+	public Map map;
 	
 	public Level(String file) {
-		this.file = file;
-		loadLevel();
-		width = (map.getWidth() / 3);
-		height = map.getHeight();
-		backgroundTiles = new Vector2[map.getWidth() / 3][map.getHeight()];
-		wallTiles = new Vector2[map.getWidth() / 3][map.getHeight()];
-		foregroundTiles = new Vector2[map.getWidth() / 3][map.getHeight()];
-		eMap = new EntityMap(width,height);
+		map = new Map(file);
+		eMap = new EntityMap(map.getWidth(), map.getHeight());
 		spawner = new Spawner();
-	}
-
-	private void loadLevel() {
-		try {
-			map = ImageIO.read(getClass().getResource(file));
-		} catch (IOException e) {
-		}
-	}
-	
-	public void init(){
-		addStuff();
-		setTiles();
-	}
-	
-	private void setTiles() {
-
-		boolean noWall;
-		float width = Art.wall.getWidth()/Art.wall.getFWidth();
-		float height = Art.wall.getHeight()/Art.wall.getFHeight();
-		for (int y = 0; y < map.getHeight(); y++) {
-			for (int x = 0; x < map.getWidth() / 3; x++) {
-				switch (map.getRGB(x, y)) {
-				case -1:
-					backgroundTiles[x][y] = new Vector2(0.0f, 0.0f);
-					break;
-				case -16777216:
-					backgroundTiles[x][y] = new Vector2(1.0f, 0.0f);
-					break;
-				default:
-					System.out.println(map.getRGB(x, y));
-				}
-				
-				//creating walls
-				noWall = false;
-				Entity wall = new Entity();
-				MapGraphics wallG = null;
-				switch (map.getRGB(x + (map.getWidth() / 3), y)) {
-				case -1:
-					noWall = true;
-					break;
-				case -3584:
-					wallG = new MapGraphics(Art.wall, new Vector2(5.0f, 0.0f), x * width, y * height);
-					break;
-				case -14066:
-					wallG = new MapGraphics(Art.wall, new Vector2(7.0f, 1.0f), x * width, y * height);
-					break;
-				case -20791:
-					wallG = new MapGraphics(Art.wall, new Vector2(0.0f, 2.0f), x * width, y * height);
-					break;
-				case -32985:
-					wallG = new MapGraphics(Art.wall, new Vector2(4.0f, 0.0f), x * width, y * height);
-					break;
-				case -1055568:
-					wallG = new MapGraphics(Art.wall, new Vector2(6.0f, 1.0f), x * width, y * height);
-					break;
-				case -1237980:
-					wallG = new MapGraphics(Art.wall, new Vector2(3.0f, 0.0f), x * width, y * height);
-					break;
-				case -3620889:
-					wallG = new MapGraphics(Art.wall, new Vector2(2.0f, 1.0f), x * width, y * height);
-					break;
-				case -3947581:
-					wallG = new MapGraphics(Art.wall, new Vector2(2.0f, 2.0f), x * width, y * height);
-					break;
-				case -4621737:
-					wallG = new MapGraphics(Art.wall, new Vector2(1.0f, 2.0f), x * width, y * height);
-					break;
-				case -4856291:
-					wallG = new MapGraphics(Art.wall, new Vector2(5.0f, 1.0f), x * width, y * height);
-					break;
-				case -6075996:
-					wallG = new MapGraphics(Art.wall, new Vector2(1.0f, 1.0f), x * width, y * height);
-					break;
-				case -6694422:
-					wallG = new MapGraphics(Art.wall, new Vector2(4.0f, 1.0f), x * width, y * height);
-					break;
-				case -7864299:
-					wallG = new MapGraphics(Art.wall, new Vector2(2.0f, 0.0f), x * width, y * height);
-					break;
-				case -8355840:
-					wallG = new MapGraphics(Art.wall, new Vector2(3.0f, 2.0f), x * width, y * height);
-					break;
-				case -8421505:
-					wallG = new MapGraphics(Art.wall, new Vector2(1.0f, 0.0f), x * width, y * height);
-					break;
-				case -9399618:
-					wallG = new MapGraphics(Art.wall, new Vector2(3.0f, 1.0f), x * width, y * height);
-					break;
-				case -14503604:
-					wallG = new MapGraphics(Art.wall, new Vector2(6.0f, 0.0f), x * width, y * height);
-					break;
-				case -12629812:
-					wallG = new MapGraphics(Art.wall, new Vector2(0.0f, 1.0f), x * width, y * height);
-					break;
-				case -16735512:
-					wallG = new MapGraphics(Art.wall, new Vector2(7.0f, 0.0f), x * width, y * height);
-					break;
-				case -16777216:
-					wallG = new MapGraphics(Art.wall, new Vector2(0.0f, 0.0f), x * width, y * height);
-					break;
-				default:
-					System.out.println(map.getRGB(x + (map.getWidth() / 3), y));
-				}
-				
-				if(!noWall){
-					wall.addComponent(wallG);
-					RigidCollision MC = new RigidCollision(wall);
-					wall.addComponent(MC);
-					entities.add(wall);
-					walls.put(new Vector2(x,y), wall);
-				}
-				
-				switch (map.getRGB(x + ((map.getWidth() / 3) * 2), y)) {
-				case -1:
-					break;
-				case -7864299:
-					foregroundTiles[x][y] = new Vector2(2.0f, 0.0f);
-					break;
-				case -8421505:
-					foregroundTiles[x][y] = new Vector2(1.0f, 0.0f);
-					break;
-				case -16777216:
-					foregroundTiles[x][y] = new Vector2(0.0f, 0.0f);
-					break;
-				default:
-					System.out.println(map.getRGB(x + ((map.getWidth() / 3) * 2), y));
-				}
-			}
-		}
-		Art.irBack = new IRenderer(backgroundTiles, new Vector2(4.0f, 4.0f), 32.0f, 32.0f);
-		Art.irWall = new IRenderer(walls, new Vector2(8.0f, 8.0f), 32.0f, 32.0f);
-		Art.irFore = new IRenderer(foregroundTiles, new Vector2(4.0f, 4.0f), 32.0f, 32.0f);
-	}
-
-	private void addStuff() {
-		walls = new HashMap<Vector2,Entity>();
 		entities = new HashSet<Entity>();
 		oldEntities = new HashSet<Entity>();
 		newEntities = new HashSet<Entity>();
-		
-		//create player
+	}
+	
+	public void init(){
+		map.setTiles();
+		createPlayer();
+	}
+
+	public void createPlayer(){
 		player = new Entity();
 		PlayerGraphics g = new PlayerGraphics(player, Art.player, Art.base);
 		PointSpawn s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
@@ -222,16 +70,7 @@ public class Level {
 		
 		entities.add(player);
 	}
-
-	private void renderLowTiles() {
-		Art.irBack.draw(Art.background.getID());
-		Art.irWall.draw(Art.wall.getID());
-	}
-
-	private void renderHighTiles() {
-		Art.irFore.draw(Art.foreground.getID());
-	}
-
+	
 	public void update() {
 		spawner.update();
 		
@@ -259,14 +98,13 @@ public class Level {
 	}
 
 	public void render() {
-		renderLowTiles();
-		renderHighTiles();
+		map.renderLowTiles();
 
 		for (Entity character : entities) {
 			((BaseGraphics)character.getComponent(ComponentType.GRAPHICS)).render(character);
 		}
 
-		renderHighTiles();
+		map.renderHighTiles();
 
 		hud.render(Art.stat);
 
@@ -274,14 +112,6 @@ public class Level {
 
 	public Entity getPlayer() {
 		return player;
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public int getHeight() {
-		return height;
 	}
 	
 	/*

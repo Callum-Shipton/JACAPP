@@ -327,9 +327,9 @@ public class Art {
 		base.initRenderData();
 		stat.initRenderData();
 		if(ShootEmUp.currentLevel != null){
-		irWall.initRenderData(ShootEmUp.currentLevel.walls, new Vector2(wall.getFWidth(), wall.getFHeight()));
-		irBack.initRenderData(ShootEmUp.currentLevel.backgroundTiles, new Vector2(background.getFWidth(),background.getFHeight()));
-		irFore.initRenderData(ShootEmUp.currentLevel.foregroundTiles, new Vector2(foreground.getFWidth(), foreground.getFHeight()));
+		irWall.initRenderData(ShootEmUp.currentLevel.map.getWalls(), new Vector2(wall.getFWidth(), wall.getFHeight()));
+		irBack.initRenderData(ShootEmUp.currentLevel.map.getBackgroundTiles(), new Vector2(background.getFWidth(),background.getFHeight()));
+		irFore.initRenderData(ShootEmUp.currentLevel.map.getForegroundTiles(), new Vector2(foreground.getFWidth(), foreground.getFHeight()));
 		}
 	}
 	
