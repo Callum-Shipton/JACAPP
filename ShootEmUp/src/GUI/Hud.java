@@ -28,7 +28,7 @@ public class Hud extends GuiComponent{
 	public Hud(Entity player){
 		this.player = player;
 		hudElems = new CopyOnWriteArrayList<HudElement>();
-		infoBox = new HudElement(0.0f,0.0f,189.0f,110.0f, Art.infoBox, false);
+		infoBox = new HudElement(0.0f,0.0f,Art.infoBox.getWidth(),Art.infoBox.getHeight(), Art.infoBox, false);
 		hudElems.add(infoBox);
 		healthBar = new HudBar(10.0f, 10.0f, Art.healthBar.getWidth()/Art.healthBar.getFWidth(), Art.healthBar.getHeight()/Art.healthBar.getFHeight(), Art.healthBar);
 		hudElems.add(healthBar);
@@ -90,8 +90,8 @@ public class Hud extends GuiComponent{
 		int exp = ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getExp();
 		
 		if(Math.max(maxHealth, maxMana) > 18.0f) {
-			hudW =  (Math.max(maxHealth, maxMana)-18.0f)*10.0f + 189.0f;
-			infoBox.setSize(hudW, 110.0f);
+			hudW =  (Math.max(maxHealth, maxMana)-18.0f)*10.0f + Art.infoBox.getWidth();
+			infoBox.setSize(hudW, Art.infoBox.getHeight());
 		}
 
 		healthBar.setValue(health);
