@@ -1,6 +1,6 @@
 package Components.Inventory;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 import Components.Attack.PlayerAttack;
 import Components.Movement.BaseMovement;
@@ -15,9 +15,14 @@ public class PlayerInventory extends BasicInventory{
 	private final int MAX_EXP_BOUND = 18;
 	private int expBound;
 	
-	private HashSet<InventoryItem> inventory;
-	private HashSet<PotionType> potions = new HashSet<PotionType>(); 
+	private ArrayList<InventoryItem> inventory;
+	private ArrayList<PotionType> potions; 
 	private int maxPotions = 3;
+	
+	protected Armour boots = null;
+	protected Armour legs = null;
+	protected Armour chest = null;
+	protected Armour helmet = null;
 	
 	private PlayerAttack PA;
 	private BaseMovement BM;
@@ -27,7 +32,30 @@ public class PlayerInventory extends BasicInventory{
 		this.PA = PA;
 		this.BM = BM;
 		this.expBound = expBound;
-		inventory = new HashSet<InventoryItem>();
+		inventory = new ArrayList<InventoryItem>();
+		potions = new ArrayList<PotionType>();
+	}
+	
+	public void equipItem(int itemNo){
+		InventoryItem item = inventory.get(itemNo);
+		inventory.remove(itemNo);
+		if(item instanceof Armour){
+			switch(((Armour) item).getType()){
+			case BOOTS:
+				boots = (Armour)item;
+				break;
+			case LEGS:
+				legs = (Armour)item;
+				break;
+			case CHESTPLATE:
+				chest = (Armour)item;
+				break;
+			case HELMET:
+				helmet = (Armour)item;
+			}
+		} else {
+			PA.setWeapon((Weapon)item);
+		}
 	}
 	
 	public void giveItem(PickupType type, Subtype subtype){
@@ -76,28 +104,28 @@ public class PlayerInventory extends BasicInventory{
 			WeaponType weaponType = (WeaponType) subtype;
 			switch(weaponType){
 			case SWORD:
-				inventory.add(new Weapon(weaponType, 3, 3, 3, true, 1, 0, Art.bow));
+				inventory.add(new Weapon(weaponType, 3, 3, 3, true, 1, 0, Art.swordProjectile, Art.bow));
 				break;
 			case BATTLEAXE:
-				inventory.add(new Weapon(weaponType, 5, 2, 2, true, 2, 0, Art.bow));
+				inventory.add(new Weapon(weaponType, 5, 2, 2, true, 2, 0, Art.swordProjectile, Art.bow));
 				break;
 			case WARHAMMER:
-				inventory.add(new Weapon(weaponType, 10, 2, 1, true, 3, 0, Art.bow));
+				inventory.add(new Weapon(weaponType, 10, 2, 1, true, 3, 0, Art.swordProjectile, Art.bow));
 				break;
 			case CROSSBOW:
-				inventory.add(new Weapon(weaponType, 10, 3, 2, false, 1, 0, Art.bow));
+				inventory.add(new Weapon(weaponType, 10, 3, 2, false, 1, 0, Art.arrow, Art.bow));
 				break;
 			case BOW:
-				inventory.add(new Weapon(weaponType, 5, 2, 3, false, 1, 0, Art.bow));
+				inventory.add(new Weapon(weaponType, 5, 2, 3, false, 1, 0, Art.arrow, Art.bow));
 				break;
 			case FIRE_STAFF:
-				inventory.add(new Weapon(weaponType, 3, 3, 3, false, 1, 0, Art.bow));
+				inventory.add(new Weapon(weaponType, 3, 3, 3, false, 1, 0, Art.fireMagic, Art.bow));
 				break;
 			case ICE_STAFF:
-				inventory.add(new Weapon(weaponType, 3, 3, 3, false, 1, 0, Art.bow));
+				inventory.add(new Weapon(weaponType, 3, 3, 3, false, 1, 0, Art.iceMagic, Art.bow));
 				break;
 			case GROUND_STAFF:
-				inventory.add(new Weapon(weaponType, 5, 3, 2, false, 2, 0, Art.bow));
+				inventory.add(new Weapon(weaponType, 5, 3, 2, false, 2, 0, Art.earthMagic, Art.bow));
 				break;
 			}
 		}
@@ -122,5 +150,25 @@ public class PlayerInventory extends BasicInventory{
 
 	public void setExpBound(int expBound) {
 		this.expBound = expBound;
+	}
+	
+	public ArrayList<InventoryItem> getInventory(){
+		return inventory;
+	}
+	
+	public Armour setBoots(){
+		return boots;
+	}
+	
+	public Armour setLegs(){
+		return legs;
+	}
+	
+	public Armour setChest(){
+		return chest;
+	}
+	
+	public Armour setHelmet(){
+		return helmet;
 	}
 }

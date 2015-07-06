@@ -95,8 +95,8 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 		
 		//create armour, item or weapon
 		Random rand = new Random();
-		int prob = rand.nextInt(100);
-		if(prob <= 25 ) {
+		int prob = rand.nextInt(3);
+		if(prob == 0 ) {
 			int itemProb = rand.nextInt(4);
 			Entity item = new Entity();
 			PickupType T = PickupType.POTION;
@@ -125,7 +125,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 			item.addComponent(s);
 			item.addComponent(c);
 			ShootEmUp.currentLevel.newEntities.add(item);
-		} else if(prob <= 40) {
+		} else if(prob == 1) {
 			int armourProb = rand.nextInt(4);
 			Entity armour = new Entity();
 			PickupType T = PickupType.ARMOUR;
@@ -153,12 +153,50 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 			armour.addComponent(g);
 			armour.addComponent(c);
 			ShootEmUp.currentLevel.newEntities.add(armour);
-		} else if(prob <= 50) {	
+		} else if(prob == 2) {	
+			int weaponProb = rand.nextInt(8);
 			Entity weapon = new Entity();
-			g = new AnimatedGraphics(Art.bow, Art.base, true);
-			s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
-			weapon.addComponent(g);
-			c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.BOW);
+			if(weaponProb == 0){
+				g = new AnimatedGraphics(Art.sword, Art.base, true);
+				s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
+				weapon.addComponent(g);
+				c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.SWORD);
+			} else if(weaponProb == 0){
+				g = new AnimatedGraphics(Art.battleaxe, Art.base, true);
+				s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
+				weapon.addComponent(g);
+				c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.BATTLEAXE);
+			} else if(weaponProb == 0){
+				g = new AnimatedGraphics(Art.mace, Art.base, true);
+				s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
+				weapon.addComponent(g);
+				c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.WARHAMMER);
+			} else if(weaponProb == 0){
+				g = new AnimatedGraphics(Art.bow, Art.base, true);
+				s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
+				weapon.addComponent(g);
+				c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.BOW);
+			} else if(weaponProb == 0){
+				g = new AnimatedGraphics(Art.crossbow, Art.base, true);
+				s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
+				weapon.addComponent(g);
+				c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.CROSSBOW);
+			} else if(weaponProb == 0){
+				g = new AnimatedGraphics(Art.fireStaff, Art.base, true);
+				s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
+				weapon.addComponent(g);
+				c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.FIRE_STAFF);
+			} else if(weaponProb == 0){
+				g = new AnimatedGraphics(Art.iceStaff, Art.base, true);
+				s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
+				weapon.addComponent(g);
+				c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.ICE_STAFF);
+			} else {
+				g = new AnimatedGraphics(Art.earthStaff, Art.base, true);
+				s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
+				weapon.addComponent(g);
+				c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.GROUND_STAFF);
+			}
 			weapon.addComponent(s);
 			weapon.addComponent(c);
 			ShootEmUp.currentLevel.newEntities.add(weapon);

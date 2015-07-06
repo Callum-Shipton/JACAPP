@@ -22,9 +22,9 @@ public class Weapon extends InventoryItem{
 	private boolean melee;
 	private int manaCost;
 	private int team;
-	private Image image;
-
-	public Weapon(WeaponType type, int damage, int range, int fireRate, boolean melee, int manaCost, int team, Image image) {
+    private Image particleImage;	
+	
+	public Weapon(WeaponType type, int damage, int range, int fireRate, boolean melee, int manaCost, int team, Image particleImage, Image inventoryImage) {
 		this.type = type;
 		this.damage = damage;
 		this.range = range;
@@ -32,7 +32,8 @@ public class Weapon extends InventoryItem{
 		this.melee = melee;
 		this.manaCost = manaCost;
 		this.team = team;
-		this.image = image;
+		this.particleImage = particleImage;
+		this.inventoryImage = inventoryImage;
 	}
 	
 	public void attack(Entity e, int direction) {
@@ -41,7 +42,7 @@ public class Weapon extends InventoryItem{
 		float posY = BG.getY();
 		//create particle
 		Entity particle = new Entity();
-		AnimatedGraphics g = new AnimatedGraphics(image, Art.base, false);
+		AnimatedGraphics g = new AnimatedGraphics(particleImage, Art.base, false);
 		g.setDirection(direction);
 		particle.addComponent(g);
 		switch(direction){
@@ -131,5 +132,9 @@ public class Weapon extends InventoryItem{
 	
 	public WeaponType getType(){
 		return type;
+	}
+	
+	public Image getParticleImage(){
+		return particleImage;
 	}
 }

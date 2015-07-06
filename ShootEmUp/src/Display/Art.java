@@ -70,7 +70,7 @@ public class Art {
 	public static Image iceMagic;
 	
 	public static Image arrow;
-	public static Image sword;
+	public static Image swordProjectile;
 	
 	//Armour maps
 	public static Image shoes;
@@ -85,7 +85,14 @@ public class Art {
 	public static Image knockbackPotion;
 	
 	//Weapon maps
+	public static Image sword;
+	public static Image battleaxe;
+	public static Image mace;
 	public static Image bow;
+	public static Image crossbow;
+	public static Image fireStaff;
+	public static Image iceStaff;
+	public static Image earthStaff;
 	
 	//HUD Textures
 	public static Image infoBox;
@@ -267,7 +274,7 @@ public class Art {
 		iceMagic = new Image("/Magic/IceMagic.png",1,8);
 		
 		arrow = new Image("/Magic/Arrow2.png",1,8);
-		sword = new Image("/Magic/Sword.png",1,8);
+		swordProjectile = new Image("/Magic/Sword.png",1,8);
 		
 		//Load Armour maps
 		shoes = new Image("/Armour/Shoes.png",8,1);
@@ -282,7 +289,14 @@ public class Art {
 		knockbackPotion = new Image("/Items/KnockbackPotion.png",3,1);
 		
 		//Load Weapon maps
+		sword = new Image("/Weapons/Bow.png",8,1);
+		battleaxe = new Image("/Weapons/Battleaxe.png",8,1);
+		mace = new Image("/Weapons/Mace.png",8,1);
 		bow = new Image("/Weapons/Bow.png",8,1);
+		crossbow = new Image("/Weapons/Crossbow.png",8,1);
+		fireStaff = new Image("/Weapons/FireStaff.png",8,1);
+		iceStaff = new Image("/Weapons/IceStaff.png",8,1);
+		earthStaff = new Image("/Weapons/EarthStaff.png",8,1);
 		
 		//Load HUD textures 
 		infoBox = new Image("/HUD/BarInfo.png",1,1);
