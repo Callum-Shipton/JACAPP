@@ -9,6 +9,7 @@ import java.util.Stack;
 
 import org.lwjgl.glfw.GLFW;
 
+import Audio.Music.BackgroundMusic;
 import Display.Art;
 import Display.Display;
 import GUI.Menus.GuiMenu;
@@ -25,6 +26,7 @@ public class ShootEmUp {
 
 	// Handle for monitor/window funcs
 	public static Display d;
+	public static BackgroundMusic m;
 	
 	public static boolean paused;
 
@@ -44,6 +46,7 @@ public class ShootEmUp {
 			// the GLFWerrorfun
 			Keyboard.destroy();
 			d.destroyGLFW();
+			m.destoyAL();
 
 		}
 	}
@@ -51,10 +54,12 @@ public class ShootEmUp {
 	private void init() {
 		d = new Display(WIDTH, HEIGHT);
 		d.initGLFW();
+		m = new BackgroundMusic();
+		m.initAL();
 		
 		paused = true;
 		addMenu(new MainMenu(Art.mainMenuScreen));
-
+		m.play(m.MENU);
 	}
 
 	private void loop() {

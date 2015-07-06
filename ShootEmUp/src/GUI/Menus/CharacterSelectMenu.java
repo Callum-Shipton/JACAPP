@@ -38,18 +38,24 @@ public class CharacterSelectMenu extends GuiMenu {
     		ShootEmUp.currentLevel.createPlayer(0);
     		ShootEmUp.paused = false;
     		ShootEmUp.clearMenus();
+    		ShootEmUp.m.stop(ShootEmUp.m.MENU);
+    		ShootEmUp.m.play(ShootEmUp.m.MAIN);
     		warrior.postAction();
     	}
     	if(archer.hasClicked()){
     		ShootEmUp.currentLevel.createPlayer(1);
     		ShootEmUp.paused = false;
     		ShootEmUp.clearMenus();
+    		ShootEmUp.m.stop(ShootEmUp.m.MENU);
+    		ShootEmUp.m.play(ShootEmUp.m.MAIN);
     		archer.postAction();
     	}
     	if(mage.hasClicked()){
     		ShootEmUp.currentLevel.createPlayer(2);
     		ShootEmUp.paused = false;
     		ShootEmUp.clearMenus();
+    		ShootEmUp.m.stop(ShootEmUp.m.MENU);
+    		ShootEmUp.m.play(ShootEmUp.m.MAIN);
     		mage.postAction();
     	}
     	if(back.hasClicked()){
