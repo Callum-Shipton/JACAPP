@@ -62,7 +62,7 @@ public class SkillMenu extends GuiMenu {
     	    saveButton.postAction();
     	}
     	if(back.hasClicked()){
-    		popMenu();
+    		ShootEmUp.menuStack.clear();
         	ShootEmUp.paused = false;
         	back.postAction();
     	}
@@ -71,7 +71,7 @@ public class SkillMenu extends GuiMenu {
     		addMenu(new MainMenu(Art.mainMenuScreen));
         	back.postAction();
     	}
-    	if ((((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).getCoins() <= 0)){
+    	if ((((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).getCoins() > 0)){
 	    	if(healthButton.hasClicked()){
 	    		BaseAttack BA = (BaseAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
 	    		BA.setMaxHealth(BA.getMaxHealth() + 1);

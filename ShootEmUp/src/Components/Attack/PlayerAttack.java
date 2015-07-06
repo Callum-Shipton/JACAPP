@@ -1,4 +1,4 @@
-package Components.Attack;
+  package Components.Attack;
 
 import Display.Art;
 import GUI.Menus.GameOverMenu;
@@ -6,7 +6,7 @@ import Main.ShootEmUp;
 
 public abstract class PlayerAttack extends BaseAttack {
 	
-	private int lives;
+	protected int lives;
 	protected int mana;
 	protected int manaRegen;
 	protected int maxMana;

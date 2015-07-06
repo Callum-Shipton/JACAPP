@@ -7,7 +7,7 @@ import Object.Weapon;
 
 public class MageAttack extends PlayerAttack implements AttackComponent {
 
-	public MageAttack(BaseSpawn BS, Weapon weapon, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana){
+	public MageAttack(BaseSpawn BS, Weapon weapon, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana, int lives){
 		this.BS = BS;
 		this.setWeapon(weapon);
 		this.health = health;
@@ -18,7 +18,7 @@ public class MageAttack extends PlayerAttack implements AttackComponent {
 		this.manaRegen = manaRegen;
 		this.maxMana = maxMana;
 		this.maxManaRegen = manaRegen;
-		
+		this.lives = lives;
 	}
 	
 	@Override
@@ -42,8 +42,8 @@ public class MageAttack extends PlayerAttack implements AttackComponent {
 		if(health <= 0) {
 			health = maxHealth;
 			mana = maxMana;
-			BS.spawn(e);
 			removeLife();
+			BS.spawn(e);
 		}
 		
 		healthRegen();

@@ -50,7 +50,7 @@ public class InventoryMenu extends GuiMenu {
     	    saveButton.postAction();
     	}
     	if(back.hasClicked()){
-    		popMenu();
+    		ShootEmUp.menuStack.clear();
         	ShootEmUp.paused = false;
         	back.postAction();
     	}

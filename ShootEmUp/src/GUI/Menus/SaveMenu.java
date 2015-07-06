@@ -50,7 +50,7 @@ public class SaveMenu extends GuiMenu {
     	    mapButton.postAction();
     	}
     	if(back.hasClicked()){
-    		popMenu();
+    		ShootEmUp.menuStack.clear();
         	ShootEmUp.paused = false;
         	back.postAction();
     	}
