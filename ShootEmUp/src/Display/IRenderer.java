@@ -16,14 +16,14 @@ import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL31.*;
 import static org.lwjgl.opengl.GL33.*;
+import Components.ComponentType;
+import Components.Graphical.MapGraphics;
 import Math.Vector2;
-import Object.Tile;
+import Object.Entity;
 
-public class IRenderer {
+public class IRenderer extends Renderer {
 	
-	private int VAO;
-	private int VBO;
-	private int EBO;
+
 	private float width;
 	private float height;
 	private int amount;
@@ -35,7 +35,7 @@ public class IRenderer {
 		initRenderData(Textures, texMax);
 	}
 	
-	public IRenderer(HashMap<Vector2,Tile> Textures, Vector2 texMax, float width, float height){
+	public IRenderer(HashMap<Vector2, Entity> Textures, Vector2 texMax, float width, float height){
 		this.width = width;
 		this.height = height;
 		initRenderData(Textures, texMax);
@@ -49,7 +49,7 @@ public class IRenderer {
         glBindVertexArray(0);
         glUseProgram(0);
 	}
-	private void initRenderData(Vector2[][] textures, Vector2 texMax){
+	public void initRenderData(Vector2[][] textures, Vector2 texMax){
 			
 		amount = textures.length * textures[0].length;
 		
@@ -140,18 +140,19 @@ public class IRenderer {
 		//GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 		//GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
-	private void initRenderData(HashMap<Vector2,Tile> textures, Vector2 texMax){
+	public void initRenderData(HashMap<Vector2, Entity> textures, Vector2 texMax){
 		
 		amount = textures.size();
 		
 		float[] texture = new float[2];
 		float[] translation = new float[2];
 		FloatBuffer instanceFloatBuffer = BufferUtils.createByteBuffer(amount * 4 * 4).asFloatBuffer();
-		Iterator<Entry<Vector2, Tile>> iterator = textures.entrySet().iterator() ;
+		Iterator<Entry<Vector2, Entity>> iterator = textures.entrySet().iterator() ;
 		while(iterator.hasNext()){
-			Tile wall = iterator.next().getValue();
-			Vector2 textured = wall.getTexture();
-			Vector2 pos = wall.getPositionVector();
+			Entity wall = iterator.next().getValue();
+			MapGraphics MG = (MapGraphics) wall.getComponent(ComponentType.GRAPHICS);
+			Vector2 textured = MG.getMapPos();
+			Vector2 pos = new Vector2(MG.getX(), MG.getY());
 			texture[0] = textured.x()/texMax.x();
 			texture[1] = textured.y()/texMax.y();
 			translation[0] = pos.x();

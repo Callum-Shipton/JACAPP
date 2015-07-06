@@ -9,9 +9,11 @@ uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
 
 out vec2 texCoords;
+out vec2 position;
 
 void main()
 {
+	position = pos+trans;
     gl_Position = projectionMatrix * viewMatrix * vec4(pos.x+trans.x,pos.y+trans.y, 0.0f, 1.0f);
     texCoords = tex+text;
 }

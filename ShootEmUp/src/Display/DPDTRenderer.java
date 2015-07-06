@@ -12,12 +12,9 @@ import static org.lwjgl.opengl.GL30.*;
 import Math.Matrix4;
 import Math.Vector2;
 
-public class DPDTRenderer {
+public class DPDTRenderer extends Renderer {
 
 	private int shaderProgramID;
-	private int VAO;
-	private int VBO;
-	private int EBO;
 	private int modelMatrixLocation;
 	private int textureMatrixLocation;
 	private FloatBuffer matrix44Buffer;
@@ -67,7 +64,7 @@ public class DPDTRenderer {
 		glUseProgram(0);
 	}
 
-	private void initRenderData() {
+	public void initRenderData() {
 
 		matrix44Buffer = BufferUtils.createFloatBuffer(16);
 		model = new Matrix4();

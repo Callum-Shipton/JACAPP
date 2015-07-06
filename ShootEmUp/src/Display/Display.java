@@ -11,7 +11,10 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWvidmode;
 import org.lwjgl.opengl.GLContext;
 
+import Components.ComponentType;
+import Components.Graphical.PlayerGraphics;
 import Input.Keyboard;
+import Main.ShootEmUp;
 
 public class Display {
 
@@ -22,9 +25,13 @@ public class Display {
 
 	// The monitor handle (for Fullscreen mode)
 	private long monitor;
+	private ByteBuffer vidmode;
+	private GLFWvidmode vm;
 
 	private int width;
 	private int height;
+	
+	boolean fullscreen = false;
 
 	public Display(int width, int height) {
 		this.width = width;
@@ -54,8 +61,9 @@ public class Display {
 		monitor = glfwGetPrimaryMonitor();
 		if (monitor == NULL)
 			throw new RuntimeException("Failed to find primary monitor");
-
-		ByteBuffer vidmode = glfwGetVideoMode(monitor);
+		
+		vidmode = glfwGetVideoMode(monitor);
+		vm = new GLFWvidmode(vidmode);
 
 		// Create the window
 		window = glfwCreateWindow(width, height, "Hello World!", NULL, NULL);
@@ -69,8 +77,8 @@ public class Display {
 		// Make the GLFW OpenGL context current
 		glfwMakeContextCurrent(window);
 
-		// Enable v-sync
 		glfwSwapInterval(1);
+		
 		// Make the window visible
 		glfwShowWindow(window);
 
@@ -84,6 +92,9 @@ public class Display {
 		initGL();
 		Art a = new Art();
 		a.init();
+		
+		// Initialise key handling
+		Keyboard.keyCheck(window);
 	}
 
 	private void initGL() {
@@ -105,9 +116,50 @@ public class Display {
 
 	public void update() {
 		if (Keyboard.getKey(GLFW_KEY_ESCAPE) == 1) {
-			glfwSetWindowShouldClose(window, GL_TRUE); // We will detect this in
-			// our update loop
+			if(fullscreen)toggleFullscreen();
+			glfwSetWindowShouldClose(window, GL_TRUE);
 			Keyboard.setKey(GLFW_KEY_ESCAPE);
 		}
+		if (Keyboard.getKey(GLFW_KEY_F) == 1) {
+			toggleFullscreen();
+			 // We will detect this in
+			// our update loop
+			Keyboard.setKey(GLFW_KEY_F);
+		}
+	}
+	public void toggleFullscreen(){
+		long newWindow;
+		if(fullscreen){
+			ShootEmUp.WIDTH =1024;
+			ShootEmUp.HEIGHT =512;
+			width = 1024;
+			height = 512;
+			newWindow = glfwCreateWindow(width, height, "Hello World!", NULL, window);
+			if (newWindow == NULL)
+				throw new RuntimeException("Failed to create the NEW GLFW window");
+
+			// Center our window
+			glfwSetWindowPos(newWindow, (GLFWvidmode.width(vidmode) - width) / 2,
+					(GLFWvidmode.height(vidmode) - height) / 2);
+		}else{
+			ShootEmUp.WIDTH = vm.getWidth();
+			ShootEmUp.HEIGHT = vm.getHeight();
+			width = vm.getWidth();
+			height = vm.getHeight();
+			newWindow = glfwCreateWindow(width, height, "Hello World!", monitor, window);
+			if (newWindow == NULL)
+				throw new RuntimeException("Failed to create the GLFW window");
+		}
+		glfwMakeContextCurrent(newWindow);
+		glfwSwapInterval(1);
+		glfwShowWindow(newWindow);
+		glfwDestroyWindow(window);
+		window = newWindow;
+		initGL();
+		Keyboard.keyCheck(window);
+		Art.initShaderUniforms();
+		Art.refreshRenderers();
+		if(ShootEmUp.currentLevel != null) ((PlayerGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).scrollScreen(null);
+		fullscreen = !fullscreen;
 	}
 }

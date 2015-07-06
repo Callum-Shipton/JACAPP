@@ -2,32 +2,36 @@ package GUI;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import Components.ComponentType;
+import Components.Attack.BaseAttack;
+import Components.Attack.PlayerAttack;
+import Components.Inventory.PlayerInventory;
 import Display.Art;
 import Display.DPDTRenderer;
 import Math.Vector2;
-import Object.Player;
+import Object.Entity;
 
 public class Hud extends GuiComponent{
 	
 	public CopyOnWriteArrayList<HudElement> hudElems;
 	private HudElement infoBox;
-	private HudElement healthBar;
-	private HudElement manaBar;
-	private HudElement xpBar;
+	private HudBar healthBar;
+	private HudBar manaBar;
+	private HudBar xpBar;
 	private HudElement moneyCounter;
-	private Player player;
+	private Entity player;
 	private float hudW;
 
-	public Hud(Player player){
+	public Hud(Entity player){
 		this.player = player;
 		hudElems = new CopyOnWriteArrayList<HudElement>();
 		infoBox = new HudElement(0.0f,0.0f,189.0f,110.0f, Art.infoBox);
 		hudElems.add(infoBox);
-		healthBar = new HudElement(10.0f, 10.0f, Art.healthBar.getWidth(), Art.healthBar.getHeight()/Art.healthBar.getFHeight(), Art.healthBar);
+		healthBar = new HudBar(10.0f, 10.0f, Art.healthBar.getWidth()/Art.healthBar.getFWidth(), Art.healthBar.getHeight()/Art.healthBar.getFHeight(), Art.healthBar);
 		hudElems.add(healthBar);
-		manaBar = new HudElement(10.0f, 35.0f, Art.manaBar.getWidth(), Art.manaBar.getHeight()/Art.manaBar.getFHeight(), Art.manaBar);
+		manaBar = new HudBar(10.0f, 35.0f, Art.manaBar.getWidth()/Art.manaBar.getFWidth(), Art.manaBar.getHeight()/Art.manaBar.getFHeight(), Art.manaBar);
 		hudElems.add(manaBar);
-		xpBar = new HudElement(10.0f, 60.0f, Art.xpBar.getWidth(), Art.xpBar.getHeight()/Art.xpBar.getFHeight(), Art.xpBar);
+		xpBar = new HudBar(10.0f, 60.0f, Art.xpBar.getWidth()/Art.xpBar.getFWidth(), Art.xpBar.getHeight()/Art.xpBar.getFHeight(), Art.xpBar);
 		hudElems.add(xpBar);
 		moneyCounter = new HudElement(10.0f, 82.0f, Art.BarCoin.getWidth(), Art.BarCoin.getHeight(), Art.BarCoin);
 		hudElems.add(moneyCounter);
@@ -38,33 +42,42 @@ public class Hud extends GuiComponent{
 			h.render(r);
 		}
 		
-		if(player.getLevel() < 10){
-			r.draw(Art.numbers, new Vector2(140,82), new Vector2(16,16), 0.0f, new Vector2(player.getLevel(),1), new Vector2(10,1));
+		int level =  ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getLevel();
+		Vector2 size = new Vector2(16,16);
+		Vector2 maxTex = new Vector2(10,1);
+		
+		if(level < 10){
+			r.draw(Art.numbers, new Vector2(140,82), size, 0.0f, new Vector2(level,1), maxTex);
 		} else {
-			r.draw(Art.numbers, new Vector2(140,82), new Vector2(16,16), 0.0f, new Vector2((int) Math.floor(player.getLevel() / 10),1), new Vector2(10,1));
-			r.draw(Art.numbers, new Vector2(160,82), new Vector2(16,16), 0.0f, new Vector2((player.getLevel() % 10),1), new Vector2(10,1));
+			r.draw(Art.numbers, new Vector2(140,82), size, 0.0f, new Vector2((int) Math.floor(level / 10),1), maxTex);
+			r.draw(Art.numbers, new Vector2(160,82), size, 0.0f, new Vector2((level % 10),1), maxTex);
 		}
 		
-		if(player.getCoins() < 10){
-			r.draw(Art.numbers, new Vector2(45,82), new Vector2(16,16), 0.0f, new Vector2(player.getCoins(),1), new Vector2(10,1));
+		int coins =  ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getCoins();
+		if(coins < 10){
+			r.draw(Art.numbers, new Vector2(45,82), size, 0.0f, new Vector2(coins,1), maxTex);
 		} else {
-			r.draw(Art.numbers, new Vector2(45,82), new Vector2(16,16), 0.0f, new Vector2((int) Math.floor(player.getCoins() / 10),1), new Vector2(10,1));
-			r.draw(Art.numbers, new Vector2(65,82), new Vector2(16,16), 0.0f, new Vector2(player.getCoins() % 10,1), new Vector2(10,1));
+			r.draw(Art.numbers, new Vector2(45,82), size, 0.0f, new Vector2((int) Math.floor(coins / 10),1), maxTex);
+			r.draw(Art.numbers, new Vector2(65,82), size, 0.0f, new Vector2(coins % 10,1), maxTex);
 		}
 	}
 
 	public void update() {
-		hudW = (Math.max(player.getMaxHealth(), player.getMaxMana()) - 18.0f)*10.0f + 189.0f;
+		int maxHealth = ((BaseAttack)player.getComponent(ComponentType.ATTACK)).getMaxHealth();
+		int health = ((BaseAttack)player.getComponent(ComponentType.ATTACK)).getHealth();
+		int maxMana = ((PlayerAttack)player.getComponent(ComponentType.ATTACK)).getMaxMana();
+		int mana = ((PlayerAttack)player.getComponent(ComponentType.ATTACK)).getMana();
+		int expBound = ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getExpBound();
+		int exp = ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getExp();
+		
+		hudW = (Math.max(maxHealth, maxMana))*10.0f + 189.0f;
 		infoBox.setSize(hudW, 110.0f);
-		healthBar.setVal(player.getHealth());
-		healthBar.setSize(player.getMaxHealth()*Art.healthBar.getWidth()/((Art.healthBar.getHeight()/Art.healthBar.getFHeight())-1), Art.healthBar.getHeight()/Art.healthBar.getFHeight());
-		healthBar.setMFrame(18.0f/player.getMaxHealth(), Art.healthBar.getFHeight() );
-		manaBar.setVal(player.getMana());
-		manaBar.setSize(player.getMaxMana()*Art.manaBar.getWidth()/((Art.manaBar.getHeight()/Art.manaBar.getFHeight())-1), Art.manaBar.getHeight()/Art.manaBar.getFHeight());
-		manaBar.setMFrame(18.0f/player.getMaxMana(), Art.manaBar.getFHeight() );
-		xpBar.setVal(player.getCurrentExp());
-		xpBar.setSize(player.getExpBound()*Art.xpBar.getWidth()/((Art.xpBar.getHeight()/Art.xpBar.getFHeight())-1), Art.xpBar.getHeight()/Art.xpBar.getFHeight());
-		xpBar.setMFrame(18.0f/player.getExpBound(), Art.xpBar.getFHeight() );
+		healthBar.setValue(health);
+		healthBar.setMaxValue(maxHealth);
+		manaBar.setValue(mana);
+		manaBar.setMaxValue(maxMana);
+		xpBar.setValue(exp);
+		xpBar.setMaxValue(expBound);
 		//healthBar.setMFrame((player.getMaxHealth()+1)/(player.getHealth()+1), Art.healthBar.getFHeight());
 		//healthBar.setSize((((float)player.getHealth())/((float)player.getMaxHealth())) * Art.healthBar.getWidth(), healthBar.getSize().y());
 	}

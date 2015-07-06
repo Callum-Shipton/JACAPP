@@ -42,6 +42,7 @@ public class Button extends GuiComponent {
 	@Override
 	public void update() {
 		super.update();
+		window = ShootEmUp.d.getWindow();
 		Bx.clear();
 		By.clear();
 		
@@ -94,9 +95,9 @@ public class Button extends GuiComponent {
 
 	public void render(DPDTRenderer stat) {
 			if (isPressed) {
-				stat.draw(id, new Vector2(x,y), new Vector2(w,h), 0, new Vector2(0,0), new Vector2(1,2));
-			} else {
 				stat.draw(id, new Vector2(x,y), new Vector2(w,h), 0, new Vector2(0,1), new Vector2(1,2));
+			} else {
+				stat.draw(id, new Vector2(x,y), new Vector2(w,h), 0, new Vector2(0,0), new Vector2(1,2));
 			}
 	}
 

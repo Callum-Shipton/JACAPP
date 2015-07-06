@@ -1,5 +1,6 @@
 package Main;
 
+
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
@@ -11,8 +12,10 @@ import org.lwjgl.glfw.GLFW;
 import Display.Art;
 import Display.Display;
 import GUI.Menus.GuiMenu;
-import GUI.Menus.PauseMenu;
+import GUI.Menus.MainMenu;
+import GUI.Menus.InventoryMenu;
 import Input.Keyboard;
+import Level.Level;
 
 public class ShootEmUp {
 
@@ -49,13 +52,8 @@ public class ShootEmUp {
 		d = new Display(WIDTH, HEIGHT);
 		d.initGLFW();
 		
-
-
-		currentLevel = new Level(Art.level1);
-		currentLevel.init();
-
-		// Initialise key handling
-		Keyboard.keyCheck(d.getWindow());
+		paused = true;
+		addMenu(new MainMenu(Art.mainMenuScreen));
 
 	}
 
@@ -69,16 +67,24 @@ public class ShootEmUp {
 		double delta = newTime - oldTime;
 		double sleepTime = (1.0 / FPS) - delta;
 
+		int Error = glGetError();
+		
 		while (glfwWindowShouldClose(d.getWindow()) == GL_FALSE) {
 
+			Error = glGetError();
+			
+			if(Error != GL_NO_ERROR){
+				System.out.println("OpenGL Error: " + Error);
+			}
+			
 			delta = newTime - oldTime;
 			oldTime = newTime;
 			sleepTime = (1.0 / FPS) - delta;
+			//System.out.println(1.0/delta);
 			if (sleepTime > 0.01)
 				try {
 					Thread.sleep((long) (sleepTime * 1000));
-					// System.out.println("I slept for " + 1000*sleepTime +
-					// " seconds." );
+					 //System.out.println("I slept for " + sleepTime + " seconds." );
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -94,15 +100,17 @@ public class ShootEmUp {
 		// Poll for window events. The key callback above will only be
 		// invoked during this call.
 		glfwPollEvents();
-		if(Keyboard.getKey(GLFW_KEY_P) == 1){
-				paused = !paused;
-				Keyboard.setKey(GLFW_KEY_P);
-				if(paused) addMenu(new PauseMenu(Art.invScreen));
-				else clearMenus();
-		}
-
-		if(!paused){
-			currentLevel.update();
+		if(currentLevel != null){
+			if(Keyboard.getKey(GLFW_KEY_P) == 1){
+					paused = !paused;
+					Keyboard.setKey(GLFW_KEY_P);
+					if(paused) addMenu(new InventoryMenu(Art.invScreen));
+					else clearMenus();
+			}
+	
+			if(!paused){
+				currentLevel.update();
+			}
 		}
 		if (!menuStack.isEmpty()) {
 			menuStack.peek().update();
@@ -115,7 +123,9 @@ public class ShootEmUp {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		currentLevel.render();
+		if(!paused && (currentLevel != null)){
+			currentLevel.render();
+		}
 		if (!menuStack.isEmpty()) {
 			menuStack.peek().render();
 		}
