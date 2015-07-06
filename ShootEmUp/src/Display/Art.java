@@ -266,7 +266,7 @@ public class Art {
 		fireMagic = new Image("/Magic/FireMagic.png",1,8);
 		iceMagic = new Image("/Magic/IceMagic.png",1,8);
 		
-		arrow = new Image("/Magic/Arrow.png",1,8);
+		arrow = new Image("/Magic/Arrow2.png",1,8);
 		sword = new Image("/Magic/Sword.png",1,8);
 		
 		//Load Armour maps
