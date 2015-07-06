@@ -3,6 +3,7 @@ package GUI.Menus;
 import Components.ComponentType;
 import Components.Attack.BaseAttack;
 import Components.Attack.PlayerAttack;
+import Components.Inventory.BaseInventory;
 import Display.Art;
 import Display.Image;
 import GUI.Button;
@@ -70,27 +71,33 @@ public class SkillMenu extends GuiMenu {
     		addMenu(new MainMenu(Art.mainMenuScreen));
         	back.postAction();
     	}
-    	if(healthButton.hasClicked()){
-    		BaseAttack BA = (BaseAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
-    		BA.setMaxHealth(BA.getMaxHealth() + 1);
-    		BA.setHealth(BA.getHealth()+1);
-    		healthButton.postAction();
-    	}
-    	if(healthRegenButton.hasClicked()){
-    		BaseAttack BA = (BaseAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
-    		BA.setMaxHealthRegen((int)Math.ceil(BA.getMaxHealthRegen()/2));
-    		healthRegenButton.postAction();
-    	}
-    	if(manaButton.hasClicked()){
-    		PlayerAttack PA = (PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
-    		PA.setMaxMana(PA.getMaxMana() + 1);
-    		PA.setMana(PA.getMana() + 1);
-    		manaButton.postAction();
-    	}
-    	if(manaRegenButton.hasClicked()){
-    		PlayerAttack PA = (PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
-    		PA.setMaxManaRegen((int)Math.ceil(PA.getMaxManaRegen()/2));
-    		healthButton.postAction();
+    	if ((((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).getCoins() <= 0)){
+	    	if(healthButton.hasClicked()){
+	    		BaseAttack BA = (BaseAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
+	    		BA.setMaxHealth(BA.getMaxHealth() + 1);
+	    		BA.setHealth(BA.getHealth()+1);
+	    		healthButton.postAction();
+	    		((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).spendCoins(1);
+	    	}
+	    	if(healthRegenButton.hasClicked()){
+	    		BaseAttack BA = (BaseAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
+	    		BA.setMaxHealthRegen((int)Math.ceil(BA.getMaxHealthRegen()/2));
+	    		healthRegenButton.postAction();
+	    		((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).spendCoins(1);
+	    	}
+	    	if(manaButton.hasClicked()){
+	    		PlayerAttack PA = (PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
+	    		PA.setMaxMana(PA.getMaxMana() + 1);
+	    		PA.setMana(PA.getMana() + 1);
+	    		manaButton.postAction();
+	    		((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).spendCoins(1);
+	    	}
+	    	if(manaRegenButton.hasClicked()){
+	    		PlayerAttack PA = (PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
+	    		PA.setMaxManaRegen((int)Math.ceil(PA.getMaxManaRegen()/2));
+	    		healthButton.postAction();
+	    		((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).spendCoins(1);
+	    	}
     	}
     }
 

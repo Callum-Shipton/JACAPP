@@ -27,7 +27,6 @@ package Audio.Libraries;
 
 import java.io.File;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.IOException;
 import java.io.DataInputStream;
 import java.net.URL;
@@ -36,8 +35,6 @@ import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.sound.sampled.spi.AudioFileReader;
-
-
 
 /**
  * Abstract File Reader class.

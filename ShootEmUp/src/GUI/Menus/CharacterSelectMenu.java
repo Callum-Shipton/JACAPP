@@ -2,6 +2,7 @@ package GUI.Menus;
 
 import org.lwjgl.glfw.GLFW;
 
+import Audio.Music.BackgroundMusic;
 import Display.Art;
 import Display.Image;
 import GUI.Button;
@@ -36,26 +37,17 @@ public class CharacterSelectMenu extends GuiMenu {
     	super.update();
     	if(warrior.hasClicked()){
     		ShootEmUp.currentLevel.createPlayer(0);
-    		ShootEmUp.paused = false;
-    		ShootEmUp.clearMenus();
-    		ShootEmUp.m.stop(ShootEmUp.m.MENU);
-    		ShootEmUp.m.play(ShootEmUp.m.MAIN);
+    		startGame();
     		warrior.postAction();
     	}
     	if(archer.hasClicked()){
     		ShootEmUp.currentLevel.createPlayer(1);
-    		ShootEmUp.paused = false;
-    		ShootEmUp.clearMenus();
-    		ShootEmUp.m.stop(ShootEmUp.m.MENU);
-    		ShootEmUp.m.play(ShootEmUp.m.MAIN);
+    		startGame();
     		archer.postAction();
     	}
     	if(mage.hasClicked()){
     		ShootEmUp.currentLevel.createPlayer(2);
-    		ShootEmUp.paused = false;
-    		ShootEmUp.clearMenus();
-    		ShootEmUp.m.stop(ShootEmUp.m.MENU);
-    		ShootEmUp.m.play(ShootEmUp.m.MAIN);
+    		startGame();
     		mage.postAction();
     	}
     	if(back.hasClicked()){
@@ -90,4 +82,11 @@ public class CharacterSelectMenu extends GuiMenu {
     public void addMenu(GuiMenu menu) {
 		ShootEmUp.menuStack.add(menu);
 	}
+    
+    public void startGame(){
+    	ShootEmUp.paused = false;
+		ShootEmUp.clearMenus();
+		ShootEmUp.m.stop(BackgroundMusic.MENU);
+		ShootEmUp.m.play(BackgroundMusic.MAIN);
+    }
 }

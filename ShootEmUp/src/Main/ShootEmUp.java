@@ -59,7 +59,7 @@ public class ShootEmUp {
 		
 		paused = true;
 		addMenu(new MainMenu(Art.mainMenuScreen));
-		m.play(m.MENU);
+		m.play(BackgroundMusic.MENU);
 	}
 
 	private void loop() {

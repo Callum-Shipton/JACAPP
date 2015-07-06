@@ -44,6 +44,10 @@ public abstract class BaseInventory extends Component implements InventoryCompon
 		this.coins = coins;
 	}
 
+	public void spendCoins(int coins) {
+		this.coins -= coins;
+	}
+	
 	public void setType(ComponentType type) {
 		this.type = type;
 	}
