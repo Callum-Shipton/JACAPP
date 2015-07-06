@@ -58,7 +58,7 @@ public class Spawner {
 		BaseAttack a;
 		
 		if(type == 0){
-			a = new WarriorAttack(s, i, new Weapon(5, 100, 10, false, 1, 0, Art.earthMagic), 3, 100, 3, 3, 50, 3);
+			a = new WarriorAttack(s, i, new Weapon(5, 100, 10, false, 1, 0, Art.sword), 3, 100, 3, 3, 50, 3);
 		} else if (type == 1){
 			 a = new ArcherAttack(s, i, new Weapon(5, 100, 10, false, 1, 0, Art.arrow), 3, 100, 3, 3, 50, 3);
 		} else {

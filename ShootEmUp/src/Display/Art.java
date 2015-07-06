@@ -70,6 +70,7 @@ public class Art {
 	public static Image iceMagic;
 	
 	public static Image arrow;
+	public static Image sword;
 	
 	//Armour maps
 	public static Image shoes;
@@ -263,7 +264,9 @@ public class Art {
 		earthMagic = new Image("/Magic/EarthMagic.png",1,8);
 		fireMagic = new Image("/Magic/FireMagic.png",1,8);
 		iceMagic = new Image("/Magic/IceMagic.png",1,8);
+		
 		arrow = new Image("/Magic/Arrow.png",1,8);
+		sword = new Image("/Magic/Sword.png",1,8);
 		
 		//Load Armour maps
 		shoes = new Image("/Armour/Shoes.png",8,1);
