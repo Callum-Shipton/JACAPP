@@ -110,7 +110,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 			item.addComponent(itemC);
 			ShootEmUp.currentLevel.newEntities.add(item);
 		} else if(prob <= 40) {
-			int armourProb = rand.nextInt(5);
+			int armourProb = rand.nextInt(4);
 			Entity armour = new Entity();
 			AnimatedGraphics armourG;
 			if(armourProb == 0){
