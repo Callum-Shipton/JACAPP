@@ -53,16 +53,16 @@ public class LevelSelectMenu extends GuiMenu {
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
     		ShootEmUp.currentLevel = new Level(Art.level1);
     		ShootEmUp.currentLevel.init();
-    		ShootEmUp.paused = false;
-    		ShootEmUp.clearMenus();
+    		addMenu(new CharacterSelectMenu(Art.mainMenuScreen));
         	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
     		ShootEmUp.currentLevel = new Level(Art.level2);
     		ShootEmUp.currentLevel.init();
-    		ShootEmUp.paused = false;
-    		ShootEmUp.clearMenus();
+    		addMenu(new CharacterSelectMenu(Art.mainMenuScreen));
+    		Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
     		popMenu();
+    		Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	}
     	
         else if (Keyboard.getKey(GLFW.GLFW_KEY_DOWN) == 1) {
