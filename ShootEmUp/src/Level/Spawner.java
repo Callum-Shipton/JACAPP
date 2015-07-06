@@ -12,7 +12,6 @@ import Components.Collision.BaseCollision;
 import Components.Collision.RigidCollision;
 import Components.Control.AIControl;
 import Components.Control.BaseControl;
-import Components.Control.HomingControl;
 import Components.Control.PlayerControl;
 import Components.Graphical.AnimatedGraphics;
 import Components.Graphical.BaseGraphics;
@@ -32,6 +31,9 @@ public class Spawner {
 	
 	private int counter = 0;
 	private final int ENEMY_SPAWN_RATE = 150;
+	private int enemies = 0;
+	private int wave = 1;
+	private boolean newWave = true;
 	
 	private BaseGraphics enemyGraphics;
 	private PointSpawn enemySpawn;
@@ -77,29 +79,43 @@ public class Spawner {
 	}
 	
 	public void update(){
-		counter++;
-		if (counter == ENEMY_SPAWN_RATE) {
-			//creates an enemy to test the spawning position
-			testEnemy();
-			
-			//creating new Enemy
-			newEnemy = new Entity();
-			
-			//randomly chooses an enemy
-			int prob = rand.nextInt(3);
-			if(prob == 0){
-				smallEnemy();
-			} else if(prob == 1){
-				largeEnemy();
-			} else {
-				flyingEnemy();
-			}			
-			
-			//creates the enemy and adds it to the level
-			addEnemy();
-			
-			counter = 0;
+		if(newWave){
+			counter++;
+			if (counter == ENEMY_SPAWN_RATE) {
+				//creates an enemy to test the spawning position
+				testEnemy();
+				
+				//creating new Enemy
+				newEnemy = new Entity();
+				
+				//randomly chooses an enemy
+				int prob = rand.nextInt(3);
+				if(prob == 0){
+					smallEnemy();
+				} else if(prob == 1){
+					largeEnemy();
+				} else {
+					flyingEnemy();
+				}			
+				
+				//creates the enemy and adds it to the level
+				addEnemy();
+				enemies++;
+				if(enemies == wave){
+					newWave = false;
+					wave++;
+				}
+				
+				counter = 0;
+			}
 		}
+		if(enemies == 0){
+			newWave = true;
+		}
+	}
+	
+	public void removeEnemy(){
+		enemies--;
 	}
 	
 	private void testEnemy(){
