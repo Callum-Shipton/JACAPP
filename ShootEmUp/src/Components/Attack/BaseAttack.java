@@ -24,6 +24,16 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	@Override
 	public abstract void update(Entity e);
 	
+	public void healthRegen(){
+		if (health < maxHealth) {
+			if (healthRegen <= 0) {
+				healthRegen = maxHealthRegen;
+				health++;
+			}
+			healthRegen--;
+		}
+	}
+	
 	public void destroy(Entity e){
 		
 	}

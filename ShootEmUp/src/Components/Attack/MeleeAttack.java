@@ -49,13 +49,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 			e.send(Message.ENTITY_DIED);
 		}
 		
-		if (healthRegen <= 0) {
-			healthRegen = maxHealthRegen;
-			if (getHealth() < getMaxHealth()) {
-				setHealth(getHealth() + 1);
-			}
-		}
-		healthRegen--;
+		healthRegen();
 	}
 	
 	@Override

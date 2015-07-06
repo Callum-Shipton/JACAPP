@@ -48,13 +48,7 @@ public class ArcherAttack extends PlayerAttack implements AttackComponent {
 			PI.removeLife();
 		}
 		
-		if (healthRegen <= 0) {
-			healthRegen = maxHealthRegen;
-			if (health < maxHealth) {
-				health++;
-			}
-		}
-		healthRegen--;
+		healthRegen();
 		
 		if (manaRegen <= 0) {
 			manaRegen = maxManaRegen;
