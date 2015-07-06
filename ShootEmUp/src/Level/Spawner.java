@@ -68,11 +68,11 @@ public class Spawner {
 			a = new MageAttack(s, new Weapon(WeaponType.FIRE_STAFF, 5, 100, 10, false, 1, 0, Art.fireMagic), 3, 100, 3, 3, 50, 3, 3);
 		}
 		
-		PlayerInventory i = new PlayerInventory(a, 0, 1);
 		player.addComponent(g);
 		RigidCollision c = new RigidCollision(player);
 		player.addComponent(c);
 		BasicMovement m = new BasicMovement(player,c, g, 5);
+		PlayerInventory i = new PlayerInventory(a, 0, 1);
 		player.addComponent(s);
 		player.addComponent(a);
 		player.addComponent(m);

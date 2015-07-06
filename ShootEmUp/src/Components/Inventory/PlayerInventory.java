@@ -3,6 +3,7 @@ package Components.Inventory;
 import java.util.HashSet;
 
 import Components.Attack.PlayerAttack;
+import Components.Movement.PlayerMovement;
 import Display.Art;
 import Object.Armour;
 import Object.InventoryItem;
@@ -17,10 +18,12 @@ public class PlayerInventory extends BasicInventory{
 	private HashSet<InventoryItem> inventory;
 	
 	private PlayerAttack PA;
+	private PlayerMovement PM;
 	
-	public PlayerInventory(PlayerAttack PA, int level, int expBound) {
+	public PlayerInventory(PlayerAttack PA, PlayerMovement PM, int level, int expBound) {
 		super(level);
 		this.PA = PA;
+		this.PM = PM;
 		this.expBound = expBound;
 		inventory = new HashSet<InventoryItem>();
 	}
@@ -42,6 +45,7 @@ public class PlayerInventory extends BasicInventory{
 				PA.addMana(5);
 				break;
 			case SPEED:
+				PM.increaseSpeed(2);
 				break;
 			case KNOCKBACK:
 			}
