@@ -56,11 +56,14 @@ public class CharacterSelectMenu extends GuiMenu {
     	}
     	
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
-    		
+    		ShootEmUp.currentLevel.createPlayer(0);
+    		startGame();
     	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
-    		
+    		ShootEmUp.currentLevel.createPlayer(1);
+    		startGame();
     	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 2){
-    		
+    		ShootEmUp.currentLevel.createPlayer(2);
+    		startGame();
     	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 3){
     		popMenu();
     	}
