@@ -5,6 +5,7 @@ import Components.Collision.HitCollision;
 import Components.Control.LineControl;
 import Components.Graphical.AnimatedGraphics;
 import Components.Graphical.BaseGraphics;
+import Components.Inventory.WeaponType;
 import Components.Movement.FlyingMovement;
 import Components.Spawn.PointSpawn;
 import Display.Art;
@@ -12,8 +13,9 @@ import Display.Image;
 import Main.ShootEmUp;
 import Math.Vector2;
 
-public class Weapon{
+public class Weapon extends InventoryItem{
 
+	private WeaponType type;
 	private int damage;
 	private int range;
 	private int fireRate;
@@ -22,7 +24,8 @@ public class Weapon{
 	private int team;
 	private Image image;
 
-	public Weapon(int damage, int range, int fireRate, boolean melee, int manaCost, int team, Image image) {
+	public Weapon(WeaponType type, int damage, int range, int fireRate, boolean melee, int manaCost, int team, Image image) {
+		this.type = type;
 		this.damage = damage;
 		this.range = range;
 		this.setFireRate(fireRate);
@@ -124,5 +127,9 @@ public class Weapon{
 
 	public void setFireRate(int fireRate) {
 		this.fireRate = fireRate;
+	}
+	
+	public WeaponType getType(){
+		return type;
 	}
 }

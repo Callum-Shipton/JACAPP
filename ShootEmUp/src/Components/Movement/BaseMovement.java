@@ -30,15 +30,6 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	public void destroy(Entity e){
 		
 	}
-	//getter and setters
-	
-	public int getSpeed(){
-		return speed;
-	}
-	
-	public void setSpeed(int speed){
-		this.speed = speed;
-	}
 	
 	public boolean getFlat(){
 		return flat;
@@ -61,4 +52,17 @@ public abstract class BaseMovement extends Component implements MovementComponen
 		}
 		
 	}
+	
+	public void increaseSpeed(int increase){
+		speed += increase;
+	}
+	
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
 }

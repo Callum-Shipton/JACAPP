@@ -12,7 +12,6 @@ import Math.Vector4;
 import Object.Entity;
 
 public class BasicMovement extends BaseMovement {
-	protected int speed;
 	protected BaseGraphics BG;
 
 	public BasicMovement(Entity e, BaseCollision BC, BaseGraphics BG, int speed) {
@@ -144,13 +143,6 @@ public class BasicMovement extends BaseMovement {
 		return null;
 	}
 
-	public int getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(int speed) {
-		this.speed = speed;
-	}
 
 	@Override
 	public void update(Entity e) {
