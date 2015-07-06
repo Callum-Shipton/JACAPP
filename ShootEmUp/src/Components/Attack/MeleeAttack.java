@@ -62,6 +62,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 		this.health -= damage;
 		if(health <= 0) {
 			drop(e);
+			e.destroy();
 			e.send(Message.ENTITY_DIED);
 			ShootEmUp.currentLevel.spawner.removeEnemy();
 		}

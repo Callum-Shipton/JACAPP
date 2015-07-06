@@ -19,12 +19,15 @@ public class Entity{
 
 	public void update() {
 		for(Component component : components.values()){
-			if(!destroy)component.update(this);
+			if(!isDestroy())component.update(this);
 		}
 	}
 	
 	public void destroy(){
-		destroy = true;
+		setDestroy(true);
+		for(Component component : components.values()){
+			component.destroy(this);
+		}
 	}
 
 	//add components
@@ -44,5 +47,13 @@ public class Entity{
 		for(Component c : components.values()){
 			c.receive(m, this);
 		}
+	}
+
+	public boolean isDestroy() {
+		return destroy;
+	}
+
+	public void setDestroy(boolean destroy) {
+		this.destroy = destroy;
 	}
 }

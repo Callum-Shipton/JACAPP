@@ -59,7 +59,7 @@ public class BasicMovement extends BaseMovement {
 		}
 
 		ShootEmUp.currentLevel.eMap.removeEntity(BC.getGridPos(), e);
-		ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
+		if(!e.isDestroy())ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
 		BC.setGridPos(newGrid);
 
 	}
@@ -92,7 +92,7 @@ public class BasicMovement extends BaseMovement {
 		}
 
 		ShootEmUp.currentLevel.eMap.removeEntity(BC.getGridPos(), e);
-		ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
+		if(!e.isDestroy())ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
 		BC.setGridPos(newGrid);
 
 	}

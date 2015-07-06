@@ -28,8 +28,7 @@ public class HitCollision extends BaseCollision{
 			}
 		}
 		if(hit.getComponent(ComponentType.COLLISION) instanceof RigidCollision){
-			ShootEmUp.currentLevel.eMap.removeEntity(gridPos, e);
-			ShootEmUp.currentLevel.oldEntities.add(e);
+			e.destroy();
 			if(hitAttack != null) hitAttack.damage(weapon.getDamage(), hit); //needs updating to take weapon damage
 		}
 		/*
