@@ -16,18 +16,19 @@ public class Weapon{
 
 	private int damage;
 	private int range;
+	private int fireRate;
 	private boolean melee;
 	private int manaCost;
 	private int team;
-	private int fireRate;
 	private Image image;
 
-	public Weapon(int damage, int range, int fireRate, boolean melee, int manaCost, Image image) {
+	public Weapon(int damage, int range, int fireRate, boolean melee, int manaCost, int team, Image image) {
 		this.damage = damage;
 		this.range = range;
 		this.setFireRate(fireRate);
 		this.melee = melee;
 		this.manaCost = manaCost;
+		this.team = team;
 		this.image = image;
 	}
 	

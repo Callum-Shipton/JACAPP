@@ -21,15 +21,16 @@ public class HitCollision extends BaseCollision{
 	@Override
 	public void collision(Entity e, Entity hit) {
 		
+		BaseAttack hitAttack = (BaseAttack) hit.getComponent(ComponentType.ATTACK);
+		if(hitAttack != null){
+			if(hitAttack.getWeapon().getTeam() == weapon.getTeam()){
+				return;
+			}
+		}
 		if(hit.getComponent(ComponentType.COLLISION) instanceof RigidCollision){
 			ShootEmUp.currentLevel.eMap.removeEntity(gridPos, e);
 			ShootEmUp.currentLevel.oldEntities.add(e);
-			
-			BaseAttack hitAttack = (BaseAttack) hit.getComponent(ComponentType.ATTACK);
-			
-			if(hitAttack != null){
-				hitAttack.damage(weapon.getDamage(), hit); //needs updating to take weapon damage
-			}
+			if(hitAttack != null) hitAttack.damage(weapon.getDamage(), hit); //needs updating to take weapon damage
 		}
 		/*
 		if (hit != null && getTeam() != hit.getTeam()) {

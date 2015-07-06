@@ -67,5 +67,13 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	public ComponentType getType() {
 		return type;
 	}
+
+	public Weapon getWeapon() {
+		return weapon;
+	}
+
+	public void setWeapon(Weapon weapon) {
+		this.weapon = weapon;
+	}
 	
 }

@@ -22,7 +22,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 	public MeleeAttack(BaseSpawn BS, AnimatedGraphics AG, Weapon weapon, int health, int healthRegen, int maxHealth){
 		this.AG = AG;
 		this.BS = BS;
-		this.weapon = weapon;
+		this.setWeapon(weapon);
 		this.health = health;
 		this.healthRegen = healthRegen;
 		this.maxHealthRegen = healthRegen;
@@ -32,10 +32,10 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 	@Override
 	public void attack(Entity e, int dir) {
 		if(fireRate <= 0){
-			if(weapon.isMelee()){
-				weapon.attack(e, dir);
+			if(getWeapon().isMelee()){
+				getWeapon().attack(e, dir);
 			}
-			fireRate = weapon.getFireRate();
+			fireRate = getWeapon().getFireRate();
 		}
 	}
 

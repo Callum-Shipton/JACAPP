@@ -11,7 +11,7 @@ public class WarriorAttack extends PlayerAttack implements AttackComponent {
 	public WarriorAttack(BaseSpawn BS, PlayerInventory PI, Weapon weapon, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana){
 		this.BS = BS;
 		this.PI = PI;
-		this.weapon = weapon;
+		this.setWeapon(weapon);
 		this.health = health;
 		this.healthRegen = healthRegen;
 		this.maxHealthRegen = healthRegen;
@@ -26,14 +26,14 @@ public class WarriorAttack extends PlayerAttack implements AttackComponent {
 	@Override
 	public void attack(Entity e, int dir) {
 		if(fireRate <= 0){
-			if(weapon.isMelee()){
-				weapon.attack(e, dir);
+			if(getWeapon().isMelee()){
+				getWeapon().attack(e, dir);
 			}
-			else if(mana >= weapon.getManaCost()){
-				weapon.attack(e, dir);
-				mana-=weapon.getManaCost();
+			else if(mana >= getWeapon().getManaCost()){
+				getWeapon().attack(e, dir);
+				mana-=getWeapon().getManaCost();
 			}
-			fireRate = weapon.getFireRate();
+			fireRate = getWeapon().getFireRate();
 		}
 	}
 	
