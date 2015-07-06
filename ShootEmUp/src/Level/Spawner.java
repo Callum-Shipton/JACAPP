@@ -31,6 +31,7 @@ public class Spawner {
 	
 	private int counter = 0;
 	private final int ENEMY_SPAWN_RATE = 150;
+	private final int MAX_WAVE = 20;
 	private int enemies = 0;
 	private int wave = 1;
 	private boolean newWave = true;
@@ -103,7 +104,9 @@ public class Spawner {
 				enemies++;
 				if(enemies == wave){
 					newWave = false;
-					wave++;
+					if(wave <= MAX_WAVE){
+						wave++;
+					}
 				}
 				
 				counter = 0;
