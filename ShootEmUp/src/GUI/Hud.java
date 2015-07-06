@@ -43,19 +43,22 @@ public class Hud extends GuiComponent{
 		}
 		
 		int level =  ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getLevel();
+		Vector2 size = new Vector2(16,16);
+		Vector2 maxTex = new Vector2(10,1);
+		
 		if(level < 10){
-			r.draw(Art.numbers, new Vector2(140,82), new Vector2(16,16), 0.0f, new Vector2(level,1), new Vector2(10,1));
+			r.draw(Art.numbers, new Vector2(140,82), size, 0.0f, new Vector2(level,1), maxTex);
 		} else {
-			r.draw(Art.numbers, new Vector2(140,82), new Vector2(16,16), 0.0f, new Vector2((int) Math.floor(level / 10),1), new Vector2(10,1));
-			r.draw(Art.numbers, new Vector2(160,82), new Vector2(16,16), 0.0f, new Vector2((level % 10),1), new Vector2(10,1));
+			r.draw(Art.numbers, new Vector2(140,82), size, 0.0f, new Vector2((int) Math.floor(level / 10),1), maxTex);
+			r.draw(Art.numbers, new Vector2(160,82), size, 0.0f, new Vector2((level % 10),1), maxTex);
 		}
 		
 		int coins =  ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getCoins();
 		if(coins < 10){
-			r.draw(Art.numbers, new Vector2(45,82), new Vector2(16,16), 0.0f, new Vector2(coins,1), new Vector2(10,1));
+			r.draw(Art.numbers, new Vector2(45,82), size, 0.0f, new Vector2(coins,1), maxTex);
 		} else {
-			r.draw(Art.numbers, new Vector2(45,82), new Vector2(16,16), 0.0f, new Vector2((int) Math.floor(coins / 10),1), new Vector2(10,1));
-			r.draw(Art.numbers, new Vector2(65,82), new Vector2(16,16), 0.0f, new Vector2(coins % 10,1), new Vector2(10,1));
+			r.draw(Art.numbers, new Vector2(45,82), size, 0.0f, new Vector2((int) Math.floor(coins / 10),1), maxTex);
+			r.draw(Art.numbers, new Vector2(65,82), size, 0.0f, new Vector2(coins % 10,1), maxTex);
 		}
 	}
 
