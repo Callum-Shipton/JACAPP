@@ -34,6 +34,7 @@ public class Spawner {
 	private final int ENEMY_SPAWN_RATE = 150;
 	private final int MAX_WAVE = 20;
 	private int enemies = 0;
+	private int totalEnemies = 0;
 	private int wave = 1;
 	private boolean newWave = true;
 	
@@ -102,18 +103,19 @@ public class Spawner {
 				
 				//creates the enemy and adds it to the level
 				addEnemy();
+				totalEnemies++;
 				enemies++;
-				if(enemies == wave){
+				if(totalEnemies == wave){
 					newWave = false;
-					if(wave <= MAX_WAVE){
-						wave++;
-					}
 				}
 				
 				counter = 0;
 			}
-		}
-		if(enemies == 0){
+		} else if(enemies == 0){
+			totalEnemies = 0;
+			if(wave < MAX_WAVE){
+				wave++;
+			}
 			newWave = true;
 		}
 	}
@@ -182,5 +184,9 @@ public class Spawner {
 		newEnemy.addComponent(enemyMovement);
 		
 		ShootEmUp.currentLevel.entities.add(newEnemy);
+	}
+	
+	public int getWave(){
+		return wave;
 	}
 }
