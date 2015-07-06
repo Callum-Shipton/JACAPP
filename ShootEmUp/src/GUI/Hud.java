@@ -70,8 +70,11 @@ public class Hud extends GuiComponent{
 		int expBound = ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getExpBound();
 		int exp = ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getExp();
 		
-		hudW = (Math.max(maxHealth, maxMana))*10.0f + 189.0f;
-		infoBox.setSize(hudW, 110.0f);
+		if(Math.max(maxHealth, maxMana) > 18.0f) {
+			hudW =  (Math.max(maxHealth, maxMana)-18.0f)*10.0f + 189.0f;
+			infoBox.setSize(hudW, 110.0f);
+		}
+
 		healthBar.setValue(health);
 		healthBar.setMaxValue(maxHealth);
 		manaBar.setValue(mana);
