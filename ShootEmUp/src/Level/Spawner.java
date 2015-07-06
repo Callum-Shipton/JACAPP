@@ -72,7 +72,7 @@ public class Spawner {
 		RigidCollision c = new RigidCollision(player);
 		player.addComponent(c);
 		BasicMovement m = new BasicMovement(player,c, g, 5);
-		PlayerInventory i = new PlayerInventory(a, 0, 1);
+		PlayerInventory i = new PlayerInventory(a, m, 0, 1);
 		player.addComponent(s);
 		player.addComponent(a);
 		player.addComponent(m);

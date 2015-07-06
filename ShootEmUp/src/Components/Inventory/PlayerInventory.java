@@ -3,7 +3,7 @@ package Components.Inventory;
 import java.util.HashSet;
 
 import Components.Attack.PlayerAttack;
-import Components.Movement.PlayerMovement;
+import Components.Movement.BaseMovement;
 import Display.Art;
 import Object.Armour;
 import Object.InventoryItem;
@@ -18,12 +18,12 @@ public class PlayerInventory extends BasicInventory{
 	private HashSet<InventoryItem> inventory;
 	
 	private PlayerAttack PA;
-	private PlayerMovement PM;
+	private BaseMovement BM;
 	
-	public PlayerInventory(PlayerAttack PA, PlayerMovement PM, int level, int expBound) {
+	public PlayerInventory(PlayerAttack PA, BaseMovement BM, int level, int expBound) {
 		super(level);
 		this.PA = PA;
-		this.PM = PM;
+		this.BM = BM;
 		this.expBound = expBound;
 		inventory = new HashSet<InventoryItem>();
 	}
@@ -45,7 +45,7 @@ public class PlayerInventory extends BasicInventory{
 				PA.addMana(5);
 				break;
 			case SPEED:
-				PM.increaseSpeed(2);
+				BM.increaseSpeed(2);
 				break;
 			case KNOCKBACK:
 			}
@@ -83,6 +83,16 @@ public class PlayerInventory extends BasicInventory{
 				break;
 			case BOW:
 				inventory.add(new Weapon(weaponType, 5, 2, 3, false, 1, 0, Art.bow));
+				break;
+			case FIRE_STAFF:
+				inventory.add(new Weapon(weaponType, 3, 3, 3, false, 1, 0, Art.bow));
+				break;
+			case ICE_STAFF:
+				inventory.add(new Weapon(weaponType, 3, 3, 3, false, 1, 0, Art.bow));
+				break;
+			case GROUND_STAFF:
+				inventory.add(new Weapon(weaponType, 5, 3, 2, false, 2, 0, Art.bow));
+				break;
 			}
 		}
 	}

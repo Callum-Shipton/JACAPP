@@ -128,4 +128,8 @@ public class Weapon extends InventoryItem{
 	public void setFireRate(int fireRate) {
 		this.fireRate = fireRate;
 	}
+	
+	public WeaponType getType(){
+		return type;
+	}
 }

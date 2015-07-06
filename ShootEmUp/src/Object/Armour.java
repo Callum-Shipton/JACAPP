@@ -18,4 +18,21 @@ public class Armour extends InventoryItem{
 	public int getDefence(){
 		return defence;
 	}
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
+
+	public ArmourType getType() {
+		return type;
+	}
+
+	public void setDefence(int defence) {
+		this.defence = defence;
+	}
+	
 }
