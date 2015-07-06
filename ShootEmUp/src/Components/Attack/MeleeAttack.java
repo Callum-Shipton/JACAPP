@@ -9,7 +9,12 @@ import Components.Graphical.AnimatedGraphics;
 import Components.Graphical.BaseGraphics;
 import Components.Spawn.BaseSpawn;
 import Components.Spawn.PointSpawn;
+import Components.Inventory.ArmourType;
+import Components.Inventory.CoinType;
+import Components.Inventory.PickupType;
 import Components.Inventory.PlayerInventory;
+import Components.Inventory.PotionType;
+import Components.Inventory.WeaponType;
 import Display.Art;
 import Main.ShootEmUp;
 import Math.Vector2;
@@ -77,7 +82,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 		AnimatedGraphics coinG = new AnimatedGraphics(Art.coin, Art.base, true);
 		PointSpawn coinS = new PointSpawn(coinG, new Vector2(BG.getX() + BG.getWidth() - coinG.getWidth(), BG.getY() + BG.getHeight() - coinG.getHeight()), coin);
 		coin.addComponent(coinG);
-		PickupCollision coinC = new PickupCollision(coin);
+		PickupCollision coinC = new PickupCollision(coin, PickupType.COIN, CoinType.ONE);
 		coin.addComponent(coinS);
 		coin.addComponent(coinC);
 		ShootEmUp.currentLevel.newEntities.add(coin);
@@ -90,18 +95,31 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 			int itemProb = rand.nextInt(4);
 			Entity item = new Entity();
 			AnimatedGraphics itemG;
+			PointSpawn itemS;
+			PickupCollision itemC;
+			PickupType T = PickupType.POTION;
 			if(itemProb == 0) {
 				itemG = new AnimatedGraphics(Art.healthPotion, Art.base, true);
+				itemS = new PointSpawn(itemG, new Vector2(BG.getX() + BG.getWidth() - itemG.getWidth(),BG.getY()), item);
+				item.addComponent(itemG);
+				itemC = new PickupCollision(item, T, PotionType.HEALTH);
 			} else if(itemProb == 1){
 				itemG = new AnimatedGraphics(Art.manaPotion, Art.base, true);
+				itemS = new PointSpawn(itemG, new Vector2(BG.getX() + BG.getWidth() - itemG.getWidth(),BG.getY()), item);
+				item.addComponent(itemG);
+				itemC = new PickupCollision(item, T, PotionType.MANA);
 			} else if(itemProb == 2){
 				itemG = new AnimatedGraphics(Art.speedPotion, Art.base, true);
+				itemS = new PointSpawn(itemG, new Vector2(BG.getX() + BG.getWidth() - itemG.getWidth(),BG.getY()), item);
+				item.addComponent(itemG);
+				itemC = new PickupCollision(item, T, PotionType.SPEED);
 			} else {
 				itemG = new AnimatedGraphics(Art.knockbackPotion, Art.base, true);
+				itemS = new PointSpawn(itemG, new Vector2(BG.getX() + BG.getWidth() - itemG.getWidth(),BG.getY()), item);
+				item.addComponent(itemG);
+				itemC = new PickupCollision(item, T, PotionType.KNOCKBACK);
 			}
-			PointSpawn itemS = new PointSpawn(itemG, new Vector2(BG.getX() + BG.getWidth() - itemG.getWidth(),BG.getY()), item);
-			item.addComponent(itemG);
-			PickupCollision itemC = new PickupCollision(item);
+			
 			item.addComponent(itemS);
 			item.addComponent(itemC);
 			ShootEmUp.currentLevel.newEntities.add(item);
@@ -109,18 +127,30 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 			int armourProb = rand.nextInt(4);
 			Entity armour = new Entity();
 			AnimatedGraphics armourG;
+			PointSpawn armourS;
+			PickupCollision armourC;
+			PickupType T = PickupType.ARMOUR;
 			if(armourProb == 0){
 				armourG = new AnimatedGraphics(Art.shoes, Art.base, true);
+				armourS = new PointSpawn(armourG, new Vector2(BG.getX(), BG.getY()), armour);
+				armour.addComponent(armourG);
+				armourC = new PickupCollision(armour, T, ArmourType.BOOTS);
 			} else if(armourProb == 1){
 				armourG = new AnimatedGraphics(Art.legs, Art.base, true);
+				armourS = new PointSpawn(armourG, new Vector2(BG.getX(), BG.getY()), armour);
+				armour.addComponent(armourG);
+				armourC = new PickupCollision(armour, T, ArmourType.LEGS);
 			} else if(armourProb == 2){
 				armourG = new AnimatedGraphics(Art.chest, Art.base, true);
+				armourS = new PointSpawn(armourG, new Vector2(BG.getX(), BG.getY()), armour);
+				armour.addComponent(armourG);
+				armourC = new PickupCollision(armour, T, ArmourType.CHESTPLATE);
 			} else {
 				armourG = new AnimatedGraphics(Art.helmet, Art.base, true);
+				armourS = new PointSpawn(armourG, new Vector2(BG.getX(), BG.getY()), armour);
+				armour.addComponent(armourG);
+				armourC = new PickupCollision(armour, T, ArmourType.HELMET);
 			}
-			PointSpawn armourS = new PointSpawn(armourG, new Vector2(BG.getX(), BG.getY()), armour);
-			armour.addComponent(armourG);
-			PickupCollision armourC = new PickupCollision(armour);
 			armour.addComponent(armourS);
 			armour.addComponent(armourC);
 			ShootEmUp.currentLevel.newEntities.add(armour);
@@ -129,7 +159,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 			AnimatedGraphics weaponG = new AnimatedGraphics(Art.bow, Art.base, true);
 			PointSpawn weaponS = new PointSpawn(weaponG, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - weaponG.getHeight()), weapon);
 			weapon.addComponent(weaponG);
-			PickupCollision weaponC = new PickupCollision(weapon);
+			PickupCollision weaponC = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.BOW);
 			weapon.addComponent(weaponS);
 			weapon.addComponent(weaponC);
 			ShootEmUp.currentLevel.newEntities.add(weapon);

@@ -1,8 +1,6 @@
 package Components.Inventory;
 
-import Display.Art;
-import GUI.Menus.GameOverMenu;
-import Main.ShootEmUp;
+import Components.Attack.PlayerAttack;
 
 public class PlayerInventory extends BasicInventory{
 	
@@ -10,36 +8,37 @@ public class PlayerInventory extends BasicInventory{
 	private final int MAX_EXP_BOUND = 18;
 	
 	private int expBound;
-	private int lives;
 	
-	public PlayerInventory(int level, int expBound, int lives) {
+	private PlayerAttack PA;
+	
+	public PlayerInventory(PlayerAttack PA, int level, int expBound) {
 		super(level);
-		this.expBound = expBound;
-		this.lives = lives;
-	}
-	
-	public int getExpBound() {
-		return expBound;
-	}
-
-	public void setExpBound(int expBound) {
+		this.PA = PA;
 		this.expBound = expBound;
 	}
 	
-	public int getLives() {
-		return lives;
-	}
-
-	public void setLives(int lives) {
-		this.lives = lives;
-	}
-	
-	public void removeLife() {
-		if(lives == 1){
-			ShootEmUp.paused = true;
-			ShootEmUp.menuStack.add(new GameOverMenu(Art.gameOverScreen))
-;		} else {
-			lives--;
+	public void giveItem(PickupType type, Subtype subtype){
+		switch(type){
+		case COIN: 
+			coins++;
+			break;
+		case POTION:
+			PotionType potionType = (PotionType) subtype;
+			switch(potionType){
+			case HEALTH:
+				PA.addHealth(5);
+				break;
+			case MANA:
+				PA.addMana(5);
+				break;
+			case SPEED:
+				break;
+			case KNOCKBACK:
+			}
+			break;
+		case ARMOUR:
+			break;
+		case WEAPON:
 		}
 	}
 	
@@ -54,5 +53,13 @@ public class PlayerInventory extends BasicInventory{
 				}		
 			}
 		}
+	}
+	
+	public int getExpBound() {
+		return expBound;
+	}
+
+	public void setExpBound(int expBound) {
+		this.expBound = expBound;
 	}
 }
