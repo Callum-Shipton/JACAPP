@@ -171,7 +171,7 @@ public class BackgroundMusic {
 		if(audioDevice == null) throw new RuntimeException("Default audio device could not be opened");
 		ALCCapabilities caps = audioDevice.getCapabilities();
 		String defaultDeviceSpecifier = alcGetString(0L, ALC_DEFAULT_DEVICE_SPECIFIER);
-		audioContext = ALContext.create(null, 44100, 60, false);
+		audioContext = ALContext.create();
 		if(audioContext == null) {
 			audioDevice.destroy();
 			throw new RuntimeException("context could not be made/current");
