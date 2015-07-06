@@ -20,7 +20,9 @@ public class PlayerInventory extends BasicInventory{
 	public void giveItem(PickupType type, Subtype subtype){
 		switch(type){
 		case COIN: 
-			coins++;
+			if(coins < 99){
+				coins++;
+			}
 			break;
 		case POTION:
 			PotionType potionType = (PotionType) subtype;
