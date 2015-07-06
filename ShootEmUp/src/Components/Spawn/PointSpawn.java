@@ -20,6 +20,7 @@ public class PointSpawn extends BaseSpawn implements SpawnComponent {
 	public void spawn(Entity e) {
 		BG.setX(spawnLoc.x());
 		BG.setY(spawnLoc.y());
+		e.send(Message.ENTITY_MOVED);
 	}
 
 	@Override

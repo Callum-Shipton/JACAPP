@@ -6,6 +6,7 @@ import Components.ComponentType;
 import Components.Message;
 import Components.Collision.PickupCollision;
 import Components.Graphical.AnimatedGraphics;
+import Components.Graphical.BaseGraphics;
 import Components.Spawn.BaseSpawn;
 import Components.Spawn.PointSpawn;
 import Components.Inventory.PlayerInventory;
@@ -17,10 +18,10 @@ import Object.Weapon;
 
 public class MeleeAttack extends BaseAttack implements AttackComponent {
 
-	AnimatedGraphics AG;
+	BaseGraphics BG;
 	
-	public MeleeAttack(BaseSpawn BS, AnimatedGraphics AG, Weapon weapon, int health, int healthRegen, int maxHealth){
-		this.AG = AG;
+	public MeleeAttack(BaseSpawn BS, BaseGraphics BG, Weapon weapon, int health, int healthRegen, int maxHealth){
+		this.BG = BG;
 		this.BS = BS;
 		this.setWeapon(weapon);
 		this.health = health;
@@ -32,9 +33,9 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 	@Override
 	public void attack(Entity e, int dir) {
 		if(fireRate <= 0){
-			if(getWeapon().isMelee()){
+			//if(getWeapon().isMelee()){
 				getWeapon().attack(e, dir);
-			}
+		//	}
 			fireRate = getWeapon().getFireRate();
 		}
 	}
@@ -79,7 +80,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 		//create coins
 		Entity coin = new Entity();
 		AnimatedGraphics coinG = new AnimatedGraphics(Art.coin, Art.base, true);
-		PointSpawn coinS = new PointSpawn(coinG, new Vector2(AG.getX() + AG.getWidth() - coinG.getWidth(), AG.getY() + AG.getHeight() - coinG.getHeight()), coin);
+		PointSpawn coinS = new PointSpawn(coinG, new Vector2(BG.getX() + BG.getWidth() - coinG.getWidth(), BG.getY() + BG.getHeight() - coinG.getHeight()), coin);
 		coin.addComponent(coinG);
 		PickupCollision coinC = new PickupCollision(coin);
 		coin.addComponent(coinS);
@@ -103,7 +104,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 			} else {
 				itemG = new AnimatedGraphics(Art.knockbackPotion, Art.base, true);
 			}
-			PointSpawn itemS = new PointSpawn(itemG, new Vector2(AG.getX() + AG.getWidth() - itemG.getWidth(),AG.getY()), item);
+			PointSpawn itemS = new PointSpawn(itemG, new Vector2(BG.getX() + BG.getWidth() - itemG.getWidth(),BG.getY()), item);
 			item.addComponent(itemG);
 			PickupCollision itemC = new PickupCollision(item);
 			item.addComponent(itemS);
@@ -122,7 +123,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 			} else {
 				armourG = new AnimatedGraphics(Art.helmet, Art.base, true);
 			}
-			PointSpawn armourS = new PointSpawn(armourG, new Vector2(AG.getX(), AG.getY()), armour);
+			PointSpawn armourS = new PointSpawn(armourG, new Vector2(BG.getX(), BG.getY()), armour);
 			armour.addComponent(armourG);
 			PickupCollision armourC = new PickupCollision(armour);
 			armour.addComponent(armourS);
@@ -131,7 +132,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 		} else if(prob <= 50) {	
 			Entity weapon = new Entity();
 			AnimatedGraphics weaponG = new AnimatedGraphics(Art.bow, Art.base, true);
-			PointSpawn weaponS = new PointSpawn(weaponG, new Vector2(AG.getX(), AG.getY() + AG.getHeight() - weaponG.getHeight()), weapon);
+			PointSpawn weaponS = new PointSpawn(weaponG, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - weaponG.getHeight()), weapon);
 			weapon.addComponent(weaponG);
 			PickupCollision weaponC = new PickupCollision(weapon);
 			weapon.addComponent(weaponS);

@@ -1,9 +1,13 @@
 package Components.Movement;
 
+import java.util.HashSet;
+
 import Components.Component;
 import Components.ComponentType;
+import Components.Message;
 import Components.Collision.BaseCollision;
 import Components.Graphical.BaseGraphics;
+import Main.ShootEmUp;
 import Math.Vector2;
 import Math.Vector4;
 import Object.Entity;
@@ -48,5 +52,15 @@ public abstract class BaseMovement extends Component implements MovementComponen
 
 	public ComponentType getType() {
 		return type;
+	}
+	
+	@Override
+	public void receive(Message m, Entity e) {
+		if(m == Message.ENTITY_MOVED){
+			ShootEmUp.currentLevel.eMap.removeEntity(BC.getGridPos(), e);
+			BC.setGridPos(ShootEmUp.currentLevel.eMap.getGridPos(e));
+			ShootEmUp.currentLevel.eMap.addEntity(BC.getGridPos(), e);
+		}
+		
 	}
 }

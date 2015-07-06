@@ -8,7 +8,10 @@ import Components.Attack.BaseAttack;
 import Components.Attack.MageAttack;
 import Components.Attack.MeleeAttack;
 import Components.Attack.WarriorAttack;
+import Components.Collision.BaseCollision;
 import Components.Collision.RigidCollision;
+import Components.Control.AIControl;
+import Components.Control.BaseControl;
 import Components.Control.HomingControl;
 import Components.Control.PlayerControl;
 import Components.Graphical.AnimatedGraphics;
@@ -30,11 +33,11 @@ public class Spawner {
 	private int counter = 0;
 	private final int ENEMY_SPAWN_RATE = 150;
 	
-	private AnimatedGraphics enemyGraphics;
+	private BaseGraphics enemyGraphics;
 	private PointSpawn enemySpawn;
-	private MeleeAttack enemyAttack;
-	private HomingControl enemyControl;
-	private RigidCollision enemyCollision;
+	private BaseAttack enemyAttack;
+	private BaseControl enemyControl;
+	private BaseCollision enemyCollision;
 	private BaseMovement enemyMovement;
 	
 	private Entity test;
@@ -102,11 +105,11 @@ public class Spawner {
 	private void testEnemy(){
 		boolean collide = false;
 		test = new Entity();
-		AnimatedGraphics AG = new AnimatedGraphics(Art.player, Art.base, false);
-		test.addComponent(AG);
-		RigidCollision RC = new RigidCollision(test);
-		test.addComponent(RC);
-		test.addComponent(new BasicMovement(test, RC, AG, 5));
+		BaseGraphics BG = new AnimatedGraphics(Art.player, Art.base, false);
+		test.addComponent(BG);
+		BaseCollision BC = new RigidCollision(test);
+		test.addComponent(BC);
+		test.addComponent(new BasicMovement(test, BC, BG, 5));
 		do {
 			collide = false;
 			((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).setX((float)rand.nextInt((ShootEmUp.currentLevel.map.getBackgroundTiles().length - 1) * 32));
@@ -123,32 +126,32 @@ public class Spawner {
 	
 	private void smallEnemy(){
 		enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base, false); 
-		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(2, 100, 10, false, 1, 1, Art.iceMagic), 10, 100, 10);
+		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
+		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(1, 100, 10, false, 1, 1, Art.iceMagic), 10, 100, 10);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
 		enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 7);
-		enemyControl = new HomingControl(enemyGraphics, enemyMovement);
+		enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
 	}
 	
 	private void largeEnemy(){
 		enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base, false); 
-		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(10, 100, 10, false, 1, 1, Art.iceMagic), 10, 100, 10);
+		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
+		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(1, 100, 10, false, 1, 1, Art.iceMagic), 10, 100, 10);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
 		enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 2);
-		enemyControl = new HomingControl(enemyGraphics, enemyMovement);
+		enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
 	}
 	
 	private void flyingEnemy(){
 		enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base, false); 
-		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(5, 100, 10, false, 1, 1, Art.iceMagic), 10, 100, 10);
+		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
+		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(1, 100, 10, false, 1, 1, Art.iceMagic), 10, 100, 10);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
 		enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);
-		enemyControl = new HomingControl(enemyGraphics, enemyMovement);
+		enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
 	}
 	
 	private void addEnemy(){

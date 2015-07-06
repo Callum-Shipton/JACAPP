@@ -5,6 +5,7 @@ import java.nio.FloatBuffer;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL20;
 
+import Components.Message;
 import Display.Art;
 import Display.Image;
 import Display.Renderer;
@@ -63,6 +64,13 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 		GL20.glUseProgram(0);
 	}
 
+	@Override
+	public void receive(Message m, Entity e) {
+		if(m == Message.ENTITY_MOVED){
+			scrollScreen(e);
+		}
+		
+	}
 
 
 

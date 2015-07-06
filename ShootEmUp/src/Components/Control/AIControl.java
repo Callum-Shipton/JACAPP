@@ -23,15 +23,17 @@ import Object.Weapon;
 public class AIControl extends BaseControl{
 	
 	private BaseMovement BM;
-	private AnimatedGraphics AG;
+	private BaseGraphics BG;
+	private BaseAttack BA;
 	
 	private int counter = 0;
 	private Entity target;
 	
 	//private Vector2 target;
 	
-	public AIControl(AnimatedGraphics AG, BaseMovement BM){
-		this.AG = AG;
+	public AIControl(BaseGraphics BG, BaseAttack BA, BaseMovement BM){
+		this.BA = BA;
+		this.BG = BG;
 		this.BM = BM;
 	}
 	
@@ -42,30 +44,30 @@ public class AIControl extends BaseControl{
 		
 		if(target != null){
 			Vector2 movement = new Vector2(0.0f, 0.0f);
-			if (y < AG.getY()) {
-				if(y - AG.getY() > -BM.getSpeed()){
-					movement.add(0.0f, ((1.0f / BM.getSpeed()) * (y - AG.getY())));
+			if (y < BG.getY()) {
+				if(y - BG.getY() > -BM.getSpeed()){
+					movement.add(0.0f, ((1.0f / BM.getSpeed()) * (y - BG.getY())));
 				} else {
 					movement.add(0.0f, -1.0f);
 				}
 			}
-			if (x < AG.getX()) {
-				if(x - AG.getX() > -BM.getSpeed()){
-					movement.add(((1.0f / BM.getSpeed()) * (x - AG.getX())), 0.0f);
+			if (x < BG.getX()) {
+				if(x - BG.getX() > -BM.getSpeed()){
+					movement.add(((1.0f / BM.getSpeed()) * (x - BG.getX())), 0.0f);
 				} else {
 					movement.add(-1.0f, 0.0f);
 				}
 			}
-			if (y > AG.getY()) {
-				if(y - AG.getY() < BM.getSpeed()){
-					movement.add(0.0f, ((1.0f / BM.getSpeed()) * (y - AG.getY())));
+			if (y > BG.getY()) {
+				if(y - BG.getY() < BM.getSpeed()){
+					movement.add(0.0f, ((1.0f / BM.getSpeed()) * (y - BG.getY())));
 				} else {
 					movement.add(0.0f, 1.0f);
 				}
 			}
-			if (x > AG.getX()) {
-				if(x - AG.getX() < BM.getSpeed()){
-					movement.add(((1.0f / BM.getSpeed()) * (x - AG.getX())), 0.0f);
+			if (x > BG.getX()) {
+				if(x - BG.getX() < BM.getSpeed()){
+					movement.add(((1.0f / BM.getSpeed()) * (x - BG.getX())), 0.0f);
 				} else {
 					movement.add(1.0f, 0.0f);
 				}
@@ -73,15 +75,15 @@ public class AIControl extends BaseControl{
 			if (movement.length() > 0) {
 				if (movement.length() > 1)
 					movement.normalize();
-				AG.setAnimating(true);
+				if(BG instanceof AnimatedGraphics) ((AnimatedGraphics) BG).setAnimating(true);
 				BM.move(e, movement);
-				AG.setDirection((int) (Math.round(movement.Angle()) / 45));
+				if(BG instanceof AnimatedGraphics) ((AnimatedGraphics) BG).setDirection((int) (Math.round(movement.Angle()) / 45));
 			}
-			else AG.setAnimating(false);
+			else if(BG instanceof AnimatedGraphics) ((AnimatedGraphics) BG).setAnimating(false);
 		}
 		counter++;
 		if (counter == 30){
-			//weapon.attack(AG.getX(), AG.getY(), getDirection(), getTeam());
+			BA.attack(e, (BG instanceof AnimatedGraphics) ? ((AnimatedGraphics) BG).getDirection() : 0);
 			counter = 0;
 		}
 	}

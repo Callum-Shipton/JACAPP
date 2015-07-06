@@ -5,6 +5,7 @@ import java.util.HashSet;
 import Components.ComponentType;
 import Components.Message;
 import Components.Collision.BaseCollision;
+import Components.Collision.HitCollision;
 import Components.Graphical.BaseGraphics;
 import Main.ShootEmUp;
 import Math.Vector2;
@@ -43,8 +44,7 @@ public class BasicMovement extends BaseMovement {
 				collVec = doesCollide(e, character);
 				if (collVec != null) {
 					hit = character;
-					if (((BaseCollision) hit.getComponent(ComponentType.COLLISION))
-							.getMoveBack() == true) {
+					if (((BaseCollision) hit.getComponent(ComponentType.COLLISION)).getMoveBack() == true && !(BC instanceof HitCollision)) {
 						moveBackY(e, moveVec, collVec);
 						newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
 					}
@@ -76,7 +76,7 @@ public class BasicMovement extends BaseMovement {
 				collVec = doesCollide(e, character);
 				if (collVec != null) {
 					hit = character;
-					if (((BaseCollision) hit.getComponent(ComponentType.COLLISION)).getMoveBack() == true) {
+					if (((BaseCollision) hit.getComponent(ComponentType.COLLISION)).getMoveBack() == true && !(BC instanceof HitCollision)) {
 						moveBackX(e, moveVec, collVec);
 						newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
 					}
@@ -143,11 +143,6 @@ public class BasicMovement extends BaseMovement {
 					- (BG.getY() + BG.getHeight()));
 		}
 		return null;
-	}
-
-	public void receive(Message m, Entity e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public int getSpeed() {
