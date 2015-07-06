@@ -92,7 +92,8 @@ public class Art {
 	public static Image healthBar;
 	public static Image manaBar;
 	public static Image xpBar;
-	public static Image BarCoin;
+	public static Image level;
+	public static Image wave;
 	public static Image numbers;
 	
 	//Level map file locations
@@ -288,7 +289,8 @@ public class Art {
 		healthBar = new Image("/HUD/BarHealth.png",1,2);			
 		manaBar = new Image("/HUD/BarMana.png",1,2);
 		xpBar = new Image("/HUD/BarXP.png",1,2);
-		BarCoin = new Image("/HUD/BarCoin.png",1,1);
+		level = new Image("/HUD/Level.png",1,1);
+		wave = new Image("/HUD/Wave.png",1,1);
 		numbers = new Image("/HUD/Numbers.png",10,1);
 	}
 
