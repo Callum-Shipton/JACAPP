@@ -25,7 +25,7 @@ public class Hud extends GuiComponent{
 	public Hud(Entity player){
 		this.player = player;
 		hudElems = new CopyOnWriteArrayList<HudElement>();
-		infoBox = new HudElement(0.0f,0.0f,189.0f,110.0f, Art.infoBox);
+		infoBox = new HudElement(0.0f,0.0f,189.0f,110.0f, Art.infoBox, false);
 		hudElems.add(infoBox);
 		healthBar = new HudBar(10.0f, 10.0f, Art.healthBar.getWidth()/Art.healthBar.getFWidth(), Art.healthBar.getHeight()/Art.healthBar.getFHeight(), Art.healthBar);
 		hudElems.add(healthBar);
@@ -33,7 +33,7 @@ public class Hud extends GuiComponent{
 		hudElems.add(manaBar);
 		xpBar = new HudBar(10.0f, 60.0f, Art.xpBar.getWidth()/Art.xpBar.getFWidth(), Art.xpBar.getHeight()/Art.xpBar.getFHeight(), Art.xpBar);
 		hudElems.add(xpBar);
-		moneyCounter = new HudElement(10.0f, 82.0f, Art.BarCoin.getWidth(), Art.BarCoin.getHeight(), Art.BarCoin);
+		moneyCounter = new HudElement(10.0f, 82.0f, (Art.coin.getWidth() / Art.coin.getFWidth()), Art.coin.getHeight(), Art.coin, true);
 		hudElems.add(moneyCounter);
 	}
 	
