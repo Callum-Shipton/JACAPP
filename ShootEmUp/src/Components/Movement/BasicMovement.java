@@ -3,7 +3,6 @@ package Components.Movement;
 import java.util.HashSet;
 
 import Components.ComponentType;
-import Components.Message;
 import Components.Collision.BaseCollision;
 import Components.Collision.HitCollision;
 import Components.Graphical.BaseGraphics;

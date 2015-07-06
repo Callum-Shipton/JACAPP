@@ -1,7 +1,5 @@
 package Components.Movement;
 
-import java.util.HashSet;
-
 import Components.Component;
 import Components.ComponentType;
 import Components.Message;
