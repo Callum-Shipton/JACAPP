@@ -38,9 +38,9 @@ public class Hud extends GuiComponent{
 		hudElems.add(xpBar);
 		moneyCounter = new HudElement(10.0f, 82.0f, (Art.coin.getWidth() / Art.coin.getFWidth()), Art.coin.getHeight(), Art.coin, true);
 		hudElems.add(moneyCounter);
-		levelCounter = new HudElement(50.0f, 84.0f, Art.level.getWidth(), Art.level.getHeight(), Art.level, false);
+		levelCounter = new HudElement(68.0f, 84.0f, Art.level.getWidth(), Art.level.getHeight(), Art.level, false);
 		hudElems.add(levelCounter);
-		waveCounter = new HudElement(118.0f, 83.0f, Art.wave.getWidth(), Art.wave.getHeight(), Art.wave, false);
+		waveCounter = new HudElement(154.0f, 83.0f, Art.wave.getWidth(), Art.wave.getHeight(), Art.wave, false);
 		hudElems.add(waveCounter);
 	}
 	
@@ -62,18 +62,18 @@ public class Hud extends GuiComponent{
 		}
 		
 		if(level < 10){
-			r.draw(Art.numbers, new Vector2(95,82), size, 0.0f, new Vector2(level,1), maxTex);
+			r.draw(Art.numbers, new Vector2(113,82), size, 0.0f, new Vector2(level,1), maxTex);
 		} else {
-			r.draw(Art.numbers, new Vector2(95,82), size, 0.0f, new Vector2((int) Math.floor(level / 10),1), maxTex);
-			r.draw(Art.numbers, new Vector2(115,82), size, 0.0f, new Vector2((level % 10),1), maxTex);
+			r.draw(Art.numbers, new Vector2(113,82), size, 0.0f, new Vector2((int) Math.floor(level / 10),1), maxTex);
+			r.draw(Art.numbers, new Vector2(133,82), size, 0.0f, new Vector2((level % 10),1), maxTex);
 		}
 		
 		int wave =  ShootEmUp.currentLevel.spawner.getWave();
 		if(wave < 10){
-			r.draw(Art.numbers, new Vector2(164,82), size, 0.0f, new Vector2(wave,1), maxTex);
+			r.draw(Art.numbers, new Vector2(200,82), size, 0.0f, new Vector2(wave,1), maxTex);
 		} else {
-			r.draw(Art.numbers, new Vector2(164,82), size, 0.0f, new Vector2((int) Math.floor(wave / 10),1), maxTex);
-			r.draw(Art.numbers, new Vector2(184,82), size, 0.0f, new Vector2(wave % 10,1), maxTex);
+			r.draw(Art.numbers, new Vector2(200,82), size, 0.0f, new Vector2((int) Math.floor(wave / 10),1), maxTex);
+			r.draw(Art.numbers, new Vector2(220,82), size, 0.0f, new Vector2(wave % 10,1), maxTex);
 		}
 	}
 
