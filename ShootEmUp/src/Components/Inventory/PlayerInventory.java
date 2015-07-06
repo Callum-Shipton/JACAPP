@@ -16,6 +16,8 @@ public class PlayerInventory extends BasicInventory{
 	private int expBound;
 	
 	private HashSet<InventoryItem> inventory;
+	private HashSet<PotionType> potions = new HashSet<PotionType>(); 
+	private int maxPotions = 3;
 	
 	private PlayerAttack PA;
 	private BaseMovement BM;
@@ -37,17 +39,21 @@ public class PlayerInventory extends BasicInventory{
 			break;
 		case POTION:
 			PotionType potionType = (PotionType) subtype;
-			switch(potionType){
-			case HEALTH:
-				PA.addHealth(5);
-				break;
-			case MANA:
-				PA.addMana(5);
-				break;
-			case SPEED:
-				BM.increaseSpeed(2);
-				break;
-			case KNOCKBACK:
+			if(potions.size() < maxPotions){
+				potions.add(potionType);
+			} else {
+				switch(potionType){
+				case HEALTH:
+					PA.addHealth(5);
+					break;
+				case MANA:
+					PA.addMana(5);
+					break;
+				case SPEED:
+					BM.increaseSpeed(2);
+					break;
+				case KNOCKBACK:
+				}
 			}
 			break;
 		case ARMOUR:
