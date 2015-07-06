@@ -28,7 +28,7 @@ public class HudElement extends GuiComponent {
 		d.draw(i, pos, getSize(), 0.0f, getCurrFrame(), maxFrame);
 	}
 
-	public void update(float v){
+	public void update(){
 		if(isAnimated){
 			if(currFrame.x() < maxFrame.x()){
 				currFrame.set((currFrame.x() + 1), currFrame.y());

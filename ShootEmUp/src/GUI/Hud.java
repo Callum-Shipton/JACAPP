@@ -63,6 +63,10 @@ public class Hud extends GuiComponent{
 	}
 
 	public void update() {
+		for (HudElement h : hudElems){
+			h.update();
+		}
+		
 		int maxHealth = ((BaseAttack)player.getComponent(ComponentType.ATTACK)).getMaxHealth();
 		int health = ((BaseAttack)player.getComponent(ComponentType.ATTACK)).getHealth();
 		int maxMana = ((PlayerAttack)player.getComponent(ComponentType.ATTACK)).getMaxMana();
