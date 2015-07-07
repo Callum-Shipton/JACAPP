@@ -1,14 +1,14 @@
 package Object;
 
-import Components.Inventory.ArmourType;
+import Components.Inventory.TypeArmour;
 import Display.Image;
 
 public class Armour extends InventoryItem{
 	
-	private ArmourType type;
+	private TypeArmour type;
 	private int defence;
 	
-	public Armour(ArmourType type, int defence, Image inventoryImage){
+	public Armour(TypeArmour type, int defence, Image inventoryImage){
 		this.type = type;
 		this.defence = defence;
 		this.inventoryImage = inventoryImage;
@@ -18,7 +18,7 @@ public class Armour extends InventoryItem{
 		return defence;
 	}
 
-	public ArmourType getType() {
+	public TypeArmour getType() {
 		return type;
 	}
 

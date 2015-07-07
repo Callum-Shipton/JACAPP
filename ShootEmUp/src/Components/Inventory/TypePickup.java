@@ -1,5 +1,5 @@
 package Components.Inventory;
 
-public enum PickupType {
+public enum TypePickup {
 	COIN, POTION, ARMOUR, WEAPON
 }

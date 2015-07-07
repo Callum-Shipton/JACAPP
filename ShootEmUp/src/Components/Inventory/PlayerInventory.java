@@ -16,7 +16,7 @@ public class PlayerInventory extends BasicInventory{
 	private int expBound;
 	
 	private ArrayList<InventoryItem> inventory;
-	private ArrayList<PotionType> potions; 
+	private ArrayList<TypePotion> potions; 
 	private int maxPotions = 3;
 	
 	protected Armour boots = null;
@@ -33,7 +33,7 @@ public class PlayerInventory extends BasicInventory{
 		this.BM = BM;
 		this.expBound = expBound;
 		inventory = new ArrayList<InventoryItem>();
-		potions = new ArrayList<PotionType>();
+		potions = new ArrayList<TypePotion>();
 	}
 	
 	public void equipItem(int itemNo){
@@ -58,7 +58,7 @@ public class PlayerInventory extends BasicInventory{
 		}
 	}
 	
-	public void giveItem(PickupType type, Subtype subtype){
+	public void giveItem(TypePickup type, Subtype subtype){
 		switch(type){
 		case COIN: 
 			if(coins < 99){
@@ -66,7 +66,7 @@ public class PlayerInventory extends BasicInventory{
 			}
 			break;
 		case POTION:
-			PotionType potionType = (PotionType) subtype;
+			TypePotion potionType = (TypePotion) subtype;
 			if(potions.size() < maxPotions){
 				potions.add(potionType);
 			} else {
@@ -85,7 +85,7 @@ public class PlayerInventory extends BasicInventory{
 			}
 			break;
 		case ARMOUR:
-			ArmourType armourType = (ArmourType) subtype;
+			TypeArmour armourType = (TypeArmour) subtype;
 			switch(armourType){
 			case BOOTS:
 				inventory.add(new Armour(armourType, 2, Art.bootsButton));
@@ -101,7 +101,7 @@ public class PlayerInventory extends BasicInventory{
 			}
 			break;
 		case WEAPON:
-			WeaponType weaponType = (WeaponType) subtype;
+			TypeWeapon weaponType = (TypeWeapon) subtype;
 			switch(weaponType){
 			case SWORD:
 				inventory.add(new Weapon(weaponType, 3, 3, 3, true, 1, 0, Art.swordProjectile, Art.swordButton));

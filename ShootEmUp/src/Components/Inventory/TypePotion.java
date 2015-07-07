@@ -1,5 +1,5 @@
 package Components.Inventory;
 
-public enum PotionType implements Subtype{
+public enum TypePotion implements Subtype{
 	HEALTH, MANA, SPEED, KNOCKBACK
 }

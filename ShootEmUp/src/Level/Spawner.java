@@ -18,7 +18,7 @@ import Components.Graphical.AnimatedGraphics;
 import Components.Graphical.BaseGraphics;
 import Components.Graphical.PlayerGraphics;
 import Components.Inventory.PlayerInventory;
-import Components.Inventory.WeaponType;
+import Components.Inventory.TypeWeapon;
 import Components.Movement.BaseMovement;
 import Components.Movement.BasicMovement;
 import Components.Movement.FlyingMovement;
@@ -61,11 +61,11 @@ public class Spawner {
 		PlayerAttack a;
 		
 		if(type == 0){
-			a = new WarriorAttack(s, new Weapon(WeaponType.SWORD, 5, 100, 10, false, 1, 0, Art.swordProjectile, Art.bow), 3, 100, 3, 3, 50, 3, 3);
+			a = new WarriorAttack(s, new Weapon(TypeWeapon.SWORD, 5, 100, 10, false, 1, 0, Art.swordProjectile, Art.bow), 3, 100, 3, 3, 50, 3, 3);
 		} else if (type == 1){
-			 a = new ArcherAttack(s, new Weapon(WeaponType.BOW, 5, 100, 10, false, 1, 0, Art.arrow, Art.bow), 3, 100, 3, 3, 50, 3, 3);
+			 a = new ArcherAttack(s, new Weapon(TypeWeapon.BOW, 5, 100, 10, false, 1, 0, Art.arrow, Art.bow), 3, 100, 3, 3, 50, 3, 3);
 		} else {
-			a = new MageAttack(s, new Weapon(WeaponType.FIRE_STAFF, 5, 100, 10, false, 1, 0, Art.fireMagic, Art.bow), 3, 100, 3, 3, 50, 3, 3);
+			a = new MageAttack(s, new Weapon(TypeWeapon.FIRE_STAFF, 5, 100, 10, false, 1, 0, Art.fireMagic, Art.bow), 3, 100, 3, 3, 50, 3, 3);
 		}
 		
 		player.addComponent(g);
@@ -150,7 +150,7 @@ public class Spawner {
 	private void smallEnemy(){
 		enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base, false); 
 		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(WeaponType.ICE_STAFF, 1, 100, 10, false, 1, 1, Art.iceMagic, Art.bow), 10, 100, 10);
+		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(TypeWeapon.ICE_STAFF, 1, 100, 10, false, 1, 1, Art.iceMagic, Art.bow), 10, 100, 10);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
 		enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 7);
@@ -160,7 +160,7 @@ public class Spawner {
 	private void largeEnemy(){
 		enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base, false); 
 		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(WeaponType.ICE_STAFF, 1, 100, 10, false, 1, 1, Art.iceMagic, Art.bow), 10, 100, 10);
+		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(TypeWeapon.ICE_STAFF, 1, 100, 10, false, 1, 1, Art.iceMagic, Art.bow), 10, 100, 10);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
 		enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 2);
@@ -170,7 +170,7 @@ public class Spawner {
 	private void flyingEnemy(){
 		enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base, false); 
 		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(WeaponType.ICE_STAFF, 1, 100, 10, false, 1, 1, Art.iceMagic, Art.bow), 10, 100, 10);
+		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, new Weapon(TypeWeapon.ICE_STAFF, 1, 100, 10, false, 1, 1, Art.iceMagic, Art.bow), 10, 100, 10);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
 		enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);

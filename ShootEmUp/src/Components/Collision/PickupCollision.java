@@ -3,7 +3,7 @@ package Components.Collision;
 import Components.ComponentType;
 import Components.Message;
 import Components.Control.PlayerControl;
-import Components.Inventory.PickupType;
+import Components.Inventory.TypePickup;
 import Components.Inventory.PlayerInventory;
 import Components.Inventory.Subtype;
 import Main.ShootEmUp;
@@ -11,10 +11,10 @@ import Object.Entity;
 
 public class PickupCollision extends BaseCollision {
 
-	PickupType type;
+	TypePickup type;
 	Subtype subtype;
 	
-	public PickupCollision(Entity e, PickupType type, Subtype subtype){
+	public PickupCollision(Entity e, TypePickup type, Subtype subtype){
 		this.type = type;
 		this.subtype = subtype;
 		
