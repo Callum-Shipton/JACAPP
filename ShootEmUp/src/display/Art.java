@@ -314,8 +314,8 @@ public class Art {
 		
 		//Load Armour maps
 		shoes = new Image("/Images/Drops/Armour/Boots.png",8,1);
-		legs = new Image("/Images/Drops/Armour/Legs.png",3,1);
-		chest = new Image("/Images/Drops/Armour/Chest.png",3,1);
+		legs = new Image("/Images/Drops/Armour/Legs.png",4,1);
+		chest = new Image("/Images/Drops/Armour/Chest.png",4,1);
 		helmet = new Image("/Images/Drops/Armour/Helmet.png",7,1);
 		
 		//Load Item maps
