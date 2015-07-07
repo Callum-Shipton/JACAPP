@@ -306,7 +306,7 @@ public class Art {
 		knockbackPotion = new Image("/Items/KnockbackPotion.png",3,1);
 		
 		//Load Weapon maps
-		sword = new Image("/Weapons/Bow.png",8,1);
+		sword = new Image("/Weapons/Sword.png",8,1);
 		battleaxe = new Image("/Weapons/Battleaxe.png",8,1);
 		mace = new Image("/Weapons/Mace.png",8,1);
 		bow = new Image("/Weapons/Bow.png",8,1);

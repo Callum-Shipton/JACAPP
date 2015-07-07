@@ -60,7 +60,7 @@ public class InventoryMenu extends GuiMenu {
 			InventoryItem item = items.next();
 			itemButtons.add(addButton(new Button(item.getInventoryImage(), x + (item.getInventoryImage().getWidth() * row), y + (item.getInventoryImage().getHeight() * column), item.getInventoryImage().getWidth(), item.getInventoryImage().getHeight() / 2)));
 			row++;
-			if(row > 5){
+			if(row > 10){
 				row = 0;
 				column++;
 			}
