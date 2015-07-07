@@ -40,10 +40,7 @@ public class PlayerAttack extends BaseAttack {
 	@Override
 	public void attack(Entity e, int dir) {
 		if(fireRate <= 0){
-			if(getWeapon().isMelee()){
-				getWeapon().attack(e, dir);
-			}
-			else if(mana >= getWeapon().getManaCost()){
+			if(mana >= getWeapon().getManaCost()){
 				getWeapon().attack(e, dir);
 				mana-=getWeapon().getManaCost();
 			}
