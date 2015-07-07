@@ -88,16 +88,16 @@ public class PlayerInventory extends BasicInventory{
 			ArmourType armourType = (ArmourType) subtype;
 			switch(armourType){
 			case BOOTS:
-				inventory.add(new Armour(armourType, 2, Art.shoes));
+				inventory.add(new Armour(armourType, 2, Art.bootsButton));
 				break;
 			case LEGS:
-				inventory.add(new Armour(armourType, 5, Art.legs));
+				inventory.add(new Armour(armourType, 5, Art.legsButton));
 				break;
 			case CHESTPLATE:
-				inventory.add(new Armour(armourType, 10, Art.chest));
+				inventory.add(new Armour(armourType, 10, Art.chestButton));
 				break;
 			case HELMET:
-				inventory.add(new Armour(armourType, 7, Art.helmet));
+				inventory.add(new Armour(armourType, 7, Art.helmetButton));
 			}
 			break;
 		case WEAPON:

@@ -54,6 +54,11 @@ public class Art {
 	public static Image fireStaffButton;
 	public static Image earthStaffButton;
 	
+	public static Image bootsButton;
+	public static Image legsButton;
+	public static Image chestButton;
+	public static Image helmetButton;
+	
 	public static Image healthButton;
 	public static Image healthRegenButton;
 	public static Image manaButton;
@@ -270,6 +275,11 @@ public class Art {
 		iceStaffButton = new Image("/Buttons/IceStaffButton.png",1,2);
 		fireStaffButton = new Image("/Buttons/FireStaffButton.png",1,2);
 		earthStaffButton = new Image("/Buttons/EarthStaffButton.png",1,2);
+		
+		bootsButton = new Image("/Buttons/ShoesButton.png",1,2);
+		legsButton = new Image("/Buttons/LegsButton.png",1,2);
+		chestButton = new Image("/Buttons/ChestButton.png",1,2);
+		helmetButton = new Image("/Buttons/HelmetButton.png",1,2);
 		
 		//Load tile maps
 		background = new Image("/Tiles/background.png",4,4);
