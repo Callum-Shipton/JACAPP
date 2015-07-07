@@ -1,6 +1,5 @@
 package level;
 
-import java.util.HashSet;
 import java.util.Random;
 
 import object.Entity;

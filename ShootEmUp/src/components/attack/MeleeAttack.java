@@ -1,25 +1,11 @@
 package components.attack;
 
-import java.util.Random;
-
 import object.Entity;
 import object.Weapon;
 import main.ShootEmUp;
-import math.Vector2;
-import components.ComponentType;
 import components.Message;
-import components.collision.PickupCollision;
-import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
-import components.inventory.PlayerInventory;
-import components.inventory.TypeArmour;
-import components.inventory.TypeCoin;
-import components.inventory.TypePickup;
-import components.inventory.TypePotion;
-import components.inventory.TypeWeapon;
 import components.spawn.BaseSpawn;
-import components.spawn.PointSpawn;
-import display.Art;
 
 public class MeleeAttack extends BaseAttack implements AttackComponent {
 
