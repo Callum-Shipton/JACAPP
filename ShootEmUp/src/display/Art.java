@@ -33,6 +33,9 @@ public class Art {
 	
 	public static Image backButton;
 	
+	public static Image controlsButton;
+	public static Image soundButton;
+	
 	public static Image level1Button;
 	public static Image level2Button;
 	
@@ -250,6 +253,9 @@ public class Art {
 		exitButton = new Image("/Buttons/exitButton.png",1,2);
 		
 		backButton = new Image("/Buttons/backButton.png",1,2);
+		
+		controlsButton = new Image("/Buttons/ControlsButton.png",1,2);
+		soundButton = new Image("/Buttons/SoundButton.png",1,2);
 		
 		level1Button = new Image("/Buttons/level1Button.png",1,2);
 		level2Button = new Image("/Buttons/level2Button.png",1,2);
