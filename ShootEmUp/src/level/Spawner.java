@@ -162,12 +162,10 @@ public class Spawner {
 	}
 	
 	public void checkSpawn(Entity e){
-		BasicMovement BM = (BasicMovement)e.getComponent(ComponentType.MOVEMENT);
-		if(!(BM.checkCollisionY(e, new Vector2(0,0)) || BM.checkCollisionX(e, new Vector2(0,0)))){
-			ShootEmUp.currentLevel.newEntities.add(e);
-		} else {
-			ShootEmUp.currentLevel.eMap.removeEntity(((BaseCollision)e.getComponent(ComponentType.COLLISION)).getGridPos(), e);
-		}
+		BasicMovement BM = (BasicMovement) e.getComponent(ComponentType.MOVEMENT);
+		ShootEmUp.currentLevel.newEntities.add(e);
+		BM.checkCollisionY(e, new Vector2(0,0));
+		BM.checkCollisionX(e, new Vector2(0,0));
 	}
 	
 	private void smallEnemy(){
