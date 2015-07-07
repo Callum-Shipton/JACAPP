@@ -93,16 +93,19 @@ public class Spawner {
 				//creating new Enemy
 				newEnemy = new Entity();
 				
-				//randomly chooses an enemy
-				int prob = rand.nextInt(3);
-				if(prob == 0){
-					smallEnemy();
-				} else if(prob == 1){
-					largeEnemy();
+				if((totalEnemies == 0) && (wave == 20)){
+					bossEnemy();
 				} else {
-					flyingEnemy();
-				}			
-				
+					//randomly chooses an enemy
+					int prob = rand.nextInt(3);
+					if(prob == 0){
+						smallEnemy();
+					} else if(prob == 1){
+						largeEnemy();
+					} else {
+						flyingEnemy();
+					}			
+				}
 				//creates the enemy and adds it to the level
 				addEnemy();
 				totalEnemies++;
@@ -174,6 +177,17 @@ public class Spawner {
 		enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base, false); 
 		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
 		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, WeaponBuilder.buildWeapon(TypeWeapon.ICE_STAFF, 1), 10, 100, 10);
+		newEnemy.addComponent(enemyGraphics);
+		enemyCollision = new RigidCollision(newEnemy);
+		enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);
+		enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
+		enemyInventory = new EnemyInventory(enemyGraphics, 1);
+	}
+	
+	private void bossEnemy(){
+		enemyGraphics = new AnimatedGraphics(Art.bossEnemy, Art.base, false); 
+		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
+		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, WeaponBuilder.buildWeapon(TypeWeapon.EARTH_STAFF, 1), 1000, 100, 1000);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
 		enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);

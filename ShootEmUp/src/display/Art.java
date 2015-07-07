@@ -75,6 +75,7 @@ public class Art {
 	public static Image enemy;
 	public static Image smallEnemy;
 	public static Image flyingEnemy;
+	public static Image bossEnemy;
 	
 	//Drop maps
 	public static Image coin;
@@ -292,6 +293,7 @@ public class Art {
 		enemy = new Image("/Characters/Enemy.png",6,8);
 		smallEnemy = new Image("/Characters/SmallEnemy.png",6,8);
 		flyingEnemy = new Image("/Characters/FlyingEnemy.png",6,8);
+		bossEnemy = new Image("/Characters/BossEnemy.png",6,8);
 		
 		//Load particle maps
 		coin = new Image("/img/Coin.png",6,1);
