@@ -6,6 +6,8 @@ import Main.ShootEmUp;
 
 public abstract class PlayerAttack extends BaseAttack {
 	
+	protected TypeAttack type;
+	
 	protected int lives;
 	protected int mana;
 	protected int manaRegen;

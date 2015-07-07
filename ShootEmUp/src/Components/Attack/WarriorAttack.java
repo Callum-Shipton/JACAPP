@@ -19,6 +19,7 @@ public class WarriorAttack extends PlayerAttack implements AttackComponent {
 		this.maxMana = maxMana;
 		this.maxManaRegen = manaRegen;
 		this.lives = lives;
+		type = TypeAttack.WARRIOR;
 		
 	}
 	
