@@ -43,12 +43,6 @@ public class Art {
 	public static Image archerButton;
 	public static Image mageButton;
 	
-	public static Image invButton;
-	public static Image skillButton;
-	public static Image magicButton;
-	public static Image mapButton;
-	public static Image saveButton;
-	
 	public static Image swordButton;
 	public static Image battleaxeButton;
 	public static Image maceButton;
@@ -67,6 +61,12 @@ public class Art {
 	public static Image healthRegenButton;
 	public static Image manaButton;
 	public static Image manaRegenButton;
+	
+	public static Image invButton;
+	public static Image skillButton;
+	public static Image magicButton;
+	public static Image mapButton;
+	public static Image saveButton;
 	
 	//Tile maps
 	public static Image background;
@@ -123,8 +123,8 @@ public class Art {
 	public static Image numbers;
 	
 	//Level map file locations
-	public static String level1 = "/levels/level1.png";
-	public static String level2 = "/levels/level2.png";
+	public static String level1 = "/Levels/Level1.png";
+	public static String level2 = "/Levels/Level2.png";
 	
 	//Texture.....stuff
 	public static int ShaderBase;
@@ -140,22 +140,22 @@ public class Art {
 	private void initShaders() {
 		
 		// Load the vertex shader
-		int vsId = loadShader("/shaders/VertexShader.glsl",
+		int vsId = loadShader("/Shaders/VertexShader.glsl",
 				GL_VERTEX_SHADER);
 		// Load the fragment shader
-		int fsId = loadShader("/shaders/FragmentShader.glsl",
+		int fsId = loadShader("/Shaders/FragmentShader.glsl",
 				GL_FRAGMENT_SHADER);
 
-		int IvsId = loadShader("/shaders/IVertexShader.glsl",
+		int IvsId = loadShader("/Shaders/IVertexShader.glsl",
 				GL_VERTEX_SHADER);
 		// Load the fragment shader
-		int IfsId = loadShader("/shaders/IFragmentShader.glsl",
+		int IfsId = loadShader("/Shaders/IFragmentShader.glsl",
 				GL_FRAGMENT_SHADER);
 		
-		int SvsId = loadShader("/shaders/StatVertexShader.glsl",
+		int SvsId = loadShader("/Shaders/StatVertexShader.glsl",
 				GL_VERTEX_SHADER);
 		
-		int SfsId = loadShader("/shaders/StatFragmentShader.glsl",
+		int SfsId = loadShader("/Shaders/StatFragmentShader.glsl",
 				GL_FRAGMENT_SHADER);
 
 		// Create a new shader program that links both shaders
@@ -237,111 +237,111 @@ public class Art {
 		//new Image("/filepath.png", maxFrameWidth, maxFrameHeight);
 		
 		//load menu screen art
-		mainMenuScreen = new Image("/Menus/mainMenuScreen.png", 1, 1);
-		invScreen = new Image("/Menus/invScreen.png", 1, 1);
-		skillScreen = new Image("/Menus/skillScreen.png", 1, 1);
-		magicScreen = new Image("/Menus/magicScreen.png", 1, 1);
-		mapScreen = new Image("/Menus/mapScreen.png", 1, 1);
-		saveScreen = new Image("/Menus/saveScreen.png", 1, 1);
-		gameOverScreen = new Image("/Menus/gameOverScreen.png", 1, 1);
+		mainMenuScreen = new Image("/Images/Menus/Backgrounds/MainMenuScreen.png", 1, 1);
+		invScreen = new Image("/Images/Menus/Backgrounds/InventoryScreen.png", 1, 1);
+		skillScreen = new Image("/Images/Menus/Backgrounds/SkillScreen.png", 1, 1);
+		magicScreen = new Image("/Images/Menus/Backgrounds/MagicScreen.png", 1, 1);
+		mapScreen = new Image("/Images/Menus/Backgrounds/MapScreen.png", 1, 1);
+		saveScreen = new Image("/Images/Menus/Backgrounds/SaveScreen.png", 1, 1);
+		gameOverScreen = new Image("/Images/Menus/Backgrounds/GameOverScreen.png", 1, 1);
 		
 		//load button art
-		newGameButton = new Image("/Buttons/newGameButton.png",1,2);
+		newGameButton = new Image("/Images/Menus/Buttons/MenuButtons/NewGameButton.png",1,2);
 		
-		loadGameButton = new Image("/Buttons/loadGameButton.png",1,2);
-		optionsButton = new Image("/Buttons/optionsButton.png",1,2);
-		exitButton = new Image("/Buttons/exitButton.png",1,2);
+		loadGameButton = new Image("/Images/Menus/Buttons/MenuButtons/LoadGameButton.png",1,2);
+		optionsButton = new Image("/Images/Menus/Buttons/MenuButtons/OptionsButton.png",1,2);
+		exitButton = new Image("/Images/Menus/Buttons/MenuButtons/ExitButton.png",1,2);
 		
-		backButton = new Image("/Buttons/backButton.png",1,2);
+		backButton = new Image("/Images/Menus/Buttons/MenuButtons/BackButton.png",1,2);
 		
-		controlsButton = new Image("/Buttons/ControlsButton.png",1,2);
-		soundButton = new Image("/Buttons/SoundButton.png",1,2);
+		controlsButton = new Image("/Images/Menus/Buttons/MenuButtons/ControlsButton.png",1,2);
+		soundButton = new Image("/Images/Menus/Buttons/MenuButtons/SoundButton.png",1,2);
 		
-		level1Button = new Image("/Buttons/level1Button.png",1,2);
-		level2Button = new Image("/Buttons/level2Button.png",1,2);
+		level1Button = new Image("/Images/Menus/Buttons/MenuButtons/Level1Button.png",1,2);
+		level2Button = new Image("/Images/Menus/Buttons/MenuButtons/Level2Button.png",1,2);
 		
-		warriorButton = new Image("/Buttons/warriorButton.png",1,2);
-		archerButton = new Image("/Buttons/archerButton.png",1,2);
-		mageButton = new Image("/Buttons/mageButton.png",1,2);
+		warriorButton = new Image("/Images/Menus/Buttons/MenuButtons/warriorButton.png",1,2);
+		archerButton = new Image("/Images/Menus/Buttons/MenuButtons/ArcherButton.png",1,2);
+		mageButton = new Image("/Images/Menus/Buttons/MenuButtons/MageButton.png",1,2);
 		
-		invButton = new Image("/Buttons/invButton.png",1,2);
-		skillButton = new Image("/Buttons/skillButton.png",1,2);
-		magicButton = new Image("/Buttons/magicButton.png",1,2);
-		mapButton = new Image("/Buttons/mapButton.png",1,2);
-		saveButton = new Image("/Buttons/saveButton.png",1,2);
+		healthButton = new Image("/Images/Menus/Buttons/MenuButtons/HealthButton.png",1,2);
+		healthRegenButton = new Image("/Images/Menus/Buttons/MenuButtons/HealthRegenButton.png",1,2);
+		manaButton = new Image("/Images/Menus/Buttons/MenuButtons/ManaButton.png",1,2);
+		manaRegenButton = new Image("/Images/Menus/Buttons/MenuButtons/ManaRegenButton.png",1,2);
 		
-		healthButton = new Image("/Buttons/healthButton.png",1,2);
-		healthRegenButton = new Image("/Buttons/healthRegenButton.png",1,2);
-		manaButton = new Image("/Buttons/manaButton.png",1,2);
-		manaRegenButton = new Image("/Buttons/manaRegenButton.png",1,2);
+		swordButton = new Image("/Images/Menus/Buttons/Items/SwordButton.png",1,2);
+		battleaxeButton = new Image("/Images/Menus/Buttons/Items/BattleaxeButton.png",1,2);
+		maceButton = new Image("/Images/Menus/Buttons/Items/MaceButton.png",1,2);
+		bowButton = new Image("/Images/Menus/Buttons/Items/BowButton.png",1,2);
+		crossbowButton = new Image("/Images/Menus/Buttons/Items/CrossbowButton.png",1,2);
+		iceStaffButton = new Image("/Images/Menus/Buttons/Items/IceStaffButton.png",1,2);
+		fireStaffButton = new Image("/Images/Menus/Buttons/Items/FireStaffButton.png",1,2);
+		earthStaffButton = new Image("/Images/Menus/Buttons/Items/EarthStaffButton.png",1,2);
 		
-		swordButton = new Image("/Buttons/SwordButton.png",1,2);
-		battleaxeButton = new Image("/Buttons/BattleaxeButton.png",1,2);
-		maceButton = new Image("/Buttons/MaceButton.png",1,2);
-		bowButton = new Image("/Buttons/BowButton.png",1,2);
-		crossbowButton = new Image("/Buttons/CrossbowButton.png",1,2);
-		iceStaffButton = new Image("/Buttons/IceStaffButton.png",1,2);
-		fireStaffButton = new Image("/Buttons/FireStaffButton.png",1,2);
-		earthStaffButton = new Image("/Buttons/EarthStaffButton.png",1,2);
+		bootsButton = new Image("/Images/Menus/Buttons/Items/BootsButton.png",1,2);
+		legsButton = new Image("/Images/Menus/Buttons/Items/LegsButton.png",1,2);
+		chestButton = new Image("/Images/Menus/Buttons/Items/ChestButton.png",1,2);
+		helmetButton = new Image("/Images/Menus/Buttons/Items/HelmetButton.png",1,2);
 		
-		bootsButton = new Image("/Buttons/ShoesButton.png",1,2);
-		legsButton = new Image("/Buttons/LegsButton.png",1,2);
-		chestButton = new Image("/Buttons/ChestButton.png",1,2);
-		helmetButton = new Image("/Buttons/HelmetButton.png",1,2);
+		invButton = new Image("/Images/Menus/Buttons/Tabs/InventoryButton.png",1,2);
+		skillButton = new Image("/Images/Menus/Buttons/Tabs/SkillButton.png",1,2);
+		magicButton = new Image("/Images/Menus/Buttons/Tabs/MagicButton.png",1,2);
+		mapButton = new Image("/Images/Menus/Buttons/Tabs/MapButton.png",1,2);
+		saveButton = new Image("/Images/Menus/Buttons/Tabs/SaveButton.png",1,2);
 		
 		//Load tile maps
-		background = new Image("/Tiles/background.png",4,4);
-		wall = new Image("/Tiles/wall.png",8,8);
-		foreground = new Image("/Tiles/foreground.png",4,4);
+		background = new Image("/Images/Tiles/Background.png",4,4);
+		wall = new Image("/Images/Tiles/Wall.png",8,8);
+		foreground = new Image("/Images/Tiles/Foreground.png",4,4);
 		
 		//Load character maps
-		player = new Image("/Characters/Player.png",6,8);
-		enemy = new Image("/Characters/Enemy.png",6,8);
-		smallEnemy = new Image("/Characters/SmallEnemy.png",6,8);
-		flyingEnemy = new Image("/Characters/FlyingEnemy.png",6,8);
-		bossEnemy = new Image("/Characters/BossEnemy.png",6,8);
+		player = new Image("/Images/Characters/Player.png",6,8);
+		enemy = new Image("/Images/Characters/Enemy.png",6,8);
+		smallEnemy = new Image("/Images/Characters/SmallEnemy.png",6,8);
+		flyingEnemy = new Image("/Images/Characters/FlyingEnemy.png",6,8);
+		bossEnemy = new Image("/Images/Characters/BossEnemy.png",6,8);
 		
 		//Load particle maps
-		coin = new Image("/img/Coin.png",6,1);
+		coin = new Image("/Images/Drops/Coin.png",6,1);
 		
 		//Load Magic maps
-		earthMagic = new Image("/Magic/EarthMagic.png",1,8);
-		fireMagic = new Image("/Magic/FireMagic.png",1,8);
-		iceMagic = new Image("/Magic/IceMagic.png",1,8);
+		earthMagic = new Image("/Images/Particles/EarthMagic.png",1,8);
+		fireMagic = new Image("/Images/Particles/FireMagic.png",1,8);
+		iceMagic = new Image("/Images/Particles/IceMagic.png",1,8);
 		
-		arrow = new Image("/Magic/Arrow2.png",1,8);
-		swordProjectile = new Image("/Magic/Sword.png",1,8);
+		arrow = new Image("/Images/Particles/Arrow.png",1,8);
+		swordProjectile = new Image("/Images/Particles/Sword.png",1,8);
 		
 		//Load Armour maps
-		shoes = new Image("/Armour/Shoes.png",8,1);
-		legs = new Image("/Armour/Legs.png",3,1);
-		chest = new Image("/Armour/Chest.png",3,1);
-		helmet = new Image("/Armour/Helmet.png",7,1);
+		shoes = new Image("/Images/Drops/Armour/Boots.png",8,1);
+		legs = new Image("/Images/Drops/Armour/Legs.png",3,1);
+		chest = new Image("/Images/Drops/Armour/Chest.png",3,1);
+		helmet = new Image("/Images/Drops/Armour/Helmet.png",7,1);
 		
 		//Load Item maps
-		healthPotion = new Image("/Items/HealthPotion.png",3,1);
-		manaPotion = new Image("/Items/ManaPotion.png",3,1);
-		speedPotion = new Image("/Items/SpeedPotion.png",3,1);
-		knockbackPotion = new Image("/Items/KnockbackPotion.png",3,1);
+		healthPotion = new Image("/Images/Drops/Potions/HealthPotion.png",3,1);
+		manaPotion = new Image("/Images/Drops/Potions/ManaPotion.png",3,1);
+		speedPotion = new Image("/Images/Drops/Potions/SpeedPotion.png",3,1);
+		knockbackPotion = new Image("/Images/Drops/Potions/KnockbackPotion.png",3,1);
 		
 		//Load Weapon maps
-		sword = new Image("/Weapons/Sword.png",8,1);
-		battleaxe = new Image("/Weapons/Battleaxe.png",8,1);
-		mace = new Image("/Weapons/Mace.png",8,1);
-		bow = new Image("/Weapons/Bow.png",8,1);
-		crossbow = new Image("/Weapons/Crossbow.png",8,1);
-		fireStaff = new Image("/Weapons/FireStaff.png",8,1);
-		iceStaff = new Image("/Weapons/IceStaff.png",8,1);
-		earthStaff = new Image("/Weapons/EarthStaff.png",8,1);
+		sword = new Image("/Images/Drops/Weapons/Sword.png",8,1);
+		battleaxe = new Image("/Images/Drops/Weapons/Battleaxe.png",8,1);
+		mace = new Image("/Images/Drops/Weapons/Mace.png",8,1);
+		bow = new Image("/Images/Drops/Weapons/Bow.png",8,1);
+		crossbow = new Image("/Images/Drops/Weapons/Crossbow.png",8,1);
+		fireStaff = new Image("/Images/Drops/Weapons/FireStaff.png",8,1);
+		iceStaff = new Image("/Images/Drops/Weapons/IceStaff.png",8,1);
+		earthStaff = new Image("/Images/Drops/Weapons/EarthStaff.png",8,1);
 		
 		//Load HUD textures 
-		infoBox = new Image("/HUD/BarInfo.png",1,1);
-		healthBar = new Image("/HUD/BarHealth.png",1,2);			
-		manaBar = new Image("/HUD/BarMana.png",1,2);
-		xpBar = new Image("/HUD/BarXP.png",1,2);
-		level = new Image("/HUD/Level.png",1,1);
-		wave = new Image("/HUD/Wave.png",1,1);
-		numbers = new Image("/HUD/Numbers.png",10,1);
+		infoBox = new Image("/Images/HUD/BarInfo.png",1,1);
+		healthBar = new Image("/Images/HUD/BarHealth.png",1,2);			
+		manaBar = new Image("/Images/HUD/BarMana.png",1,2);
+		xpBar = new Image("/Images/HUD/BarXP.png",1,2);
+		level = new Image("/Images/HUD/Level.png",1,1);
+		wave = new Image("/Images/HUD/Wave.png",1,1);
+		numbers = new Image("/Images/HUD/Numbers.png",10,1);
 	}
 
 	
