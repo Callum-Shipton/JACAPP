@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 import Components.ComponentType;
+import Components.Attack.TypeAttack;
 import Components.Collision.BaseCollision;
 import Components.Graphical.BaseGraphics;
 import Display.Art;
@@ -39,7 +40,7 @@ public class Level {
 		map.setTiles();
 	}
 	
-	public void createPlayer(int type){
+	public void createPlayer(TypeAttack type){
 		player = spawner.createPlayer(type);
 		entities.add(player);
 		hud = new Hud(player);

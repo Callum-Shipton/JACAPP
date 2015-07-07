@@ -23,7 +23,7 @@ public class Weapon extends InventoryItem{
 	private int manaCost;
 	private int team;
     private Image particleImage;	
-	
+    
 	public Weapon(TypeWeapon type, int damage, int range, int fireRate, boolean melee, int manaCost, int team, Image particleImage, Image inventoryImage) {
 		this.type = type;
 		this.damage = damage;

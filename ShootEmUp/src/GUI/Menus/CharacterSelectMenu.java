@@ -3,6 +3,7 @@ package GUI.Menus;
 import org.lwjgl.glfw.GLFW;
 
 import Audio.Music.BackgroundMusic;
+import Components.Attack.TypeAttack;
 import Display.Art;
 import Display.Image;
 import GUI.Button;
@@ -36,17 +37,17 @@ public class CharacterSelectMenu extends GuiMenu {
     public void update() {
     	super.update();
     	if(warrior.hasClicked()){
-    		ShootEmUp.currentLevel.createPlayer(0);
+    		ShootEmUp.currentLevel.createPlayer(TypeAttack.WARRIOR);
     		startGame();
     		warrior.postAction();
     	}
     	if(archer.hasClicked()){
-    		ShootEmUp.currentLevel.createPlayer(1);
+    		ShootEmUp.currentLevel.createPlayer(TypeAttack.ARCHER);
     		startGame();
     		archer.postAction();
     	}
     	if(mage.hasClicked()){
-    		ShootEmUp.currentLevel.createPlayer(2);
+    		ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE);
     		startGame();
     		mage.postAction();
     	}
@@ -56,13 +57,13 @@ public class CharacterSelectMenu extends GuiMenu {
     	}
     	
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
-    		ShootEmUp.currentLevel.createPlayer(0);
+    		ShootEmUp.currentLevel.createPlayer(TypeAttack.WARRIOR);
     		startGame();
     	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
-    		ShootEmUp.currentLevel.createPlayer(1);
+    		ShootEmUp.currentLevel.createPlayer(TypeAttack.ARCHER);
     		startGame();
     	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 2){
-    		ShootEmUp.currentLevel.createPlayer(2);
+    		ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE);
     		startGame();
     	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 3){
     		popMenu();

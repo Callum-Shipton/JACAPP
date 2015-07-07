@@ -28,7 +28,6 @@ public class PointSpawn extends BaseSpawn implements SpawnComponent {
 		if(m == Message.ENTITY_DIED){
 			spawn(e);
 		}
-		
 	}
 
 	@Override

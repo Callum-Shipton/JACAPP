@@ -7,7 +7,7 @@ import Object.Entity;
 import Object.Weapon;
 
 public abstract class BaseAttack extends Component implements AttackComponent {
-	
+
 	protected ComponentType type = ComponentType.ATTACK;
 	protected BaseSpawn BS;
 	
