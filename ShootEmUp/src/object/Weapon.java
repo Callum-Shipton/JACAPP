@@ -78,8 +78,7 @@ public class Weapon extends InventoryItem{
 		particle.addComponent(m);
 		particle.addComponent(new LineControl(g, m));
 		
-		ShootEmUp.currentLevel.newEntities.add(particle);
-		
+		ShootEmUp.currentLevel.spawner.checkSpawn(particle);
 	}
 
 	public int getDamage() {

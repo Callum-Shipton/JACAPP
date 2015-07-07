@@ -31,16 +31,17 @@ public class BasicMovement extends BaseMovement {
 		}
 	}
 
-	private void checkCollisionY(Entity e, Vector2 moveVec) {
+	public boolean checkCollisionY(Entity e, Vector2 moveVec) {
+		boolean collide = false;
 		HashSet<Vector2> newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
-		HashSet<Entity> entities = ShootEmUp.currentLevel.eMap
-				.getEntites(newGrid);
+		HashSet<Entity> entities = ShootEmUp.currentLevel.eMap.getEntites(newGrid);
 		Vector4 collVec = null;
 		Entity hit = null;
 		for (Entity character : entities) {
 			if (character != e) {
 				collVec = doesCollide(e, character);
 				if (collVec != null) {
+					collide = true;
 					hit = character;
 					if (((BaseCollision) hit.getComponent(ComponentType.COLLISION)).getMoveBack() == true && !(BC instanceof HitCollision)) {
 						moveBackY(e, moveVec, collVec);
@@ -60,19 +61,20 @@ public class BasicMovement extends BaseMovement {
 		ShootEmUp.currentLevel.eMap.removeEntity(BC.getGridPos(), e);
 		if(!e.isDestroy())ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
 		BC.setGridPos(newGrid);
-
+		return collide;
 	}
 
-	public void checkCollisionX(Entity e, Vector2 moveVec) {
+	public boolean checkCollisionX(Entity e, Vector2 moveVec) {
+		boolean collide = false;
 		HashSet<Vector2> newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
-		HashSet<Entity> entities = ShootEmUp.currentLevel.eMap
-				.getEntites(newGrid);
+		HashSet<Entity> entities = ShootEmUp.currentLevel.eMap.getEntites(newGrid);
 		Vector4 collVec = null;
 		Entity hit = null;
 		for (Entity character : entities) {
 			if (character != e) {
 				collVec = doesCollide(e, character);
 				if (collVec != null) {
+					collide = true;
 					hit = character;
 					if (((BaseCollision) hit.getComponent(ComponentType.COLLISION)).getMoveBack() == true && !(BC instanceof HitCollision)) {
 						moveBackX(e, moveVec, collVec);
@@ -93,7 +95,7 @@ public class BasicMovement extends BaseMovement {
 		ShootEmUp.currentLevel.eMap.removeEntity(BC.getGridPos(), e);
 		if(!e.isDestroy())ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
 		BC.setGridPos(newGrid);
-
+		return collide;
 	}
 
 	public void moveBackX(Entity e, Vector2 moveVec, Vector4 collVec) {

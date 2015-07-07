@@ -1,5 +1,6 @@
 package level;
 
+import java.util.HashSet;
 import java.util.Random;
 
 import object.Entity;
@@ -159,6 +160,13 @@ public class Spawner {
 				}
 			}
 		} while (collide == true);
+	}
+	
+	public void checkSpawn(Entity e){
+		BasicMovement BM = (BasicMovement)e.getComponent(ComponentType.MOVEMENT);
+		if(!(BM.checkCollisionY(e, new Vector2(0,0)) || BM.checkCollisionX(e, new Vector2(0,0)))){
+			ShootEmUp.currentLevel.newEntities.add(e);
+		}
 	}
 	
 	private void smallEnemy(){
