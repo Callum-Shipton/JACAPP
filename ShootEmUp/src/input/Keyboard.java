@@ -42,4 +42,13 @@ public class Keyboard {
 	public static void setKey(int key) {
 		keys[key] = 0;
 	}
+	
+	public static void setKey(int key, int value) {
+		keys[key] = value;
+	}
+	
+	public static void setKey(int key, boolean value) {
+		if(value)keys[key] = 1;
+		else keys[key] = 0;
+		}
 }

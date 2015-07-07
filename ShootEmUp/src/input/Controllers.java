@@ -71,9 +71,9 @@ public class Controllers {
 			net.java.games.input.Controller[] found = env.getControllers();
 			ArrayList<net.java.games.input.Controller> lollers = new ArrayList<net.java.games.input.Controller>();
 			for ( net.java.games.input.Controller c : found ) {
-				if ( (!c.getType().equals(net.java.games.input.Controller.Type.KEYBOARD)) &&
-				     (!c.getType().equals(net.java.games.input.Controller.Type.MOUSE)) ) {
+				if ( (c.getType() == Controller.Type.GAMEPAD || c.getType() == Controller.Type.STICK) ) {
 					lollers.add(c);
+					System.out.println("Gamepad found: " + c.getType());
 				}
 			}
 

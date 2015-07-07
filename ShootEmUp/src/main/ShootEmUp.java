@@ -6,6 +6,7 @@ import static org.lwjgl.opengl.GL11.*;
 import gui.menus.GuiMenu;
 import gui.menus.InventoryMenu;
 import gui.menus.MainMenu;
+import input.Controllers;
 import input.Keyboard;
 
 import java.io.File;
@@ -58,6 +59,8 @@ public class ShootEmUp {
 		m = new BackgroundMusic();
 		m.initAL();
 		
+		Controllers.create();
+		
 		paused = true;
 		addMenu(new MainMenu(Art.mainMenuScreen));
 		m.play(BackgroundMusic.MENU);
@@ -106,6 +109,7 @@ public class ShootEmUp {
 		// Poll for window events. The key callback above will only be
 		// invoked during this call.
 		glfwPollEvents();
+		Controllers.poll();
 		if(currentLevel != null){
 			if(Keyboard.getKey(GLFW_KEY_P) == 1){
 					paused = !paused;
@@ -142,6 +146,7 @@ public class ShootEmUp {
 
 	public static void main(String[] args) {
 		System.setProperty("org.lwjgl.librarypath", new File("natives").getAbsolutePath());
+		System.setProperty("net.java.games.input.librarypath", new File("natives/JInput").getAbsolutePath());
 		new ShootEmUp().run();
 	}
 	
