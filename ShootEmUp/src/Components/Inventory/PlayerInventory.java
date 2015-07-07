@@ -104,28 +104,28 @@ public class PlayerInventory extends BasicInventory{
 			WeaponType weaponType = (WeaponType) subtype;
 			switch(weaponType){
 			case SWORD:
-				inventory.add(new Weapon(weaponType, 3, 3, 3, true, 1, 0, Art.swordProjectile, Art.bow));
+				inventory.add(new Weapon(weaponType, 3, 3, 3, true, 1, 0, Art.swordProjectile, Art.swordButton));
 				break;
 			case BATTLEAXE:
-				inventory.add(new Weapon(weaponType, 5, 2, 2, true, 2, 0, Art.swordProjectile, Art.bow));
+				inventory.add(new Weapon(weaponType, 5, 2, 2, true, 2, 0, Art.swordProjectile, Art.battleaxeButton));
 				break;
-			case WARHAMMER:
-				inventory.add(new Weapon(weaponType, 10, 2, 1, true, 3, 0, Art.swordProjectile, Art.bow));
+			case MACE:
+				inventory.add(new Weapon(weaponType, 10, 2, 1, true, 3, 0, Art.swordProjectile, Art.maceButton));
 				break;
 			case CROSSBOW:
-				inventory.add(new Weapon(weaponType, 10, 3, 2, false, 1, 0, Art.arrow, Art.bow));
+				inventory.add(new Weapon(weaponType, 10, 3, 2, false, 1, 0, Art.arrow, Art.crossbowButton));
 				break;
 			case BOW:
-				inventory.add(new Weapon(weaponType, 5, 2, 3, false, 1, 0, Art.arrow, Art.bow));
+				inventory.add(new Weapon(weaponType, 5, 2, 3, false, 1, 0, Art.arrow, Art.bowButton));
 				break;
 			case FIRE_STAFF:
-				inventory.add(new Weapon(weaponType, 3, 3, 3, false, 1, 0, Art.fireMagic, Art.bow));
+				inventory.add(new Weapon(weaponType, 3, 3, 3, false, 1, 0, Art.fireMagic, Art.fireStaffButton));
 				break;
 			case ICE_STAFF:
-				inventory.add(new Weapon(weaponType, 3, 3, 3, false, 1, 0, Art.iceMagic, Art.bow));
+				inventory.add(new Weapon(weaponType, 3, 3, 3, false, 1, 0, Art.iceMagic, Art.iceStaffButton));
 				break;
-			case GROUND_STAFF:
-				inventory.add(new Weapon(weaponType, 5, 3, 2, false, 2, 0, Art.earthMagic, Art.bow));
+			case EARTH_STAFF:
+				inventory.add(new Weapon(weaponType, 5, 3, 2, false, 2, 0, Art.earthMagic, Art.earthStaffButton));
 				break;
 			}
 		}

@@ -45,6 +45,15 @@ public class Art {
 	public static Image mapButton;
 	public static Image saveButton;
 	
+	public static Image swordButton;
+	public static Image battleaxeButton;
+	public static Image maceButton;
+	public static Image bowButton;
+	public static Image crossbowButton;
+	public static Image iceStaffButton;
+	public static Image fireStaffButton;
+	public static Image earthStaffButton;
+	
 	public static Image healthButton;
 	public static Image healthRegenButton;
 	public static Image manaButton;
@@ -253,6 +262,14 @@ public class Art {
 		manaButton = new Image("/Buttons/manaButton.png",1,2);
 		manaRegenButton = new Image("/Buttons/manaRegenButton.png",1,2);
 		
+		swordButton = new Image("/Buttons/SwordButton.png",1,2);
+		battleaxeButton = new Image("/Buttons/BattleaxeButton.png",1,2);
+		maceButton = new Image("/Buttons/MaceButton.png",1,2);
+		bowButton = new Image("/Buttons/BowButton.png",1,2);
+		crossbowButton = new Image("/Buttons/CrossbowButton.png",1,2);
+		iceStaffButton = new Image("/Buttons/IceStaffButton.png",1,2);
+		fireStaffButton = new Image("/Buttons/FireStaffButton.png",1,2);
+		earthStaffButton = new Image("/Buttons/EarthStaffButton.png",1,2);
 		
 		//Load tile maps
 		background = new Image("/Tiles/background.png",4,4);

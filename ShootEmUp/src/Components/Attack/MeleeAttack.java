@@ -170,7 +170,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 				g = new AnimatedGraphics(Art.mace, Art.base, true);
 				s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
 				weapon.addComponent(g);
-				c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.WARHAMMER);
+				c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.MACE);
 			} else if(weaponProb == 0){
 				g = new AnimatedGraphics(Art.bow, Art.base, true);
 				s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
@@ -195,7 +195,7 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 				g = new AnimatedGraphics(Art.earthStaff, Art.base, true);
 				s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
 				weapon.addComponent(g);
-				c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.GROUND_STAFF);
+				c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.EARTH_STAFF);
 			}
 			weapon.addComponent(s);
 			weapon.addComponent(c);
