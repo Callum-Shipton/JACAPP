@@ -161,32 +161,32 @@ public class MeleeAttack extends BaseAttack implements AttackComponent {
 				s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
 				weapon.addComponent(g);
 				c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.SWORD);
-			} else if(weaponProb == 0){
+			} else if(weaponProb == 1){
 				g = new AnimatedGraphics(Art.battleaxe, Art.base, true);
 				s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
 				weapon.addComponent(g);
 				c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.BATTLEAXE);
-			} else if(weaponProb == 0){
+			} else if(weaponProb == 2){
 				g = new AnimatedGraphics(Art.mace, Art.base, true);
 				s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
 				weapon.addComponent(g);
 				c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.MACE);
-			} else if(weaponProb == 0){
+			} else if(weaponProb == 3){
 				g = new AnimatedGraphics(Art.bow, Art.base, true);
 				s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
 				weapon.addComponent(g);
 				c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.BOW);
-			} else if(weaponProb == 0){
+			} else if(weaponProb == 4){
 				g = new AnimatedGraphics(Art.crossbow, Art.base, true);
 				s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
 				weapon.addComponent(g);
 				c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.CROSSBOW);
-			} else if(weaponProb == 0){
+			} else if(weaponProb == 5){
 				g = new AnimatedGraphics(Art.fireStaff, Art.base, true);
 				s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
 				weapon.addComponent(g);
 				c = new PickupCollision(weapon, PickupType.WEAPON, WeaponType.FIRE_STAFF);
-			} else if(weaponProb == 0){
+			} else if(weaponProb == 6){
 				g = new AnimatedGraphics(Art.iceStaff, Art.base, true);
 				s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY() + BG.getHeight() - g.getHeight()), weapon);
 				weapon.addComponent(g);
