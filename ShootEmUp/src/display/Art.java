@@ -260,7 +260,7 @@ public class Art {
 		level1Button = new Image("/Images/Menus/Buttons/MenuButtons/Level1Button.png",1,2);
 		level2Button = new Image("/Images/Menus/Buttons/MenuButtons/Level2Button.png",1,2);
 		
-		warriorButton = new Image("/Images/Menus/Buttons/MenuButtons/warriorButton.png",1,2);
+		warriorButton = new Image("/Images/Menus/Buttons/MenuButtons/WarriorButton.png",1,2);
 		archerButton = new Image("/Images/Menus/Buttons/MenuButtons/ArcherButton.png",1,2);
 		mageButton = new Image("/Images/Menus/Buttons/MenuButtons/MageButton.png",1,2);
 		
