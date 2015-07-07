@@ -137,10 +137,20 @@ public class Spawner {
 		BaseCollision BC = new RigidCollision(test);
 		test.addComponent(BC);
 		test.addComponent(new BasicMovement(test, BC, BG, 5));
+		float px = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getX();
+		float py = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getY();
+		float pw = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getWidth();
+		float ph = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getHeight();
 		do {
 			collide = false;
-			((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).setX((float)rand.nextInt((ShootEmUp.currentLevel.map.getBackgroundTiles().length - 1) * 32));
-			((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).setY(rand.nextInt((ShootEmUp.currentLevel.map.getBackgroundTiles()[0].length - 1) * 32));
+			
+			BG.setX((float)rand.nextInt((ShootEmUp.currentLevel.map.getBackgroundTiles().length - 1) * 32));
+			BG.setY(rand.nextInt((ShootEmUp.currentLevel.map.getBackgroundTiles()[0].length - 1) * 32));
+			
+			if(Math.abs((BG.getX()+(BG.getWidth()/2)) - (px + (pw/2))) <= (ShootEmUp.WIDTH+BG.getWidth()) && Math.abs((BG.getY()+(BG.getHeight()/2)) - (py + (ph/2))) <= (ShootEmUp.HEIGHT+BG.getHeight())) {
+				collide = true;
+				continue;
+			}
 
 			for (Entity character : ShootEmUp.currentLevel.entities) {
 				if ((((BaseMovement) test.getComponent(ComponentType.MOVEMENT)).doesCollide(test, character) != null)) {
