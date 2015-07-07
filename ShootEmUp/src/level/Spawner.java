@@ -165,13 +165,15 @@ public class Spawner {
 		BasicMovement BM = (BasicMovement)e.getComponent(ComponentType.MOVEMENT);
 		if(!(BM.checkCollisionY(e, new Vector2(0,0)) || BM.checkCollisionX(e, new Vector2(0,0)))){
 			ShootEmUp.currentLevel.newEntities.add(e);
+		} else {
+			ShootEmUp.currentLevel.eMap.removeEntity(((BaseCollision)e.getComponent(ComponentType.COLLISION)).getGridPos(), e);
 		}
 	}
 	
 	private void smallEnemy(){
 		enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base, false); 
 		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, WeaponBuilder.buildWeapon(TypeWeapon.ICE_STAFF, 1), 10, 100, 10);
+		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, WeaponBuilder.buildWeapon(TypeWeapon.ICE_STAFF, 1), 1, 100, 1);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
 		enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 7);
@@ -182,7 +184,7 @@ public class Spawner {
 	private void largeEnemy(){
 		enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base, false); 
 		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, WeaponBuilder.buildWeapon(TypeWeapon.ICE_STAFF, 1), 10, 100, 10);
+		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, WeaponBuilder.buildWeapon(TypeWeapon.ICE_STAFF, 1), 3, 100, 3);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
 		enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 2);
@@ -193,7 +195,7 @@ public class Spawner {
 	private void flyingEnemy(){
 		enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base, false); 
 		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, WeaponBuilder.buildWeapon(TypeWeapon.ICE_STAFF, 1), 10, 100, 10);
+		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, WeaponBuilder.buildWeapon(TypeWeapon.ICE_STAFF, 1), 2, 100, 2);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
 		enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);

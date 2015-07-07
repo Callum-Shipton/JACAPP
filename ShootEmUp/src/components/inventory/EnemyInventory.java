@@ -23,6 +23,7 @@ public class EnemyInventory extends BasicInventory{
 	}
 
 	public void drop(Entity e) {
+		
 		//give player exp
 		((PlayerInventory)ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY)).giveExp(1);
 	
@@ -45,6 +46,7 @@ public class EnemyInventory extends BasicInventory{
 		Random rand = new Random();
 		int prob = rand.nextInt(3);
 		if(prob == 0 ) {
+			System.out.println("Drop potion");
 			int itemProb = rand.nextInt(4);
 			Entity item = new Entity();
 			TypePickup T = TypePickup.POTION;
@@ -74,6 +76,7 @@ public class EnemyInventory extends BasicInventory{
 			item.addComponent(c);
 			ShootEmUp.currentLevel.newEntities.add(item);
 		} else if(prob == 1) {
+			System.out.println("Drop armour");
 			int armourProb = rand.nextInt(4);
 			Entity armour = new Entity();
 			TypePickup T = TypePickup.ARMOUR;
@@ -102,6 +105,7 @@ public class EnemyInventory extends BasicInventory{
 			armour.addComponent(c);
 			ShootEmUp.currentLevel.newEntities.add(armour);
 		} else if(prob == 2) {	
+			System.out.println("Drop weapon");
 			int weaponProb = rand.nextInt(8);
 			Entity weapon = new Entity();
 			if(weaponProb == 0){
