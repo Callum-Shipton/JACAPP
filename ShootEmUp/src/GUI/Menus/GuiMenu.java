@@ -30,6 +30,10 @@ public abstract class GuiMenu {
         buttons.add(button);
         return button;
     }
+    
+    protected void removeButton(Button button) {
+        buttons.remove(button);
+    }
 
     public void render() {
     	Art.stat.draw(menuImage, new Vector2(x,y), new Vector2(ShootEmUp.WIDTH,ShootEmUp.HEIGHT), 0, new Vector2(0,0));

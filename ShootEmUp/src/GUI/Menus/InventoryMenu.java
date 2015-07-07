@@ -82,7 +82,12 @@ public class InventoryMenu extends GuiMenu {
 			itemButton = Buttons.next();
 			if(itemButton.hasClicked()){
 				((PlayerInventory)(ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).equipItem(position);
+				itemButton.postAction();
+				removeButton(itemButton);
+				Buttons.remove();
+				
 			}
+
 			position++;
 		}
     	if(magicButton.hasClicked()){
