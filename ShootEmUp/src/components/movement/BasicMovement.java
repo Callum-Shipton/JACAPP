@@ -7,7 +7,6 @@ import main.ShootEmUp;
 import math.Vector2;
 import math.Vector4;
 import components.ComponentType;
-import components.Message;
 import components.collision.BaseCollision;
 import components.collision.HitCollision;
 import components.graphical.BaseGraphics;
@@ -60,10 +59,7 @@ public class BasicMovement extends BaseMovement {
 		}
 
 		ShootEmUp.currentLevel.eMap.removeEntity(BC.getGridPos(), e);
-		if(!e.isDestroy()){
-			ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
-			e.send(Message.ENTITY_MOVED);
-		}
+		if(!e.isDestroy())ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
 		BC.setGridPos(newGrid);
 		return collide;
 	}
@@ -97,10 +93,7 @@ public class BasicMovement extends BaseMovement {
 		}
 
 		ShootEmUp.currentLevel.eMap.removeEntity(BC.getGridPos(), e);
-		if(!e.isDestroy()){
-			ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
-			e.send(Message.ENTITY_MOVED);
-		}
+		if(!e.isDestroy())ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
 		BC.setGridPos(newGrid);
 		return collide;
 	}

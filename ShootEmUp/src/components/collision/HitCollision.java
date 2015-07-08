@@ -6,7 +6,6 @@ import main.ShootEmUp;
 import components.ComponentType;
 import components.Message;
 import components.attack.BaseAttack;
-import components.graphical.AnimatedGraphics;
 
 public class HitCollision extends BaseCollision{
 	
@@ -30,7 +29,7 @@ public class HitCollision extends BaseCollision{
 		}
 		if(hit.getComponent(ComponentType.COLLISION) instanceof RigidCollision){
 			e.destroy();
-			if(hitAttack != null) hitAttack.damage(weapon.getDamage(), ((AnimatedGraphics)e.getComponent(ComponentType.GRAPHICS)).getDirection(), hit); //needs updating to take weapon damage
+			if(hitAttack != null) hitAttack.damage(weapon.getDamage(), hit); //needs updating to take weapon damage
 		}
 		/*
 		if (hit != null && getTeam() != hit.getTeam()) {
