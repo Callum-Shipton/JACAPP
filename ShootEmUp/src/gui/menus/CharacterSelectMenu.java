@@ -2,6 +2,7 @@ package gui.menus;
 
 import input.Keyboard;
 import gui.Button;
+import gui.ButtonType;
 import main.ShootEmUp;
 
 import org.lwjgl.glfw.GLFW;
@@ -15,18 +16,14 @@ public class CharacterSelectMenu extends GuiMenu {
 	
 	static int selectedItem = 0;
 	public static boolean saved;
-	private Button warrior;
-	private Button archer;
-	private Button mage;
-	private Button back;
 
     public CharacterSelectMenu(Image menuImage) {
         super(menuImage);
         selectedItem = 0;
-        warrior = addButton(new Button(Art.warriorButton, (ShootEmUp.WIDTH / 2) - (Art.warriorButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.warriorButton.getHeight() * 2), 128,24));
-        archer = addButton(new Button(Art.archerButton, (ShootEmUp.WIDTH / 2) - (Art.archerButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - Art.archerButton.getHeight(), 128,24));
-        mage  = addButton(new Button(Art.mageButton, (ShootEmUp.WIDTH / 2) - (Art.mageButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2), 128,24));
-        back = addButton(new Button(Art.backButton, (ShootEmUp.WIDTH / 2) - (Art.backButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) + Art.backButton.getHeight(), 128,24));
+        addButton(new Button(ButtonType.WARRIOR, Art.warriorButton, (ShootEmUp.WIDTH / 2) - (Art.warriorButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.warriorButton.getHeight() * 2), 128,24));
+        addButton(new Button(ButtonType.ARCHER, Art.archerButton, (ShootEmUp.WIDTH / 2) - (Art.archerButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - Art.archerButton.getHeight(), 128,24));
+        addButton(new Button(ButtonType.MAGE, Art.mageButton, (ShootEmUp.WIDTH / 2) - (Art.mageButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2), 128,24));
+        addButton(new Button(ButtonType.BACK, Art.backButton, (ShootEmUp.WIDTH / 2) - (Art.backButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) + Art.backButton.getHeight(), 128,24));
     }
 
     @Override
@@ -37,25 +34,6 @@ public class CharacterSelectMenu extends GuiMenu {
 
     public void update() {
     	super.update();
-    	if(warrior.hasClicked()){
-    		ShootEmUp.currentLevel.createPlayer(TypeAttack.WARRIOR);
-    		startGame();
-    		warrior.postAction();
-    	}
-    	if(archer.hasClicked()){
-    		ShootEmUp.currentLevel.createPlayer(TypeAttack.ARCHER);
-    		startGame();
-    		archer.postAction();
-    	}
-    	if(mage.hasClicked()){
-    		ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE);
-    		startGame();
-    		mage.postAction();
-    	}
-    	if(back.hasClicked()){
-    		popMenu();
-        	back.postAction();
-    	}
     	
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
     		ShootEmUp.currentLevel.createPlayer(TypeAttack.WARRIOR);

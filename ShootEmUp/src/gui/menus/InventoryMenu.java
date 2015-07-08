@@ -1,6 +1,7 @@
 package gui.menus;
 
 import gui.Button;
+import gui.ButtonType;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,13 +16,7 @@ import display.Image;
 public class InventoryMenu extends GuiMenu {
 	
 	public static boolean saved;
-	private Button back;
-	private Button exit;
-	private Button skillButton;
-	private Button magicButton;
-	private Button mapButton;
-	private Button saveButton;
-	
+
 	/*
 	private Button boots;
 	private Button legs;
@@ -39,12 +34,12 @@ public class InventoryMenu extends GuiMenu {
 
     public InventoryMenu(Image menuImage) {
         super(menuImage);
-        back = addButton(new Button(Art.backButton, 30, 30, 128,24));
-        exit = addButton(new Button(Art.exitButton, 30, 64, 128,24));
-        magicButton = addButton(new Button(Art.magicButton, 922, 102, 101, 102));
-        skillButton = addButton(new Button(Art.skillButton, 922, 204, 101, 102));
-        mapButton = addButton(new Button(Art.mapButton, 922, 306, 101, 102));
-        saveButton = addButton(new Button(Art.saveButton, 922, 408, 101, 102));
+        addButton(new Button(ButtonType.RESUME, Art.backButton, 30, 30, 128,24));
+        addButton(new Button(ButtonType.MAIN_MENU, Art.exitButton, 30, 64, 128,24));
+        addButton(new Button(ButtonType.MAGIC, Art.magicButton, 922, 102, 101, 102));
+        addButton(new Button(ButtonType.SKILLS, Art.skillButton, 922, 204, 101, 102));
+        addButton(new Button(ButtonType.MAP, Art.mapButton, 922, 306, 101, 102));
+        addButton(new Button(ButtonType.SAVE, Art.saveButton, 922, 408, 101, 102));
         itemButtons = new ArrayList<Button>();
         /*
         boots = addButton(new Button(null, 30, 30, 128,24));
@@ -59,7 +54,7 @@ public class InventoryMenu extends GuiMenu {
         Iterator<InventoryItem> items = ((PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).getInventory().iterator();
 		while(items.hasNext()){
 			InventoryItem item = items.next();
-			itemButtons.add(addButton(new Button(item.getInventoryImage(), x + (item.getInventoryImage().getWidth() * row), y + (item.getInventoryImage().getHeight() * column), item.getInventoryImage().getWidth(), item.getInventoryImage().getHeight() / 2)));
+			itemButtons.add(addButton(new Button(ButtonType.OTHER, item.getInventoryImage(), x + (item.getInventoryImage().getWidth() * row), y + (item.getInventoryImage().getHeight() * column), item.getInventoryImage().getWidth(), item.getInventoryImage().getHeight() / 2)));
 			row++;
 			if(row > 10){
 				row = 0;
@@ -91,32 +86,6 @@ public class InventoryMenu extends GuiMenu {
 
 			position++;
 		}
-    	if(magicButton.hasClicked()){
-    	    addMenu(new MagicMenu(Art.magicScreen));
-    	    magicButton.postAction();
-    	}
-    	if(skillButton.hasClicked()){
-    	    addMenu(new SkillMenu(Art.skillScreen));
-    	    skillButton.postAction();
-    	}
-    	if(mapButton.hasClicked()){
-    	    addMenu(new MapMenu(Art.mapScreen));
-    	    mapButton.postAction();
-    	}
-    	if(saveButton.hasClicked()){
-    	    addMenu(new SaveMenu(Art.saveScreen));
-    	    saveButton.postAction();
-    	}
-    	if(back.hasClicked()){
-    		ShootEmUp.menuStack.clear();
-        	ShootEmUp.paused = false;
-        	back.postAction();
-    	}
-    	if(exit.hasClicked()){
-    		ShootEmUp.menuStack.clear();
-    		addMenu(new MainMenu(Art.mainMenuScreen));
-        	exit.postAction();
-    	}
     }
 
     public void addMenu(GuiMenu menu) {

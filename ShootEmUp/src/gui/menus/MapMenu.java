@@ -2,27 +2,22 @@ package gui.menus;
 
 import main.ShootEmUp;
 import gui.Button;
+import gui.ButtonType;
 import display.Art;
 import display.Image;
 
 public class MapMenu extends GuiMenu {
 	
 	public static boolean saved;
-	private Button back;
-	private Button exit;
-	private Button invButton;
-	private Button skillButton;
-	private Button magicButton;
-	private Button saveButton;
 
     public MapMenu(Image menuImage) {
         super(menuImage);
-        back = addButton(new Button(Art.backButton, 30, 30, 128,24));
-        exit = addButton(new Button(Art.exitButton, 30, 64, 128,24));
-        invButton = addButton(new Button(Art.invButton, 922, 0, 101, 102));
-        skillButton = addButton(new Button(Art.skillButton, 922, 204, 101, 102));
-        magicButton = addButton(new Button(Art.magicButton, 922, 102, 101, 102));
-        saveButton = addButton(new Button(Art.saveButton, 922, 408, 101, 102));
+        addButton(new Button(ButtonType.RESUME, Art.backButton, 30, 30, 128,24));
+        addButton(new Button(ButtonType.MAIN_MENU, Art.exitButton, 30, 64, 128,24));
+        addButton(new Button(ButtonType.INVENTORY, Art.invButton, 922, 0, 101, 102));
+        addButton(new Button(ButtonType.SKILLS, Art.skillButton, 922, 204, 101, 102));
+        addButton(new Button(ButtonType.MAGIC, Art.magicButton, 922, 102, 101, 102));
+        addButton(new Button(ButtonType.SAVE, Art.saveButton, 922, 408, 101, 102));
     }
 
     @Override
@@ -33,32 +28,6 @@ public class MapMenu extends GuiMenu {
 
     public void update() {
     	super.update();
-    	if(invButton.hasClicked()){
-    	    addMenu(new InventoryMenu(Art.invScreen));
-    	    invButton.postAction();
-    	}
-    	if(magicButton.hasClicked()){
-    	    addMenu(new MagicMenu(Art.magicScreen));
-    	    magicButton.postAction();
-    	}
-    	if(skillButton.hasClicked()){
-    	    addMenu(new SkillMenu(Art.skillScreen));
-    	    skillButton.postAction();
-    	}
-    	if(saveButton.hasClicked()){
-    	    addMenu(new SaveMenu(Art.saveScreen));
-    	    saveButton.postAction();
-    	}
-    	if(back.hasClicked()){
-    		ShootEmUp.menuStack.clear();
-        	ShootEmUp.paused = false;
-        	back.postAction();
-    	}
-    	if(exit.hasClicked()){
-    		ShootEmUp.menuStack.clear();
-    		addMenu(new MainMenu(Art.mainMenuScreen));
-        	exit.postAction();
-    	}
     }
 
     public void addMenu(GuiMenu menu) {

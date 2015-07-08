@@ -4,6 +4,7 @@ import level.Level;
 import main.ShootEmUp;
 import input.Keyboard;
 import gui.Button;
+import gui.ButtonType;
 
 import org.lwjgl.glfw.GLFW;
 
@@ -14,16 +15,13 @@ public class LevelSelectMenu extends GuiMenu {
 	
 	static int selectedItem = 0;
 	public static boolean saved;
-	private Button level1;
-	private Button level2;
-	private Button back;
 
     public LevelSelectMenu(Image menuImage) {
         super(menuImage);
         selectedItem = 0;
-        level1 = addButton(new Button(Art.level1Button, (ShootEmUp.WIDTH / 2) - (Art.level1Button.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - Art.level1Button.getHeight(), 128,24));
-        level2 = addButton(new Button(Art.level2Button, (ShootEmUp.WIDTH / 2) - (Art.level1Button.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.level2Button.getHeight() / 4), 128,24));
-        back = addButton(new Button(Art.backButton, (ShootEmUp.WIDTH / 2) - (Art.level1Button.getWidth() / 2), (ShootEmUp.HEIGHT / 2) + Art.level1Button.getHeight(), 128,24));
+        addButton(new Button(ButtonType.LEVEL1, Art.level1Button, (ShootEmUp.WIDTH / 2) - (Art.level1Button.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - Art.level1Button.getHeight(), 128,24));
+        addButton(new Button(ButtonType.LEVEL2, Art.level2Button, (ShootEmUp.WIDTH / 2) - (Art.level1Button.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.level2Button.getHeight() / 4), 128,24));
+        addButton(new Button(ButtonType.BACK, Art.backButton, (ShootEmUp.WIDTH / 2) - (Art.level1Button.getWidth() / 2), (ShootEmUp.HEIGHT / 2) + Art.level1Button.getHeight(), 128,24));
     }
 
     @Override
@@ -34,22 +32,6 @@ public class LevelSelectMenu extends GuiMenu {
 
     public void update() {
     	super.update();
-    	if(level1.hasClicked()){
-    		ShootEmUp.currentLevel = new Level(Art.level1);
-    		ShootEmUp.currentLevel.init();
-    		addMenu(new CharacterSelectMenu(Art.mainMenuScreen));
-    		level1.postAction();
-    	}
-    	if(level2.hasClicked()){
-    		ShootEmUp.currentLevel = new Level(Art.level2);
-    		ShootEmUp.currentLevel.init();
-    		addMenu(new CharacterSelectMenu(Art.mainMenuScreen));
-    		level2.postAction();
-    	}
-    	if(back.hasClicked()){
-    		popMenu();
-        	back.postAction();
-    	}
     	
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
     		ShootEmUp.currentLevel = new Level(Art.level1);

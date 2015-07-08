@@ -12,7 +12,9 @@ import display.Image;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Button extends GuiComponent {
-
+	
+	private ButtonType type;
+	
 	private long window;
 
 	private boolean isPressed;
@@ -22,16 +24,14 @@ public class Button extends GuiComponent {
 	private final int h;
 
 	private final Image id;
-
 	
 	private boolean performClick = false;
 	
 	DoubleBuffer Bx = BufferUtils.createDoubleBuffer(1);
     DoubleBuffer By = BufferUtils.createDoubleBuffer(1);
 
-
-
-	public Button(Image id, int x, int y, int w, int h) {
+	public Button(ButtonType type, Image id, int x, int y, int w, int h) {
+		this.type = type;
 		this.id = id;
 		this.x = x;
 		this.y = y;
@@ -53,30 +53,6 @@ public class Button extends GuiComponent {
 	    double my = By.get();
 
 		if (mx >= x && my >= y && mx < (x + w) && my < (y + h)) {
-			/*
-			if (!tabs) {
-				if (RpgComponent.menuStack.search(new TitleMenu(
-						RpgComponent.GAME_WIDTH, RpgComponent.GAME_WIDTH)) == -1) {
-					TitleMenu.selectedItem = (y - 160) / 30;
-				}
-				if (RpgComponent.menuStack.search(new PauseMenu()) == -1) {
-					PauseMenu.selectedItem = (y - 30) / 30;
-				}
-				if (RpgComponent.menuStack.search(new QuestMenu()) == -1) {
-					QuestMenu.selectedItem = (y - 30) / 30;
-				}
-				if (RpgComponent.menuStack.search(new SkillsMenu()) == -1) {
-					SkillsMenu.selectedItem = (y - 30) / 30;
-				}
-				if (RpgComponent.menuStack.search(new MapMenu()) == -1) {
-					MapMenu.selectedItem = (y - 30) / 30;
-				}
-				if (RpgComponent.menuStack.search(new SaveGameMenu()) == -1) {
-					SaveGameMenu.selectedItem = (y - 30) / 30;
-				}
-			}
-
-			*/
 			
 			if (isPressed && glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE) {
 				performClick = true;
@@ -110,4 +86,7 @@ public class Button extends GuiComponent {
 		return id;
 	}
 
+	public ButtonType getType(){
+		return type;
+	}
 }

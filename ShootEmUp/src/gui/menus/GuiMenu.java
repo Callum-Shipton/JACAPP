@@ -1,6 +1,7 @@
 package gui.menus;
 
 import gui.Button;
+import gui.ButtonHandler;
 
 import java.util.*;
 
@@ -17,7 +18,6 @@ public abstract class GuiMenu {
     protected int y;
     protected int w;
     protected int h;
-    
     
     public GuiMenu(Image menuImage){
     	this.menuImage = menuImage;
@@ -44,9 +44,12 @@ public abstract class GuiMenu {
     }
 
     public void update() {
-
         for (Button button : buttons) {
             button.update();
+            if (button.hasClicked()){
+            	ButtonHandler.selectButton(button.getType());
+            	button.postAction();
+            }
         }
     }
 

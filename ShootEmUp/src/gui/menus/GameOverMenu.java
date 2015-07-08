@@ -2,6 +2,7 @@ package gui.menus;
 
 import input.Keyboard;
 import gui.Button;
+import gui.ButtonType;
 import main.ShootEmUp;
 
 import org.lwjgl.glfw.GLFW;
@@ -13,12 +14,11 @@ public class GameOverMenu extends GuiMenu{
 
 	static int selectedItem = 0;
 	public static boolean saved;
-	private Button exit;
 
     public GameOverMenu(Image menuImage) {
         super(menuImage);
         selectedItem = 0;
-        exit = addButton(new Button(Art.exitButton, (ShootEmUp.WIDTH / 2) - (Art.exitButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.exitButton.getHeight() / 2), 128,24));
+        addButton(new Button(ButtonType.MAIN_MENU, Art.exitButton, (ShootEmUp.WIDTH / 2) - (Art.exitButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.exitButton.getHeight() / 2), 128,24));
     }
 
     @Override
@@ -29,14 +29,8 @@ public class GameOverMenu extends GuiMenu{
 
     public void update() {
     	super.update();
-    	
-    	if(exit.hasClicked()){
-    		popMenu();
-    		addMenu(new MainMenu(Art.mainMenuScreen));
-        	exit.postAction();
-    	}
+
     	//KEYBOARD SELECTION
-    	
     	
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
         	popMenu();

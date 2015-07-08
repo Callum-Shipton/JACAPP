@@ -2,6 +2,7 @@ package gui.menus;
 
 import input.Keyboard;
 import gui.Button;
+import gui.ButtonType;
 import main.ShootEmUp;
 
 import org.lwjgl.glfw.GLFW;
@@ -13,16 +14,13 @@ public class OptionsMenu extends GuiMenu{
 
 	static int selectedItem = 0;
 	public static boolean saved;
-	private Button controls;
-	private Button sound;
-	private Button back;
 
     public OptionsMenu(Image menuImage) {
         super(menuImage);
         selectedItem = 0;
-        controls = addButton(new Button(Art.controlsButton, (ShootEmUp.WIDTH / 2) - (Art.controlsButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.controlsButton.getHeight()), 128,24));
-        sound = addButton(new Button(Art.soundButton, (ShootEmUp.WIDTH / 2) - (Art.soundButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.soundButton.getHeight() / 4), 128,24));
-        back = addButton(new Button(Art.backButton, (ShootEmUp.WIDTH / 2) - (Art.backButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) + (Art.backButton.getHeight()), 128,24));
+        addButton(new Button(ButtonType.CONTROLS, Art.controlsButton, (ShootEmUp.WIDTH / 2) - (Art.controlsButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.controlsButton.getHeight()), 128,24));
+        addButton(new Button(ButtonType.SOUND, Art.soundButton, (ShootEmUp.WIDTH / 2) - (Art.soundButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.soundButton.getHeight() / 4), 128,24));
+        addButton(new Button(ButtonType.BACK, Art.backButton, (ShootEmUp.WIDTH / 2) - (Art.backButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) + (Art.backButton.getHeight()), 128,24));
     }
 
     @Override
@@ -33,18 +31,7 @@ public class OptionsMenu extends GuiMenu{
 
     public void update() {
     	super.update();
-    	if(controls.hasClicked()){
-    		addMenu(new ControlsMenu(Art.mainMenuScreen));
-        	controls.postAction();
-    	}
-    	if(sound.hasClicked()){
-    		addMenu(new SoundMenu(Art.mainMenuScreen));
-        	sound.postAction();
-    	}
-    	if(back.hasClicked()){
-    		popMenu();
-        	back.postAction();
-    	}
+
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
     		addMenu(new ControlsMenu(Art.mainMenuScreen));
         	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
