@@ -43,10 +43,11 @@ public class EntityMap {
 	public HashSet<Vector2> getGridPos(Entity e){
 		HashSet<Vector2> gridPos = new HashSet<Vector2>();
 		BaseGraphics BG = (BaseGraphics) e.getComponent(ComponentType.GRAPHICS);
-		gridPos.add(new Vector2((float)Math.floor((BG.getX()/32)/6),(float)Math.floor((BG.getY()/32)/6)));
-		gridPos.add(new Vector2((float)Math.floor(((BG.getX()+BG.getWidth())/32)/6),(float)Math.floor((BG.getY()/32)/6)));
-		gridPos.add(new Vector2((float)Math.floor(((BG.getX()+BG.getWidth())/32)/6),(float)Math.floor(((BG.getY()+BG.getWidth())/32)/6)));
-		gridPos.add(new Vector2((float)Math.floor((BG.getX()/32)/6),(float)Math.floor(((BG.getY()+BG.getWidth())/32)/6)));
+		for(int i = (int) Math.floor((BG.getX()/32)/6); i <= Math.floor(((BG.getX()+BG.getWidth())/32)/6); i++){
+			for(int j = (int) Math.floor((BG.getY()/32)/6); j <= Math.floor(((BG.getY()+BG.getHeight())/32)/6); j++ ){
+				gridPos.add(new Vector2(i,j));
+			}
+		}
 		return gridPos;
 	}
 	
