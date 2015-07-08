@@ -53,13 +53,9 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 		manaRegen();
 	}
 	
-	@Override
-	public void damage(int damage, Entity e) {
-		this.health -= damage;
-		if(health <= 0) {
-			e.destroy();
-			ShootEmUp.currentLevel.spawner.removeEnemy();
-		}
+	public void died(Entity e){
+		e.destroy();
+		ShootEmUp.currentLevel.spawner.removeEnemy();
 	}
 
 	@Override

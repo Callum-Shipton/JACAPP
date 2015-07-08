@@ -19,6 +19,7 @@ public class GameOverMenu extends GuiMenu{
         super(menuImage);
         selectedItem = 0;
         exit = addButton(new Button(Art.exitButton, (ShootEmUp.WIDTH / 2) - (Art.exitButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.exitButton.getHeight() / 2), 128,24));
+        ShootEmUp.currentLevel = null;
     }
 
     @Override

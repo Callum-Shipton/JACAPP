@@ -58,17 +58,6 @@ public class PlayerAttack extends BaseAttack {
 		healthRegen();
 		manaRegen();
 	}
-	
-	@Override
-	public void damage(int damage, Entity e) {
-		this.health -= damage;
-		if(health <= 0) {
-			health = maxHealth;
-			mana = maxMana;
-			removeLife();
-			e.send(Message.ENTITY_DIED);
-		}
-	}
 
 	@Override
 	public void receive(Message m, Entity e) {
@@ -82,6 +71,8 @@ public class PlayerAttack extends BaseAttack {
 			ShootEmUp.menuStack.add(new GameOverMenu(Art.gameOverScreen));
 		} else {
 			lives--;
+			health = maxHealth;
+			mana = maxMana;
 		}
 	}
 	
@@ -91,5 +82,11 @@ public class PlayerAttack extends BaseAttack {
 
 	public void setLives(int lives) {
 		this.lives = lives;
+	}
+
+	@Override
+	public void died(Entity e) {
+		removeLife();
+		e.send(Message.ENTITY_DIED);
 	}
 }

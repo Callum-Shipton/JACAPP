@@ -7,6 +7,7 @@ import main.ShootEmUp;
 import math.Vector2;
 import math.Vector4;
 import components.ComponentType;
+import components.Message;
 import components.collision.BaseCollision;
 import components.collision.HitCollision;
 import components.graphical.BaseGraphics;
@@ -29,6 +30,7 @@ public class BasicMovement extends BaseMovement {
 			BG.setY(BG.getY() + Math.round(moveVec.y() * speed));
 			checkCollisionY(e, moveVec);
 		}
+		e.send(Message.ENTITY_MOVED);
 	}
 
 	public boolean checkCollisionY(Entity e, Vector2 moveVec) {
