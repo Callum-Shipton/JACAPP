@@ -1,7 +1,9 @@
 package components.inventory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.function.BiFunction;
 
 import object.Armour;
 import object.InventoryItem;
@@ -11,97 +13,113 @@ import components.attack.PlayerAttack;
 import components.movement.BaseMovement;
 import display.Art;
 
-public class PlayerInventory extends BasicInventory{
-	
+import static components.inventory.TypePotion.*;
+
+public class PlayerInventory extends BasicInventory {
+
 	private final int MAX_LEVEL = 99;
 	private final int MAX_EXP_BOUND = 18;
 	private int expBound;
-	
+
 	private ArrayList<InventoryItem> inventory;
-	private ArrayList<TypePotion> potions; 
+	private HashMap<TypePotion, Integer> potions;
 	private int maxPotions = 20;
-	
+
 	protected Armour boots = null;
 	protected Armour legs = null;
 	protected Armour chest = null;
 	protected Armour helmet = null;
-	
+
 	private PlayerAttack PA;
 	private BaseMovement BM;
-	
+
 	private boolean speedOn;
-	
+
 	public PlayerInventory(PlayerAttack PA, BaseMovement BM, int level, int expBound) {
 		super(level);
 		this.PA = PA;
 		this.BM = BM;
 		this.expBound = expBound;
 		inventory = new ArrayList<InventoryItem>();
-		potions = new ArrayList<TypePotion>();
+		potions = new HashMap<TypePotion, Integer>();
+		for (TypePotion type : TypePotion.values()) {
+			potions.put(type, 0);
+		}
+
 	}
-	
-	public void usePotion(TypePotion type){
-		Iterator<TypePotion> Potions = potions.iterator();
-		int potionIndex = 0;
-		while(Potions.hasNext()){
-			if(Potions.next() == type){
-				potions.remove(potionIndex);
-				switch(type){
-				case HEALTH:
-					PA.addHealth(5);
-					break;
-				case MANA:
-					PA.addMana(5);
-					break;
-				case SPEED:
-					if(!speedOn){
-						BM.increaseSpeed(2);
-						speedOn = true;
-					}
-					break;
-				case KNOCKBACK:
-				}
-				break;
+
+	public void usePotion(TypePotion type) {
+		int numPotion;
+		switch (type) {
+		case HEALTH:
+			numPotion = potions.get(HEALTH);
+			if(numPotion > 0){
+				PA.addHealth(5);
+				potions.replace(HEALTH, --numPotion);
 			}
-			potionIndex++;
+			break;
+		case MANA:
+			numPotion = potions.get(MANA);
+			if(numPotion > 0){
+				PA.addMana(5);
+				potions.replace(MANA, --numPotion);
+			}
+			break;
+		case SPEED:
+			if (!speedOn) {
+				numPotion = potions.get(SPEED);
+				if(numPotion > 0){
+					BM.increaseSpeed(2);
+					speedOn = true;
+					potions.replace(SPEED, --numPotion);
+				}
+			}
+			break;
+		case KNOCKBACK:
+			numPotion = potions.get(KNOCKBACK);
+			if(numPotion > 0){
+				//Code for adding to knockback
+				potions.replace(KNOCKBACK, --numPotion);
+			}
+			break;
 		}
 	}
-	
-	public void equipItem(int itemNo){
+
+	public void equipItem(int itemNo) {
 		InventoryItem item = inventory.get(itemNo);
 		inventory.remove(itemNo);
-		if(item instanceof Armour){
-			switch(((Armour) item).getType()){
+		if (item instanceof Armour) {
+			switch (((Armour) item).getType()) {
 			case BOOTS:
-				boots = (Armour)item;
+				boots = (Armour) item;
 				break;
 			case LEGS:
-				legs = (Armour)item;
+				legs = (Armour) item;
 				break;
 			case CHESTPLATE:
-				chest = (Armour)item;
+				chest = (Armour) item;
 				break;
 			case HELMET:
-				helmet = (Armour)item;
+				helmet = (Armour) item;
 			}
 		} else {
-			PA.setWeapon((Weapon)item);
+			PA.setWeapon((Weapon) item);
 		}
 	}
-	
-	public void giveItem(TypePickup type, Subtype subtype){
-		switch(type){
-		case COIN: 
-			if(coins < 99){
+
+	public void giveItem(TypePickup type, Subtype subtype) {
+		switch (type) {
+		case COIN:
+			if (coins < 99) {
 				coins++;
 			}
 			break;
 		case POTION:
 			TypePotion potionType = (TypePotion) subtype;
-			if(potions.size() < maxPotions){
-				potions.add(potionType);
+			if (potions.size() < maxPotions) {
+				potions.merge(potionType, 1, (Integer a, Integer b) -> a+b);
 			} else {
-				switch(potionType){
+				switch (potionType) {
 				case HEALTH:
 					PA.addHealth(5);
 					break;
@@ -109,7 +127,7 @@ public class PlayerInventory extends BasicInventory{
 					PA.addMana(5);
 					break;
 				case SPEED:
-					if(!speedOn){
+					if (!speedOn) {
 						BM.increaseSpeed(2);
 						speedOn = true;
 					}
@@ -120,7 +138,7 @@ public class PlayerInventory extends BasicInventory{
 			break;
 		case ARMOUR:
 			TypeArmour armourType = (TypeArmour) subtype;
-			switch(armourType){
+			switch (armourType) {
 			case BOOTS:
 				inventory.add(new Armour(armourType, 2, Art.bootsButton));
 				break;
@@ -139,20 +157,20 @@ public class PlayerInventory extends BasicInventory{
 			inventory.add(WeaponBuilder.buildWeapon(weaponType, 0));
 		}
 	}
-	
-	public void giveExp(int exp){
+
+	public void giveExp(int exp) {
 		this.exp += exp;
-		if(this.exp > expBound){
-			if(level < MAX_LEVEL){
+		if (this.exp > expBound) {
+			if (level < MAX_LEVEL) {
 				this.exp = 0;
 				level++;
-				if (expBound < MAX_EXP_BOUND){
+				if (expBound < MAX_EXP_BOUND) {
 					expBound++;
-				}		
+				}
 			}
 		}
 	}
-	
+
 	public int getExpBound() {
 		return expBound;
 	}
@@ -160,24 +178,24 @@ public class PlayerInventory extends BasicInventory{
 	public void setExpBound(int expBound) {
 		this.expBound = expBound;
 	}
-	
-	public ArrayList<InventoryItem> getInventory(){
+
+	public ArrayList<InventoryItem> getInventory() {
 		return inventory;
 	}
-	
-	public Armour setBoots(){
+
+	public Armour setBoots() {
 		return boots;
 	}
-	
-	public Armour setLegs(){
+
+	public Armour setLegs() {
 		return legs;
 	}
-	
-	public Armour setChest(){
+
+	public Armour setChest() {
 		return chest;
 	}
-	
-	public Armour setHelmet(){
+
+	public Armour setHelmet() {
 		return helmet;
 	}
 }
