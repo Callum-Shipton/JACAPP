@@ -62,6 +62,9 @@ public class Art {
 	public static Image manaButton;
 	public static Image manaRegenButton;
 	
+	public static Image potionsButton;
+	public static Image inventoryButton;
+	
 	public static Image invButton;
 	public static Image skillButton;
 	public static Image magicButton;
@@ -269,6 +272,9 @@ public class Art {
 		healthRegenButton = new Image("/Images/Menus/Buttons/MenuButtons/HealthRegenButton.png",1,2);
 		manaButton = new Image("/Images/Menus/Buttons/MenuButtons/ManaButton.png",1,2);
 		manaRegenButton = new Image("/Images/Menus/Buttons/MenuButtons/ManaRegenButton.png",1,2);
+		
+		potionsButton = new Image("/Images/Menus/Buttons/MenuButtons/PotionsButton.png",1,2);
+		inventoryButton = new Image("/Images/Menus/Buttons/MenuButtons/InventoryButton.png",1,2);
 		
 		swordButton = new Image("/Images/Menus/Buttons/Items/SwordButton.png",1,2);
 		battleaxeButton = new Image("/Images/Menus/Buttons/Items/BattleaxeButton.png",1,2);

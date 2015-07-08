@@ -227,4 +227,12 @@ public class PlayerInventory extends BasicInventory {
 		}
 		return sum;
 	}
+	
+	public void addInventorySize(int addition){
+		inventorySize += addition;
+	}
+	
+	public void addMaxPotions(int addition){
+		maxPotions += addition;
+	}
 }

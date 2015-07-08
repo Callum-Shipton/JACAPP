@@ -97,6 +97,12 @@ public abstract class ButtonHandler {
 		case MANA:
 			mana();
 			break;
+		case POTIONS_UPGRADE:
+			potionsUpgrade();
+			break;
+		case INVENTORY_UPGRADE:
+			inventoryUpgrade();
+			break;
 		case OTHER:
 		}
 	}
@@ -217,6 +223,22 @@ public abstract class ButtonHandler {
 			PA.setMaxMana(PA.getMaxMana() + 1);
 			PA.setMana(PA.getMana() + 1);
 			((PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).spendLevelPoints(1);
+		}
+	}
+	
+	private static void inventoryUpgrade(){
+		PlayerInventory PI = (PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY));
+		if(PI.getCoins() > 10){
+			PI.addInventorySize(5);
+			PI.spendCoins(10);
+		}
+	}
+	
+	private static void potionsUpgrade(){
+		PlayerInventory PI = (PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY));
+		if(PI.getCoins() > 10){
+			PI.addMaxPotions(5);
+			PI.spendCoins(10);
 		}
 	}
 	
