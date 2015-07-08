@@ -12,17 +12,31 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	protected BaseSpawn BS;
 	
 	protected Weapon weapon;
-	protected int fireRate;
 	protected int health;
 	protected int healthRegen;
 	protected int maxHealth;
 	protected int maxHealthRegen;
-	
-	@Override
-	public abstract void attack(Entity e, int dir);
+	protected int mana;
+	protected int manaRegen;
+	protected int maxMana;
+	protected int maxManaRegen;
+	private int fireCountdown;
 
 	@Override
 	public abstract void update(Entity e);
+	
+	public abstract void damage(int damage, Entity e);
+	
+	public void attack(Entity e, int dir) {
+		if(fireCountdown <= 0){
+			if(mana >= weapon.getManaCost()){
+				weapon.attack(e, dir);
+				mana -= weapon.getManaCost();
+			}
+			fireCountdown = weapon.getFireRate();
+		}
+		fireCountdown--;
+	}
 	
 	public void healthRegen(){
 		if (health < maxHealth) {
@@ -31,6 +45,30 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 				health++;
 			}
 			healthRegen--;
+		}
+	}
+	
+	public void manaRegen(){
+		if (mana < maxMana) {
+			if (manaRegen <= 0) {
+				manaRegen = maxManaRegen;
+				mana++;
+			}
+			manaRegen--;
+		}
+	}
+	
+	public void addHealth(int i){
+		health += i;
+		if(health > maxHealth){
+			health = maxHealth;
+		}
+	}
+	
+	public void addMana(int i){
+		mana += i;
+		if(mana > maxMana){
+			mana = maxMana;
 		}
 	}
 	
@@ -62,16 +100,44 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		this.maxHealthRegen = maxHealthRegen;
 	}
 	
-	public void damage(int damage, Entity e) {
-		this.health -= damage;
-	}
-	
 	public int getMaxHealth() {
 		return maxHealth;
 	}
 
 	public void setMaxHealth(int maxHealth) {
 		this.maxHealth = maxHealth;
+	}
+	
+	public int getMana() {
+		return mana;
+	}
+
+	public void setMana(int mana) {
+		this.mana = mana;
+	}
+
+	public int getManaRegen() {
+		return manaRegen;
+	}
+
+	public void setManaRegen(int manaRegen) {
+		this.manaRegen = manaRegen;
+	}
+
+	public int getMaxMana() {
+		return maxMana;
+	}
+
+	public void setMaxMana(int maxMana) {
+		this.maxMana = maxMana;
+	}
+
+	public int getMaxManaRegen() {
+		return maxManaRegen;
+	}
+
+	public void setMaxManaRegen(int maxManaRegen) {
+		this.maxManaRegen = maxManaRegen;
 	}
 
 	public ComponentType getType() {

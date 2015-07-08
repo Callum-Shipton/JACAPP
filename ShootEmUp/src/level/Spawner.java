@@ -3,12 +3,11 @@ package level;
 import java.util.Random;
 
 import object.Entity;
-import object.WeaponBuilder;
 import main.ShootEmUp;
 import math.Vector2;
 import components.ComponentType;
 import components.attack.BaseAttack;
-import components.attack.MeleeAttack;
+import components.attack.EnemyAttack;
 import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
 import components.collision.BaseCollision;
@@ -22,7 +21,6 @@ import components.graphical.PlayerGraphics;
 import components.inventory.BaseInventory;
 import components.inventory.EnemyInventory;
 import components.inventory.PlayerInventory;
-import components.inventory.TypeWeapon;
 import components.movement.BaseMovement;
 import components.movement.BasicMovement;
 import components.movement.FlyingMovement;
@@ -61,13 +59,7 @@ public class Spawner {
 		PointSpawn s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
 		PlayerAttack a;
 		
-		if(type == TypeAttack.WARRIOR){
-			a = new PlayerAttack(type, s, WeaponBuilder.buildWeapon(TypeWeapon.SWORD, 0), 3, 100, 3, 3, 50, 3, 3);
-		} else if (type == TypeAttack.ARCHER){
-			 a = new PlayerAttack(type, s, WeaponBuilder.buildWeapon(TypeWeapon.BOW, 0), 3, 100, 3, 3, 50, 3, 3);
-		} else {
-			a = new PlayerAttack(type, s, WeaponBuilder.buildWeapon(TypeWeapon.EARTH_STAFF, 0), 3, 100, 3, 3, 50, 3, 3);
-		}
+		a = new PlayerAttack(type, s);
 		
 		player.addComponent(g);
 		RigidCollision c = new RigidCollision(player);
@@ -171,7 +163,7 @@ public class Spawner {
 	private void smallEnemy(){
 		enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base, false); 
 		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, WeaponBuilder.buildWeapon(TypeWeapon.ICE_STAFF, 1), 1, 100, 1);
+		enemyAttack = new EnemyAttack(TypeAttack.WARRIOR, 1);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
 		enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 7);
@@ -182,7 +174,7 @@ public class Spawner {
 	private void largeEnemy(){
 		enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base, false); 
 		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, WeaponBuilder.buildWeapon(TypeWeapon.ICE_STAFF, 1), 3, 100, 3);
+		enemyAttack = new EnemyAttack(TypeAttack.ARCHER, 3);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
 		enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 2);
@@ -193,7 +185,7 @@ public class Spawner {
 	private void flyingEnemy(){
 		enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base, false); 
 		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, WeaponBuilder.buildWeapon(TypeWeapon.ICE_STAFF, 1), 2, 100, 2);
+		enemyAttack = new EnemyAttack(TypeAttack.MAGE, 2);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
 		enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);
@@ -204,7 +196,7 @@ public class Spawner {
 	private void bossEnemy(){
 		enemyGraphics = new AnimatedGraphics(Art.bossEnemy, Art.base, false); 
 		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
-		enemyAttack = new MeleeAttack(enemySpawn, enemyGraphics, WeaponBuilder.buildWeapon(TypeWeapon.EARTH_STAFF, 1), 1000, 100, 1000);
+		enemyAttack = new EnemyAttack(TypeAttack.MAGE, 1000);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
 		enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);
