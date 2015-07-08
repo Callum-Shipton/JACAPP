@@ -2,8 +2,6 @@ package components.inventory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.function.BiFunction;
 
 import object.Armour;
 import object.InventoryItem;
@@ -20,6 +18,7 @@ public class PlayerInventory extends BasicInventory {
 	private final int MAX_LEVEL = 99;
 	private final int MAX_EXP_BOUND = 18;
 	private int expBound;
+	private int levelPoints = 0;
 
 	private ArrayList<InventoryItem> inventory;
 	private HashMap<TypePotion, Integer> potions;
@@ -46,6 +45,10 @@ public class PlayerInventory extends BasicInventory {
 			potions.put(type, 0);
 		}
 
+	}
+	
+	public void spendLevelPoints(int points){
+		levelPoints -= points;
 	}
 
 	public void usePotion(TypePotion type) {
@@ -164,6 +167,7 @@ public class PlayerInventory extends BasicInventory {
 			if (level < MAX_LEVEL) {
 				this.exp = 0;
 				level++;
+				levelPoints++;
 				if (expBound < MAX_EXP_BOUND) {
 					expBound++;
 				}
@@ -197,5 +201,9 @@ public class PlayerInventory extends BasicInventory {
 
 	public Armour setHelmet() {
 		return helmet;
+	}
+	
+	public int getLevelPoints(){
+		return levelPoints;
 	}
 }
