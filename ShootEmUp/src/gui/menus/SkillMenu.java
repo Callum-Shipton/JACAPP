@@ -3,10 +3,6 @@ package gui.menus;
 import main.ShootEmUp;
 import gui.Button;
 import gui.ButtonType;
-import components.ComponentType;
-import components.attack.BaseAttack;
-import components.attack.PlayerAttack;
-import components.inventory.BaseInventory;
 import display.Art;
 import display.Image;
 
