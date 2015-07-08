@@ -67,7 +67,7 @@ public class Display {
 		vm = new GLFWvidmode(vidmode);
 
 		// Create the window
-		window = glfwCreateWindow(width, height, "Hello World!", NULL, NULL);
+		window = glfwCreateWindow(width, height, "Shoot Em' Up", NULL, NULL);
 		if (window == NULL)
 			throw new RuntimeException("Failed to create the GLFW window");
 
