@@ -30,7 +30,6 @@ public class BasicMovement extends BaseMovement {
 			BG.setY(BG.getY() + Math.round(moveVec.y() * speed));
 			checkCollisionY(e, moveVec);
 		}
-		e.send(Message.ENTITY_MOVED);
 	}
 
 	public boolean checkCollisionY(Entity e, Vector2 moveVec) {
@@ -61,7 +60,10 @@ public class BasicMovement extends BaseMovement {
 		}
 
 		ShootEmUp.currentLevel.eMap.removeEntity(BC.getGridPos(), e);
-		if(!e.isDestroy())ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
+		if(!e.isDestroy()){
+			ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
+			e.send(Message.ENTITY_MOVED);
+		}
 		BC.setGridPos(newGrid);
 		return collide;
 	}
@@ -95,7 +97,10 @@ public class BasicMovement extends BaseMovement {
 		}
 
 		ShootEmUp.currentLevel.eMap.removeEntity(BC.getGridPos(), e);
-		if(!e.isDestroy())ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
+		if(!e.isDestroy()){
+			ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
+			e.send(Message.ENTITY_MOVED);
+		}
 		BC.setGridPos(newGrid);
 		return collide;
 	}
