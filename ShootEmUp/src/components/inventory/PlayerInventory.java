@@ -124,7 +124,7 @@ public class PlayerInventory extends BasicInventory {
 			break;
 		case POTION:
 			TypePotion potionType = (TypePotion) subtype;
-			if (potions.size() < maxPotions) {
+			if (getNumPotions() < maxPotions) {
 				potions.merge(potionType, 1, (Integer a, Integer b) -> a+b);
 			} else {
 				switch (potionType) {
@@ -218,5 +218,13 @@ public class PlayerInventory extends BasicInventory {
 	
 	public int getNumPotion(TypePotion type){
 		return potions.get(type);
+	}
+	
+	public int getNumPotions(){
+		int sum = 0;
+		for(TypePotion type: TypePotion.values()){
+			sum += potions.get(type);
+		}
+		return sum;
 	}
 }
