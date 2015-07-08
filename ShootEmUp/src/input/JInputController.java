@@ -425,7 +425,7 @@ class JInputController implements Controller {
 		case "Controller (Xbox One For Windows)":
 			switch (buttonIndex) {
 			case 0: // A
-
+				Keyboard.setKey(GLFW.GLFW_KEY_ENTER, value);
 				break;
 			case 1: // B
 
