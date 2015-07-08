@@ -16,26 +16,32 @@ public class PlayerAttack extends BaseAttack {
 	
 	public PlayerAttack(TypeAttack type){
 		this.type = type;
-		health = 3;
-		maxHealth = health;
+		
 		healthRegen = 100;
-		maxHealthRegen = healthRegen;
-		mana = 3;
-		maxMana = mana;
 		manaRegen = 100;
-		maxManaRegen = manaRegen;
 		lives = 3;
 		
 		switch(type){
 		case WARRIOR:
+			health = 5;
+			mana = 3;
 			weapon = WeaponBuilder.buildWeapon(TypeWeapon.SWORD, 0);
 			break;
 		case ARCHER:
+			health = 4;
+			mana = 4;
 			weapon = WeaponBuilder.buildWeapon(TypeWeapon.BOW, 0);
 			break;
 		case MAGE:
+			health = 3;
+			mana = 5;
 			weapon = WeaponBuilder.buildWeapon(TypeWeapon.EARTH_STAFF, 0);
 		}
+		
+		maxHealth = health;
+		maxHealthRegen = healthRegen;
+		maxMana = mana;
+		maxManaRegen = manaRegen;
 	}
 	
 	public PlayerAttack(TypeAttack type, Weapon weapon, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana, int lives){

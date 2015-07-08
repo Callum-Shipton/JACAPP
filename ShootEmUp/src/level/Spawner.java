@@ -80,31 +80,30 @@ public class Spawner {
 			counter++;
 			if (counter == ENEMY_SPAWN_RATE) {
 				//creates an enemy to test the spawning position
-				if(testEnemy()){
+				testEnemy();
 					
-					//creating new Enemy
-					newEnemy = new Entity();
-					
-					if((totalEnemies == 0) && (wave == 20)){
-						bossEnemy();
+				//creating new Enemy
+				newEnemy = new Entity();
+				
+				if((totalEnemies == 0) && (wave == 20)){
+					bossEnemy();
+				} else {
+					//randomly chooses an enemy
+					int prob = rand.nextInt(3);
+					if(prob == 0){
+						smallEnemy();
+					} else if(prob == 1){
+						largeEnemy();
 					} else {
-						//randomly chooses an enemy
-						int prob = rand.nextInt(3);
-						if(prob == 0){
-							smallEnemy();
-						} else if(prob == 1){
-							largeEnemy();
-						} else {
-							flyingEnemy();
-						}			
-					}
-					//creates the enemy and adds it to the level
-					addEnemy();
-					totalEnemies++;
-					enemies++;
-					if(totalEnemies == wave){
-						newWave = false;
-					}
+						flyingEnemy();
+					}			
+				}
+				//creates the enemy and adds it to the level
+				addEnemy();
+				totalEnemies++;
+				enemies++;
+				if(totalEnemies == wave){
+					newWave = false;
 				}
 				counter = 0;
 			}
@@ -121,8 +120,7 @@ public class Spawner {
 		enemies--;
 	}
 	
-	private boolean testEnemy(){
-		int attempts = 0;
+	private void testEnemy(){
 		
 		boolean collide = false;
 		test = new Entity();
@@ -154,12 +152,7 @@ public class Spawner {
 					break;
 				}
 			}
-			attempts++;
-		} while ((collide == true) && (attempts < 30));
-		if(attempts >= 30){
-			return false;
-		}
-		return true;
+		} while (collide == true);
 	}
 	
 	public void checkSpawn(Entity e){
