@@ -21,8 +21,9 @@ public class PlayerInventory extends BasicInventory {
 	private int levelPoints = 0;
 
 	private ArrayList<InventoryItem> inventory;
+	private int inventorySize = 5;
 	private HashMap<TypePotion, Integer> potions;
-	private int maxPotions = 20;
+	private int maxPotions = 5;
 
 	protected Armour boots = null;
 	protected Armour legs = null;
@@ -82,6 +83,10 @@ public class PlayerInventory extends BasicInventory {
 			numPotion = potions.get(KNOCKBACK);
 			if(numPotion > 0){
 				//Code for adding to knockback
+				PA.setHealth(100);
+				PA.setMaxHealth(100);
+				PA.setMana(100);
+				PA.setMaxMana(100);
 				potions.replace(KNOCKBACK, --numPotion);
 			}
 			break;
@@ -140,24 +145,28 @@ public class PlayerInventory extends BasicInventory {
 			}
 			break;
 		case ARMOUR:
-			TypeArmour armourType = (TypeArmour) subtype;
-			switch (armourType) {
-			case BOOTS:
-				inventory.add(new Armour(armourType, 2, Art.bootsButton));
-				break;
-			case LEGS:
-				inventory.add(new Armour(armourType, 5, Art.legsButton));
-				break;
-			case CHESTPLATE:
-				inventory.add(new Armour(armourType, 10, Art.chestButton));
-				break;
-			case HELMET:
-				inventory.add(new Armour(armourType, 7, Art.helmetButton));
+			if(inventory.size() < inventorySize){
+				TypeArmour armourType = (TypeArmour) subtype;
+				switch (armourType) {
+				case BOOTS:
+					inventory.add(new Armour(armourType, 2, Art.bootsButton));
+					break;
+				case LEGS:
+					inventory.add(new Armour(armourType, 5, Art.legsButton));
+					break;
+				case CHESTPLATE:
+					inventory.add(new Armour(armourType, 10, Art.chestButton));
+					break;
+				case HELMET:
+					inventory.add(new Armour(armourType, 7, Art.helmetButton));
+				}
 			}
 			break;
 		case WEAPON:
-			TypeWeapon weaponType = (TypeWeapon) subtype;
-			inventory.add(WeaponBuilder.buildWeapon(weaponType, 0));
+			if(inventory.size() < inventorySize){
+				TypeWeapon weaponType = (TypeWeapon) subtype;
+				inventory.add(WeaponBuilder.buildWeapon(weaponType, 0));
+			}
 		}
 	}
 

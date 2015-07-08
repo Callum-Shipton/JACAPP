@@ -17,13 +17,6 @@ public class InventoryMenu extends GuiMenu {
 	
 	public static boolean saved;
 
-	/*
-	private Button boots;
-	private Button legs;
-	private Button chest;
-	private Button helmet;
-	*/
-	
 	private ArrayList<Button> itemButtons;
 	
 	private int row = 0;
