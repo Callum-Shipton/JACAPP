@@ -109,7 +109,10 @@ public class PlayerInventory extends BasicInventory{
 					PA.addMana(5);
 					break;
 				case SPEED:
-					BM.increaseSpeed(2);
+					if(!speedOn){
+						BM.increaseSpeed(2);
+						speedOn = true;
+					}
 					break;
 				case KNOCKBACK:
 				}

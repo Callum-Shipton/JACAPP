@@ -187,29 +187,37 @@ public abstract class ButtonHandler {
 	}
 	
 	private static void healthRegen(){
-		BaseAttack BA = (BaseAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
-		BA.setMaxHealthRegen((int)Math.ceil(BA.getMaxHealthRegen()/2));
-		((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).spendCoins(1);
+		if(((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).getCoins() > 0){
+			BaseAttack BA = (BaseAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
+			BA.setMaxHealthRegen((int)Math.ceil(BA.getMaxHealthRegen()/2));
+			((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).spendCoins(1);
+		}
 	}
 	
 	private static void health(){
-		BaseAttack BA = (BaseAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
-		BA.setMaxHealth(BA.getMaxHealth() + 1);
-		BA.setHealth(BA.getHealth()+1);
-		((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).spendCoins(1);
+		if(((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).getCoins() > 0){
+			BaseAttack BA = (BaseAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
+			BA.setMaxHealth(BA.getMaxHealth() + 1);
+			BA.setHealth(BA.getHealth()+1);
+			((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).spendCoins(1);
+		}
 	}
 	
 	private static void manaRegen(){
-		PlayerAttack PA = (PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
-		PA.setMaxManaRegen((int)Math.ceil(PA.getMaxManaRegen()/2));
-		((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).spendCoins(1);
+		if(((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).getCoins() > 0){
+			PlayerAttack PA = (PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
+			PA.setMaxManaRegen((int)Math.ceil(PA.getMaxManaRegen()/2));
+			((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).spendCoins(1);
+		}
 	}
 	
 	private static void mana(){
-		PlayerAttack PA = (PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
-		PA.setMaxMana(PA.getMaxMana() + 1);
-		PA.setMana(PA.getMana() + 1);
-		((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).spendCoins(1);
+		if(((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).getCoins() > 0){
+			PlayerAttack PA = (PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
+			PA.setMaxMana(PA.getMaxMana() + 1);
+			PA.setMana(PA.getMana() + 1);
+			((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).spendCoins(1);
+		}
 	}
 	
 	//Extra Methods
