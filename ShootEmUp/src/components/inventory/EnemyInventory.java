@@ -6,7 +6,6 @@ import object.Entity;
 import main.ShootEmUp;
 import math.Vector2;
 import components.ComponentType;
-import components.Message;
 import components.collision.PickupCollision;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
@@ -20,6 +19,11 @@ public class EnemyInventory extends BasicInventory{
 	public EnemyInventory(BaseGraphics BG, int level) {
 		super(level);
 		this.BG = BG;
+	}
+	
+	@Override
+	public void destroy(Entity e){
+		drop(e);
 	}
 
 	public void drop(Entity e) {
@@ -46,7 +50,6 @@ public class EnemyInventory extends BasicInventory{
 		Random rand = new Random();
 		int prob = rand.nextInt(3);
 		if(prob == 0 ) {
-			System.out.println("Drop potion");
 			int itemProb = rand.nextInt(4);
 			Entity item = new Entity();
 			TypePickup T = TypePickup.POTION;
@@ -76,7 +79,6 @@ public class EnemyInventory extends BasicInventory{
 			item.addComponent(c);
 			ShootEmUp.currentLevel.newEntities.add(item);
 		} else if(prob == 1) {
-			System.out.println("Drop armour");
 			int armourProb = rand.nextInt(4);
 			Entity armour = new Entity();
 			TypePickup T = TypePickup.ARMOUR;
@@ -105,7 +107,6 @@ public class EnemyInventory extends BasicInventory{
 			armour.addComponent(c);
 			ShootEmUp.currentLevel.newEntities.add(armour);
 		} else if(prob == 2) {	
-			System.out.println("Drop weapon");
 			int weaponProb = rand.nextInt(8);
 			Entity weapon = new Entity();
 			if(weaponProb == 0){
@@ -154,12 +155,4 @@ public class EnemyInventory extends BasicInventory{
 			ShootEmUp.currentLevel.newEntities.add(weapon);
 		}
 	}
-	
-	@Override
-	public void receive(Message m, Entity e) {
-		if(m == Message.ENTITY_DIED){
-			drop(e);
-		}
-	}
-	
 }

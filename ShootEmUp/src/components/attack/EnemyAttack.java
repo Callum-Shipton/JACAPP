@@ -5,7 +5,6 @@ import object.Weapon;
 import object.WeaponBuilder;
 import main.ShootEmUp;
 import components.Message;
-import components.graphical.BaseGraphics;
 import components.inventory.TypeWeapon;
 
 public class EnemyAttack extends BaseAttack implements AttackComponent {
@@ -35,7 +34,7 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 		}
 	}
 	
-	public EnemyAttack(TypeAttack type, BaseGraphics BG, Weapon weapon, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana){
+	public EnemyAttack(TypeAttack type, Weapon weapon, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana){
 		this.setWeapon(weapon);
 		this.health = health;
 		this.healthRegen = healthRegen;
@@ -59,7 +58,6 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 		this.health -= damage;
 		if(health <= 0) {
 			e.destroy();
-			e.send(Message.ENTITY_DIED);
 			ShootEmUp.currentLevel.spawner.removeEnemy();
 		}
 	}

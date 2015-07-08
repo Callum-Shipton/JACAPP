@@ -7,7 +7,6 @@ import main.ShootEmUp;
 import gui.menus.GameOverMenu;
 import components.Message;
 import components.inventory.TypeWeapon;
-import components.spawn.BaseSpawn;
 import display.Art;
 
 public class PlayerAttack extends BaseAttack {
@@ -15,9 +14,8 @@ public class PlayerAttack extends BaseAttack {
 	
 	protected int lives;
 	
-	public PlayerAttack(TypeAttack type, BaseSpawn BS){
+	public PlayerAttack(TypeAttack type){
 		this.type = type;
-		this.BS = BS;
 		health = 3;
 		maxHealth = health;
 		healthRegen = 100;
@@ -40,8 +38,7 @@ public class PlayerAttack extends BaseAttack {
 		}
 	}
 	
-	public PlayerAttack(TypeAttack type, BaseSpawn BS, Weapon weapon, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana, int lives){
-		this.BS = BS;
+	public PlayerAttack(TypeAttack type, Weapon weapon, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana, int lives){
 		this.setWeapon(weapon);
 		this.health = health;
 		this.healthRegen = healthRegen;
@@ -69,7 +66,7 @@ public class PlayerAttack extends BaseAttack {
 			health = maxHealth;
 			mana = maxMana;
 			removeLife();
-			BS.spawn(e);
+			e.send(Message.ENTITY_DIED);
 		}
 	}
 

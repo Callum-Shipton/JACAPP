@@ -4,12 +4,10 @@ import object.Entity;
 import object.Weapon;
 import components.Component;
 import components.ComponentType;
-import components.spawn.BaseSpawn;
 
 public abstract class BaseAttack extends Component implements AttackComponent {
 
 	protected ComponentType type = ComponentType.ATTACK;
-	protected BaseSpawn BS;
 	
 	protected Weapon weapon;
 	protected int health;

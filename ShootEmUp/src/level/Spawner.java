@@ -38,7 +38,6 @@ public class Spawner {
 	private boolean newWave = true;
 	
 	private BaseGraphics enemyGraphics;
-	private PointSpawn enemySpawn;
 	private BaseAttack enemyAttack;
 	private BaseControl enemyControl;
 	private BaseCollision enemyCollision;
@@ -59,7 +58,7 @@ public class Spawner {
 		PointSpawn s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
 		PlayerAttack a;
 		
-		a = new PlayerAttack(type, s);
+		a = new PlayerAttack(type);
 		
 		player.addComponent(g);
 		RigidCollision c = new RigidCollision(player);
@@ -161,8 +160,7 @@ public class Spawner {
 	}
 	
 	private void smallEnemy(){
-		enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base, false); 
-		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
+		enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base, false, ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX()); 
 		enemyAttack = new EnemyAttack(TypeAttack.WARRIOR, 1);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
@@ -172,8 +170,7 @@ public class Spawner {
 	}
 	
 	private void largeEnemy(){
-		enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base, false); 
-		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
+		enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base, false, ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX()); 
 		enemyAttack = new EnemyAttack(TypeAttack.ARCHER, 3);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
@@ -183,8 +180,7 @@ public class Spawner {
 	}
 	
 	private void flyingEnemy(){
-		enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base, false); 
-		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
+		enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base, false, ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX()); 
 		enemyAttack = new EnemyAttack(TypeAttack.MAGE, 2);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
@@ -194,8 +190,7 @@ public class Spawner {
 	}
 	
 	private void bossEnemy(){
-		enemyGraphics = new AnimatedGraphics(Art.bossEnemy, Art.base, false); 
-		enemySpawn = new PointSpawn(enemyGraphics, new Vector2(((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(),((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY()), newEnemy);
+		enemyGraphics = new AnimatedGraphics(Art.bossEnemy, Art.base, false, ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX()); 
 		enemyAttack = new EnemyAttack(TypeAttack.MAGE, 1000);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
@@ -205,7 +200,6 @@ public class Spawner {
 	}
 	
 	private void addEnemy(){
-		newEnemy.addComponent(enemySpawn);
 		newEnemy.addComponent(enemyAttack);
 		newEnemy.addComponent(enemyCollision);
 		newEnemy.addComponent(enemyControl);
