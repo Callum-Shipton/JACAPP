@@ -9,6 +9,7 @@ import components.ComponentType;
 import components.attack.BaseAttack;
 import components.attack.PlayerAttack;
 import components.inventory.PlayerInventory;
+import components.inventory.TypePotion;
 import display.Art;
 import display.DPDTRenderer;
 
@@ -74,6 +75,15 @@ public class Hud extends GuiComponent{
 			r.draw(Art.numbers, new Vector2(113,82), size, 0.0f, new Vector2((int) Math.floor(level / 10),1), maxTex);
 			r.draw(Art.numbers, new Vector2(133,82), size, 0.0f, new Vector2((level % 10),1), maxTex);
 		}
+		int hPot = ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getNumPotion(TypePotion.HEALTH);
+		int mPot = ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getNumPotion(TypePotion.MANA);
+		int sPot = ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getNumPotion(TypePotion.SPEED);
+		int kPot = ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getNumPotion(TypePotion.KNOCKBACK);
+		r.draw(Art.numbers, new Vector2(26,457), size, 0.0f, new Vector2(hPot,1), maxTex);
+		r.draw(Art.numbers, new Vector2(70,457), size, 0.0f, new Vector2(mPot,1), maxTex);
+		r.draw(Art.numbers, new Vector2(114,457), size, 0.0f, new Vector2(sPot,1), maxTex);
+		r.draw(Art.numbers, new Vector2(159,457), size, 0.0f, new Vector2(kPot,1), maxTex);
+		
 		
 		int wave =  ShootEmUp.currentLevel.spawner.getWave();
 		if(wave < 10){

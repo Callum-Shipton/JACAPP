@@ -206,4 +206,8 @@ public class PlayerInventory extends BasicInventory {
 	public int getLevelPoints(){
 		return levelPoints;
 	}
+	
+	public int getNumPotion(TypePotion type){
+		return potions.get(type);
+	}
 }
