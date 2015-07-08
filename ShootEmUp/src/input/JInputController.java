@@ -360,58 +360,58 @@ class JInputController implements Controller {
 			case 0:
 				switch (Math.round(value * 8)) {
 				case 0:
-					Keyboard.setKey(GLFW.GLFW_KEY_W, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_A, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_S, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_D, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
 					break;
 				case 1:
-					Keyboard.setKey(GLFW.GLFW_KEY_W, 1);
-					Keyboard.setKey(GLFW.GLFW_KEY_A, 1);
-					Keyboard.setKey(GLFW.GLFW_KEY_S, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_D, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
 					break;
 				case 2:
-					Keyboard.setKey(GLFW.GLFW_KEY_W, 1);
-					Keyboard.setKey(GLFW.GLFW_KEY_A, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_S, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_D, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_1, 1);
+					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
 					break;
 				case 3:
-					Keyboard.setKey(GLFW.GLFW_KEY_W, 1);
-					Keyboard.setKey(GLFW.GLFW_KEY_A, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_S, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_D, 1);
+					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
 					break;
 				case 4:
-					Keyboard.setKey(GLFW.GLFW_KEY_W, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_A, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_S, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_D, 1);
+					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_2, 1);
 					break;
 				case 5:
-					Keyboard.setKey(GLFW.GLFW_KEY_W, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_A, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_S, 1);
-					Keyboard.setKey(GLFW.GLFW_KEY_D, 1);
+					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
 					break;
 				case 6:
-					Keyboard.setKey(GLFW.GLFW_KEY_W, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_A, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_S, 1);
-					Keyboard.setKey(GLFW.GLFW_KEY_D, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_3, 1);
+					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
 					break;
 				case 7:
-					Keyboard.setKey(GLFW.GLFW_KEY_W, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_A, 1);
-					Keyboard.setKey(GLFW.GLFW_KEY_S, 1);
-					Keyboard.setKey(GLFW.GLFW_KEY_D, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
 					break;
 				case 8:
-					Keyboard.setKey(GLFW.GLFW_KEY_W, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_A, 1);
-					Keyboard.setKey(GLFW.GLFW_KEY_S, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_D, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_4, 1);
+					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
+					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
 					break;
 				}
 				break;
