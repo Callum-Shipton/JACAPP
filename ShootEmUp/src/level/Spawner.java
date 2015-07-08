@@ -79,32 +79,32 @@ public class Spawner {
 			counter++;
 			if (counter == ENEMY_SPAWN_RATE) {
 				//creates an enemy to test the spawning position
-				testEnemy();
-				
-				//creating new Enemy
-				newEnemy = new Entity();
-				
-				if((totalEnemies == 0) && (wave == 20)){
-					bossEnemy();
-				} else {
-					//randomly chooses an enemy
-					int prob = rand.nextInt(3);
-					if(prob == 0){
-						smallEnemy();
-					} else if(prob == 1){
-						largeEnemy();
+				if(testEnemy()){
+					
+					//creating new Enemy
+					newEnemy = new Entity();
+					
+					if((totalEnemies == 0) && (wave == 20)){
+						bossEnemy();
 					} else {
-						flyingEnemy();
-					}			
+						//randomly chooses an enemy
+						int prob = rand.nextInt(3);
+						if(prob == 0){
+							smallEnemy();
+						} else if(prob == 1){
+							largeEnemy();
+						} else {
+							flyingEnemy();
+						}			
+					}
+					//creates the enemy and adds it to the level
+					addEnemy();
+					totalEnemies++;
+					enemies++;
+					if(totalEnemies == wave){
+						newWave = false;
+					}
 				}
-				//creates the enemy and adds it to the level
-				addEnemy();
-				totalEnemies++;
-				enemies++;
-				if(totalEnemies == wave){
-					newWave = false;
-				}
-				
 				counter = 0;
 			}
 		} else if(enemies == 0){
@@ -120,7 +120,9 @@ public class Spawner {
 		enemies--;
 	}
 	
-	private void testEnemy(){
+	private boolean testEnemy(){
+		int attempts = 0;
+		
 		boolean collide = false;
 		test = new Entity();
 		BaseGraphics BG = new AnimatedGraphics(Art.player, Art.base, false);
@@ -142,14 +144,21 @@ public class Spawner {
 				collide = true;
 				continue;
 			}
-
+			
+			//changed to grid position;
+			
 			for (Entity character : ShootEmUp.currentLevel.entities) {
 				if ((((BaseMovement) test.getComponent(ComponentType.MOVEMENT)).doesCollide(test, character) != null)) {
 					collide = true;
 					break;
 				}
 			}
-		} while (collide == true);
+			attempts++;
+		} while ((collide == true) && (attempts < 30));
+		if(attempts >= 30){
+			return false;
+		}
+		return true;
 	}
 	
 	public void checkSpawn(Entity e){

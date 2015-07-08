@@ -86,6 +86,26 @@ public class PlayerControl extends BaseControl{
 				|| Keyboard.getKey(GLFW_KEY_SPACE) == 2) {
 			BA.attack(e, PG.getDirection());
 		}
+		
+		if (Keyboard.getKey(GLFW_KEY_1) == 1
+				|| Keyboard.getKey(GLFW_KEY_1) == 2) {
+			BA.attack(e, PG.getDirection());
+		}
+		
+		if (Keyboard.getKey(GLFW_KEY_2) == 1
+				|| Keyboard.getKey(GLFW_KEY_2) == 2) {
+			BA.attack(e, PG.getDirection());
+		}
+		
+		if (Keyboard.getKey(GLFW_KEY_3) == 1
+				|| Keyboard.getKey(GLFW_KEY_3) == 2) {
+			BA.attack(e, PG.getDirection());
+		}
+		
+		if (Keyboard.getKey(GLFW_KEY_4) == 1
+				|| Keyboard.getKey(GLFW_KEY_4) == 2) {
+			BA.attack(e, PG.getDirection());
+		}
 	}
 
 	@Override
