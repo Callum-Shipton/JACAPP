@@ -114,7 +114,8 @@ public class Art {
 	public static Image earthStaff;
 	
 	//HUD Textures
-	public static Image infoBox;
+	public static Image infoBoxTop;
+	public static Image infoBoxBottom;
 	public static Image healthBar;
 	public static Image manaBar;
 	public static Image xpBar;
@@ -335,16 +336,16 @@ public class Art {
 		earthStaff = new Image("/Images/Drops/Weapons/EarthStaff.png",8,1);
 		
 		//Load HUD textures 
-		infoBox = new Image("/Images/HUD/BarInfo.png",1,1);
+		infoBoxTop = new Image("/Images/HUD/BarInfoTop.png",1,1);
 		healthBar = new Image("/Images/HUD/BarHealth.png",1,2);			
 		manaBar = new Image("/Images/HUD/BarMana.png",1,2);
 		xpBar = new Image("/Images/HUD/BarXP.png",1,2);
 		level = new Image("/Images/HUD/Level.png",1,1);
 		wave = new Image("/Images/HUD/Wave.png",1,1);
 		numbers = new Image("/Images/HUD/Numbers.png",10,1);
+		
+		infoBoxBottom = new Image("/Images/HUD/BarInfoBottom.png",1,1);
 	}
-
-	
 
 	public static void initShaderUniforms() {
 

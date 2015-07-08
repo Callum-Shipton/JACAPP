@@ -1,6 +1,7 @@
 package components.inventory;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import object.Armour;
 import object.InventoryItem;
@@ -18,7 +19,7 @@ public class PlayerInventory extends BasicInventory{
 	
 	private ArrayList<InventoryItem> inventory;
 	private ArrayList<TypePotion> potions; 
-	private int maxPotions = 3;
+	private int maxPotions = 20;
 	
 	protected Armour boots = null;
 	protected Armour legs = null;
@@ -28,6 +29,8 @@ public class PlayerInventory extends BasicInventory{
 	private PlayerAttack PA;
 	private BaseMovement BM;
 	
+	private boolean speedOn;
+	
 	public PlayerInventory(PlayerAttack PA, BaseMovement BM, int level, int expBound) {
 		super(level);
 		this.PA = PA;
@@ -35,6 +38,33 @@ public class PlayerInventory extends BasicInventory{
 		this.expBound = expBound;
 		inventory = new ArrayList<InventoryItem>();
 		potions = new ArrayList<TypePotion>();
+	}
+	
+	public void usePotion(TypePotion type){
+		Iterator<TypePotion> Potions = potions.iterator();
+		int potionIndex = 0;
+		while(Potions.hasNext()){
+			if(Potions.next() == type){
+				potions.remove(potionIndex);
+				switch(type){
+				case HEALTH:
+					PA.addHealth(5);
+					break;
+				case MANA:
+					PA.addMana(5);
+					break;
+				case SPEED:
+					if(!speedOn){
+						BM.increaseSpeed(2);
+						speedOn = true;
+					}
+					break;
+				case KNOCKBACK:
+				}
+				break;
+			}
+			potionIndex++;
+		}
 	}
 	
 	public void equipItem(int itemNo){

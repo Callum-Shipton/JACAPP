@@ -8,6 +8,8 @@ import input.Keyboard;
 import components.Message;
 import components.attack.BaseAttack;
 import components.graphical.PlayerGraphics;
+import components.inventory.PlayerInventory;
+import components.inventory.TypePotion;
 import components.movement.BaseMovement;
 
 public class PlayerControl extends BaseControl{
@@ -15,12 +17,14 @@ public class PlayerControl extends BaseControl{
 	BaseMovement BM;
 	PlayerGraphics PG;
 	BaseAttack BA;
+	PlayerInventory PI;
 	
-	public PlayerControl(Entity e, PlayerGraphics PG, BaseAttack BA, BaseMovement BM){
+	public PlayerControl(Entity e, PlayerGraphics PG, BaseAttack BA, BaseMovement BM, PlayerInventory PI){
 		PG.scrollScreen(e);
 		this.PG = PG;
 		this.BA = BA;
 		this.BM = BM;
+		this.PI = PI;
 	}
 
 	@Override
@@ -82,22 +86,22 @@ public class PlayerControl extends BaseControl{
 		
 		if (Keyboard.getKey(GLFW_KEY_1) == 1
 				|| Keyboard.getKey(GLFW_KEY_1) == 2) {
-			BA.attack(e, PG.getDirection());
+			PI.usePotion(TypePotion.HEALTH);
 		}
 		
 		if (Keyboard.getKey(GLFW_KEY_2) == 1
 				|| Keyboard.getKey(GLFW_KEY_2) == 2) {
-			BA.attack(e, PG.getDirection());
+			PI.usePotion(TypePotion.MANA);
 		}
 		
 		if (Keyboard.getKey(GLFW_KEY_3) == 1
 				|| Keyboard.getKey(GLFW_KEY_3) == 2) {
-			BA.attack(e, PG.getDirection());
+			PI.usePotion(TypePotion.SPEED);
 		}
 		
 		if (Keyboard.getKey(GLFW_KEY_4) == 1
 				|| Keyboard.getKey(GLFW_KEY_4) == 2) {
-			BA.attack(e, PG.getDirection());
+			PI.usePotion(TypePotion.KNOCKBACK);
 		}
 	}
 

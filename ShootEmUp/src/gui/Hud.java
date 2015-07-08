@@ -15,7 +15,7 @@ import display.DPDTRenderer;
 public class Hud extends GuiComponent{
 	
 	public CopyOnWriteArrayList<HudElement> hudElems;
-	private HudElement infoBox;
+	private HudElement infoBoxTop;
 	private HudBar healthBar;
 	private HudBar manaBar;
 	private HudBar xpBar;
@@ -23,13 +23,16 @@ public class Hud extends GuiComponent{
 	private HudElement levelCounter;
 	private HudElement waveCounter;
 	private Entity player;
+	
+	private HudElement infoBoxBottom;
+	
 	private float hudW;
 
 	public Hud(Entity player){
 		this.player = player;
 		hudElems = new CopyOnWriteArrayList<HudElement>();
-		infoBox = new HudElement(0.0f,0.0f,Art.infoBox.getWidth(),Art.infoBox.getHeight(), Art.infoBox, false);
-		hudElems.add(infoBox);
+		infoBoxTop = new HudElement(0.0f,0.0f,Art.infoBoxTop.getWidth(),Art.infoBoxTop.getHeight(), Art.infoBoxTop, false);
+		hudElems.add(infoBoxTop);
 		healthBar = new HudBar(10.0f, 10.0f, Art.healthBar.getWidth()/Art.healthBar.getFWidth(), Art.healthBar.getHeight()/Art.healthBar.getFHeight(), Art.healthBar);
 		hudElems.add(healthBar);
 		manaBar = new HudBar(10.0f, 35.0f, Art.manaBar.getWidth()/Art.manaBar.getFWidth(), Art.manaBar.getHeight()/Art.manaBar.getFHeight(), Art.manaBar);
@@ -42,6 +45,10 @@ public class Hud extends GuiComponent{
 		hudElems.add(levelCounter);
 		waveCounter = new HudElement(154.0f, 83.0f, Art.wave.getWidth(), Art.wave.getHeight(), Art.wave, false);
 		hudElems.add(waveCounter);
+		
+		//Potions bar
+		infoBoxBottom = new HudElement(0.0f,ShootEmUp.HEIGHT - Art.infoBoxBottom.getHeight(),Art.infoBoxBottom.getWidth(),Art.infoBoxBottom.getHeight(), Art.infoBoxBottom, false);
+		hudElems.add(infoBoxBottom);
 	}
 	
 	public void render(DPDTRenderer r) {
@@ -90,8 +97,8 @@ public class Hud extends GuiComponent{
 		int exp = ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getExp();
 		
 		if(Math.max(maxHealth, maxMana) > 18.0f) {
-			hudW =  (Math.max(maxHealth, maxMana)-18.0f)*10.0f + Art.infoBox.getWidth();
-			infoBox.setSize(hudW, Art.infoBox.getHeight());
+			hudW =  (Math.max(maxHealth, maxMana)-18.0f)*10.0f + Art.infoBoxTop.getWidth();
+			infoBoxTop.setSize(hudW, Art.infoBoxTop.getHeight());
 		}
 
 		healthBar.setValue(health);

@@ -4,11 +4,15 @@ import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
 import gui.menus.CharacterSelectMenu;
 import gui.menus.ControlsMenu;
+import gui.menus.InventoryMenu;
 import gui.menus.LevelSelectMenu;
 import gui.menus.LoadMenu;
 import gui.menus.MagicMenu;
 import gui.menus.MainMenu;
+import gui.menus.MapMenu;
 import gui.menus.OptionsMenu;
+import gui.menus.SaveMenu;
+import gui.menus.SkillMenu;
 import gui.menus.SoundMenu;
 import audio.music.BackgroundMusic;
 import level.Level;
@@ -153,7 +157,7 @@ public abstract class ButtonHandler {
 	}
 	
 	private static void inventory(){
-		ShootEmUp.addMenu(new MagicMenu(Art.invScreen));	
+		ShootEmUp.addMenu(new InventoryMenu(Art.invScreen));	
 	}
 	
 	private static void magic(){
@@ -161,15 +165,15 @@ public abstract class ButtonHandler {
 	}
 	
 	private static void skills(){
-		ShootEmUp.addMenu(new MagicMenu(Art.skillScreen));
+		ShootEmUp.addMenu(new SkillMenu(Art.skillScreen));
 	}
 	
 	private static void map(){
-		ShootEmUp.addMenu(new MagicMenu(Art.mapScreen));
+		ShootEmUp.addMenu(new MapMenu(Art.mapScreen));
 	}
 	
 	private static void save(){
-		ShootEmUp.addMenu(new MagicMenu(Art.saveScreen));
+		ShootEmUp.addMenu(new SaveMenu(Art.saveScreen));
 	}
 	
 	private static void resume(){
@@ -184,27 +188,27 @@ public abstract class ButtonHandler {
 	
 	private static void healthRegen(){
 		BaseAttack BA = (BaseAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
-		BA.setMaxHealth(BA.getMaxHealth() + 1);
-		BA.setHealth(BA.getHealth()+1);
+		BA.setMaxHealthRegen((int)Math.ceil(BA.getMaxHealthRegen()/2));
 		((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).spendCoins(1);
 	}
 	
 	private static void health(){
 		BaseAttack BA = (BaseAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
-		BA.setMaxHealthRegen((int)Math.ceil(BA.getMaxHealthRegen()/2));
+		BA.setMaxHealth(BA.getMaxHealth() + 1);
+		BA.setHealth(BA.getHealth()+1);
 		((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).spendCoins(1);
 	}
 	
 	private static void manaRegen(){
 		PlayerAttack PA = (PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
-		PA.setMaxMana(PA.getMaxMana() + 1);
-		PA.setMana(PA.getMana() + 1);
+		PA.setMaxManaRegen((int)Math.ceil(PA.getMaxManaRegen()/2));
 		((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).spendCoins(1);
 	}
 	
 	private static void mana(){
 		PlayerAttack PA = (PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK));
-		PA.setMaxManaRegen((int)Math.ceil(PA.getMaxManaRegen()/2));
+		PA.setMaxMana(PA.getMaxMana() + 1);
+		PA.setMana(PA.getMana() + 1);
 		((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).spendCoins(1);
 	}
 	

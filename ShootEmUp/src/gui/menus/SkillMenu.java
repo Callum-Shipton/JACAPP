@@ -18,10 +18,10 @@ public class SkillMenu extends GuiMenu {
         addButton(new Button(ButtonType.MAGIC, Art.magicButton, 922, 102, 101, 102));
         addButton(new Button(ButtonType.MAP, Art.mapButton, 922, 306, 101, 102));
         addButton(new Button(ButtonType.SAVE, Art.saveButton, 922, 408, 101, 102));
-		addButton(new Button(ButtonType.HEALTH_REGEN, Art.healthRegenButton,30, 98,128,24));
-		addButton(new Button(ButtonType.HEALTH, Art.healthButton,30, 132,128,24));
-		addButton(new Button(ButtonType.MANA_REGEN, Art.manaRegenButton,30, 166,128,24));
-		addButton(new Button(ButtonType.MANA, Art.manaButton,30, 200,128,24));
+		addButton(new Button(ButtonType.HEALTH_REGEN, Art.healthRegenButton,30, 98, 128, 24));
+		addButton(new Button(ButtonType.HEALTH, Art.healthButton,30, 132, 128, 24));
+		addButton(new Button(ButtonType.MANA_REGEN, Art.manaRegenButton,30, 166, 128, 24));
+		addButton(new Button(ButtonType.MANA, Art.manaButton,30, 200, 128, 24));
     }
 
     @Override

@@ -68,8 +68,9 @@ public class Spawner {
 		player.addComponent(s);
 		player.addComponent(a);
 		player.addComponent(m);
-		player.addComponent(new PlayerControl(player, g, a, m));
 		player.addComponent(i);
+		player.addComponent(new PlayerControl(player, g, a, m, i));
+		
 		
 		return player;
 	}
