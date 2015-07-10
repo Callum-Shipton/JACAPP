@@ -131,6 +131,7 @@ public class Display {
 	public void toggleFullscreen(){
 		long newWindow;
 		if(fullscreen){
+			ShootEmUp.menuStack.peek().reset(width, height, 1024, 512);
 			ShootEmUp.WIDTH =1024;
 			ShootEmUp.HEIGHT =512;
 			width = 1024;
@@ -143,6 +144,7 @@ public class Display {
 			glfwSetWindowPos(newWindow, (GLFWvidmode.width(vidmode) - width) / 2,
 					(GLFWvidmode.height(vidmode) - height) / 2);
 		}else{
+			ShootEmUp.menuStack.peek().reset(width, height, vm.getWidth(), vm.getHeight());
 			ShootEmUp.WIDTH = vm.getWidth();
 			ShootEmUp.HEIGHT = vm.getHeight();
 			width = vm.getWidth();

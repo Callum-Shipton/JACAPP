@@ -18,8 +18,8 @@ public class Button extends GuiComponent {
 	private long window;
 
 	private boolean isPressed;
-	private final int x;
-	private final int y;
+	private int x;
+	private int y;
 	private final int w;
 	private final int h;
 
@@ -77,6 +77,11 @@ public class Button extends GuiComponent {
 				stat.draw(id, new Vector2(x,y), new Vector2(w,h), 0, new Vector2(0,0), new Vector2(1,2));
 			}
 	}
+	
+    public void reset (int oldWidth, int oldHeight, int newWidth, int newHeight){
+    	x = (int)(((float)x/oldWidth)*newWidth);
+    	y = (int)(((float)y/oldHeight)*newHeight);
+    }
 
 	public boolean hasClicked() {
 		return performClick;
