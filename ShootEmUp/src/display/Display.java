@@ -67,7 +67,7 @@ public class Display {
 		vm = new GLFWvidmode(vidmode);
 
 		// Create the window
-		window = glfwCreateWindow(width, height, "Shoot Em' Up", NULL, NULL);
+		window = glfwCreateWindow(width, height, "THE MAZE", NULL, NULL);
 		if (window == NULL)
 			throw new RuntimeException("Failed to create the GLFW window");
 
@@ -135,7 +135,7 @@ public class Display {
 			ShootEmUp.HEIGHT =512;
 			width = 1024;
 			height = 512;
-			newWindow = glfwCreateWindow(width, height, "Hello World!", NULL, window);
+			newWindow = glfwCreateWindow(width, height, "THE MAZE", NULL, window);
 			if (newWindow == NULL)
 				throw new RuntimeException("Failed to create the NEW GLFW window");
 
@@ -147,7 +147,7 @@ public class Display {
 			ShootEmUp.HEIGHT = vm.getHeight();
 			width = vm.getWidth();
 			height = vm.getHeight();
-			newWindow = glfwCreateWindow(width, height, "Hello World!", monitor, window);
+			newWindow = glfwCreateWindow(width, height, "THE MAZE", monitor, window);
 			if (newWindow == NULL)
 				throw new RuntimeException("Failed to create the GLFW window");
 		}
