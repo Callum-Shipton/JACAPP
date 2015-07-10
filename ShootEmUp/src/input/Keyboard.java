@@ -19,12 +19,14 @@ public class Keyboard {
 			// needs input handling.
 			public void invoke(long window, int key, int scancode, int action,
 					int mods) {
+				if(key >=0 && key < keys.length){
 				if (action == GLFW_REPEAT)
 					keys[key] = 2;
 				else if (action == GLFW_PRESS)
 					keys[key] = 1;
 				else if (action == GLFW_RELEASE)
 					keys[key] = 0;
+				}
 			}
 		});
 	}
