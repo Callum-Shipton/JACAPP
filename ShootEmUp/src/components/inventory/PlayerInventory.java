@@ -3,6 +3,10 @@ package components.inventory;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import object.Armour;
+import object.InventoryItem;
+import object.Weapon;
+import object.WeaponBuilder;
 import components.attack.PlayerAttack;
 import components.movement.BaseMovement;
 import display.Art;

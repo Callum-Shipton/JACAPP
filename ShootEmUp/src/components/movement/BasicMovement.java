@@ -2,6 +2,7 @@ package components.movement;
 
 import java.util.HashSet;
 
+import object.Entity;
 import main.ShootEmUp;
 import math.Vector2;
 import math.Vector4;
@@ -9,12 +10,11 @@ import components.ComponentType;
 import components.collision.BaseCollision;
 import components.collision.HitCollision;
 import components.graphical.BaseGraphics;
-import entities.Entity;
 
 public class BasicMovement extends BaseMovement {
 	protected BaseGraphics BG;
 
-	public BasicMovement(BaseCollision BC, BaseGraphics BG, int speed) {
+	public BasicMovement(Entity e, BaseCollision BC, BaseGraphics BG, int speed) {
 		this.BG = BG;
 		this.BC = BC;
 		this.speed = speed;

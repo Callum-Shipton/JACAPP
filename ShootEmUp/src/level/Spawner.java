@@ -2,27 +2,30 @@ package level;
 
 import java.util.Random;
 
+import object.Entity;
 import main.ShootEmUp;
 import math.Vector2;
 import components.ComponentType;
 import components.attack.BaseAttack;
 import components.attack.EnemyAttack;
+import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
 import components.collision.BaseCollision;
 import components.collision.RigidCollision;
 import components.control.AIControl;
 import components.control.BaseControl;
+import components.control.PlayerControl;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
+import components.graphical.PlayerGraphics;
 import components.inventory.BaseInventory;
 import components.inventory.EnemyInventory;
+import components.inventory.PlayerInventory;
 import components.movement.BaseMovement;
 import components.movement.BasicMovement;
 import components.movement.FlyingMovement;
+import components.spawn.PointSpawn;
 import display.Art;
-import entities.Enemy;
-import entities.Entity;
-import entities.Types;
 
 public class Spawner {
 	
@@ -34,12 +37,42 @@ public class Spawner {
 	private int wave = 1;
 	private boolean newWave = true;
 	
+	private BaseGraphics enemyGraphics;
+	private BaseAttack enemyAttack;
+	private BaseControl enemyControl;
+	private BaseCollision enemyCollision;
+	private BaseMovement enemyMovement;
+	private BaseInventory enemyInventory;
+	
 	private Entity test;
-	private Enemy newEnemy;
+	private Entity newEnemy;
 	private Random rand;
 	
 	public Spawner(){
 		rand = new Random();
+	}
+	
+	public Entity createPlayer(TypeAttack type){
+		Entity player = new Entity();
+		PlayerGraphics g = new PlayerGraphics(player, Art.player, Art.base);
+		PointSpawn s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
+		PlayerAttack a;
+		
+		a = new PlayerAttack(type);
+		
+		player.addComponent(g);
+		RigidCollision c = new RigidCollision(player);
+		player.addComponent(c);
+		BasicMovement m = new BasicMovement(player,c, g, 5);
+		PlayerInventory i = new PlayerInventory(a, m, 0, 1);
+		player.addComponent(s);
+		player.addComponent(a);
+		player.addComponent(m);
+		player.addComponent(i);
+		player.addComponent(new PlayerControl(player, g, a, m, i));
+		
+		
+		return player;
 	}
 	
 	public void update(){
@@ -48,24 +81,25 @@ public class Spawner {
 			if (counter == ENEMY_SPAWN_RATE) {
 				//creates an enemy to test the spawning position
 				testEnemy();
-
+					
+				//creating new Enemy
+				newEnemy = new Entity();
+				
 				if((totalEnemies == 0) && (wave == 20)){
-					newEnemy = new Enemy(Types.bossEnemy, ((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY());
-
+					bossEnemy();
 				} else {
 					//randomly chooses an enemy
 					int prob = rand.nextInt(3);
 					if(prob == 0){
-						newEnemy = new Enemy(Types.smallEnemy, ((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY());
+						smallEnemy();
 					} else if(prob == 1){
-						newEnemy = new Enemy(Types.enemy, ((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY());
+						largeEnemy();
 					} else {
-						newEnemy = new Enemy(Types.flyingEnemy, ((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY());
-
+						flyingEnemy();
 					}			
 				}
 				//creates the enemy and adds it to the level
-				ShootEmUp.currentLevel.entities.add(newEnemy);
+				addEnemy();
 				totalEnemies++;
 				enemies++;
 				if(totalEnemies == wave){
@@ -94,7 +128,7 @@ public class Spawner {
 		test.addComponent(BG);
 		BaseCollision BC = new RigidCollision(test);
 		test.addComponent(BC);
-		test.addComponent(new BasicMovement(BC, BG, 5));
+		test.addComponent(new BasicMovement(test, BC, BG, 5));
 		float px = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getX();
 		float py = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getY();
 		float pw = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getWidth();
@@ -126,6 +160,56 @@ public class Spawner {
 		ShootEmUp.currentLevel.newEntities.add(e);
 		BM.checkCollisionY(e, new Vector2(0,0));
 		BM.checkCollisionX(e, new Vector2(0,0));
+	}
+	
+	private void smallEnemy(){
+		enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base, false, ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX()); 
+		enemyAttack = new EnemyAttack(TypeAttack.WARRIOR, 1);
+		newEnemy.addComponent(enemyGraphics);
+		enemyCollision = new RigidCollision(newEnemy);
+		enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 7);
+		enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
+		enemyInventory = new EnemyInventory(enemyGraphics, 1);
+	}
+	
+	private void largeEnemy(){
+		enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base, false, ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX()); 
+		enemyAttack = new EnemyAttack(TypeAttack.ARCHER, 3);
+		newEnemy.addComponent(enemyGraphics);
+		enemyCollision = new RigidCollision(newEnemy);
+		enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 2);
+		enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
+		enemyInventory = new EnemyInventory(enemyGraphics, 1);
+	}
+	
+	private void flyingEnemy(){
+		enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base, false, ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX()); 
+		enemyAttack = new EnemyAttack(TypeAttack.MAGE, 2);
+		newEnemy.addComponent(enemyGraphics);
+		enemyCollision = new RigidCollision(newEnemy);
+		enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);
+		enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
+		enemyInventory = new EnemyInventory(enemyGraphics, 1);
+	}
+	
+	private void bossEnemy(){
+		enemyGraphics = new AnimatedGraphics(Art.bossEnemy, Art.base, false, ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX()); 
+		enemyAttack = new EnemyAttack(TypeAttack.MAGE, 1000);
+		newEnemy.addComponent(enemyGraphics);
+		enemyCollision = new RigidCollision(newEnemy);
+		enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);
+		enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
+		enemyInventory = new EnemyInventory(enemyGraphics, 1);
+	}
+	
+	private void addEnemy(){
+		newEnemy.addComponent(enemyAttack);
+		newEnemy.addComponent(enemyCollision);
+		newEnemy.addComponent(enemyControl);
+		newEnemy.addComponent(enemyMovement);
+		newEnemy.addComponent(enemyInventory);
+		
+		ShootEmUp.currentLevel.entities.add(newEnemy);
 	}
 	
 	public int getWave(){

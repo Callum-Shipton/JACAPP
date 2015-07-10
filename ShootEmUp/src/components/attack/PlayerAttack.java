@@ -1,13 +1,13 @@
   package components.attack;
 
+import object.Entity;
+import object.Weapon;
+import object.WeaponBuilder;
 import main.ShootEmUp;
 import gui.menus.GameOverMenu;
 import components.Message;
 import components.inventory.TypeWeapon;
-import components.inventory.Weapon;
-import components.inventory.WeaponBuilder;
 import display.Art;
-import entities.Entity;
 
 public class PlayerAttack extends BaseAttack {
 	protected TypeAttack type;

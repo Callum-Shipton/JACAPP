@@ -2,7 +2,7 @@ package components.inventory;
 
 import java.util.HashSet;
 
-import entities.Entity;
+import object.Entity;
 
 public class BasicInventory extends BaseInventory{
 

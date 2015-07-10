@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.Random;
 
+import object.Entity;
+import object.Weapon;
 import main.ShootEmUp;
 import math.Vector2;
 import components.ComponentType;
@@ -12,12 +14,10 @@ import components.attack.BaseAttack;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.graphical.PlayerGraphics;
-import components.inventory.Weapon;
 import components.movement.BaseMovement;
 import components.movement.BasicMovement;
 import components.spawn.PointSpawn;
 import display.Art;
-import entities.Entity;
 
 public class AIControl extends BaseControl{
 	

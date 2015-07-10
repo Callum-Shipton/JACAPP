@@ -1,9 +1,9 @@
 package components.spawn;
 
+import object.Entity;
 import math.Vector2;
 import components.Message;
 import components.graphical.BaseGraphics;
-import entities.Entity;
 
 public class PointSpawn extends BaseSpawn implements SpawnComponent {
 

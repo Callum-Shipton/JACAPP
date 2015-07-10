@@ -2,6 +2,7 @@ package components.inventory;
 
 import java.util.Random;
 
+import object.Entity;
 import main.ShootEmUp;
 import math.Vector2;
 import components.ComponentType;
@@ -10,7 +11,6 @@ import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.spawn.PointSpawn;
 import display.Art;
-import entities.Entity;
 
 public class EnemyInventory extends BasicInventory{
 	

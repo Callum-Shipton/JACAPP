@@ -1,6 +1,6 @@
 package components.graphical;
 
-import entities.Entity;
+import object.Entity;
 
 public interface GraphicsComponent {
 	

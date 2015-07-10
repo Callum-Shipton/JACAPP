@@ -1,10 +1,10 @@
 package components.graphical;
 
+import object.Entity;
 import components.Component;
 import components.ComponentType;
 import display.Image;
 import display.Renderer;
-import entities.Entity;
 
 public abstract class BaseGraphics extends Component implements GraphicsComponent {
 

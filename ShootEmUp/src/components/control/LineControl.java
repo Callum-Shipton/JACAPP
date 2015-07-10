@@ -1,10 +1,10 @@
 package components.control;
 
+import object.Entity;
 import math.Vector2;
 import components.Message;
 import components.graphical.AnimatedGraphics;
 import components.movement.BaseMovement;
-import entities.Entity;
 
 public class LineControl extends BaseControl{
 	

@@ -1,5 +1,6 @@
 package components.control;
 
+import object.Entity;
 import main.ShootEmUp;
 import math.Vector2;
 import components.ComponentType;
@@ -7,7 +8,6 @@ import components.Message;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.movement.BaseMovement;
-import entities.Entity;
 
 public class HomingControl extends BaseControl{
 	

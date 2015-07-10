@@ -2,12 +2,12 @@ package components.collision;
 
 import java.util.HashSet;
 
+import object.Entity;
 import main.ShootEmUp;
 import math.Vector2;
 import components.Component;
 import components.ComponentType;
 import components.Message;
-import entities.Entity;
 
 public abstract class BaseCollision extends Component implements CollisionComponent{
 

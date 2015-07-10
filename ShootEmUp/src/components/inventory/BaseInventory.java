@@ -2,10 +2,10 @@ package components.inventory;
 
 import java.util.HashSet;
 
+import object.Entity;
 import components.Component;
 import components.ComponentType;
 import components.Message;
-import entities.Entity;
 
 public abstract class BaseInventory extends Component implements InventoryComponent {
 

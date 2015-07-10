@@ -1,6 +1,6 @@
 package components.collision;
 
-import entities.Entity;
+import object.Entity;
 
 public interface CollisionComponent {
 	

@@ -1,6 +1,6 @@
 package components.attack;
 
-import entities.Entity;
+import object.Entity;
 
 public interface AttackComponent {
 	

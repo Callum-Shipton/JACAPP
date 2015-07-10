@@ -1,8 +1,8 @@
 package components.control;
 
+import object.Entity;
 import components.Component;
 import components.ComponentType;
-import entities.Entity;
 
 public abstract class BaseControl extends Component implements ControlComponent {
 	

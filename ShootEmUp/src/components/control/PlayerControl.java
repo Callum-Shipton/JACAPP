@@ -2,6 +2,7 @@ package components.control;
 
 import static org.lwjgl.glfw.GLFW.*;
 
+import object.Entity;
 import math.Vector2;
 import input.Keyboard;
 import components.Message;
@@ -10,7 +11,6 @@ import components.graphical.PlayerGraphics;
 import components.inventory.PlayerInventory;
 import components.inventory.TypePotion;
 import components.movement.BaseMovement;
-import entities.Entity;
 
 public class PlayerControl extends BaseControl{
 	

@@ -5,19 +5,18 @@ import gui.Hud;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import object.Entity;
+import object.EntityMap;
 import main.ShootEmUp;
 import components.ComponentType;
 import components.attack.TypeAttack;
 import components.collision.BaseCollision;
 import components.graphical.BaseGraphics;
 import display.Art;
-import entities.Entity;
-import entities.EntityMap;
-import entities.Player;
 
 public class Level {
 	
-	private Player player;
+	private Entity player;
 	private Hud hud;
 	
 	public EntityMap eMap;
@@ -43,7 +42,7 @@ public class Level {
 	}
 	
 	public void createPlayer(TypeAttack type){
-		player = new Player(type);	
+		player = spawner.createPlayer(type);
 		entities.add(player);
 		hud = new Hud(player);
 	}

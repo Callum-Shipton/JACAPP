@@ -1,6 +1,6 @@
 package components.spawn;
 
-import entities.Entity;
+import object.Entity;
 
 public interface SpawnComponent {
 

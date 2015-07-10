@@ -1,11 +1,11 @@
 package components.graphical;
 
+import object.Entity;
 import math.Vector2;
 import components.Message;
 import display.DPDTRenderer;
 import display.Image;
 import display.Renderer;
-import entities.Entity;
 
 public class AnimatedGraphics extends BaseGraphics {
 

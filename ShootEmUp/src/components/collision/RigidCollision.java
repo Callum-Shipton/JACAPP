@@ -1,12 +1,14 @@
 package components.collision;
 
-import entities.Entity;
+import object.Entity;
 import main.ShootEmUp;
 
 public class RigidCollision extends BaseCollision {
 
-	public RigidCollision() {
-		
+	public RigidCollision(Entity e) {
+		moveBack = true;
+		setGridPos(ShootEmUp.currentLevel.eMap.getGridPos(e));
+		ShootEmUp.currentLevel.eMap.addEntity(getGridPos(), e);
 	}
 
 	@Override
@@ -19,11 +21,5 @@ public class RigidCollision extends BaseCollision {
 	public void update(Entity e) {
 		// TODO Auto-generated method stub
 
-	}
-	
-	public void setUp(Entity e){
-		moveBack = true;
-		setGridPos(ShootEmUp.currentLevel.eMap.getGridPos(e));
-		ShootEmUp.currentLevel.eMap.addEntity(getGridPos(), e);
 	}
 }
