@@ -7,25 +7,22 @@ import math.Vector2;
 import components.ComponentType;
 import components.attack.BaseAttack;
 import components.attack.EnemyAttack;
-import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
 import components.collision.BaseCollision;
 import components.collision.RigidCollision;
 import components.control.AIControl;
 import components.control.BaseControl;
-import components.control.PlayerControl;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
-import components.graphical.PlayerGraphics;
 import components.inventory.BaseInventory;
 import components.inventory.EnemyInventory;
-import components.inventory.PlayerInventory;
 import components.movement.BaseMovement;
 import components.movement.BasicMovement;
 import components.movement.FlyingMovement;
-import components.spawn.PointSpawn;
 import display.Art;
+import entities.Enemy;
 import entities.Entity;
+import entities.Types;
 
 public class Spawner {
 	
@@ -45,7 +42,7 @@ public class Spawner {
 	private BaseInventory enemyInventory;
 	
 	private Entity test;
-	private Entity newEnemy;
+	private Enemy newEnemy;
 	private Random rand;
 	
 	public Spawner(){
@@ -58,25 +55,24 @@ public class Spawner {
 			if (counter == ENEMY_SPAWN_RATE) {
 				//creates an enemy to test the spawning position
 				testEnemy();
-					
-				//creating new Enemy
-				newEnemy = new Entity();
-				
+
 				if((totalEnemies == 0) && (wave == 20)){
-					bossEnemy();
+					newEnemy = new Enemy(Types.bossEnemy, ((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY());
+
 				} else {
 					//randomly chooses an enemy
 					int prob = rand.nextInt(3);
 					if(prob == 0){
-						smallEnemy();
+						newEnemy = new Enemy(Types.smallEnemy, ((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY());
 					} else if(prob == 1){
-						largeEnemy();
+						newEnemy = new Enemy(Types.enemy, ((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY());
 					} else {
-						flyingEnemy();
+						newEnemy = new Enemy(Types.flyingEnemy, ((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics)test.getComponent(ComponentType.GRAPHICS)).getY());
+
 					}			
 				}
 				//creates the enemy and adds it to the level
-				addEnemy();
+				ShootEmUp.currentLevel.entities.add(newEnemy);
 				totalEnemies++;
 				enemies++;
 				if(totalEnemies == wave){
@@ -137,56 +133,6 @@ public class Spawner {
 		ShootEmUp.currentLevel.newEntities.add(e);
 		BM.checkCollisionY(e, new Vector2(0,0));
 		BM.checkCollisionX(e, new Vector2(0,0));
-	}
-	
-	private void smallEnemy(){
-		enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base, false, ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX()); 
-		enemyAttack = new EnemyAttack(TypeAttack.WARRIOR, 1);
-		newEnemy.addComponent(enemyGraphics);
-		enemyCollision = new RigidCollision(newEnemy);
-		enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 7);
-		enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
-		enemyInventory = new EnemyInventory(enemyGraphics, 1);
-	}
-	
-	private void largeEnemy(){
-		enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base, false, ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX()); 
-		enemyAttack = new EnemyAttack(TypeAttack.ARCHER, 3);
-		newEnemy.addComponent(enemyGraphics);
-		enemyCollision = new RigidCollision(newEnemy);
-		enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 2);
-		enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
-		enemyInventory = new EnemyInventory(enemyGraphics, 1);
-	}
-	
-	private void flyingEnemy(){
-		enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base, false, ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX()); 
-		enemyAttack = new EnemyAttack(TypeAttack.MAGE, 2);
-		newEnemy.addComponent(enemyGraphics);
-		enemyCollision = new RigidCollision(newEnemy);
-		enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);
-		enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
-		enemyInventory = new EnemyInventory(enemyGraphics, 1);
-	}
-	
-	private void bossEnemy(){
-		enemyGraphics = new AnimatedGraphics(Art.bossEnemy, Art.base, false, ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX()); 
-		enemyAttack = new EnemyAttack(TypeAttack.MAGE, 1000);
-		newEnemy.addComponent(enemyGraphics);
-		enemyCollision = new RigidCollision(newEnemy);
-		enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);
-		enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
-		enemyInventory = new EnemyInventory(enemyGraphics, 1);
-	}
-	
-	private void addEnemy(){
-		newEnemy.addComponent(enemyAttack);
-		newEnemy.addComponent(enemyCollision);
-		newEnemy.addComponent(enemyControl);
-		newEnemy.addComponent(enemyMovement);
-		newEnemy.addComponent(enemyInventory);
-		
-		ShootEmUp.currentLevel.entities.add(newEnemy);
 	}
 	
 	public int getWave(){
