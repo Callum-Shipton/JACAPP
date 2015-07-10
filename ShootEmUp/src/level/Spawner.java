@@ -34,13 +34,6 @@ public class Spawner {
 	private int wave = 1;
 	private boolean newWave = true;
 	
-	private BaseGraphics enemyGraphics;
-	private BaseAttack enemyAttack;
-	private BaseControl enemyControl;
-	private BaseCollision enemyCollision;
-	private BaseMovement enemyMovement;
-	private BaseInventory enemyInventory;
-	
 	private Entity test;
 	private Enemy newEnemy;
 	private Random rand;
@@ -101,7 +94,7 @@ public class Spawner {
 		test.addComponent(BG);
 		BaseCollision BC = new RigidCollision(test);
 		test.addComponent(BC);
-		test.addComponent(new BasicMovement(test, BC, BG, 5));
+		test.addComponent(new BasicMovement(BC, BG, 5));
 		float px = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getX();
 		float py = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getY();
 		float pw = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getWidth();

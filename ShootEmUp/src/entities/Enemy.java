@@ -1,5 +1,6 @@
 package entities;
 
+import components.ComponentType;
 import components.attack.BaseAttack;
 import components.attack.EnemyAttack;
 import components.collision.BaseCollision;
@@ -16,29 +17,17 @@ import display.Art;
 import main.ShootEmUp;
 
 public class Enemy extends Entity{
-
-	private BaseGraphics enemyGraphics;
-	private BaseAttack enemyAttack;
-	private BaseControl enemyControl;
-	private BaseCollision enemyCollision;
-	private BaseMovement enemyMovement;
-	private BaseInventory enemyInventory;
 	
 	public Enemy(EnemyType type, float x, float y){	
 		
-		enemyGraphics = new AnimatedGraphics(type.getImage(), Art.base, false, x, y); 
-		enemyAttack = new EnemyAttack(type.getAttack(), type.getHealth());
-		this.addComponent(enemyGraphics);
-		enemyCollision = new RigidCollision(this);
-		enemyMovement = new BasicMovement(this, enemyCollision, enemyGraphics, type.getSpeed());
-		enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
-		enemyInventory = new EnemyInventory(enemyGraphics, 1);
+		addComponent(type.getEnemyGraphics());
+		addComponent(type.getEnemyAttack());
+		addComponent(type.getEnemyCollision());
+		addComponent(type.getEnemyControl());
+		addComponent(type.getEnemyMovement());
+		addComponent(type.getEnemyInventory());
 		
-		addComponent(enemyAttack);
-		addComponent(enemyCollision);
-		addComponent(enemyControl);
-		addComponent(enemyMovement);
-		addComponent(enemyInventory);
+		((RigidCollision)getComponent(ComponentType.COLLISION)).setUp(this);
 		
 		ShootEmUp.currentLevel.entities.add(this);
 	}

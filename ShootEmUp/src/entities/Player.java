@@ -21,7 +21,7 @@ public class Player extends Entity{
 		addComponent(g);
 		RigidCollision c = new RigidCollision(this);
 		addComponent(c);
-		BasicMovement m = new BasicMovement(this,c, g, 5);
+		BasicMovement m = new BasicMovement(c, g, 5);
 		PlayerInventory i = new PlayerInventory(a, m, 0, 1);
 		addComponent(s);
 		addComponent(a);

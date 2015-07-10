@@ -14,7 +14,7 @@ import entities.Entity;
 public class BasicMovement extends BaseMovement {
 	protected BaseGraphics BG;
 
-	public BasicMovement(Entity e, BaseCollision BC, BaseGraphics BG, int speed) {
+	public BasicMovement(BaseCollision BC, BaseGraphics BG, int speed) {
 		this.BG = BG;
 		this.BC = BC;
 		this.speed = speed;
