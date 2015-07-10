@@ -1,6 +1,5 @@
-package object;
+package components.inventory;
 
-import components.inventory.TypeArmour;
 import display.Image;
 
 public class Armour extends InventoryItem{

@@ -6,13 +6,13 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
-import object.Entity;
 import main.ShootEmUp;
 import math.Vector2;
 import components.collision.RigidCollision;
 import components.graphical.MapGraphics;
 import display.Art;
 import display.IRenderer;
+import entities.Entity;
 
 public class Map {
 

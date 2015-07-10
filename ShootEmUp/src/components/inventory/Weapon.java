@@ -1,4 +1,4 @@
-package object;
+package components.inventory;
 
 import main.ShootEmUp;
 import math.Vector2;
@@ -7,11 +7,11 @@ import components.collision.HitCollision;
 import components.control.LineControl;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
-import components.inventory.TypeWeapon;
 import components.movement.FlyingMovement;
 import components.spawn.PointSpawn;
 import display.Art;
 import display.Image;
+import entities.Entity;
 
 public class Weapon extends InventoryItem{
 

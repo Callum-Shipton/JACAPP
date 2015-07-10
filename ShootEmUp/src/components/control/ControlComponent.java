@@ -1,6 +1,6 @@
 package components.control;
 
-import object.Entity;
+import entities.Entity;
 
 public interface ControlComponent {
 	

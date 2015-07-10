@@ -1,4 +1,4 @@
-package object;
+package components.inventory;
 
 import display.Image;
 

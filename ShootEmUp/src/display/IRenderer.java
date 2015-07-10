@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 import math.Vector2;
-import object.Entity;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
@@ -15,6 +14,8 @@ import org.lwjgl.opengl.GL15;
 
 import components.ComponentType;
 import components.graphical.MapGraphics;
+import entities.Entity;
+
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;

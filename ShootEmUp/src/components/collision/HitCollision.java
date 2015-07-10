@@ -1,11 +1,11 @@
 package components.collision;
 
-import object.Entity;
-import object.Weapon;
 import main.ShootEmUp;
 import components.ComponentType;
 import components.Message;
 import components.attack.BaseAttack;
+import components.inventory.Weapon;
+import entities.Entity;
 
 public class HitCollision extends BaseCollision{
 	

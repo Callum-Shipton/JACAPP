@@ -2,7 +2,6 @@ package level;
 
 import java.util.Random;
 
-import object.Entity;
 import main.ShootEmUp;
 import math.Vector2;
 import components.ComponentType;
@@ -26,6 +25,7 @@ import components.movement.BasicMovement;
 import components.movement.FlyingMovement;
 import components.spawn.PointSpawn;
 import display.Art;
+import entities.Entity;
 
 public class Spawner {
 	
@@ -50,29 +50,6 @@ public class Spawner {
 	
 	public Spawner(){
 		rand = new Random();
-	}
-	
-	public Entity createPlayer(TypeAttack type){
-		Entity player = new Entity();
-		PlayerGraphics g = new PlayerGraphics(player, Art.player, Art.base);
-		PointSpawn s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
-		PlayerAttack a;
-		
-		a = new PlayerAttack(type);
-		
-		player.addComponent(g);
-		RigidCollision c = new RigidCollision(player);
-		player.addComponent(c);
-		BasicMovement m = new BasicMovement(player,c, g, 5);
-		PlayerInventory i = new PlayerInventory(a, m, 0, 1);
-		player.addComponent(s);
-		player.addComponent(a);
-		player.addComponent(m);
-		player.addComponent(i);
-		player.addComponent(new PlayerControl(player, g, a, m, i));
-		
-		
-		return player;
 	}
 	
 	public void update(){

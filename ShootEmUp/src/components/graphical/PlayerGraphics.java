@@ -4,7 +4,6 @@ import java.nio.FloatBuffer;
 
 import main.ShootEmUp;
 import math.Matrix4;
-import object.Entity;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL20;
@@ -13,6 +12,7 @@ import components.Message;
 import display.Art;
 import display.Image;
 import display.Renderer;
+import entities.Entity;
 
 public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponent {
 

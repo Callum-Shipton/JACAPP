@@ -2,7 +2,6 @@ package gui;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import object.Entity;
 import main.ShootEmUp;
 import math.Vector2;
 import components.ComponentType;
@@ -12,6 +11,7 @@ import components.inventory.PlayerInventory;
 import components.inventory.TypePotion;
 import display.Art;
 import display.DPDTRenderer;
+import entities.Entity;
 
 public class Hud extends GuiComponent{
 	

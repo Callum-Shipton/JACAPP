@@ -1,9 +1,9 @@
 package components.movement;
 
-import object.Entity;
 import math.Vector4;
 import components.collision.BaseCollision;
 import components.graphical.BaseGraphics;
+import entities.Entity;
 
 public class FlyingMovement extends BasicMovement {
 	

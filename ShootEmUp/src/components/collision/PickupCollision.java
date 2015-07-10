@@ -1,6 +1,5 @@
 package components.collision;
 
-import object.Entity;
 import main.ShootEmUp;
 import components.ComponentType;
 import components.Message;
@@ -8,6 +7,7 @@ import components.control.PlayerControl;
 import components.inventory.PlayerInventory;
 import components.inventory.Subtype;
 import components.inventory.TypePickup;
+import entities.Entity;
 
 public class PickupCollision extends BaseCollision {
 

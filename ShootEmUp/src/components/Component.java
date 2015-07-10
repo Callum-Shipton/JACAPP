@@ -1,6 +1,6 @@
 package components;
 
-import object.Entity;
+import entities.Entity;
 
 public abstract class Component {
 	

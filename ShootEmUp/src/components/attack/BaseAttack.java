@@ -1,9 +1,9 @@
 package components.attack;
 
-import object.Entity;
-import object.Weapon;
 import components.Component;
 import components.ComponentType;
+import components.inventory.Weapon;
+import entities.Entity;
 
 public abstract class BaseAttack extends Component implements AttackComponent {
 

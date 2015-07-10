@@ -6,9 +6,9 @@ import gui.ButtonType;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import object.InventoryItem;
 import main.ShootEmUp;
 import components.ComponentType;
+import components.inventory.InventoryItem;
 import components.inventory.PlayerInventory;
 import display.Art;
 import display.Image;

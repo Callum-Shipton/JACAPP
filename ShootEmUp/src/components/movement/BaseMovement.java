@@ -1,6 +1,5 @@
 package components.movement;
 
-import object.Entity;
 import main.ShootEmUp;
 import math.Vector2;
 import math.Vector4;
@@ -9,6 +8,7 @@ import components.ComponentType;
 import components.Message;
 import components.collision.BaseCollision;
 import components.graphical.BaseGraphics;
+import entities.Entity;
 
 public abstract class BaseMovement extends Component implements MovementComponent {
 	

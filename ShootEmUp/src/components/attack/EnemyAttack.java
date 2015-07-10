@@ -1,11 +1,11 @@
 package components.attack;
 
-import object.Entity;
-import object.Weapon;
-import object.WeaponBuilder;
 import main.ShootEmUp;
 import components.Message;
 import components.inventory.TypeWeapon;
+import components.inventory.Weapon;
+import components.inventory.WeaponBuilder;
+import entities.Entity;
 
 public class EnemyAttack extends BaseAttack implements AttackComponent {
 	protected TypeAttack type;

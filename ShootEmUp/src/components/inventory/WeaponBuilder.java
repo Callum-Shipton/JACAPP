@@ -1,6 +1,5 @@
-package object;
+package components.inventory;
 
-import components.inventory.TypeWeapon;
 import display.Art;
 
 public abstract class WeaponBuilder {
