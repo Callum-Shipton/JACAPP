@@ -287,6 +287,17 @@ class JInputController implements Controller {
 
 	private void axisMap(int axisIndex, float value) {
 		switch (this.getName()) {
+		case "Controller (XBOX 360 For Windows)":
+			switch (axisIndex) {
+			case 4:
+				if(value < -1*axisDead){ // Right trigger in
+					Keyboard.setKey(GLFW.GLFW_KEY_SPACE, 1);
+				} else if (value > axisDead){
+					//Left trigger in
+				} else{
+					Keyboard.setKey(GLFW.GLFW_KEY_SPACE, 0); //Both in or out
+				}
+			}
 		case "Controller (Xbox One For Windows)":
 			switch (axisIndex) {
 			case 0: // Left Stick Y (-1 UP) (1 DOWN)
@@ -355,6 +366,7 @@ class JInputController implements Controller {
 
 	private void povMap(int povIndex, float value) {
 		switch (this.getName()) {
+		case "Controller (XBOX 360 For Windows)":
 		case "Controller (Xbox One For Windows)":
 			switch (povIndex) {
 			case 0:
@@ -422,6 +434,7 @@ class JInputController implements Controller {
 
 	private void buttonMap(int buttonIndex, boolean value) {
 		switch (this.getName()) {
+		case "Controller (XBOX 360 For Windows)":
 		case "Controller (Xbox One For Windows)":
 			switch (buttonIndex) {
 			case 0: // A
