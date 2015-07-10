@@ -188,6 +188,7 @@ public abstract class ButtonHandler {
 	}
 	
 	private static void mainMenu(){
+		ShootEmUp.mainMenu = true;
 		ShootEmUp.menuStack.clear();
 		ShootEmUp.addMenu(new MainMenu(Art.mainMenuScreen));
 	}
@@ -247,6 +248,7 @@ public abstract class ButtonHandler {
 
     private static void startGame(){
     	ShootEmUp.paused = false;
+    	ShootEmUp.mainMenu = false;
 		ShootEmUp.clearMenus();
 		ShootEmUp.m.stop(BackgroundMusic.MENU);
 		ShootEmUp.m.play(BackgroundMusic.MAIN);

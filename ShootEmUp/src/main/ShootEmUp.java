@@ -31,6 +31,7 @@ public class ShootEmUp {
 	public static BackgroundMusic m;
 	
 	public static boolean paused;
+	public static boolean mainMenu = true;
 
 	public static Level currentLevel;
 	public static Stack<GuiMenu> menuStack = new Stack<GuiMenu>();
@@ -110,14 +111,13 @@ public class ShootEmUp {
 		// invoked during this call.
 		glfwPollEvents();
 		Controllers.poll();
-		if(currentLevel != null){
+		if(!mainMenu){
 			if(Keyboard.getKey(GLFW_KEY_P) == 1){
 					paused = !paused;
 					Keyboard.setKey(GLFW_KEY_P);
 					if(paused) addMenu(new InventoryMenu(Art.invScreen));
 					else clearMenus();
 			}
-	
 			if(!paused){
 				currentLevel.update();
 			}
@@ -133,7 +133,7 @@ public class ShootEmUp {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		if(!paused && (currentLevel != null)){
+		if(!paused){
 			currentLevel.render();
 		}
 		if (!menuStack.isEmpty()) {

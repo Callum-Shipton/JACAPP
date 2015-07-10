@@ -68,6 +68,7 @@ public class CharacterSelectMenu extends GuiMenu {
     
     public void startGame(){
     	ShootEmUp.paused = false;
+    	ShootEmUp.mainMenu = false;
 		ShootEmUp.clearMenus();
 		ShootEmUp.m.stop(BackgroundMusic.MENU);
 		ShootEmUp.m.play(BackgroundMusic.MAIN);

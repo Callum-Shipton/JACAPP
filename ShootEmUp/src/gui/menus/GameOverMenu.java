@@ -17,6 +17,7 @@ public class GameOverMenu extends GuiMenu{
 
     public GameOverMenu(Image menuImage) {
         super(menuImage);
+        ShootEmUp.mainMenu = true;
         selectedItem = 0;
         addButton(new Button(ButtonType.MAIN_MENU, Art.exitButton, (ShootEmUp.WIDTH / 2) - (Art.exitButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.exitButton.getHeight() / 2), 128,24));
     }
@@ -24,7 +25,6 @@ public class GameOverMenu extends GuiMenu{
     @Override
     public void render() {
         super.render();
-        
     }
 
     public void update() {
