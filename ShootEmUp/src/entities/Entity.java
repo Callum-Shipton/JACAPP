@@ -5,6 +5,12 @@ import java.util.HashMap;
 import components.Component;
 import components.ComponentType;
 import components.Message;
+import components.attack.BaseAttack;
+import components.collision.BaseCollision;
+import components.control.BaseControl;
+import components.graphical.BaseGraphics;
+import components.inventory.BaseInventory;
+import components.movement.BaseMovement;
 
 public class Entity{
 	
@@ -56,4 +62,42 @@ public class Entity{
 	public void setDestroy(boolean destroy) {
 		this.destroy = destroy;
 	}
+	
+	//Attack Getters & Setters
+	
+	public BaseAttack getAttack(){
+		return (BaseAttack) components.get(ComponentType.ATTACK);
+	}
+	
+	//Collision Getters & Setters
+	
+	public BaseCollision getCollision(){
+		return (BaseCollision) components.get(ComponentType.COLLISION);
+	}
+	
+	//Control Getters & Setters
+	
+	public BaseControl getControl(){
+		return (BaseControl) components.get(ComponentType.CONTROL);
+	}
+	
+	//Graphics Getters & Setters
+	
+	public BaseGraphics getGraphics(){
+		return (BaseGraphics) components.get(ComponentType.GRAPHICS);
+	}
+	
+	//Inventory Getters & Setters
+	
+	public BaseInventory getInventory(){
+		return (BaseInventory) components.get(ComponentType.INVENTORY);
+	}
+	
+	//Movement Getters & Setters
+	
+	public BaseMovement getMovement(){
+		return (BaseMovement) components.get(ComponentType.MOVEMENT);
+	}
+	
+	
 }
