@@ -72,9 +72,8 @@ public class Art {
 	public static Image saveButton;
 	
 	//Tile maps
-	public static Image background;
+	public static Image floor;
 	public static Image wall;
-	public static Image foreground;
 	
 	//Character maps
 	public static Image player;
@@ -297,9 +296,8 @@ public class Art {
 		saveButton = new Image("/Images/Menus/Buttons/Tabs/SaveButton.png",1,2);
 		
 		//Load tile maps
-		background = new Image("/Images/Tiles/Background.png",4,4);
-		wall = new Image("/Images/Tiles/Wall.png",8,8);
-		foreground = new Image("/Images/Tiles/Foreground.png",4,4);
+		floor = new Image("/Images/Tiles/Floor.png",2,2);
+		wall = new Image("/Images/Tiles/Wall.png",6,4);
 		
 		//Load character maps
 		player = new Image("/Images/Characters/Player.png",6,8);
@@ -410,8 +408,8 @@ public class Art {
 		stat.initRenderData();
 		if(ShootEmUp.currentLevel != null){
 		irWall.initRenderData(ShootEmUp.currentLevel.map.getWalls(), new Vector2(wall.getFWidth(), wall.getFHeight()));
-		irBack.initRenderData(ShootEmUp.currentLevel.map.getBackgroundTiles(), new Vector2(background.getFWidth(),background.getFHeight()));
-		irFore.initRenderData(ShootEmUp.currentLevel.map.getForegroundTiles(), new Vector2(foreground.getFWidth(), foreground.getFHeight()));
+		irBack.initRenderData(ShootEmUp.currentLevel.map.getBackgroundTiles(), new Vector2(floor.getFWidth(),floor.getFHeight()));
+		irFore.initRenderData(ShootEmUp.currentLevel.map.getForegroundTiles(), new Vector2(wall.getFWidth(), wall.getFHeight()));
 		}
 	}
 	
