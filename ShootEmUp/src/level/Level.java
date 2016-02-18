@@ -38,7 +38,7 @@ public class Level {
 	}
 	
 	public void init(){
-		map.setTiles();
+		map.setTileTypes();
 	}
 	
 	public void createPlayer(TypeAttack type){

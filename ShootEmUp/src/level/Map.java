@@ -16,26 +16,42 @@ import display.IRenderer;
 
 public class Map {
 
+	//RGB integer values for tiles
 	private final int WALL = -7864299;
 	private final int WATER = -16735512;
 	private final int GRASS = -4856291;
 	private final int PATH = -1055568;
 	
+	//size of map
 	private int width;
 	private int height;
+	
+	//map layout image
 	private String file;
+	private BufferedImage map = null;
+	
+	//Tile type arrays
+	private int[][] backgroundTileTypes; //Replace with Irenderer changes
+	private int[][] wallTileTypes; // ^^
+	private int[][] foregroundTileTypes;
+	
+	//texture map position arrays
 	private Vector2[][] backgroundTiles; //Replace with Irenderer changes
 	private Vector2[][] wallTiles; // ^^
 	private Vector2[][] foregroundTiles; // ^^
-	private BufferedImage map = null;
+	
+	//collidable wall entities
 	public HashMap<Vector2, Entity> walls;
 
 	public Map(String file){
 		
 		this.file = file;
 		loadMap();
-		width = (map.getWidth());
+		width = map.getWidth();
 		height = map.getHeight();
+		backgroundTileTypes = new int[map.getWidth()][map.getHeight()];
+		wallTileTypes = new int[map.getWidth()][map.getHeight()];
+		foregroundTileTypes = new int[map.getWidth()][map.getHeight()];
 		backgroundTiles = new Vector2[map.getWidth()][map.getHeight()];
 		wallTiles = new Vector2[map.getWidth()][map.getHeight()];
 		foregroundTiles = new Vector2[map.getWidth()][map.getHeight()];
@@ -49,39 +65,184 @@ public class Map {
 		}
 	}
 	
-	public void setTiles() {
+	public void setTileTypes() {
 		for (int y = 0; y < map.getHeight(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
 				switch (map.getRGB(x, y)) {
 				case GRASS:
-					backgroundTiles[x][y] = new Vector2(0.0f, 0.0f);
+					backgroundTileTypes[x][y] = 1;
 					break;
-				case PATH:
-					backgroundTiles[x][y] = new Vector2(1.0f, 0.0f);
+				case PATH: 
+					backgroundTileTypes[x][y] = 2;
 					break;
 				case WALL:
-					System.out.println(x + " " + y);
-					insertWall(x, y);
+					wallTileTypes[x][y] = 1;
 					break;
 				case WATER:
-					System.out.println(x + " " + y);
-					insertWater(x, y);
+					wallTileTypes[x][y] = 7;
 					break;
 				default:
 					System.out.println(map.getRGB(x, y));
 				}
 			}
 		}
+		//Set Wall & Water Types
+		for (int y = 0; y < map.getHeight(); y++) {
+			for (int x = 0; x < map.getWidth(); x++) {
+				//if a wall
+				if(wallTileTypes[x][y] == 1){
+					//if not the left edge of the map
+					if(x > 0){
+						//if a wall to the left
+						if(((wallTileTypes[x-1][y] == 1) || (wallTileTypes[x-1][y] == 2))){
+							if(y < map.getHeight()-1){
+								if(x < map.getWidth()-1){
+									if((wallTileTypes[x+1][y+1] == 0) || (wallTileTypes[x+1][y+1] > 8)){
+										wallTileTypes[x][y] = 7;
+									} else {
+										wallTileTypes[x][y] = 2;
+									}
+								}
+							}
+						}
+						if(((wallTileTypes[x-1][y] == 7) || (wallTileTypes[x-1][y] == 8))){
+							wallTileTypes[x][y] = 2;
+						}
+						
+						if((wallTileTypes[x-1][y] == 4) || (wallTileTypes[x-1][y] == 5)){
+							if(y < map.getHeight()-1){
+								if(x < map.getWidth()-1){
+									if((wallTileTypes[x-1][y+1] == 0) || (wallTileTypes[x-1][y+1] > 8)){
+										wallTileTypes[x][y] = 8;
+									} else if ((wallTileTypes[x][y+1] != 0) || (wallTileTypes[x][y+1] <= 8)) {
+										wallTileTypes[x][y] = 2;
+									} else {
+									wallTileTypes[x][y] = 5;
+									}
+								}
+							}
+						}
+						
+						//if not the right edge
+						if(x < map.getWidth()-1){
+							//if the end horizontal wall
+							if((wallTileTypes[x+1][y] == 0) || (wallTileTypes[x+1][y] > 8)){
+								if((wallTileTypes[x-1][y] == 4) || (wallTileTypes[x-1][y] == 5)){
+									wallTileTypes[x][y] = 6;
+								} else {
+									wallTileTypes[x][y] = 3;
+								}
+							}
+						}
+					}
+					//if not the top edge of the map
+					if(y < map.getHeight()-1){
+						if((wallTileTypes[x][y+1] == 0) || (wallTileTypes[x][y+1] > 8)){
+							if(x > 0){
+								if((wallTileTypes[x-1][y] == 0) || (wallTileTypes[x-1][y] > 8)){
+									wallTileTypes[x][y] = 4;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		setTiles();
+		
 		Art.irBack = new IRenderer(backgroundTiles, new Vector2(Art.floor.getFWidth(), Art.floor.getFHeight()), Art.floor.getWidth() / Art.floor.getFWidth(), Art.floor.getHeight() / Art.floor.getFHeight());
 		Art.irWall = new IRenderer(walls, new Vector2(Art.wall.getFWidth(), Art.wall.getFHeight()), Art.wall.getWidth() / Art.wall.getFWidth(), Art.wall.getHeight() / Art.wall.getFHeight());
 		Art.irFore = new IRenderer(foregroundTiles, new Vector2(Art.wall.getFWidth(), Art.wall.getFHeight()), Art.wall.getWidth() / Art.wall.getFWidth(), Art.wall.getHeight() / Art.wall.getFHeight());
 	}
 	
-	public void insertWall(int x, int y){
+	public void setTiles(){
+		//Set Background Tiles
+		for (int y = 0; y < map.getHeight(); y++) {
+			for (int x = 0; x < map.getWidth(); x++) {
+				switch (backgroundTileTypes[x][y]) {
+				case 1:
+					backgroundTiles[x][y] = new Vector2(0.0f, 0.0f);
+					break;
+				case 2:
+					backgroundTiles[x][y] = new Vector2(1.0f, 0.0f);
+					break;
+				}
+			}
+		}
+		//Set Wall Tiles
+		for (int y = 0; y < map.getHeight(); y++) {
+			for (int x = 0; x < map.getWidth(); x++) {
+				switch (wallTileTypes[x][y]) {
+				case 1:
+					insertWall(x, y, 0.0f, 2.0f);
+					break;
+				case 2:
+					insertWall(x, y, 1.0f, 2.0f);
+					break;
+				case 3:
+					insertWall(x, y, 2.0f, 2.0f);
+					break;
+				case 4:
+					insertWall(x, y, 0.0f, 3.0f);
+					break;
+				case 5:
+					insertWall(x, y, 1.0f, 3.0f);
+					break;
+				case 6:
+					insertWall(x, y, 2.0f, 3.0f);
+					break;
+				case 7:
+					insertWall(x, y, 4.0f, 0.0f);
+					break;
+				case 8:
+					insertWall(x, y, 5.0f, 0.0f);
+					break;
+				case 9:
+					insertWater(x, y, 3.0f, 1.0f);
+					break;
+				case 10:
+					insertWater(x, y, 4.0f, 1.0f);
+					break;
+				case 11:
+					insertWater(x, y, 5.0f, 1.0f);
+					break;
+				case 12:
+					insertWater(x, y, 3.0f, 2.0f);
+					break;
+				case 13:
+					insertWater(x, y, 4.0f, 2.0f);
+					break;
+				case 14:
+					insertWater(x, y, 5.0f, 2.0f);
+					break;
+				case 15:
+					insertWater(x, y, 3.0f, 3.0f);
+					break;
+				case 16:
+					insertWater(x, y, 4.0f, 3.0f);
+					break;
+				case 17:
+					insertWater(x, y, 5.0f, 3.0f);
+					break;
+				}
+			}
+		}
+		//Set Foreground Tiles
+		for (int y = 0; y < map.getHeight(); y++) {
+			for (int x = 0; x < map.getWidth(); x++) {
+				switch (foregroundTileTypes[x][y]) {
+				
+				}
+			}
+		}
+	}
+	
+	public void insertWall(int x, int y, float tileMapX, float tileMapY){
 		float width = Art.wall.getWidth()/Art.wall.getFWidth();
 		float height = Art.wall.getHeight()/Art.wall.getFHeight();
 		Entity wall = new Entity();
-		MapGraphics wallG = new MapGraphics(Art.wall, new Vector2(1.0f, 2.0f), x * width, y * height);
+		MapGraphics wallG = new MapGraphics(Art.wall, new Vector2(tileMapX, tileMapY), x * width, y * height);
 		wall.addComponent(wallG);
 		RigidCollision MC = new RigidCollision(wall);
 		wall.addComponent(MC);
@@ -89,11 +250,11 @@ public class Map {
 		walls.put(new Vector2(x,y), wall);
 	}
 	
-	public void insertWater(int x, int y){
+	public void insertWater(int x, int y, float tileMapX, float tileMapY){
 		float width = Art.wall.getWidth()/Art.wall.getFWidth();
 		float height = Art.wall.getHeight()/Art.wall.getFHeight();
 		Entity wall = new Entity();
-		MapGraphics wallG = new MapGraphics(Art.wall, new Vector2(4.0f, 2.0f), x * width, y * height);
+		MapGraphics wallG = new MapGraphics(Art.wall, new Vector2(tileMapX, tileMapY), x * width, y * height);
 		wall.addComponent(wallG);
 		RigidCollision MC = new RigidCollision(wall);
 		wall.addComponent(MC);
