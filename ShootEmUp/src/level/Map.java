@@ -17,8 +17,10 @@ import display.IRenderer;
 public class Map {
 
 	//RGB integer values for tiles
-	private final int WALL = -7864299;
-	private final int WATER = -16735512;
+	private final int BROWNWALL = -7864299;
+	private final int GREYWALL = -8421505;
+	private final int LIGHTWATER = -16735512;
+	private final int DARKWATER = -12629812;
 	private final int GRASS = -4856291;
 	private final int PATH = -1055568;
 	
@@ -58,6 +60,7 @@ public class Map {
 		walls = new HashMap<Vector2,Entity>();
 	}
 	
+	//Load in the level file
 	private void loadMap() {
 		try {
 			map = ImageIO.read(getClass().getResource(file));
@@ -65,6 +68,7 @@ public class Map {
 		}
 	}
 	
+	//take the map image and use it to fill the tile type array with the correct tiles for
 	public void setTileTypes() {
 		for (int y = 0; y < map.getHeight(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
@@ -75,10 +79,16 @@ public class Map {
 				case PATH: 
 					backgroundTileTypes[x][y] = 2;
 					break;
-				case WALL:
+				case BROWNWALL:
 					wallTileTypes[x][y] = 1;
 					break;
-				case WATER:
+				case GREYWALL:
+					wallTileTypes[x][y] = 1;
+					break;
+				case LIGHTWATER:
+					wallTileTypes[x][y] = 9;
+					break;
+				case DARKWATER:
 					wallTileTypes[x][y] = 9;
 					break;
 				default:
@@ -149,8 +159,8 @@ public class Map {
 		setTiles();
 		
 		Art.irBack = new IRenderer(backgroundTiles, new Vector2(Art.floor.getFWidth(), Art.floor.getFHeight()), Art.floor.getWidth() / Art.floor.getFWidth(), Art.floor.getHeight() / Art.floor.getFHeight());
-		Art.irWall = new IRenderer(walls, new Vector2(Art.wall.getFWidth(), Art.wall.getFHeight()), Art.wall.getWidth() / Art.wall.getFWidth(), Art.wall.getHeight() / Art.wall.getFHeight());
-		Art.irFore = new IRenderer(foregroundTiles, new Vector2(Art.wall.getFWidth(), Art.wall.getFHeight()), Art.wall.getWidth() / Art.wall.getFWidth(), Art.wall.getHeight() / Art.wall.getFHeight());
+		Art.irWall = new IRenderer(walls, new Vector2(Art.walls.getFWidth(), Art.walls.getFHeight()), Art.walls.getWidth() / Art.walls.getFWidth(), Art.walls.getHeight() / Art.walls.getFHeight());
+		Art.irFore = new IRenderer(foregroundTiles, new Vector2(Art.walls.getFWidth(), Art.walls.getFHeight()), Art.walls.getWidth() / Art.walls.getFWidth(), Art.walls.getHeight() / Art.walls.getFHeight());
 	}
 	
 	public void setTiles(){
@@ -172,55 +182,55 @@ public class Map {
 			for (int x = 0; x < map.getWidth(); x++) {
 				switch (wallTileTypes[x][y]) {
 				case 1:
-					insertWall(x, y, 0.0f, 2.0f);
+					insertWall(x, y, 0.0f, 3.0f, map.getRGB(x, y));
 					break;
 				case 2:
-					insertWall(x, y, 1.0f, 2.0f);
+					insertWall(x, y, 1.0f, 3.0f, map.getRGB(x, y));
 					break;
 				case 3:
-					insertWall(x, y, 2.0f, 2.0f);
+					insertWall(x, y, 2.0f, 3.0f, map.getRGB(x, y));
 					break;
 				case 4:
-					insertWall(x, y, 0.0f, 3.0f);
+					insertWall(x, y, 0.0f, 4.0f, map.getRGB(x, y));
 					break;
 				case 5:
-					insertWall(x, y, 1.0f, 3.0f);
+					insertWall(x, y, 1.0f, 4.0f, map.getRGB(x, y));
 					break;
 				case 6:
-					insertWall(x, y, 2.0f, 3.0f);
+					insertWall(x, y, 2.0f, 4.0f, map.getRGB(x, y));
 					break;
 				case 7:
-					insertWall(x, y, 4.0f, 0.0f);
+					insertWall(x, y, 2.0f, 2.0f, map.getRGB(x, y));
 					break;
 				case 8:
-					insertWall(x, y, 5.0f, 0.0f);
+					insertWall(x, y, 0.0f, 2.0f, map.getRGB(x, y));
 					break;
 				case 9:
-					insertWater(x, y, 3.0f, 1.0f);
+					insertWater(x, y, 0.0f, 0.0f, map.getRGB(x, y));
 					break;
 				case 10:
-					insertWater(x, y, 4.0f, 1.0f);
+					insertWater(x, y, 1.0f, 0.0f, map.getRGB(x, y));
 					break;
 				case 11:
-					insertWater(x, y, 5.0f, 1.0f);
+					insertWater(x, y, 2.0f, 0.0f, map.getRGB(x, y));
 					break;
 				case 12:
-					insertWater(x, y, 3.0f, 2.0f);
+					insertWater(x, y, 0.0f, 1.0f, map.getRGB(x, y));
 					break;
 				case 13:
-					insertWater(x, y, 4.0f, 2.0f);
+					insertWater(x, y, 1.0f, 1.0f, map.getRGB(x, y));
 					break;
 				case 14:
-					insertWater(x, y, 5.0f, 2.0f);
+					insertWater(x, y, 2.0f, 1.0f, map.getRGB(x, y));
 					break;
 				case 15:
-					insertWater(x, y, 3.0f, 3.0f);
+					insertWater(x, y, 0.0f, 2.0f, map.getRGB(x, y));
 					break;
 				case 16:
-					insertWater(x, y, 4.0f, 3.0f);
+					insertWater(x, y, 1.0f, 2.0f, map.getRGB(x, y));
 					break;
 				case 17:
-					insertWater(x, y, 5.0f, 3.0f);
+					insertWater(x, y, 2.0f, 2.0f, map.getRGB(x, y));
 					break;
 				}
 			}
@@ -235,11 +245,23 @@ public class Map {
 		}
 	}
 	
-	public void insertWall(int x, int y, float tileMapX, float tileMapY){
-		float width = Art.wall.getWidth()/Art.wall.getFWidth();
-		float height = Art.wall.getHeight()/Art.wall.getFHeight();
+	public void insertWall(int x, int y, float tileMapX, float tileMapY, int wallType){
+		float width = Art.walls.getWidth()/Art.walls.getFWidth();
+		float height = Art.walls.getHeight()/Art.walls.getFHeight();
+		MapGraphics wallG;
+		switch(wallType){
+		case BROWNWALL:
+			wallG = new MapGraphics(Art.walls, new Vector2(tileMapX, tileMapY), x * width, y * height);
+			break;
+		case GREYWALL:
+			wallG = new MapGraphics(Art.walls, new Vector2(tileMapX + 3.0f, tileMapY), x * width, y * height);
+			break;
+		default:
+			wallG = new MapGraphics(Art.walls, new Vector2(tileMapX, tileMapY), x * width, y * height);
+			break;
+		}
+		
 		Entity wall = new Entity();
-		MapGraphics wallG = new MapGraphics(Art.wall, new Vector2(tileMapX, tileMapY), x * width, y * height);
 		wall.addComponent(wallG);
 		RigidCollision MC = new RigidCollision(wall);
 		wall.addComponent(MC);
@@ -247,11 +269,22 @@ public class Map {
 		walls.put(new Vector2(x,y), wall);
 	}
 	
-	public void insertWater(int x, int y, float tileMapX, float tileMapY){
-		float width = Art.wall.getWidth()/Art.wall.getFWidth();
-		float height = Art.wall.getHeight()/Art.wall.getFHeight();
+	public void insertWater(int x, int y, float tileMapX, float tileMapY, int waterType){
+		float width = Art.walls.getWidth()/Art.walls.getFWidth();
+		float height = Art.walls.getHeight()/Art.walls.getFHeight();
+		MapGraphics wallG;
+		switch(map.getRGB(x, y)){
+		case LIGHTWATER:
+			wallG = new MapGraphics(Art.walls, new Vector2(tileMapX, tileMapY + 5.0f), x * width, y * height);
+			break;
+		case DARKWATER:
+			wallG = new MapGraphics(Art.walls, new Vector2(tileMapX + 3.0f, tileMapY + 5.0f), x * width, y * height);
+			break;
+		default:
+			wallG = new MapGraphics(Art.walls, new Vector2(tileMapX, tileMapY + 5.0f), x * width, y * height);
+		}
+		
 		Entity wall = new Entity();
-		MapGraphics wallG = new MapGraphics(Art.wall, new Vector2(tileMapX, tileMapY), x * width, y * height);
 		wall.addComponent(wallG);
 		RigidCollision MC = new RigidCollision(wall);
 		wall.addComponent(MC);
@@ -261,11 +294,11 @@ public class Map {
 	
 	public void renderLowTiles() {
 		Art.irBack.draw(Art.floor.getID());
-		Art.irWall.draw(Art.wall.getID());
+		Art.irWall.draw(Art.walls.getID());
 	}
 
 	public void renderHighTiles() {
-		Art.irFore.draw(Art.wall.getID());
+		Art.irFore.draw(Art.walls.getID());
 	}
 	
 	//Getters 

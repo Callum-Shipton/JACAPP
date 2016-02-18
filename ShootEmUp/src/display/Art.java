@@ -73,7 +73,7 @@ public class Art {
 	
 	//Tile maps
 	public static Image floor;
-	public static Image wall;
+	public static Image walls;
 	
 	//Character maps
 	public static Image player;
@@ -297,7 +297,7 @@ public class Art {
 		
 		//Load tile maps
 		floor = new Image("/Images/Tiles/Floor.png",2,2);
-		wall = new Image("/Images/Tiles/Wall.png",6,4);
+		walls = new Image("/Images/Tiles/Walls.png",6,8);
 		
 		//Load character maps
 		player = new Image("/Images/Characters/Player.png",6,8);
@@ -407,9 +407,9 @@ public class Art {
 		base.initRenderData();
 		stat.initRenderData();
 		if(ShootEmUp.currentLevel != null){
-		irWall.initRenderData(ShootEmUp.currentLevel.map.getWalls(), new Vector2(wall.getFWidth(), wall.getFHeight()));
+		irWall.initRenderData(ShootEmUp.currentLevel.map.getWalls(), new Vector2(walls.getFWidth(), walls.getFHeight()));
 		irBack.initRenderData(ShootEmUp.currentLevel.map.getBackgroundTiles(), new Vector2(floor.getFWidth(),floor.getFHeight()));
-		irFore.initRenderData(ShootEmUp.currentLevel.map.getForegroundTiles(), new Vector2(wall.getFWidth(), wall.getFHeight()));
+		irFore.initRenderData(ShootEmUp.currentLevel.map.getForegroundTiles(), new Vector2(walls.getFWidth(), walls.getFHeight()));
 		}
 	}
 	
