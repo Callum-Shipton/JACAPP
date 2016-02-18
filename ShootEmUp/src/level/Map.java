@@ -79,7 +79,7 @@ public class Map {
 					wallTileTypes[x][y] = 1;
 					break;
 				case WATER:
-					wallTileTypes[x][y] = 7;
+					wallTileTypes[x][y] = 9;
 					break;
 				default:
 					System.out.println(map.getRGB(x, y));
@@ -94,33 +94,12 @@ public class Map {
 					//if not the left edge of the map
 					if(x > 0){
 						//if a wall to the left
-						if(((wallTileTypes[x-1][y] == 1) || (wallTileTypes[x-1][y] == 2))){
-							if(y < map.getHeight()-1){
-								if(x < map.getWidth()-1){
-									if((wallTileTypes[x+1][y+1] == 0) || (wallTileTypes[x+1][y+1] > 8)){
-										wallTileTypes[x][y] = 7;
-									} else {
-										wallTileTypes[x][y] = 2;
-									}
-								}
-							}
-						}
-						if(((wallTileTypes[x-1][y] == 7) || (wallTileTypes[x-1][y] == 8))){
+						if((wallTileTypes[x-1][y] == 1) || (wallTileTypes[x-1][y] == 2)){
 							wallTileTypes[x][y] = 2;
 						}
 						
-						if((wallTileTypes[x-1][y] == 4) || (wallTileTypes[x-1][y] == 5)){
-							if(y < map.getHeight()-1){
-								if(x < map.getWidth()-1){
-									if((wallTileTypes[x-1][y+1] == 0) || (wallTileTypes[x-1][y+1] > 8)){
-										wallTileTypes[x][y] = 8;
-									} else if ((wallTileTypes[x][y+1] != 0) || (wallTileTypes[x][y+1] <= 8)) {
-										wallTileTypes[x][y] = 2;
-									} else {
-									wallTileTypes[x][y] = 5;
-									}
-								}
-							}
+						if(((wallTileTypes[x-1][y] == 4) || (wallTileTypes[x-1][y] == 5))||(wallTileTypes[x-1][y] == 7)){
+							wallTileTypes[x][y] = 5;
 						}
 						
 						//if not the right edge
@@ -145,6 +124,24 @@ public class Map {
 							}
 						}
 					}
+					if(((x > 0) && (y > 0)) && ((x < map.getWidth()-1) && (y < map.getHeight()-1))){
+						if((wallTileTypes[x-1][y] <= 8) && (wallTileTypes[x-1][y] != 0)){
+							if((wallTileTypes[x+1][y] <= 8) && (wallTileTypes[x+1][y] != 0)){
+								if((wallTileTypes[x][y-1] <= 8) && (wallTileTypes[x][y-1] != 0)){
+									if((wallTileTypes[x][y+1] <= 8) && (wallTileTypes[x][y+1] != 0)){
+										if((wallTileTypes[x+1][y+1] == 0) || (wallTileTypes[x+1][y+1] > 8)){
+											wallTileTypes[x][y] = 7;
+										} else if((wallTileTypes[x-1][y+1] == 0) || (wallTileTypes[x-1][y+1] > 8)){
+											wallTileTypes[x][y] = 8;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				if(wallTileTypes[x][y] == 9){
+					wallTileTypes[x][y] = 13;
 				}
 			}
 		}
