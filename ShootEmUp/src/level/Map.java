@@ -68,8 +68,9 @@ public class Map {
 		}
 	}
 	
-	//take the map image and use it to fill the tile type array with the correct tiles for
+	//fill the tile type arrays
 	public void setTileTypes() {
+		//take the map image and use it to fill the tile type array 
 		for (int y = 0; y < map.getHeight(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
 				switch (map.getRGB(x, y)) {
@@ -96,7 +97,7 @@ public class Map {
 				}
 			}
 		}
-		//Set Wall & Water Types
+		//Set Wall & Water tile types
 		for (int y = 0; y < map.getHeight(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
 				//if a wall
@@ -135,12 +136,15 @@ public class Map {
 						}
 					}
 					if(((x > 0) && (y > 0)) && ((x < map.getWidth()-1) && (y < map.getHeight()-1))){
+						//if surrounded by wall
 						if((wallTileTypes[x-1][y] <= 8) && (wallTileTypes[x-1][y] != 0)){
 							if((wallTileTypes[x+1][y] <= 8) && (wallTileTypes[x+1][y] != 0)){
 								if((wallTileTypes[x][y-1] <= 8) && (wallTileTypes[x][y-1] != 0)){
 									if((wallTileTypes[x][y+1] <= 8) && (wallTileTypes[x][y+1] != 0)){
+										//if left corner
 										if((wallTileTypes[x+1][y+1] == 0) || (wallTileTypes[x+1][y+1] > 8)){
 											wallTileTypes[x][y] = 7;
+										//if right corner
 										} else if((wallTileTypes[x-1][y+1] == 0) || (wallTileTypes[x-1][y+1] > 8)){
 											wallTileTypes[x][y] = 8;
 										}
@@ -150,6 +154,7 @@ public class Map {
 						}
 					}
 				}
+				//if water
 				if(wallTileTypes[x][y] == 9){
 					wallTileTypes[x][y] = 13;
 				}
@@ -177,7 +182,7 @@ public class Map {
 				}
 			}
 		}
-		//Set Wall Tiles
+		//insert correct wall/water type and side
 		for (int y = 0; y < map.getHeight(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
 				switch (wallTileTypes[x][y]) {
@@ -245,6 +250,7 @@ public class Map {
 		}
 	}
 	
+	//create wall
 	public void insertWall(int x, int y, float tileMapX, float tileMapY, int wallType){
 		float width = Art.walls.getWidth()/Art.walls.getFWidth();
 		float height = Art.walls.getHeight()/Art.walls.getFHeight();
@@ -269,6 +275,7 @@ public class Map {
 		walls.put(new Vector2(x,y), wall);
 	}
 	
+	//create water
 	public void insertWater(int x, int y, float tileMapX, float tileMapY, int waterType){
 		float width = Art.walls.getWidth()/Art.walls.getFWidth();
 		float height = Art.walls.getHeight()/Art.walls.getFHeight();
