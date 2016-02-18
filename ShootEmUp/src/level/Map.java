@@ -160,6 +160,29 @@ public class Map {
 				}
 			}
 		}
+		for (int y = 0; y < map.getHeight(); y++) {
+			for (int x = 0; x < map.getWidth(); x++) {
+				if(wallTileTypes[x][y] == 0){
+					if(y < map.getHeight()-1){
+						if(wallTileTypes[x][y+1] == 1){
+							foregroundTileTypes[x][y] = 1;
+						} else if (wallTileTypes[x][y+1] == 2){
+							foregroundTileTypes[x][y] = 2;
+							if((x > 0) && (x < map.getWidth()-1)){
+								if(wallTileTypes[x-1][y] == 3){
+									wallTileTypes[x-1][y] = 2;
+								}
+								if(wallTileTypes[x+1][y] == 1){
+									wallTileTypes[x+1][y] = 2;
+								}
+							}
+						}  else if (wallTileTypes[x][y+1] == 3){
+							foregroundTileTypes[x][y] = 3;
+						}
+					}
+				}
+			}
+		}
 		
 		setTiles();
 		
@@ -244,7 +267,21 @@ public class Map {
 		for (int y = 0; y < map.getHeight(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
 				switch (foregroundTileTypes[x][y]) {
-				
+				case 1:
+					foregroundTiles[x][y] = new Vector2(0.0f, 1.0f);
+					break;
+				case 2:
+					foregroundTiles[x][y] = new Vector2(1.0f, 1.0f);
+					break;
+				case 3:
+					foregroundTiles[x][y] = new Vector2(2.0f, 1.0f);
+					break;
+				case 4:
+					foregroundTiles[x][y] = new Vector2(0.0f, 0.0f);
+					break;
+				case 5:
+					foregroundTiles[x][y] = new Vector2(2.0f, 0.0f);
+					break;
 				}
 			}
 		}
