@@ -81,16 +81,16 @@ public class Map {
 					backgroundTileTypes[x][y] = 2;
 					break;
 				case BROWNWALL:
-					wallTileTypes[x][y] = 1;
+					wallTileTypes[x][y] = 7;
 					break;
 				case GREYWALL:
-					wallTileTypes[x][y] = 1;
+					wallTileTypes[x][y] = 7;
 					break;
 				case LIGHTWATER:
-					wallTileTypes[x][y] = 9;
+					wallTileTypes[x][y] = 12;
 					break;
 				case DARKWATER:
-					wallTileTypes[x][y] = 9;
+					wallTileTypes[x][y] = 12;
 					break;
 				default:
 					System.out.println(map.getRGB(x, y));
@@ -101,62 +101,103 @@ public class Map {
 		for (int y = 0; y < map.getHeight(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
 				//if a wall
-				if(wallTileTypes[x][y] == 1){
-					//if not the left edge of the map
+				if(wallTileTypes[x][y] == 7){
 					if(x > 0){
-						//if a wall to the left
-						if((wallTileTypes[x-1][y] == 1) || (wallTileTypes[x-1][y] == 2)){
-							wallTileTypes[x][y] = 2;
+						if(y < map.getHeight()-2){
+							if((wallTileTypes[x][y+2] == 0) || (wallTileTypes[x][y+2] > 11)){
+								wallTileTypes[x][y] = 1;
+							}
+							if(x < map.getWidth()-1){
+								if((wallTileTypes[x-1][y+1] != 0) && (wallTileTypes[x-1][y+1] <= 11)){
+									wallTileTypes[x][y] = 8;
+								}
+							}
 						}
-						
-						if(((wallTileTypes[x-1][y] == 4) || (wallTileTypes[x-1][y] == 5))||(wallTileTypes[x-1][y] == 7)){
-							wallTileTypes[x][y] = 5;
+						if((wallTileTypes[x-1][y] == 7) || (wallTileTypes[x-1][y] == 8)){
+							if(y < map.getHeight()-2){
+								if((wallTileTypes[x][y+2] == 0) || (wallTileTypes[x][y+2] > 11)){
+									wallTileTypes[x][y] = 2;
+								} else {
+									wallTileTypes[x][y] = 8; 
+								}
+							}
+							if(x < map.getWidth()-1){
+								if((wallTileTypes[x+1][y] <= 7) || (wallTileTypes[x+1][y] > 11)){
+									if(y < map.getHeight()-1){
+										if((wallTileTypes[x+1][y+1] == 0) || (wallTileTypes[x+1][y+1] > 11)){
+											wallTileTypes[x][y] = 9;
+										}
+									} 
+								}
+							}
 						}
-						
-						//if not the right edge
-						if(x < map.getWidth()-1){
-							//if the end horizontal wall
-							if((wallTileTypes[x+1][y] == 0) || (wallTileTypes[x+1][y] > 8)){
-								if((wallTileTypes[x-1][y] == 4) || (wallTileTypes[x-1][y] == 5)){
+						if(wallTileTypes[x-1][y] == 1){
+							if(x < map.getWidth()-1){
+								if((wallTileTypes[x+1][y] == 0) || (wallTileTypes[x+1][y] > 11)){
+									wallTileTypes[x][y] = 3;
+								} else {
+									wallTileTypes[x][y] = 2;
+								}							
+							} 
+						}
+						if(wallTileTypes[x-1][y] == 2){
+							if(y < map.getHeight()-2){
+								if((wallTileTypes[x][y+2] == 0) || (wallTileTypes[x][y+2] > 11)){
+									if(x < map.getWidth()-1){
+										if((wallTileTypes[x+1][y] == 0) || (wallTileTypes[x+1][y] > 11)){
+											wallTileTypes[x][y] = 3;
+										} else {
+											wallTileTypes[x][y] = 2;
+										}							
+									} 
+								} else {
+									wallTileTypes[x][y] = 8; 
+								}
+							}
+						}
+						if(wallTileTypes[x-1][y] == 5){
+							if(x < map.getWidth()-1){
+								if((wallTileTypes[x+1][y] == 0) || (wallTileTypes[x+1][y] > 11)){
 									wallTileTypes[x][y] = 6;
 								} else {
-									wallTileTypes[x][y] = 3;
-								}
+									wallTileTypes[x][y] = 5;
+								}							
 							}
 						}
-					}
-					//if not the top edge of the map
-					if(y < map.getHeight()-1){
-						if((wallTileTypes[x][y+1] == 0) || (wallTileTypes[x][y+1] > 8)){
-							if(x > 0){
-								if((wallTileTypes[x-1][y] == 0) || (wallTileTypes[x-1][y] > 8)){
-									wallTileTypes[x][y] = 4;
-								}
+						if(wallTileTypes[x-1][y] == 10){
+							if(x < map.getWidth()-1){
+								if((wallTileTypes[x+1][y] == 0) || (wallTileTypes[x+1][y] > 11)){
+									wallTileTypes[x][y] = 9;
+								} else {
+									wallTileTypes[x][y] = 8;
+								}							
 							}
 						}
+						if(wallTileTypes[x-1][y] == 11){
+							wallTileTypes[x][y] = 5; 
+						}
+						
 					}
-					if(((x > 0) && (y > 0)) && ((x < map.getWidth()-1) && (y < map.getHeight()-1))){
-						//if surrounded by wall
-						if((wallTileTypes[x-1][y] <= 8) && (wallTileTypes[x-1][y] != 0)){
-							if((wallTileTypes[x+1][y] <= 8) && (wallTileTypes[x+1][y] != 0)){
-								if((wallTileTypes[x][y-1] <= 8) && (wallTileTypes[x][y-1] != 0)){
-									if((wallTileTypes[x][y+1] <= 8) && (wallTileTypes[x][y+1] != 0)){
-										//if left corner
-										if((wallTileTypes[x+1][y+1] == 0) || (wallTileTypes[x+1][y+1] > 8)){
-											wallTileTypes[x][y] = 7;
-										//if right corner
-										} else if((wallTileTypes[x-1][y+1] == 0) || (wallTileTypes[x-1][y+1] > 8)){
-											wallTileTypes[x][y] = 8;
+					if(((x > 0 )&&(y > 0)) && ((x < map.getWidth()-1) && (y < map.getHeight() - 1))){
+						if((wallTileTypes[x+1][y] != 0) && (wallTileTypes[x+1][y] <= 11)){
+							if((wallTileTypes[x-1][y] != 0) && (wallTileTypes[x-1][y] <= 11)){
+								if((wallTileTypes[x][y+1] != 0) && (wallTileTypes[x][y+1] <= 11)){
+									if((wallTileTypes[x][y-1] != 0) && (wallTileTypes[x][y-1] <= 11)){
+										if((wallTileTypes[x+1][y+1] <= 6) || (wallTileTypes[x+1][y+1] > 11)){
+											wallTileTypes[x][y] = 11; 
 										}
-									}
-								}
+										if((wallTileTypes[x-1][y+1] <= 6) || (wallTileTypes[x-1][y+1] > 11)){
+											wallTileTypes[x][y] = 10; 
+										}
+									}	
+								}	
 							}
 						}
 					}
 				}
 				//if water
-				if(wallTileTypes[x][y] == 9){
-					wallTileTypes[x][y] = 13;
+				if(wallTileTypes[x][y] == 12){
+					wallTileTypes[x][y] = 16;
 				}
 			}
 		}
@@ -210,54 +251,63 @@ public class Map {
 			for (int x = 0; x < map.getWidth(); x++) {
 				switch (wallTileTypes[x][y]) {
 				case 1:
-					insertWall(x, y, 0.0f, 3.0f, map.getRGB(x, y));
-					break;
-				case 2:
-					insertWall(x, y, 1.0f, 3.0f, map.getRGB(x, y));
-					break;
-				case 3:
-					insertWall(x, y, 2.0f, 3.0f, map.getRGB(x, y));
-					break;
-				case 4:
-					insertWall(x, y, 0.0f, 4.0f, map.getRGB(x, y));
-					break;
-				case 5:
-					insertWall(x, y, 1.0f, 4.0f, map.getRGB(x, y));
-					break;
-				case 6:
-					insertWall(x, y, 2.0f, 4.0f, map.getRGB(x, y));
-					break;
-				case 7:
-					insertWall(x, y, 2.0f, 2.0f, map.getRGB(x, y));
-					break;
-				case 8:
 					insertWall(x, y, 0.0f, 2.0f, map.getRGB(x, y));
 					break;
+				case 2:
+					insertWall(x, y, 1.0f, 2.0f, map.getRGB(x, y));
+					break;
+				case 3:
+					insertWall(x, y, 2.0f, 2.0f, map.getRGB(x, y));
+					break;
+				case 4:
+					insertWall(x, y, 0.0f, 3.0f, map.getRGB(x, y));
+					break;
+				case 5:
+					insertWall(x, y, 1.0f, 3.0f, map.getRGB(x, y));
+					break;
+				case 6:
+					insertWall(x, y, 2.0f, 3.0f, map.getRGB(x, y));
+					break;
+				case 7:
+					insertWall(x, y, 0.0f, 1.0f, map.getRGB(x, y));
+					break;
+				case 8:
+					insertWall(x, y, 1.0f, 1.0f, map.getRGB(x, y));
+					break;
 				case 9:
-					insertWater(x, y, 0.0f, 0.0f, map.getRGB(x, y));
+					insertWall(x, y, 2.0f, 1.0f, map.getRGB(x, y));
 					break;
 				case 10:
-					insertWater(x, y, 1.0f, 0.0f, map.getRGB(x, y));
+					insertWall(x, y, 0.0f, 0.0f, map.getRGB(x, y));
 					break;
 				case 11:
-					insertWater(x, y, 2.0f, 0.0f, map.getRGB(x, y));
+					insertWall(x, y, 2.0f, 0.0f, map.getRGB(x, y));
 					break;
 				case 12:
-					insertWater(x, y, 0.0f, 1.0f, map.getRGB(x, y));
+					insertWater(x, y, 0.0f, 0.0f, map.getRGB(x, y));
 					break;
 				case 13:
-					insertWater(x, y, 1.0f, 1.0f, map.getRGB(x, y));
+					insertWater(x, y, 1.0f, 0.0f, map.getRGB(x, y));
 					break;
 				case 14:
-					insertWater(x, y, 2.0f, 1.0f, map.getRGB(x, y));
+					insertWater(x, y, 2.0f, 0.0f, map.getRGB(x, y));
 					break;
 				case 15:
-					insertWater(x, y, 0.0f, 2.0f, map.getRGB(x, y));
+					insertWater(x, y, 0.0f, 1.0f, map.getRGB(x, y));
 					break;
 				case 16:
-					insertWater(x, y, 1.0f, 2.0f, map.getRGB(x, y));
+					insertWater(x, y, 1.0f, 1.0f, map.getRGB(x, y));
 					break;
 				case 17:
+					insertWater(x, y, 2.0f, 1.0f, map.getRGB(x, y));
+					break;
+				case 18:
+					insertWater(x, y, 0.0f, 2.0f, map.getRGB(x, y));
+					break;
+				case 19:
+					insertWater(x, y, 1.0f, 2.0f, map.getRGB(x, y));
+					break;
+				case 20:
 					insertWater(x, y, 2.0f, 2.0f, map.getRGB(x, y));
 					break;
 				}
@@ -319,13 +369,13 @@ public class Map {
 		MapGraphics wallG;
 		switch(map.getRGB(x, y)){
 		case LIGHTWATER:
-			wallG = new MapGraphics(Art.walls, new Vector2(tileMapX, tileMapY + 5.0f), x * width, y * height);
+			wallG = new MapGraphics(Art.walls, new Vector2(tileMapX, tileMapY + 4.0f), x * width, y * height);
 			break;
 		case DARKWATER:
-			wallG = new MapGraphics(Art.walls, new Vector2(tileMapX + 3.0f, tileMapY + 5.0f), x * width, y * height);
+			wallG = new MapGraphics(Art.walls, new Vector2(tileMapX + 3.0f, tileMapY + 4.0f), x * width, y * height);
 			break;
 		default:
-			wallG = new MapGraphics(Art.walls, new Vector2(tileMapX, tileMapY + 5.0f), x * width, y * height);
+			wallG = new MapGraphics(Art.walls, new Vector2(tileMapX, tileMapY + 4.0f), x * width, y * height);
 		}
 		
 		Entity wall = new Entity();

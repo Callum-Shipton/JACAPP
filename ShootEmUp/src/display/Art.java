@@ -297,7 +297,7 @@ public class Art {
 		
 		//Load tile maps
 		floor = new Image("/Images/Tiles/Floor.png",2,2);
-		walls = new Image("/Images/Tiles/Walls.png",6,8);
+		walls = new Image("/Images/Tiles/Walls.png",6,7);
 		
 		//Load character maps
 		player = new Image("/Images/Characters/Player.png",6,8);
