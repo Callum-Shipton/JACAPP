@@ -61,6 +61,9 @@ public abstract class ButtonHandler {
 		case SOUND:
 			sound();
 			break;
+		case MUTE:
+			mute();
+			break;
 		case CONTROLS:
 			controls();
 			break;
@@ -162,6 +165,15 @@ public abstract class ButtonHandler {
 		ShootEmUp.addMenu(new SoundMenu(Art.mainMenuScreen));
 	}
 	
+	private static void mute(){
+		if(ShootEmUp.musicPause){
+			ShootEmUp.backgroundMusic.play(ShootEmUp.currentMusic);
+		} else {
+			ShootEmUp.backgroundMusic.pause(ShootEmUp.currentMusic);
+		}
+		ShootEmUp.musicPause = !ShootEmUp.musicPause;
+	}
+	
 	private static void inventory(){
 		ShootEmUp.addMenu(new InventoryMenu(Art.invScreen));	
 	}
@@ -250,7 +262,10 @@ public abstract class ButtonHandler {
     	ShootEmUp.paused = false;
     	ShootEmUp.mainMenu = false;
 		ShootEmUp.clearMenus();
-		ShootEmUp.backgroundMusic.stop(BackgroundMusic.MENU);
-		ShootEmUp.backgroundMusic.play(BackgroundMusic.MAIN);
+		ShootEmUp.backgroundMusic.stop(ShootEmUp.currentMusic);
+		ShootEmUp.currentMusic = BackgroundMusic.MAIN;
+		if(!ShootEmUp.musicPause){
+			ShootEmUp.backgroundMusic.play(ShootEmUp.currentMusic);
+		}
     }
 }
