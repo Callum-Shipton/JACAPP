@@ -364,6 +364,7 @@ class JInputController implements Controller {
 
 	}
 
+	//D Pad
 	private void povMap(int povIndex, float value) {
 		switch (this.getName()) {
 		case "Controller (XBOX 360 For Windows)":
@@ -371,54 +372,63 @@ class JInputController implements Controller {
 			switch (povIndex) {
 			case 0:
 				switch (Math.round(value * 8)) {
+				//No Input
 				case 0:
 					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
 					break;
+				//Top Right
 				case 1:
 					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
 					break;
+				//Right
 				case 2:
 					Keyboard.setKey(GLFW.GLFW_KEY_1, 1);
 					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
 					break;
+				//Bottom Right
 				case 3:
 					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
 					break;
+				//Bottom
 				case 4:
 					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_2, 1);
 					break;
+				//Bottom Left
 				case 5:
 					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
 					break;
+				//Left
 				case 6:
 					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_3, 1);
 					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
 					break;
+				//Top Left
 				case 7:
 					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
 					break;
+				//Top
 				case 8:
 					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_4, 1);
