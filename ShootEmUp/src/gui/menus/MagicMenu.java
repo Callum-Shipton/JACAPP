@@ -6,8 +6,6 @@ import display.Art;
 import display.Image;
 
 public class MagicMenu extends GuiMenu {
-	
-	public static boolean saved;
 
     public MagicMenu(Image menuImage) {
         super(menuImage);

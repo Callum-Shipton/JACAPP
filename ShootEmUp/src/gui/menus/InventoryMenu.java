@@ -15,8 +15,6 @@ import display.Image;
 
 public class InventoryMenu extends GuiMenu {
 	
-	public static boolean saved;
-
 	private ArrayList<Button> itemButtons;
 	
 	private int row = 0;

@@ -7,8 +7,6 @@ import display.Image;
 
 public class SaveMenu extends GuiMenu {
 	
-	public static boolean saved;
-
     public SaveMenu(Image menuImage) {
         super(menuImage);
         addButton(new Button(ButtonType.RESUME, Art.backButton, 30, 30, 128,24));

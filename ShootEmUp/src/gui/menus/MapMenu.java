@@ -6,8 +6,6 @@ import display.Art;
 import display.Image;
 
 public class MapMenu extends GuiMenu {
-	
-	public static boolean saved;
 
     public MapMenu(Image menuImage) {
         super(menuImage);

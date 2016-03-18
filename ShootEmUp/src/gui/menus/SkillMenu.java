@@ -6,8 +6,6 @@ import display.Art;
 import display.Image;
 
 public class SkillMenu extends GuiMenu {
-	
-	public static boolean saved;
 
     public SkillMenu(Image menuImage) {
         super(menuImage);
