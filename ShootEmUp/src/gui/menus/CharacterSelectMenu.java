@@ -2,15 +2,14 @@ package gui.menus;
 
 import input.Keyboard;
 import gui.Button;
+import gui.ButtonHandler;
 import gui.ButtonType;
 import main.ShootEmUp;
 
 import org.lwjgl.glfw.GLFW;
 
-import components.attack.TypeAttack;
 import display.Art;
 import display.Image;
-import audio.music.BackgroundMusic;
 
 public class CharacterSelectMenu extends GuiMenu {
 	
@@ -36,16 +35,13 @@ public class CharacterSelectMenu extends GuiMenu {
     	super.update();
     	
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
-    		ShootEmUp.currentLevel.createPlayer(TypeAttack.WARRIOR);
-    		startGame();
+    		ButtonHandler.selectButton(ButtonType.WARRIOR);
     	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
-    		ShootEmUp.currentLevel.createPlayer(TypeAttack.ARCHER);
-    		startGame();
+    		ButtonHandler.selectButton(ButtonType.ARCHER);
     	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 2){
-    		ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE);
-    		startGame();
+    		ButtonHandler.selectButton(ButtonType.MAGE);
     	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 3){
-    		popMenu();
+    		ButtonHandler.selectButton(ButtonType.BACK);
     	}
     	
         else if (Keyboard.getKey(GLFW.GLFW_KEY_DOWN) == 1) {
@@ -60,20 +56,5 @@ public class CharacterSelectMenu extends GuiMenu {
                 selectedItem = 3;
             }
         }
-    }
-
-    public void addMenu(GuiMenu menu) {
-		ShootEmUp.menuStack.add(menu);
-	}
-    
-    public void startGame(){
-    	ShootEmUp.paused = false;
-    	ShootEmUp.mainMenu = false;
-		ShootEmUp.clearMenus();
-		ShootEmUp.backgroundMusic.stop(ShootEmUp.currentMusic);
-		ShootEmUp.currentMusic = BackgroundMusic.MAIN;
-		if(!ShootEmUp.musicPause){
-			ShootEmUp.backgroundMusic.play(ShootEmUp.currentMusic);
-		}
     }
 }

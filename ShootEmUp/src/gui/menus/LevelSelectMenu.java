@@ -1,9 +1,9 @@
 package gui.menus;
 
-import level.Level;
 import main.ShootEmUp;
 import input.Keyboard;
 import gui.Button;
+import gui.ButtonHandler;
 import gui.ButtonType;
 
 import org.lwjgl.glfw.GLFW;
@@ -34,17 +34,13 @@ public class LevelSelectMenu extends GuiMenu {
     	super.update();
     	
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
-    		ShootEmUp.currentLevel = new Level(Art.level1);
-    		ShootEmUp.currentLevel.init();
-    		addMenu(new CharacterSelectMenu(Art.mainMenuScreen));
+    		ButtonHandler.selectButton(ButtonType.LEVEL1);
         	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
-    		ShootEmUp.currentLevel = new Level(Art.level2);
-    		ShootEmUp.currentLevel.init();
-    		addMenu(new CharacterSelectMenu(Art.mainMenuScreen));
+    		ButtonHandler.selectButton(ButtonType.LEVEL2);
     		Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
-    		popMenu();
+    		ButtonHandler.selectButton(ButtonType.BACK);
     		Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	}
     	
@@ -61,8 +57,4 @@ public class LevelSelectMenu extends GuiMenu {
             }
         }
     }
-
-    public void addMenu(GuiMenu menu) {
-		ShootEmUp.menuStack.add(menu);
-	}
 }

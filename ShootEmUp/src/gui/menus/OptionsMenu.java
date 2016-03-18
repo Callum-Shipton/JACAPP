@@ -2,6 +2,7 @@ package gui.menus;
 
 import input.Keyboard;
 import gui.Button;
+import gui.ButtonHandler;
 import gui.ButtonType;
 import main.ShootEmUp;
 
@@ -33,15 +34,15 @@ public class OptionsMenu extends GuiMenu{
     	super.update();
 
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
-    		addMenu(new ControlsMenu(Art.mainMenuScreen));
+    		ButtonHandler.selectButton(ButtonType.CONTROLS);
         	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	}
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
-    		addMenu(new SoundMenu(Art.mainMenuScreen));;
+    		ButtonHandler.selectButton(ButtonType.SOUND);
         	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	}
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 2){
-        	popMenu();
+    		ButtonHandler.selectButton(ButtonType.BACK);
         	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	}
     	
@@ -58,8 +59,4 @@ public class OptionsMenu extends GuiMenu{
             }
         }
     }
-
-    public void addMenu(GuiMenu menu) {
-		ShootEmUp.menuStack.add(menu);
-	}
 }

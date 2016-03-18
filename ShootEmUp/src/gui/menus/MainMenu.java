@@ -1,9 +1,8 @@
 package gui.menus;
 
-import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
-import static org.lwjgl.opengl.GL11.GL_TRUE;
 import input.Keyboard;
 import gui.Button;
+import gui.ButtonHandler;
 import gui.ButtonType;
 import main.ShootEmUp;
 
@@ -36,16 +35,16 @@ public class MainMenu extends GuiMenu {
     public void update() {
     	super.update();
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
-    		addMenu(new LevelSelectMenu(Art.mainMenuScreen));
+    		ButtonHandler.selectButton(ButtonType.NEW_GAME);
         	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
-    		addMenu(new LoadMenu(Art.mainMenuScreen));
+    		ButtonHandler.selectButton(ButtonType.LOAD_GAME);
     		Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 2){
-    		addMenu(new OptionsMenu(Art.mainMenuScreen));
+    		ButtonHandler.selectButton(ButtonType.OPTIONS);
     		Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 3){
-    		glfwSetWindowShouldClose(ShootEmUp.display.getWindow(), GL_TRUE);
+    		ButtonHandler.selectButton(ButtonType.EXIT);
     	}
     	
         else if (Keyboard.getKey(GLFW.GLFW_KEY_DOWN) == 1) {
@@ -61,8 +60,4 @@ public class MainMenu extends GuiMenu {
             }
         }
     }
-
-    public void addMenu(GuiMenu menu) {
-		ShootEmUp.menuStack.add(menu);
-	}
 }

@@ -80,8 +80,4 @@ public class InventoryMenu extends GuiMenu {
 			position++;
 		}
     }
-
-    public void addMenu(GuiMenu menu) {
-		ShootEmUp.menuStack.add(menu);
-	}
 }

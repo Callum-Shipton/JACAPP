@@ -1,6 +1,5 @@
 package gui.menus;
 
-import main.ShootEmUp;
 import gui.Button;
 import gui.ButtonType;
 import display.Art;
@@ -33,8 +32,4 @@ public class SkillMenu extends GuiMenu {
     public void update() {
     	super.update();
     }
-
-    public void addMenu(GuiMenu menu) {
-		ShootEmUp.menuStack.add(menu);
-	}
 }

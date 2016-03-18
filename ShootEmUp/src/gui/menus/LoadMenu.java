@@ -2,6 +2,7 @@ package gui.menus;
 
 import input.Keyboard;
 import gui.Button;
+import gui.ButtonHandler;
 import gui.ButtonType;
 import main.ShootEmUp;
 
@@ -31,25 +32,8 @@ public class LoadMenu extends GuiMenu{
     	super.update();
 
     	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
-        	popMenu();
+    		ButtonHandler.selectButton(ButtonType.BACK);
         	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	}
-        /*
-    	else if (Keyboard.getKey(GLFW.GLFW_KEY_DOWN) == 1) {
-            selectedItem++;
-            if (selectedItem > 1) {
-                selectedItem = 0;
-            }
-        } else if (Keyboard.getKey(GLFW.GLFW_KEY_UP) == 1) {
-            selectedItem--;
-            if (selectedItem < 0) {
-                selectedItem = 1;
-            }
-        }
-        */
     }
-
-    public void addMenu(GuiMenu menu) {
-		ShootEmUp.menuStack.add(menu);
-	}
 }
