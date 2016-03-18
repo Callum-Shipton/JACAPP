@@ -1,13 +1,8 @@
 package gui.menus;
 
-import input.Keyboard;
 import gui.Button;
-import gui.ButtonHandler;
 import gui.ButtonType;
 import main.ShootEmUp;
-
-import org.lwjgl.glfw.GLFW;
-
 import display.Art;
 import display.Image;
 
@@ -22,41 +17,5 @@ public class OptionsMenu extends GuiMenu{
         addButton(new Button(ButtonType.CONTROLS, Art.controlsButton, (ShootEmUp.width / 2) - (Art.controlsButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.controlsButton.getHeight()), 128,24));
         addButton(new Button(ButtonType.SOUND, Art.soundButton, (ShootEmUp.width / 2) - (Art.soundButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.soundButton.getHeight() / 4), 128,24));
         addButton(new Button(ButtonType.BACK, Art.backButton, (ShootEmUp.width / 2) - (Art.backButton.getWidth() / 2), (ShootEmUp.height / 2) + (Art.backButton.getHeight()), 128,24));
-    }
-
-    @Override
-    public void render() {
-        super.render();
-        
-    }
-
-    public void update() {
-    	super.update();
-
-    	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 0){
-    		ButtonHandler.selectButton(ButtonType.CONTROLS);
-        	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
-    	}
-    	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 1){
-    		ButtonHandler.selectButton(ButtonType.SOUND);
-        	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
-    	}
-    	if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 2){
-    		ButtonHandler.selectButton(ButtonType.BACK);
-        	Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
-    	}
-    	
-        else if (Keyboard.getKey(GLFW.GLFW_KEY_DOWN) == 1) {
-            selectedItem++;
-            if (selectedItem > 2) {
-                selectedItem = 0;
-            }
-        }
-        else if (Keyboard.getKey(GLFW.GLFW_KEY_UP) == 1) {
-            selectedItem--;
-            if (selectedItem < 0) {
-                selectedItem = 2;
-            }
-        }
     }
 }

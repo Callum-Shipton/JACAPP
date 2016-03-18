@@ -18,14 +18,4 @@ public class MapMenu extends GuiMenu {
         addButton(new Button(ButtonType.MAGIC, Art.magicButton, 922, 102, 101, 102));
         addButton(new Button(ButtonType.SAVE, Art.saveButton, 922, 408, 101, 102));
     }
-
-    @Override
-    public void render() {
-        super.render();
-        
-    }
-
-    public void update() {
-    	super.update();
-    }
 }

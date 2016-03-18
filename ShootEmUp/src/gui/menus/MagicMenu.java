@@ -20,15 +20,4 @@ public class MagicMenu extends GuiMenu {
         addButton(new Button(ButtonType.INVENTORY_UPGRADE, Art.inventoryButton,30, 98, 128, 24));
 		addButton(new Button(ButtonType.POTIONS_UPGRADE, Art.potionsButton,30, 132, 128, 24));
     }
-
-    @Override
-    public void render() {
-        super.render();
-        
-    }
-
-    public void update() {
-    	super.update();
-    	
-    }
 }

@@ -22,14 +22,4 @@ public class SkillMenu extends GuiMenu {
 		addButton(new Button(ButtonType.MANA_REGEN, Art.manaRegenButton,30, 166, 128, 24));
 		addButton(new Button(ButtonType.MANA, Art.manaButton,30, 200, 128, 24));
     }
-
-    @Override
-    public void render() {
-        super.render();
-        
-    }
-
-    public void update() {
-    	super.update();
-    }
 }

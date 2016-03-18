@@ -56,12 +56,6 @@ public class InventoryMenu extends GuiMenu {
 		}
     }
 
-    @Override
-    public void render() {
-        super.render();
-        
-    }
-
     public void update() {
     	super.update();
     	Iterator<Button> Buttons = itemButtons.iterator();

@@ -3,8 +3,11 @@ package gui.menus;
 import gui.Button;
 import gui.ButtonHandler;
 import gui.ButtonType;
+import input.Keyboard;
 
 import java.util.*;
+
+import org.lwjgl.glfw.GLFW;
 
 import main.ShootEmUp;
 import math.Vector2;
@@ -14,6 +17,7 @@ import display.Image;
 public abstract class GuiMenu {
 
     protected List<Button> buttons = new ArrayList<Button>();
+    protected int buttonPointer = 0;
     protected Image menuImage;
     protected int x;
     protected int y;
@@ -52,6 +56,22 @@ public abstract class GuiMenu {
             	if(button.getType() != ButtonType.OTHER){
             		button.postAction();
             	}
+            }
+        }
+        if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1){
+    		Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
+    		ButtonHandler.selectButton(buttons.get(buttonPointer).getType());
+    	} else if (Keyboard.getKey(GLFW.GLFW_KEY_DOWN) == 1) {
+    		Keyboard.setKey(GLFW.GLFW_KEY_DOWN);
+            buttonPointer++;
+            if (buttonPointer > buttons.size()) {
+                buttonPointer = 0;
+            }
+        }else if (Keyboard.getKey(GLFW.GLFW_KEY_UP) == 1) {
+        	Keyboard.setKey(GLFW.GLFW_KEY_UP);
+        	buttonPointer--;
+            if (buttonPointer < 0) {
+            	buttonPointer = buttons.size();
             }
         }
     }
