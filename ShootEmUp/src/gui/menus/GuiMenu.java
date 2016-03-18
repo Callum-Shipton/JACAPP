@@ -74,7 +74,7 @@ public abstract class GuiMenu {
         	buttons.get(buttonPointer).setHovered(false);
         	buttonPointer--;
             if (buttonPointer < 0) {
-            	buttonPointer = buttons.size();
+            	buttonPointer = buttons.size() - 1;
             }
             buttons.get(buttonPointer).setHovered(true);
         }

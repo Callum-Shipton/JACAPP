@@ -54,7 +54,14 @@ public class Spawner {
 	
 	public Entity createPlayer(TypeAttack type){
 		Entity player = new Entity();
-		PlayerGraphics g = new PlayerGraphics(player, Art.player, Art.base);
+		PlayerGraphics g;
+		if(type == TypeAttack.WARRIOR){
+			g = new PlayerGraphics(player, Art.warrior, Art.base);
+		} else if (type == TypeAttack.ARCHER){
+			g = new PlayerGraphics(player, Art.archer, Art.base);
+		} else {
+			g = new PlayerGraphics(player, Art.mage, Art.base);
+		}
 		PointSpawn s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
 		PlayerAttack a;
 		
@@ -127,7 +134,7 @@ public class Spawner {
 		
 		boolean collide = false;
 		test = new Entity();
-		BaseGraphics BG = new AnimatedGraphics(Art.player, Art.base, false);
+		BaseGraphics BG = new AnimatedGraphics(Art.enemy, Art.base, false);
 		test.addComponent(BG);
 		BaseCollision BC = new RigidCollision(test);
 		test.addComponent(BC);

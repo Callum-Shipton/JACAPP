@@ -76,7 +76,9 @@ public class Art {
 	public static Image walls;
 	
 	//Character maps
-	public static Image player;
+	public static Image warrior;
+	public static Image archer;
+	public static Image mage;
 	public static Image enemy;
 	public static Image smallEnemy;
 	public static Image flyingEnemy;
@@ -300,7 +302,9 @@ public class Art {
 		walls = new Image("/Images/Tiles/Walls.png",6,7);
 		
 		//Load character maps
-		player = new Image("/Images/Characters/Player.png",6,8);
+		warrior = new Image("/Images/Characters/Warrior.png",6,8);
+		archer = new Image("/Images/Characters/Archer.png",6,8);
+		mage = new Image("/Images/Characters/Mage.png",6,8);
 		enemy = new Image("/Images/Characters/Enemy.png",6,8);
 		smallEnemy = new Image("/Images/Characters/SmallEnemy.png",6,8);
 		flyingEnemy = new Image("/Images/Characters/FlyingEnemy.png",6,8);
