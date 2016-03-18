@@ -63,16 +63,20 @@ public abstract class GuiMenu {
     		ButtonHandler.selectButton(buttons.get(buttonPointer).getType());
     	} else if (Keyboard.getKey(GLFW.GLFW_KEY_DOWN) == 1) {
     		Keyboard.setKey(GLFW.GLFW_KEY_DOWN);
+    		buttons.get(buttonPointer).setHovered(false);
             buttonPointer++;
-            if (buttonPointer > buttons.size()) {
+            if (buttonPointer >= buttons.size()) {
                 buttonPointer = 0;
             }
+            buttons.get(buttonPointer).setHovered(true);
         }else if (Keyboard.getKey(GLFW.GLFW_KEY_UP) == 1) {
         	Keyboard.setKey(GLFW.GLFW_KEY_UP);
+        	buttons.get(buttonPointer).setHovered(false);
         	buttonPointer--;
             if (buttonPointer < 0) {
             	buttonPointer = buttons.size();
             }
+            buttons.get(buttonPointer).setHovered(true);
         }
     }
 
