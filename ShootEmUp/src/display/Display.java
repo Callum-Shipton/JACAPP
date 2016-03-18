@@ -37,9 +37,10 @@ public class Display {
 	public Display(int width, int height) {
 		this.width = width;
 		this.height = height;
+		initGLFW();
 	}
 
-	public void initGLFW() {
+	private void initGLFW() {
 		// Setup an error callback. The default implementation
 		// will print the error message in System.err.
 

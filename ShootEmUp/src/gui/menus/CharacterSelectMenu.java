@@ -28,7 +28,6 @@ public class CharacterSelectMenu extends GuiMenu {
     @Override
     public void render() {
         super.render();
-        
     }
 
     public void update() {

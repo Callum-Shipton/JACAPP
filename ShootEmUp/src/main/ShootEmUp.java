@@ -1,6 +1,5 @@
 package main;
 
-
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import gui.menus.GuiMenu;
@@ -58,7 +57,6 @@ public class ShootEmUp {
 
 	private void init() {
 		display = new Display(width, height);
-		display.initGLFW();
 		backgroundMusic = new BackgroundMusic();
 		backgroundMusic.initAL();
 		
