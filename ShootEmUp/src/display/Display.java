@@ -92,8 +92,7 @@ public class Display {
 		GLContext.createFromCurrent();
 
 		initGL();
-		Art a = new Art();
-		a.init();
+		new Art().init();;
 		
 		// Initialise key handling
 		Keyboard.keyCheck(window);
