@@ -95,6 +95,11 @@ public class Art {
 	public static Image arrow;
 	public static Image swordProjectile;
 	
+	//Status Effect maps
+	public static Image fire;
+	public static Image frost;
+	public static Image poison;
+	
 	//Armour maps
 	public static Image shoes;
 	public static Image legs;
@@ -320,6 +325,11 @@ public class Art {
 		
 		arrow = new Image("/Images/Particles/Arrow.png",1,8);
 		swordProjectile = new Image("/Images/Particles/Sword.png",1,8);
+		
+		//load status effect maps
+		fire = new Image("/Images/Effects/Fire.png",6,1);
+		frost = new Image("/Images/Effects/Fire.png",6,1);
+		poison = new Image("/Images/Effects/Fire.png",6,1);
 		
 		//Load Armour maps
 		shoes = new Image("/Images/Drops/Armour/Boots.png",8,1);
