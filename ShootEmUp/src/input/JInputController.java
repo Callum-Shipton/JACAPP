@@ -441,7 +441,7 @@ class JInputController implements Controller {
 				Keyboard.setKey(GLFW.GLFW_KEY_ENTER, value);
 				break;
 			case 1: // B
-
+				Keyboard.setKey(GLFW.GLFW_KEY_M, value);
 				break;
 			case 2: // X
 
