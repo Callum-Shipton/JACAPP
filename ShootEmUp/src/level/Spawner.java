@@ -88,15 +88,18 @@ public class Spawner {
 				if((totalEnemies == 0) && (wave == 20)){
 					bossEnemy();
 				} else {
+					
 					//randomly chooses an enemy
-					int prob = rand.nextInt(3);
+					/*int prob = rand.nextInt(3);
 					if(prob == 0){
 						smallEnemy();
 					} else if(prob == 1){
 						largeEnemy();
 					} else {
 						flyingEnemy();
-					}			
+					}
+					*/
+					smallEnemy();
 				}
 				//creates the enemy and adds it to the level
 				addEnemy();

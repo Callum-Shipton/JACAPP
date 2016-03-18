@@ -466,7 +466,7 @@ class JInputController implements Controller {
 
 				break;
 			case 6: // Back
-
+				Keyboard.setKey(GLFW.GLFW_KEY_F, value);
 				break;
 			case 7: // Pause
 				Keyboard.setKey(GLFW.GLFW_KEY_P, value);
