@@ -132,8 +132,8 @@ public class Display {
 		long newWindow;
 		if(fullscreen){
 			ShootEmUp.menuStack.peek().reset(width, height, 1024, 512);
-			ShootEmUp.WIDTH =1024;
-			ShootEmUp.HEIGHT =512;
+			ShootEmUp.width = 1024;
+			ShootEmUp.height = 512;
 			width = 1024;
 			height = 512;
 			newWindow = glfwCreateWindow(width, height, "THE MAZE", NULL, window);
@@ -145,8 +145,8 @@ public class Display {
 					(GLFWvidmode.height(vidmode) - height) / 2);
 		}else{
 			ShootEmUp.menuStack.peek().reset(width, height, vm.getWidth(), vm.getHeight());
-			ShootEmUp.WIDTH = vm.getWidth();
-			ShootEmUp.HEIGHT = vm.getHeight();
+			ShootEmUp.width = vm.getWidth();
+			ShootEmUp.height = vm.getHeight();
 			width = vm.getWidth();
 			height = vm.getHeight();
 			newWindow = glfwCreateWindow(width, height, "THE MAZE", monitor, window);

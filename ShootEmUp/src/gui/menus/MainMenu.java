@@ -21,10 +21,10 @@ public class MainMenu extends GuiMenu {
         super(menuImage);
         ShootEmUp.currentLevel = null;
         selectedItem = 0;
-        addButton(new Button(ButtonType.NEW_GAME, Art.newGameButton, (ShootEmUp.WIDTH / 2) - (Art.newGameButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.newGameButton.getHeight() * 2), 128,24));
-        addButton(new Button(ButtonType.LOAD_GAME, Art.loadGameButton, (ShootEmUp.WIDTH / 2) - (Art.loadGameButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - Art.loadGameButton.getHeight(), 128,24));
-        addButton(new Button(ButtonType.OPTIONS, Art.optionsButton, (ShootEmUp.WIDTH / 2) - (Art.optionsButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2), 128,24));
-        addButton(new Button(ButtonType.EXIT, Art.exitButton,  (ShootEmUp.WIDTH /  2) - (Art.exitButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) + Art.exitButton.getHeight(), 128,24));
+        addButton(new Button(ButtonType.NEW_GAME, Art.newGameButton, (ShootEmUp.width / 2) - (Art.newGameButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.newGameButton.getHeight() * 2), 128,24));
+        addButton(new Button(ButtonType.LOAD_GAME, Art.loadGameButton, (ShootEmUp.width / 2) - (Art.loadGameButton.getWidth() / 2), (ShootEmUp.height / 2) - Art.loadGameButton.getHeight(), 128,24));
+        addButton(new Button(ButtonType.OPTIONS, Art.optionsButton, (ShootEmUp.width / 2) - (Art.optionsButton.getWidth() / 2), (ShootEmUp.height / 2), 128,24));
+        addButton(new Button(ButtonType.EXIT, Art.exitButton,  (ShootEmUp.width /  2) - (Art.exitButton.getWidth() / 2), (ShootEmUp.height / 2) + Art.exitButton.getHeight(), 128,24));
     }
 
     @Override
@@ -45,7 +45,7 @@ public class MainMenu extends GuiMenu {
     		addMenu(new OptionsMenu(Art.mainMenuScreen));
     		Keyboard.setKey(GLFW.GLFW_KEY_ENTER);
     	} else if(Keyboard.getKey(GLFW.GLFW_KEY_ENTER) == 1 && selectedItem == 3){
-    		glfwSetWindowShouldClose(ShootEmUp.d.getWindow(), GL_TRUE);
+    		glfwSetWindowShouldClose(ShootEmUp.display.getWindow(), GL_TRUE);
     	}
     	
         else if (Keyboard.getKey(GLFW.GLFW_KEY_DOWN) == 1) {

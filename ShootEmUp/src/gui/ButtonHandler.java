@@ -120,7 +120,7 @@ public abstract class ButtonHandler {
 	}
 	
 	private static void exit(){
-		glfwSetWindowShouldClose(ShootEmUp.d.getWindow(), GL_TRUE);
+		glfwSetWindowShouldClose(ShootEmUp.display.getWindow(), GL_TRUE);
 	}
 	
 	private static void level1(){
@@ -250,7 +250,7 @@ public abstract class ButtonHandler {
     	ShootEmUp.paused = false;
     	ShootEmUp.mainMenu = false;
 		ShootEmUp.clearMenus();
-		ShootEmUp.m.stop(BackgroundMusic.MENU);
-		ShootEmUp.m.play(BackgroundMusic.MAIN);
+		ShootEmUp.backgroundMusic.stop(BackgroundMusic.MENU);
+		ShootEmUp.backgroundMusic.play(BackgroundMusic.MAIN);
     }
 }

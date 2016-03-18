@@ -48,7 +48,7 @@ public class Hud extends GuiComponent{
 		hudElems.add(waveCounter);
 		
 		//Potions bar
-		infoBoxBottom = new HudElement(0.0f,ShootEmUp.HEIGHT - Art.infoBoxBottom.getHeight(),Art.infoBoxBottom.getWidth(),Art.infoBoxBottom.getHeight(), Art.infoBoxBottom, false);
+		infoBoxBottom = new HudElement(0.0f,ShootEmUp.height - Art.infoBoxBottom.getHeight(),Art.infoBoxBottom.getWidth(),Art.infoBoxBottom.getHeight(), Art.infoBoxBottom, false);
 		hudElems.add(infoBoxBottom);
 	}
 	
@@ -79,10 +79,10 @@ public class Hud extends GuiComponent{
 		int mPot = ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getNumPotion(TypePotion.MANA);
 		int sPot = ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getNumPotion(TypePotion.SPEED);
 		int kPot = ((PlayerInventory)player.getComponent(ComponentType.INVENTORY)).getNumPotion(TypePotion.KNOCKBACK);
-		r.draw(Art.numbers, new Vector2(26, ShootEmUp.HEIGHT - 55), size, 0.0f, new Vector2(hPot,1), maxTex);
-		r.draw(Art.numbers, new Vector2(70, ShootEmUp.HEIGHT - 55), size, 0.0f, new Vector2(mPot,1), maxTex);
-		r.draw(Art.numbers, new Vector2(114, ShootEmUp.HEIGHT - 55), size, 0.0f, new Vector2(sPot,1), maxTex);
-		r.draw(Art.numbers, new Vector2(159, ShootEmUp.HEIGHT - 55), size, 0.0f, new Vector2(kPot,1), maxTex);
+		r.draw(Art.numbers, new Vector2(26, ShootEmUp.height - 55), size, 0.0f, new Vector2(hPot,1), maxTex);
+		r.draw(Art.numbers, new Vector2(70, ShootEmUp.height - 55), size, 0.0f, new Vector2(mPot,1), maxTex);
+		r.draw(Art.numbers, new Vector2(114, ShootEmUp.height - 55), size, 0.0f, new Vector2(sPot,1), maxTex);
+		r.draw(Art.numbers, new Vector2(159, ShootEmUp.height - 55), size, 0.0f, new Vector2(kPot,1), maxTex);
 		
 		
 		int wave =  ShootEmUp.currentLevel.spawner.getWave();

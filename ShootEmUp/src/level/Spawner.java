@@ -139,7 +139,7 @@ public class Spawner {
 			BG.setX((float)rand.nextInt((ShootEmUp.currentLevel.map.getBackgroundTiles().length - 1) * 32));
 			BG.setY(rand.nextInt((ShootEmUp.currentLevel.map.getBackgroundTiles()[0].length - 1) * 32));
 			
-			if(Math.abs((BG.getX()+(BG.getWidth()/2)) - (px + (pw/2))) <= (ShootEmUp.WIDTH+BG.getWidth()) && Math.abs((BG.getY()+(BG.getHeight()/2)) - (py + (ph/2))) <= (ShootEmUp.HEIGHT+BG.getHeight())) {
+			if(Math.abs((BG.getX()+(BG.getWidth()/2)) - (px + (pw/2))) <= (ShootEmUp.width+BG.getWidth()) && Math.abs((BG.getY()+(BG.getHeight()/2)) - (py + (ph/2))) <= (ShootEmUp.height+BG.getHeight())) {
 				collide = true;
 				continue;
 			}

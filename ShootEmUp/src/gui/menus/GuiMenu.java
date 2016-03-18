@@ -38,7 +38,7 @@ public abstract class GuiMenu {
     }
 
     public void render() {
-    	Art.stat.draw(menuImage, new Vector2(x,y), new Vector2(ShootEmUp.WIDTH,ShootEmUp.HEIGHT), 0, new Vector2(0,0));
+    	Art.stat.draw(menuImage, new Vector2(x,y), new Vector2(ShootEmUp.width,ShootEmUp.height), 0, new Vector2(0,0));
         for (Button button : buttons) {
             button.render(Art.stat);
         }

@@ -37,13 +37,13 @@ public class Button extends GuiComponent {
 		this.y = y;
 		this.w = w;
 		this.h = h;
-		window = ShootEmUp.d.getWindow();
+		window = ShootEmUp.display.getWindow();
 	}
 
 	@Override
 	public void update() {
 		super.update();
-		window = ShootEmUp.d.getWindow();
+		window = ShootEmUp.display.getWindow();
 		Bx.clear();
 		By.clear();
 		

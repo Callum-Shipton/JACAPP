@@ -20,10 +20,10 @@ public class CharacterSelectMenu extends GuiMenu {
     public CharacterSelectMenu(Image menuImage) {
         super(menuImage);
         selectedItem = 0;
-        addButton(new Button(ButtonType.WARRIOR, Art.warriorButton, (ShootEmUp.WIDTH / 2) - (Art.warriorButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - (Art.warriorButton.getHeight() * 2), 128,24));
-        addButton(new Button(ButtonType.ARCHER, Art.archerButton, (ShootEmUp.WIDTH / 2) - (Art.archerButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) - Art.archerButton.getHeight(), 128,24));
-        addButton(new Button(ButtonType.MAGE, Art.mageButton, (ShootEmUp.WIDTH / 2) - (Art.mageButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2), 128,24));
-        addButton(new Button(ButtonType.BACK, Art.backButton, (ShootEmUp.WIDTH / 2) - (Art.backButton.getWidth() / 2), (ShootEmUp.HEIGHT / 2) + Art.backButton.getHeight(), 128,24));
+        addButton(new Button(ButtonType.WARRIOR, Art.warriorButton, (ShootEmUp.width / 2) - (Art.warriorButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.warriorButton.getHeight() * 2), 128,24));
+        addButton(new Button(ButtonType.ARCHER, Art.archerButton, (ShootEmUp.width / 2) - (Art.archerButton.getWidth() / 2), (ShootEmUp.height / 2) - Art.archerButton.getHeight(), 128,24));
+        addButton(new Button(ButtonType.MAGE, Art.mageButton, (ShootEmUp.width / 2) - (Art.mageButton.getWidth() / 2), (ShootEmUp.height / 2), 128,24));
+        addButton(new Button(ButtonType.BACK, Art.backButton, (ShootEmUp.width / 2) - (Art.backButton.getWidth() / 2), (ShootEmUp.height / 2) + Art.backButton.getHeight(), 128,24));
     }
 
     @Override
@@ -70,7 +70,10 @@ public class CharacterSelectMenu extends GuiMenu {
     	ShootEmUp.paused = false;
     	ShootEmUp.mainMenu = false;
 		ShootEmUp.clearMenus();
-		ShootEmUp.m.stop(BackgroundMusic.MENU);
-		ShootEmUp.m.play(BackgroundMusic.MAIN);
+		ShootEmUp.backgroundMusic.stop(ShootEmUp.currentMusic);
+		ShootEmUp.currentMusic = BackgroundMusic.MAIN;
+		if(!ShootEmUp.musicPause){
+			ShootEmUp.backgroundMusic.play(ShootEmUp.currentMusic);
+		}
     }
 }

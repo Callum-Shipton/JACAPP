@@ -23,12 +23,14 @@ import audio.music.BackgroundMusic;
 public class ShootEmUp {
 
 	// Screen Width & Height
-	public static int WIDTH = 1024;
-	public static int HEIGHT = 512;
+	public static int width = 1024;
+	public static int height = 512;
 
 	// Handle for monitor/window funcs
-	public static Display d;
-	public static BackgroundMusic m;
+	public static Display display;
+	public static BackgroundMusic backgroundMusic;
+	public static int currentMusic = BackgroundMusic.MENU;
+	public static boolean musicPause = false;
 	
 	public static boolean paused;
 	public static boolean mainMenu = true;
@@ -48,23 +50,23 @@ public class ShootEmUp {
 			// Release window and window callbacks Terminate GLFW and release
 			// the GLFWerrorfun
 			Keyboard.destroy();
-			d.destroyGLFW();
-			m.destoyAL();
+			display.destroyGLFW();
+			backgroundMusic.destoyAL();
 
 		}
 	}
 
 	private void init() {
-		d = new Display(WIDTH, HEIGHT);
-		d.initGLFW();
-		m = new BackgroundMusic();
-		m.initAL();
+		display = new Display(width, height);
+		display.initGLFW();
+		backgroundMusic = new BackgroundMusic();
+		backgroundMusic.initAL();
 		
 		Controllers.create();
 		
 		paused = true;
 		addMenu(new MainMenu(Art.mainMenuScreen));
-		m.play(BackgroundMusic.MENU);
+		backgroundMusic.play(currentMusic);
 	}
 
 	private void loop() {
@@ -79,7 +81,7 @@ public class ShootEmUp {
 
 		int Error = glGetError();
 		
-		while (glfwWindowShouldClose(d.getWindow()) == GL_FALSE) {
+		while (glfwWindowShouldClose(display.getWindow()) == GL_FALSE) {
 
 			Error = glGetError();
 			
@@ -125,7 +127,19 @@ public class ShootEmUp {
 		if (!menuStack.isEmpty()) {
 			menuStack.peek().update();
 		}
-		d.update();
+		
+		//dealing with pausing music
+		if(Keyboard.getKey(GLFW_KEY_M) == 1){
+			Keyboard.setKey(GLFW_KEY_M);
+			if(musicPause){
+				backgroundMusic.play(currentMusic);
+			} else {
+				backgroundMusic.pause(currentMusic);
+			}
+			musicPause = !musicPause;
+		}
+		
+		display.update();
 
 	}
 
@@ -140,7 +154,7 @@ public class ShootEmUp {
 			menuStack.peek().render();
 		}
 
-		glfwSwapBuffers(d.getWindow()); // Swaps front and back buffers to
+		glfwSwapBuffers(display.getWindow()); // Swaps front and back buffers to
 										// render changes
 	}
 
