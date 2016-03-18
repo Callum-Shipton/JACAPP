@@ -103,94 +103,53 @@ public class Map {
 				//if a wall
 				if(wallTileTypes[x][y] == 7){
 					if(x > 0){
-						if(y < map.getHeight()-2){
-							if((wallTileTypes[x][y+2] == 0) || (wallTileTypes[x][y+2] > 11)){
-								wallTileTypes[x][y] = 1;
-							}
-							if(x < map.getWidth()-1){
-								if((wallTileTypes[x-1][y+1] != 0) && (wallTileTypes[x-1][y+1] <= 11)){
-									wallTileTypes[x][y] = 8;
+						if((wallTileTypes[x-1][y] == 0) || (wallTileTypes[x-1][y] > 11) ){
+							if(y < map.getHeight() - 2){
+								if((wallTileTypes[x][y+2] == 0) || (wallTileTypes[x][y+2] > 11) ){
+									if((wallTileTypes[x][y+1] == 0) || (wallTileTypes[x][y+1] > 11) ){
+										wallTileTypes[x][y] = 4;
+									} else {
+										wallTileTypes[x][y] = 1;
+									}
 								}
 							}
 						}
 						if((wallTileTypes[x-1][y] == 7) || (wallTileTypes[x-1][y] == 8)){
-							if(y < map.getHeight()-2){
-								if((wallTileTypes[x][y+2] == 0) || (wallTileTypes[x][y+2] > 11)){
+							if(y < map.getHeight() - 2){
+								if((wallTileTypes[x][y+2] == 0) || (wallTileTypes[x][y+2] > 11) ){
 									wallTileTypes[x][y] = 2;
+									wallTileTypes[x-1][y] = 9;
 								} else {
-									wallTileTypes[x][y] = 8; 
-								}
-							}
-							if(x < map.getWidth()-1){
-								if((wallTileTypes[x+1][y] <= 7) || (wallTileTypes[x+1][y] > 11)){
-									if(y < map.getHeight()-1){
-										if((wallTileTypes[x+1][y+1] == 0) || (wallTileTypes[x+1][y+1] > 11)){
-											wallTileTypes[x][y] = 9;
-										}
-									} 
+									wallTileTypes[x][y] = 8;
 								}
 							}
 						}
-						if(wallTileTypes[x-1][y] == 1){
-							if(x < map.getWidth()-1){
-								if((wallTileTypes[x+1][y] == 0) || (wallTileTypes[x+1][y] > 11)){
-									wallTileTypes[x][y] = 3;
-								} else {
-									wallTileTypes[x][y] = 2;
-								}							
-							} 
-						}
-						if(wallTileTypes[x-1][y] == 2){
-							if(y < map.getHeight()-2){
-								if((wallTileTypes[x][y+2] == 0) || (wallTileTypes[x][y+2] > 11)){
-									if(x < map.getWidth()-1){
-										if((wallTileTypes[x+1][y] == 0) || (wallTileTypes[x+1][y] > 11)){
+						if(x < map.getWidth()-1){
+							if((wallTileTypes[x+1][y] == 0) || (wallTileTypes[x+1][y] > 11) ){
+								wallTileTypes[x][y] = 9;
+							}
+							if((wallTileTypes[x-1][y] == 1) || (wallTileTypes[x-1][y] == 2)){
+								if(y < map.getHeight() - 2){
+									if((wallTileTypes[x][y+2] == 0) || (wallTileTypes[x][y+2] > 11) ){
+										if((wallTileTypes[x+1][y] == 0) || (wallTileTypes[x+1][y] > 11) ){
 											wallTileTypes[x][y] = 3;
 										} else {
 											wallTileTypes[x][y] = 2;
-										}							
-									} 
-								} else {
-									wallTileTypes[x][y] = 8; 
+										}
+									}
 								}
 							}
 						}
-						if(wallTileTypes[x-1][y] == 5){
-							if(x < map.getWidth()-1){
-								if((wallTileTypes[x+1][y] == 0) || (wallTileTypes[x+1][y] > 11)){
-									wallTileTypes[x][y] = 6;
-								} else {
+						if((wallTileTypes[x-1][y] == 4) || (wallTileTypes[x-1][y] == 5) ){
+							if(y < map.getHeight() - 1){
+								if((wallTileTypes[x][y+1] == 0) || (wallTileTypes[x][y+1] > 11) ){
 									wallTileTypes[x][y] = 5;
-								}							
+								}
 							}
-						}
-						if(wallTileTypes[x-1][y] == 10){
 							if(x < map.getWidth()-1){
-								if((wallTileTypes[x+1][y] == 0) || (wallTileTypes[x+1][y] > 11)){
-									wallTileTypes[x][y] = 9;
-								} else {
-									wallTileTypes[x][y] = 8;
-								}							
-							}
-						}
-						if(wallTileTypes[x-1][y] == 11){
-							wallTileTypes[x][y] = 5; 
-						}
-						
-					}
-					if(((x > 0 )&&(y > 0)) && ((x < map.getWidth()-1) && (y < map.getHeight() - 1))){
-						if((wallTileTypes[x+1][y] != 0) && (wallTileTypes[x+1][y] <= 11)){
-							if((wallTileTypes[x-1][y] != 0) && (wallTileTypes[x-1][y] <= 11)){
-								if((wallTileTypes[x][y+1] != 0) && (wallTileTypes[x][y+1] <= 11)){
-									if((wallTileTypes[x][y-1] != 0) && (wallTileTypes[x][y-1] <= 11)){
-										if((wallTileTypes[x+1][y+1] <= 6) || (wallTileTypes[x+1][y+1] > 11)){
-											wallTileTypes[x][y] = 11; 
-										}
-										if((wallTileTypes[x-1][y+1] <= 6) || (wallTileTypes[x-1][y+1] > 11)){
-											wallTileTypes[x][y] = 10; 
-										}
-									}	
-								}	
+								if((wallTileTypes[x+1][y] == 0) || (wallTileTypes[x+1][y] > 11) ){
+									wallTileTypes[x][y] = 6;
+								}
 							}
 						}
 					}
@@ -210,15 +169,29 @@ public class Map {
 						} else if (wallTileTypes[x][y+1] == 2){
 							foregroundTileTypes[x][y] = 2;
 							if((x > 0) && (x < map.getWidth()-1)){
-								if(wallTileTypes[x-1][y] == 3){
-									wallTileTypes[x-1][y] = 2;
+								if(foregroundTileTypes[x-1][y] == 3){
+									foregroundTileTypes[x-1][y] = 2;
 								}
-								if(wallTileTypes[x+1][y] == 1){
-									wallTileTypes[x+1][y] = 2;
+								if(wallTileTypes[x-1][y] == 9){
+									wallTileTypes[x-1][y] = 8;
+								}
+								if(wallTileTypes[x+1][y] == 7){
+									wallTileTypes[x+1][y] = 8;
 								}
 							}
 						}  else if (wallTileTypes[x][y+1] == 3){
 							foregroundTileTypes[x][y] = 3;
+						}
+						if((x > 0) && (x < map.getWidth()-1)){
+							if(wallTileTypes[x][y+1] == 7){
+								if(foregroundTileTypes[x-1][y] != 0){
+									foregroundTileTypes[x][y] = 2;
+								} else {
+									foregroundTileTypes[x][y] = 1;
+								}
+							} else if(wallTileTypes[x][y+1] == 9){
+								foregroundTileTypes[x][y] = 3;
+							}
 						}
 					}
 				}
