@@ -106,7 +106,10 @@ public abstract class ButtonHandler {
 		case INVENTORY_UPGRADE:
 			inventoryUpgrade();
 			break;
-		case OTHER:
+		case SAVE_GAME:
+			saveGame();
+			break;
+		default:
 		}
 	}
 	
@@ -115,7 +118,12 @@ public abstract class ButtonHandler {
 	}
 	
 	private static void loadGame(){
-		ShootEmUp.addMenu(new LoadMenu(Art.mainMenuScreen));
+		//ShootEmUp.addMenu(new LoadMenu(Art.mainMenuScreen));
+		ShootEmUp.currentLevel = new Level("/Levels/Level" + ShootEmUp.save[0].level + ".png");
+		ShootEmUp.currentLevel.init();
+		ShootEmUp.currentLevel.createPlayer(ShootEmUp.save[0].player);
+		startGame();
+		
 	}
 	
 	private static void options(){
@@ -255,6 +263,9 @@ public abstract class ButtonHandler {
 		}
 	}
 	
+	private static void saveGame(){
+		ShootEmUp.saves[0] = new Save();
+	}
 	//Extra Methods
 	
 

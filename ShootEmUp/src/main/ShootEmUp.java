@@ -37,6 +37,8 @@ public class ShootEmUp {
 
 	public static Level currentLevel;
 	public static Stack<GuiMenu> menuStack = new Stack<GuiMenu>();
+	
+	public static Save[] saves;
 
 	public void run() {
 		try {
