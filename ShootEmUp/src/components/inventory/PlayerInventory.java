@@ -25,11 +25,6 @@ public class PlayerInventory extends BasicInventory {
 	private HashMap<TypePotion, Integer> potions;
 	private int maxPotions = 5;
 
-	protected Armour boots = null;
-	protected Armour legs = null;
-	protected Armour chest = null;
-	protected Armour helmet = null;
-
 	private PlayerAttack PA;
 	private BaseMovement BM;
 
@@ -95,26 +90,31 @@ public class PlayerInventory extends BasicInventory {
 
 	public void equipItem(int itemNo) {
 		InventoryItem item = inventory.get(itemNo);
+		InventoryItem equipped = null;
 		inventory.remove(itemNo);
 		if (item instanceof Armour) {
 			switch (((Armour) item).getType()) {
 			case BOOTS:
-				boots = (Armour) item;
+				equipped = PA.getBoots();
+				PA.setBoots((Armour) item);
 				break;
 			case LEGS:
-				legs = (Armour) item;
+				equipped = PA.getLegs();
+				PA.setLegs((Armour) item);
 				break;
 			case CHESTPLATE:
-				chest = (Armour) item;
+				equipped = PA.getChest();
+				PA.setChest((Armour) item);
 				break;
 			case HELMET:
-				helmet = (Armour) item;
+				equipped = PA.getHelmet();
+				PA.setHelmet((Armour) item);
 			}
 		} else {
-			Weapon equipped = PA.getWeapon();
+			equipped = PA.getWeapon();
 			PA.setWeapon((Weapon) item);
-			inventory.add(equipped);
 		}
+		inventory.add(equipped);
 	}
 
 	public void giveItem(TypePickup type, Subtype subtype) {
@@ -197,22 +197,6 @@ public class PlayerInventory extends BasicInventory {
 	public ArrayList<InventoryItem> getInventory() {
 		return inventory;
 	}
-
-	public Armour setBoots() {
-		return boots;
-	}
-
-	public Armour setLegs() {
-		return legs;
-	}
-
-	public Armour setChest() {
-		return chest;
-	}
-
-	public Armour setHelmet() {
-		return helmet;
-	}
 	
 	public int getLevelPoints(){
 		return levelPoints;
@@ -230,11 +214,23 @@ public class PlayerInventory extends BasicInventory {
 		return sum;
 	}
 	
+	public int getInventorySize(){
+		return inventorySize;
+	}
+	
 	public void addInventorySize(int addition){
 		inventorySize += addition;
 	}
 	
 	public void addMaxPotions(int addition){
 		maxPotions += addition;
+	}
+	
+	public HashMap<TypePotion, Integer> getPotions() {
+		return potions;
+	}
+
+	public int getMaxPotions() {
+		return maxPotions;
 	}
 }

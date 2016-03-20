@@ -1,5 +1,6 @@
   package components.attack;
 
+import object.Armour;
 import object.Entity;
 import object.Weapon;
 import object.WeaponBuilder;
@@ -13,6 +14,11 @@ public class PlayerAttack extends BaseAttack {
 	protected TypeAttack type;
 	
 	protected int lives;
+	
+	private Armour boots = null;
+	private Armour legs = null;
+	private Armour chest = null;
+	private Armour helmet = null;
 	
 	public PlayerAttack(TypeAttack type){
 		this.type = type;
@@ -102,4 +108,37 @@ public class PlayerAttack extends BaseAttack {
 	public TypeAttack getTypeAttack(){
 		return type;
 	}
+	
+	public Armour getBoots() {
+		return boots;
+	}
+
+	public Armour getLegs() {
+		return legs;
+	}
+
+	public Armour getChest() {
+		return chest;
+	}
+
+	public Armour getHelmet() {
+		return helmet;
+	}
+	
+	public void setBoots(Armour boots) {
+		this.boots = boots;
+	}
+
+	public void setChest(Armour chest) {
+		this.chest = chest;
+	}
+	
+	public void setLegs(Armour legs) {
+		this.legs = legs;
+	}
+	
+	public void setHelmet(Armour helmet) {
+		this.helmet = helmet;
+	}
+		
 }

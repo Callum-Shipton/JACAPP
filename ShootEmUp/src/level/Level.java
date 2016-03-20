@@ -16,6 +16,8 @@ import display.Art;
 
 public class Level {
 	
+	private int level;
+	
 	private Entity player;
 	private Hud hud;
 	
@@ -28,8 +30,9 @@ public class Level {
 	public Spawner spawner;
 	public Map map;
 	
-	public Level(String file) {
-		map = new Map(file);
+	public Level(String file, int level) {
+		this.level = level;
+		map = new Map(file + level + ".png");
 		eMap = new EntityMap(map.getWidth(), map.getHeight());
 		spawner = new Spawner();
 		entities = new HashSet<Entity>();
@@ -95,4 +98,13 @@ public class Level {
 	public Entity getPlayer() {
 		return player;
 	}
+	
+	public int getLevel() {
+		return level;
+	}
+
+	public Spawner getSpawner() {
+		return spawner;
+	}
+
 }
