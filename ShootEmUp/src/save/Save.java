@@ -8,11 +8,13 @@ import components.attack.TypeAttack;
 import components.attack.PlayerAttack;
 import components.inventory.PlayerInventory;
 import components.inventory.TypeArmour;
+import components.inventory.TypePickup;
 import components.inventory.TypePotion;
 import components.inventory.TypeWeapon;
 import main.ShootEmUp;
 import object.Armour;
 import object.InventoryItem;
+import object.Weapon;
 
 public class Save implements Serializable{
 
@@ -41,7 +43,8 @@ public class Save implements Serializable{
 	private int exp;
 	private int playerLevel;
 	
-	private ArrayList<InventoryItem> inventory;
+	private ArrayList<TypeWeapon> weapons = new ArrayList<TypeWeapon>();
+	private ArrayList<TypeArmour> armour = new ArrayList<TypeArmour>();;
 	private int inventorySize;
 
 	private HashMap<TypePotion, Integer> potions;
@@ -101,7 +104,14 @@ public class Save implements Serializable{
 		coins = tempInventory.getCoins();
 		exp = tempInventory.getExp();
 		playerLevel = tempInventory.getLevel();
-		inventory = tempInventory.getInventory();
+		ArrayList<InventoryItem> inventory = tempInventory.getInventory();
+		for(InventoryItem inventoryItem : inventory){
+			if(inventoryItem.getTypePickup() == TypePickup.WEAPON){
+				weapons.add(((Weapon)inventoryItem).getType());
+			} else {
+				armour.add(((Armour)inventoryItem).getType());
+			}
+		}
 		inventorySize = tempInventory.getInventorySize();
 		potions = tempInventory.getPotions();
 		maxPotions = tempInventory.getMaxPotions();
@@ -168,8 +178,12 @@ public class Save implements Serializable{
 		return wave;
 	}
 
-	public ArrayList<InventoryItem> getInventory() {
-		return inventory;
+	public ArrayList<TypeWeapon> getWeapons() {
+		return weapons;
+	}
+	
+	public ArrayList<TypeArmour> getArmour() {
+		return armour;
 	}
 
 	public int getInventorySize() {

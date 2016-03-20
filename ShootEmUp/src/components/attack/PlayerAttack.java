@@ -63,10 +63,18 @@ public class PlayerAttack extends BaseAttack {
 		health = save.getHealth();
 		mana = save.getMana();
 		weapon = WeaponBuilder.buildWeapon(save.getWeapon(), 0);
-		boots = ArmourBuilder.buildArmour(save.getBoots());
-		legs = ArmourBuilder.buildArmour(save.getLegs());
-		chest = ArmourBuilder.buildArmour(save.getChest());
-		helmet = ArmourBuilder.buildArmour(save.getHelmet());
+		if(save.getBoots() != null){
+			boots = ArmourBuilder.buildArmour(save.getBoots());
+		}
+		if(save.getBoots() != null){
+			legs = ArmourBuilder.buildArmour(save.getLegs());
+		}
+		if(save.getBoots() != null){
+			chest = ArmourBuilder.buildArmour(save.getChest());
+		}
+		if(save.getBoots() != null){
+			helmet = ArmourBuilder.buildArmour(save.getHelmet());
+		}
 		
 		maxHealth = save.getMaxHealth();
 		maxHealthRegen = save.getMaxHealthRegen();

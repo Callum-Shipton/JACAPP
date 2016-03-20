@@ -11,7 +11,6 @@ import object.WeaponBuilder;
 import save.Save;
 import components.attack.PlayerAttack;
 import components.movement.BaseMovement;
-import display.Art;
 
 import static components.inventory.TypePotion.*;
 
@@ -49,7 +48,12 @@ public class PlayerInventory extends BasicInventory {
 		this.PA = PA;
 		this.BM = BM;
 		this.expBound = expBound;
-		inventory = save.getInventory();
+		for(TypeWeapon typeWeapon : save.getWeapons()){
+			inventory.add(WeaponBuilder.buildWeapon(typeWeapon, 0));
+		}
+		for(TypeArmour typeArmour : save.getArmour()){
+			inventory.add(ArmourBuilder.buildArmour(typeArmour));
+		}
 		inventorySize = save.getInventorySize();
 		potions = save.getPotions();
 		maxPotions = save.getMaxPotions();

@@ -1,6 +1,7 @@
 package object;
 
 import components.inventory.TypeArmour;
+import components.inventory.TypePickup;
 import display.Image;
 
 public class Armour extends InventoryItem{
@@ -12,6 +13,7 @@ public class Armour extends InventoryItem{
 		this.type = type;
 		this.defence = defence;
 		this.inventoryImage = inventoryImage;
+		typePickup = TypePickup.ARMOUR;
 	}
 	
 	public int getDefence(){

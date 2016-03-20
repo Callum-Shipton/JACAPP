@@ -7,6 +7,7 @@ import components.collision.HitCollision;
 import components.control.LineControl;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
+import components.inventory.TypePickup;
 import components.inventory.TypeWeapon;
 import components.movement.FlyingMovement;
 import components.spawn.PointSpawn;
@@ -15,6 +16,7 @@ import display.Image;
 
 public class Weapon extends InventoryItem {
 
+	
 	private TypeWeapon type;
 	private int damage;
 	private int range;
@@ -34,6 +36,7 @@ public class Weapon extends InventoryItem {
 		this.team = team;
 		this.particleImage = particleImage;
 		this.inventoryImage = inventoryImage;
+		typePickup = TypePickup.WEAPON;
 	}
 	
 	public void attack(Entity e, int direction) {
