@@ -10,10 +10,9 @@ import object.InventoryItem;
 import main.ShootEmUp;
 import components.ComponentType;
 import components.inventory.PlayerInventory;
-import display.Art;
 import display.Image;
 
-public class InventoryMenu extends GuiMenu {
+public class InventoryMenu extends PauseMenu {
 	
 	private ArrayList<Button> itemButtons;
 	
@@ -25,12 +24,6 @@ public class InventoryMenu extends GuiMenu {
 
     public InventoryMenu(Image menuImage) {
         super(menuImage);
-        addButton(new Button(ButtonType.RESUME, Art.backButton, 30, 30));
-        addButton(new Button(ButtonType.MAIN_MENU, Art.exitButton, 30, 64));
-        addButton(new Button(ButtonType.MAGIC, Art.magicButton, 922, 102));
-        addButton(new Button(ButtonType.SKILLS, Art.skillButton, 922, 204));
-        addButton(new Button(ButtonType.MAP, Art.mapButton, 922, 306));
-        addButton(new Button(ButtonType.SAVE, Art.saveButton, 922, 408));
         itemButtons = new ArrayList<Button>();
         /*
         boots = addButton(new Button(null, 30, 30, 128,24));
