@@ -20,7 +20,7 @@ public class Art {
 	public static Image mainMenuScreen;
 	public static Image invScreen;
 	public static Image skillScreen;
-	public static Image magicScreen;
+	public static Image upgradesScreen;
 	public static Image mapScreen;
 	public static Image saveScreen;
 	public static Image gameOverScreen;
@@ -71,7 +71,7 @@ public class Art {
 	
 	public static Image invButton;
 	public static Image skillButton;
-	public static Image magicButton;
+	public static Image upgradesButton;
 	public static Image mapButton;
 	public static Image saveButton;
 	
@@ -253,7 +253,7 @@ public class Art {
 		mainMenuScreen = new Image("/Images/Menus/Backgrounds/MainMenuScreen.png", 1, 1);
 		invScreen = new Image("/Images/Menus/Backgrounds/InventoryScreen.png", 1, 1);
 		skillScreen = new Image("/Images/Menus/Backgrounds/SkillScreen.png", 1, 1);
-		magicScreen = new Image("/Images/Menus/Backgrounds/MagicScreen.png", 1, 1);
+		upgradesScreen = new Image("/Images/Menus/Backgrounds/UpgradesScreen.png", 1, 1);
 		mapScreen = new Image("/Images/Menus/Backgrounds/MapScreen.png", 1, 1);
 		saveScreen = new Image("/Images/Menus/Backgrounds/SaveScreen.png", 1, 1);
 		gameOverScreen = new Image("/Images/Menus/Backgrounds/GameOverScreen.png", 1, 1);
@@ -305,7 +305,7 @@ public class Art {
 		
 		invButton = new Image("/Images/Menus/Buttons/Tabs/InventoryButton.png",1,2);
 		skillButton = new Image("/Images/Menus/Buttons/Tabs/SkillButton.png",1,2);
-		magicButton = new Image("/Images/Menus/Buttons/Tabs/MagicButton.png",1,2);
+		upgradesButton = new Image("/Images/Menus/Buttons/Tabs/UpgradesButton.png",1,2);
 		mapButton = new Image("/Images/Menus/Buttons/Tabs/MapButton.png",1,2);
 		saveButton = new Image("/Images/Menus/Buttons/Tabs/SaveButton.png",1,2);
 		

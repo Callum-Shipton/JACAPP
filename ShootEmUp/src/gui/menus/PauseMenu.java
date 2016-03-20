@@ -12,7 +12,8 @@ public abstract class PauseMenu extends GuiMenu {
         addButton(new Button(ButtonType.MAIN_MENU, Art.exitButton, 30, 64));
         addButton(new Button(ButtonType.INVENTORY, Art.invButton, 922, 0));
         addButton(new Button(ButtonType.SKILLS, Art.skillButton, 922, 204));
-        addButton(new Button(ButtonType.MAGIC, Art.magicButton, 922, 102));
+        addButton(new Button(ButtonType.UPGRADES, Art.upgradesButton, 922, 102));
         addButton(new Button(ButtonType.MAP, Art.mapButton, 922, 306));
+        addButton(new Button(ButtonType.SAVE, Art.saveButton, 922, 408));
 	}
 }

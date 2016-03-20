@@ -8,7 +8,7 @@ import gui.menus.ControlsMenu;
 import gui.menus.InventoryMenu;
 import gui.menus.LevelSelectMenu;
 import gui.menus.LoadMenu;
-import gui.menus.MagicMenu;
+import gui.menus.UpgradesMenu;
 import gui.menus.MainMenu;
 import gui.menus.MapMenu;
 import gui.menus.OptionsMenu;
@@ -79,7 +79,7 @@ public abstract class ButtonHandler {
 		case INVENTORY:
 			inventory();
 			break;
-		case MAGIC:
+		case UPGRADES:
 			magic();
 			break;
 		case SKILLS:
@@ -190,7 +190,7 @@ public abstract class ButtonHandler {
 	}
 	
 	private static void magic(){
-		ShootEmUp.addMenu(new MagicMenu(Art.magicScreen));
+		ShootEmUp.addMenu(new UpgradesMenu(Art.upgradesScreen));
 	}
 	
 	private static void skills(){
