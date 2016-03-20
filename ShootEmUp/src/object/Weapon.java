@@ -13,7 +13,7 @@ import components.spawn.PointSpawn;
 import display.Art;
 import display.Image;
 
-public class Weapon extends InventoryItem{
+public class Weapon extends InventoryItem {
 
 	private TypeWeapon type;
 	private int damage;

@@ -1,4 +1,4 @@
-package Save;
+package save;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,11 +7,11 @@ import components.ComponentType;
 import components.attack.TypeAttack;
 import components.attack.PlayerAttack;
 import components.inventory.PlayerInventory;
+import components.inventory.TypeArmour;
 import components.inventory.TypePotion;
+import components.inventory.TypeWeapon;
 import main.ShootEmUp;
-import object.Armour;
 import object.InventoryItem;
-import object.Weapon;
 
 public class Save implements Serializable{
 
@@ -29,11 +29,11 @@ public class Save implements Serializable{
 	private int manaRegen;
 	private int maxManaRegen;
 	
-	private Weapon weapon;
-	private Armour helmet;
-	private Armour chest;
-	private Armour legs;
-	private Armour boots;
+	private TypeWeapon weapon;
+	private TypeArmour helmet;
+	private TypeArmour chest;
+	private TypeArmour legs;
+	private TypeArmour boots;
 	
 	
 	private int coins;
@@ -76,11 +76,11 @@ public class Save implements Serializable{
 		manaRegen = tempAttack.getManaRegen();
 		maxManaRegen = tempAttack.getMaxManaRegen();
 		
-		weapon = tempAttack.getWeapon();
-		boots = tempAttack.getBoots();
-		legs = tempAttack.getLegs();
-		chest = tempAttack.getChest();
-		helmet = tempAttack.getHelmet();
+		weapon = tempAttack.getWeapon().getType();
+		boots = tempAttack.getBoots().getType();
+		legs = tempAttack.getLegs().getType();
+		chest = tempAttack.getChest().getType();
+		helmet = tempAttack.getHelmet().getType();
 		
 		
 		PlayerInventory tempInventory = (PlayerInventory) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY);
@@ -163,23 +163,23 @@ public class Save implements Serializable{
 		return inventorySize;
 	}
 
-	public Weapon getWeapon() {
+	public TypeWeapon getWeapon() {
 		return weapon;
 	}
 
-	public Armour getHelmet() {
+	public TypeArmour getHelmet() {
 		return helmet;
 	}
 
-	public Armour getChest() {
+	public TypeArmour getChest() {
 		return chest;
 	}
 
-	public Armour getLegs() {
+	public TypeArmour getLegs() {
 		return legs;
 	}
 
-	public Armour getBoots() {
+	public TypeArmour getBoots() {
 		return boots;
 	}
 

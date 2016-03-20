@@ -3,11 +3,12 @@ package components.inventory;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import Save.Save;
 import object.Armour;
+import object.ArmourBuilder;
 import object.InventoryItem;
 import object.Weapon;
 import object.WeaponBuilder;
+import save.Save;
 import components.attack.PlayerAttack;
 import components.movement.BaseMovement;
 import display.Art;
@@ -165,19 +166,7 @@ public class PlayerInventory extends BasicInventory {
 		case ARMOUR:
 			if(inventory.size() < inventorySize){
 				TypeArmour armourType = (TypeArmour) subtype;
-				switch (armourType) {
-				case BOOTS:
-					inventory.add(new Armour(armourType, 2, Art.bootsButton));
-					break;
-				case LEGS:
-					inventory.add(new Armour(armourType, 5, Art.legsButton));
-					break;
-				case CHESTPLATE:
-					inventory.add(new Armour(armourType, 10, Art.chestButton));
-					break;
-				case HELMET:
-					inventory.add(new Armour(armourType, 7, Art.helmetButton));
-				}
+				inventory.add(ArmourBuilder.buildArmour(armourType));
 			}
 			break;
 		case WEAPON:

@@ -3,7 +3,6 @@ package gui;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
 
-import Save.Save;
 import gui.menus.CharacterSelectMenu;
 import gui.menus.ControlsMenu;
 import gui.menus.InventoryMenu;
@@ -19,6 +18,8 @@ import gui.menus.SoundMenu;
 import audio.music.BackgroundMusic;
 import level.Level;
 import main.ShootEmUp;
+import save.Save;
+import save.SaveHandler;
 import components.ComponentType;
 import components.attack.BaseAttack;
 import components.attack.PlayerAttack;
@@ -121,9 +122,12 @@ public abstract class ButtonHandler {
 	
 	private static void loadGame(){
 		//ShootEmUp.addMenu(new LoadMenu(Art.mainMenuScreen));
-		if(ShootEmUp.saves[0] != null){
-			Save save = ShootEmUp.saves[0];
-			ShootEmUp.currentLevel = new Level(Art.levels, ShootEmUp.saves[0].getLevel(), save.getWave());
+		
+		ShootEmUp.save = SaveHandler.load(1);
+		
+		if(ShootEmUp.save != null){
+			Save save = ShootEmUp.save;
+			ShootEmUp.currentLevel = new Level(Art.levels, ShootEmUp.save.getLevel(), save.getWave());
 			ShootEmUp.currentLevel.init();
 			ShootEmUp.currentLevel.createPlayer(save.getPlayer(), save);
 			startGame();
@@ -263,7 +267,8 @@ public abstract class ButtonHandler {
 	}
 	
 	private static void saveGame(){
-		ShootEmUp.saves[0] = new Save();
+		ShootEmUp.save = new Save();
+		SaveHandler.save(ShootEmUp.save, 1);
 	}
 	//Extra Methods
 	

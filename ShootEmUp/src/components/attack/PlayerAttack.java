@@ -1,12 +1,13 @@
   package components.attack;
 
 import object.Armour;
+import object.ArmourBuilder;
 import object.Entity;
 import object.Weapon;
 import object.WeaponBuilder;
+import save.Save;
 import main.ShootEmUp;
 import gui.menus.GameOverMenu;
-import Save.Save;
 import components.Message;
 import components.inventory.TypeWeapon;
 import display.Art;
@@ -61,11 +62,11 @@ public class PlayerAttack extends BaseAttack {
 		
 		health = save.getHealth();
 		mana = save.getMana();
-		weapon = save.getWeapon();
-		boots = save.getBoots();
-		legs = save.getLegs();
-		chest = save.getChest();
-		helmet = save.getHelmet();
+		weapon = WeaponBuilder.buildWeapon(save.getWeapon(), 0);
+		boots = ArmourBuilder.buildArmour(save.getBoots());
+		legs = ArmourBuilder.buildArmour(save.getLegs());
+		chest = ArmourBuilder.buildArmour(save.getChest());
+		helmet = ArmourBuilder.buildArmour(save.getHelmet());
 		
 		maxHealth = save.getMaxHealth();
 		maxHealthRegen = save.getMaxHealthRegen();

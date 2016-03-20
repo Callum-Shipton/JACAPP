@@ -13,10 +13,10 @@ import java.io.File;
 import java.util.Stack;
 
 import level.Level;
+import save.Save;
 
 import org.lwjgl.glfw.GLFW;
 
-import Save.Save;
 import display.Art;
 import display.Display;
 import audio.music.BackgroundMusic;
@@ -39,7 +39,7 @@ public class ShootEmUp {
 	public static Level currentLevel;
 	public static Stack<GuiMenu> menuStack = new Stack<GuiMenu>();
 	
-	public static Save[] saves;
+	public static Save save;
 
 	public void run() {
 		try {
@@ -65,8 +65,6 @@ public class ShootEmUp {
 		backgroundMusic.initAL();
 		
 		Controllers.create();
-		
-		saves = new Save[3];
 		
 		paused = true;
 		addMenu(new MainMenu(Art.mainMenuScreen));
