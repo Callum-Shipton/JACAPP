@@ -107,7 +107,7 @@ public class Spawner {
 		RigidCollision c = new RigidCollision(player);
 		player.addComponent(c);
 		BasicMovement m = new BasicMovement(player,c, g, 5);
-		PlayerInventory i = new PlayerInventory(a, m, save.getPlayerLevel(), save.getPlayerLevel() + 1);
+		PlayerInventory i = new PlayerInventory(a, m, save.getPlayerLevel(), save.getPlayerLevel() + 1, save);
 		player.addComponent(s);
 		player.addComponent(a);
 		player.addComponent(m);

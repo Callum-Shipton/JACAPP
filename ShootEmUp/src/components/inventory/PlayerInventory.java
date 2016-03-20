@@ -48,6 +48,7 @@ public class PlayerInventory extends BasicInventory {
 		this.PA = PA;
 		this.BM = BM;
 		this.expBound = expBound;
+		inventory = new ArrayList<InventoryItem>();
 		for(TypeWeapon typeWeapon : save.getWeapons()){
 			inventory.add(WeaponBuilder.buildWeapon(typeWeapon, 0));
 		}
