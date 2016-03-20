@@ -11,6 +11,7 @@ import components.inventory.TypeArmour;
 import components.inventory.TypePotion;
 import components.inventory.TypeWeapon;
 import main.ShootEmUp;
+import object.Armour;
 import object.InventoryItem;
 
 public class Save implements Serializable{
@@ -58,8 +59,6 @@ public class Save implements Serializable{
 	
 	private void getData(){
 		
-		
-		
 		PlayerAttack tempAttack = (PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK);
 		
 		player = tempAttack.getTypeAttack();
@@ -77,10 +76,24 @@ public class Save implements Serializable{
 		maxManaRegen = tempAttack.getMaxManaRegen();
 		
 		weapon = tempAttack.getWeapon().getType();
-		boots = tempAttack.getBoots().getType();
-		legs = tempAttack.getLegs().getType();
-		chest = tempAttack.getChest().getType();
-		helmet = tempAttack.getHelmet().getType();
+		
+		Armour tempArmour;
+		tempArmour = tempAttack.getBoots();
+		if(tempArmour != null){
+			boots = tempArmour.getType();
+		}
+		tempArmour = tempAttack.getLegs();
+		if(tempArmour != null){
+			legs = tempArmour.getType();
+		}
+		tempArmour = tempAttack.getChest();
+		if(tempArmour != null){
+			chest = tempArmour.getType();
+		}
+		tempArmour = tempAttack.getHelmet();
+		if(tempArmour != null){
+			helmet = tempArmour.getType();
+		}
 		
 		
 		PlayerInventory tempInventory = (PlayerInventory) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY);

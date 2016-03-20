@@ -14,8 +14,9 @@ public abstract class ArmourBuilder {
 			return new Armour(type, 10, Art.chestButton);
 		case HELMET:
 			return new Armour(type, 7, Art.helmetButton);
+		default:
+			System.out.println("no armour");
 		}
-		System.out.println("no armour");
 		return null;
 	}
 }
