@@ -98,4 +98,8 @@ public class PlayerAttack extends BaseAttack {
 	public void setLives(int lives) {
 		this.lives = lives;
 	}
+	
+	public TypeAttack getTypeAttack(){
+		return type;
+	}
 }

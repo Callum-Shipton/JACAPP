@@ -16,6 +16,7 @@ import level.Level;
 
 import org.lwjgl.glfw.GLFW;
 
+import Save.Save;
 import display.Art;
 import display.Display;
 import audio.music.BackgroundMusic;
@@ -64,6 +65,8 @@ public class ShootEmUp {
 		backgroundMusic.initAL();
 		
 		Controllers.create();
+		
+		saves = new Save[3];
 		
 		paused = true;
 		addMenu(new MainMenu(Art.mainMenuScreen));

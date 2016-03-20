@@ -111,7 +111,9 @@ public class PlayerInventory extends BasicInventory {
 				helmet = (Armour) item;
 			}
 		} else {
+			Weapon equipped = PA.getWeapon();
 			PA.setWeapon((Weapon) item);
+			inventory.add(equipped);
 		}
 	}
 

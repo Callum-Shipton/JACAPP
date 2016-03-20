@@ -133,8 +133,7 @@ public class Art {
 	public static Image numbers;
 	
 	//Level map file locations
-	public static String level1 = "/Levels/Level1.png";
-	public static String level2 = "/Levels/Level2.png";
+	public static String levels = "/Levels/Level";
 	
 	//Texture.....stuff
 	public static int ShaderBase;

@@ -2,6 +2,8 @@ package gui;
 
 import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
+
+import Save.Save;
 import gui.menus.CharacterSelectMenu;
 import gui.menus.ControlsMenu;
 import gui.menus.InventoryMenu;
@@ -41,10 +43,10 @@ public abstract class ButtonHandler {
 			exit();
 			break;
 		case LEVEL1:
-			level1();
+			level(1);
 			break;
 		case LEVEL2:
-			level2();
+			level(2);
 			break;
 		case WARRIOR:
 			warrior();
@@ -119,10 +121,12 @@ public abstract class ButtonHandler {
 	
 	private static void loadGame(){
 		//ShootEmUp.addMenu(new LoadMenu(Art.mainMenuScreen));
-		ShootEmUp.currentLevel = new Level("/Levels/Level" + ShootEmUp.save[0].level + ".png");
-		ShootEmUp.currentLevel.init();
-		ShootEmUp.currentLevel.createPlayer(ShootEmUp.save[0].player);
-		startGame();
+		if(ShootEmUp.saves[0] != null){
+			ShootEmUp.currentLevel = new Level("/Levels/Level" + ShootEmUp.saves[0].getLevel() + ".png");
+			ShootEmUp.currentLevel.init();
+			ShootEmUp.currentLevel.createPlayer(ShootEmUp.saves[0].getPlayer());
+			startGame();
+		}
 		
 	}
 	
@@ -134,14 +138,8 @@ public abstract class ButtonHandler {
 		glfwSetWindowShouldClose(ShootEmUp.display.getWindow(), GL_TRUE);
 	}
 	
-	private static void level1(){
-		ShootEmUp.currentLevel = new Level(Art.level1);
-		ShootEmUp.currentLevel.init();
-		ShootEmUp.addMenu(new CharacterSelectMenu(Art.mainMenuScreen));
-	}
-	
-	private static void level2(){
-		ShootEmUp.currentLevel = new Level(Art.level2);
+	private static void level(int level){
+		ShootEmUp.currentLevel = new Level(Art.levels + level + ".png");
 		ShootEmUp.currentLevel.init();
 		ShootEmUp.addMenu(new CharacterSelectMenu(Art.mainMenuScreen));
 	}
