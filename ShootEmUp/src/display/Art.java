@@ -36,6 +36,10 @@ public class Art {
 	public static Image controlsButton;
 	public static Image soundButton;
 	
+	public static Image muteButton;
+	
+	public static Image saveGameButton;
+	
 	public static Image level1Button;
 	public static Image level2Button;
 	
@@ -265,6 +269,10 @@ public class Art {
 		
 		controlsButton = new Image("/Images/Menus/Buttons/MenuButtons/ControlsButton.png",1,2);
 		soundButton = new Image("/Images/Menus/Buttons/MenuButtons/SoundButton.png",1,2);
+		
+		muteButton = new Image("/Images/Menus/Buttons/MenuButtons/MuteButton.png",1,2);
+		
+		saveGameButton = new Image("/Images/Menus/Buttons/MenuButtons/SaveGameButton.png",1,2);
 		
 		level1Button = new Image("/Images/Menus/Buttons/MenuButtons/Level1Button.png",1,2);
 		level2Button = new Image("/Images/Menus/Buttons/MenuButtons/Level2Button.png",1,2);
