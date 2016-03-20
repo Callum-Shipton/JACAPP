@@ -14,7 +14,7 @@ import object.InventoryItem;
 import object.Weapon;
 
 public class Save implements Serializable{
-	
+
 	private TypeAttack player;
 	
 	private int lives;
@@ -57,6 +57,9 @@ public class Save implements Serializable{
 	}
 	
 	private void getData(){
+		
+		
+		
 		PlayerAttack tempAttack = (PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK);
 		
 		player = tempAttack.getTypeAttack();
@@ -186,5 +189,9 @@ public class Save implements Serializable{
 
 	public int getMaxPotions() {
 		return maxPotions;
+	}
+	
+	public int getLives() {
+		return lives;
 	}
 }

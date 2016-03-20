@@ -122,9 +122,10 @@ public abstract class ButtonHandler {
 	private static void loadGame(){
 		//ShootEmUp.addMenu(new LoadMenu(Art.mainMenuScreen));
 		if(ShootEmUp.saves[0] != null){
-			ShootEmUp.currentLevel = new Level(Art.levels, ShootEmUp.saves[0].getLevel());
+			Save save = ShootEmUp.saves[0];
+			ShootEmUp.currentLevel = new Level(Art.levels, ShootEmUp.saves[0].getLevel(), save.getWave());
 			ShootEmUp.currentLevel.init();
-			ShootEmUp.currentLevel.createPlayer(ShootEmUp.saves[0].getPlayer());
+			ShootEmUp.currentLevel.createPlayer(save.getPlayer(), save);
 			startGame();
 		}
 		

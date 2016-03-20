@@ -3,6 +3,7 @@ package components.inventory;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import Save.Save;
 import object.Armour;
 import object.InventoryItem;
 import object.Weapon;
@@ -40,7 +41,22 @@ public class PlayerInventory extends BasicInventory {
 		for (TypePotion type : TypePotion.values()) {
 			potions.put(type, 0);
 		}
-
+	}
+	
+	public PlayerInventory(PlayerAttack PA, BaseMovement BM, int level, int expBound, Save save) {
+		super(level);
+		this.PA = PA;
+		this.BM = BM;
+		this.expBound = expBound;
+		inventory = save.getInventory();
+		inventorySize = save.getInventorySize();
+		potions = save.getPotions();
+		maxPotions = save.getMaxPotions();
+		exp = save.getExp();
+		coins = save.getCoins();
+		for (TypePotion type : TypePotion.values()) {
+			potions.put(type, 0);
+		}
 	}
 	
 	public void spendLevelPoints(int points){

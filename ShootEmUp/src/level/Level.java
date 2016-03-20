@@ -5,6 +5,7 @@ import gui.Hud;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import Save.Save;
 import object.Entity;
 import object.EntityMap;
 import main.ShootEmUp;
@@ -40,12 +41,28 @@ public class Level {
 		newEntities = new HashSet<Entity>();
 	}
 	
+	public Level(String file, int level, int wave) {
+		this.level = level;
+		map = new Map(file + level + ".png");
+		eMap = new EntityMap(map.getWidth(), map.getHeight());
+		spawner = new Spawner(wave);
+		entities = new HashSet<Entity>();
+		oldEntities = new HashSet<Entity>();
+		newEntities = new HashSet<Entity>();
+	}
+	
 	public void init(){
 		map.setTileTypes();
 	}
 	
 	public void createPlayer(TypeAttack type){
 		player = spawner.createPlayer(type);
+		entities.add(player);
+		hud = new Hud(player);
+	}
+	
+	public void createPlayer(TypeAttack type, Save save){
+		player = spawner.createPlayer(type, save);
 		entities.add(player);
 		hud = new Hud(player);
 	}

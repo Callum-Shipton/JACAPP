@@ -6,6 +6,7 @@ import object.Weapon;
 import object.WeaponBuilder;
 import main.ShootEmUp;
 import gui.menus.GameOverMenu;
+import Save.Save;
 import components.Message;
 import components.inventory.TypeWeapon;
 import display.Art;
@@ -48,6 +49,28 @@ public class PlayerAttack extends BaseAttack {
 		maxHealthRegen = healthRegen;
 		maxMana = mana;
 		maxManaRegen = manaRegen;
+	}
+	
+	public PlayerAttack(TypeAttack type, Save save){
+		this.type = type;
+		
+		healthRegen = 100;
+		manaRegen = 100;
+		lives = save.getLives();
+		
+		
+		health = save.getHealth();
+		mana = save.getMana();
+		weapon = save.getWeapon();
+		boots = save.getBoots();
+		legs = save.getLegs();
+		chest = save.getChest();
+		helmet = save.getHelmet();
+		
+		maxHealth = save.getMaxHealth();
+		maxHealthRegen = save.getMaxHealthRegen();
+		maxMana = save.getMaxMana();
+		maxManaRegen = save.getMaxManaRegen();
 	}
 	
 	public PlayerAttack(TypeAttack type, Weapon weapon, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana, int lives){

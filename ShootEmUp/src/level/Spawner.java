@@ -2,6 +2,7 @@ package level;
 
 import java.util.Random;
 
+import Save.Save;
 import object.Entity;
 import main.ShootEmUp;
 import math.Vector2;
@@ -52,6 +53,11 @@ public class Spawner {
 		rand = new Random();
 	}
 	
+	public Spawner(int wave){
+		this.wave = wave;
+		rand = new Random();
+	}
+	
 	public Entity createPlayer(TypeAttack type){
 		Entity player = new Entity();
 		PlayerGraphics g;
@@ -72,6 +78,36 @@ public class Spawner {
 		player.addComponent(c);
 		BasicMovement m = new BasicMovement(player,c, g, 5);
 		PlayerInventory i = new PlayerInventory(a, m, 0, 1);
+		player.addComponent(s);
+		player.addComponent(a);
+		player.addComponent(m);
+		player.addComponent(i);
+		player.addComponent(new PlayerControl(player, g, a, m, i));
+		
+		
+		return player;
+	}
+	
+	public Entity createPlayer(TypeAttack type, Save save){
+		Entity player = new Entity();
+		PlayerGraphics g;
+		if(type == TypeAttack.WARRIOR){
+			g = new PlayerGraphics(player, Art.warrior, Art.base);
+		} else if (type == TypeAttack.ARCHER){
+			g = new PlayerGraphics(player, Art.archer, Art.base);
+		} else {
+			g = new PlayerGraphics(player, Art.mage, Art.base);
+		}
+		PointSpawn s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
+		PlayerAttack a;
+		
+		a = new PlayerAttack(type, save);
+		
+		player.addComponent(g);
+		RigidCollision c = new RigidCollision(player);
+		player.addComponent(c);
+		BasicMovement m = new BasicMovement(player,c, g, 5);
+		PlayerInventory i = new PlayerInventory(a, m, save.getPlayerLevel(), save.getPlayerLevel() + 1);
 		player.addComponent(s);
 		player.addComponent(a);
 		player.addComponent(m);
