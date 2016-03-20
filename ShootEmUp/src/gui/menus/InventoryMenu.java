@@ -25,12 +25,12 @@ public class InventoryMenu extends GuiMenu {
 
     public InventoryMenu(Image menuImage) {
         super(menuImage);
-        addButton(new Button(ButtonType.RESUME, Art.backButton, 30, 30, 128,24));
-        addButton(new Button(ButtonType.MAIN_MENU, Art.exitButton, 30, 64, 128,24));
-        addButton(new Button(ButtonType.MAGIC, Art.magicButton, 922, 102, 101, 102));
-        addButton(new Button(ButtonType.SKILLS, Art.skillButton, 922, 204, 101, 102));
-        addButton(new Button(ButtonType.MAP, Art.mapButton, 922, 306, 101, 102));
-        addButton(new Button(ButtonType.SAVE, Art.saveButton, 922, 408, 101, 102));
+        addButton(new Button(ButtonType.RESUME, Art.backButton, 30, 30));
+        addButton(new Button(ButtonType.MAIN_MENU, Art.exitButton, 30, 64));
+        addButton(new Button(ButtonType.MAGIC, Art.magicButton, 922, 102));
+        addButton(new Button(ButtonType.SKILLS, Art.skillButton, 922, 204));
+        addButton(new Button(ButtonType.MAP, Art.mapButton, 922, 306));
+        addButton(new Button(ButtonType.SAVE, Art.saveButton, 922, 408));
         itemButtons = new ArrayList<Button>();
         /*
         boots = addButton(new Button(null, 30, 30, 128,24));
@@ -45,7 +45,7 @@ public class InventoryMenu extends GuiMenu {
         Iterator<InventoryItem> items = ((PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).getInventory().iterator();
 		while(items.hasNext()){
 			InventoryItem item = items.next();
-			itemButtons.add(addButton(new Button(ButtonType.OTHER, item.getInventoryImage(), x + (item.getInventoryImage().getWidth() * row), y + (item.getInventoryImage().getHeight() * column), item.getInventoryImage().getWidth(), item.getInventoryImage().getHeight() / 2)));
+			itemButtons.add(addButton(new Button(ButtonType.OTHER, item.getInventoryImage(), x + (item.getInventoryImage().getWidth() * row), y + (item.getInventoryImage().getHeight() * column))));
 			row++;
 			if(row > 10){
 				row = 0;

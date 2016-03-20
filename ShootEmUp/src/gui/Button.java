@@ -31,13 +31,13 @@ public class Button extends GuiComponent {
 	DoubleBuffer Bx = BufferUtils.createDoubleBuffer(1);
     DoubleBuffer By = BufferUtils.createDoubleBuffer(1);
 
-	public Button(ButtonType type, Image id, int x, int y, int w, int h) {
+	public Button(ButtonType type, Image id, int x, int y) {
 		this.type = type;
 		this.id = id;
 		this.x = x;
 		this.y = y;
-		this.w = w;
-		this.h = h;
+		this.w = id.getWidth();
+		this.h = id.getHeight() / 2;
 		window = ShootEmUp.display.getWindow();
 	}
 
