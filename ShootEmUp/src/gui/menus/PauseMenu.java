@@ -4,12 +4,13 @@ import display.Art;
 import display.Image;
 import gui.Button;
 import gui.ButtonType;
+import main.ShootEmUp;
 
 public abstract class PauseMenu extends GuiMenu {
 	public PauseMenu(Image MenuImage){
 		super(MenuImage);
-		addButton(new Button(ButtonType.RESUME, Art.backButton, 30, 30));
-        addButton(new Button(ButtonType.MAIN_MENU, Art.exitButton, 30, 64));
+		addButton(new Button(ButtonType.RESUME, Art.backButton, 30, ShootEmUp.height - 64));
+        addButton(new Button(ButtonType.MAIN_MENU, Art.exitButton, 30, ShootEmUp.height - 94));
         addButton(new Button(ButtonType.INVENTORY, Art.invButton, 922, 0));
         addButton(new Button(ButtonType.SKILLS, Art.skillButton, 922, 204));
         addButton(new Button(ButtonType.UPGRADES, Art.upgradesButton, 922, 102));
