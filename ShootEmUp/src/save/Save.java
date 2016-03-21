@@ -18,6 +18,8 @@ import object.Weapon;
 
 public class Save implements Serializable{
 
+	private static final long serialVersionUID = 7179389236763035983L;
+
 	private TypeAttack player;
 	
 	private int lives;
