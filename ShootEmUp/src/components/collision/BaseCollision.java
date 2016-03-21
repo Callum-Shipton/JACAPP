@@ -6,12 +6,12 @@ import object.Entity;
 import main.ShootEmUp;
 import math.Vector2;
 import components.Component;
-import components.ComponentType;
+import components.TypeComponent;
 import components.Message;
 
 public abstract class BaseCollision extends Component implements CollisionComponent{
 
-	protected ComponentType type = ComponentType.COLLISION;
+	protected TypeComponent type = TypeComponent.COLLISION;
 	
 	protected HashSet<Vector2> gridPos;
 	protected boolean moveBack;
@@ -23,7 +23,7 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 		ShootEmUp.currentLevel.oldEntities.add(e);
 	}
 	
-	public ComponentType getType() {
+	public TypeComponent getType() {
 		return type;
 	}
 	

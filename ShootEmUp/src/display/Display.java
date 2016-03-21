@@ -14,7 +14,7 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWvidmode;
 import org.lwjgl.opengl.GLContext;
 
-import components.ComponentType;
+import components.TypeComponent;
 import components.graphical.PlayerGraphics;
 
 public class Display {
@@ -162,7 +162,7 @@ public class Display {
 		Keyboard.keyCheck(window);
 		Art.initShaderUniforms();
 		Art.refreshRenderers();
-		if(ShootEmUp.currentLevel != null) ((PlayerGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).scrollScreen(null);
+		if(ShootEmUp.currentLevel != null) ((PlayerGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS)).scrollScreen(null);
 		fullscreen = !fullscreen;
 	}
 }

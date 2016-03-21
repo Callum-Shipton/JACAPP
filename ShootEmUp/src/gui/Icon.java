@@ -4,7 +4,7 @@ import math.Vector2;
 import display.DPDTRenderer;
 import display.Image;
 
-public class HudElement extends GuiComponent {
+public class Icon extends GuiComponent {
 	
 	protected Vector2 pos;
 	protected Vector2 size;
@@ -15,7 +15,7 @@ public class HudElement extends GuiComponent {
 
 	
 	
-	public HudElement(float x, float y, float w, float h, Image i, boolean animating){
+	public Icon(float x, float y, float w, float h, Image i, boolean animating){
 		pos = new Vector2(x,y);
 		size = new Vector2(w,h);
 		setCurrFrame(new Vector2(0.0f, 0.0f));

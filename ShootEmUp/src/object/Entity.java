@@ -3,18 +3,18 @@ package object;
 import java.util.HashMap;
 
 import components.Component;
-import components.ComponentType;
+import components.TypeComponent;
 import components.Message;
 
 public class Entity{
 	
-	private HashMap<ComponentType,Component> components;
+	private HashMap<TypeComponent,Component> components;
 
 	private boolean destroy;
 	// Constructors
 
 	public Entity() {
-		components = new HashMap<ComponentType, Component>();
+		components = new HashMap<TypeComponent, Component>();
 	}
 
 	public void update() {
@@ -35,11 +35,11 @@ public class Entity{
 		components.put(c.getType(), c);
 	}
 	
-	public Component getComponent(ComponentType type){
+	public Component getComponent(TypeComponent type){
 		return components.get(type);
 	}
 	
-	public HashMap<ComponentType, Component> getComponents(){
+	public HashMap<TypeComponent, Component> getComponents(){
 		return components;
 	}
 	

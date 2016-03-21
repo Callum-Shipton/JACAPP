@@ -3,7 +3,7 @@ package components.collision;
 import object.Entity;
 import object.Weapon;
 import main.ShootEmUp;
-import components.ComponentType;
+import components.TypeComponent;
 import components.Message;
 import components.attack.BaseAttack;
 
@@ -21,13 +21,13 @@ public class HitCollision extends BaseCollision{
 	@Override
 	public void collision(Entity e, Entity hit) {
 		
-		BaseAttack hitAttack = (BaseAttack) hit.getComponent(ComponentType.ATTACK);
+		BaseAttack hitAttack = (BaseAttack) hit.getComponent(TypeComponent.ATTACK);
 		if(hitAttack != null){
 			if(hitAttack.getWeapon().getTeam() == weapon.getTeam()){
 				return;
 			}
 		}
-		if(hit.getComponent(ComponentType.COLLISION) instanceof RigidCollision){
+		if(hit.getComponent(TypeComponent.COLLISION) instanceof RigidCollision){
 			e.destroy();
 			if(hitAttack != null) hitAttack.damage(weapon.getDamage(), hit); //needs updating to take weapon damage
 		}

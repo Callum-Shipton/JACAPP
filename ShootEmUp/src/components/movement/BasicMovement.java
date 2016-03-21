@@ -6,7 +6,7 @@ import object.Entity;
 import main.ShootEmUp;
 import math.Vector2;
 import math.Vector4;
-import components.ComponentType;
+import components.TypeComponent;
 import components.collision.BaseCollision;
 import components.collision.HitCollision;
 import components.graphical.BaseGraphics;
@@ -43,14 +43,14 @@ public class BasicMovement extends BaseMovement {
 				if (collVec != null) {
 					collide = true;
 					hit = character;
-					if (((BaseCollision) hit.getComponent(ComponentType.COLLISION)).getMoveBack() == true && !(BC instanceof HitCollision)) {
+					if (((BaseCollision) hit.getComponent(TypeComponent.COLLISION)).getMoveBack() == true && !(BC instanceof HitCollision)) {
 						moveBackY(e, moveVec, collVec);
 						newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
 					}
-					if ((e.getComponent(ComponentType.COLLISION) != null)) {
+					if ((e.getComponent(TypeComponent.COLLISION) != null)) {
 						BC.collision(e, hit);
 					}
-					BaseCollision EC = (BaseCollision) hit.getComponent(ComponentType.COLLISION);
+					BaseCollision EC = (BaseCollision) hit.getComponent(TypeComponent.COLLISION);
 					if (EC != null) {
 						EC.collision(hit, e);
 					}
@@ -76,15 +76,15 @@ public class BasicMovement extends BaseMovement {
 				if (collVec != null) {
 					collide = true;
 					hit = character;
-					if (((BaseCollision) hit.getComponent(ComponentType.COLLISION)).getMoveBack() == true && !(BC instanceof HitCollision)) {
+					if (((BaseCollision) hit.getComponent(TypeComponent.COLLISION)).getMoveBack() == true && !(BC instanceof HitCollision)) {
 						moveBackX(e, moveVec, collVec);
 						newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
 					}
-					if ((e.getComponent(ComponentType.COLLISION) != null)) {
+					if ((e.getComponent(TypeComponent.COLLISION) != null)) {
 						BC.collision(e, hit);
 					}
 					BaseCollision EC = (BaseCollision) hit
-							.getComponent(ComponentType.COLLISION);
+							.getComponent(TypeComponent.COLLISION);
 					if (EC != null) {
 						EC.collision(hit, e);
 					}
@@ -116,7 +116,7 @@ public class BasicMovement extends BaseMovement {
 
 	public Vector4 doesCollide(Entity moving, Entity checked) {
 		BaseGraphics CG = (BaseGraphics) checked
-				.getComponent(ComponentType.GRAPHICS);
+				.getComponent(TypeComponent.GRAPHICS);
 		float x = BG.getX();
 		float y = BG.getY();
 		float w = BG.getWidth();

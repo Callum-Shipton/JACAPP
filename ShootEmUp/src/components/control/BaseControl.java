@@ -2,11 +2,11 @@ package components.control;
 
 import object.Entity;
 import components.Component;
-import components.ComponentType;
+import components.TypeComponent;
 
 public abstract class BaseControl extends Component implements ControlComponent {
 	
-	protected ComponentType type = ComponentType.CONTROL;
+	protected TypeComponent type = TypeComponent.CONTROL;
 	
 	@Override
 	public abstract void update(Entity e);
@@ -15,7 +15,7 @@ public abstract class BaseControl extends Component implements ControlComponent 
 		
 	}
 	
-	public ComponentType getType() {
+	public TypeComponent getType() {
 		return type;
 	}
 }

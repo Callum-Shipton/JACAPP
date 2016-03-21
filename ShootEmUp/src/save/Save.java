@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import components.ComponentType;
+import components.TypeComponent;
 import components.attack.TypeAttack;
 import components.attack.PlayerAttack;
 import components.inventory.PlayerInventory;
@@ -64,7 +64,7 @@ public class Save implements Serializable{
 	
 	private void getData(){
 		
-		PlayerAttack tempAttack = (PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.ATTACK);
+		PlayerAttack tempAttack = (PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK);
 		
 		player = tempAttack.getTypeAttack();
 		
@@ -101,7 +101,7 @@ public class Save implements Serializable{
 		}
 		
 		
-		PlayerInventory tempInventory = (PlayerInventory) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY);
+		PlayerInventory tempInventory = (PlayerInventory) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY);
 		
 		coins = tempInventory.getCoins();
 		exp = tempInventory.getExp();

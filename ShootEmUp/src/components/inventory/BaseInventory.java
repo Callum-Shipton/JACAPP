@@ -4,12 +4,12 @@ import java.util.HashSet;
 
 import object.Entity;
 import components.Component;
-import components.ComponentType;
+import components.TypeComponent;
 import components.Message;
 
 public abstract class BaseInventory extends Component implements InventoryComponent {
 
-	protected ComponentType type = ComponentType.INVENTORY;
+	protected TypeComponent type = TypeComponent.INVENTORY;
 	
 	protected int level;
 	protected int exp;
@@ -48,7 +48,7 @@ public abstract class BaseInventory extends Component implements InventoryCompon
 		this.coins -= coins;
 	}
 	
-	public void setType(ComponentType type) {
+	public void setType(TypeComponent type) {
 		this.type = type;
 	}
 
@@ -61,7 +61,7 @@ public abstract class BaseInventory extends Component implements InventoryCompon
 	}
 
 	@Override
-	public ComponentType getType() {
+	public TypeComponent getType() {
 		return type;
 	}
 }

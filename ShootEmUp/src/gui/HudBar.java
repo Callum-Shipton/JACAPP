@@ -4,7 +4,7 @@ import math.Vector2;
 import display.DPDTRenderer;
 import display.Image;
 
-public class HudBar extends HudElement {
+public class HudBar extends Icon {
 	
 	private float value = 3;
 	private float maxValue = 3;

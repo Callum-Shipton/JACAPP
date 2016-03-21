@@ -2,13 +2,13 @@ package components.graphical;
 
 import object.Entity;
 import components.Component;
-import components.ComponentType;
+import components.TypeComponent;
 import display.Image;
 import display.Renderer;
 
 public abstract class BaseGraphics extends Component implements GraphicsComponent {
 
-	protected ComponentType type = ComponentType.GRAPHICS;
+	protected TypeComponent type = TypeComponent.GRAPHICS;
 	
 	protected Renderer r;
 	
@@ -68,7 +68,7 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 		this.height = height;
 	}
 	
-	public ComponentType getType(){
+	public TypeComponent getType(){
 		return type;
 	}
 

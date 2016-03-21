@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 import object.InventoryItem;
 import main.ShootEmUp;
-import components.ComponentType;
+import components.TypeComponent;
 import components.inventory.PlayerInventory;
 import display.Image;
 
@@ -35,7 +35,7 @@ public class InventoryMenu extends PauseMenu {
         x = 20;
         y = 100;
         
-        Iterator<InventoryItem> items = ((PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).getInventory().iterator();
+        Iterator<InventoryItem> items = ((PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY))).getInventory().iterator();
 		while(items.hasNext()){
 			InventoryItem item = items.next();
 			itemButtons.add(addButton(new Button(ButtonType.OTHER, item.getInventoryImage(), x + (item.getInventoryImage().getWidth() * row), y + (item.getInventoryImage().getHeight() * column))));
@@ -55,7 +55,7 @@ public class InventoryMenu extends PauseMenu {
 		while(Buttons.hasNext()){
 			itemButton = Buttons.next();
 			if(itemButton.hasClicked()){
-				((PlayerInventory)(ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY))).equipItem(position);
+				((PlayerInventory)(ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY))).equipItem(position);
 				itemButton.postAction();
 				removeButton(itemButton);
 				Buttons.remove();

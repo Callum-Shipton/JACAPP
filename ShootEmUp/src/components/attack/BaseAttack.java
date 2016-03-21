@@ -3,11 +3,11 @@ package components.attack;
 import object.Entity;
 import object.Weapon;
 import components.Component;
-import components.ComponentType;
+import components.TypeComponent;
 
 public abstract class BaseAttack extends Component implements AttackComponent {
 
-	protected ComponentType type = ComponentType.ATTACK;
+	protected TypeComponent type = TypeComponent.ATTACK;
 	
 	protected Weapon weapon;
 	protected int health;
@@ -138,7 +138,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		this.maxManaRegen = maxManaRegen;
 	}
 
-	public ComponentType getType() {
+	public TypeComponent getType() {
 		return type;
 	}
 

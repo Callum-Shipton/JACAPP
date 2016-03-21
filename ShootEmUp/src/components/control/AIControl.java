@@ -3,7 +3,7 @@ package components.control;
 import object.Entity;
 import main.ShootEmUp;
 import math.Vector2;
-import components.ComponentType;
+import components.TypeComponent;
 import components.Message;
 import components.attack.BaseAttack;
 import components.graphical.AnimatedGraphics;
@@ -29,8 +29,8 @@ public class AIControl extends BaseControl{
 	
 	public void update(Entity e) {		
 		target = ShootEmUp.currentLevel.getPlayer();
-		float y = ((BaseGraphics)target.getComponent(ComponentType.GRAPHICS)).getY();
-		float x = ((BaseGraphics)target.getComponent(ComponentType.GRAPHICS)).getX();
+		float y = ((BaseGraphics)target.getComponent(TypeComponent.GRAPHICS)).getY();
+		float x = ((BaseGraphics)target.getComponent(TypeComponent.GRAPHICS)).getX();
 		
 		if(target != null){
 			Vector2 movement = new Vector2(0.0f, 0.0f);

@@ -2,7 +2,7 @@ package object;
 
 import main.ShootEmUp;
 import math.Vector2;
-import components.ComponentType;
+import components.TypeComponent;
 import components.collision.HitCollision;
 import components.control.LineControl;
 import components.graphical.AnimatedGraphics;
@@ -40,7 +40,7 @@ public class Weapon extends InventoryItem {
 	}
 	
 	public void attack(Entity e, int direction) {
-			BaseGraphics BG = (BaseGraphics) e.getComponent(ComponentType.GRAPHICS);
+			BaseGraphics BG = (BaseGraphics) e.getComponent(TypeComponent.GRAPHICS);
 			float posX = BG.getX();
 			float posY = BG.getY();
 			//create particle

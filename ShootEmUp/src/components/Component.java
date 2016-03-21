@@ -4,7 +4,7 @@ import object.Entity;
 
 public abstract class Component {
 	
-	public abstract ComponentType getType();
+	public abstract TypeComponent getType();
 	
 	public abstract void update(Entity e);
 	

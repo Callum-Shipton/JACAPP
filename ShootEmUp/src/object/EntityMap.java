@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import math.Vector2;
-import components.ComponentType;
+import components.TypeComponent;
 import components.collision.RigidCollision;
 import components.graphical.BaseGraphics;
 
@@ -34,7 +34,7 @@ public class EntityMap {
 		HashSet<Entity> result = new HashSet<Entity>();
 		for(Vector2 gridPosi : gridPos){
 			for(Entity e : map.get((int)gridPosi.x()).get((int)gridPosi.y())){
-				if(e.getComponent(ComponentType.COLLISION) instanceof RigidCollision)result.add(e);
+				if(e.getComponent(TypeComponent.COLLISION) instanceof RigidCollision)result.add(e);
 			}
 		}
 		return result;
@@ -42,7 +42,7 @@ public class EntityMap {
 	
 	public HashSet<Vector2> getGridPos(Entity e){
 		HashSet<Vector2> gridPos = new HashSet<Vector2>();
-		BaseGraphics BG = (BaseGraphics) e.getComponent(ComponentType.GRAPHICS);
+		BaseGraphics BG = (BaseGraphics) e.getComponent(TypeComponent.GRAPHICS);
 		for(int i = (int) Math.floor((BG.getX()/32)/6); i <= Math.floor(((BG.getX()+BG.getWidth())/32)/6); i++){
 			for(int j = (int) Math.floor((BG.getY()/32)/6); j <= Math.floor(((BG.getY()+BG.getHeight())/32)/6); j++ ){
 				gridPos.add(new Vector2(i,j));

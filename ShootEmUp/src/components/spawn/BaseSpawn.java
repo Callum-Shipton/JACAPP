@@ -2,11 +2,11 @@ package components.spawn;
 
 import object.Entity;
 import components.Component;
-import components.ComponentType;
+import components.TypeComponent;
 
 public abstract class BaseSpawn extends Component implements SpawnComponent {
 	
-	protected ComponentType type = ComponentType.SPAWN;
+	protected TypeComponent type = TypeComponent.SPAWN;
 	
 	@Override
 	public abstract void spawn(Entity e);
@@ -15,7 +15,7 @@ public abstract class BaseSpawn extends Component implements SpawnComponent {
 		
 	}
 	
-	public ComponentType getType() {
+	public TypeComponent getType() {
 		return type;
 	}
 	

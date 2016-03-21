@@ -5,14 +5,14 @@ import main.ShootEmUp;
 import math.Vector2;
 import math.Vector4;
 import components.Component;
-import components.ComponentType;
+import components.TypeComponent;
 import components.Message;
 import components.collision.BaseCollision;
 import components.graphical.BaseGraphics;
 
 public abstract class BaseMovement extends Component implements MovementComponent {
 	
-	protected ComponentType type = ComponentType.MOVEMENT;
+	protected TypeComponent type = TypeComponent.MOVEMENT;
 	
 	protected int speed;
 	protected BaseCollision BC;
@@ -39,7 +39,7 @@ public abstract class BaseMovement extends Component implements MovementComponen
 		this.flat = flat;
 	}
 
-	public ComponentType getType() {
+	public TypeComponent getType() {
 		return type;
 	}
 	

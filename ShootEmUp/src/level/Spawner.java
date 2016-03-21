@@ -6,7 +6,7 @@ import object.Entity;
 import save.Save;
 import main.ShootEmUp;
 import math.Vector2;
-import components.ComponentType;
+import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.attack.EnemyAttack;
 import components.attack.PlayerAttack;
@@ -175,10 +175,10 @@ public class Spawner {
 		BaseCollision BC = new RigidCollision(test);
 		test.addComponent(BC);
 		test.addComponent(new BasicMovement(test, BC, BG, 5));
-		float px = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getX();
-		float py = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getY();
-		float pw = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getWidth();
-		float ph = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getHeight();
+		float px = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS)).getX();
+		float py = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS)).getY();
+		float pw = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS)).getWidth();
+		float ph = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS)).getHeight();
 		do {
 			collide = false;
 			
@@ -193,7 +193,7 @@ public class Spawner {
 			//changed to grid position;
 			
 			for (Entity character : ShootEmUp.currentLevel.entities) {
-				if ((((BaseMovement) test.getComponent(ComponentType.MOVEMENT)).doesCollide(test, character) != null)) {
+				if ((((BaseMovement) test.getComponent(TypeComponent.MOVEMENT)).doesCollide(test, character) != null)) {
 					collide = true;
 					break;
 				}
@@ -202,14 +202,14 @@ public class Spawner {
 	}
 	
 	public void checkSpawn(Entity e){
-		BasicMovement BM = (BasicMovement) e.getComponent(ComponentType.MOVEMENT);
+		BasicMovement BM = (BasicMovement) e.getComponent(TypeComponent.MOVEMENT);
 		ShootEmUp.currentLevel.newEntities.add(e);
 		BM.checkCollisionY(e, new Vector2(0,0));
 		BM.checkCollisionX(e, new Vector2(0,0));
 	}
 	
 	private void smallEnemy(){
-		enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base, false, ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX()); 
+		enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base, false, ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX()); 
 		enemyAttack = new EnemyAttack(TypeAttack.WARRIOR, 1);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
@@ -219,7 +219,7 @@ public class Spawner {
 	}
 	
 	private void largeEnemy(){
-		enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base, false, ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX()); 
+		enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base, false, ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX()); 
 		enemyAttack = new EnemyAttack(TypeAttack.ARCHER, 3);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
@@ -229,7 +229,7 @@ public class Spawner {
 	}
 	
 	private void flyingEnemy(){
-		enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base, false, ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX()); 
+		enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base, false, ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX()); 
 		enemyAttack = new EnemyAttack(TypeAttack.MAGE, 2);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);
@@ -239,7 +239,7 @@ public class Spawner {
 	}
 	
 	private void bossEnemy(){
-		enemyGraphics = new AnimatedGraphics(Art.bossEnemy, Art.base, false, ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(ComponentType.GRAPHICS)).getX()); 
+		enemyGraphics = new AnimatedGraphics(Art.bossEnemy, Art.base, false, ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX()); 
 		enemyAttack = new EnemyAttack(TypeAttack.MAGE, 1000);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision(newEnemy);

@@ -1,5 +1,5 @@
 package components;
 
-public enum ComponentType {
+public enum TypeComponent {
 	ATTACK,COLLISION,CONTROL,GRAPHICS,MOVEMENT,SPAWN,INVENTORY,COMPONENT
 }

@@ -5,7 +5,7 @@ import java.util.Random;
 import object.Entity;
 import main.ShootEmUp;
 import math.Vector2;
-import components.ComponentType;
+import components.TypeComponent;
 import components.collision.PickupCollision;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
@@ -29,7 +29,7 @@ public class EnemyInventory extends BasicInventory{
 	public void drop(Entity e) {
 		
 		//give player exp
-		((PlayerInventory)ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY)).giveExp(1);
+		((PlayerInventory)ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)).giveExp(1);
 	
 		
 		//create a coin

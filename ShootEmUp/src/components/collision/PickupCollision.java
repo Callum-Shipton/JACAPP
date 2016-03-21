@@ -2,7 +2,7 @@ package components.collision;
 
 import object.Entity;
 import main.ShootEmUp;
-import components.ComponentType;
+import components.TypeComponent;
 import components.Message;
 import components.control.PlayerControl;
 import components.inventory.PlayerInventory;
@@ -25,8 +25,8 @@ public class PickupCollision extends BaseCollision {
 	
 	@Override
 	public void collision(Entity e, Entity hit) {
-		if(hit.getComponent(ComponentType.CONTROL) instanceof PlayerControl){
-			((PlayerInventory)ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.INVENTORY)).giveItem(type, subtype);
+		if(hit.getComponent(TypeComponent.CONTROL) instanceof PlayerControl){
+			((PlayerInventory)ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)).giveItem(type, subtype);
 			ShootEmUp.currentLevel.eMap.removeEntity(gridPos, e);
 			ShootEmUp.currentLevel.oldEntities.add(e);
 			e.destroy();
