@@ -9,6 +9,6 @@ public class SaveMenu extends PauseMenu {
 	
     public SaveMenu(Image menuImage) {
         super(menuImage);
-        addButton(new Button(ButtonType.SAVE_GAME, Art.saveGameButton,30, 98));
+        addButton(new Button(ButtonType.SAVE_GAME, Art.saveGameButton,30, 30));
     }
 }
