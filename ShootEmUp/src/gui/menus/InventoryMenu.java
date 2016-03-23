@@ -33,7 +33,6 @@ public class InventoryMenu extends PauseMenu {
 
     public InventoryMenu(Image menuImage) {
         super(menuImage);
-        itemButtons = new ArrayList<Button>();
         
 	    if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getHelmet() != null){    
 	        Image helmetArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getHelmet().getInventoryImage();
@@ -55,9 +54,16 @@ public class InventoryMenu extends PauseMenu {
 	        Image weaponArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getWeapon().getInventoryImage();
 	        weapon = new Icon(800.0f, 190.0f, weaponArt.getWidth(), weaponArt.getHeight()/2, weaponArt, true);
 	    }
-        x = 30;
+        
+        itemButtons = new ArrayList<Button>();
+        addInventoryItems();
+    }
+
+    public void addInventoryItems(){
+    	x = 30;
         y = 30;
         
+    	itemButtons.clear();
         Iterator<InventoryItem> items = ((PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY))).getInventory().iterator();
 		while(items.hasNext()){
 			InventoryItem item = items.next();
@@ -69,7 +75,7 @@ public class InventoryMenu extends PauseMenu {
 			}
 		}
     }
-
+    
     public void render(){
     	super.render();
     	if(boots != null){
@@ -112,6 +118,7 @@ public class InventoryMenu extends PauseMenu {
     	
     	Iterator<Button> Buttons = itemButtons.iterator();
     	Button itemButton;
+    	boolean change = false;
     	int position = 0;
 		while(Buttons.hasNext()){
 			itemButton = Buttons.next();
@@ -120,10 +127,14 @@ public class InventoryMenu extends PauseMenu {
 				itemButton.postAction();
 				removeButton(itemButton);
 				Buttons.remove();
-				
+				change = true;
 			}
 
 			position++;
+		}
+		
+		if(change == true){
+			addInventoryItems();
 		}
     }
 }

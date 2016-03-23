@@ -217,7 +217,7 @@ class JInputController implements Controller {
 				Component button = event.getComponent();
 				int buttonIndex = buttons.indexOf(button);
 				buttonState[buttonIndex] = event.getValue() != 0;
-				System.out.println(buttonIndex);
+				//System.out.println(buttonIndex);
 				buttonMap(buttonIndex, buttonState[buttonIndex]);
 				// fire button pressed event
 				Controllers.addEvent(new ControllerEvent(this, event.getNanos(), ControllerEvent.BUTTON, buttonIndex,
@@ -233,7 +233,7 @@ class JInputController implements Controller {
 				povValues[povIndex] = event.getValue();
 				povMap(povIndex, povValues[povIndex]);
 
-				System.out.println(povIndex + ", value: " + povValues[povIndex]);
+				//System.out.println(povIndex + ", value: " + povValues[povIndex]);
 
 				if (prevX != getPovX()) {
 					Controllers.addEvent(
@@ -278,7 +278,7 @@ class JInputController implements Controller {
 				Controllers.addEvent(new ControllerEvent(this, event.getNanos(), ControllerEvent.AXIS, axisIndex, false,
 						axisIndex == xaxis, axisIndex == yaxis, xaxisValue, yaxisValue));
 				axesValue[axisIndex] = value;
-				System.out.println(axisIndex + ", value: " + axesValue[axisIndex]);
+				//System.out.println(axisIndex + ", value: " + axesValue[axisIndex]);
 				axisMap(axisIndex, value);
 			}
 		}
