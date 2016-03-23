@@ -2,6 +2,7 @@ package gui.menus;
 
 import gui.Button;
 import gui.ButtonType;
+import gui.Icon;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,11 +11,19 @@ import object.InventoryItem;
 import main.ShootEmUp;
 import components.TypeComponent;
 import components.inventory.PlayerInventory;
+import components.attack.PlayerAttack;
+import display.Art;
 import display.Image;
 
 public class InventoryMenu extends PauseMenu {
 	
 	private ArrayList<Button> itemButtons;
+	
+	private Icon boots;
+	private Icon legs;
+	private Icon chest;
+	private Icon helmet;
+	private Icon weapon;
 	
 	private int row = 0;
 	private int column = 0;
@@ -25,13 +34,27 @@ public class InventoryMenu extends PauseMenu {
     public InventoryMenu(Image menuImage) {
         super(menuImage);
         itemButtons = new ArrayList<Button>();
-        /*
-        boots = addButton(new Button(null, 30, 30, 128,24));
-        legs = addButton(new Button(null, 30, 30, 128,24));
-        chest = addButton(new Button(null, 30, 30, 128,24));
-        helmet = addButton(new Button(null, 30, 30, 128,24));
-        */
         
+        if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getBoots() != null){
+	        Image bootsArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getBoots().getInventoryImage();
+	        boots = new Icon(800.0f, 30.0f, bootsArt.getWidth(), bootsArt.getHeight()/2, bootsArt, true);
+        }
+        if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getLegs() != null){
+	        Image legsArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getLegs().getInventoryImage();
+	        legs = new Icon(800.0f, 60.0f, legsArt.getWidth(), legsArt.getHeight()/2, legsArt, true);
+        }
+	    if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getChest() != null){    
+	        Image chestArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getChest().getInventoryImage();
+	        chest = new Icon(800.0f, 90.0f, chestArt.getWidth(), chestArt.getHeight()/2, chestArt, true);
+	    }
+	    if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getHelmet() != null){    
+	        Image helmetArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getHelmet().getInventoryImage();
+	        helmet = new Icon(800.0f, 120.0f, helmetArt.getWidth(), helmetArt.getHeight()/2, helmetArt, true);
+	    }
+	    if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getWeapon() != null){   
+	        Image weaponArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getWeapon().getInventoryImage();
+	        weapon = new Icon(800.0f, 150.0f, weaponArt.getWidth(), weaponArt.getHeight()/2, weaponArt, true);
+	    }
         x = 20;
         y = 100;
         
@@ -47,6 +70,27 @@ public class InventoryMenu extends PauseMenu {
 		}
     }
 
+    public void render(){
+    	super.render();
+    	if(boots != null){
+    		boots.render(Art.stat);
+    	}
+    	if(legs != null){
+    		legs.render(Art.stat);
+    	}
+    	if(chest != null){
+    		chest.render(Art.stat);
+    	}
+    	if(helmet != null){
+    		helmet.render(Art.stat);
+    	}
+    	if(weapon != null){
+    		weapon.render(Art.stat);
+    	}
+   	}
+    
+    
+    
     public void update() {
     	super.update();
     	Iterator<Button> Buttons = itemButtons.iterator();

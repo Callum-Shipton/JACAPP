@@ -251,17 +251,17 @@ public abstract class ButtonHandler {
 	
 	private static void inventoryUpgrade(){
 		PlayerInventory PI = (PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY));
-		if(PI.getCoins() > 10){
+		if(PI.getCoins() > 5){
 			PI.addInventorySize(5);
-			PI.spendCoins(10);
+			PI.spendCoins(5);
 		}
 	}
 	
 	private static void potionsUpgrade(){
 		PlayerInventory PI = (PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY));
-		if(PI.getCoins() > 10){
+		if(PI.getCoins() > 5){
 			PI.addMaxPotions(5);
-			PI.spendCoins(10);
+			PI.spendCoins(5);
 		}
 	}
 	
