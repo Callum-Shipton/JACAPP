@@ -34,7 +34,20 @@ public class InventoryMenu extends PauseMenu {
     public InventoryMenu(Image menuImage) {
         super(menuImage);
         
-	    if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getHelmet() != null){    
+        addButtons();
+    }
+
+    public void addButtons(){
+    	
+    	addButton(new Button(ButtonType.RESUME, Art.backButton, 30, ShootEmUp.height - 64));
+        addButton(new Button(ButtonType.MAIN_MENU, Art.exitButton, 30, ShootEmUp.height - 94));
+        addButton(new Button(ButtonType.INVENTORY, Art.invButton, 922, 0));
+        addButton(new Button(ButtonType.SKILLS, Art.skillButton, 922, 204));
+        addButton(new Button(ButtonType.UPGRADES, Art.upgradesButton, 922, 102));
+        addButton(new Button(ButtonType.MAP, Art.mapButton, 922, 306));
+        addButton(new Button(ButtonType.SAVE, Art.saveButton, 922, 408));
+    	
+    	if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getHelmet() != null){    
 	        Image helmetArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getHelmet().getInventoryImage();
 	        helmet = new Icon(800.0f, 30.0f, helmetArt.getWidth(), helmetArt.getHeight()/2, helmetArt, true);
 	    }
@@ -56,10 +69,7 @@ public class InventoryMenu extends PauseMenu {
 	    }
         
         itemButtons = new ArrayList<Button>();
-        addInventoryItems();
-    }
-
-    public void addInventoryItems(){
+    	
         row = 0;
         column = 0;
         
@@ -134,7 +144,8 @@ public class InventoryMenu extends PauseMenu {
 		}
 		
 		if(change == true){
-			addInventoryItems();
+			buttons.clear();
+			addButtons();
 		}
     }
 }
