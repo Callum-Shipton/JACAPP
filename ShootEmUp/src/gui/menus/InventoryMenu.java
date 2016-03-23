@@ -92,7 +92,24 @@ public class InventoryMenu extends PauseMenu {
     
     
     public void update() {
-    	super.update();
+    	super.update();  	
+    	
+    	if(boots != null){
+    		boots.setI(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getBoots().getInventoryImage());
+    	}
+    	if(legs != null){
+    		legs.setI(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getLegs().getInventoryImage());
+    	}
+    	if(chest != null){
+    		chest.setI(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getChest().getInventoryImage());
+    	}
+    	if(helmet != null){
+    		helmet.setI(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getHelmet().getInventoryImage());
+    	}
+    	if(weapon != null){
+    		weapon.setI(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getWeapon().getInventoryImage());
+    	}
+    	
     	Iterator<Button> Buttons = itemButtons.iterator();
     	Button itemButton;
     	int position = 0;

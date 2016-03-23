@@ -58,4 +58,8 @@ public class Icon extends GuiComponent {
 	public void setCurrFrame(Vector2 currFrame) {
 		this.currFrame = currFrame;
 	}
+	
+	public void setI(Image i) {
+		this.i = i;
+	}
 }
