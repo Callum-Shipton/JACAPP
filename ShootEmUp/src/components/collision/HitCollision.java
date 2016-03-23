@@ -1,9 +1,13 @@
 package components.collision;
 
+import object.Element;
 import object.Entity;
 import object.Weapon;
 import main.ShootEmUp;
 import components.TypeComponent;
+
+import java.util.Random;
+
 import components.Message;
 import components.attack.BaseAttack;
 
@@ -29,7 +33,30 @@ public class HitCollision extends BaseCollision{
 		}
 		if(hit.getComponent(TypeComponent.COLLISION) instanceof RigidCollision){
 			e.destroy();
-			if(hitAttack != null) hitAttack.damage(weapon.getDamage(), hit); //needs updating to take weapon damage
+			if(hitAttack != null){
+				hitAttack.damage(weapon.getDamage(), hit);
+				if(weapon.getElement() == Element.FIRE){
+					Random rand = new Random();
+					int prob = rand.nextInt(3);
+					if(prob == 0){
+						hitAttack.setFire(true);
+					}
+				}
+				if(weapon.getElement() == Element.FROST){
+					Random rand = new Random();
+					int prob = rand.nextInt(3);
+					if(prob == 0){
+						
+					}
+				}
+				if(weapon.getElement() == Element.EARTH){
+					Random rand = new Random();
+					int prob = rand.nextInt(3);
+					if(prob == 0){
+						hitAttack.setPoison(true);
+					}
+				}
+			}	
 		}
 		/*
 		if (hit != null && getTeam() != hit.getTeam()) {

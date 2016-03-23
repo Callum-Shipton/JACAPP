@@ -460,10 +460,10 @@ class JInputController implements Controller {
 
 				break;
 			case 4: // LB
-
+				Keyboard.setKey(GLFW.GLFW_KEY_LEFT_SHIFT, value);
 				break;
 			case 5: // RB
-
+				Keyboard.setKey(GLFW.GLFW_KEY_TAB, value);
 				break;
 			case 6: // Back
 				Keyboard.setKey(GLFW.GLFW_KEY_F, value);

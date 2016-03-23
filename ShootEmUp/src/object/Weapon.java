@@ -24,15 +24,17 @@ public class Weapon extends InventoryItem {
 	private boolean melee;
 	private int manaCost;
 	private int team;
-    private Image particleImage;	
+    private Image particleImage;
+    private Element element;
     
-	public Weapon(TypeWeapon type, int damage, int range, int fireRate, boolean melee, int manaCost, int team, Image particleImage, Image inventoryImage) {
+	public Weapon(TypeWeapon type, int damage, int range, int fireRate, boolean melee, int manaCost, Element element, int team, Image particleImage, Image inventoryImage) {
 		this.type = type;
 		this.damage = damage;
 		this.range = range;
 		this.fireRate = fireRate;
 		this.melee = melee;
 		this.manaCost = manaCost;
+		this.element = element;
 		this.team = team;
 		this.particleImage = particleImage;
 		this.inventoryImage = inventoryImage;
@@ -139,4 +141,9 @@ public class Weapon extends InventoryItem {
 	public Image getParticleImage(){
 		return particleImage;
 	}
+	
+	public Element getElement() {
+		return element;
+	}
+
 }

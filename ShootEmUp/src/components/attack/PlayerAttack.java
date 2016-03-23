@@ -105,7 +105,7 @@ public class PlayerAttack extends BaseAttack {
 	
 	@Override
 	public void damage(int damage, Entity e) {
-		this.health -= damage;
+		super.damage(damage, e);
 		if(health <= 0) {
 			health = maxHealth;
 			mana = maxMana;

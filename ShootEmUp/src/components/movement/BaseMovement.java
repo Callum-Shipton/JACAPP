@@ -18,6 +18,8 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	protected BaseCollision BC;
 	protected boolean flat;
 	
+	private boolean frost = false;
+	
 	@Override
 	public abstract void move(Entity e, Vector2 moveVec);
 	
