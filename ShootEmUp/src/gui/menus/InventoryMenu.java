@@ -35,33 +35,33 @@ public class InventoryMenu extends PauseMenu {
         super(menuImage);
         itemButtons = new ArrayList<Button>();
         
-        if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getBoots() != null){
-	        Image bootsArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getBoots().getInventoryImage();
-	        boots = new Icon(800.0f, 30.0f, bootsArt.getWidth(), bootsArt.getHeight()/2, bootsArt, true);
-        }
-        if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getLegs() != null){
-	        Image legsArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getLegs().getInventoryImage();
-	        legs = new Icon(800.0f, 60.0f, legsArt.getWidth(), legsArt.getHeight()/2, legsArt, true);
-        }
-	    if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getChest() != null){    
-	        Image chestArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getChest().getInventoryImage();
-	        chest = new Icon(800.0f, 90.0f, chestArt.getWidth(), chestArt.getHeight()/2, chestArt, true);
-	    }
 	    if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getHelmet() != null){    
 	        Image helmetArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getHelmet().getInventoryImage();
-	        helmet = new Icon(800.0f, 120.0f, helmetArt.getWidth(), helmetArt.getHeight()/2, helmetArt, true);
+	        helmet = new Icon(800.0f, 30.0f, helmetArt.getWidth(), helmetArt.getHeight()/2, helmetArt, true);
 	    }
+	    if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getChest() != null){    
+	        Image chestArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getChest().getInventoryImage();
+	        chest = new Icon(800.0f, 70.0f, chestArt.getWidth(), chestArt.getHeight()/2, chestArt, true);
+	    }
+	    if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getLegs() != null){
+	        Image legsArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getLegs().getInventoryImage();
+	        legs = new Icon(800.0f, 110.0f, legsArt.getWidth(), legsArt.getHeight()/2, legsArt, true);
+        }
+	    if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getBoots() != null){
+	        Image bootsArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getBoots().getInventoryImage();
+	        boots = new Icon(800.0f, 150.0f, bootsArt.getWidth(), bootsArt.getHeight()/2, bootsArt, true);
+        }
 	    if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getWeapon() != null){   
 	        Image weaponArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getWeapon().getInventoryImage();
-	        weapon = new Icon(800.0f, 150.0f, weaponArt.getWidth(), weaponArt.getHeight()/2, weaponArt, true);
+	        weapon = new Icon(800.0f, 190.0f, weaponArt.getWidth(), weaponArt.getHeight()/2, weaponArt, true);
 	    }
-        x = 20;
-        y = 100;
+        x = 30;
+        y = 30;
         
         Iterator<InventoryItem> items = ((PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY))).getInventory().iterator();
 		while(items.hasNext()){
 			InventoryItem item = items.next();
-			itemButtons.add(addButton(new Button(ButtonType.OTHER, item.getInventoryImage(), x + (item.getInventoryImage().getWidth() * row), y + (item.getInventoryImage().getHeight() * column))));
+			itemButtons.add(addButton(new Button(ButtonType.OTHER, item.getInventoryImage(), x + ((item.getInventoryImage().getWidth() * row)), y + (((item.getInventoryImage().getHeight()/2) * column)))));
 			row++;
 			if(row > 10){
 				row = 0;

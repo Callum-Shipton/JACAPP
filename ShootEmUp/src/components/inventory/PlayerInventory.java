@@ -136,7 +136,9 @@ public class PlayerInventory extends BasicInventory {
 			equipped = PA.getWeapon();
 			PA.setWeapon((Weapon) item);
 		}
-		inventory.add(equipped);
+		if(equipped != null){
+			inventory.add(equipped);
+		}
 	}
 
 	public void giveItem(TypePickup type, Subtype subtype) {
