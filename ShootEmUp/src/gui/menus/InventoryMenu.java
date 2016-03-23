@@ -28,8 +28,8 @@ public class InventoryMenu extends PauseMenu {
 	private int row = 0;
 	private int column = 0;
 	
-	private int x;
-	private int y;
+	private final int inventoryX = 30;
+	private final int inventoryY = 30;
 
     public InventoryMenu(Image menuImage) {
         super(menuImage);
@@ -60,14 +60,14 @@ public class InventoryMenu extends PauseMenu {
     }
 
     public void addInventoryItems(){
-    	x = 30;
-        y = 30;
+        row = 0;
+        column = 0;
         
     	itemButtons.clear();
         Iterator<InventoryItem> items = ((PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY))).getInventory().iterator();
 		while(items.hasNext()){
 			InventoryItem item = items.next();
-			itemButtons.add(addButton(new Button(ButtonType.OTHER, item.getInventoryImage(), x + ((item.getInventoryImage().getWidth() * row)), y + (((item.getInventoryImage().getHeight()/2) * column)))));
+			itemButtons.add(addButton(new Button(ButtonType.OTHER, item.getInventoryImage(), inventoryX + ((item.getInventoryImage().getWidth() * row)), inventoryY + (((item.getInventoryImage().getHeight()/2) * column)))));
 			row++;
 			if(row > 10){
 				row = 0;
