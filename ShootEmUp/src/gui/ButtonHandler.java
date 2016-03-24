@@ -287,7 +287,10 @@ public abstract class ButtonHandler {
 	}
 	
 	private static void saveGame(){
-		ShootEmUp.save = new Save();
+		if(ShootEmUp.save == null){
+			ShootEmUp.save = new Save();
+		}
+		ShootEmUp.save.saveCharacter();
 		SaveHandler.save(ShootEmUp.save, 1);
 		ShootEmUp.save = null;
 	}
