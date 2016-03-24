@@ -5,12 +5,12 @@ import java.util.HashMap;
 
 import object.Armour;
 import object.ArmourBuilder;
+import object.Entity;
 import object.InventoryItem;
 import object.Weapon;
 import object.WeaponBuilder;
 import save.CharacterSave;
 import components.attack.PlayerAttack;
-import components.movement.BaseMovement;
 
 import static components.inventory.TypePotion.*;
 
@@ -27,23 +27,18 @@ public class PlayerInventory extends BasicInventory {
 	private int maxPotions = 5;
 
 	private PlayerAttack PA;
-	private BaseMovement BM;
 
-	private boolean speedOn;
-
-	public PlayerInventory(PlayerAttack PA, BaseMovement BM, int level, int expBound) {
+	public PlayerInventory(PlayerAttack PA, int level, int expBound) {
 		super(level);
 		this.PA = PA;
-		this.BM = BM;
 		this.expBound = expBound;
 		inventory = new ArrayList<InventoryItem>();
 		potions = new HashMap<TypePotion,Potion>();
 	}
 	
-	public PlayerInventory(PlayerAttack PA, BaseMovement BM, int level, int expBound, CharacterSave save) {
+	public PlayerInventory(PlayerAttack PA, int level, int expBound, CharacterSave save) {
 		super(level);
 		this.PA = PA;
-		this.BM = BM;
 		this.expBound = expBound;
 		inventory = new ArrayList<InventoryItem>();
 		for(TypeWeapon typeWeapon : save.getWeapons()){
@@ -57,6 +52,14 @@ public class PlayerInventory extends BasicInventory {
 		maxPotions = save.getMaxPotions();
 		exp = save.getExp();
 		coins = save.getCoins();
+	}
+	
+	@Override
+	public void update(Entity e){
+		super.update(e);
+		for(TypePotion type: potions.keySet()){
+			potions.get(type).update(e);
+		}
 	}
 	
 	public void spendLevelPoints(int points){
@@ -171,12 +174,15 @@ public class PlayerInventory extends BasicInventory {
 	}
 	
 	public int getNumPotion(TypePotion type){
+		if(potions.containsKey(type)){
 		return potions.get(type).quantity;
+		}
+		return 0;
 	}
 	
 	public int getNumPotions(){
 		int sum = 0;
-		for(TypePotion type: TypePotion.values()){
+		for(TypePotion type: potions.keySet()){
 			sum += getNumPotion(type);
 		}
 		return sum;

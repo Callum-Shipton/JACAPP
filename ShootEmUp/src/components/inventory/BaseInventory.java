@@ -14,7 +14,7 @@ public abstract class BaseInventory extends Component implements InventoryCompon
 	protected int level;
 	protected int exp;
 	protected int coins;
-	public HashSet<Entity> equiped;
+	public HashSet<Entity> equipped;
 	
 	public void destroy(Entity e){
 		

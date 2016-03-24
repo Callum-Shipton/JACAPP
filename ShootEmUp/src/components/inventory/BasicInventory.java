@@ -11,12 +11,11 @@ public class BasicInventory extends BaseInventory{
 		exp = 0;
 		coins = 0;
 		
-		equiped = new HashSet<Entity>();
+		equipped = new HashSet<Entity>();
 	}
 	
 	@Override
 	public void update(Entity e) {
-		// TODO Auto-generated method stub
 		
 	}
 

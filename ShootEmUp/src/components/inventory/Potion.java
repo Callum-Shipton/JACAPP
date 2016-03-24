@@ -6,7 +6,7 @@ public abstract class Potion {
 
 	protected TypePotion type;
 	
-	protected int quantity = 0;
+	protected int quantity = 1;
 	
 	protected boolean active = false;
 	
