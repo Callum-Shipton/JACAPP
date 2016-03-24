@@ -1,8 +1,12 @@
 package components.inventory;
 
+import java.io.Serializable;
+
 import object.Entity;
 
-public abstract class Potion {
+public abstract class Potion implements Serializable {
+
+	private static final long serialVersionUID = -3226423799063342754L;
 
 	protected TypePotion type;
 	

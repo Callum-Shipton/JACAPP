@@ -7,6 +7,8 @@ import object.Entity;
 
 public class DurationPotion extends Potion {
 
+	private static final long serialVersionUID = 1435723715378911832L;
+	
 	private int duration;
 	private int maxDuration;
 	
