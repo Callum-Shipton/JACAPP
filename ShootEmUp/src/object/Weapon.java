@@ -5,6 +5,7 @@ import math.Vector2;
 import components.TypeComponent;
 import components.collision.HitCollision;
 import components.control.LineControl;
+import components.control.RangeControl;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.inventory.TypePickup;
@@ -81,7 +82,7 @@ public class Weapon extends InventoryItem {
 			particle.addComponent(s);
 			particle.addComponent(c);
 			particle.addComponent(m);
-			particle.addComponent(new LineControl(g, m));
+			particle.addComponent(new RangeControl(g, m, this.range));
 			
 			ShootEmUp.currentLevel.spawner.checkSpawn(particle);
 	}
