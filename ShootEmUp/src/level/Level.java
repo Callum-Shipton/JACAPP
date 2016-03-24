@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 import object.Entity;
 import object.EntityMap;
-import save.Save;
+import save.CharacterSave;
 import main.ShootEmUp;
 import components.TypeComponent;
 import components.attack.TypeAttack;
@@ -61,7 +61,7 @@ public class Level {
 		hud = new Hud(player);
 	}
 	
-	public void createPlayer(TypeAttack type, Save save){
+	public void createPlayer(TypeAttack type, CharacterSave save){
 		player = spawner.createPlayer(type, save);
 		entities.add(player);
 		hud = new Hud(player);

@@ -3,7 +3,7 @@ package level;
 import java.util.Random;
 
 import object.Entity;
-import save.Save;
+import save.CharacterSave;
 import main.ShootEmUp;
 import math.Vector2;
 import components.TypeComponent;
@@ -68,7 +68,7 @@ public class Spawner {
 		return player;
 	}
 	
-	public Entity createPlayer(TypeAttack type, Save save){
+	public Entity createPlayer(TypeAttack type, CharacterSave save){
 		Entity player = new Entity();
 		PlayerGraphics g;
 		if(type == TypeAttack.WARRIOR){

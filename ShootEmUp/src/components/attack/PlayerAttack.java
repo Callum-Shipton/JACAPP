@@ -5,7 +5,7 @@ import object.ArmourBuilder;
 import object.Entity;
 import object.Weapon;
 import object.WeaponBuilder;
-import save.Save;
+import save.CharacterSave;
 import main.ShootEmUp;
 import gui.menus.GameOverMenu;
 import components.Message;
@@ -52,7 +52,7 @@ public class PlayerAttack extends BaseAttack {
 		maxManaRegen = manaRegen;
 	}
 	
-	public PlayerAttack(TypeAttack type, Save save){
+	public PlayerAttack(TypeAttack type, CharacterSave save){
 		this.type = type;
 		
 		healthRegen = 100;

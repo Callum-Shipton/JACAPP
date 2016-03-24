@@ -4,7 +4,6 @@ import main.ShootEmUp;
 import math.Vector2;
 import components.TypeComponent;
 import components.collision.HitCollision;
-import components.control.LineControl;
 import components.control.RangeControl;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;

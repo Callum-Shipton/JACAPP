@@ -8,6 +8,7 @@ import object.ArmourBuilder;
 import object.InventoryItem;
 import object.Weapon;
 import object.WeaponBuilder;
+import save.CharacterSave;
 import save.Save;
 import components.attack.PlayerAttack;
 import components.movement.BaseMovement;
@@ -40,7 +41,7 @@ public class PlayerInventory extends BasicInventory {
 		potions = new HashMap<TypePotion,Potion>();
 	}
 	
-	public PlayerInventory(PlayerAttack PA, BaseMovement BM, int level, int expBound, Save save) {
+	public PlayerInventory(PlayerAttack PA, BaseMovement BM, int level, int expBound, CharacterSave save) {
 		super(level);
 		this.PA = PA;
 		this.BM = BM;
