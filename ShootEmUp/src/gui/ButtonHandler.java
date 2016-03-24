@@ -146,7 +146,11 @@ public abstract class ButtonHandler {
 		if(ShootEmUp.save == null){
 			ShootEmUp.currentLevel.createPlayer(TypeAttack.WARRIOR);
 		} else {
-			ShootEmUp.currentLevel.createPlayer(TypeAttack.WARRIOR, ShootEmUp.save.getWarrior());
+			if(ShootEmUp.save.getWarrior() != null){
+				ShootEmUp.currentLevel.createPlayer(TypeAttack.WARRIOR, ShootEmUp.save.getWarrior());
+			} else {
+				ShootEmUp.currentLevel.createPlayer(TypeAttack.WARRIOR);
+			}
 		}
 		ShootEmUp.save = null;
 		startGame();
@@ -156,7 +160,11 @@ public abstract class ButtonHandler {
 		if(ShootEmUp.save == null){
 			ShootEmUp.currentLevel.createPlayer(TypeAttack.ARCHER);
 		} else {
-			ShootEmUp.currentLevel.createPlayer(TypeAttack.ARCHER, ShootEmUp.save.getArcher());
+			if(ShootEmUp.save.getArcher() != null){
+				ShootEmUp.currentLevel.createPlayer(TypeAttack.ARCHER, ShootEmUp.save.getArcher());
+			} else {
+				ShootEmUp.currentLevel.createPlayer(TypeAttack.ARCHER);
+			}
 		}
 		ShootEmUp.save = null;
 		startGame();
@@ -166,7 +174,11 @@ public abstract class ButtonHandler {
 		if(ShootEmUp.save == null){
 			ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE);
 		} else {
-			ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE, ShootEmUp.save.getMage());
+			if(ShootEmUp.save.getMage() != null){
+				ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE, ShootEmUp.save.getMage());
+			} else {
+				ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE);
+			}
 		}
 		ShootEmUp.save = null;
 		startGame();
@@ -275,7 +287,10 @@ public abstract class ButtonHandler {
 	}
 	
 	private static void saveGame(){
-		ShootEmUp.save = new Save();
+		if(ShootEmUp.save == null){
+			ShootEmUp.save = new Save();
+		}
+		ShootEmUp.save.saveCharacter();
 		SaveHandler.save(ShootEmUp.save, 1);
 		ShootEmUp.save = null;
 	}
