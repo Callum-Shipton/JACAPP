@@ -1,9 +1,9 @@
-package components.inventory;
+package object;
 
 import components.TypeComponent;
 import components.attack.BaseAttack;
+import components.inventory.TypePotion;
 import components.movement.BaseMovement;
-import object.Entity;
 
 public class DurationPotion extends Potion {
 
@@ -12,13 +12,13 @@ public class DurationPotion extends Potion {
 	private int duration;
 	private int maxDuration;
 	
-	DurationPotion(TypePotion type, int maxDuration){
+	public DurationPotion(TypePotion type, int maxDuration){
 		super(type);
 		this.maxDuration = maxDuration;
 	}
 	
 	@Override
-	void update(Entity e) {
+	public void update(Entity e) {
 		if(active){
 			BaseMovement BM = (BaseMovement) e.getComponent(TypeComponent.MOVEMENT);
 			BaseAttack BA = (BaseAttack) e.getComponent(TypeComponent.ATTACK);
@@ -54,7 +54,7 @@ public class DurationPotion extends Potion {
 	}
 	
 	@Override
-	void usePotion(){
+	public void usePotion(){
 		if(quantity > 0 ){
 			active = true;
 			duration = maxDuration;

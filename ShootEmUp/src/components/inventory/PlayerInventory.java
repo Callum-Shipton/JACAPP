@@ -5,8 +5,11 @@ import java.util.HashMap;
 
 import object.Armour;
 import object.ArmourBuilder;
+import object.DurationPotion;
 import object.Entity;
 import object.InventoryItem;
+import object.OneTimePotion;
+import object.Potion;
 import object.Weapon;
 import object.WeaponBuilder;
 import save.CharacterSave;

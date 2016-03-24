@@ -8,7 +8,6 @@ import components.TypeComponent;
 import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
 import components.inventory.PlayerInventory;
-import components.inventory.Potion;
 import components.inventory.TypeArmour;
 import components.inventory.TypePickup;
 import components.inventory.TypePotion;
@@ -16,6 +15,7 @@ import components.inventory.TypeWeapon;
 import main.ShootEmUp;
 import object.Armour;
 import object.InventoryItem;
+import object.Potion;
 import object.Weapon;
 
 public class CharacterSave implements Serializable{

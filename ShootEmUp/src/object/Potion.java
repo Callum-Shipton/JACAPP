@@ -1,8 +1,8 @@
-package components.inventory;
+package object;
 
 import java.io.Serializable;
 
-import object.Entity;
+import components.inventory.TypePotion;
 
 public abstract class Potion implements Serializable {
 
@@ -10,7 +10,7 @@ public abstract class Potion implements Serializable {
 
 	protected TypePotion type;
 	
-	protected int quantity = 1;
+	public int quantity = 1;
 	
 	protected boolean active = false;
 	
@@ -18,16 +18,16 @@ public abstract class Potion implements Serializable {
 		this.type = type;
 	}
 	
-	abstract void update(Entity e);
+	public abstract void update(Entity e);
 	
-	void usePotion(){
+	public void usePotion(){
 			if(quantity > 0 ){
 				active = true;
 				quantity--;
 			}
 	}
 	
-	void addPotion(){
+	public void addPotion(){
 		quantity++;
 	}
 }

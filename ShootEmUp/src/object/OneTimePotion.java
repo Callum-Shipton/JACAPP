@@ -1,17 +1,19 @@
-package components.inventory;
+package object;
 
 import components.TypeComponent;
 import components.attack.BaseAttack;
-import object.Entity;
+import components.inventory.TypePotion;
 
 public class OneTimePotion extends Potion {
 
-	OneTimePotion(TypePotion type){
+	private static final long serialVersionUID = -5999484039194013016L;
+
+	public OneTimePotion(TypePotion type){
 		super(type);
 	}
 	
 	@Override
-	void update(Entity e) {
+	public void update(Entity e) {
 		if(active){
 			BaseAttack BA = (BaseAttack) e.getComponent(TypeComponent.ATTACK);
 			switch (type) {
