@@ -23,6 +23,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	private boolean fire = false;
 	private int fireCounter = 0;
 	private int fireTime = 10;
+	private int fireStop = 00;
 	private boolean poison = false;
 	private int poisonCounter = 0;
 	private int poisonTime = 20;
@@ -30,18 +31,21 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	@Override
 	public void update(Entity e){
 		if(fire == true){
-			damage(1, null);
 			fireCounter++;
-			if(fireCounter > fireTime){
-				fire = false;
+			if(fireCounter == fireTime){
+				damage(1, null);
 				fireCounter = 0;
+				fireStop++;
+				if(fireStop > 10){
+					fire = false;
+					fireStop = 0;
+				}
 			}
 		}
 		if(poison == true){
-			damage(2, null);
 			poisonCounter++;
 			if(poisonCounter > poisonTime){
-				poison = false;
+				damage(2, null);
 				poisonCounter = 0;
 			}
 		}
