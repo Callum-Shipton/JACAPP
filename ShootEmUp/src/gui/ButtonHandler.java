@@ -143,7 +143,7 @@ public abstract class ButtonHandler {
 	}
 	
 	private static void warrior(){
-		if(ShootEmUp.save != null){
+		if(ShootEmUp.save == null){
 			ShootEmUp.currentLevel.createPlayer(TypeAttack.WARRIOR);
 		} else {
 			ShootEmUp.currentLevel.createPlayer(TypeAttack.WARRIOR, ShootEmUp.save.getWarrior());
@@ -153,7 +153,7 @@ public abstract class ButtonHandler {
 	}
 	
 	private static void archer(){
-		if(ShootEmUp.save != null){
+		if(ShootEmUp.save == null){
 			ShootEmUp.currentLevel.createPlayer(TypeAttack.ARCHER);
 		} else {
 			ShootEmUp.currentLevel.createPlayer(TypeAttack.ARCHER, ShootEmUp.save.getArcher());
@@ -163,7 +163,7 @@ public abstract class ButtonHandler {
 	}
 	
 	private static void mage(){
-		if(ShootEmUp.save != null){
+		if(ShootEmUp.save == null){
 			ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE);
 		} else {
 			ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE, ShootEmUp.save.getMage());
