@@ -23,7 +23,7 @@ public class PlayerInventory extends BasicInventory {
 
 	private ArrayList<InventoryItem> inventory;
 	private int inventorySize = 5;
-	private HashMap<TypePotion, Integer> potions;
+	private HashMap<TypePotion,Potion> potions;
 	private int maxPotions = 5;
 
 	private PlayerAttack PA;
@@ -37,10 +37,7 @@ public class PlayerInventory extends BasicInventory {
 		this.BM = BM;
 		this.expBound = expBound;
 		inventory = new ArrayList<InventoryItem>();
-		potions = new HashMap<TypePotion, Integer>();
-		for (TypePotion type : TypePotion.values()) {
-			potions.put(type, 0);
-		}
+		potions = new HashMap<TypePotion,Potion>();
 	}
 	
 	public PlayerInventory(PlayerAttack PA, BaseMovement BM, int level, int expBound, Save save) {
@@ -60,55 +57,12 @@ public class PlayerInventory extends BasicInventory {
 		maxPotions = save.getMaxPotions();
 		exp = save.getExp();
 		coins = save.getCoins();
-		for (TypePotion type : TypePotion.values()) {
-			potions.put(type, 0);
-		}
 	}
 	
 	public void spendLevelPoints(int points){
 		levelPoints -= points;
 	}
 
-	public void usePotion(TypePotion type) {
-		int numPotion;
-		switch (type) {
-		case HEALTH:
-			numPotion = potions.get(HEALTH);
-			if(numPotion > 0){
-				PA.addHealth(5);
-				potions.replace(HEALTH, --numPotion);
-			}
-			break;
-		case MANA:
-			numPotion = potions.get(MANA);
-			if(numPotion > 0){
-				PA.addMana(5);
-				potions.replace(MANA, --numPotion);
-			}
-			break;
-		case SPEED:
-			if (!speedOn) {
-				numPotion = potions.get(SPEED);
-				if(numPotion > 0){
-					BM.increaseSpeed(2);
-					speedOn = true;
-					potions.replace(SPEED, --numPotion);
-				}
-			}
-			break;
-		case KNOCKBACK:
-			numPotion = potions.get(KNOCKBACK);
-			if(numPotion > 0){
-				//Code for adding to knockback
-				PA.setHealth(100);
-				PA.setMaxHealth(100);
-				PA.setMana(100);
-				PA.setMaxMana(100);
-				potions.replace(KNOCKBACK, --numPotion);
-			}
-			break;
-		}
-	}
 
 	public void equipItem(int itemNo) {
 		InventoryItem item = inventory.get(itemNo);
@@ -141,47 +95,49 @@ public class PlayerInventory extends BasicInventory {
 		}
 	}
 
-	public void giveItem(TypePickup type, Subtype subtype) {
+	public boolean giveItem(TypePickup type, Subtype subtype) {
 		switch (type) {
 		case COIN:
 			if (coins < 99) {
 				coins++;
+				return true;
 			}
 			break;
 		case POTION:
 			TypePotion potionType = (TypePotion) subtype;
 			if (getNumPotions() < maxPotions) {
-				potions.merge(potionType, 1, (Integer a, Integer b) -> a+b);
-			} else {
-				switch (potionType) {
-				case HEALTH:
-					PA.addHealth(5);
-					break;
-				case MANA:
-					PA.addMana(5);
-					break;
-				case SPEED:
-					if (!speedOn) {
-						BM.increaseSpeed(2);
-						speedOn = true;
-					}
-					break;
-				case KNOCKBACK:
+				if(potions.containsKey(potionType)){
+					potions.get(potionType).addPotion();
 				}
-			}
+				else{
+					switch(potionType){
+					case HEALTH: potions.put(HEALTH, new OneTimePotion(HEALTH));
+					break;
+					case MANA: potions.put(MANA, new OneTimePotion(MANA));
+					break;
+					case SPEED: potions.put(SPEED, new DurationPotion(SPEED,30));
+					break;
+					case KNOCKBACK: potions.put(KNOCKBACK, new DurationPotion(KNOCKBACK,30));
+					}
+				}
+				return true;
+			} 
 			break;
 		case ARMOUR:
 			if(inventory.size() < inventorySize){
 				TypeArmour armourType = (TypeArmour) subtype;
 				inventory.add(ArmourBuilder.buildArmour(armourType));
+				return true;
 			}
 			break;
 		case WEAPON:
 			if(inventory.size() < inventorySize){
 				TypeWeapon weaponType = (TypeWeapon) subtype;
 				inventory.add(WeaponBuilder.buildWeapon(weaponType, 0));
+				return true;
 			}
 		}
+		return false;
 	}
 
 	public void giveExp(int exp) {
@@ -215,13 +171,13 @@ public class PlayerInventory extends BasicInventory {
 	}
 	
 	public int getNumPotion(TypePotion type){
-		return potions.get(type);
+		return potions.get(type).quantity;
 	}
 	
 	public int getNumPotions(){
 		int sum = 0;
 		for(TypePotion type: TypePotion.values()){
-			sum += potions.get(type);
+			sum += getNumPotion(type);
 		}
 		return sum;
 	}
@@ -238,11 +194,15 @@ public class PlayerInventory extends BasicInventory {
 		maxPotions += addition;
 	}
 	
-	public HashMap<TypePotion, Integer> getPotions() {
+	public HashMap<TypePotion,Potion> getPotions() {
 		return potions;
 	}
 
 	public int getMaxPotions() {
 		return maxPotions;
+	}
+
+	public void usePotion(TypePotion type) {
+		potions.get(type).usePotion();
 	}
 }
