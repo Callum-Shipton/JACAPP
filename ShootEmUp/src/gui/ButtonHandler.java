@@ -152,7 +152,6 @@ public abstract class ButtonHandler {
 				ShootEmUp.currentLevel.createPlayer(TypeAttack.WARRIOR);
 			}
 		}
-		ShootEmUp.save = null;
 		startGame();
 	}
 	
@@ -166,7 +165,6 @@ public abstract class ButtonHandler {
 				ShootEmUp.currentLevel.createPlayer(TypeAttack.ARCHER);
 			}
 		}
-		ShootEmUp.save = null;
 		startGame();
 	}
 	
@@ -180,7 +178,6 @@ public abstract class ButtonHandler {
 				ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE);
 			}
 		}
-		ShootEmUp.save = null;
 		startGame();
 	}
 	
