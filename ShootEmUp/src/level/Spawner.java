@@ -24,12 +24,13 @@ public class Spawner {
 	private final int MAX_WAVE = 20;
 	private int enemies = 0;
 	private int totalEnemies = 0;
-	private int wave = 1;
+	private int wave;
 	private boolean newWave = true;
 
 	private Random rand;
 	
 	public Spawner(){
+		wave = 1;
 		rand = new Random();
 	}
 	

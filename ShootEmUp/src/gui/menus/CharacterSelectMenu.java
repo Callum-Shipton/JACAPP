@@ -38,13 +38,13 @@ public class CharacterSelectMenu extends GuiMenu {
     	super.update();
     	
     	if(warriorLevel != null){
-    		warriorLevel = new Counter2(800, 400);
+    		warriorLevel.update(ShootEmUp.save.getWarrior().getPlayerLevel());
     	}
     	if(archerLevel != null){
-    		archerLevel = new Counter2(800, 500);
+    		archerLevel.update(ShootEmUp.save.getArcher().getPlayerLevel());
     	}
 		if(mageLevel != null){
-			mageLevel = new Counter2(800, 600);
+			mageLevel.update(ShootEmUp.save.getMage().getPlayerLevel());
 		}
     }
     
