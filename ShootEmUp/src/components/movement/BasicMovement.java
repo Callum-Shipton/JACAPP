@@ -18,9 +18,11 @@ public class BasicMovement extends BaseMovement {
 		this.BG = BG;
 		this.BC = BC;
 		this.speed = speed;
+		realSpeed = speed;
 	}
 
 	public void move(Entity e, Vector2 moveVec) {
+		super.move(e, moveVec);
 		if (Math.abs(moveVec.x()) > 0) {
 			BG.setX((BG.getX() + Math.round(moveVec.x() * speed)));
 			checkCollisionX(e, moveVec);

@@ -15,13 +15,26 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	protected TypeComponent type = TypeComponent.MOVEMENT;
 	
 	protected int speed;
+	protected int realSpeed;
 	protected BaseCollision BC;
 	protected boolean flat;
 	
 	private boolean frost = false;
-	
+	private int frostCounter = 0;
+	private int frostTime = 100;
+
 	@Override
-	public abstract void move(Entity e, Vector2 moveVec);
+	public void move(Entity e, Vector2 moveVec){
+		if(frost == true){
+			speed = speed / 2;
+			frostCounter++;
+			if(frostCounter > frostTime){
+				frost = false;
+				speed = realSpeed;
+				frostCounter = 0;
+			}
+		}
+	}
 	
 	@Override
 	public abstract Vector4 doesCollide(Entity moving, Entity checked);
@@ -67,4 +80,7 @@ public abstract class BaseMovement extends Component implements MovementComponen
 		this.speed = speed;
 	}
 
+	public void setFrost(boolean frost) {
+		this.frost = frost;
+	}
 }

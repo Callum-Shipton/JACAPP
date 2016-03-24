@@ -133,7 +133,7 @@ public class Spawner {
 				} else {
 					
 					//randomly chooses an enemy
-					/*int prob = rand.nextInt(3);
+					int prob = rand.nextInt(3);
 					if(prob == 0){
 						smallEnemy();
 					} else if(prob == 1){
@@ -141,8 +141,7 @@ public class Spawner {
 					} else {
 						flyingEnemy();
 					}
-					*/
-					smallEnemy();
+					
 				}
 				//creates the enemy and adds it to the level
 				addEnemy();

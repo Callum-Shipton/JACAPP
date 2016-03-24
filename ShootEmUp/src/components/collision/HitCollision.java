@@ -10,6 +10,7 @@ import java.util.Random;
 
 import components.Message;
 import components.attack.BaseAttack;
+import components.movement.BaseMovement;
 
 public class HitCollision extends BaseCollision{
 	
@@ -26,6 +27,7 @@ public class HitCollision extends BaseCollision{
 	public void collision(Entity e, Entity hit) {
 		
 		BaseAttack hitAttack = (BaseAttack) hit.getComponent(TypeComponent.ATTACK);
+		BaseMovement hitMove = (BaseMovement) hit.getComponent(TypeComponent.MOVEMENT);
 		if(hitAttack != null){
 			if(hitAttack.getWeapon().getTeam() == weapon.getTeam()){
 				return;
@@ -46,7 +48,7 @@ public class HitCollision extends BaseCollision{
 					Random rand = new Random();
 					int prob = rand.nextInt(3);
 					if(prob == 0){
-						
+						hitMove.setFrost(true);
 					}
 				}
 				if(weapon.getElement() == Element.EARTH){
