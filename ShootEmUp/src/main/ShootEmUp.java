@@ -40,6 +40,8 @@ public class ShootEmUp {
 	public static Stack<GuiMenu> menuStack = new Stack<GuiMenu>();
 	
 	public static Save save;
+	
+	public static double FPS = 60.0;
 
 	public void run() {
 		try {
@@ -75,7 +77,7 @@ public class ShootEmUp {
 		// Run the rendering loop until the user has attempted to close
 		// the window or has pressed the ESCAPE key.
 
-		double FPS = 60.0;
+		
 		double oldTime = GLFW.glfwGetTime();
 		double newTime = GLFW.glfwGetTime();
 		double delta = newTime - oldTime;

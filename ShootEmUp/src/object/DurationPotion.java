@@ -4,6 +4,7 @@ import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.inventory.TypePotion;
 import components.movement.BaseMovement;
+import main.ShootEmUp;
 
 public class DurationPotion extends Potion {
 
@@ -11,6 +12,8 @@ public class DurationPotion extends Potion {
 	
 	private int duration;
 	private int maxDuration;
+	private int counter = 0;
+	
 	
 	public DurationPotion(TypePotion type, int maxDuration){
 		super(type);
@@ -19,7 +22,7 @@ public class DurationPotion extends Potion {
 	
 	@Override
 	public void update(Entity e) {
-		if(active){
+		if(active && counter == 0){
 			BaseMovement BM = (BaseMovement) e.getComponent(TypeComponent.MOVEMENT);
 			BaseAttack BA = (BaseAttack) e.getComponent(TypeComponent.ATTACK);
 			switch(type){
@@ -50,7 +53,10 @@ public class DurationPotion extends Potion {
 				active = false;
 			}
 		}
-	
+	counter++;
+	if(counter == (int) ShootEmUp.FPS){
+		counter = 0;
+	}
 	}
 	
 	@Override
@@ -59,6 +65,7 @@ public class DurationPotion extends Potion {
 			active = true;
 			duration = maxDuration;
 			quantity--;
+			counter = 0;
 		}
 	}
 }
