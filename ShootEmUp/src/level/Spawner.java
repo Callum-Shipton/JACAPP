@@ -100,7 +100,7 @@ public class Spawner {
 			if (counter == ENEMY_SPAWN_RATE) {
 				//creating new Enemy
 				
-				if((totalEnemies == 0) && (wave == 20)){
+				if((totalEnemies == 0) && (wave == MAX_WAVE)){
 					EnemyBuilder.buildEnemy(TypeEnemy.BOSS);
 				} else {
 					
