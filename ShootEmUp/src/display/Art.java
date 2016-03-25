@@ -110,10 +110,14 @@ public class Art {
 	public static Image poison;
 	
 	//Armour maps
-	public static Image shoes;
-	public static Image legs;
-	public static Image chest;
-	public static Image helmet;
+	public static Image leatherBoots;
+	public static Image leatherLegs;
+	public static Image leatherChest;
+	public static Image leatherHelmet;
+	public static Image ironBoots;
+	public static Image ironLegs;
+	public static Image ironChest;
+	public static Image ironHelmet;
 	
 	//Item maps
 	public static Image healthPotion;
@@ -349,10 +353,14 @@ public class Art {
 		poison = new Image("/Images/Effects/Fire.png",6,1);
 		
 		//Load Armour maps
-		shoes = new Image("/Images/Drops/Armour/Boots.png",8,1);
-		legs = new Image("/Images/Drops/Armour/Legs.png",4,1);
-		chest = new Image("/Images/Drops/Armour/Chest.png",4,1);
-		helmet = new Image("/Images/Drops/Armour/Helmet.png",7,1);
+		leatherBoots = new Image("/Images/Drops/Armour/LeatherBoots.png",8,1);
+		leatherLegs = new Image("/Images/Drops/Armour/LeatherLegs.png",4,1);
+		leatherChest = new Image("/Images/Drops/Armour/LeatherChest.png",4,1);
+		leatherHelmet = new Image("/Images/Drops/Armour/LeatherHelmet.png",7,1);
+		ironBoots = new Image("/Images/Drops/Armour/IronBoots.png",8,1);
+		ironLegs = new Image("/Images/Drops/Armour/IronLegs.png",4,1);
+		ironChest = new Image("/Images/Drops/Armour/IronChest.png",4,1);
+		ironHelmet = new Image("/Images/Drops/Armour/IronHelmet.png",7,1);
 		
 		//Load Item maps
 		healthPotion = new Image("/Images/Drops/Potions/HealthPotion.png",3,1);

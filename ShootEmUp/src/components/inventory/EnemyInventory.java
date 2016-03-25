@@ -50,7 +50,7 @@ public class EnemyInventory extends BasicInventory{
 		Random rand = new Random();
 		TypePickup T;
 		
-		switch(rand.nextInt()){
+		switch(rand.nextInt(10)){
 			case 1:
 			case 2:
 			case 3:
@@ -92,22 +92,22 @@ public class EnemyInventory extends BasicInventory{
 				Entity armour = new Entity();
 				T = TypePickup.ARMOUR;
 				if(armourProb == 0){
-					g = new AnimatedGraphics(Art.shoes, Art.base, true);
+					g = new AnimatedGraphics(Art.leatherBoots, Art.base, true);
 					s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY()), armour);
 					armour.addComponent(g);
 					c = new PickupCollision(armour, T, TypeArmour.BOOTS);
 				} else if(armourProb == 1){
-					g = new AnimatedGraphics(Art.legs, Art.base, true);
+					g = new AnimatedGraphics(Art.leatherLegs, Art.base, true);
 					s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY()), armour);
 					armour.addComponent(g);
 					c = new PickupCollision(armour, T, TypeArmour.LEGS);
 				} else if(armourProb == 2){
-					g = new AnimatedGraphics(Art.chest, Art.base, true);
+					g = new AnimatedGraphics(Art.leatherChest, Art.base, true);
 					s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY()), armour);
 					armour.addComponent(g);
 					c = new PickupCollision(armour, T, TypeArmour.CHESTPLATE);
 				} else {
-					g = new AnimatedGraphics(Art.helmet, Art.base, true);
+					g = new AnimatedGraphics(Art.leatherHelmet, Art.base, true);
 					s = new PointSpawn(g, new Vector2(BG.getX(), BG.getY()), armour);
 					armour.addComponent(g);
 					c = new PickupCollision(armour, T, TypeArmour.HELMET);
