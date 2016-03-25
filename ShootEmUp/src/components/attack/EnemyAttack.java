@@ -2,15 +2,13 @@ package components.attack;
 
 import object.Entity;
 import object.Weapon;
-import object.WeaponBuilder;
 import main.ShootEmUp;
 import components.Message;
-import components.inventory.TypeWeapon;
 
 public class EnemyAttack extends BaseAttack implements AttackComponent {
 	protected TypeAttack type;
 	
-	public EnemyAttack(TypeAttack type, int health){
+	public EnemyAttack(TypeAttack type, int health, Weapon weapon){
 		this.type = type;
 		
 		this.health = health;
@@ -21,17 +19,7 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 		maxMana = mana;
 		manaRegen = 100;
 		maxManaRegen = manaRegen;
-		
-		switch(type){
-		case WARRIOR:
-			weapon = WeaponBuilder.buildWeapon(TypeWeapon.SWORD, 1);
-			break;
-		case ARCHER:
-			weapon = WeaponBuilder.buildWeapon(TypeWeapon.BOW, 1);
-			break;
-		case MAGE:
-			weapon = WeaponBuilder.buildWeapon(TypeWeapon.EARTH_STAFF, 1);
-		}
+		this.weapon = weapon;
 	}
 	
 	public EnemyAttack(TypeAttack type, Weapon weapon, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana){

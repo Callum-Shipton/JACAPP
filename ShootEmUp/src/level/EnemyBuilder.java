@@ -14,12 +14,14 @@ import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.inventory.BaseInventory;
 import components.inventory.EnemyInventory;
+import components.inventory.TypeWeapon;
 import components.movement.BaseMovement;
 import components.movement.BasicMovement;
 import components.movement.FlyingMovement;
 import display.Art;
 import main.ShootEmUp;
 import object.Entity;
+import object.WeaponBuilder;
 
 public abstract class EnemyBuilder {
 	
@@ -44,7 +46,7 @@ public abstract class EnemyBuilder {
 		switch(type){
 		case SMALL:
 			enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base, false, ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX()); 
-			enemyAttack = new EnemyAttack(TypeAttack.WARRIOR, 1);
+			enemyAttack = new EnemyAttack(TypeAttack.WARRIOR, 1, WeaponBuilder.buildWeapon(TypeWeapon.FIRE_STAFF, 1));
 			newEnemy.addComponent(enemyGraphics);
 			enemyCollision = new RigidCollision(newEnemy);
 			enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 7);
@@ -53,7 +55,7 @@ public abstract class EnemyBuilder {
 			break;
 		case NORMAL:
 			enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base, false, ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX()); 
-			enemyAttack = new EnemyAttack(TypeAttack.ARCHER, 3);
+			enemyAttack = new EnemyAttack(TypeAttack.ARCHER, 3, WeaponBuilder.buildWeapon(TypeWeapon.ICE_STAFF, 1));
 			newEnemy.addComponent(enemyGraphics);
 			enemyCollision = new RigidCollision(newEnemy);
 			enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 2);
@@ -62,7 +64,7 @@ public abstract class EnemyBuilder {
 			break;
 		case FLYING:
 			enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base, false, ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX()); 
-			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 2);
+			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 2, WeaponBuilder.buildWeapon(TypeWeapon.EARTH_STAFF, 1));
 			newEnemy.addComponent(enemyGraphics);
 			enemyCollision = new RigidCollision(newEnemy);
 			enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);
@@ -71,7 +73,7 @@ public abstract class EnemyBuilder {
 			break;
 		case BOSS:
 			enemyGraphics = new AnimatedGraphics(Art.bossEnemy, Art.base, false, ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX()); 
-			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 1000);
+			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 1000, WeaponBuilder.buildWeapon(TypeWeapon.FIRE_STAFF, 1));
 			newEnemy.addComponent(enemyGraphics);
 			enemyCollision = new RigidCollision(newEnemy);
 			enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);

@@ -84,4 +84,8 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	public void setFrost(boolean frost) {
 		this.frost = frost;
 	}
+
+	public boolean isFrost() {
+		return frost;
+	}
 }

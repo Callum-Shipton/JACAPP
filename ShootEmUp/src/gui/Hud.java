@@ -6,6 +6,7 @@ import object.Entity;
 import main.ShootEmUp;
 import math.Vector2;
 import components.TypeComponent;
+import components.movement.BasicMovement;
 import components.attack.BaseAttack;
 import components.attack.PlayerAttack;
 import components.inventory.PlayerInventory;
@@ -24,6 +25,10 @@ public class Hud extends GuiComponent{
 	private Counter levelCounter;
 	private Counter waveCounter;
 	private Entity player;
+	
+	private Icon fire;
+	private Icon frost;
+	private Icon poison;
 	
 	private Icon infoBoxBottom;
 	
@@ -46,6 +51,9 @@ public class Hud extends GuiComponent{
 		hudElems.add(levelCounter);
 		waveCounter = new Counter(154.0f, 83.0f, Art.wave.getWidth(), Art.wave.getHeight(), Art.wave, false);
 		hudElems.add(waveCounter);
+		fire = new Icon(0.0f,100.0f,Art.fire.getWidth()/Art.fire.getFWidth(),Art.fire.getHeight(), Art.fire, false);
+		poison = new Icon(0.0f,120.0f,Art.poison.getWidth()/Art.poison.getFWidth(),Art.poison.getHeight(), Art.poison, false);
+		frost = new Icon(0.0f,140.0f,Art.frost.getWidth()/Art.frost.getFWidth(),Art.frost.getHeight(), Art.frost, false);
 		
 		//Potions bar
 		infoBoxBottom = new Icon(0.0f,ShootEmUp.height - Art.infoBoxBottom.getHeight(),Art.infoBoxBottom.getWidth(),Art.infoBoxBottom.getHeight(), Art.infoBoxBottom, false);
@@ -57,6 +65,16 @@ public class Hud extends GuiComponent{
 			h.render(r);
 		}
 	
+		if(((PlayerAttack)player.getComponent(TypeComponent.ATTACK)).isFire()){
+			fire.render(r);
+		}
+		if(((PlayerAttack)player.getComponent(TypeComponent.ATTACK)).isPoison()){
+			poison.render(r);
+		}
+		if(((BasicMovement)player.getComponent(TypeComponent.MOVEMENT)).isFrost()){
+			frost.render(r);
+		}
+		
 		Vector2 size = new Vector2(16,16);
 		Vector2 maxTex = new Vector2(10,1);
 				
@@ -74,6 +92,10 @@ public class Hud extends GuiComponent{
 		for (Icon h : hudElems){
 			h.update();
 		}
+		
+		fire.update();
+		poison.update();
+		frost.update();
 		moneyCounter.update(((PlayerInventory)player.getComponent(TypeComponent.INVENTORY)).getCoins());
 		levelCounter.update(((PlayerInventory)player.getComponent(TypeComponent.INVENTORY)).getLevel());
 		waveCounter.update(ShootEmUp.currentLevel.spawner.getWave());

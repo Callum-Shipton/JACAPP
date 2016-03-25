@@ -349,8 +349,8 @@ public class Art {
 		
 		//load status effect maps
 		fire = new Image("/Images/Effects/Fire.png",6,1);
-		frost = new Image("/Images/Effects/Fire.png",6,1);
-		poison = new Image("/Images/Effects/Fire.png",6,1);
+		frost = new Image("/Images/Effects/Frost.png",6,1);
+		poison = new Image("/Images/Effects/Poison.png",6,1);
 		
 		//Load Armour maps
 		leatherBoots = new Image("/Images/Drops/Armour/LeatherBoots.png",8,1);

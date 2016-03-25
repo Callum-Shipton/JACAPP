@@ -15,6 +15,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	protected int healthRegen;
 	protected int maxHealth;
 	protected int maxHealthRegen;
+
 	protected int mana;
 	protected int manaRegen;
 	protected int maxMana;
@@ -23,21 +24,22 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	
 	private boolean fire = false;
 	private int fireCounter = 0;
-	private int fireTime = 1;
+	private final int FIRE_TIME = 1;
 	private int fireStop = 0;
+	private final int FIRE_HITS = 10;
 	private boolean poison = false;
 	private int poisonCounter = 0;
-	private int poisonTime = 2;
+	private final int POISON_TIME = 2;
 
 	@Override
 	public void update(Entity e){
 		if(fire == true){
 			fireCounter++;
-			if(fireCounter == Seconds.ticks(fireTime)){
+			if(fireCounter >= Seconds.ticks(FIRE_TIME)){
 				damage(1, null);
 				fireCounter = 0;
 				fireStop++;
-				if(fireStop > 10){
+				if(fireStop > FIRE_HITS){
 					fire = false;
 					fireStop = 0;
 				}
@@ -45,7 +47,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		}
 		if(poison == true){
 			poisonCounter++;
-			if(poisonCounter > Seconds.ticks(poisonTime)){
+			if(poisonCounter > Seconds.ticks(POISON_TIME)){
 				damage(2, null);
 				poisonCounter = 0;
 			}
@@ -183,6 +185,14 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	
 	public void setFire(boolean fire) {
 		this.fire = fire;
+	}
+	
+	public boolean isFire() {
+		return fire;
+	}
+
+	public boolean isPoison() {
+		return poison;
 	}
 
 	public void setPoison(boolean poison) {
