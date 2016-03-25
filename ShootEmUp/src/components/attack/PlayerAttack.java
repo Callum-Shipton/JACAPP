@@ -66,13 +66,13 @@ public class PlayerAttack extends BaseAttack {
 		if(save.getBoots() != null){
 			boots = ArmourBuilder.buildArmour(save.getBoots());
 		}
-		if(save.getBoots() != null){
+		if(save.getLegs() != null){
 			legs = ArmourBuilder.buildArmour(save.getLegs());
 		}
-		if(save.getBoots() != null){
+		if(save.getChest() != null){
 			chest = ArmourBuilder.buildArmour(save.getChest());
 		}
-		if(save.getBoots() != null){
+		if(save.getHelmet() != null){
 			helmet = ArmourBuilder.buildArmour(save.getHelmet());
 		}
 		

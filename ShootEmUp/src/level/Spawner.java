@@ -4,6 +4,7 @@ import java.util.Random;
 
 import object.Entity;
 import save.CharacterSave;
+import save.SaveHandler;
 import main.ShootEmUp;
 import math.Vector2;
 import components.TypeComponent;
@@ -21,7 +22,7 @@ public class Spawner {
 	
 	private int counter = 0;
 	private final int ENEMY_SPAWN_RATE = 150;
-	private final int MAX_WAVE = 20;
+	private final int MAX_WAVE = 10;
 	private int enemies = 0;
 	private int totalEnemies = 0;
 	private int wave = 1;
@@ -126,6 +127,23 @@ public class Spawner {
 			totalEnemies = 0;
 			if(wave < MAX_WAVE){
 				wave++;
+			} else {
+				TypeAttack temp = ((PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK)).getTypeAttack();
+				ShootEmUp.currentLevel = new Level(Art.levels, ShootEmUp.currentLevel.getLevel() + 1);
+				ShootEmUp.currentLevel.init();
+				ShootEmUp.save = SaveHandler.load(1);
+				switch(temp){
+				case WARRIOR:
+					ShootEmUp.currentLevel.createPlayer(TypeAttack.WARRIOR, ShootEmUp.save.getWarrior());
+					break;
+				case ARCHER:
+					ShootEmUp.currentLevel.createPlayer(TypeAttack.ARCHER, ShootEmUp.save.getArcher());
+					break;
+				case MAGE:
+					ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE, ShootEmUp.save.getMage());
+					break;
+				}
+				
 			}
 			newWave = true;
 		}

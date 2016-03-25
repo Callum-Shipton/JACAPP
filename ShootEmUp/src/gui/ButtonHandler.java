@@ -123,10 +123,7 @@ public abstract class ButtonHandler {
 	}
 	
 	private static void loadGame(){
-		
 		ShootEmUp.save = SaveHandler.load(1);
-		ShootEmUp.currentLevel = new Level(Art.levels, ShootEmUp.save.getLevel());
-		ShootEmUp.currentLevel.init();
 		ShootEmUp.addMenu(new LevelSelectMenu(Art.mainMenuScreen));
 	}
 	
@@ -271,7 +268,7 @@ public abstract class ButtonHandler {
 	
 	private static void inventoryUpgrade(){
 		PlayerInventory PI = (PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY));
-		if(PI.getCoins() > 5){
+		if(PI.getCoins() >= 5){
 			PI.addInventorySize(5);
 			PI.spendCoins(5);
 		}
@@ -279,7 +276,7 @@ public abstract class ButtonHandler {
 	
 	private static void potionsUpgrade(){
 		PlayerInventory PI = (PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY));
-		if(PI.getCoins() > 5){
+		if(PI.getCoins() >= 5){
 			PI.addMaxPotions(5);
 			PI.spendCoins(5);
 		}
