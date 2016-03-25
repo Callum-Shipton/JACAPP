@@ -16,15 +16,14 @@ public class Save implements Serializable{
 	
 	private int level;
 	
-	private int wave;
-	
 	public Save(){	
 		
 	}
 
 	public void saveCharacter(){
-		level = ShootEmUp.currentLevel.getLevel();
-		wave = ShootEmUp.currentLevel.getSpawner().getWave();
+		if(ShootEmUp.currentLevel.getLevel() > level){
+			level = ShootEmUp.currentLevel.getLevel();
+		}
 		
 		TypeAttack tempAttack = ((PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK)).getTypeAttack();
 		
@@ -55,9 +54,5 @@ public class Save implements Serializable{
 
 	public int getLevel() {
 		return level;
-	}
-
-	public int getWave() {
-		return wave;
 	}
 }

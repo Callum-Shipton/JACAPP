@@ -41,16 +41,6 @@ public class Level {
 		newEntities = new HashSet<Entity>();
 	}
 	
-	public Level(String file, int level, int wave) {
-		this.level = level;
-		map = new Map(file + level + ".png");
-		eMap = new EntityMap(map.getWidth(), map.getHeight());
-		spawner = new Spawner(wave);
-		entities = new HashSet<Entity>();
-		oldEntities = new HashSet<Entity>();
-		newEntities = new HashSet<Entity>();
-	}
-	
 	public void init(){
 		map.setTileTypes();
 	}
