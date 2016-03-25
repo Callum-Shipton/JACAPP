@@ -23,6 +23,7 @@ public class Spawner {
 	private int counter = 0;
 	private final int ENEMY_SPAWN_RATE = 150;
 	private final int MAX_WAVE = 10;
+	private final int MAX_LEVEL = 3;
 	private int enemies = 0;
 	private int totalEnemies = 0;
 	private int wave = 1;
@@ -127,7 +128,7 @@ public class Spawner {
 			totalEnemies = 0;
 			if(wave < MAX_WAVE){
 				wave++;
-			} else {
+			} else if (ShootEmUp.currentLevel.getLevel() < MAX_LEVEL){
 				TypeAttack temp = ((PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK)).getTypeAttack();
 				ShootEmUp.currentLevel = new Level(Art.levels, ShootEmUp.currentLevel.getLevel() + 1);
 				ShootEmUp.currentLevel.init();
