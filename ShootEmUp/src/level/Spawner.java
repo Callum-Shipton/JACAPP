@@ -6,6 +6,7 @@ import object.Entity;
 import save.CharacterSave;
 import save.SaveHandler;
 import main.ShootEmUp;
+import math.Seconds;
 import math.Vector2;
 import components.TypeComponent;
 import components.attack.PlayerAttack;
@@ -21,7 +22,7 @@ import display.Art;
 public class Spawner {
 	
 	private int counter = 0;
-	private final int ENEMY_SPAWN_RATE = 150;
+	private final int ENEMY_SPAWN_RATE = 3;
 	private final int MAX_WAVE = 10;
 	private final int MAX_LEVEL = 3;
 	private int enemies = 0;
@@ -98,7 +99,7 @@ public class Spawner {
 	public void update(){
 		if(newWave){
 			counter++;
-			if (counter == ENEMY_SPAWN_RATE) {
+			if (counter == Seconds.ticks(ENEMY_SPAWN_RATE)) {
 				//creating new Enemy
 				
 				if((totalEnemies == 0) && (wave == MAX_WAVE)){

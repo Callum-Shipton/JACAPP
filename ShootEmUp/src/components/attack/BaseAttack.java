@@ -4,6 +4,7 @@ import object.Entity;
 import object.Weapon;
 import components.Component;
 import components.TypeComponent;
+import math.Seconds;
 
 public abstract class BaseAttack extends Component implements AttackComponent {
 
@@ -22,17 +23,17 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	
 	private boolean fire = false;
 	private int fireCounter = 0;
-	private int fireTime = 10;
-	private int fireStop = 00;
+	private int fireTime = 1;
+	private int fireStop = 0;
 	private boolean poison = false;
 	private int poisonCounter = 0;
-	private int poisonTime = 20;
+	private int poisonTime = 2;
 
 	@Override
 	public void update(Entity e){
 		if(fire == true){
 			fireCounter++;
-			if(fireCounter == fireTime){
+			if(fireCounter == Seconds.ticks(fireTime)){
 				damage(1, null);
 				fireCounter = 0;
 				fireStop++;
@@ -44,7 +45,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		}
 		if(poison == true){
 			poisonCounter++;
-			if(poisonCounter > poisonTime){
+			if(poisonCounter > Seconds.ticks(poisonTime)){
 				damage(2, null);
 				poisonCounter = 0;
 			}

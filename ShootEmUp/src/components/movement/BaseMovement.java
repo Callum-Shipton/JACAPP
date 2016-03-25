@@ -2,6 +2,7 @@ package components.movement;
 
 import object.Entity;
 import main.ShootEmUp;
+import math.Seconds;
 import math.Vector2;
 import math.Vector4;
 import components.Component;
@@ -21,14 +22,14 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	
 	private boolean frost = false;
 	private int frostCounter = 0;
-	private int frostTime = 100;
+	private int frostTime = 5;
 
 	@Override
 	public void move(Entity e, Vector2 moveVec){
 		if(frost == true){
 			speed = speed / 2;
 			frostCounter++;
-			if(frostCounter > frostTime){
+			if(frostCounter > Seconds.ticks(frostTime)){
 				frost = false;
 				speed = realSpeed;
 				frostCounter = 0;
