@@ -105,6 +105,7 @@ public class PlayerAttack extends BaseAttack {
 	
 	@Override
 	public void damage(int damage, Entity e) {
+		damage = damage / (boots.getDefence() + legs.getDefence() + chest.getDefence() + helmet.getDefence());
 		super.damage(damage, e);
 		if(health <= 0) {
 			health = maxHealth;
