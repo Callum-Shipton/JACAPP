@@ -1,7 +1,8 @@
 package gui.menus;
 
 import gui.Button;
-import gui.ButtonType;
+import gui.ButtonBuilder;
+import gui.TypeButton;
 import gui.Counter2;
 import gui.Icon;
 
@@ -49,13 +50,13 @@ public class InventoryMenu extends PauseMenu {
 
     public void addButtons(){
     	
-    	addButton(new Button(ButtonType.RESUME, Art.backButton, 30, ShootEmUp.height - 64));
-        addButton(new Button(ButtonType.MAIN_MENU, Art.exitButton, 30, ShootEmUp.height - 94));
-        addButton(new Button(ButtonType.INVENTORY, Art.invButton, 922, 0));
-        addButton(new Button(ButtonType.SKILLS, Art.skillButton, 922, 204));
-        addButton(new Button(ButtonType.UPGRADES, Art.upgradesButton, 922, 102));
-        addButton(new Button(ButtonType.MAP, Art.mapButton, 922, 306));
-        addButton(new Button(ButtonType.SAVE, Art.saveButton, 922, 408));
+    	addButton(ButtonBuilder.buildButton(TypeButton.RESUME, 30, ShootEmUp.height - 64));
+        addButton(ButtonBuilder.buildButton(TypeButton.MAIN_MENU, 30, ShootEmUp.height - 94));
+        addButton(ButtonBuilder.buildButton(TypeButton.INVENTORY, 922, 0));
+        addButton(ButtonBuilder.buildButton(TypeButton.SKILLS, 922, 204));
+        addButton(ButtonBuilder.buildButton(TypeButton.UPGRADES, 922, 102));
+        addButton(ButtonBuilder.buildButton(TypeButton.MAP, 922, 306));
+        addButton(ButtonBuilder.buildButton(TypeButton.SAVE, 922, 408));
     	
     	if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getHelmet() != null){    
 	        Image helmetArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getHelmet().getInventoryImage();
@@ -95,7 +96,7 @@ public class InventoryMenu extends PauseMenu {
         Iterator<InventoryItem> items = ((PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY))).getInventory().iterator();
 		while(items.hasNext()){
 			InventoryItem item = items.next();
-			itemButtons.add(addButton(new Button(ButtonType.OTHER, item.getInventoryImage(), inventoryX + ((item.getInventoryImage().getWidth() * row)), inventoryY + (((item.getInventoryImage().getHeight()/2) * column)))));
+			itemButtons.add(addButton(new Button(TypeButton.OTHER, item.getInventoryImage(), inventoryX + ((item.getInventoryImage().getWidth() * row)), inventoryY + (((item.getInventoryImage().getHeight()/2) * column)))));
 			row++;
 			if(row > 10){
 				row = 0;

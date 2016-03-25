@@ -28,7 +28,7 @@ import display.Art;
 
 public abstract class ButtonHandler {
 	
-	public static void selectButton(ButtonType type){
+	public static void selectButton(TypeButton type){
 		switch(type){
 		case NEW_GAME:
 			newGame();

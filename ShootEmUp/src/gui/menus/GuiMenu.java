@@ -2,7 +2,7 @@ package gui.menus;
 
 import gui.Button;
 import gui.ButtonHandler;
-import gui.ButtonType;
+import gui.TypeButton;
 import input.Keyboard;
 
 import java.util.*;
@@ -53,7 +53,7 @@ public abstract class GuiMenu {
             button.update();
             if (button.hasClicked()){
             	ButtonHandler.selectButton(button.getType());
-            	if(button.getType() != ButtonType.OTHER){
+            	if(button.getType() != TypeButton.OTHER){
             		button.postAction();
             	}
             }

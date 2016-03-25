@@ -13,7 +13,7 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class Button extends GuiComponent {
 	
-	private ButtonType type;
+	private TypeButton type;
 	
 	private long window;
 
@@ -31,7 +31,7 @@ public class Button extends GuiComponent {
 	DoubleBuffer Bx = BufferUtils.createDoubleBuffer(1);
     DoubleBuffer By = BufferUtils.createDoubleBuffer(1);
 
-	public Button(ButtonType type, Image id, int x, int y) {
+	public Button(TypeButton type, Image id, int x, int y) {
 		this.type = type;
 		this.id = id;
 		this.x = x;
@@ -92,7 +92,7 @@ public class Button extends GuiComponent {
 		return id;
 	}
 
-	public ButtonType getType(){
+	public TypeButton getType(){
 		return type;
 	}
 	

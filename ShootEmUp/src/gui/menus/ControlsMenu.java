@@ -1,7 +1,8 @@
 package gui.menus;
 
 import gui.Button;
-import gui.ButtonType;
+import gui.ButtonBuilder;
+import gui.TypeButton;
 import main.ShootEmUp;
 
 import display.Art;
@@ -11,6 +12,6 @@ public class ControlsMenu extends GuiMenu{
 
     public ControlsMenu(Image menuImage) {
         super(menuImage);
-        addButton(new Button(ButtonType.BACK, Art.backButton, (ShootEmUp.width / 2) - (Art.backButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.backButton.getHeight() / 2)));
+        addButton(ButtonBuilder.buildButton(TypeButton.BACK, (ShootEmUp.width / 2) - (Art.backButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.backButton.getHeight() / 2)));
     }
 }

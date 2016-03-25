@@ -1,6 +1,6 @@
 package gui;
 
-public enum ButtonType {
+public enum TypeButton {
 	NEW_GAME, LOAD_GAME, OPTIONS, EXIT,
 	LEVEL1, LEVEL2, LEVEL3,
 	WARRIOR, ARCHER, MAGE,

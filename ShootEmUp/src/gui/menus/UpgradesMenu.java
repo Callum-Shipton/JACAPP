@@ -1,7 +1,8 @@
 package gui.menus;
 
 import gui.Button;
-import gui.ButtonType;
+import gui.ButtonBuilder;
+import gui.TypeButton;
 import gui.Counter;
 import main.ShootEmUp;
 import math.Vector2;
@@ -17,8 +18,8 @@ public class UpgradesMenu extends PauseMenu {
 	
     public UpgradesMenu(Image menuImage) {
         super(menuImage);
-        addButton(new Button(ButtonType.INVENTORY_UPGRADE, Art.inventoryButton, 30, 30));
-		addButton(new Button(ButtonType.POTIONS_UPGRADE, Art.potionsButton, 30, 64));
+        addButton(ButtonBuilder.buildButton(TypeButton.INVENTORY_UPGRADE, 30, 30));
+		addButton(ButtonBuilder.buildButton(TypeButton.POTIONS_UPGRADE, 30, 64));
 		coins = new Counter(30.0f, 98.0f, (Art.coin.getWidth() / Art.coin.getFWidth()), Art.coin.getHeight(), Art.coin, true);
     }
     

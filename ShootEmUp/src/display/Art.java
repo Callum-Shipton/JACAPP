@@ -71,7 +71,7 @@ public class Art {
 	public static Image inventoryButton;
 	
 	public static Image invButton;
-	public static Image skillButton;
+	public static Image skillsButton;
 	public static Image upgradesButton;
 	public static Image mapButton;
 	public static Image saveButton;
@@ -306,7 +306,7 @@ public class Art {
 		helmetButton = new Image("/Images/Menus/Buttons/Items/HelmetButton.png",1,2);
 		
 		invButton = new Image("/Images/Menus/Buttons/Tabs/InventoryButton.png",1,2);
-		skillButton = new Image("/Images/Menus/Buttons/Tabs/SkillButton.png",1,2);
+		skillsButton = new Image("/Images/Menus/Buttons/Tabs/SkillButton.png",1,2);
 		upgradesButton = new Image("/Images/Menus/Buttons/Tabs/UpgradesButton.png",1,2);
 		mapButton = new Image("/Images/Menus/Buttons/Tabs/MapButton.png",1,2);
 		saveButton = new Image("/Images/Menus/Buttons/Tabs/SaveButton.png",1,2);

@@ -1,7 +1,8 @@
 package gui.menus;
 
 import gui.Button;
-import gui.ButtonType;
+import gui.ButtonBuilder;
+import gui.TypeButton;
 import gui.Counter;
 import main.ShootEmUp;
 import math.Vector2;
@@ -16,10 +17,10 @@ public class SkillMenu extends PauseMenu {
 	
     public SkillMenu(Image menuImage) {
         super(menuImage);
-		addButton(new Button(ButtonType.HEALTH_REGEN, Art.healthRegenButton,30, 30));
-		addButton(new Button(ButtonType.HEALTH, Art.healthButton,30, 64));
-		addButton(new Button(ButtonType.MANA_REGEN, Art.manaRegenButton,30, 98));
-		addButton(new Button(ButtonType.MANA, Art.manaButton,30, 132));
+		addButton(ButtonBuilder.buildButton(TypeButton.HEALTH_REGEN,30, 30));
+		addButton(ButtonBuilder.buildButton(TypeButton.HEALTH,30, 64));
+		addButton(ButtonBuilder.buildButton(TypeButton.MANA_REGEN,30, 98));
+		addButton(ButtonBuilder.buildButton(TypeButton.MANA,30, 132));
 		skillPoints = new Counter(30.0f, 166.0f, (Art.coin.getWidth() / Art.coin.getFWidth()), Art.coin.getHeight(), Art.coin, true);
     }
     
