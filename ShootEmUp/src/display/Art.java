@@ -42,6 +42,7 @@ public class Art {
 	
 	public static Image level1Button;
 	public static Image level2Button;
+	public static Image level3Button;
 	
 	public static Image warriorButton;
 	public static Image archerButton;
@@ -276,6 +277,7 @@ public class Art {
 		
 		level1Button = new Image("/Images/Menus/Buttons/MenuButtons/Level1Button.png",1,2);
 		level2Button = new Image("/Images/Menus/Buttons/MenuButtons/Level2Button.png",1,2);
+		level3Button = new Image("/Images/Menus/Buttons/MenuButtons/Level3Button.png",1,2);
 		
 		warriorButton = new Image("/Images/Menus/Buttons/MenuButtons/WarriorButton.png",1,2);
 		archerButton = new Image("/Images/Menus/Buttons/MenuButtons/ArcherButton.png",1,2);

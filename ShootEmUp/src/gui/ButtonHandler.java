@@ -48,6 +48,9 @@ public abstract class ButtonHandler {
 		case LEVEL2:
 			level(2);
 			break;
+		case LEVEL3:
+			level(3);
+			break;
 		case WARRIOR:
 			warrior();
 			break;
