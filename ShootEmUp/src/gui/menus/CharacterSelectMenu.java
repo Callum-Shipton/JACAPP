@@ -23,13 +23,13 @@ public class CharacterSelectMenu extends GuiMenu {
         
         if(ShootEmUp.save != null){
         	if(ShootEmUp.save.getWarrior() != null){
-        		warriorLevel = new Counter2(800, 400);
+        		warriorLevel = new Counter2((ShootEmUp.width / 2) + (Art.warriorButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.warriorButton.getHeight() * 2));
         	}
         	if(ShootEmUp.save.getArcher() != null){
-        		archerLevel = new Counter2(800, 500);
+        		archerLevel = new Counter2((ShootEmUp.width / 2) + (Art.warriorButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.warriorButton.getHeight() * 2));
         	}
 			if(ShootEmUp.save.getMage() != null){
-				mageLevel = new Counter2(800, 600);
+				mageLevel = new Counter2((ShootEmUp.width / 2) + (Art.warriorButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.warriorButton.getHeight() * 2));
 			}
         }
     }
