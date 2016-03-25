@@ -22,6 +22,8 @@ public class PlayerAttack extends BaseAttack {
 	private Armour chest = null;
 	private Armour helmet = null;
 	
+	private int armourValue = 0;
+	
 	public PlayerAttack(TypeAttack type){
 		this.type = type;
 		
@@ -65,15 +67,19 @@ public class PlayerAttack extends BaseAttack {
 		weapon = WeaponBuilder.buildWeapon(save.getWeapon(), 0);
 		if(save.getBoots() != null){
 			boots = ArmourBuilder.buildArmour(save.getBoots());
+			setArmourValue();
 		}
 		if(save.getLegs() != null){
 			legs = ArmourBuilder.buildArmour(save.getLegs());
+			setArmourValue();
 		}
 		if(save.getChest() != null){
 			chest = ArmourBuilder.buildArmour(save.getChest());
+			setArmourValue();
 		}
 		if(save.getHelmet() != null){
 			helmet = ArmourBuilder.buildArmour(save.getHelmet());
+			setArmourValue();
 		}
 		
 		maxHealth = save.getMaxHealth();
@@ -105,7 +111,7 @@ public class PlayerAttack extends BaseAttack {
 	
 	@Override
 	public void damage(int damage, Entity e) {
-		damage = damage / (boots.getDefence() + legs.getDefence() + chest.getDefence() + helmet.getDefence());
+		damage = damage / armourValue;
 		super.damage(damage, e);
 		if(health <= 0) {
 			health = maxHealth;
@@ -160,18 +166,34 @@ public class PlayerAttack extends BaseAttack {
 	
 	public void setBoots(Armour boots) {
 		this.boots = boots;
+		setArmourValue();
 	}
 
 	public void setChest(Armour chest) {
 		this.chest = chest;
+		setArmourValue();
 	}
 	
 	public void setLegs(Armour legs) {
 		this.legs = legs;
+		setArmourValue();
 	}
 	
 	public void setHelmet(Armour helmet) {
 		this.helmet = helmet;
+		setArmourValue();
 	}
 		
+	public void setArmourValue() {
+		armourValue = 0;
+		if(boots != null){
+			armourValue += boots.getDefence();
+		} else if(legs != null){
+			armourValue += legs.getDefence();
+		} else if(chest != null){
+			armourValue += chest.getDefence();
+		} else if(helmet != null){
+			armourValue += helmet.getDefence();
+		}
+	}
 }
