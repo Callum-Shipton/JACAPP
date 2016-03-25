@@ -57,10 +57,14 @@ public class Art {
 	public static Image fireStaffButton;
 	public static Image earthStaffButton;
 	
-	public static Image bootsButton;
-	public static Image legsButton;
-	public static Image chestButton;
-	public static Image helmetButton;
+	public static Image leatherBootsButton;
+	public static Image leatherLegsButton;
+	public static Image leatherChestButton;
+	public static Image leatherHelmetButton;
+	public static Image ironBootsButton;
+	public static Image ironLegsButton;
+	public static Image ironChestButton;
+	public static Image ironHelmetButton;	
 	
 	public static Image healthButton;
 	public static Image healthRegenButton;
@@ -300,10 +304,14 @@ public class Art {
 		fireStaffButton = new Image("/Images/Menus/Buttons/Items/FireStaffButton.png",1,2);
 		earthStaffButton = new Image("/Images/Menus/Buttons/Items/EarthStaffButton.png",1,2);
 		
-		bootsButton = new Image("/Images/Menus/Buttons/Items/BootsButton.png",1,2);
-		legsButton = new Image("/Images/Menus/Buttons/Items/LegsButton.png",1,2);
-		chestButton = new Image("/Images/Menus/Buttons/Items/ChestButton.png",1,2);
-		helmetButton = new Image("/Images/Menus/Buttons/Items/HelmetButton.png",1,2);
+		leatherBootsButton = new Image("/Images/Menus/Buttons/Items/LeatherBootsButton.png",1,2);
+		leatherLegsButton = new Image("/Images/Menus/Buttons/Items/LeatherLegsButton.png",1,2);
+		leatherChestButton = new Image("/Images/Menus/Buttons/Items/LeatherChestButton.png",1,2);
+		leatherHelmetButton = new Image("/Images/Menus/Buttons/Items/LeatherHelmetButton.png",1,2);
+		ironBootsButton = new Image("/Images/Menus/Buttons/Items/IronBootsButton.png",1,2);
+		ironLegsButton = new Image("/Images/Menus/Buttons/Items/IronLegsButton.png",1,2);
+		ironChestButton = new Image("/Images/Menus/Buttons/Items/IronChestButton.png",1,2);
+		ironHelmetButton = new Image("/Images/Menus/Buttons/Items/IronHelmetButton.png",1,2);
 		
 		invButton = new Image("/Images/Menus/Buttons/Tabs/InventoryButton.png",1,2);
 		skillsButton = new Image("/Images/Menus/Buttons/Tabs/SkillButton.png",1,2);

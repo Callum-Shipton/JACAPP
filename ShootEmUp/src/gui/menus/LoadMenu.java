@@ -1,6 +1,5 @@
 package gui.menus;
 
-import gui.Button;
 import gui.ButtonBuilder;
 import gui.TypeButton;
 import main.ShootEmUp;

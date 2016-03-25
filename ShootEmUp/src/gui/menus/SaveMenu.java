@@ -1,9 +1,7 @@
 package gui.menus;
 
-import gui.Button;
 import gui.ButtonBuilder;
 import gui.TypeButton;
-import display.Art;
 import display.Image;
 
 public class SaveMenu extends PauseMenu {
