@@ -66,6 +66,13 @@ public class Art {
 	public static Image ironChestButton;
 	public static Image ironHelmetButton;	
 	
+	public static Image levelIcon;	
+	public static Image damageIcon;	
+	public static Image armourIcon;	
+	public static Image rangeIcon;	
+	public static Image fireRateIcon;	
+	public static Image manaCostIcon;	
+	
 	public static Image healthButton;
 	public static Image healthRegenButton;
 	public static Image manaButton;
@@ -316,6 +323,13 @@ public class Art {
 		ironLegsButton = new Image("/Images/Menus/Buttons/Items/IronLegsButton.png",1,2);
 		ironChestButton = new Image("/Images/Menus/Buttons/Items/IronChestButton.png",1,2);
 		ironHelmetButton = new Image("/Images/Menus/Buttons/Items/IronHelmetButton.png",1,2);
+		
+		levelIcon = new Image("/Images/Menus/Icons/LevelIcon.png",1,1);
+		damageIcon = new Image("/Images/Menus/Icons/DamageIcon.png",1,1);
+		armourIcon = new Image("/Images/Menus/Icons/ArmourIcon.png",1,1);
+		rangeIcon = new Image("/Images/Menus/Icons/RangeIcon.png",1,1);
+		fireRateIcon = new Image("/Images/Menus/Icons/FireRateIcon.png",1,1);
+		manaCostIcon = new Image("/Images/Menus/Icons/ManaCostIcon.png",1,1);
 		
 		invButton = new Image("/Images/Menus/Buttons/Tabs/InventoryButton.png",1,2);
 		skillsButton = new Image("/Images/Menus/Buttons/Tabs/SkillButton.png",1,2);

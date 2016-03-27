@@ -14,10 +14,19 @@ public class Icon extends GuiComponent {
 	protected boolean isAnimated;
 
 	
-	
+	/*
 	public Icon(float x, float y, float w, float h, Image i, boolean animating){
 		pos = new Vector2(x,y);
 		size = new Vector2(w,h);
+		setCurrFrame(new Vector2(0.0f, 0.0f));
+		maxFrame = new Vector2(i.getFWidth(), i.getFHeight());
+		this.i = i;
+		isAnimated = animating;
+	}
+	*/
+	public Icon(float x, float y, Image i, boolean animating){
+		pos = new Vector2(x,y);
+		size = new Vector2(i.getWidth()/i.getFWidth(),i.getHeight()/i.getFHeight());
 		setCurrFrame(new Vector2(0.0f, 0.0f));
 		maxFrame = new Vector2(i.getFWidth(), i.getFHeight());
 		this.i = i;

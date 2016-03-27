@@ -20,7 +20,7 @@ public class SkillMenu extends PauseMenu {
 		addButton(ButtonBuilder.buildButton(TypeButton.HEALTH,30, 64));
 		addButton(ButtonBuilder.buildButton(TypeButton.MANA_REGEN,30, 98));
 		addButton(ButtonBuilder.buildButton(TypeButton.MANA,30, 132));
-		skillPoints = new Counter(30.0f, 166.0f, (Art.coin.getWidth() / Art.coin.getFWidth()), Art.coin.getHeight(), Art.coin, true, ((PlayerInventory)ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)).getLevelPoints());
+		skillPoints = new Counter(30.0f, 166.0f, Art.coin, true, ((PlayerInventory)ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)).getLevelPoints());
     }
     
     public void update(){

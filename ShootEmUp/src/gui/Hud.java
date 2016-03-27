@@ -37,26 +37,26 @@ public class Hud extends GuiComponent{
 	public Hud(Entity player){
 		this.player = player;
 		hudElems = new CopyOnWriteArrayList<Icon>();
-		infoBoxTop = new Icon(0.0f,0.0f,Art.infoBoxTop.getWidth(),Art.infoBoxTop.getHeight(), Art.infoBoxTop, false);
+		infoBoxTop = new Icon(0.0f,0.0f, Art.infoBoxTop, false);
 		hudElems.add(infoBoxTop);
-		healthBar = new HudBar(10.0f, 10.0f, Art.healthBar.getWidth()/Art.healthBar.getFWidth(), Art.healthBar.getHeight()/Art.healthBar.getFHeight(), Art.healthBar);
+		healthBar = new HudBar(10.0f, 10.0f, Art.healthBar);
 		hudElems.add(healthBar);
-		manaBar = new HudBar(10.0f, 35.0f, Art.manaBar.getWidth()/Art.manaBar.getFWidth(), Art.manaBar.getHeight()/Art.manaBar.getFHeight(), Art.manaBar);
+		manaBar = new HudBar(10.0f, 35.0f, Art.manaBar);
 		hudElems.add(manaBar);
-		xpBar = new HudBar(10.0f, 60.0f, Art.xpBar.getWidth()/Art.xpBar.getFWidth(), Art.xpBar.getHeight()/Art.xpBar.getFHeight(), Art.xpBar);
+		xpBar = new HudBar(10.0f, 60.0f, Art.xpBar);
 		hudElems.add(xpBar);
-		moneyCounter = new Counter(10.0f, 82.0f, (Art.coin.getWidth() / Art.coin.getFWidth()), Art.coin.getHeight(), Art.coin, true, ((PlayerInventory)player.getComponent(TypeComponent.INVENTORY)).getCoins());
+		moneyCounter = new Counter(10.0f, 82.0f, Art.coin, true, ((PlayerInventory)player.getComponent(TypeComponent.INVENTORY)).getCoins());
 		hudElems.add(moneyCounter);
-		levelCounter = new Counter(68.0f, 84.0f, Art.level.getWidth(), Art.level.getHeight(), Art.level, false, ((PlayerInventory)player.getComponent(TypeComponent.INVENTORY)).getLevel());
+		levelCounter = new Counter(68.0f, 84.0f, Art.level, false, ((PlayerInventory)player.getComponent(TypeComponent.INVENTORY)).getLevel());
 		hudElems.add(levelCounter);
-		waveCounter = new Counter(154.0f, 83.0f, Art.wave.getWidth(), Art.wave.getHeight(), Art.wave, false, ShootEmUp.currentLevel.spawner.getWave());
+		waveCounter = new Counter(154.0f, 83.0f, Art.wave, false, ShootEmUp.currentLevel.spawner.getWave());
 		hudElems.add(waveCounter);
-		fire = new Icon(0.0f,100.0f,Art.fire.getWidth()/Art.fire.getFWidth(),Art.fire.getHeight(), Art.fire, false);
-		poison = new Icon(0.0f,120.0f,Art.poison.getWidth()/Art.poison.getFWidth(),Art.poison.getHeight(), Art.poison, false);
-		frost = new Icon(0.0f,140.0f,Art.frost.getWidth()/Art.frost.getFWidth(),Art.frost.getHeight(), Art.frost, false);
+		fire = new Icon(0.0f,100.0f, Art.fire, false);
+		poison = new Icon(0.0f,120.0f, Art.poison, false);
+		frost = new Icon(0.0f,140.0f, Art.frost, false);
 		
 		//Potions bar
-		infoBoxBottom = new Icon(0.0f,ShootEmUp.height - Art.infoBoxBottom.getHeight(),Art.infoBoxBottom.getWidth(),Art.infoBoxBottom.getHeight(), Art.infoBoxBottom, false);
+		infoBoxBottom = new Icon(0.0f,ShootEmUp.height - Art.infoBoxBottom.getHeight(), Art.infoBoxBottom, false);
 		hudElems.add(infoBoxBottom);
 	}
 	

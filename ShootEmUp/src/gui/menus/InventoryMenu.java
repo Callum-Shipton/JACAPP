@@ -2,7 +2,7 @@ package gui.menus;
 
 import gui.ButtonBuilder;
 import gui.TypeButton;
-import gui.Counter2;
+import gui.Counter;
 import gui.Icon;
 import gui.Inventory;
 import main.ShootEmUp;
@@ -22,14 +22,14 @@ public class InventoryMenu extends PauseMenu {
 	private Icon boots;
 	private Icon weapon;
 	
-	private Counter2 helmetArmour;
-	private Counter2 chestArmour;
-	private Counter2 legsArmour;
-	private Counter2 bootsArmour;
-	private Counter2 weaponDamage;
-	private Counter2 weaponRange;
-	private Counter2 weaponRate;
-	private Counter2 weaponCost;
+	private Counter helmetArmour;
+	private Counter chestArmour;
+	private Counter legsArmour;
+	private Counter bootsArmour;
+	private Counter weaponDamage;
+	private Counter weaponRange;
+	private Counter weaponRate;
+	private Counter weaponCost;
 	
 	private Inventory inventory;
 
@@ -122,46 +122,44 @@ public class InventoryMenu extends PauseMenu {
     	} else {
     		weaponIcon();
     	}
-    	
     	inventory.update();
     }
     
     public void helmetIcon(){
     	if(playerAttack.getHelmet() != null){    
 	        Image helmetArt =  playerAttack.getHelmet().getInventoryImage();
-	        helmet = new Icon(600.0f, 30.0f, helmetArt.getWidth(), helmetArt.getHeight()/2, helmetArt, true);
-	        helmetArmour = new Counter2(640.0f, 30f, playerAttack.getHelmet().getDefence());
+	        helmet = new Icon(560.0f, 30.0f, helmetArt, true);
+	        helmetArmour = new Counter(600.0f, 30f, Art.armourIcon, false, playerAttack.getHelmet().getDefence());
 	    }
     }
     public void chestIcon(){
     	if(playerAttack.getChest() != null){    
 	        Image chestArt =  playerAttack.getChest().getInventoryImage();
-	        chest = new Icon(600.0f, 70.0f, chestArt.getWidth(), chestArt.getHeight()/2, chestArt, true);
-	        chestArmour = new Counter2(640.0f, 70f, playerAttack.getChest().getDefence());
+	        chest = new Icon(560.0f, 70.0f, chestArt, true);
+	        chestArmour = new Counter(600.0f, 70f, Art.armourIcon, false, playerAttack.getChest().getDefence());
 	    }
     }
     public void legsIcon(){
     	if(playerAttack.getLegs() != null){
 	        Image legsArt =  playerAttack.getLegs().getInventoryImage();
-	        legs = new Icon(600.0f, 110.0f, legsArt.getWidth(), legsArt.getHeight()/2, legsArt, true);
-	        legsArmour = new Counter2(640.0f, 110.0f, playerAttack.getLegs().getDefence());
+	        legs = new Icon(560.0f, 110.0f, legsArt, true);
+	        legsArmour = new Counter(600.0f, 110.0f, Art.armourIcon, false, playerAttack.getLegs().getDefence());
         }
     }
     public void bootsIcon(){
     	if(playerAttack.getBoots() != null){
 	        Image bootsArt =  playerAttack.getBoots().getInventoryImage();
-	        boots = new Icon(600.0f, 150.0f, bootsArt.getWidth(), bootsArt.getHeight()/2, bootsArt, true);
-	        bootsArmour = new Counter2(640.0f, 150.0f, playerAttack.getBoots().getDefence());
+	        boots = new Icon(560.0f, 150.0f, bootsArt, true);
+	        bootsArmour = new Counter(600.0f, 150.0f, Art.armourIcon, false, playerAttack.getBoots().getDefence());
         }
     }
     public void weaponIcon(){
     	if(playerAttack.getWeapon() != null){   
-	        Image weaponArt =  playerAttack.getWeapon().getInventoryImage();
-	        weapon = new Icon(600.0f, 190.0f, weaponArt.getWidth(), weaponArt.getHeight()/2, weaponArt, true);
-	        weaponDamage = new Counter2(640.0f, 190.0f, playerAttack.getWeapon().getDamage());
-	        weaponRange = new Counter2(680.0f, 190.0f, playerAttack.getWeapon().getRange());
-	        weaponRate = new Counter2(720.0f, 190.0f, playerAttack.getWeapon().getFireRate());
-	        weaponCost = new Counter2(760.0f, 190.0f, playerAttack.getWeapon().getManaCost());
+	        weapon = new Icon(560.0f, 190.0f, playerAttack.getWeapon().getInventoryImage(), true);
+	        weaponDamage = new Counter(600.0f, 190.0f, Art.damageIcon, false, playerAttack.getWeapon().getDamage());
+	        weaponRange = new Counter(680.0f, 190.0f, Art.rangeIcon, false, playerAttack.getWeapon().getRange());
+	        weaponRate = new Counter(760.0f, 190.0f, Art.fireRateIcon, false, playerAttack.getWeapon().getFireRate());
+	        weaponCost = new Counter(840.0f, 190.0f, Art.manaCostIcon, false, playerAttack.getWeapon().getManaCost());
 	    }
     }
 }

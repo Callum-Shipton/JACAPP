@@ -9,8 +9,14 @@ public class HudBar extends Icon {
 	private float value = 3;
 	private float maxValue = 3;
 
+	/*
 	public HudBar(float x, float y, float w, float h, Image i) {
 		super(x, y, w, h, i, false);
+	}
+	*/
+	
+	public HudBar(float x, float y, Image i) {
+		super(x, y, i, false);
 	}
 	
 	public void render(DPDTRenderer r){
