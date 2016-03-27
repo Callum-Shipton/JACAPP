@@ -19,7 +19,7 @@ public class UpgradesMenu extends PauseMenu {
         super(menuImage);
         addButton(ButtonBuilder.buildButton(TypeButton.INVENTORY_UPGRADE, 30, 30));
 		addButton(ButtonBuilder.buildButton(TypeButton.POTIONS_UPGRADE, 30, 64));
-		coins = new Counter(30.0f, 98.0f, Art.coin, true, ((PlayerInventory)ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)).getCoins());
+		coins = new Counter(30.0f, 98.0f, Art.coin, true, ((PlayerInventory)ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)).getCoins(), 0.5f);
     }
     
     public void update(){

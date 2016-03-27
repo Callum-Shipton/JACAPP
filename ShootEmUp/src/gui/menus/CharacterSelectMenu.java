@@ -23,13 +23,13 @@ public class CharacterSelectMenu extends GuiMenu {
         
         if(ShootEmUp.save != null){
         	if(ShootEmUp.save.getWarrior() != null){
-        		warriorLevel = new Counter((ShootEmUp.width / 2) + (Art.warriorButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.warriorButton.getHeight() * 2), Art.levelIcon, false, ShootEmUp.save.getWarrior().getPlayerLevel());
+        		warriorLevel = new Counter((ShootEmUp.width / 2) + (Art.warriorButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.warriorButton.getHeight() * 2), Art.levelIcon, false, ShootEmUp.save.getWarrior().getPlayerLevel(), 0.5f);
         	}
         	if(ShootEmUp.save.getArcher() != null){
-        		archerLevel = new Counter((ShootEmUp.width / 2) + (Art.warriorButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.warriorButton.getHeight() * 2), Art.levelIcon, false, ShootEmUp.save.getArcher().getPlayerLevel());
+        		archerLevel = new Counter((ShootEmUp.width / 2) + (Art.warriorButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.warriorButton.getHeight() * 2), Art.levelIcon, false, ShootEmUp.save.getArcher().getPlayerLevel(), 0.5f);
         	}
 			if(ShootEmUp.save.getMage() != null){
-				mageLevel = new Counter((ShootEmUp.width / 2) + (Art.warriorButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.warriorButton.getHeight() * 2), Art.levelIcon, false, ShootEmUp.save.getMage().getPlayerLevel());
+				mageLevel = new Counter((ShootEmUp.width / 2) + (Art.warriorButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.warriorButton.getHeight() * 2), Art.levelIcon, false, ShootEmUp.save.getMage().getPlayerLevel(), 0.5f);
 			}
         }
     }

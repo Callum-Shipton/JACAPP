@@ -71,7 +71,9 @@ public class Art {
 	public static Image armourIcon;	
 	public static Image rangeIcon;	
 	public static Image fireRateIcon;	
-	public static Image manaCostIcon;	
+	public static Image manaCostIcon;
+	public static Image coinIcon;	
+	public static Image waveIcon;	
 	
 	public static Image healthButton;
 	public static Image healthRegenButton;
@@ -148,8 +150,6 @@ public class Art {
 	public static Image healthBar;
 	public static Image manaBar;
 	public static Image xpBar;
-	public static Image level;
-	public static Image wave;
 	public static Image numbers;
 	
 	//Level map file locations
@@ -330,6 +330,8 @@ public class Art {
 		rangeIcon = new Image("/Images/Menus/Icons/RangeIcon.png",1,1);
 		fireRateIcon = new Image("/Images/Menus/Icons/FireRateIcon.png",1,1);
 		manaCostIcon = new Image("/Images/Menus/Icons/ManaCostIcon.png",1,1);
+		coinIcon = new Image("/Images/Menus/Icons/CoinIcon.png",1,1);
+		waveIcon = new Image("/Images/Menus/Icons/WaveIcon.png",1,1);
 		
 		invButton = new Image("/Images/Menus/Buttons/Tabs/InventoryButton.png",1,2);
 		skillsButton = new Image("/Images/Menus/Buttons/Tabs/SkillButton.png",1,2);
@@ -397,8 +399,6 @@ public class Art {
 		healthBar = new Image("/Images/HUD/BarHealth.png",1,2);			
 		manaBar = new Image("/Images/HUD/BarMana.png",1,2);
 		xpBar = new Image("/Images/HUD/BarXP.png",1,2);
-		level = new Image("/Images/HUD/Level.png",1,1);
-		wave = new Image("/Images/HUD/Wave.png",1,1);
 		numbers = new Image("/Images/HUD/Numbers.png",10,1);
 		
 		infoBoxBottom = new Image("/Images/HUD/BarInfoBottom.png",1,1);

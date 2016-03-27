@@ -7,10 +7,14 @@ import math.Vector2;
 
 public class Counter extends Icon{
 
-	int count;
-	float width;
-	float x;
-	float y;
+	private int count;
+	private float x;
+	private float y;
+	private Vector2 size;
+	private int width;
+	private final int FIRST_GAP = 5;
+	private final int NUMBER_GAP = 25;
+	private float scale;
 	
 	/*
 	public Counter(float x, float y, float w, float h, Image i, boolean animating, int count) {
@@ -22,12 +26,15 @@ public class Counter extends Icon{
 	}
 	*/
 	
-	public Counter(float x, float y, Image i, boolean animating, int count) {
-		super(x, y, i, animating);
-		width = i.getWidth()/i.getFWidth();
+	public Counter(float x, float y, Image i, boolean animating, int count, float scale) {
+		super(x, y, i, animating, scale);
+		
+		this.scale = scale;
 		this.x = x;
 		this.y = y;
 		this.count = count;
+		width = (int) ((i.getWidth()/i.getFWidth()) * scale);
+		size = new Vector2((i.getHeight()/i.getFHeight()) * scale,(i.getHeight()/i.getFHeight()) * scale);
 	}
 
 	public void update(int count){
@@ -38,14 +45,13 @@ public class Counter extends Icon{
 	public void render(DPDTRenderer r){
 		super.render(r);
 		
-		Vector2 size = new Vector2(16,16);
 		Vector2 maxTex = new Vector2(10,1);
 		
 		if(count < 10){
-			Art.stat.draw(Art.numbers, new Vector2(x + width + 5, y), size, 0.0f, new Vector2(count,1), maxTex);
+			Art.stat.draw(Art.numbers, new Vector2(x + width + (FIRST_GAP * scale), y), size, 0.0f, new Vector2(count,1), maxTex);
 		} else {
-			Art.stat.draw(Art.numbers, new Vector2(x + width + 5, y), size, 0.0f, new Vector2((int) Math.floor(count / 10),1), maxTex);
-			Art.stat.draw(Art.numbers, new Vector2(x + width + 25, y), size, 0.0f, new Vector2(count % 10,1), maxTex);
+			Art.stat.draw(Art.numbers, new Vector2(x + width + (FIRST_GAP * scale), y), size, 0.0f, new Vector2((int) Math.floor(count / 10),1), maxTex);
+			Art.stat.draw(Art.numbers, new Vector2(x + width + (NUMBER_GAP * scale), y), size, 0.0f, new Vector2(count % 10,1), maxTex);
 		}
 	}
 }

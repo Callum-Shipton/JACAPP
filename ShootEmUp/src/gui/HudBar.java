@@ -15,8 +15,8 @@ public class HudBar extends Icon {
 	}
 	*/
 	
-	public HudBar(float x, float y, Image i) {
-		super(x, y, i, false);
+	public HudBar(float x, float y, Image i, float scale) {
+		super(x, y, i, false, scale);
 	}
 	
 	public void render(DPDTRenderer r){

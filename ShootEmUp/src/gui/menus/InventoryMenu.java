@@ -128,38 +128,38 @@ public class InventoryMenu extends PauseMenu {
     public void helmetIcon(){
     	if(playerAttack.getHelmet() != null){    
 	        Image helmetArt =  playerAttack.getHelmet().getInventoryImage();
-	        helmet = new Icon(560.0f, 30.0f, helmetArt, true);
-	        helmetArmour = new Counter(600.0f, 30f, Art.armourIcon, false, playerAttack.getHelmet().getDefence());
+	        helmet = new Icon(560.0f, 30.0f, helmetArt, true, 1f);
+	        helmetArmour = new Counter(600.0f, 30f, Art.armourIcon, false, playerAttack.getHelmet().getDefence(), 0.5f);
 	    }
     }
     public void chestIcon(){
     	if(playerAttack.getChest() != null){    
 	        Image chestArt =  playerAttack.getChest().getInventoryImage();
-	        chest = new Icon(560.0f, 70.0f, chestArt, true);
-	        chestArmour = new Counter(600.0f, 70f, Art.armourIcon, false, playerAttack.getChest().getDefence());
+	        chest = new Icon(560.0f, 70.0f, chestArt, true, 1f);
+	        chestArmour = new Counter(600.0f, 70f, Art.armourIcon, false, playerAttack.getChest().getDefence(), 0.5f);
 	    }
     }
     public void legsIcon(){
     	if(playerAttack.getLegs() != null){
 	        Image legsArt =  playerAttack.getLegs().getInventoryImage();
-	        legs = new Icon(560.0f, 110.0f, legsArt, true);
-	        legsArmour = new Counter(600.0f, 110.0f, Art.armourIcon, false, playerAttack.getLegs().getDefence());
+	        legs = new Icon(560.0f, 110.0f, legsArt, true, 1f);
+	        legsArmour = new Counter(600.0f, 110.0f, Art.armourIcon, false, playerAttack.getLegs().getDefence(), 0.5f);
         }
     }
     public void bootsIcon(){
     	if(playerAttack.getBoots() != null){
 	        Image bootsArt =  playerAttack.getBoots().getInventoryImage();
-	        boots = new Icon(560.0f, 150.0f, bootsArt, true);
-	        bootsArmour = new Counter(600.0f, 150.0f, Art.armourIcon, false, playerAttack.getBoots().getDefence());
+	        boots = new Icon(560.0f, 150.0f, bootsArt, true, 1f);
+	        bootsArmour = new Counter(600.0f, 150.0f, Art.armourIcon, false, playerAttack.getBoots().getDefence(), 0.5f);
         }
     }
     public void weaponIcon(){
     	if(playerAttack.getWeapon() != null){   
-	        weapon = new Icon(560.0f, 190.0f, playerAttack.getWeapon().getInventoryImage(), true);
-	        weaponDamage = new Counter(600.0f, 190.0f, Art.damageIcon, false, playerAttack.getWeapon().getDamage());
-	        weaponRange = new Counter(680.0f, 190.0f, Art.rangeIcon, false, playerAttack.getWeapon().getRange());
-	        weaponRate = new Counter(760.0f, 190.0f, Art.fireRateIcon, false, playerAttack.getWeapon().getFireRate());
-	        weaponCost = new Counter(840.0f, 190.0f, Art.manaCostIcon, false, playerAttack.getWeapon().getManaCost());
+	        weapon = new Icon(560.0f, 190.0f, playerAttack.getWeapon().getInventoryImage(), true, 1f);
+	        weaponDamage = new Counter(600.0f, 190.0f, Art.damageIcon, false, playerAttack.getWeapon().getDamage(), 0.5f);
+	        weaponRange = new Counter(680.0f, 190.0f, Art.rangeIcon, false, playerAttack.getWeapon().getRange(), 0.5f);
+	        weaponRate = new Counter(760.0f, 190.0f, Art.fireRateIcon, false, playerAttack.getWeapon().getFireRate(), 0.5f);
+	        weaponCost = new Counter(840.0f, 190.0f, Art.manaCostIcon, false, playerAttack.getWeapon().getManaCost(), 0.5f);
 	    }
     }
 }

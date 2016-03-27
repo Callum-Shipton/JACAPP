@@ -37,26 +37,26 @@ public class Hud extends GuiComponent{
 	public Hud(Entity player){
 		this.player = player;
 		hudElems = new CopyOnWriteArrayList<Icon>();
-		infoBoxTop = new Icon(0.0f,0.0f, Art.infoBoxTop, false);
+		infoBoxTop = new Icon(0.0f,0.0f, Art.infoBoxTop, false, 1f);
 		hudElems.add(infoBoxTop);
-		healthBar = new HudBar(10.0f, 10.0f, Art.healthBar);
+		healthBar = new HudBar(10.0f, 10.0f, Art.healthBar, 1f);
 		hudElems.add(healthBar);
-		manaBar = new HudBar(10.0f, 35.0f, Art.manaBar);
+		manaBar = new HudBar(10.0f, 35.0f, Art.manaBar, 1f);
 		hudElems.add(manaBar);
-		xpBar = new HudBar(10.0f, 60.0f, Art.xpBar);
+		xpBar = new HudBar(10.0f, 60.0f, Art.xpBar, 1f);
 		hudElems.add(xpBar);
-		moneyCounter = new Counter(10.0f, 82.0f, Art.coin, true, ((PlayerInventory)player.getComponent(TypeComponent.INVENTORY)).getCoins());
+		moneyCounter = new Counter(10.0f, 82.0f, Art.coinIcon, false, ((PlayerInventory)player.getComponent(TypeComponent.INVENTORY)).getCoins(), 0.5f);
 		hudElems.add(moneyCounter);
-		levelCounter = new Counter(68.0f, 84.0f, Art.level, false, ((PlayerInventory)player.getComponent(TypeComponent.INVENTORY)).getLevel());
+		levelCounter = new Counter(90.0f, 82.0f, Art.levelIcon, false, ((PlayerInventory)player.getComponent(TypeComponent.INVENTORY)).getLevel(), 0.5f);
 		hudElems.add(levelCounter);
-		waveCounter = new Counter(154.0f, 83.0f, Art.wave, false, ShootEmUp.currentLevel.spawner.getWave());
+		waveCounter = new Counter(170.0f, 82.0f, Art.waveIcon, false, ShootEmUp.currentLevel.spawner.getWave(), 0.5f);
 		hudElems.add(waveCounter);
-		fire = new Icon(0.0f,100.0f, Art.fire, false);
-		poison = new Icon(0.0f,120.0f, Art.poison, false);
-		frost = new Icon(0.0f,140.0f, Art.frost, false);
+		fire = new Icon(0.0f,100.0f, Art.fire, false, 1f);
+		poison = new Icon(0.0f,120.0f, Art.poison, false, 1f);
+		frost = new Icon(0.0f,140.0f, Art.frost, false, 1f);
 		
 		//Potions bar
-		infoBoxBottom = new Icon(0.0f,ShootEmUp.height - Art.infoBoxBottom.getHeight(), Art.infoBoxBottom, false);
+		infoBoxBottom = new Icon(0.0f,ShootEmUp.height - Art.infoBoxBottom.getHeight(), Art.infoBoxBottom, false, 1f);
 		hudElems.add(infoBoxBottom);
 	}
 	
