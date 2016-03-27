@@ -46,34 +46,11 @@ public class InventoryMenu extends PauseMenu {
         addButton(ButtonBuilder.buildButton(TypeButton.MAP, 922, 306));
         addButton(ButtonBuilder.buildButton(TypeButton.SAVE, 922, 408));
     	
-    	if(playerAttack.getHelmet() != null){    
-	        Image helmetArt =  playerAttack.getHelmet().getInventoryImage();
-	        helmet = new Icon(600.0f, 30.0f, helmetArt.getWidth(), helmetArt.getHeight()/2, helmetArt, true);
-	        helmetArmour = new Counter2(640.0f, 30f, playerAttack.getHelmet().getDefence());
-	    }
-	    if(playerAttack.getChest() != null){    
-	        Image chestArt =  playerAttack.getChest().getInventoryImage();
-	        chest = new Icon(600.0f, 70.0f, chestArt.getWidth(), chestArt.getHeight()/2, chestArt, true);
-	        chestArmour = new Counter2(640.0f, 70f, playerAttack.getChest().getDefence());
-	    }
-	    if(playerAttack.getLegs() != null){
-	        Image legsArt =  playerAttack.getLegs().getInventoryImage();
-	        legs = new Icon(600.0f, 110.0f, legsArt.getWidth(), legsArt.getHeight()/2, legsArt, true);
-	        legsArmour = new Counter2(640.0f, 110.0f, playerAttack.getLegs().getDefence());
-        }
-	    if(playerAttack.getBoots() != null){
-	        Image bootsArt =  playerAttack.getBoots().getInventoryImage();
-	        boots = new Icon(600.0f, 150.0f, bootsArt.getWidth(), bootsArt.getHeight()/2, bootsArt, true);
-	        bootsArmour = new Counter2(640.0f, 150.0f, playerAttack.getBoots().getDefence());
-        }
-	    if(playerAttack.getWeapon() != null){   
-	        Image weaponArt =  playerAttack.getWeapon().getInventoryImage();
-	        weapon = new Icon(600.0f, 190.0f, weaponArt.getWidth(), weaponArt.getHeight()/2, weaponArt, true);
-	        weaponDamage = new Counter2(640.0f, 190.0f, playerAttack.getWeapon().getDamage());
-	        weaponRange = new Counter2(680.0f, 190.0f, playerAttack.getWeapon().getRange());
-	        weaponRate = new Counter2(720.0f, 190.0f, playerAttack.getWeapon().getFireRate());
-	        weaponCost = new Counter2(760.0f, 190.0f, playerAttack.getWeapon().getManaCost());
-	    }
+        helmetIcon();
+        chestIcon();
+        legsIcon();
+        bootsIcon();
+        weaponIcon();
 	    
 	    inventory = new Inventory(((PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY))).getInventory());
     }
@@ -116,41 +93,25 @@ public class InventoryMenu extends PauseMenu {
     		boots.setI(playerAttack.getBoots().getInventoryImage());
     		bootsArmour.update(playerAttack.getBoots().getDefence());
     	} else {
-    		if(playerAttack.getBoots() != null){
-    			Image bootsArt =  playerAttack.getBoots().getInventoryImage();
-    	        boots = new Icon(600.0f, 150.0f, bootsArt.getWidth(), bootsArt.getHeight()/2, bootsArt, true);
-    	        bootsArmour = new Counter2(640.0f, 150.0f, playerAttack.getBoots().getDefence());
-    		}
+    		bootsIcon();
     	}
     	if(legs != null){
     		legs.setI(playerAttack.getLegs().getInventoryImage());
     		legsArmour.update(playerAttack.getLegs().getDefence());
     	} else {
-    		if(playerAttack.getLegs() != null){
-    			Image legsArt =  playerAttack.getLegs().getInventoryImage();
-    	        legs = new Icon(600.0f, 110.0f, legsArt.getWidth(), legsArt.getHeight()/2, legsArt, true);
-    	        legsArmour = new Counter2(640.0f, 110.0f, playerAttack.getLegs().getDefence());
-    		}
+    		legsIcon();
     	}
     	if(chest != null){
     		chest.setI(playerAttack.getChest().getInventoryImage());
     		chestArmour.update(playerAttack.getChest().getDefence());
     	} else {
-    		if(playerAttack.getChest() != null){
-    			Image chestArt =  playerAttack.getChest().getInventoryImage();
-    	        chest = new Icon(600.0f, 70.0f, chestArt.getWidth(), chestArt.getHeight()/2, chestArt, true);
-    	        chestArmour = new Counter2(640.0f, 70.0f, playerAttack.getChest().getDefence());
-    		}
+    		chestIcon();
     	}
     	if(helmet != null){
     		helmet.setI(playerAttack.getHelmet().getInventoryImage());
     		helmetArmour.update(playerAttack.getHelmet().getDefence());
     	} else {
-    		if(playerAttack.getHelmet() != null){
-    			Image helmetArt =  playerAttack.getHelmet().getInventoryImage();
-    	        helmet = new Icon(600.0f, 30.0f, helmetArt.getWidth(), helmetArt.getHeight()/2, helmetArt, true);
-    	        helmetArmour = new Counter2(640.0f, 30.0f, playerAttack.getHelmet().getDefence());
-    		}
+    		helmetIcon();
     	}
     	if(weapon != null){
     		weapon.setI(playerAttack.getWeapon().getInventoryImage());
@@ -159,16 +120,48 @@ public class InventoryMenu extends PauseMenu {
 	        weaponRate.update(playerAttack.getWeapon().getFireRate());
 	        weaponCost.update(playerAttack.getWeapon().getManaCost());
     	} else {
-    		if(playerAttack.getWeapon() != null){   
-    	        Image weaponArt =  playerAttack.getWeapon().getInventoryImage();
-    	        weapon = new Icon(600.0f, 190.0f, weaponArt.getWidth(), weaponArt.getHeight()/2, weaponArt, true);
-    	        weaponDamage = new Counter2(640.0f, 190.0f, playerAttack.getWeapon().getDamage());
-    	        weaponRange = new Counter2(680.0f, 190.0f, playerAttack.getWeapon().getRange());
-    	        weaponRate = new Counter2(720.0f, 190.0f, playerAttack.getWeapon().getFireRate());
-    	        weaponCost = new Counter2(760.0f, 190.0f, playerAttack.getWeapon().getManaCost());
-    	    }
+    		weaponIcon();
     	}
     	
     	inventory.update();
+    }
+    
+    public void helmetIcon(){
+    	if(playerAttack.getHelmet() != null){    
+	        Image helmetArt =  playerAttack.getHelmet().getInventoryImage();
+	        helmet = new Icon(600.0f, 30.0f, helmetArt.getWidth(), helmetArt.getHeight()/2, helmetArt, true);
+	        helmetArmour = new Counter2(640.0f, 30f, playerAttack.getHelmet().getDefence());
+	    }
+    }
+    public void chestIcon(){
+    	if(playerAttack.getChest() != null){    
+	        Image chestArt =  playerAttack.getChest().getInventoryImage();
+	        chest = new Icon(600.0f, 70.0f, chestArt.getWidth(), chestArt.getHeight()/2, chestArt, true);
+	        chestArmour = new Counter2(640.0f, 70f, playerAttack.getChest().getDefence());
+	    }
+    }
+    public void legsIcon(){
+    	if(playerAttack.getLegs() != null){
+	        Image legsArt =  playerAttack.getLegs().getInventoryImage();
+	        legs = new Icon(600.0f, 110.0f, legsArt.getWidth(), legsArt.getHeight()/2, legsArt, true);
+	        legsArmour = new Counter2(640.0f, 110.0f, playerAttack.getLegs().getDefence());
+        }
+    }
+    public void bootsIcon(){
+    	if(playerAttack.getBoots() != null){
+	        Image bootsArt =  playerAttack.getBoots().getInventoryImage();
+	        boots = new Icon(600.0f, 150.0f, bootsArt.getWidth(), bootsArt.getHeight()/2, bootsArt, true);
+	        bootsArmour = new Counter2(640.0f, 150.0f, playerAttack.getBoots().getDefence());
+        }
+    }
+    public void weaponIcon(){
+    	if(playerAttack.getWeapon() != null){   
+	        Image weaponArt =  playerAttack.getWeapon().getInventoryImage();
+	        weapon = new Icon(600.0f, 190.0f, weaponArt.getWidth(), weaponArt.getHeight()/2, weaponArt, true);
+	        weaponDamage = new Counter2(640.0f, 190.0f, playerAttack.getWeapon().getDamage());
+	        weaponRange = new Counter2(680.0f, 190.0f, playerAttack.getWeapon().getRange());
+	        weaponRate = new Counter2(720.0f, 190.0f, playerAttack.getWeapon().getFireRate());
+	        weaponCost = new Counter2(760.0f, 190.0f, playerAttack.getWeapon().getManaCost());
+	    }
     }
 }
