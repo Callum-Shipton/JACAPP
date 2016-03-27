@@ -10,9 +10,10 @@ public class Counter2 {
 	private float x;
 	private float y;
 	
-	public Counter2(float x, float y) {
+	public Counter2(float x, float y, int count) {
 		this.x = x;
 		this.y = y;
+		this.count = count;
 	}
 
 	public void update(int count){

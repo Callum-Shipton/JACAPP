@@ -1,25 +1,20 @@
 package gui.menus;
 
-import gui.Button;
 import gui.ButtonBuilder;
 import gui.TypeButton;
 import gui.Counter2;
 import gui.Icon;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import object.InventoryItem;
+import gui.Inventory;
 import main.ShootEmUp;
 import components.TypeComponent;
-import components.inventory.PlayerInventory;
 import components.attack.PlayerAttack;
+import components.inventory.PlayerInventory;
 import display.Art;
 import display.Image;
 
 public class InventoryMenu extends PauseMenu {
 	
-	private ArrayList<Button> itemButtons;
+	private PlayerAttack playerAttack;
 	
 	private Icon helmet;
 	private Icon chest;
@@ -36,20 +31,13 @@ public class InventoryMenu extends PauseMenu {
 	private Counter2 weaponRate;
 	private Counter2 weaponCost;
 	
-	private int row = 0;
-	private int column = 0;
-	
-	private final int inventoryX = 30;
-	private final int inventoryY = 30;
+	private Inventory inventory;
 
     public InventoryMenu(Image menuImage) {
         super(menuImage);
         
-        addButtons();
-    }
-
-    public void addButtons(){
-    	
+        playerAttack = (PlayerAttack)ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK);
+        
     	addButton(ButtonBuilder.buildButton(TypeButton.RESUME, 30, ShootEmUp.height - 64));
         addButton(ButtonBuilder.buildButton(TypeButton.MAIN_MENU, 30, ShootEmUp.height - 94));
         addButton(ButtonBuilder.buildButton(TypeButton.INVENTORY, 922, 0));
@@ -58,51 +46,36 @@ public class InventoryMenu extends PauseMenu {
         addButton(ButtonBuilder.buildButton(TypeButton.MAP, 922, 306));
         addButton(ButtonBuilder.buildButton(TypeButton.SAVE, 922, 408));
     	
-    	if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getHelmet() != null){    
-	        Image helmetArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getHelmet().getInventoryImage();
+    	if(playerAttack.getHelmet() != null){    
+	        Image helmetArt =  playerAttack.getHelmet().getInventoryImage();
 	        helmet = new Icon(600.0f, 30.0f, helmetArt.getWidth(), helmetArt.getHeight()/2, helmetArt, true);
-	        helmetArmour = new Counter2(640.0f, 30f);
+	        helmetArmour = new Counter2(640.0f, 30f, playerAttack.getHelmet().getDefence());
 	    }
-	    if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getChest() != null){    
-	        Image chestArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getChest().getInventoryImage();
+	    if(playerAttack.getChest() != null){    
+	        Image chestArt =  playerAttack.getChest().getInventoryImage();
 	        chest = new Icon(600.0f, 70.0f, chestArt.getWidth(), chestArt.getHeight()/2, chestArt, true);
-	        chestArmour = new Counter2(640.0f, 70f);
+	        chestArmour = new Counter2(640.0f, 70f, playerAttack.getChest().getDefence());
 	    }
-	    if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getLegs() != null){
-	        Image legsArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getLegs().getInventoryImage();
+	    if(playerAttack.getLegs() != null){
+	        Image legsArt =  playerAttack.getLegs().getInventoryImage();
 	        legs = new Icon(600.0f, 110.0f, legsArt.getWidth(), legsArt.getHeight()/2, legsArt, true);
-	        legsArmour = new Counter2(640.0f, 110.0f);
+	        legsArmour = new Counter2(640.0f, 110.0f, playerAttack.getLegs().getDefence());
         }
-	    if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getBoots() != null){
-	        Image bootsArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getBoots().getInventoryImage();
+	    if(playerAttack.getBoots() != null){
+	        Image bootsArt =  playerAttack.getBoots().getInventoryImage();
 	        boots = new Icon(600.0f, 150.0f, bootsArt.getWidth(), bootsArt.getHeight()/2, bootsArt, true);
-	        bootsArmour = new Counter2(640.0f, 150.0f);
+	        bootsArmour = new Counter2(640.0f, 150.0f, playerAttack.getBoots().getDefence());
         }
-	    if(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getWeapon() != null){   
-	        Image weaponArt =  ((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getWeapon().getInventoryImage();
+	    if(playerAttack.getWeapon() != null){   
+	        Image weaponArt =  playerAttack.getWeapon().getInventoryImage();
 	        weapon = new Icon(600.0f, 190.0f, weaponArt.getWidth(), weaponArt.getHeight()/2, weaponArt, true);
-	        weaponDamage = new Counter2(640.0f, 190.0f);
-	        weaponRange = new Counter2(680.0f, 190.0f);
-	        weaponRate = new Counter2(720.0f, 190.0f);
-	        weaponCost = new Counter2(760.0f, 190.0f);
+	        weaponDamage = new Counter2(640.0f, 190.0f, playerAttack.getWeapon().getDamage());
+	        weaponRange = new Counter2(680.0f, 190.0f, playerAttack.getWeapon().getRange());
+	        weaponRate = new Counter2(720.0f, 190.0f, playerAttack.getWeapon().getFireRate());
+	        weaponCost = new Counter2(760.0f, 190.0f, playerAttack.getWeapon().getManaCost());
 	    }
-        
-        itemButtons = new ArrayList<Button>();
-    	
-        row = 0;
-        column = 0;
-        
-    	itemButtons.clear();
-        Iterator<InventoryItem> items = ((PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY))).getInventory().iterator();
-		while(items.hasNext()){
-			InventoryItem item = items.next();
-			itemButtons.add(addButton(new Button(TypeButton.OTHER, item.getInventoryImage(), inventoryX + ((item.getInventoryImage().getWidth() * row)), inventoryY + (((item.getInventoryImage().getHeight()/2) * column)))));
-			row++;
-			if(row > 10){
-				row = 0;
-				column++;
-			}
-		}
+	    
+	    inventory = new Inventory(((PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY))).getInventory());
     }
     
     public void render(){
@@ -130,6 +103,8 @@ public class InventoryMenu extends PauseMenu {
 	        weaponRate.render(Art.stat);
 	        weaponCost.render(Art.stat);
     	}
+    	
+    	inventory.render();
    	}
     
     
@@ -138,49 +113,62 @@ public class InventoryMenu extends PauseMenu {
     	super.update();  	
     	
     	if(boots != null){
-    		boots.setI(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getBoots().getInventoryImage());
-    		bootsArmour.update(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getBoots().getDefence());
+    		boots.setI(playerAttack.getBoots().getInventoryImage());
+    		bootsArmour.update(playerAttack.getBoots().getDefence());
+    	} else {
+    		if(playerAttack.getBoots() != null){
+    			Image bootsArt =  playerAttack.getBoots().getInventoryImage();
+    	        boots = new Icon(600.0f, 150.0f, bootsArt.getWidth(), bootsArt.getHeight()/2, bootsArt, true);
+    	        bootsArmour = new Counter2(640.0f, 150.0f, playerAttack.getBoots().getDefence());
+    		}
     	}
     	if(legs != null){
-    		legs.setI(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getLegs().getInventoryImage());
-    		legsArmour.update(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getLegs().getDefence());
+    		legs.setI(playerAttack.getLegs().getInventoryImage());
+    		legsArmour.update(playerAttack.getLegs().getDefence());
+    	} else {
+    		if(playerAttack.getLegs() != null){
+    			Image legsArt =  playerAttack.getLegs().getInventoryImage();
+    	        legs = new Icon(600.0f, 110.0f, legsArt.getWidth(), legsArt.getHeight()/2, legsArt, true);
+    	        legsArmour = new Counter2(640.0f, 110.0f, playerAttack.getLegs().getDefence());
+    		}
     	}
     	if(chest != null){
-    		chest.setI(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getChest().getInventoryImage());
-    		chestArmour.update(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getChest().getDefence());
+    		chest.setI(playerAttack.getChest().getInventoryImage());
+    		chestArmour.update(playerAttack.getChest().getDefence());
+    	} else {
+    		if(playerAttack.getChest() != null){
+    			Image chestArt =  playerAttack.getChest().getInventoryImage();
+    	        chest = new Icon(600.0f, 70.0f, chestArt.getWidth(), chestArt.getHeight()/2, chestArt, true);
+    	        chestArmour = new Counter2(640.0f, 70.0f, playerAttack.getChest().getDefence());
+    		}
     	}
     	if(helmet != null){
-    		helmet.setI(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getHelmet().getInventoryImage());
-    		helmetArmour.update(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getHelmet().getDefence());
+    		helmet.setI(playerAttack.getHelmet().getInventoryImage());
+    		helmetArmour.update(playerAttack.getHelmet().getDefence());
+    	} else {
+    		if(playerAttack.getHelmet() != null){
+    			Image helmetArt =  playerAttack.getHelmet().getInventoryImage();
+    	        helmet = new Icon(600.0f, 30.0f, helmetArt.getWidth(), helmetArt.getHeight()/2, helmetArt, true);
+    	        helmetArmour = new Counter2(640.0f, 30.0f, playerAttack.getHelmet().getDefence());
+    		}
     	}
     	if(weapon != null){
-    		weapon.setI(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getWeapon().getInventoryImage());
-    		weaponDamage.update(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getWeapon().getDamage());
-    		weaponRange.update(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getWeapon().getRange());
-	        weaponRate.update(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getWeapon().getFireRate());
-	        weaponCost.update(((PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))).getWeapon().getManaCost());
+    		weapon.setI(playerAttack.getWeapon().getInventoryImage());
+    		weaponDamage.update(playerAttack.getWeapon().getDamage());
+    		weaponRange.update(playerAttack.getWeapon().getRange());
+	        weaponRate.update(playerAttack.getWeapon().getFireRate());
+	        weaponCost.update(playerAttack.getWeapon().getManaCost());
+    	} else {
+    		if(playerAttack.getWeapon() != null){   
+    	        Image weaponArt =  playerAttack.getWeapon().getInventoryImage();
+    	        weapon = new Icon(600.0f, 190.0f, weaponArt.getWidth(), weaponArt.getHeight()/2, weaponArt, true);
+    	        weaponDamage = new Counter2(640.0f, 190.0f, playerAttack.getWeapon().getDamage());
+    	        weaponRange = new Counter2(680.0f, 190.0f, playerAttack.getWeapon().getRange());
+    	        weaponRate = new Counter2(720.0f, 190.0f, playerAttack.getWeapon().getFireRate());
+    	        weaponCost = new Counter2(760.0f, 190.0f, playerAttack.getWeapon().getManaCost());
+    	    }
     	}
     	
-    	Iterator<Button> Buttons = itemButtons.iterator();
-    	Button itemButton;
-    	boolean change = false;
-    	int position = 0;
-		while(Buttons.hasNext()){
-			itemButton = Buttons.next();
-			if(itemButton.hasClicked()){
-				((PlayerInventory)(ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY))).equipItem(position);
-				itemButton.postAction();
-				removeButton(itemButton);
-				Buttons.remove();
-				change = true;
-			}
-
-			position++;
-		}
-		
-		if(change == true){
-			buttons.clear();
-			addButtons();
-		}
+    	inventory.update();
     }
 }

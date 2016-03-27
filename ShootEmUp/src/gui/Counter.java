@@ -12,11 +12,12 @@ public class Counter extends Icon{
 	float x;
 	float y;
 	
-	public Counter(float x, float y, float w, float h, Image i, boolean animating) {
+	public Counter(float x, float y, float w, float h, Image i, boolean animating, int count) {
 		super(x, y, w, h, i, animating);
 		width = w;
 		this.x = x;
 		this.y = y;
+		this.count = count;
 	}
 
 	public void update(int count){

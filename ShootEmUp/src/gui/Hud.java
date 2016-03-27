@@ -45,11 +45,11 @@ public class Hud extends GuiComponent{
 		hudElems.add(manaBar);
 		xpBar = new HudBar(10.0f, 60.0f, Art.xpBar.getWidth()/Art.xpBar.getFWidth(), Art.xpBar.getHeight()/Art.xpBar.getFHeight(), Art.xpBar);
 		hudElems.add(xpBar);
-		moneyCounter = new Counter(10.0f, 82.0f, (Art.coin.getWidth() / Art.coin.getFWidth()), Art.coin.getHeight(), Art.coin, true);
+		moneyCounter = new Counter(10.0f, 82.0f, (Art.coin.getWidth() / Art.coin.getFWidth()), Art.coin.getHeight(), Art.coin, true, ((PlayerInventory)player.getComponent(TypeComponent.INVENTORY)).getCoins());
 		hudElems.add(moneyCounter);
-		levelCounter = new Counter(68.0f, 84.0f, Art.level.getWidth(), Art.level.getHeight(), Art.level, false);
+		levelCounter = new Counter(68.0f, 84.0f, Art.level.getWidth(), Art.level.getHeight(), Art.level, false, ((PlayerInventory)player.getComponent(TypeComponent.INVENTORY)).getLevel());
 		hudElems.add(levelCounter);
-		waveCounter = new Counter(154.0f, 83.0f, Art.wave.getWidth(), Art.wave.getHeight(), Art.wave, false);
+		waveCounter = new Counter(154.0f, 83.0f, Art.wave.getWidth(), Art.wave.getHeight(), Art.wave, false, ShootEmUp.currentLevel.spawner.getWave());
 		hudElems.add(waveCounter);
 		fire = new Icon(0.0f,100.0f,Art.fire.getWidth()/Art.fire.getFWidth(),Art.fire.getHeight(), Art.fire, false);
 		poison = new Icon(0.0f,120.0f,Art.poison.getWidth()/Art.poison.getFWidth(),Art.poison.getHeight(), Art.poison, false);
