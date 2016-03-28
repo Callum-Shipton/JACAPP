@@ -60,6 +60,12 @@ public abstract class ButtonHandler {
 		case MAGE:
 			mage();
 			break;
+		case BATTLE_MAGE:
+			battleMage();
+			break;
+		case ROGUE:
+			rogue();
+			break;
 		case BACK:
 			back();
 			break;
@@ -175,6 +181,32 @@ public abstract class ButtonHandler {
 				ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE, ShootEmUp.save.getMage());
 			} else {
 				ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE);
+			}
+		}
+		startGame();
+	}
+	
+	private static void battleMage(){
+		if(ShootEmUp.save == null){
+			ShootEmUp.currentLevel.createPlayer(TypeAttack.BATTLE_MAGE);
+		} else {
+			if(ShootEmUp.save.getBattleMage() != null){
+				ShootEmUp.currentLevel.createPlayer(TypeAttack.BATTLE_MAGE, ShootEmUp.save.getBattleMage());
+			} else {
+				ShootEmUp.currentLevel.createPlayer(TypeAttack.BATTLE_MAGE);
+			}
+		}
+		startGame();
+	}
+	
+	private static void rogue(){
+		if(ShootEmUp.save == null){
+			ShootEmUp.currentLevel.createPlayer(TypeAttack.ROGUE);
+		} else {
+			if(ShootEmUp.save.getRogue() != null){
+				ShootEmUp.currentLevel.createPlayer(TypeAttack.ROGUE, ShootEmUp.save.getRogue());
+			} else {
+				ShootEmUp.currentLevel.createPlayer(TypeAttack.ROGUE);
 			}
 		}
 		startGame();

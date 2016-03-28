@@ -40,13 +40,24 @@ public class PlayerInventory extends BasicInventory {
 		inventory = new ArrayList<InventoryItem>();
 		switch(PA.getTypeAttack()){
 		case ARCHER:
-			weaponTypes[1] = TypeWeapon.RANGED;
+			weaponTypes[0] = TypeWeapon.BOW;
+			weaponTypes[1] = TypeWeapon.DAGGAR;
 			break;
 		case MAGE:
-			weaponTypes[1] = TypeWeapon.MAGIC;
+			weaponTypes[0] = TypeWeapon.STAFF;
+			weaponTypes[1] = TypeWeapon.DAGGAR;
 			break;
 		case WARRIOR:
-			weaponTypes[1] = TypeWeapon.MELEE;
+			weaponTypes[0] = TypeWeapon.ONE_HANDED;
+			weaponTypes[1] = TypeWeapon.TWO_HANDED;
+			break;
+		case BATTLE_MAGE:
+			weaponTypes[0] = TypeWeapon.ONE_HANDED;
+			weaponTypes[1] = TypeWeapon.STAFF;
+			break;
+		case ROGUE:
+			weaponTypes[0] = TypeWeapon.CROSSBOW;
+			weaponTypes[1] = TypeWeapon.DAGGAR;
 			break;
 		}
 	}
@@ -103,7 +114,7 @@ public class PlayerInventory extends BasicInventory {
 			}
 		} else {
 			equipped = PA.getWeapon();
-			if(((Weapon)item).getType() == weaponTypes[1]){
+			if((((Weapon)item).getType() == weaponTypes[0]) || (((Weapon)item).getType() == weaponTypes[1])){
 				PA.setWeapon((Weapon) item);
 			} else {
 				inventory.add(item);

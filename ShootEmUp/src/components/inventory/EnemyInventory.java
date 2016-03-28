@@ -35,7 +35,7 @@ public class EnemyInventory extends BasicInventory{
 		
 		switch(rand.nextInt(3)){
 		case 0:
-			PickupBuilder.buildPickup(TypePickup.WEAPON, TypeWeapon.MAGIC, SubTypeWeapon.EARTH_STAFF, BG.getX(), BG.getY() + BG.getHeight());
+			PickupBuilder.buildPickup(TypePickup.WEAPON, TypeWeapon.STAFF, SubTypeWeapon.EARTH_STAFF, BG.getX(), BG.getY() + BG.getHeight());
 			break;
 		case 1:
 			PickupBuilder.buildPickup(TypePickup.ARMOUR, TypeArmour.BOOTS, SubTypeArmour.LEATHER, BG.getX(), BG.getY() + BG.getHeight());

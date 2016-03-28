@@ -39,12 +39,24 @@ public class Spawner {
 	public Entity createPlayer(TypeAttack type){
 		Entity player = new Entity();
 		PlayerGraphics g;
-		if(type == TypeAttack.WARRIOR){
-			g = new PlayerGraphics(player, Art.warrior, Art.base);
-		} else if (type == TypeAttack.ARCHER){
+		switch(type){
+		case ARCHER:
 			g = new PlayerGraphics(player, Art.archer, Art.base);
-		} else {
+			break;
+		case BATTLE_MAGE:
+			g = new PlayerGraphics(player, Art.battleMage, Art.base);
+			break;
+		case MAGE:
 			g = new PlayerGraphics(player, Art.mage, Art.base);
+			break;
+		case ROGUE:
+			g = new PlayerGraphics(player, Art.rogue, Art.base);
+			break;
+		case WARRIOR:
+			g = new PlayerGraphics(player, Art.warrior, Art.base);
+			break;
+		default:
+			g = new PlayerGraphics(player, Art.warrior, Art.base);
 		}
 		PointSpawn s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
 		PlayerAttack a;
@@ -69,13 +81,26 @@ public class Spawner {
 	public Entity createPlayer(TypeAttack type, CharacterSave save){
 		Entity player = new Entity();
 		PlayerGraphics g;
-		if(type == TypeAttack.WARRIOR){
-			g = new PlayerGraphics(player, Art.warrior, Art.base);
-		} else if (type == TypeAttack.ARCHER){
+		switch(type){
+		case ARCHER:
 			g = new PlayerGraphics(player, Art.archer, Art.base);
-		} else {
+			break;
+		case BATTLE_MAGE:
+			g = new PlayerGraphics(player, Art.battleMage, Art.base);
+			break;
+		case MAGE:
 			g = new PlayerGraphics(player, Art.mage, Art.base);
+			break;
+		case ROGUE:
+			g = new PlayerGraphics(player, Art.rogue, Art.base);
+			break;
+		case WARRIOR:
+			g = new PlayerGraphics(player, Art.warrior, Art.base);
+			break;
+		default:
+			g = new PlayerGraphics(player, Art.warrior, Art.base);
 		}
+		
 		PointSpawn s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
 		PlayerAttack a;
 		
@@ -143,6 +168,14 @@ public class Spawner {
 					break;
 				case MAGE:
 					ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE, ShootEmUp.save.getMage());
+					break;
+				case BATTLE_MAGE:
+					ShootEmUp.currentLevel.createPlayer(TypeAttack.BATTLE_MAGE, ShootEmUp.save.getBattleMage());
+					break;
+				case ROGUE:
+					ShootEmUp.currentLevel.createPlayer(TypeAttack.ROGUE, ShootEmUp.save.getRogue());
+					break;
+				default:
 					break;
 				}
 				

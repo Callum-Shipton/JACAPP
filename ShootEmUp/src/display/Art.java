@@ -47,6 +47,8 @@ public class Art {
 	public static Image warriorButton;
 	public static Image archerButton;
 	public static Image mageButton;
+	public static Image battleMageButton;
+	public static Image rogueButton;
 	
 	public static Image swordButton;
 	public static Image battleaxeButton;
@@ -97,6 +99,9 @@ public class Art {
 	public static Image warrior;
 	public static Image archer;
 	public static Image mage;
+	public static Image battleMage;
+	public static Image rogue;
+	
 	public static Image enemy;
 	public static Image smallEnemy;
 	public static Image flyingEnemy;
@@ -297,6 +302,8 @@ public class Art {
 		warriorButton = new Image("/Images/Menus/Buttons/MenuButtons/WarriorButton.png",1,2);
 		archerButton = new Image("/Images/Menus/Buttons/MenuButtons/ArcherButton.png",1,2);
 		mageButton = new Image("/Images/Menus/Buttons/MenuButtons/MageButton.png",1,2);
+		battleMageButton = new Image("/Images/Menus/Buttons/MenuButtons/BattleMageButton.png",1,2);
+		rogueButton = new Image("/Images/Menus/Buttons/MenuButtons/RogueButton.png",1,2);
 		
 		healthButton = new Image("/Images/Menus/Buttons/MenuButtons/HealthButton.png",1,2);
 		healthRegenButton = new Image("/Images/Menus/Buttons/MenuButtons/HealthRegenButton.png",1,2);
@@ -347,6 +354,9 @@ public class Art {
 		warrior = new Image("/Images/Characters/Warrior.png",6,8);
 		archer = new Image("/Images/Characters/Archer.png",6,8);
 		mage = new Image("/Images/Characters/Mage.png",6,8);
+		battleMage = new Image("/Images/Characters/BattleMage.png",6,8);
+		rogue = new Image("/Images/Characters/Rogue.png",6,8);
+		
 		enemy = new Image("/Images/Characters/Enemy.png",6,8);
 		smallEnemy = new Image("/Images/Characters/SmallEnemy.png",6,8);
 		flyingEnemy = new Image("/Images/Characters/FlyingEnemy.png",6,8);

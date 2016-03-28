@@ -45,7 +45,18 @@ public class PlayerAttack extends BaseAttack {
 		case MAGE:
 			health = 3;
 			mana = 5;
+			weapon = WeaponBuilder.buildWeapon(SubTypeWeapon.FIRE_STAFF, 0);
+			break;
+		case BATTLE_MAGE:
+			health = 3;
+			mana = 5;
 			weapon = WeaponBuilder.buildWeapon(SubTypeWeapon.EARTH_STAFF, 0);
+			break;
+		case ROGUE:
+			health = 3;
+			mana = 5;
+			weapon = WeaponBuilder.buildWeapon(SubTypeWeapon.CROSSBOW, 0);
+			break;
 		}
 		
 		maxHealth = health;

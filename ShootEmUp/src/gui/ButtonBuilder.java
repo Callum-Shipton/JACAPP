@@ -40,6 +40,12 @@ public abstract class ButtonBuilder {
 		case MAGE:
 			image = Art.mageButton;
 			break;
+		case BATTLE_MAGE:
+			image = Art.battleMageButton;
+			break;
+		case ROGUE:
+			image = Art.rogueButton;
+			break;
 		case BACK:
 			image = Art.backButton;
 			break;

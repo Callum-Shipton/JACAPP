@@ -1,5 +1,5 @@
 package components.inventory;
 
 public enum TypeWeapon implements SubType{
-	MELEE, RANGED, MAGIC
+	DAGGAR, ONE_HANDED, TWO_HANDED, BOW, STAFF, CROSSBOW
 }

@@ -13,6 +13,8 @@ public class Save implements Serializable{
 	private CharacterSave warrior;
 	private CharacterSave archer;
 	private CharacterSave mage;
+	private CharacterSave battleMage;
+	private CharacterSave rogue;
 	
 	private int level;
 	
@@ -37,6 +39,12 @@ public class Save implements Serializable{
 		case MAGE:
 			mage = new CharacterSave();
 			break;
+		case BATTLE_MAGE:
+			battleMage = new CharacterSave();
+			break;
+		case ROGUE:
+			rogue = new CharacterSave();
+			break;
 		}
 	}
 	
@@ -50,6 +58,14 @@ public class Save implements Serializable{
 
 	public CharacterSave getMage() {
 		return mage;
+	}
+	
+	public CharacterSave getBattleMage() {
+		return battleMage;
+	}
+	
+	public CharacterSave getRogue() {
+		return rogue;
 	}
 
 	public int getLevel() {
