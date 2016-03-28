@@ -26,8 +26,10 @@ public class PlayerInventory extends BasicInventory {
 
 	private ArrayList<InventoryItem> inventory;
 	private int inventorySize = 5;
-	private HashMap<TypePotion,Potion> potions;
+	private HashMap<TypePotion,Potion> potions = new HashMap<TypePotion,Potion>();;
 	private int maxPotions = 5;
+	
+	private TypeWeapon[] weaponTypes = new TypeWeapon[2];
 
 	private PlayerAttack PA;
 
@@ -36,14 +38,21 @@ public class PlayerInventory extends BasicInventory {
 		this.PA = PA;
 		this.expBound = expBound;
 		inventory = new ArrayList<InventoryItem>();
-		potions = new HashMap<TypePotion,Potion>();
+		switch(PA.getTypeAttack()){
+		case ARCHER:
+			weaponTypes[1] = TypeWeapon.RANGED;
+			break;
+		case MAGE:
+			weaponTypes[1] = TypeWeapon.MAGIC;
+			break;
+		case WARRIOR:
+			weaponTypes[1] = TypeWeapon.MELEE;
+			break;
+		}
 	}
 	
 	public PlayerInventory(PlayerAttack PA, int level, int expBound, CharacterSave save) {
-		super(level);
-		this.PA = PA;
-		this.expBound = expBound;
-		inventory = new ArrayList<InventoryItem>();
+		this(PA, level, expBound);
 		for(SubTypeWeapon typeWeapon : save.getWeapons()){
 			inventory.add(WeaponBuilder.buildWeapon(typeWeapon, 0));
 		}
@@ -94,7 +103,12 @@ public class PlayerInventory extends BasicInventory {
 			}
 		} else {
 			equipped = PA.getWeapon();
-			PA.setWeapon((Weapon) item);
+			if(((Weapon)item).getType() == weaponTypes[1]){
+				PA.setWeapon((Weapon) item);
+			} else {
+				inventory.add(item);
+				equipped = null;
+			}
 		}
 		if(equipped != null){
 			inventory.add(equipped);

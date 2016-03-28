@@ -76,7 +76,7 @@ public class CharacterSave implements Serializable{
 		manaRegen = tempAttack.getManaRegen();
 		maxManaRegen = tempAttack.getMaxManaRegen();
 		
-		weapon = tempAttack.getWeapon().getType();
+		weapon = tempAttack.getWeapon().getSubType();
 		
 		Armour tempArmour;
 		tempArmour = tempAttack.getBoots();
@@ -105,7 +105,7 @@ public class CharacterSave implements Serializable{
 		ArrayList<InventoryItem> inventory = tempInventory.getInventory();
 		for(InventoryItem inventoryItem : inventory){
 			if(inventoryItem.getTypePickup() == TypePickup.WEAPON){
-				weapons.add(((Weapon)inventoryItem).getType());
+				weapons.add(((Weapon)inventoryItem).getSubType());
 			} else {
 				armour.add(((Armour)inventoryItem).getType());
 			}

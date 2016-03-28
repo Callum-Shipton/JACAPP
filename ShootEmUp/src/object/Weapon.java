@@ -9,6 +9,7 @@ import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.inventory.SubTypeWeapon;
 import components.inventory.TypePickup;
+import components.inventory.TypeWeapon;
 import components.movement.FlyingMovement;
 import components.spawn.PointSpawn;
 import display.Art;
@@ -17,7 +18,8 @@ import display.Image;
 public class Weapon extends InventoryItem {
 
 	
-	private SubTypeWeapon type;
+	private TypeWeapon type;
+	private SubTypeWeapon subType;
 	private int damage;
 	private int range;
 	private int fireRate;
@@ -27,8 +29,9 @@ public class Weapon extends InventoryItem {
     private Image particleImage;
     private Element element;
     
-	public Weapon(SubTypeWeapon type, int damage, int range, int fireRate, boolean melee, int manaCost, Element element, int team, Image particleImage, Image inventoryImage) {
+	public Weapon(TypeWeapon type, SubTypeWeapon subType, int damage, int range, int fireRate, boolean melee, int manaCost, Element element, int team, Image particleImage, Image inventoryImage) {
 		this.type = type;
+		this.subType = subType;
 		this.damage = damage;
 		this.range = range;
 		this.fireRate = fireRate;
@@ -134,7 +137,7 @@ public class Weapon extends InventoryItem {
 		this.fireRate = fireRate;
 	}
 	
-	public SubTypeWeapon getType(){
+	public TypeWeapon getType(){
 		return type;
 	}
 	
@@ -144,6 +147,10 @@ public class Weapon extends InventoryItem {
 	
 	public Element getElement() {
 		return element;
+	}
+
+	public SubTypeWeapon getSubType() {
+		return subType;
 	}
 
 }
