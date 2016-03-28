@@ -8,10 +8,10 @@ import components.TypeComponent;
 import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
 import components.inventory.PlayerInventory;
+import components.inventory.SubTypeWeapon;
 import components.inventory.TypeArmour;
 import components.inventory.TypePickup;
 import components.inventory.TypePotion;
-import components.inventory.TypeWeapon;
 import main.ShootEmUp;
 import object.Armour;
 import object.InventoryItem;
@@ -36,7 +36,7 @@ public class CharacterSave implements Serializable{
 	private int manaRegen;
 	private int maxManaRegen;
 	
-	private TypeWeapon weapon;
+	private SubTypeWeapon weapon;
 	private TypeArmour helmet;
 	private TypeArmour chest;
 	private TypeArmour legs;
@@ -47,7 +47,7 @@ public class CharacterSave implements Serializable{
 	private int exp;
 	private int playerLevel;
 	
-	private ArrayList<TypeWeapon> weapons = new ArrayList<TypeWeapon>();
+	private ArrayList<SubTypeWeapon> weapons = new ArrayList<SubTypeWeapon>();
 	private ArrayList<TypeArmour> armour = new ArrayList<TypeArmour>();;
 	private int inventorySize;
 
@@ -163,7 +163,7 @@ public class CharacterSave implements Serializable{
 		return playerLevel;
 	}
 
-	public ArrayList<TypeWeapon> getWeapons() {
+	public ArrayList<SubTypeWeapon> getWeapons() {
 		return weapons;
 	}
 	
@@ -175,7 +175,7 @@ public class CharacterSave implements Serializable{
 		return inventorySize;
 	}
 
-	public TypeWeapon getWeapon() {
+	public SubTypeWeapon getWeapon() {
 		return weapon;
 	}
 

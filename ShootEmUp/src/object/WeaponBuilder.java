@@ -1,11 +1,11 @@
 package object;
 
-import components.inventory.TypeWeapon;
+import components.inventory.SubTypeWeapon;
 import display.Art;
 
 public abstract class WeaponBuilder {
 	
-	public static Weapon buildWeapon(TypeWeapon type, int team){
+	public static Weapon buildWeapon(SubTypeWeapon type, int team){
 		switch(type){
 		case SWORD:
 			return new Weapon(type, 3, 1, 5, true, 1, null, team, Art.swordProjectile, Art.swordButton);

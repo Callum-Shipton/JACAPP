@@ -1,5 +1,5 @@
 package components.inventory;
 
-public interface Subtype {
+public interface SubType {
 
 }

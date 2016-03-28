@@ -9,7 +9,7 @@ import save.CharacterSave;
 import main.ShootEmUp;
 import gui.menus.GameOverMenu;
 import components.Message;
-import components.inventory.TypeWeapon;
+import components.inventory.SubTypeWeapon;
 import display.Art;
 
 public class PlayerAttack extends BaseAttack {
@@ -35,17 +35,17 @@ public class PlayerAttack extends BaseAttack {
 		case WARRIOR:
 			health = 5;
 			mana = 3;
-			weapon = WeaponBuilder.buildWeapon(TypeWeapon.SWORD, 0);
+			weapon = WeaponBuilder.buildWeapon(SubTypeWeapon.SWORD, 0);
 			break;
 		case ARCHER:
 			health = 4;
 			mana = 4;
-			weapon = WeaponBuilder.buildWeapon(TypeWeapon.BOW, 0);
+			weapon = WeaponBuilder.buildWeapon(SubTypeWeapon.BOW, 0);
 			break;
 		case MAGE:
 			health = 3;
 			mana = 5;
-			weapon = WeaponBuilder.buildWeapon(TypeWeapon.EARTH_STAFF, 0);
+			weapon = WeaponBuilder.buildWeapon(SubTypeWeapon.EARTH_STAFF, 0);
 		}
 		
 		maxHealth = health;

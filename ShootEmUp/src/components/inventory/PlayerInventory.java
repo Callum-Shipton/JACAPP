@@ -44,7 +44,7 @@ public class PlayerInventory extends BasicInventory {
 		this.PA = PA;
 		this.expBound = expBound;
 		inventory = new ArrayList<InventoryItem>();
-		for(TypeWeapon typeWeapon : save.getWeapons()){
+		for(SubTypeWeapon typeWeapon : save.getWeapons()){
 			inventory.add(WeaponBuilder.buildWeapon(typeWeapon, 0));
 		}
 		for(TypeArmour typeArmour : save.getArmour()){
@@ -101,7 +101,7 @@ public class PlayerInventory extends BasicInventory {
 		}
 	}
 
-	public boolean giveItem(TypePickup type, Subtype subtype) {
+	public boolean giveItem(TypePickup type, SubType subtype, SubSubType subsubtype) {
 		switch (type) {
 		case COIN:
 			if (coins < 99) {
@@ -138,7 +138,7 @@ public class PlayerInventory extends BasicInventory {
 			break;
 		case WEAPON:
 			if(inventory.size() < inventorySize){
-				TypeWeapon weaponType = (TypeWeapon) subtype;
+				SubTypeWeapon weaponType = (SubTypeWeapon) subsubtype;
 				inventory.add(WeaponBuilder.buildWeapon(weaponType, 0));
 				return true;
 			}
