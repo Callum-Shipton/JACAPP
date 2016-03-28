@@ -3,7 +3,6 @@ package level;
 import java.util.Random;
 
 import object.Entity;
-import save.CharacterSave;
 import save.SaveHandler;
 import main.ShootEmUp;
 import math.Seconds;
@@ -11,12 +10,7 @@ import math.Vector2;
 import components.TypeComponent;
 import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
-import components.collision.RigidCollision;
-import components.control.PlayerControl;
-import components.graphical.PlayerGraphics;
-import components.inventory.PlayerInventory;
 import components.movement.BasicMovement;
-import components.spawn.PointSpawn;
 import display.Art;
 
 public class Spawner {
@@ -36,90 +30,7 @@ public class Spawner {
 		rand = new Random();
 	}
 	
-	public Entity createPlayer(TypeAttack type){
-		Entity player = new Entity();
-		PlayerGraphics g;
-		switch(type){
-		case ARCHER:
-			g = new PlayerGraphics(player, Art.archer, Art.base);
-			break;
-		case BATTLE_MAGE:
-			g = new PlayerGraphics(player, Art.battleMage, Art.base);
-			break;
-		case MAGE:
-			g = new PlayerGraphics(player, Art.mage, Art.base);
-			break;
-		case ROGUE:
-			g = new PlayerGraphics(player, Art.rogue, Art.base);
-			break;
-		case WARRIOR:
-			g = new PlayerGraphics(player, Art.warrior, Art.base);
-			break;
-		default:
-			g = new PlayerGraphics(player, Art.warrior, Art.base);
-		}
-		PointSpawn s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
-		PlayerAttack a;
-		
-		a = new PlayerAttack(type);
-		
-		player.addComponent(g);
-		RigidCollision c = new RigidCollision(player);
-		player.addComponent(c);
-		BasicMovement m = new BasicMovement(player,c, g, 5);
-		PlayerInventory i = new PlayerInventory(a, 0, 1);
-		player.addComponent(s);
-		player.addComponent(a);
-		player.addComponent(m);
-		player.addComponent(i);
-		player.addComponent(new PlayerControl(player, g, a, m, i));
-		
-		
-		return player;
-	}
 	
-	public Entity createPlayer(TypeAttack type, CharacterSave save){
-		Entity player = new Entity();
-		PlayerGraphics g;
-		switch(type){
-		case ARCHER:
-			g = new PlayerGraphics(player, Art.archer, Art.base);
-			break;
-		case BATTLE_MAGE:
-			g = new PlayerGraphics(player, Art.battleMage, Art.base);
-			break;
-		case MAGE:
-			g = new PlayerGraphics(player, Art.mage, Art.base);
-			break;
-		case ROGUE:
-			g = new PlayerGraphics(player, Art.rogue, Art.base);
-			break;
-		case WARRIOR:
-			g = new PlayerGraphics(player, Art.warrior, Art.base);
-			break;
-		default:
-			g = new PlayerGraphics(player, Art.warrior, Art.base);
-		}
-		
-		PointSpawn s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
-		PlayerAttack a;
-		
-		a = new PlayerAttack(type, save);
-		
-		player.addComponent(g);
-		RigidCollision c = new RigidCollision(player);
-		player.addComponent(c);
-		BasicMovement m = new BasicMovement(player,c, g, 5);
-		PlayerInventory i = new PlayerInventory(a, save.getPlayerLevel(), save.getPlayerLevel() + 1, save);
-		player.addComponent(s);
-		player.addComponent(a);
-		player.addComponent(m);
-		player.addComponent(i);
-		player.addComponent(new PlayerControl(player, g, a, m, i));
-		
-		
-		return player;
-	}
 	
 	public void update(){
 		if(newWave){
@@ -161,19 +72,19 @@ public class Spawner {
 				ShootEmUp.save = SaveHandler.load(1);
 				switch(temp){
 				case WARRIOR:
-					ShootEmUp.currentLevel.createPlayer(TypeAttack.WARRIOR, ShootEmUp.save.getWarrior());
+					PlayerBuilder.buildPlayer(TypeAttack.WARRIOR, ShootEmUp.save.getWarrior());
 					break;
 				case ARCHER:
-					ShootEmUp.currentLevel.createPlayer(TypeAttack.ARCHER, ShootEmUp.save.getArcher());
+					PlayerBuilder.buildPlayer(TypeAttack.ARCHER, ShootEmUp.save.getArcher());
 					break;
 				case MAGE:
-					ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE, ShootEmUp.save.getMage());
+					PlayerBuilder.buildPlayer(TypeAttack.MAGE, ShootEmUp.save.getMage());
 					break;
 				case BATTLE_MAGE:
-					ShootEmUp.currentLevel.createPlayer(TypeAttack.BATTLE_MAGE, ShootEmUp.save.getBattleMage());
+					PlayerBuilder.buildPlayer(TypeAttack.BATTLE_MAGE, ShootEmUp.save.getBattleMage());
 					break;
 				case ROGUE:
-					ShootEmUp.currentLevel.createPlayer(TypeAttack.ROGUE, ShootEmUp.save.getRogue());
+					PlayerBuilder.buildPlayer(TypeAttack.ROGUE, ShootEmUp.save.getRogue());
 					break;
 				default:
 					break;

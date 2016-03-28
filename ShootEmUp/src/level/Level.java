@@ -7,10 +7,8 @@ import java.util.Iterator;
 
 import object.Entity;
 import object.EntityMap;
-import save.CharacterSave;
 import main.ShootEmUp;
 import components.TypeComponent;
-import components.attack.TypeAttack;
 import components.collision.BaseCollision;
 import components.graphical.BaseGraphics;
 import display.Art;
@@ -20,7 +18,7 @@ public class Level {
 	private int level;
 	
 	private Entity player;
-	private Hud hud;
+	public Hud hud;
 	
 	public EntityMap eMap;
 
@@ -43,18 +41,6 @@ public class Level {
 	
 	public void init(){
 		map.setTileTypes();
-	}
-	
-	public void createPlayer(TypeAttack type){
-		player = spawner.createPlayer(type);
-		entities.add(player);
-		hud = new Hud(player);
-	}
-	
-	public void createPlayer(TypeAttack type, CharacterSave save){
-		player = spawner.createPlayer(type, save);
-		entities.add(player);
-		hud = new Hud(player);
 	}
 	
 	public void update() {

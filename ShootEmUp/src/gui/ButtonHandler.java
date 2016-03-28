@@ -16,6 +16,7 @@ import gui.menus.SkillMenu;
 import gui.menus.SoundMenu;
 import audio.music.BackgroundMusic;
 import level.Level;
+import level.PlayerBuilder;
 import main.ShootEmUp;
 import save.Save;
 import save.SaveHandler;
@@ -149,12 +150,12 @@ public abstract class ButtonHandler {
 	
 	private static void warrior(){
 		if(ShootEmUp.save == null){
-			ShootEmUp.currentLevel.createPlayer(TypeAttack.WARRIOR);
+			PlayerBuilder.buildPlayer(TypeAttack.WARRIOR);
 		} else {
 			if(ShootEmUp.save.getWarrior() != null){
-				ShootEmUp.currentLevel.createPlayer(TypeAttack.WARRIOR, ShootEmUp.save.getWarrior());
+				PlayerBuilder.buildPlayer(TypeAttack.WARRIOR, ShootEmUp.save.getWarrior());
 			} else {
-				ShootEmUp.currentLevel.createPlayer(TypeAttack.WARRIOR);
+				PlayerBuilder.buildPlayer(TypeAttack.WARRIOR);
 			}
 		}
 		startGame();
@@ -162,12 +163,12 @@ public abstract class ButtonHandler {
 	
 	private static void archer(){
 		if(ShootEmUp.save == null){
-			ShootEmUp.currentLevel.createPlayer(TypeAttack.ARCHER);
+			PlayerBuilder.buildPlayer(TypeAttack.ARCHER);
 		} else {
 			if(ShootEmUp.save.getArcher() != null){
-				ShootEmUp.currentLevel.createPlayer(TypeAttack.ARCHER, ShootEmUp.save.getArcher());
+				PlayerBuilder.buildPlayer(TypeAttack.ARCHER, ShootEmUp.save.getArcher());
 			} else {
-				ShootEmUp.currentLevel.createPlayer(TypeAttack.ARCHER);
+				PlayerBuilder.buildPlayer(TypeAttack.ARCHER);
 			}
 		}
 		startGame();
@@ -175,12 +176,12 @@ public abstract class ButtonHandler {
 	
 	private static void mage(){
 		if(ShootEmUp.save == null){
-			ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE);
+			PlayerBuilder.buildPlayer(TypeAttack.MAGE);
 		} else {
 			if(ShootEmUp.save.getMage() != null){
-				ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE, ShootEmUp.save.getMage());
+				PlayerBuilder.buildPlayer(TypeAttack.MAGE, ShootEmUp.save.getMage());
 			} else {
-				ShootEmUp.currentLevel.createPlayer(TypeAttack.MAGE);
+				PlayerBuilder.buildPlayer(TypeAttack.MAGE);
 			}
 		}
 		startGame();
@@ -188,12 +189,12 @@ public abstract class ButtonHandler {
 	
 	private static void battleMage(){
 		if(ShootEmUp.save == null){
-			ShootEmUp.currentLevel.createPlayer(TypeAttack.BATTLE_MAGE);
+			PlayerBuilder.buildPlayer(TypeAttack.BATTLE_MAGE);
 		} else {
 			if(ShootEmUp.save.getBattleMage() != null){
-				ShootEmUp.currentLevel.createPlayer(TypeAttack.BATTLE_MAGE, ShootEmUp.save.getBattleMage());
+				PlayerBuilder.buildPlayer(TypeAttack.BATTLE_MAGE, ShootEmUp.save.getBattleMage());
 			} else {
-				ShootEmUp.currentLevel.createPlayer(TypeAttack.BATTLE_MAGE);
+				PlayerBuilder.buildPlayer(TypeAttack.BATTLE_MAGE);
 			}
 		}
 		startGame();
@@ -201,12 +202,12 @@ public abstract class ButtonHandler {
 	
 	private static void rogue(){
 		if(ShootEmUp.save == null){
-			ShootEmUp.currentLevel.createPlayer(TypeAttack.ROGUE);
+			PlayerBuilder.buildPlayer(TypeAttack.ROGUE);
 		} else {
 			if(ShootEmUp.save.getRogue() != null){
-				ShootEmUp.currentLevel.createPlayer(TypeAttack.ROGUE, ShootEmUp.save.getRogue());
+				PlayerBuilder.buildPlayer(TypeAttack.ROGUE, ShootEmUp.save.getRogue());
 			} else {
-				ShootEmUp.currentLevel.createPlayer(TypeAttack.ROGUE);
+				PlayerBuilder.buildPlayer(TypeAttack.ROGUE);
 			}
 		}
 		startGame();
