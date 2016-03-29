@@ -85,5 +85,7 @@ public abstract class PlayerBuilder {
 		
 		ShootEmUp.currentLevel.entities.add(player);
 		ShootEmUp.currentLevel.hud = new Hud(player);
+		
+		ShootEmUp.currentLevel.setPlayer(player);
 	}
 }

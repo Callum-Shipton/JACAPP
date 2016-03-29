@@ -100,10 +100,11 @@ public abstract class EnemyBuilder {
 		BaseCollision BC = new RigidCollision(test);
 		test.addComponent(BC);
 		test.addComponent(new BasicMovement(test, BC, BG, 5));
-		float px = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS)).getX();
-		float py = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS)).getY();
-		float pw = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS)).getWidth();
-		float ph = ((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS)).getHeight();
+		BaseGraphics playerGraphics = (BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS);
+		float px = playerGraphics.getX();
+		float py = playerGraphics.getY();
+		float pw = playerGraphics.getWidth();
+		float ph = playerGraphics.getHeight();
 		do {
 			collide = false;
 			

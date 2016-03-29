@@ -2,7 +2,6 @@ package audio.music;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL;
-import org.lwjgl.openal.ALCCapabilities;
 import org.lwjgl.openal.ALContext;
 import org.lwjgl.openal.ALDevice;
 
@@ -12,7 +11,6 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 import static org.lwjgl.openal.AL10.*;
-import static org.lwjgl.openal.ALC10.*;
 
 /**
  * $Id$
@@ -154,8 +152,9 @@ public class BackgroundMusic {
 		// Initialize OpenAL and clear the error bit.
 		audioDevice = ALDevice.create();
 		if(audioDevice == null) throw new RuntimeException("Default audio device could not be opened");
-		ALCCapabilities caps = audioDevice.getCapabilities();
-		String defaultDeviceSpecifier = alcGetString(0L, ALC_DEFAULT_DEVICE_SPECIFIER);
+		//Unused
+		//ALCCapabilities caps = audioDevice.getCapabilities();
+		//String defaultDeviceSpecifier = alcGetString(0L, ALC_DEFAULT_DEVICE_SPECIFIER);
 		audioContext = ALContext.create();
 		if(audioContext == null) {
 			audioDevice.destroy();

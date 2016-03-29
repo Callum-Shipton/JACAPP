@@ -100,4 +100,8 @@ public class Level {
 		return spawner;
 	}
 
+	public void setPlayer(Entity player) {
+		this.player = player;
+	}
+
 }

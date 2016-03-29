@@ -48,24 +48,21 @@ public class Save implements Serializable{
 		}
 	}
 	
-	public CharacterSave getWarrior() {
-		return warrior;
-	}
-
-	public CharacterSave getArcher() {
-		return archer;
-	}
-
-	public CharacterSave getMage() {
-		return mage;
-	}
-	
-	public CharacterSave getBattleMage() {
-		return battleMage;
-	}
-	
-	public CharacterSave getRogue() {
-		return rogue;
+	public CharacterSave getCharacter(TypeAttack type) {
+		switch(type){
+		case ARCHER:
+			return archer;
+		case BATTLE_MAGE:
+			return battleMage;
+		case MAGE:
+			return mage;
+		case ROGUE:
+			return rogue;
+		case WARRIOR:
+			return warrior;
+		default:
+			return warrior;
+		}
 	}
 
 	public int getLevel() {

@@ -70,26 +70,7 @@ public class Spawner {
 				ShootEmUp.currentLevel = new Level(Art.levels, ShootEmUp.currentLevel.getLevel() + 1);
 				ShootEmUp.currentLevel.init();
 				ShootEmUp.save = SaveHandler.load(1);
-				switch(temp){
-				case WARRIOR:
-					PlayerBuilder.buildPlayer(TypeAttack.WARRIOR, ShootEmUp.save.getWarrior());
-					break;
-				case ARCHER:
-					PlayerBuilder.buildPlayer(TypeAttack.ARCHER, ShootEmUp.save.getArcher());
-					break;
-				case MAGE:
-					PlayerBuilder.buildPlayer(TypeAttack.MAGE, ShootEmUp.save.getMage());
-					break;
-				case BATTLE_MAGE:
-					PlayerBuilder.buildPlayer(TypeAttack.BATTLE_MAGE, ShootEmUp.save.getBattleMage());
-					break;
-				case ROGUE:
-					PlayerBuilder.buildPlayer(TypeAttack.ROGUE, ShootEmUp.save.getRogue());
-					break;
-				default:
-					break;
-				}
-				
+				PlayerBuilder.buildPlayer(temp, ShootEmUp.save.getCharacter(temp));
 			}
 			newWave = true;
 		}

@@ -53,19 +53,19 @@ public abstract class ButtonHandler {
 			level(3);
 			break;
 		case WARRIOR:
-			warrior();
+			character(TypeAttack.WARRIOR);
 			break;
 		case ARCHER:
-			archer();
+			character(TypeAttack.ARCHER);
 			break;
 		case MAGE:
-			mage();
+			character(TypeAttack.MAGE);
 			break;
 		case BATTLE_MAGE:
-			battleMage();
+			character(TypeAttack.BATTLE_MAGE);
 			break;
 		case ROGUE:
-			rogue();
+			character(TypeAttack.ROGUE);
 			break;
 		case BACK:
 			back();
@@ -148,66 +148,14 @@ public abstract class ButtonHandler {
 		ShootEmUp.addMenu(new CharacterSelectMenu(Art.mainMenuScreen));
 	}
 	
-	private static void warrior(){
+	private static void character(TypeAttack type){
 		if(ShootEmUp.save == null){
-			PlayerBuilder.buildPlayer(TypeAttack.WARRIOR);
+			PlayerBuilder.buildPlayer(type);
 		} else {
-			if(ShootEmUp.save.getWarrior() != null){
-				PlayerBuilder.buildPlayer(TypeAttack.WARRIOR, ShootEmUp.save.getWarrior());
+			if(ShootEmUp.save.getCharacter(type) != null){
+				PlayerBuilder.buildPlayer(type, ShootEmUp.save.getCharacter(type));
 			} else {
-				PlayerBuilder.buildPlayer(TypeAttack.WARRIOR);
-			}
-		}
-		startGame();
-	}
-	
-	private static void archer(){
-		if(ShootEmUp.save == null){
-			PlayerBuilder.buildPlayer(TypeAttack.ARCHER);
-		} else {
-			if(ShootEmUp.save.getArcher() != null){
-				PlayerBuilder.buildPlayer(TypeAttack.ARCHER, ShootEmUp.save.getArcher());
-			} else {
-				PlayerBuilder.buildPlayer(TypeAttack.ARCHER);
-			}
-		}
-		startGame();
-	}
-	
-	private static void mage(){
-		if(ShootEmUp.save == null){
-			PlayerBuilder.buildPlayer(TypeAttack.MAGE);
-		} else {
-			if(ShootEmUp.save.getMage() != null){
-				PlayerBuilder.buildPlayer(TypeAttack.MAGE, ShootEmUp.save.getMage());
-			} else {
-				PlayerBuilder.buildPlayer(TypeAttack.MAGE);
-			}
-		}
-		startGame();
-	}
-	
-	private static void battleMage(){
-		if(ShootEmUp.save == null){
-			PlayerBuilder.buildPlayer(TypeAttack.BATTLE_MAGE);
-		} else {
-			if(ShootEmUp.save.getBattleMage() != null){
-				PlayerBuilder.buildPlayer(TypeAttack.BATTLE_MAGE, ShootEmUp.save.getBattleMage());
-			} else {
-				PlayerBuilder.buildPlayer(TypeAttack.BATTLE_MAGE);
-			}
-		}
-		startGame();
-	}
-	
-	private static void rogue(){
-		if(ShootEmUp.save == null){
-			PlayerBuilder.buildPlayer(TypeAttack.ROGUE);
-		} else {
-			if(ShootEmUp.save.getRogue() != null){
-				PlayerBuilder.buildPlayer(TypeAttack.ROGUE, ShootEmUp.save.getRogue());
-			} else {
-				PlayerBuilder.buildPlayer(TypeAttack.ROGUE);
+				PlayerBuilder.buildPlayer(type);
 			}
 		}
 		startGame();

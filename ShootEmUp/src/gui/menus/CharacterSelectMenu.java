@@ -4,7 +4,7 @@ import gui.ButtonBuilder;
 import gui.Counter;
 import gui.TypeButton;
 import main.ShootEmUp;
-
+import components.attack.TypeAttack;
 import display.Art;
 import display.Image;
 
@@ -26,20 +26,20 @@ public class CharacterSelectMenu extends GuiMenu {
         addButton(ButtonBuilder.buildButton(TypeButton.BACK, (ShootEmUp.width / 2) - (Art.backButton.getWidth() / 2), (ShootEmUp.height / 2) + (Art.backButton.getHeight()*3)));
         
         if(ShootEmUp.save != null){
-        	if(ShootEmUp.save.getWarrior() != null){
-        		warriorLevel = new Counter((ShootEmUp.width / 2) + (Art.warriorButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.warriorButton.getHeight() * 2), Art.levelIcon, false, ShootEmUp.save.getWarrior().getPlayerLevel(), 0.5f);
+        	if(ShootEmUp.save.getCharacter(TypeAttack.WARRIOR) != null){
+        		warriorLevel = new Counter((ShootEmUp.width / 2) + (Art.warriorButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.warriorButton.getHeight() * 2), Art.levelIcon, false, ShootEmUp.save.getCharacter(TypeAttack.WARRIOR).getPlayerLevel(), 0.5f);
         	}
-        	if(ShootEmUp.save.getArcher() != null){
-        		archerLevel = new Counter((ShootEmUp.width / 2) + (Art.archerButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.archerButton.getHeight() * 2), Art.levelIcon, false, ShootEmUp.save.getArcher().getPlayerLevel(), 0.5f);
+        	if(ShootEmUp.save.getCharacter(TypeAttack.ARCHER) != null){
+        		archerLevel = new Counter((ShootEmUp.width / 2) + (Art.archerButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.archerButton.getHeight() * 2), Art.levelIcon, false, ShootEmUp.save.getCharacter(TypeAttack.ARCHER).getPlayerLevel(), 0.5f);
         	}
-			if(ShootEmUp.save.getMage() != null){
-				mageLevel = new Counter((ShootEmUp.width / 2) + (Art.mageButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.mageButton.getHeight() * 2), Art.levelIcon, false, ShootEmUp.save.getMage().getPlayerLevel(), 0.5f);
+			if(ShootEmUp.save.getCharacter(TypeAttack.MAGE) != null){
+				mageLevel = new Counter((ShootEmUp.width / 2) + (Art.mageButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.mageButton.getHeight() * 2), Art.levelIcon, false, ShootEmUp.save.getCharacter(TypeAttack.MAGE).getPlayerLevel(), 0.5f);
 			}
-			if(ShootEmUp.save.getBattleMage() != null){
-				battleMageLevel = new Counter((ShootEmUp.width / 2) + (Art.battleMageButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.battleMageButton.getHeight() * 2), Art.levelIcon, false, ShootEmUp.save.getMage().getPlayerLevel(), 0.5f);
+			if(ShootEmUp.save.getCharacter(TypeAttack.BATTLE_MAGE) != null){
+				battleMageLevel = new Counter((ShootEmUp.width / 2) + (Art.battleMageButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.battleMageButton.getHeight() * 2), Art.levelIcon, false, ShootEmUp.save.getCharacter(TypeAttack.BATTLE_MAGE).getPlayerLevel(), 0.5f);
 			}
-			if(ShootEmUp.save.getRogue() != null){
-				rogueLevel = new Counter((ShootEmUp.width / 2) + (Art.rogueButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.rogueButton.getHeight() * 2), Art.levelIcon, false, ShootEmUp.save.getMage().getPlayerLevel(), 0.5f);
+			if(ShootEmUp.save.getCharacter(TypeAttack.ROGUE) != null){
+				rogueLevel = new Counter((ShootEmUp.width / 2) + (Art.rogueButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.rogueButton.getHeight() * 2), Art.levelIcon, false, ShootEmUp.save.getCharacter(TypeAttack.ROGUE).getPlayerLevel(), 0.5f);
 			}
         }
     }
