@@ -1,33 +1,22 @@
 package gui.menus;
 
-import gui.Counter;
-import gui.Icon;
 import gui.Inventory;
+import gui.ItemSlot;
 import main.ShootEmUp;
 import components.TypeComponent;
 import components.attack.PlayerAttack;
 import components.inventory.PlayerInventory;
-import display.Art;
 import display.Image;
 
 public class InventoryMenu extends PauseMenu {
 	
 	private PlayerAttack playerAttack;
 	
-	private Icon helmet;
-	private Icon chest;
-	private Icon legs;
-	private Icon boots;
-	private Icon weapon;
-	
-	private Counter helmetArmour;
-	private Counter chestArmour;
-	private Counter legsArmour;
-	private Counter bootsArmour;
-	private Counter weaponDamage;
-	private Counter weaponRange;
-	private Counter weaponRate;
-	private Counter weaponCost;
+	private ItemSlot helmet;
+	private ItemSlot chest;
+	private ItemSlot legs;
+	private ItemSlot boots;
+	private ItemSlot weapon;
 	
 	private Inventory inventory;
 
@@ -36,11 +25,11 @@ public class InventoryMenu extends PauseMenu {
         
         playerAttack = (PlayerAttack)ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK);
     	
-        helmetIcon();
-        chestIcon();
-        legsIcon();
-        bootsIcon();
-        weaponIcon();
+        buildHelmet();
+        buildChest();
+        buildLegs();
+        buildBoots();
+        buildWeapon();
 	    
 	    inventory = new Inventory(30, 30, ((PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY))).getInventory());
     }
@@ -48,27 +37,19 @@ public class InventoryMenu extends PauseMenu {
     public void render(){
     	super.render();
     	if(boots != null){
-    		boots.render(Art.stat);
-    		bootsArmour.render(Art.stat);
+    		boots.render();
     	}
     	if(legs != null){
-    		legs.render(Art.stat);
-    		legsArmour.render(Art.stat);
+    		legs.render();
     	}
     	if(chest != null){
-    		chest.render(Art.stat);
-    		chestArmour.render(Art.stat);
+    		chest.render();
     	}
     	if(helmet != null){
-    		helmet.render(Art.stat);
-    		helmetArmour.render(Art.stat);
+    		helmet.render();
     	}
     	if(weapon != null){
-    		weapon.render(Art.stat);
-    		weaponDamage.render(Art.stat);
-    		weaponRange.render(Art.stat);
-	        weaponRate.render(Art.stat);
-	        weaponCost.render(Art.stat);
+    		weapon.render();
     	}
     	
     	inventory.render();
@@ -80,76 +61,66 @@ public class InventoryMenu extends PauseMenu {
     	super.update();  	
     	
     	if(boots != null){
-    		boots.setI(playerAttack.getBoots().getInventoryImage());
-    		bootsArmour.update(playerAttack.getBoots().getDefence());
+    		boots.updateImage(playerAttack.getBoots().getInventoryImage());
+    		boots.updateStats(new int[]{playerAttack.getBoots().getDefence()});
     	} else {
-    		bootsIcon();
+    		buildBoots();
     	}
     	if(legs != null){
-    		legs.setI(playerAttack.getLegs().getInventoryImage());
-    		legsArmour.update(playerAttack.getLegs().getDefence());
+    		legs.updateImage(playerAttack.getLegs().getInventoryImage());
+    		legs.updateStats(new int[]{playerAttack.getLegs().getDefence()});
     	} else {
-    		legsIcon();
+    		buildLegs();
     	}
     	if(chest != null){
-    		chest.setI(playerAttack.getChest().getInventoryImage());
-    		chestArmour.update(playerAttack.getChest().getDefence());
+    		chest.updateImage(playerAttack.getChest().getInventoryImage());
+    		chest.updateStats(new int[]{playerAttack.getChest().getDefence()});
     	} else {
-    		chestIcon();
+    		buildChest();
     	}
     	if(helmet != null){
-    		helmet.setI(playerAttack.getHelmet().getInventoryImage());
-    		helmetArmour.update(playerAttack.getHelmet().getDefence());
+    		helmet.updateImage(playerAttack.getHelmet().getInventoryImage());
+    		helmet.updateStats(new int[]{playerAttack.getHelmet().getDefence()});
     	} else {
-    		helmetIcon();
+    		buildHelmet();
     	}
     	if(weapon != null){
-    		weapon.setI(playerAttack.getWeapon().getInventoryImage());
-    		weaponDamage.update(playerAttack.getWeapon().getDamage());
-    		weaponRange.update(playerAttack.getWeapon().getRange());
-	        weaponRate.update(playerAttack.getWeapon().getFireRate());
-	        weaponCost.update(playerAttack.getWeapon().getManaCost());
+    		weapon.updateImage(playerAttack.getWeapon().getInventoryImage());
+    		int[] stats = new int[]{playerAttack.getWeapon().getDamage(),
+    								playerAttack.getWeapon().getRange(),
+    								playerAttack.getWeapon().getFireRate(),
+    								playerAttack.getWeapon().getManaCost()};
+    		weapon.updateStats(stats);
     	} else {
-    		weaponIcon();
+    		buildWeapon();
     	}
     	inventory.update();
     }
     
-    public void helmetIcon(){
+    private void buildHelmet(){
     	if(playerAttack.getHelmet() != null){    
-	        Image helmetArt =  playerAttack.getHelmet().getInventoryImage();
-	        helmet = new Icon(560.0f, 30.0f, helmetArt, true, 1f);
-	        helmetArmour = new Counter(600.0f, 30f, Art.armourIcon, false, playerAttack.getHelmet().getDefence(), 0.5f);
+	        helmet = new ItemSlot(560, 30, playerAttack.getHelmet());
 	    }
     }
-    public void chestIcon(){
+    
+    private void buildChest(){
     	if(playerAttack.getChest() != null){    
-	        Image chestArt =  playerAttack.getChest().getInventoryImage();
-	        chest = new Icon(560.0f, 70.0f, chestArt, true, 1f);
-	        chestArmour = new Counter(600.0f, 70f, Art.armourIcon, false, playerAttack.getChest().getDefence(), 0.5f);
+	        chest = new ItemSlot(560, 62, playerAttack.getChest());
 	    }
     }
-    public void legsIcon(){
-    	if(playerAttack.getLegs() != null){
-	        Image legsArt =  playerAttack.getLegs().getInventoryImage();
-	        legs = new Icon(560.0f, 110.0f, legsArt, true, 1f);
-	        legsArmour = new Counter(600.0f, 110.0f, Art.armourIcon, false, playerAttack.getLegs().getDefence(), 0.5f);
-        }
+    private void buildLegs(){
+    	if(playerAttack.getLegs() != null){    
+	        legs = new ItemSlot(560, 94, playerAttack.getLegs());
+	    }
     }
-    public void bootsIcon(){
-    	if(playerAttack.getBoots() != null){
-	        Image bootsArt =  playerAttack.getBoots().getInventoryImage();
-	        boots = new Icon(560.0f, 150.0f, bootsArt, true, 1f);
-	        bootsArmour = new Counter(600.0f, 150.0f, Art.armourIcon, false, playerAttack.getBoots().getDefence(), 0.5f);
-        }
+    private void buildBoots(){
+    	if(playerAttack.getBoots() != null){    
+	        boots = new ItemSlot(560, 126, playerAttack.getBoots());
+	    }
     }
-    public void weaponIcon(){
-    	if(playerAttack.getWeapon() != null){   
-	        weapon = new Icon(560.0f, 190.0f, playerAttack.getWeapon().getInventoryImage(), true, 1f);
-	        weaponDamage = new Counter(600.0f, 190.0f, Art.damageIcon, false, playerAttack.getWeapon().getDamage(), 0.5f);
-	        weaponRange = new Counter(680.0f, 190.0f, Art.rangeIcon, false, playerAttack.getWeapon().getRange(), 0.5f);
-	        weaponRate = new Counter(760.0f, 190.0f, Art.fireRateIcon, false, playerAttack.getWeapon().getFireRate(), 0.5f);
-	        weaponCost = new Counter(840.0f, 190.0f, Art.manaCostIcon, false, playerAttack.getWeapon().getManaCost(), 0.5f);
+    private void buildWeapon(){
+    	if(playerAttack.getWeapon() != null){    
+	        weapon = new ItemSlot(560, 158, playerAttack.getWeapon());
 	    }
     }
 }

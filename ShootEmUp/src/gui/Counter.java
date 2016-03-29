@@ -10,21 +10,12 @@ public class Counter extends Icon{
 	private int count;
 	private float x;
 	private float y;
-	private Vector2 size;
+	private Vector2 numberSize;
+	private Vector2 fullSize;
 	private int width;
 	private final int FIRST_GAP = 5;
 	private final int NUMBER_GAP = 25;
 	private float scale;
-	
-	/*
-	public Counter(float x, float y, float w, float h, Image i, boolean animating, int count) {
-		super(x, y, w, h, i, animating);
-		width = w;
-		this.x = x;
-		this.y = y;
-		this.count = count;
-	}
-	*/
 	
 	public Counter(float x, float y, Image i, boolean animating, int count, float scale) {
 		super(x, y, i, animating, scale);
@@ -34,7 +25,8 @@ public class Counter extends Icon{
 		this.y = y;
 		this.count = count;
 		width = (int) ((i.getWidth()/i.getFWidth()) * scale);
-		size = new Vector2((i.getHeight()/i.getFHeight()) * scale,(i.getHeight()/i.getFHeight()) * scale);
+		numberSize = new Vector2((i.getHeight()/i.getFHeight()) * scale,(i.getHeight()/i.getFHeight()) * scale);
+		fullSize = new Vector2(width + numberSize.x(), numberSize.y());
 	}
 
 	public void update(int count){
@@ -48,10 +40,14 @@ public class Counter extends Icon{
 		Vector2 maxTex = new Vector2(10,1);
 		
 		if(count < 10){
-			Art.stat.draw(Art.numbers, new Vector2(x + width + (FIRST_GAP * scale), y), size, 0.0f, new Vector2(count,1), maxTex);
+			Art.stat.draw(Art.numbers, new Vector2(x + width + (FIRST_GAP * scale), y), numberSize, 0.0f, new Vector2(count,1), maxTex);
 		} else {
-			Art.stat.draw(Art.numbers, new Vector2(x + width + (FIRST_GAP * scale), y), size, 0.0f, new Vector2((int) Math.floor(count / 10),1), maxTex);
-			Art.stat.draw(Art.numbers, new Vector2(x + width + (NUMBER_GAP * scale), y), size, 0.0f, new Vector2(count % 10,1), maxTex);
+			Art.stat.draw(Art.numbers, new Vector2(x + width + (FIRST_GAP * scale), y), numberSize, 0.0f, new Vector2((int) Math.floor(count / 10),1), maxTex);
+			Art.stat.draw(Art.numbers, new Vector2(x + width + (NUMBER_GAP * scale), y), numberSize, 0.0f, new Vector2(count % 10,1), maxTex);
 		}
+	}
+	
+	public Vector2 getFullSize() {
+		return fullSize;
 	}
 }

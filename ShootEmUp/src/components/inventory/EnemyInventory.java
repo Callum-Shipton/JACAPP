@@ -41,7 +41,7 @@ public class EnemyInventory extends BasicInventory{
 			PickupBuilder.buildPickup(TypePickup.WEAPON, BA.getWeapon().getType(), BA.getWeapon().getSubType(), BG.getX(), BG.getY() + BG.getHeight());
 			break;
 		case 1:
-			PickupBuilder.buildPickup(TypePickup.ARMOUR, TypeArmour.BOOTS, SubTypeArmour.LEATHER, BG.getX(), BG.getY() + BG.getHeight());
+			PickupBuilder.buildPickup(TypePickup.ARMOUR, TypeArmour.HELMET, SubTypeArmour.LEATHER, BG.getX(), BG.getY() + BG.getHeight());
 			break;
 		case 2:
 			PickupBuilder.buildPickup(TypePickup.POTION, TypePotion.HEALTH, null, BG.getX(), BG.getY() + BG.getHeight());
