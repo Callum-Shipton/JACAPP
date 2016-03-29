@@ -46,41 +46,37 @@ public abstract class EnemyBuilder {
 		switch(type){
 		case SMALL:
 			enemyGraphics = new AnimatedGraphics(Art.smallEnemy, Art.base, false, ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX()); 
-			enemyAttack = new EnemyAttack(TypeAttack.WARRIOR, 1, WeaponBuilder.buildWeapon(SubTypeWeapon.FIRE_STAFF, 1));
+			enemyAttack = new EnemyAttack(TypeAttack.WARRIOR, 1, WeaponBuilder.buildWeapon(SubTypeWeapon.SWORD, 1));
 			newEnemy.addComponent(enemyGraphics);
 			enemyCollision = new RigidCollision(newEnemy);
 			enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 7);
-			enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
-			enemyInventory = new EnemyInventory(enemyGraphics, 1);
 			break;
 		case NORMAL:
 			enemyGraphics = new AnimatedGraphics(Art.enemy, Art.base, false, ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX()); 
-			enemyAttack = new EnemyAttack(TypeAttack.ARCHER, 3, WeaponBuilder.buildWeapon(SubTypeWeapon.ICE_STAFF, 1));
+			enemyAttack = new EnemyAttack(TypeAttack.ARCHER, 3, WeaponBuilder.buildWeapon(SubTypeWeapon.BOW, 1));
 			newEnemy.addComponent(enemyGraphics);
 			enemyCollision = new RigidCollision(newEnemy);
 			enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 2);
-			enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
-			enemyInventory = new EnemyInventory(enemyGraphics, 1);
 			break;
 		case FLYING:
 			enemyGraphics = new AnimatedGraphics(Art.flyingEnemy, Art.base, false, ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX()); 
-			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 2, WeaponBuilder.buildWeapon(SubTypeWeapon.EARTH_STAFF, 1));
+			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 2, WeaponBuilder.buildWeapon(SubTypeWeapon.FIRE_STAFF, 1));
 			newEnemy.addComponent(enemyGraphics);
 			enemyCollision = new RigidCollision(newEnemy);
 			enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);
-			enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
-			enemyInventory = new EnemyInventory(enemyGraphics, 1);
+			
 			break;
 		case BOSS:
 			enemyGraphics = new AnimatedGraphics(Art.bossEnemy, Art.base, false, ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(), ((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX()); 
-			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 1000, WeaponBuilder.buildWeapon(SubTypeWeapon.FIRE_STAFF, 1));
+			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 1000, WeaponBuilder.buildWeapon(SubTypeWeapon.EARTH_STAFF, 1));
 			newEnemy.addComponent(enemyGraphics);
 			enemyCollision = new RigidCollision(newEnemy);
 			enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);
-			enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
-			enemyInventory = new EnemyInventory(enemyGraphics, 1);
 			break;
 		}
+		
+		enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
+		enemyInventory = new EnemyInventory(enemyGraphics, enemyAttack, 1);
 		
 		newEnemy.addComponent(enemyAttack);
 		newEnemy.addComponent(enemyCollision);
