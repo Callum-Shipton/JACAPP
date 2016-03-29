@@ -351,16 +351,16 @@ public class Art {
 		walls = new Image("/Images/Tiles/Walls.png",6,7);
 		
 		//Load character maps
-		warrior = new Image("/Images/Characters/Warrior.png",6,8);
-		archer = new Image("/Images/Characters/Archer.png",6,8);
-		mage = new Image("/Images/Characters/Mage.png",6,8);
-		battleMage = new Image("/Images/Characters/BattleMage.png",6,8);
-		rogue = new Image("/Images/Characters/Rogue.png",6,8);
+		warrior = new Image("/Images/Characters/Players/Warrior.png",6,8);
+		archer = new Image("/Images/Characters/Players/Archer.png",6,8);
+		mage = new Image("/Images/Characters/Players/Mage.png",6,8);
+		battleMage = new Image("/Images/Characters/Players/BattleMage.png",6,8);
+		rogue = new Image("/Images/Characters/Players/Rogue.png",6,8);
 		
-		enemy = new Image("/Images/Characters/Enemy.png",6,8);
-		smallEnemy = new Image("/Images/Characters/SmallEnemy.png",6,8);
-		flyingEnemy = new Image("/Images/Characters/FlyingEnemy.png",6,8);
-		bossEnemy = new Image("/Images/Characters/BossEnemy.png",6,8);
+		enemy = new Image("/Images/Characters/Enemies/Enemy.png",6,8);
+		smallEnemy = new Image("/Images/Characters/Enemies/SmallEnemy.png",6,8);
+		flyingEnemy = new Image("/Images/Characters/Enemies/FlyingEnemy.png",6,8);
+		bossEnemy = new Image("/Images/Characters/Enemies/BossEnemy.png",6,8);
 		
 		//Load particle maps
 		coin = new Image("/Images/Drops/Coin.png",6,1);
