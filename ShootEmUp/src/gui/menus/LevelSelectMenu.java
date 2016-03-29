@@ -1,7 +1,8 @@
 package gui.menus;
 
 import main.ShootEmUp;
-import gui.ButtonBuilder;
+
+import gui.ButtonList;
 import gui.TypeButton;
 
 import display.Art;
@@ -9,21 +10,35 @@ import display.Image;
 
 public class LevelSelectMenu extends GuiMenu {
 
+	ButtonList buttonList;
+	
     public LevelSelectMenu(Image menuImage) {
         super(menuImage);
+        
+        buttonList = new ButtonList((ShootEmUp.width / 2) - (Art.level1Button.getWidth() / 2), 150, Art.level1Button.getHeight()/2, 20);
         if(ShootEmUp.save == null){
-        	  addButton(ButtonBuilder.buildButton(TypeButton.LEVEL1, (ShootEmUp.width / 2) - (Art.level1Button.getWidth() / 2), (ShootEmUp.height / 2) - Art.level1Button.getHeight() * 2));
+        	  buttonList.addButton(TypeButton.LEVEL1);
         }
         else {
         	switch(ShootEmUp.save.getLevel()){
         	case 3:
-        		addButton(ButtonBuilder.buildButton(TypeButton.LEVEL3, (ShootEmUp.width / 2) - (Art.level3Button.getWidth() / 2), (ShootEmUp.height / 2)));
+        		buttonList.addButton(TypeButton.LEVEL3);
         	case 2:
-        		addButton(ButtonBuilder.buildButton(TypeButton.LEVEL2, (ShootEmUp.width / 2) - (Art.level2Button.getWidth() / 2), (ShootEmUp.height / 2) - (Art.level2Button.getHeight())));
+        		buttonList.addButton(TypeButton.LEVEL2);
         	case 1:
-        		addButton(ButtonBuilder.buildButton(TypeButton.LEVEL1, (ShootEmUp.width / 2) - (Art.level1Button.getWidth() / 2), (ShootEmUp.height / 2) - Art.level1Button.getHeight() * 2));
+        		buttonList.addButton(TypeButton.LEVEL1);
         	}
         }
-        addButton(ButtonBuilder.buildButton(TypeButton.BACK, (ShootEmUp.width / 2) - (Art.backButton.getWidth() / 2), (ShootEmUp.height / 2) + Art.backButton.getHeight()));
+        buttonList.addButton(TypeButton.BACK);
+    }
+    
+    public void update(){
+    	super.update();
+    	buttonList.update();
+    }
+    
+    public void render(){
+    	super.render();
+    	buttonList.render();
     }
 }

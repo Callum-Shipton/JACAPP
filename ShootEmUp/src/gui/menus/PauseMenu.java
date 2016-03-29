@@ -1,19 +1,41 @@
 package gui.menus;
 
+import display.Art;
 import display.Image;
-import gui.ButtonBuilder;
+import gui.ButtonList;
 import gui.TypeButton;
 import main.ShootEmUp;
 
 public abstract class PauseMenu extends GuiMenu {
+	
+	ButtonList tabs;
+	ButtonList nativeButtons;
+	
 	public PauseMenu(Image MenuImage){
 		super(MenuImage);
-		addButton(ButtonBuilder.buildButton(TypeButton.RESUME, 30, ShootEmUp.height - 64));
-        addButton(ButtonBuilder.buildButton(TypeButton.MAIN_MENU, 30, ShootEmUp.height - 94));
-        addButton(ButtonBuilder.buildButton(TypeButton.INVENTORY, 922, 0));
-        addButton(ButtonBuilder.buildButton(TypeButton.SKILLS, 922, 204));
-        addButton(ButtonBuilder.buildButton(TypeButton.UPGRADES, 922, 102));
-        addButton(ButtonBuilder.buildButton(TypeButton.MAP, 922, 306));
-        addButton(ButtonBuilder.buildButton(TypeButton.SAVE, 922, 408));
+		
+		tabs = new ButtonList(922, 0, Art.skillsButton.getHeight()/2, 0);
+        tabs.addButton(TypeButton.INVENTORY);
+        tabs.addButton(TypeButton.SKILLS);
+        tabs.addButton(TypeButton.UPGRADES);
+        tabs.addButton(TypeButton.MAP);
+        tabs.addButton(TypeButton.SAVE);
+        
+        
+        nativeButtons = new ButtonList(30, ShootEmUp.height - 94, Art.exitButton.getHeight()/2, 20);
+        nativeButtons.addButton(TypeButton.RESUME);
+        nativeButtons.addButton(TypeButton.MAIN_MENU);
+	}
+	
+	public void update(){
+		super.update();
+		tabs.update();
+		nativeButtons.update();
+	}
+	
+	public void render(){
+		super.render();
+		tabs.render();
+		nativeButtons.render();
 	}
 }

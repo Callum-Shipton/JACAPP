@@ -1,6 +1,6 @@
 package gui.menus;
 
-import gui.ButtonBuilder;
+import gui.ButtonList;
 import gui.TypeButton;
 import main.ShootEmUp;
 
@@ -9,12 +9,25 @@ import display.Image;
 
 public class MainMenu extends GuiMenu {
 	
+	ButtonList buttonList;
+	
     public MainMenu(Image menuImage) {
         super(menuImage);
+        buttonList = new ButtonList((ShootEmUp.width / 2) - (Art.newGameButton.getWidth() / 2), 150, Art.newGameButton.getHeight()/2, 20);
         ShootEmUp.currentLevel = null;
-        addButton(ButtonBuilder.buildButton(TypeButton.NEW_GAME, (ShootEmUp.width / 2) - (Art.newGameButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.newGameButton.getHeight() * 2)));
-        addButton(ButtonBuilder.buildButton(TypeButton.LOAD_GAME, (ShootEmUp.width / 2) - (Art.loadGameButton.getWidth() / 2), (ShootEmUp.height / 2) - Art.loadGameButton.getHeight()));
-        addButton(ButtonBuilder.buildButton(TypeButton.OPTIONS, (ShootEmUp.width / 2) - (Art.optionsButton.getWidth() / 2), (ShootEmUp.height / 2)));
-        addButton(ButtonBuilder.buildButton(TypeButton.EXIT,  (ShootEmUp.width /  2) - (Art.exitButton.getWidth() / 2), (ShootEmUp.height / 2) + Art.exitButton.getHeight()));
+        buttonList.addButton(TypeButton.NEW_GAME);
+        buttonList.addButton(TypeButton.LOAD_GAME);
+        buttonList.addButton(TypeButton.OPTIONS);
+        buttonList.addButton(TypeButton.EXIT);
+    }
+    
+    public void update(){
+    	super.update();
+    	buttonList.update();
+    }
+    
+    public void render(){
+    	super.render();
+    	buttonList.render();
     }
 }

@@ -1,7 +1,5 @@
 package gui.menus;
 
-import gui.ButtonBuilder;
-import gui.TypeButton;
 import gui.Counter;
 import gui.Icon;
 import gui.Inventory;
@@ -37,14 +35,6 @@ public class InventoryMenu extends PauseMenu {
         super(menuImage);
         
         playerAttack = (PlayerAttack)ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK);
-        
-    	addButton(ButtonBuilder.buildButton(TypeButton.RESUME, 30, ShootEmUp.height - 64));
-        addButton(ButtonBuilder.buildButton(TypeButton.MAIN_MENU, 30, ShootEmUp.height - 94));
-        addButton(ButtonBuilder.buildButton(TypeButton.INVENTORY, 922, 0));
-        addButton(ButtonBuilder.buildButton(TypeButton.SKILLS, 922, 204));
-        addButton(ButtonBuilder.buildButton(TypeButton.UPGRADES, 922, 102));
-        addButton(ButtonBuilder.buildButton(TypeButton.MAP, 922, 306));
-        addButton(ButtonBuilder.buildButton(TypeButton.SAVE, 922, 408));
     	
         helmetIcon();
         chestIcon();

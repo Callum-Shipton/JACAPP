@@ -1,6 +1,6 @@
 package gui.menus;
 
-import gui.ButtonBuilder;
+import gui.ButtonList;
 import gui.TypeButton;
 import main.ShootEmUp;
 import display.Art;
@@ -8,10 +8,25 @@ import display.Image;
 
 public class OptionsMenu extends GuiMenu{
 	
+	ButtonList buttonList;
+	
     public OptionsMenu(Image menuImage) {
         super(menuImage);
-        addButton(ButtonBuilder.buildButton(TypeButton.CONTROLS, (ShootEmUp.width / 2) - (Art.controlsButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.controlsButton.getHeight())));
-        addButton(ButtonBuilder.buildButton(TypeButton.SOUND, (ShootEmUp.width / 2) - (Art.soundButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.soundButton.getHeight() / 4)));
-        addButton(ButtonBuilder.buildButton(TypeButton.BACK, (ShootEmUp.width / 2) - (Art.backButton.getWidth() / 2), (ShootEmUp.height / 2) + (Art.backButton.getHeight())));
+        
+        buttonList = new ButtonList((ShootEmUp.width / 2) - (Art.controlsButton.getWidth() / 2), 150, Art.controlsButton.getHeight()/2, 20);
+        
+        buttonList.addButton(TypeButton.CONTROLS);
+        buttonList.addButton(TypeButton.SOUND);
+        buttonList.addButton(TypeButton.BACK);
+    }
+    
+    public void update(){
+    	super.update();
+    	buttonList.render();
+    }
+    
+    public void render(){
+    	super.render();
+    	buttonList.render();
     }
 }
