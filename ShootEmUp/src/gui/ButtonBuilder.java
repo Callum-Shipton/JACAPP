@@ -5,7 +5,7 @@ import display.Image;
 
 public abstract class ButtonBuilder {
 	
-	public static Button buildButton(TypeButton type, int x, int y){
+	public static Button buildButton(TypeButton type, float x, float y){
 		
 		Image image;
 		

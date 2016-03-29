@@ -3,14 +3,15 @@ package gui;
 import java.util.ArrayList;
 
 import display.Art;
+import display.DPDTRenderer;
 
 public class ButtonList extends MenuItem{
 	
 	ArrayList<Button> buttons = new ArrayList<Button>();
-	int gap;
-	int height;
+	float gap;
+	float height;
 	
-	public ButtonList(int x ,int y, int height, int gap){
+	public ButtonList(float x ,float y, float height, float gap){
 		super(x, y);
 		this.gap = gap;
 		this.height = height;
@@ -32,7 +33,7 @@ public class ButtonList extends MenuItem{
 	        }
 	}
 	
-	public void render(){
+	public void render(DPDTRenderer d){
 		for(Button button : buttons){
 			button.render(Art.stat);
 		}

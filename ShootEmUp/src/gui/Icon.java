@@ -4,7 +4,7 @@ import math.Vector2;
 import display.DPDTRenderer;
 import display.Image;
 
-public class Icon extends GuiComponent {
+public class Icon extends MenuItem{
 	
 	protected Vector2 pos;
 	protected Vector2 size;
@@ -14,6 +14,7 @@ public class Icon extends GuiComponent {
 	protected boolean isAnimated;
 
 	public Icon(float x, float y, Image i, boolean animating, float scale){
+		super(x, y);
 		pos = new Vector2(x,y);
 		size = new Vector2((i.getWidth()/i.getFWidth()) * scale,(i.getHeight()/i.getFHeight())*scale);
 		setCurrFrame(new Vector2(0.0f, 0.0f));

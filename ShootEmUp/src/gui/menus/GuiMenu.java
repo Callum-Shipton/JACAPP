@@ -49,7 +49,7 @@ public abstract class GuiMenu {
             button.render(Art.stat);
         }
         for(MenuItem menuItem: menuItems){
-    		menuItem.render();
+    		menuItem.render(Art.stat);
     	}
     }
 

@@ -7,6 +7,7 @@ import java.util.List;
 import components.TypeComponent;
 import components.inventory.PlayerInventory;
 import display.Art;
+import display.DPDTRenderer;
 import main.ShootEmUp;
 import object.InventoryItem;
 
@@ -74,7 +75,7 @@ public class Inventory extends MenuItem{
 		
 	}
 	
-	public void render(){
+	public void render(DPDTRenderer d){
 		for (Button button : buttons) {
             button.render(Art.stat);
 		}

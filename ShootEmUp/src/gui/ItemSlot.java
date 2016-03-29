@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import components.inventory.TypePickup;
 import display.Art;
+import display.DPDTRenderer;
 import display.Image;
 import object.Armour;
 import object.InventoryItem;
@@ -51,10 +52,10 @@ public class ItemSlot extends MenuItem{
 	}
 
 	@Override
-	public void render() {
-		icon.render(Art.stat);
+	public void render(DPDTRenderer d) {
+		icon.render(d);
 		for(Counter counter: stats){
-			counter.render(Art.stat);
+			counter.render(d);
 		}
 	}
 }

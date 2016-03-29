@@ -19,8 +19,8 @@ public class Button extends GuiComponent {
 
 	private boolean isPressed;
 	private boolean hovered = false;
-	private int x;
-	private int y;
+	private float x;
+	private float y;
 	private final int w;
 	private final int h;
 
@@ -31,7 +31,7 @@ public class Button extends GuiComponent {
 	DoubleBuffer Bx = BufferUtils.createDoubleBuffer(1);
     DoubleBuffer By = BufferUtils.createDoubleBuffer(1);
 
-	public Button(TypeButton type, Image id, int x, int y) {
+	public Button(TypeButton type, Image id, float x, float y) {
 		this.type = type;
 		this.id = id;
 		this.x = x;
