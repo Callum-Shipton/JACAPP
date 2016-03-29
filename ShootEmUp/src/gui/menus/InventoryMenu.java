@@ -42,7 +42,7 @@ public class InventoryMenu extends PauseMenu {
         bootsIcon();
         weaponIcon();
 	    
-	    inventory = new Inventory(((PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY))).getInventory());
+	    inventory = new Inventory(30, 30, ((PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY))).getInventory());
     }
     
     public void render(){

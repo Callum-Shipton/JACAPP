@@ -2,6 +2,7 @@ package gui.menus;
 
 import gui.Button;
 import gui.ButtonHandler;
+import gui.MenuItem;
 import gui.TypeButton;
 import input.Keyboard;
 
@@ -17,6 +18,7 @@ import display.Image;
 public abstract class GuiMenu {
 
     protected List<Button> buttons = new ArrayList<Button>();
+    protected ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
     protected int buttonPointer = 0;
     protected Image menuImage;
     protected int x;
@@ -46,9 +48,16 @@ public abstract class GuiMenu {
         for (Button button : buttons) {
             button.render(Art.stat);
         }
+        for(MenuItem menuItem: menuItems){
+    		menuItem.render();
+    	}
     }
 
     public void update() {
+    	for(MenuItem menuItem: menuItems){
+    		menuItem.update();
+    	}
+    	
         for (Button button : buttons) {
             button.update();
             if (button.hasClicked()){

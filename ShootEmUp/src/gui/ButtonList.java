@@ -4,17 +4,14 @@ import java.util.ArrayList;
 
 import display.Art;
 
-public class ButtonList {
+public class ButtonList extends MenuItem{
 	
 	ArrayList<Button> buttons = new ArrayList<Button>();
-	int x;
-	int y;
 	int gap;
 	int height;
 	
 	public ButtonList(int x ,int y, int height, int gap){
-		this.x = x;
-		this.y = y;
+		super(x, y);
 		this.gap = gap;
 		this.height = height;
 	}

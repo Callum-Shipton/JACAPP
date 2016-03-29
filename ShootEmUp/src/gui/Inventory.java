@@ -10,18 +10,16 @@ import display.Art;
 import main.ShootEmUp;
 import object.InventoryItem;
 
-public class Inventory {
+public class Inventory extends MenuItem{
 
 	private int row = 0;
 	private int column = 0;
 	
-	private final int inventoryX = 30;
-	private final int inventoryY = 30;
-	
 	private ArrayList<InventoryItem> i;
 	private List<Button> buttons = new ArrayList<Button>();
 	
-	public Inventory(ArrayList<InventoryItem> i){
+	public Inventory(int x, int y, ArrayList<InventoryItem> i){
+		super(x, y);
 		this.i = i;
 		addButtons();
 	}
@@ -34,7 +32,7 @@ public class Inventory {
         
 		while(items.hasNext()){
 			InventoryItem item = items.next();
-			addButton(new Button(TypeButton.OTHER, item.getInventoryImage(), inventoryX + ((item.getInventoryImage().getWidth() * row)), inventoryY + (((item.getInventoryImage().getHeight()/2) * column))));
+			addButton(new Button(TypeButton.OTHER, item.getInventoryImage(), x + ((item.getInventoryImage().getWidth() * row)), y + (((item.getInventoryImage().getHeight()/2) * column))));
 			row++;
 			if(row > 10){
 				row = 0;

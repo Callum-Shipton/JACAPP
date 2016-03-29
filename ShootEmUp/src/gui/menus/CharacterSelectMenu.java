@@ -15,17 +15,17 @@ public class CharacterSelectMenu extends GuiMenu {
 	Counter mageLevel;
 	Counter battleMageLevel;
 	Counter rogueLevel;
-	ButtonList buttonList;
 	
     public CharacterSelectMenu(Image menuImage) {
         super(menuImage);
-        buttonList = new ButtonList((ShootEmUp.width / 2) - (Art.warriorButton.getWidth() / 2), 150, Art.warriorButton.getHeight()/2, 20);
+        ButtonList buttonList = new ButtonList((ShootEmUp.width / 2) - (Art.warriorButton.getWidth() / 2), 150, Art.warriorButton.getHeight()/2, 20);
         buttonList.addButton(TypeButton.WARRIOR);
         buttonList.addButton(TypeButton.ARCHER);
         buttonList.addButton(TypeButton.MAGE);
         buttonList.addButton(TypeButton.BATTLE_MAGE);
         buttonList.addButton(TypeButton.ROGUE);
         buttonList.addButton(TypeButton.BACK);  
+        menuItems.add(buttonList);
         if(ShootEmUp.save != null){
         	if(ShootEmUp.save.getCharacter(TypeAttack.WARRIOR) != null){
         		warriorLevel = new Counter((ShootEmUp.width / 2) + (Art.warriorButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.warriorButton.getHeight() * 2), Art.levelIcon, false, ShootEmUp.save.getCharacter(TypeAttack.WARRIOR).getPlayerLevel(), 0.5f);
@@ -45,14 +45,8 @@ public class CharacterSelectMenu extends GuiMenu {
         }
     }
     
-    public void update(){
-    	super.update();
-    	buttonList.update();
-    }
-    
     public void render(){
     	super.render();
-    	buttonList.render();
     	if(warriorLevel != null){
     		warriorLevel.render(Art.stat);;
     	}

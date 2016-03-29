@@ -9,13 +9,11 @@ import display.Art;
 import display.Image;
 
 public class LevelSelectMenu extends GuiMenu {
-
-	ButtonList buttonList;
 	
     public LevelSelectMenu(Image menuImage) {
         super(menuImage);
         
-        buttonList = new ButtonList((ShootEmUp.width / 2) - (Art.level1Button.getWidth() / 2), 150, Art.level1Button.getHeight()/2, 20);
+        ButtonList buttonList = new ButtonList((ShootEmUp.width / 2) - (Art.level1Button.getWidth() / 2), 150, Art.level1Button.getHeight()/2, 20);
         if(ShootEmUp.save == null){
         	  buttonList.addButton(TypeButton.LEVEL1);
         }
@@ -30,15 +28,7 @@ public class LevelSelectMenu extends GuiMenu {
         	}
         }
         buttonList.addButton(TypeButton.BACK);
-    }
-    
-    public void update(){
-    	super.update();
-    	buttonList.update();
-    }
-    
-    public void render(){
-    	super.render();
-    	buttonList.render();
+        
+        menuItems.add(buttonList);
     }
 }
