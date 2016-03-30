@@ -11,7 +11,7 @@ import display.DPDTRenderer;
 import main.ShootEmUp;
 import object.InventoryItem;
 
-public class Inventory extends MenuItem{
+public class Inventory extends GuiComponent{
 
 	private int row = 0;
 	private int column = 0;

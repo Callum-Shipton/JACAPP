@@ -10,7 +10,7 @@ import object.Armour;
 import object.InventoryItem;
 import object.Weapon;
 
-public class ItemSlot extends MenuItem{
+public class ItemSlot extends GuiComponent{
 	private Icon icon;
 	private ArrayList<Counter> stats = new ArrayList<Counter>();
 	private int BUFFER = 5; 

@@ -1,7 +1,7 @@
 package gui.menus;
 
 import main.ShootEmUp;
-
+import gui.ButtonBuilder;
 import gui.ButtonList;
 import gui.TypeButton;
 
@@ -15,19 +15,19 @@ public class LevelSelectMenu extends GuiMenu {
         
         ButtonList buttonList = new ButtonList((ShootEmUp.width / 2) - (Art.level1Button.getWidth() / 2), 150, Art.level1Button.getHeight()/2, 20);
         if(ShootEmUp.save == null){
-        	  buttonList.addButton(TypeButton.LEVEL1);
+        	  buttonList.addMenuItem(ButtonBuilder.buildButton(TypeButton.LEVEL1, 0, 0));
         }
         else {
         	switch(ShootEmUp.save.getLevel()){
         	case 3:
-        		buttonList.addButton(TypeButton.LEVEL3);
+        		buttonList.addMenuItem(ButtonBuilder.buildButton(TypeButton.LEVEL3, 0, 0));
         	case 2:
-        		buttonList.addButton(TypeButton.LEVEL2);
+        		buttonList.addMenuItem(ButtonBuilder.buildButton(TypeButton.LEVEL2, 0, 0));
         	case 1:
-        		buttonList.addButton(TypeButton.LEVEL1);
+        		buttonList.addMenuItem(ButtonBuilder.buildButton(TypeButton.LEVEL1, 0, 0));
         	}
         }
-        buttonList.addButton(TypeButton.BACK);
+        buttonList.addMenuItem(ButtonBuilder.buildButton(TypeButton.BACK, 0, 0));
         
         menuItems.add(buttonList);
     }

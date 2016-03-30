@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import display.Art;
 import display.DPDTRenderer;
 
-public class ButtonList extends MenuItem{
+public class ButtonList extends GuiComponent{
 	
-	ArrayList<Button> buttons = new ArrayList<Button>();
+	ArrayList<GuiComponent> menuItems = new ArrayList<GuiComponent>();
 	float gap;
 	float height;
 	
@@ -17,25 +17,21 @@ public class ButtonList extends MenuItem{
 		this.height = height;
 	}
 	
-	public void addButton(TypeButton type){
-		buttons.add(ButtonBuilder.buildButton(type, x, y + ((gap + height) * buttons.size())));
+	public void addMenuItem(GuiComponent menuItem){
+		menuItem.setX(x);
+		menuItem.setY(y + ((gap + height) * menuItems.size()));
+		menuItems.add(menuItem);
 	}
 	
 	public void update(){
-		 for (Button button : buttons) {
-	            button.update();
-	            if (button.hasClicked()){
-	            	ButtonHandler.selectButton(button.getType());
-	            	if(button.getType() != TypeButton.OTHER){
-	            		button.postAction();
-	            	}
-	            }
-	        }
+		for(GuiComponent menuItem : menuItems) {
+	        menuItem.update();
+	    }
 	}
 	
 	public void render(DPDTRenderer d){
-		for(Button button : buttons){
-			button.render(Art.stat);
+		for(GuiComponent menuItem : menuItems){
+			menuItem.render(Art.stat);
 		}
 	}
 }

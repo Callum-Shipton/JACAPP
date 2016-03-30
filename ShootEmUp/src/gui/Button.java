@@ -19,8 +19,6 @@ public class Button extends GuiComponent {
 
 	private boolean isPressed;
 	private boolean hovered = false;
-	private float x;
-	private float y;
 	private final int w;
 	private final int h;
 
@@ -32,10 +30,9 @@ public class Button extends GuiComponent {
     DoubleBuffer By = BufferUtils.createDoubleBuffer(1);
 
 	public Button(TypeButton type, Image id, float x, float y) {
+		super(x, y);
 		this.type = type;
 		this.id = id;
-		this.x = x;
-		this.y = y;
 		this.w = id.getWidth();
 		this.h = id.getHeight() / 2;
 		window = ShootEmUp.display.getWindow();
@@ -43,7 +40,6 @@ public class Button extends GuiComponent {
 
 	@Override
 	public void update() {
-		super.update();
 		window = ShootEmUp.display.getWindow();
 		Bx.clear();
 		By.clear();
@@ -65,6 +61,11 @@ public class Button extends GuiComponent {
 		if (isPressed && glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE) {
 			isPressed = false;
 		} 
+		
+		if(performClick){
+			ButtonHandler.selectButton(type);
+			this.postAction();
+		}
 	}
 
 	public void postAction() {

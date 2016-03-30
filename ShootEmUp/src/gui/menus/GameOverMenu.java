@@ -12,6 +12,6 @@ public class GameOverMenu extends GuiMenu{
     public GameOverMenu(Image menuImage) {
         super(menuImage);
         ShootEmUp.mainMenu = true;
-        addButton(ButtonBuilder.buildButton(TypeButton.MAIN_MENU, (ShootEmUp.width / 2) - (Art.exitButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.exitButton.getHeight() / 2)));
+        menuItems.add(ButtonBuilder.buildButton(TypeButton.MAIN_MENU, (ShootEmUp.width / 2) - (Art.exitButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.exitButton.getHeight() / 2)));
     }
 }

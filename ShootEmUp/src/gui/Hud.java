@@ -34,7 +34,8 @@ public class Hud extends GuiComponent{
 	
 	private float hudW;
 
-	public Hud(Entity player){
+	public Hud(Entity player, float x, float y){
+		super(x,y);
 		this.player = player;
 		hudElems = new CopyOnWriteArrayList<Icon>();
 		infoBoxTop = new Icon(0.0f,0.0f, Art.infoBoxTop, false, 1f);

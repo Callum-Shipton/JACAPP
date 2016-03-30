@@ -8,8 +8,6 @@ import math.Vector2;
 public class Counter extends Icon{
 
 	private int count;
-	private float x;
-	private float y;
 	private Vector2 numberSize;
 	private Vector2 fullSize;
 	private int width;
@@ -18,11 +16,8 @@ public class Counter extends Icon{
 	private float scale;
 	
 	public Counter(float x, float y, Image i, boolean animating, int count, float scale) {
-		super(x, y, i, animating, scale);
-		
+		super(x, y, i, animating, scale);	
 		this.scale = scale;
-		this.x = x;
-		this.y = y;
 		this.count = count;
 		width = (int) ((i.getWidth()/i.getFWidth()) * scale);
 		numberSize = new Vector2((i.getHeight()/i.getFHeight()) * scale,(i.getHeight()/i.getFHeight()) * scale);

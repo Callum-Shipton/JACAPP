@@ -4,9 +4,8 @@ import math.Vector2;
 import display.DPDTRenderer;
 import display.Image;
 
-public class Icon extends MenuItem{
+public class Icon extends GuiComponent{
 	
-	protected Vector2 pos;
 	protected Vector2 size;
 	protected Image i;
 	private Vector2 currFrame;
@@ -15,7 +14,6 @@ public class Icon extends MenuItem{
 
 	public Icon(float x, float y, Image i, boolean animating, float scale){
 		super(x, y);
-		pos = new Vector2(x,y);
 		size = new Vector2((i.getWidth()/i.getFWidth()) * scale,(i.getHeight()/i.getFHeight())*scale);
 		setCurrFrame(new Vector2(0.0f, 0.0f));
 		maxFrame = new Vector2(i.getFWidth(), i.getFHeight());
@@ -24,7 +22,7 @@ public class Icon extends MenuItem{
 	}
 	
 	public void render(DPDTRenderer d) {		
-		d.draw(i, pos, getSize(), 0.0f, getCurrFrame(), maxFrame);
+		d.draw(i, new Vector2(x,y), getSize(), 0.0f, getCurrFrame(), maxFrame);
 	}
 
 	public void update(){
