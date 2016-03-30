@@ -40,7 +40,7 @@ public class PlayerAttack extends BaseAttack {
 		case ARCHER:
 			health = 4;
 			mana = 4;
-			weapon = WeaponBuilder.buildWeapon(SubTypeWeapon.BOW, 0);
+			weapon = WeaponBuilder.buildWeapon(SubTypeWeapon.LONGBOW, 0);
 			break;
 		case MAGE:
 			health = 3;

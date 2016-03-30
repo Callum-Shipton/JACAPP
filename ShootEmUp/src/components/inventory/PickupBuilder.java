@@ -97,7 +97,7 @@ public abstract class PickupBuilder {
 			case BATTLEAXE:
 				BG = new AnimatedGraphics(Art.battleaxe, Art.base, true);
 				break;
-			case BOW:
+			case LONGBOW:
 				BG = new AnimatedGraphics(Art.bow, Art.base, true);
 				break;
 			case CROSSBOW:
@@ -118,7 +118,20 @@ public abstract class PickupBuilder {
 			case SWORD:
 				BG = new AnimatedGraphics(Art.sword, Art.base, true);
 				break;
-			default:
+			case HORSEBOW:
+				BG = new AnimatedGraphics(Art.bow, Art.base, true);
+				break;
+			case IRON_DAGGAR:
+				BG = new AnimatedGraphics(Art.sword, Art.base, true);
+				break;
+			case LONGSWORD:
+				BG = new AnimatedGraphics(Art.sword, Art.base, true);
+				break;
+			case QUICK_CROSSBOW:
+				BG = new AnimatedGraphics(Art.crossbow, Art.base, true);
+				break;
+			case STEEL_DAGGAR:
+				BG = new AnimatedGraphics(Art.sword, Art.base, true);
 				break;
 			}
 		}
