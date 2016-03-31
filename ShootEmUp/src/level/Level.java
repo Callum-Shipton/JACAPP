@@ -81,6 +81,8 @@ public class Level {
 		for (Entity character : entities) {
 			((BaseGraphics)character.getComponent(TypeComponent.GRAPHICS)).render(character);
 		}
+		
+		((BaseGraphics)player.getComponent(TypeComponent.GRAPHICS)).render(player);
 
 		map.renderHighTiles();
 
