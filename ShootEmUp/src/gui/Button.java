@@ -62,7 +62,7 @@ public class Button extends GuiComponent {
 			isPressed = false;
 		} 
 		
-		if(performClick){
+		if(performClick && (type != TypeButton.OTHER)){
 			ButtonHandler.selectButton(type);
 			this.postAction();
 		}
