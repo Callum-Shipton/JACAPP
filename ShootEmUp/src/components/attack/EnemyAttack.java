@@ -1,5 +1,6 @@
 package components.attack;
 
+import object.Armour;
 import object.Entity;
 import object.Weapon;
 import main.ShootEmUp;
@@ -8,7 +9,7 @@ import components.Message;
 public class EnemyAttack extends BaseAttack implements AttackComponent {
 	protected TypeAttack type;
 	
-	public EnemyAttack(TypeAttack type, int health, Weapon weapon){
+	public EnemyAttack(TypeAttack type, int health, Weapon weapon, Armour helmet, Armour chest, Armour legs, Armour boots){
 		this.type = type;
 		
 		this.health = health;
@@ -19,7 +20,12 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 		maxMana = mana;
 		manaRegen = 100;
 		maxManaRegen = manaRegen;
+		
 		this.weapon = weapon;
+		this.helmet = helmet;
+		this.chest = chest;
+		this.legs = legs;
+		this.boots = boots;
 	}
 	
 	public EnemyAttack(TypeAttack type, Weapon weapon, int health, int healthRegen, int maxHealth, int mana, int manaRegen, int maxMana){

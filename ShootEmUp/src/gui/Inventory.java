@@ -45,12 +45,6 @@ public class Inventory extends GuiComponent{
 	public void update(){
 		for (Button button : buttons) {
             button.update();
-            if (button.hasClicked()){
-            	ButtonHandler.selectButton(button.getType());
-            	if(button.getType() != TypeButton.OTHER){
-            		button.postAction();
-            	}
-            }
         }
 		Iterator<Button> Buttons = buttons.iterator();
     	Button itemButton;

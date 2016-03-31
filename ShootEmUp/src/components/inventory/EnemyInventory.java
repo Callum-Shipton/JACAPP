@@ -41,11 +41,44 @@ public class EnemyInventory extends BasicInventory{
 			PickupBuilder.buildPickup(TypePickup.WEAPON, BA.getWeapon().getType(), BA.getWeapon().getSubType(), BG.getX(), BG.getY() + BG.getHeight());
 			break;
 		case 1:
-			PickupBuilder.buildPickup(TypePickup.ARMOUR, TypeArmour.HELMET, SubTypeArmour.LEATHER, BG.getX(), BG.getY() + BG.getHeight());
+			switch(rand.nextInt(4)){
+			case 0:
+				if(BA.getHelmet() != null){
+					PickupBuilder.buildPickup(TypePickup.ARMOUR, TypeArmour.HELMET, SubTypeArmour.LEATHER, BG.getX(), BG.getY() + BG.getHeight());
+				}
+				break;
+			case 1:
+				if(BA.getChest() != null){
+					PickupBuilder.buildPickup(TypePickup.ARMOUR, TypeArmour.CHESTPLATE, SubTypeArmour.LEATHER, BG.getX(), BG.getY() + BG.getHeight());
+				}
+				break;
+			case 2:
+				if(BA.getLegs() != null){
+					PickupBuilder.buildPickup(TypePickup.ARMOUR, TypeArmour.LEGS, SubTypeArmour.LEATHER, BG.getX(), BG.getY() + BG.getHeight());
+				}
+				break;
+			case 3:
+				if(BA.getBoots() != null){
+					PickupBuilder.buildPickup(TypePickup.ARMOUR, TypeArmour.BOOTS, SubTypeArmour.LEATHER, BG.getX(), BG.getY() + BG.getHeight());
+				}
+				break;
+			}
 			break;
 		case 2:
-			PickupBuilder.buildPickup(TypePickup.POTION, TypePotion.HEALTH, null, BG.getX(), BG.getY() + BG.getHeight());
-			break;
+			switch(rand.nextInt(4)){
+			case 0:
+				PickupBuilder.buildPickup(TypePickup.POTION, TypePotion.HEALTH, null, BG.getX(), BG.getY() + BG.getHeight());
+				break;
+			case 1:
+				PickupBuilder.buildPickup(TypePickup.POTION, TypePotion.MANA, null, BG.getX(), BG.getY() + BG.getHeight());
+				break;
+			case 2:
+				PickupBuilder.buildPickup(TypePickup.POTION, TypePotion.SPEED, null, BG.getX(), BG.getY() + BG.getHeight());
+				break;
+			case 3:
+				PickupBuilder.buildPickup(TypePickup.POTION, TypePotion.KNOCKBACK, null, BG.getX(), BG.getY() + BG.getHeight());
+				break;
+			}
 		}
 	}
 }

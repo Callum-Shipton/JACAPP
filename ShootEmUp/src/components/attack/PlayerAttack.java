@@ -1,6 +1,5 @@
   package components.attack;
 
-import object.Armour;
 import object.ArmourBuilder;
 import object.Entity;
 import object.Weapon;
@@ -16,13 +15,6 @@ public class PlayerAttack extends BaseAttack {
 	protected TypeAttack type;
 	
 	protected int lives;
-	
-	private Armour boots = null;
-	private Armour legs = null;
-	private Armour chest = null;
-	private Armour helmet = null;
-	
-	private int armourValue = 0;
 	
 	public PlayerAttack(TypeAttack type){
 		this.type = type;
@@ -141,7 +133,7 @@ public class PlayerAttack extends BaseAttack {
 	}
 	
 	public void removeLife() {
-		if(lives == 1){
+		if(lives == -99){
 			ShootEmUp.paused = true;
 			ShootEmUp.menuStack.add(new GameOverMenu(Art.gameOverScreen));
 		} else {
@@ -159,54 +151,5 @@ public class PlayerAttack extends BaseAttack {
 	
 	public TypeAttack getTypeAttack(){
 		return type;
-	}
-	
-	public Armour getBoots() {
-		return boots;
-	}
-
-	public Armour getLegs() {
-		return legs;
-	}
-
-	public Armour getChest() {
-		return chest;
-	}
-
-	public Armour getHelmet() {
-		return helmet;
-	}
-	
-	public void setBoots(Armour boots) {
-		this.boots = boots;
-		setArmourValue();
-	}
-
-	public void setChest(Armour chest) {
-		this.chest = chest;
-		setArmourValue();
-	}
-	
-	public void setLegs(Armour legs) {
-		this.legs = legs;
-		setArmourValue();
-	}
-	
-	public void setHelmet(Armour helmet) {
-		this.helmet = helmet;
-		setArmourValue();
-	}
-		
-	public void setArmourValue() {
-		armourValue = 0;
-		if(boots != null){
-			armourValue += boots.getDefence();
-		} else if(legs != null){
-			armourValue += legs.getDefence();
-		} else if(chest != null){
-			armourValue += chest.getDefence();
-		} else if(helmet != null){
-			armourValue += helmet.getDefence();
-		}
 	}
 }

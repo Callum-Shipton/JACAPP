@@ -18,10 +18,10 @@ public class SkillMenu extends PauseMenu {
         super(menuImage);
         
         ButtonList buttonList = new ButtonList(30, 30, Art.healthButton.getHeight()/2, 20);
-        buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.HEALTH_REGEN, Art.coin, 5, 1f));
-        buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.HEALTH, Art.coin, 5, 1f));
-        buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.MANA_REGEN, Art.coin, 5, 1f));
-        buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.MANA, Art.coin, 5, 1f));
+        buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.HEALTH_REGEN, Art.coin, 1, 1f));
+        buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.HEALTH, Art.coin, 1, 1f));
+        buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.MANA_REGEN, Art.coin, 1, 1f));
+        buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.MANA, Art.coin, 1, 1f));
 		menuItems.add(buttonList);
 		skillPoints = new Counter(30.0f, 191.0f, Art.coin, false, ((PlayerInventory)ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)).getLevelPoints(), 1f);
     }

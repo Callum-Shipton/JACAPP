@@ -87,21 +87,25 @@ public class PlayerControl extends BaseControl{
 		if (Keyboard.getKey(GLFW_KEY_1) == 1
 				|| Keyboard.getKey(GLFW_KEY_1) == 2) {
 			PI.usePotion(TypePotion.HEALTH);
+			Keyboard.setKey(GLFW_KEY_1);
 		}
 		
 		if (Keyboard.getKey(GLFW_KEY_2) == 1
 				|| Keyboard.getKey(GLFW_KEY_2) == 2) {
 			PI.usePotion(TypePotion.MANA);
+			Keyboard.setKey(GLFW_KEY_2);
 		}
 		
 		if (Keyboard.getKey(GLFW_KEY_3) == 1
 				|| Keyboard.getKey(GLFW_KEY_3) == 2) {
 			PI.usePotion(TypePotion.SPEED);
+			Keyboard.setKey(GLFW_KEY_3);
 		}
 		
 		if (Keyboard.getKey(GLFW_KEY_4) == 1
 				|| Keyboard.getKey(GLFW_KEY_4) == 2) {
 			PI.usePotion(TypePotion.KNOCKBACK);
+			Keyboard.setKey(GLFW_KEY_4);
 		}
 	}
 

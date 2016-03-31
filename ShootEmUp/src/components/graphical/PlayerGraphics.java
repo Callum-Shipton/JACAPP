@@ -72,8 +72,4 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 		}
 		
 	}
-
-
-
-
 }

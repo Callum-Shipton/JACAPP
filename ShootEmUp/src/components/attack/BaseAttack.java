@@ -1,5 +1,6 @@
 package components.attack;
 
+import object.Armour;
 import object.Entity;
 import object.Weapon;
 import components.Component;
@@ -11,6 +12,13 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	protected TypeComponent type = TypeComponent.ATTACK;
 	
 	protected Weapon weapon;
+	
+	protected Armour boots = null;
+	protected Armour legs = null;
+	protected Armour chest = null;
+	protected Armour helmet = null;
+	protected int armourValue = 0;
+	
 	protected int health;
 	protected int healthRegen;
 	protected int maxHealth;
@@ -197,5 +205,54 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 	public void setPoison(boolean poison) {
 		this.poison = poison;
+	}
+	
+	public Armour getBoots() {
+		return boots;
+	}
+
+	public Armour getLegs() {
+		return legs;
+	}
+
+	public Armour getChest() {
+		return chest;
+	}
+
+	public Armour getHelmet() {
+		return helmet;
+	}
+	
+	public void setBoots(Armour boots) {
+		this.boots = boots;
+		setArmourValue();
+	}
+
+	public void setChest(Armour chest) {
+		this.chest = chest;
+		setArmourValue();
+	}
+	
+	public void setLegs(Armour legs) {
+		this.legs = legs;
+		setArmourValue();
+	}
+	
+	public void setHelmet(Armour helmet) {
+		this.helmet = helmet;
+		setArmourValue();
+	}
+	
+	protected void setArmourValue() {
+		armourValue = 0;
+		if(boots != null){
+			armourValue += boots.getDefence();
+		} else if(legs != null){
+			armourValue += legs.getDefence();
+		} else if(chest != null){
+			armourValue += chest.getDefence();
+		} else if(helmet != null){
+			armourValue += helmet.getDefence();
+		}
 	}
 }

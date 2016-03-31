@@ -16,7 +16,7 @@ import display.Art;
 public class Spawner {
 	
 	private int counter = 0;
-	private final int ENEMY_SPAWN_RATE = 3;
+	private final int ENEMY_SPAWN_RATE = 1;
 	private final int MAX_WAVE = 10;
 	private final int MAX_LEVEL = 3;
 	private int enemies = 0;

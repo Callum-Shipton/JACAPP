@@ -11,6 +11,7 @@ import display.Art;
 public abstract class WeaponBuilder {
 	
 	private static Random rand = new Random();
+	
 	private static ArrayList<SubTypeWeapon> daggers = new ArrayList<SubTypeWeapon>();
 	static{
 		daggers.add(SubTypeWeapon.IRON_DAGGAR);
