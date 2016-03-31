@@ -62,8 +62,13 @@ public class DurationPotion extends Potion {
 	@Override
 	public void usePotion(){
 		if(quantity > 0 ){
+			if(active){
+				duration = maxDuration-1;
+			}
+			else{
 			active = true;
 			duration = maxDuration;
+			}
 			quantity--;
 			counter = 0;
 		}
