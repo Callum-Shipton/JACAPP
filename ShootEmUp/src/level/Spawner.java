@@ -5,6 +5,7 @@ import java.util.Random;
 import org.lwjgl.opengl.GL20;
 
 import object.Entity;
+import save.Save;
 import save.SaveHandler;
 import main.ShootEmUp;
 import math.Seconds;
@@ -87,6 +88,12 @@ public class Spawner {
 				GL20.glUniform1f(radiusLocationInst, ((wave-1)*radLevel)+radius);
 				GL20.glUseProgram(0);
 			} else if (ShootEmUp.currentLevel.getLevel() < MAX_LEVEL){
+				if(ShootEmUp.save == null){
+					ShootEmUp.save = new Save();
+				} else {
+					ShootEmUp.save.saveCharacter();
+				}
+				SaveHandler.save(ShootEmUp.save, 1);
 				TypeAttack temp = ((PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK)).getAttackType();
 				ShootEmUp.currentLevel = new Level(Art.levels, ShootEmUp.currentLevel.getLevel() + 1);
 				ShootEmUp.currentLevel.init();

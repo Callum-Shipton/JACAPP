@@ -19,7 +19,7 @@ public class Save implements Serializable{
 	private int level;
 	
 	public Save(){	
-		
+		saveCharacter();
 	}
 
 	public void saveCharacter(){
