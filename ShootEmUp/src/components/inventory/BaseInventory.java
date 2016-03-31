@@ -52,6 +52,8 @@ public class BaseInventory extends Component implements InventoryComponent {
 	protected BaseGraphics BG;
 	
 	public BaseInventory(BaseGraphics BG, BaseAttack BA, int level){
+		this.BG = BG;
+		this.BA = BA;
 		this.level = level;
 		expBound = level + 1;
 		inventory = new ArrayList<InventoryItem>();
@@ -80,6 +82,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 	}
 	
 	public BaseInventory(BaseGraphics BG, PlayerAttack BA, CharacterSave save) {
+		this(BG, BA, save.getPlayerLevel());
 		for(SubTypeWeapon typeWeapon : save.getWeapons()){
 			inventory.add(WeaponBuilder.buildWeapon(typeWeapon, 0));
 		}
