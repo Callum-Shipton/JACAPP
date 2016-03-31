@@ -4,6 +4,11 @@ import object.Entity;
 import main.ShootEmUp;
 import math.Vector2;
 import components.TypeComponent;
+
+import java.awt.image.TileObserver;
+import java.util.HashSet;
+import java.util.PriorityQueue;
+
 import components.Message;
 import components.attack.BaseAttack;
 import components.graphical.AnimatedGraphics;
@@ -77,25 +82,26 @@ public class AIControl extends BaseControl{
 			counter = 0;
 		}
 	}
+
+	
 	/*
 	public Vector2 ai(){
-		PriorityQueue<Entity> open = new PriorityQueue<Entity>(); //queue for tiles to be looked at
-		HashSet<Vector2> closed = new HashSet<Vector2>(); //list of already viewed tiles
-		Entity start = new Tile((float)Math.floor(AG.getX() / 32),(float)Math.floor(AG.getY() / 32), null); //makes a tile for the enemy position
-		Entity goal = new Tile((float)Math.floor(((BaseGraphics)ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getX() / 32),(float)Math.floor(((BaseGraphics)ShootEmUp.currentLevel.getPlayer().getComponent(ComponentType.GRAPHICS)).getY() / 32), null); // makes a tile for the player
+		PriorityQueue<Node> open = new PriorityQueue<Node>(); //queue for tiles to be looked at
+		HashSet<Node> closed = new HashSet<Node>(); //list of already viewed tiles
+		Node start = new Node (new Vector2((float)Math.floor(BG.getX() / Map.TILE_WIDTH),(float)Math.floor(BG.getY() / Map.TILE_WIDTH)), null); //makes a tile for the enemy position
+		Node goal = new Node (new Vector2((float)Math.floor(((BaseGraphics)ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS)).getX() / Map.TILE_WIDTH),(float)Math.floor(((BaseGraphics)ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS)).getY() / Map.TILE_WIDTH)), null); // makes a tile for the player
 		open.add(start);
-		closed.add(new Vector2(start.getX(),start.getY()));
 		
 		while(open.size() != 0){
-			Tile current = open.poll(); //Tile currently being checked
+			Node current = open.poll(); //Tile currently being checked
 			
-			if((current.getX() == goal.getX()) && (current.getY() == goal.getY())){ //if goal is reached
-				Tile tile = current;
+			if(current.equals(goal)){ //if goal is reached
+				Node node = current;
 				while(true){
-					if(tile.getParent() == start){
-						return tile.getPositionVector();
+					if(node.getParent() == start){
+						return node.getPosition();
 					} else {
-						tile = tile.getParent();
+						node = node.getParent();
 					}
 				}
 			} 
@@ -172,7 +178,7 @@ public class AIControl extends BaseControl{
 		System.out.println("cannot find player");
 		return null;
 	}
-	
+
 	*/
 	@Override
 	public void receive(Message m, Entity e) {
