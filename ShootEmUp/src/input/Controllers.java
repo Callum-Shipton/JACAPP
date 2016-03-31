@@ -33,8 +33,8 @@ package input;
 
 import java.util.ArrayList;
 
-import net.java.games.input.*;
-
+import net.java.games.input.Controller;
+import net.java.games.input.ControllerEnvironment;
 
 /**
  * The collection of controllers currently connected.
@@ -42,6 +42,7 @@ import net.java.games.input.*;
  * @author Kevin Glass
  */
 public class Controllers {
+
 	/** The controllers available */
 	private static ArrayList<Controller> controllers = new ArrayList<Controller>();
 	/** The number of controllers */
@@ -57,50 +58,54 @@ public class Controllers {
 
 	/**
 	 * Initialise the controllers collection
-	 * @throws RuntimeException 
+	 * 
+	 * @throws RuntimeException
 	 *
-	 * @throws LWJGLException Indicates a failure to initialise the controller library.
+	 * @throws LWJGLException
+	 *             Indicates a failure to initialise the controller library.
 	 */
 	public static void create() throws RuntimeException {
-		if (created)
+		if (created) {
 			return;
+		}
 
 		try {
 			ControllerEnvironment env = ControllerEnvironment.getDefaultEnvironment();
 
 			net.java.games.input.Controller[] found = env.getControllers();
 			ArrayList<net.java.games.input.Controller> lollers = new ArrayList<net.java.games.input.Controller>();
-			for ( net.java.games.input.Controller c : found ) {
-				if ( (c.getType() == Controller.Type.GAMEPAD || c.getType() == Controller.Type.STICK) ) {
+			for (net.java.games.input.Controller c : found) {
+				if (((c.getType() == Controller.Type.GAMEPAD) || (c.getType() == Controller.Type.STICK))) {
 					lollers.add(c);
 					System.out.println("Gamepad found: " + c.getType());
 				}
 			}
 
-			for ( net.java.games.input.Controller c : lollers ) {
+			for (net.java.games.input.Controller c : lollers) {
 				createController(c);
 			}
 
 			created = true;
 		} catch (Throwable e) {
-			throw new RuntimeException("Failed to initialise controllers",e);
+			throw new RuntimeException("Failed to initialise controllers", e);
 		}
 	}
 
 	/**
 	 * Utility to create a controller based on its potential sub-controllers
 	 *
-	 * @param c The controller to add
+	 * @param c
+	 *            The controller to add
 	 */
 	private static void createController(net.java.games.input.Controller c) {
 		net.java.games.input.Controller[] subControllers = c.getControllers();
 		if (subControllers.length == 0) {
-			Controller controller = new JInputController(controllerCount,c);
+			Controller controller = new JInputController(controllerCount, c);
 
 			controllers.add(controller);
 			controllerCount++;
 		} else {
-			for ( net.java.games.input.Controller sub : subControllers ) {
+			for (net.java.games.input.Controller sub : subControllers) {
 				createController(sub);
 			}
 		}
@@ -109,7 +114,8 @@ public class Controllers {
 	/**
 	 * Get a controller from the collection
 	 *
-	 * @param index The index of the controller to retrieve
+	 * @param index
+	 *            The index of the controller to retrieve
 	 * @return The controller requested
 	 */
 	public static Controller getController(int index) {
@@ -126,11 +132,11 @@ public class Controllers {
 	}
 
 	/**
-	 * Poll the controllers available. This will both update their state
-	 * and generate events that must be cleared.
+	 * Poll the controllers available. This will both update their state and
+	 * generate events that must be cleared.
 	 */
 	public static void poll() {
-		for (int i=0;i<controllers.size();i++) {
+		for (int i = 0; i < controllers.size(); i++) {
 			getController(i).poll();
 		}
 	}
@@ -169,22 +175,22 @@ public class Controllers {
 	 * Destroys any resources used by the controllers
 	 */
 	public static void destroy() {
-// 		FIXME! not currently possible to destroy a controller
+		// FIXME! not currently possible to destroy a controller
 
-//		if (!created)
-//			return;
-//		created = false;
-//
-//		// nuke each controller
-//		for (int i=0;i<controllers.size();i++) {
-//			//
-//		}
-//
-//		// cleanup
-//		event = null;
-//		events.clear();
-//		controllers.clear();
-//		controllerCount = 0;
+		// if (!created)
+		// return;
+		// created = false;
+		//
+		// // nuke each controller
+		// for (int i=0;i<controllers.size();i++) {
+		// //
+		// }
+		//
+		// // cleanup
+		// event = null;
+		// events.clear();
+		// controllers.clear();
+		// controllerCount = 0;
 	}
 
 	/**
@@ -270,7 +276,7 @@ public class Controllers {
 
 	/**
 	 * Gets the state of the button that generated the current event
-	 *  
+	 * 
 	 * @return True if button was down, or false if released
 	 */
 	public static boolean getEventButtonState() {
@@ -278,8 +284,8 @@ public class Controllers {
 	}
 
 	/**
-	 * Get the value on an X axis of the current event 
-	 *  
+	 * Get the value on an X axis of the current event
+	 * 
 	 * @return The value on a x axis of the current event
 	 */
 	public static float getEventXAxisValue() {
@@ -287,8 +293,8 @@ public class Controllers {
 	}
 
 	/**
-	 * Get the value on an Y axis of the current event 
-	 *  
+	 * Get the value on an Y axis of the current event
+	 * 
 	 * @return The value on a y axis of the current event
 	 */
 	public static float getEventYAxisValue() {
@@ -298,7 +304,8 @@ public class Controllers {
 	/**
 	 * Add an event to the stack of events that have been caused
 	 *
-	 * @param controllerEvent The event to add to the list
+	 * @param controllerEvent
+	 *            The event to add to the list
 	 */
 	static void addEvent(ControllerEvent controllerEvent) {
 		if (controllerEvent != null) {
@@ -306,4 +313,3 @@ public class Controllers {
 		}
 	}
 }
-

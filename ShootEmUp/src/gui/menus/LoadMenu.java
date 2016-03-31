@@ -1,16 +1,17 @@
 package gui.menus;
 
+import display.Art;
+import display.Image;
 import gui.ButtonBuilder;
 import gui.TypeButton;
 import main.ShootEmUp;
 
-import display.Art;
-import display.Image;
+public class LoadMenu extends GuiMenu {
 
-public class LoadMenu extends GuiMenu{
-	
-    public LoadMenu(Image menuImage) {
-        super(menuImage);
-        menuItems.add(ButtonBuilder.buildButton(TypeButton.BACK, (ShootEmUp.width / 2) - (Art.backButton.getWidth() / 2), (ShootEmUp.height / 2) - (Art.backButton.getHeight() / 2)));
-    }
+	public LoadMenu(Image menuImage) {
+		super(menuImage);
+		menuItems.add(ButtonBuilder.buildButton(TypeButton.BACK,
+				(ShootEmUp.width / 2) - (Art.getImage("BackButton").getWidth() / 2),
+				(ShootEmUp.height / 2) - (Art.getImage("BackButton").getHeight() / 2)));
+	}
 }

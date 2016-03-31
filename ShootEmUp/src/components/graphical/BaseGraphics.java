@@ -1,33 +1,34 @@
 package components.graphical;
 
-import object.Entity;
 import components.Component;
 import components.TypeComponent;
 import display.Image;
 import display.Renderer;
+import object.Entity;
 
 public abstract class BaseGraphics extends Component implements GraphicsComponent {
 
 	protected TypeComponent type = TypeComponent.GRAPHICS;
-	
+
 	protected Renderer r;
-	
+
 	protected float x;
 	protected float y;
 	protected float width;
 	protected float height;
 	protected Image image;
-	
+
 	@Override
 	public abstract void update(Entity e);
-	
+
 	@Override
 	public abstract void render(Entity e);
-	
-	public void destroy(Entity e){
-		
+
+	@Override
+	public void destroy(Entity e) {
+
 	}
-	
+
 	public Image getImage() {
 		return image;
 	}
@@ -67,8 +68,9 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 	public void setHeight(float height) {
 		this.height = height;
 	}
-	
-	public TypeComponent getType(){
+
+	@Override
+	public TypeComponent getType() {
 		return type;
 	}
 

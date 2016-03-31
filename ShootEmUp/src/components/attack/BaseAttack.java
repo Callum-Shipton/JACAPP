@@ -1,26 +1,26 @@
 package components.attack;
 
-import object.Armour;
-import object.Entity;
-import object.Weapon;
 import components.Component;
 import components.TypeComponent;
 import math.Seconds;
+import object.Armour;
+import object.Entity;
+import object.Weapon;
 
 public abstract class BaseAttack extends Component implements AttackComponent {
 
 	protected TypeComponent componentType = TypeComponent.ATTACK;
-	
+
 	protected TypeAttack type;
-	
+
 	protected Weapon weapon;
-	
+
 	protected Armour boots = null;
 	protected Armour legs = null;
 	protected Armour chest = null;
 	protected Armour helmet = null;
 	protected int armourValue = 0;
-	
+
 	protected int health;
 	protected int healthRegen;
 	protected int maxHealth;
@@ -31,7 +31,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	protected int maxMana;
 	protected int maxManaRegen;
 	private int fireCountdown;
-	
+
 	private boolean fire = false;
 	private int fireCounter = 0;
 	private final int FIRE_TIME = 1;
@@ -42,35 +42,36 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	private final int POISON_TIME = 2;
 
 	@Override
-	public void update(Entity e){
-		if(fire == true){
+	public void update(Entity e) {
+		if (fire == true) {
 			fireCounter++;
-			if(fireCounter >= Seconds.ticks(FIRE_TIME)){
+			if (fireCounter >= Seconds.ticks(FIRE_TIME)) {
 				damage(1, null);
 				fireCounter = 0;
 				fireStop++;
-				if(fireStop > FIRE_HITS){
+				if (fireStop > FIRE_HITS) {
 					fire = false;
 					fireStop = 0;
 				}
 			}
 		}
-		if(poison == true){
+		if (poison == true) {
 			poisonCounter++;
-			if(poisonCounter > Seconds.ticks(POISON_TIME)){
+			if (poisonCounter > Seconds.ticks(POISON_TIME)) {
 				damage(2, null);
 				poisonCounter = 0;
 			}
 		}
 	}
 
-	public void damage(int damage, Entity e){
-		this.health -= damage;
+	public void damage(int damage, Entity e) {
+		health -= damage;
 	}
-	
+
+	@Override
 	public void attack(Entity e, int dir) {
-		if(fireCountdown <= 0){
-			if(mana >= weapon.getManaCost()){
+		if (fireCountdown <= 0) {
+			if (mana >= weapon.getManaCost()) {
 				weapon.attack(e, dir);
 				mana -= weapon.getManaCost();
 			}
@@ -78,8 +79,8 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		}
 		fireCountdown--;
 	}
-	
-	public void healthRegen(){
+
+	public void healthRegen() {
 		if (health < maxHealth) {
 			if (healthRegen <= 0) {
 				healthRegen = maxHealthRegen;
@@ -88,8 +89,8 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 			healthRegen--;
 		}
 	}
-	
-	public void manaRegen(){
+
+	public void manaRegen() {
 		if (mana < maxMana) {
 			if (manaRegen <= 0) {
 				manaRegen = maxManaRegen;
@@ -98,25 +99,26 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 			manaRegen--;
 		}
 	}
-	
-	public void addHealth(int i){
+
+	public void addHealth(int i) {
 		health += i;
-		if(health > maxHealth){
+		if (health > maxHealth) {
 			health = maxHealth;
 		}
 	}
-	
-	public void addMana(int i){
+
+	public void addMana(int i) {
 		mana += i;
-		if(mana > maxMana){
+		if (mana > maxMana) {
 			mana = maxMana;
 		}
 	}
-	
-	public void destroy(Entity e){
-		
+
+	@Override
+	public void destroy(Entity e) {
+
 	}
-	
+
 	public int getHealth() {
 		return health;
 	}
@@ -124,7 +126,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	public void setHealth(int health) {
 		this.health = health;
 	}
-	
+
 	public int getHealthRegen() {
 		return healthRegen;
 	}
@@ -132,7 +134,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	public void setHealthRegen(int healthRegen) {
 		this.healthRegen = healthRegen;
 	}
-	
+
 	public int getMaxHealthRegen() {
 		return maxHealthRegen;
 	}
@@ -140,7 +142,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	public void setMaxHealthRegen(int maxHealthRegen) {
 		this.maxHealthRegen = maxHealthRegen;
 	}
-	
+
 	public int getMaxHealth() {
 		return maxHealth;
 	}
@@ -148,7 +150,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	public void setMaxHealth(int maxHealth) {
 		this.maxHealth = maxHealth;
 	}
-	
+
 	public int getMana() {
 		return mana;
 	}
@@ -184,7 +186,8 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	public TypeAttack getAttackType() {
 		return type;
 	}
-	
+
+	@Override
 	public TypeComponent getType() {
 		return componentType;
 	}
@@ -196,11 +199,11 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	public void setWeapon(Weapon weapon) {
 		this.weapon = weapon;
 	}
-	
+
 	public void setFire(boolean fire) {
 		this.fire = fire;
 	}
-	
+
 	public boolean isFire() {
 		return fire;
 	}
@@ -212,7 +215,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	public void setPoison(boolean poison) {
 		this.poison = poison;
 	}
-	
+
 	public Armour getBoots() {
 		return boots;
 	}
@@ -228,7 +231,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	public Armour getHelmet() {
 		return helmet;
 	}
-	
+
 	public void setBoots(Armour boots) {
 		this.boots = boots;
 		setArmourValue();
@@ -238,26 +241,26 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		this.chest = chest;
 		setArmourValue();
 	}
-	
+
 	public void setLegs(Armour legs) {
 		this.legs = legs;
 		setArmourValue();
 	}
-	
+
 	public void setHelmet(Armour helmet) {
 		this.helmet = helmet;
 		setArmourValue();
 	}
-	
+
 	protected void setArmourValue() {
 		armourValue = 0;
-		if(boots != null){
+		if (boots != null) {
 			armourValue += boots.getDefence();
-		} else if(legs != null){
+		} else if (legs != null) {
 			armourValue += legs.getDefence();
-		} else if(chest != null){
+		} else if (chest != null) {
 			armourValue += chest.getDefence();
-		} else if(helmet != null){
+		} else if (helmet != null) {
 			armourValue += helmet.getDefence();
 		}
 	}

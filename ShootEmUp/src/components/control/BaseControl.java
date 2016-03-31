@@ -1,20 +1,22 @@
 package components.control;
 
-import object.Entity;
 import components.Component;
 import components.TypeComponent;
+import object.Entity;
 
 public abstract class BaseControl extends Component implements ControlComponent {
-	
+
 	protected TypeComponent type = TypeComponent.CONTROL;
-	
+
 	@Override
 	public abstract void update(Entity e);
-	
-	public void destroy(Entity e){
-		
+
+	@Override
+	public void destroy(Entity e) {
+
 	}
-	
+
+	@Override
 	public TypeComponent getType() {
 		return type;
 	}

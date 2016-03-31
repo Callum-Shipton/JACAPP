@@ -11,63 +11,65 @@ import java.security.NoSuchAlgorithmException;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
-import javax.crypto.SealedObject;
 import javax.crypto.CipherOutputStream;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SealedObject;
 import javax.crypto.spec.SecretKeySpec;
 
 public abstract class SaveHandler {
-	
+
 	private final static byte[] KEY = "funbrella0000000".getBytes();
 	private final static String TRANSFORMATION = "AES";
-	
-	public static void save(Save save, int num){
-		
+
+	public static void save(Save save, int num) {
+
 		try {
 			FileOutputStream fileOut = new FileOutputStream("save" + num + ".ser");
-			
-	        // Length is 16 byte
-	        SecretKeySpec sks = new SecretKeySpec(KEY, TRANSFORMATION);
 
-	        // Create cipher
-	        Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-	        cipher.init(Cipher.ENCRYPT_MODE, sks);
-	        SealedObject sealedObject = new SealedObject(save, cipher);
+			// Length is 16 byte
+			SecretKeySpec sks = new SecretKeySpec(KEY, TRANSFORMATION);
 
-	        // Wrap the output stream
-	        CipherOutputStream cos = new CipherOutputStream(fileOut, cipher);
-	        ObjectOutputStream outputStream = new ObjectOutputStream(cos);
-	        outputStream.writeObject(sealedObject);
-	        outputStream.close();
-	    } catch (IllegalBlockSizeException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IOException e) {
-	        e.printStackTrace();
-	    }
+			// Create cipher
+			Cipher cipher = Cipher.getInstance(TRANSFORMATION);
+			cipher.init(Cipher.ENCRYPT_MODE, sks);
+			SealedObject sealedObject = new SealedObject(save, cipher);
+
+			// Wrap the output stream
+			CipherOutputStream cos = new CipherOutputStream(fileOut, cipher);
+			ObjectOutputStream outputStream = new ObjectOutputStream(cos);
+			outputStream.writeObject(sealedObject);
+			outputStream.close();
+		} catch (IllegalBlockSizeException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException
+				| IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	public static Save load(int num){
-		
+
+	public static Save load(int num) {
+
 		Save s = null;
-		
+
 		try {
 			FileInputStream fileIn = new FileInputStream("save" + num + ".ser");
-			
+
 			SecretKeySpec sks = new SecretKeySpec(KEY, TRANSFORMATION);
-		    Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-		    cipher.init(Cipher.DECRYPT_MODE, sks);
-	
-		    CipherInputStream cipherInputStream = new CipherInputStream(fileIn, cipher);
-		    ObjectInputStream inputStream = new ObjectInputStream(cipherInputStream);
-		    SealedObject sealedObject;
-	    
-	        sealedObject = (SealedObject) inputStream.readObject();
-	        s = (Save) sealedObject.getObject(cipher);
-	        inputStream.close();
-	    } catch (ClassNotFoundException | IllegalBlockSizeException | BadPaddingException | InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IOException e) {
-	        e.printStackTrace();
-	        s = null;
-	    }
-		
+			Cipher cipher = Cipher.getInstance(TRANSFORMATION);
+			cipher.init(Cipher.DECRYPT_MODE, sks);
+
+			CipherInputStream cipherInputStream = new CipherInputStream(fileIn, cipher);
+			ObjectInputStream inputStream = new ObjectInputStream(cipherInputStream);
+			SealedObject sealedObject;
+
+			sealedObject = (SealedObject) inputStream.readObject();
+			s = (Save) sealedObject.getObject(cipher);
+			inputStream.close();
+		} catch (ClassNotFoundException | IllegalBlockSizeException | BadPaddingException | InvalidKeyException
+				| NoSuchAlgorithmException | NoSuchPaddingException | IOException e) {
+			e.printStackTrace();
+			s = null;
+		}
+
 		return s;
 	}
 }

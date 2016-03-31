@@ -1,5 +1,5 @@
 package components.inventory;
 
-public enum SubTypeArmour implements SubSubType{
+public enum SubTypeArmour implements SubSubType {
 	LEATHER, IRON
 }

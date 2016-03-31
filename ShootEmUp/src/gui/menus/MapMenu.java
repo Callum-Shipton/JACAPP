@@ -4,7 +4,7 @@ import display.Image;
 
 public class MapMenu extends PauseMenu {
 
-    public MapMenu(Image menuImage) {
-        super(menuImage);
-    }
+	public MapMenu(Image menuImage) {
+		super(menuImage);
+	}
 }

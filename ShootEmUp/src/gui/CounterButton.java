@@ -3,16 +3,17 @@ package gui;
 import display.DPDTRenderer;
 import display.Image;
 
-public class CounterButton extends GuiComponent{
+public class CounterButton extends GuiComponent {
+
 	private Button button;
 	private Counter counter;
-	
-	public CounterButton(float x, float y, TypeButton type, Image image, int count, float scale){
+
+	public CounterButton(float x, float y, TypeButton type, Image image, int count, float scale) {
 		super(x, y);
 		button = ButtonBuilder.buildButton(type, x, y);
 		counter = new Counter(x + button.getId().getWidth(), y, image, false, count, scale);
 	}
-	
+
 	@Override
 	public void update() {
 		button.update();
@@ -23,14 +24,16 @@ public class CounterButton extends GuiComponent{
 		button.render(d);
 		counter.render(d);
 	}
-	
-	public void setX(float x){
+
+	@Override
+	public void setX(float x) {
 		super.setX(x);
 		button.setX(x);
 		counter.setX(x + button.getId().getWidth());
 	}
-	
-	public void setY(float y){
+
+	@Override
+	public void setY(float y) {
 		super.setY(y);
 		button.setY(y);
 		counter.setY(y);

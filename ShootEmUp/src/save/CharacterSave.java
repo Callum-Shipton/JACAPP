@@ -18,14 +18,14 @@ import object.InventoryItem;
 import object.Potion;
 import object.Weapon;
 
-public class CharacterSave implements Serializable{
+public class CharacterSave implements Serializable {
 
 	private static final long serialVersionUID = -3277632631779431737L;
-	
+
 	private TypeAttack player;
-	
+
 	private int lives;
-	
+
 	private int health;
 	private int maxHealth;
 	private int healthRegen;
@@ -35,86 +35,85 @@ public class CharacterSave implements Serializable{
 	private int maxMana;
 	private int manaRegen;
 	private int maxManaRegen;
-	
+
 	private SubTypeWeapon weapon;
 	private TypeArmour helmet;
 	private TypeArmour chest;
 	private TypeArmour legs;
 	private TypeArmour boots;
-	
-	
+
 	private int coins;
 	private int exp;
 	private int playerLevel;
-	
+
 	private ArrayList<SubTypeWeapon> weapons = new ArrayList<SubTypeWeapon>();
 	private ArrayList<TypeArmour> armour = new ArrayList<TypeArmour>();;
 	private int inventorySize;
 
 	private HashMap<TypePotion, Potion> potions;
 	private int maxPotions;
-	
-	public CharacterSave(){
+
+	public CharacterSave() {
 		getData();
 	}
-	
-	private void getData(){
-		
+
+	private void getData() {
+
 		PlayerAttack tempAttack = (PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK);
-		
+
 		player = tempAttack.getAttackType();
-		
+
 		lives = tempAttack.getLives();
-		
+
 		health = tempAttack.getHealth();
 		maxHealth = tempAttack.getMaxHealth();
 		healthRegen = tempAttack.getHealthRegen();
 		maxHealthRegen = tempAttack.getMaxHealthRegen();
-		
+
 		mana = tempAttack.getMana();
 		maxMana = tempAttack.getMaxMana();
 		manaRegen = tempAttack.getManaRegen();
 		maxManaRegen = tempAttack.getMaxManaRegen();
-		
+
 		weapon = tempAttack.getWeapon().getSubType();
-		
+
 		Armour tempArmour;
 		tempArmour = tempAttack.getBoots();
-		if(tempArmour != null){
+		if (tempArmour != null) {
 			boots = tempArmour.getType();
 		}
 		tempArmour = tempAttack.getLegs();
-		if(tempArmour != null){
+		if (tempArmour != null) {
 			legs = tempArmour.getType();
 		}
 		tempArmour = tempAttack.getChest();
-		if(tempArmour != null){
+		if (tempArmour != null) {
 			chest = tempArmour.getType();
 		}
 		tempArmour = tempAttack.getHelmet();
-		if(tempArmour != null){
+		if (tempArmour != null) {
 			helmet = tempArmour.getType();
 		}
-		
-		
-		BaseInventory tempInventory = (BaseInventory) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY);
-		
+
+		BaseInventory tempInventory = (BaseInventory) ShootEmUp.currentLevel.getPlayer()
+				.getComponent(TypeComponent.INVENTORY);
+
 		coins = tempInventory.getCoins();
 		exp = tempInventory.getExp();
 		playerLevel = tempInventory.getLevel();
 		ArrayList<InventoryItem> inventory = tempInventory.getInventory();
-		for(InventoryItem inventoryItem : inventory){
-			if(inventoryItem.getTypePickup() == TypePickup.WEAPON){
-				weapons.add(((Weapon)inventoryItem).getSubType());
+		for (InventoryItem inventoryItem : inventory) {
+			if (inventoryItem.getTypePickup() == TypePickup.WEAPON) {
+				weapons.add(((Weapon) inventoryItem).getSubType());
 			} else {
-				armour.add(((Armour)inventoryItem).getType());
+				armour.add(((Armour) inventoryItem).getType());
 			}
 		}
 		inventorySize = tempInventory.getInventorySize();
 		potions = tempInventory.getPotions();
 		maxPotions = tempInventory.getMaxPotions();
 	}
-	
+
 	public int getMaxHealthRegen() {
 		return maxHealthRegen;
 	}
@@ -122,7 +121,7 @@ public class CharacterSave implements Serializable{
 	public int getMaxManaRegen() {
 		return maxManaRegen;
 	}
-	
+
 	public TypeAttack getPlayer() {
 		return player;
 	}
@@ -154,7 +153,7 @@ public class CharacterSave implements Serializable{
 	public int getCoins() {
 		return coins;
 	}
-	
+
 	public int getExp() {
 		return exp;
 	}
@@ -166,7 +165,7 @@ public class CharacterSave implements Serializable{
 	public ArrayList<SubTypeWeapon> getWeapons() {
 		return weapons;
 	}
-	
+
 	public ArrayList<TypeArmour> getArmour() {
 		return armour;
 	}
@@ -202,7 +201,7 @@ public class CharacterSave implements Serializable{
 	public int getMaxPotions() {
 		return maxPotions;
 	}
-	
+
 	public int getLives() {
 		return lives;
 	}

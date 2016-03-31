@@ -1,16 +1,29 @@
 package display;
 
+import static org.lwjgl.opengl.GL11.GL_NEAREST;
+import static org.lwjgl.opengl.GL11.GL_REPEAT;
+import static org.lwjgl.opengl.GL11.GL_RGBA;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_MAG_FILTER;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_MIN_FILTER;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_WRAP_S;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_WRAP_T;
+import static org.lwjgl.opengl.GL11.GL_UNSIGNED_BYTE;
+import static org.lwjgl.opengl.GL11.glBindTexture;
+import static org.lwjgl.opengl.GL11.glGenTextures;
+import static org.lwjgl.opengl.GL11.glTexImage2D;
+import static org.lwjgl.opengl.GL11.glTexParameteri;
+import static org.lwjgl.opengl.GL30.glGenerateMipmap;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL30.*;
-
 import de.matthiasmann.twl.utils.PNGDecoder;
 import de.matthiasmann.twl.utils.PNGDecoder.Format;
 
-public class Image{
+public class Image {
+
 	private ByteBuffer buf;
 	private int texWidth;
 	private int texHeight;
@@ -23,8 +36,8 @@ public class Image{
 		frameWidth = fw;
 		frameHeight = fh;
 		this.file = file;
-		this.setID(glGenTextures());
-		this.buf = byteBuffer();
+		setID(glGenTextures());
+		buf = byteBuffer();
 		bindTexture();
 	}
 
@@ -53,7 +66,7 @@ public class Image{
 		return null;
 
 	}
-	
+
 	private void bindTexture() {
 
 		glBindTexture(GL_TEXTURE_2D, texID);
@@ -83,6 +96,7 @@ public class Image{
 	public int getWidth() {
 		return texWidth;
 	}
+
 	public int getFHeight() {
 		return frameHeight;
 	}
@@ -90,12 +104,12 @@ public class Image{
 	public int getFWidth() {
 		return frameWidth;
 	}
-	
-	public int getID(){
+
+	public int getID() {
 		return texID;
 	}
-	
-	public void setID(int id){
+
+	public void setID(int id) {
 		texID = id;
 	}
 }

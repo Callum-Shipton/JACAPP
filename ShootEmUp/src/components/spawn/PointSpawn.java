@@ -1,21 +1,21 @@
 package components.spawn;
 
-import object.Entity;
-import math.Vector2;
 import components.Message;
 import components.graphical.BaseGraphics;
+import math.Vector2;
+import object.Entity;
 
 public class PointSpawn extends BaseSpawn implements SpawnComponent {
 
 	private Vector2 spawnLoc = new Vector2(480.0f, 480.0f);
 	private BaseGraphics BG;
-	
-	public PointSpawn(BaseGraphics BG, Vector2 spawnLoc, Entity e){
+
+	public PointSpawn(BaseGraphics BG, Vector2 spawnLoc, Entity e) {
 		this.BG = BG;
 		this.spawnLoc = spawnLoc;
 		spawn(e);
 	}
-	
+
 	@Override
 	public void spawn(Entity e) {
 		BG.setX(spawnLoc.x());
@@ -25,7 +25,7 @@ public class PointSpawn extends BaseSpawn implements SpawnComponent {
 
 	@Override
 	public void receive(Message m, Entity e) {
-		if(m == Message.ENTITY_DIED){
+		if (m == Message.ENTITY_DIED) {
 			spawn(e);
 		}
 	}
@@ -33,6 +33,6 @@ public class PointSpawn extends BaseSpawn implements SpawnComponent {
 	@Override
 	public void update(Entity e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

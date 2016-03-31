@@ -1,17 +1,33 @@
 package display;
 
+import static org.lwjgl.opengl.GL11.GL_FLOAT;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
+import static org.lwjgl.opengl.GL11.GL_UNSIGNED_BYTE;
+import static org.lwjgl.opengl.GL11.glBindTexture;
+import static org.lwjgl.opengl.GL11.glDrawElements;
+import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
+import static org.lwjgl.opengl.GL15.GL_DYNAMIC_DRAW;
+import static org.lwjgl.opengl.GL15.GL_ELEMENT_ARRAY_BUFFER;
+import static org.lwjgl.opengl.GL15.GL_STATIC_DRAW;
+import static org.lwjgl.opengl.GL15.glBindBuffer;
+import static org.lwjgl.opengl.GL15.glBufferData;
+import static org.lwjgl.opengl.GL15.glGenBuffers;
+import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
+import static org.lwjgl.opengl.GL20.glGetUniformLocation;
+import static org.lwjgl.opengl.GL20.glUniformMatrix4;
+import static org.lwjgl.opengl.GL20.glUseProgram;
+import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
+import static org.lwjgl.opengl.GL30.glBindVertexArray;
+import static org.lwjgl.opengl.GL30.glGenVertexArrays;
+
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 
-import math.Matrix4;
-import math.Vector2;
-
 import org.lwjgl.BufferUtils;
 
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL15.*;
-import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.opengl.GL30.*;
+import math.Matrix4;
+import math.Vector2;
 
 public class SPSTRenderer {
 
@@ -46,7 +62,7 @@ public class SPSTRenderer {
 		// model.m23 += -5.0f;
 
 		/*
-		 * 
+		 *
 		 * double timeValue = GLFW.glfwGetTime(); double greenValue =
 		 * ((Math.sin(timeValue) / 2) + 0.5); int vertexColorLocation =
 		 * glGetUniformLocation(shaderProgramID, "ourColor");
@@ -95,10 +111,11 @@ public class SPSTRenderer {
 		v3.setST(1.0f, 1.0f);
 
 		vertices = new TexturedVertex[] { v0, v1, v2, v3 };
-		FloatBuffer verticesFloatBuffer = BufferUtils.createByteBuffer(vertices.length * TexturedVertex.stride).asFloatBuffer();
-		for (int i = 0; i < vertices.length; i++) {
+		FloatBuffer verticesFloatBuffer = BufferUtils.createByteBuffer(vertices.length * TexturedVertex.stride)
+				.asFloatBuffer();
+		for (TexturedVertex vertice : vertices) {
 			// Add position, color and texture floats to the buffer
-			verticesFloatBuffer.put(vertices[i].getElements());
+			verticesFloatBuffer.put(vertice.getElements());
 		}
 		verticesFloatBuffer.flip();
 		byte[] indices = { 0, 1, 2, 2, 3, 0 };
@@ -115,12 +132,14 @@ public class SPSTRenderer {
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, verticesFloatBuffer, GL_DYNAMIC_DRAW);
 
-		glVertexAttribPointer(0, TexturedVertex.positionElementCount, GL_FLOAT, false, TexturedVertex.stride, TexturedVertex.positionByteOffset);
+		glVertexAttribPointer(0, TexturedVertex.positionElementCount, GL_FLOAT, false, TexturedVertex.stride,
+				TexturedVertex.positionByteOffset);
 
 		glEnableVertexAttribArray(0);
 
 		// Put the texture coordinates in attribute list 1
-		glVertexAttribPointer(1, TexturedVertex.textureElementCount, GL_FLOAT, false, TexturedVertex.stride, TexturedVertex.textureByteOffset);
+		glVertexAttribPointer(1, TexturedVertex.textureElementCount, GL_FLOAT, false, TexturedVertex.stride,
+				TexturedVertex.textureByteOffset);
 
 		glEnableVertexAttribArray(1);
 

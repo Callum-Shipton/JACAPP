@@ -5,6 +5,7 @@ import java.nio.FloatBuffer;
 import org.lwjgl.BufferUtils;
 
 public class Vector2 implements Vector<Vector2> {
+
 	private float x, y;
 
 	public Vector2() {
@@ -58,7 +59,7 @@ public class Vector2 implements Vector<Vector2> {
 	public boolean equals(Object o) {
 		if (o instanceof Vector2) {
 			Vector2 v = (Vector2) o;
-			return x == v.x && y == v.y;
+			return (x == v.x) && (y == v.y);
 		}
 
 		return false;
@@ -89,7 +90,7 @@ public class Vector2 implements Vector<Vector2> {
 
 	@Override
 	public float length() {
-		return (float) Math.sqrt(x * x + y * y);
+		return (float) Math.sqrt((x * x) + (y * y));
 	}
 
 	public Vector2 normalize() {
@@ -100,7 +101,7 @@ public class Vector2 implements Vector<Vector2> {
 	}
 
 	public float dot(Vector2 vec) {
-		return x * vec.x + y * vec.y;
+		return (x * vec.x) + (y * vec.y);
 	}
 
 	public Vector2 add(float x, float y) {
@@ -172,16 +173,17 @@ public class Vector2 implements Vector<Vector2> {
 		if (y > 0) {
 			a = Math.PI - a;
 		} else if (x < 0) {
-			a = 2 * Math.PI + a;
+			a = (2 * Math.PI) + a;
 		}
 		return a * (180 / Math.PI);
 	}
+
 	@Override
 	public int hashCode() {
-	    int hash = 139;
-	    hash = (int) (467 * hash + this.x);
-	    hash = (int) (467 * hash + this.y);
-	    return hash;
+		int hash = 139;
+		hash = (int) ((467 * hash) + x);
+		hash = (int) ((467 * hash) + y);
+		return hash;
 	}
 
 	public void floor() {

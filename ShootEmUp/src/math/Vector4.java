@@ -5,6 +5,7 @@ import java.nio.FloatBuffer;
 import org.lwjgl.BufferUtils;
 
 public class Vector4 implements Vector<Vector4> {
+
 	private float x, y, z, w;
 
 	public Vector4() {
@@ -84,7 +85,7 @@ public class Vector4 implements Vector<Vector4> {
 	public boolean equals(Object o) {
 		if (o instanceof Vector4) {
 			Vector4 v = (Vector4) o;
-			return x == v.x && y == v.y && z == v.z && w == v.w;
+			return (x == v.x) && (y == v.y) && (z == v.z) && (w == v.w);
 		}
 
 		return false;
@@ -125,7 +126,7 @@ public class Vector4 implements Vector<Vector4> {
 
 	@Override
 	public float length() {
-		return (float) Math.sqrt(x * x + y * y + z * z + w * w);
+		return (float) Math.sqrt((x * x) + (y * y) + (z * z) + (w * w));
 	}
 
 	public Vector4 normalize() {
@@ -138,7 +139,7 @@ public class Vector4 implements Vector<Vector4> {
 	}
 
 	public float dot(Vector4 vec) {
-		return x * vec.x + y * vec.y + z * vec.z + w * vec.w;
+		return (x * vec.x) + (y * vec.y) + (z * vec.z) + (w * vec.w);
 	}
 
 	public Vector4 add(float x, float y, float z, float w) {

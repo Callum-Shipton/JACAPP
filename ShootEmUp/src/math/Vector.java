@@ -3,6 +3,7 @@ package math;
 import java.nio.FloatBuffer;
 
 public interface Vector<V> {
+
 	V add(V v);
 
 	V sub(V v);

@@ -1,7 +1,7 @@
 package components.collision;
 
-import object.Entity;
 import main.ShootEmUp;
+import object.Entity;
 
 public class RigidCollision extends BaseCollision {
 

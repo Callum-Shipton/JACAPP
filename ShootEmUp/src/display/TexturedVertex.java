@@ -30,11 +30,11 @@ public class TexturedVertex {
 
 	// Setters
 	public void setXY(float x, float y) {
-		this.xy = new float[] { x, y };
+		xy = new float[] { x, y };
 	}
 
 	public void setST(float s, float t) {
-		this.st = new float[] { s, t };
+		st = new float[] { s, t };
 	}
 
 	// Getters
@@ -43,21 +43,21 @@ public class TexturedVertex {
 		int i = 0;
 
 		// Insert XY elements
-		out[i++] = this.xy[0];
-		out[i++] = this.xy[1];
+		out[i++] = xy[0];
+		out[i++] = xy[1];
 
 		// Insert ST elements
-		out[i++] = this.st[0];
-		out[i++] = this.st[1];
+		out[i++] = st[0];
+		out[i++] = st[1];
 
 		return out;
 	}
 
 	public float[] getXY() {
-		return new float[] { this.xy[0], this.xy[1] };
+		return new float[] { xy[0], xy[1] };
 	}
 
 	public float[] getST() {
-		return new float[] { this.st[0], this.st[1] };
+		return new float[] { st[0], st[1] };
 	}
 }

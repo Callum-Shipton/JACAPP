@@ -169,6 +169,7 @@ class JInputController implements Controller {
 	/*
 	 * @see org.lwjgl.input.Controller#getName()
 	 */
+	@Override
 	public String getName() {
 		String name = target.getName();
 		return name;
@@ -205,6 +206,7 @@ class JInputController implements Controller {
 	/*
 	 * @see org.lwjgl.input.Controller#poll()
 	 */
+	@Override
 	public boolean poll() {
 		target.poll();
 
@@ -217,7 +219,7 @@ class JInputController implements Controller {
 				Component button = event.getComponent();
 				int buttonIndex = buttons.indexOf(button);
 				buttonState[buttonIndex] = event.getValue() != 0;
-				//System.out.println(buttonIndex);
+				// System.out.println(buttonIndex);
 				buttonMap(buttonIndex, buttonState[buttonIndex]);
 				// fire button pressed event
 				Controllers.addEvent(new ControllerEvent(this, event.getNanos(), ControllerEvent.BUTTON, buttonIndex,
@@ -233,7 +235,8 @@ class JInputController implements Controller {
 				povValues[povIndex] = event.getValue();
 				povMap(povIndex, povValues[povIndex]);
 
-				//System.out.println(povIndex + ", value: " + povValues[povIndex]);
+				// System.out.println(povIndex + ", value: " +
+				// povValues[povIndex]);
 
 				if (prevX != getPovX()) {
 					Controllers.addEvent(
@@ -278,7 +281,8 @@ class JInputController implements Controller {
 				Controllers.addEvent(new ControllerEvent(this, event.getNanos(), ControllerEvent.AXIS, axisIndex, false,
 						axisIndex == xaxis, axisIndex == yaxis, xaxisValue, yaxisValue));
 				axesValue[axisIndex] = value;
-				//System.out.println(axisIndex + ", value: " + axesValue[axisIndex]);
+				// System.out.println(axisIndex + ", value: " +
+				// axesValue[axisIndex]);
 				axisMap(axisIndex, value);
 			}
 		}
@@ -286,198 +290,200 @@ class JInputController implements Controller {
 	}
 
 	private void axisMap(int axisIndex, float value) {
-		switch (this.getName()) {
-		case "Controller (XBOX 360 For Windows)":
-			switch (axisIndex) {
-			case 4:
-				if(value < -1*axisDead){ // Right trigger in
-					Keyboard.setKey(GLFW.GLFW_KEY_SPACE, 1);
-				} else if (value > axisDead){
-					//Left trigger in
-				} else{
-					Keyboard.setKey(GLFW.GLFW_KEY_SPACE, 0); //Both in or out
+		switch (getName()) {
+			case "Controller (XBOX 360 For Windows)":
+				switch (axisIndex) {
+					case 4:
+						if (value < (-1 * axisDead)) { // Right trigger in
+							Keyboard.setKey(GLFW.GLFW_KEY_SPACE, 1);
+						} else if (value > axisDead) {
+							// Left trigger in
+						} else {
+							Keyboard.setKey(GLFW.GLFW_KEY_SPACE, 0); // Both in
+																		// or
+																		// out
+						}
 				}
-			}
-		case "Controller (Xbox One For Windows)":
-			switch (axisIndex) {
-			case 0: // Left Stick Y (-1 UP) (1 DOWN)
-				if (value < -1 * axisDead) {
-					Keyboard.setKey(GLFW.GLFW_KEY_W, 1);
-					Keyboard.setKey(GLFW.GLFW_KEY_S, 0);
-				} else if (value > axisDead) {
-					Keyboard.setKey(GLFW.GLFW_KEY_W, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_S, 1);
-				} else {
-					Keyboard.setKey(GLFW.GLFW_KEY_W, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_S, 0);
-				}
-				break;
-			case 1: // Left Stick X (-1 LEFT) (1 RIGHT)
-				if (value < -1 * axisDead) {
-					Keyboard.setKey(GLFW.GLFW_KEY_A, 1);
-					Keyboard.setKey(GLFW.GLFW_KEY_D, 0);
-				} else if (value > axisDead) {
-					Keyboard.setKey(GLFW.GLFW_KEY_A, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_D, 1);
-				} else {
-					Keyboard.setKey(GLFW.GLFW_KEY_A, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_D, 0);
-				}
-				break;
-			case 2: // Right Stick Y (-1 UP) (1 DOWN)
-				if (value < -1 * axisDead) {
-					Keyboard.setKey(GLFW.GLFW_KEY_UP, 1);
-					Keyboard.setKey(GLFW.GLFW_KEY_DOWN, 0);
-				} else if (value > axisDead) {
-					Keyboard.setKey(GLFW.GLFW_KEY_UP, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_DOWN, 1);
-				} else {
-					Keyboard.setKey(GLFW.GLFW_KEY_UP, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_DOWN, 0);
-				}
-				break;
-			case 3: // Right Stick X (-1 LEFT) (1 RIGHT)
-				if (value < -1 * axisDead) {
-					Keyboard.setKey(GLFW.GLFW_KEY_LEFT, 1);
-					Keyboard.setKey(GLFW.GLFW_KEY_RIGHT, 0);
-				} else if (value > axisDead) {
-					Keyboard.setKey(GLFW.GLFW_KEY_LEFT, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_RIGHT, 1);
-				} else {
-					Keyboard.setKey(GLFW.GLFW_KEY_LEFT, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_RIGHT, 0);
-				}
-				break;
-			case 4: // Left Trigger (-1 OUT) (1 IN)
+			case "Controller (Xbox One For Windows)":
+				switch (axisIndex) {
+					case 0: // Left Stick Y (-1 UP) (1 DOWN)
+						if (value < (-1 * axisDead)) {
+							Keyboard.setKey(GLFW.GLFW_KEY_W, 1);
+							Keyboard.setKey(GLFW.GLFW_KEY_S, 0);
+						} else if (value > axisDead) {
+							Keyboard.setKey(GLFW.GLFW_KEY_W, 0);
+							Keyboard.setKey(GLFW.GLFW_KEY_S, 1);
+						} else {
+							Keyboard.setKey(GLFW.GLFW_KEY_W, 0);
+							Keyboard.setKey(GLFW.GLFW_KEY_S, 0);
+						}
+						break;
+					case 1: // Left Stick X (-1 LEFT) (1 RIGHT)
+						if (value < (-1 * axisDead)) {
+							Keyboard.setKey(GLFW.GLFW_KEY_A, 1);
+							Keyboard.setKey(GLFW.GLFW_KEY_D, 0);
+						} else if (value > axisDead) {
+							Keyboard.setKey(GLFW.GLFW_KEY_A, 0);
+							Keyboard.setKey(GLFW.GLFW_KEY_D, 1);
+						} else {
+							Keyboard.setKey(GLFW.GLFW_KEY_A, 0);
+							Keyboard.setKey(GLFW.GLFW_KEY_D, 0);
+						}
+						break;
+					case 2: // Right Stick Y (-1 UP) (1 DOWN)
+						if (value < (-1 * axisDead)) {
+							Keyboard.setKey(GLFW.GLFW_KEY_UP, 1);
+							Keyboard.setKey(GLFW.GLFW_KEY_DOWN, 0);
+						} else if (value > axisDead) {
+							Keyboard.setKey(GLFW.GLFW_KEY_UP, 0);
+							Keyboard.setKey(GLFW.GLFW_KEY_DOWN, 1);
+						} else {
+							Keyboard.setKey(GLFW.GLFW_KEY_UP, 0);
+							Keyboard.setKey(GLFW.GLFW_KEY_DOWN, 0);
+						}
+						break;
+					case 3: // Right Stick X (-1 LEFT) (1 RIGHT)
+						if (value < (-1 * axisDead)) {
+							Keyboard.setKey(GLFW.GLFW_KEY_LEFT, 1);
+							Keyboard.setKey(GLFW.GLFW_KEY_RIGHT, 0);
+						} else if (value > axisDead) {
+							Keyboard.setKey(GLFW.GLFW_KEY_LEFT, 0);
+							Keyboard.setKey(GLFW.GLFW_KEY_RIGHT, 1);
+						} else {
+							Keyboard.setKey(GLFW.GLFW_KEY_LEFT, 0);
+							Keyboard.setKey(GLFW.GLFW_KEY_RIGHT, 0);
+						}
+						break;
+					case 4: // Left Trigger (-1 OUT) (1 IN)
 
-				break;
-			case 5: // Right Trigger (-1 OUT) (1 IN)
-				if (value < 0) {
-					Keyboard.setKey(GLFW.GLFW_KEY_SPACE, 0);
-				} else if (value >= 0) {
-					Keyboard.setKey(GLFW.GLFW_KEY_SPACE, 1);
+						break;
+					case 5: // Right Trigger (-1 OUT) (1 IN)
+						if (value < 0) {
+							Keyboard.setKey(GLFW.GLFW_KEY_SPACE, 0);
+						} else if (value >= 0) {
+							Keyboard.setKey(GLFW.GLFW_KEY_SPACE, 1);
+						}
+						break;
 				}
-				break;
-			}
 
 		}
 
 	}
 
-	//D Pad
+	// D Pad
 	private void povMap(int povIndex, float value) {
-		switch (this.getName()) {
-		case "Controller (XBOX 360 For Windows)":
-		case "Controller (Xbox One For Windows)":
-			switch (povIndex) {
-			case 0:
-				switch (Math.round(value * 8)) {
-				//No Input
-				case 0:
-					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
-					break;
-				//Top Right
-				case 1:
-					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
-					break;
-				//Right
-				case 2:
-					Keyboard.setKey(GLFW.GLFW_KEY_1, 1);
-					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
-					break;
-				//Bottom Right
-				case 3:
-					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
-					break;
-				//Bottom
-				case 4:
-					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_2, 1);
-					break;
-				//Bottom Left
-				case 5:
-					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
-					break;
-				//Left
-				case 6:
-					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_3, 1);
-					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
-					break;
-				//Top Left
-				case 7:
-					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
-					break;
-				//Top
-				case 8:
-					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_4, 1);
-					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
-					break;
+		switch (getName()) {
+			case "Controller (XBOX 360 For Windows)":
+			case "Controller (Xbox One For Windows)":
+				switch (povIndex) {
+					case 0:
+						switch (Math.round(value * 8)) {
+							// No Input
+							case 0:
+								Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
+								break;
+							// Top Right
+							case 1:
+								Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
+								break;
+							// Right
+							case 2:
+								Keyboard.setKey(GLFW.GLFW_KEY_1, 1);
+								Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
+								break;
+							// Bottom Right
+							case 3:
+								Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
+								break;
+							// Bottom
+							case 4:
+								Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_2, 1);
+								break;
+							// Bottom Left
+							case 5:
+								Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
+								break;
+							// Left
+							case 6:
+								Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_3, 1);
+								Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
+								break;
+							// Top Left
+							case 7:
+								Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
+								break;
+							// Top
+							case 8:
+								Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_4, 1);
+								Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
+								Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
+								break;
+						}
+						break;
 				}
-				break;
-			}
 		}
 
 	}
 
 	private void buttonMap(int buttonIndex, boolean value) {
-		switch (this.getName()) {
-		case "Controller (XBOX 360 For Windows)":
-		case "Controller (Xbox One For Windows)":
-			switch (buttonIndex) {
-			case 0: // A
-				Keyboard.setKey(GLFW.GLFW_KEY_ENTER, value);
-				break;
-			case 1: // B
-				Keyboard.setKey(GLFW.GLFW_KEY_M, value);
-				break;
-			case 2: // X
+		switch (getName()) {
+			case "Controller (XBOX 360 For Windows)":
+			case "Controller (Xbox One For Windows)":
+				switch (buttonIndex) {
+					case 0: // A
+						Keyboard.setKey(GLFW.GLFW_KEY_ENTER, value);
+						break;
+					case 1: // B
+						Keyboard.setKey(GLFW.GLFW_KEY_M, value);
+						break;
+					case 2: // X
 
-				break;
-			case 3: // Y
+						break;
+					case 3: // Y
 
-				break;
-			case 4: // LB
-				Keyboard.setKey(GLFW.GLFW_KEY_LEFT_SHIFT, value);
-				break;
-			case 5: // RB
-				Keyboard.setKey(GLFW.GLFW_KEY_TAB, value);
-				break;
-			case 6: // Back
-				Keyboard.setKey(GLFW.GLFW_KEY_F, value);
-				break;
-			case 7: // Pause
-				Keyboard.setKey(GLFW.GLFW_KEY_P, value);
-				break;
-			case 8: // Left Stick In
+						break;
+					case 4: // LB
+						Keyboard.setKey(GLFW.GLFW_KEY_LEFT_SHIFT, value);
+						break;
+					case 5: // RB
+						Keyboard.setKey(GLFW.GLFW_KEY_TAB, value);
+						break;
+					case 6: // Back
+						Keyboard.setKey(GLFW.GLFW_KEY_F, value);
+						break;
+					case 7: // Pause
+						Keyboard.setKey(GLFW.GLFW_KEY_P, value);
+						break;
+					case 8: // Left Stick In
 
-				break;
-			case 9: // Right Stick In
+						break;
+					case 9: // Right Stick In
 
-				break;
-			}
+						break;
+				}
 		}
 
 	}

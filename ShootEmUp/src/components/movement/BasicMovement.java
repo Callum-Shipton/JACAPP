@@ -2,16 +2,17 @@ package components.movement;
 
 import java.util.HashSet;
 
-import object.Entity;
-import main.ShootEmUp;
-import math.Vector2;
-import math.Vector4;
 import components.TypeComponent;
 import components.collision.BaseCollision;
 import components.collision.HitCollision;
 import components.graphical.BaseGraphics;
+import main.ShootEmUp;
+import math.Vector2;
+import math.Vector4;
+import object.Entity;
 
 public class BasicMovement extends BaseMovement {
+
 	protected BaseGraphics BG;
 
 	public BasicMovement(Entity e, BaseCollision BC, BaseGraphics BG, int speed) {
@@ -21,6 +22,7 @@ public class BasicMovement extends BaseMovement {
 		realSpeed = speed;
 	}
 
+	@Override
 	public void move(Entity e, Vector2 moveVec) {
 		super.move(e, moveVec);
 		if (Math.abs(moveVec.x()) > 0) {
@@ -45,7 +47,8 @@ public class BasicMovement extends BaseMovement {
 				if (collVec != null) {
 					collide = true;
 					hit = character;
-					if (((BaseCollision) hit.getComponent(TypeComponent.COLLISION)).getMoveBack() == true && !(BC instanceof HitCollision)) {
+					if ((((BaseCollision) hit.getComponent(TypeComponent.COLLISION)).getMoveBack() == true)
+							&& !(BC instanceof HitCollision)) {
 						moveBackY(e, moveVec, collVec);
 						newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
 					}
@@ -61,7 +64,9 @@ public class BasicMovement extends BaseMovement {
 		}
 
 		ShootEmUp.currentLevel.eMap.removeEntity(BC.getGridPos(), e);
-		if(!e.isDestroy())ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
+		if (!e.isDestroy()) {
+			ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
+		}
 		BC.setGridPos(newGrid);
 		return collide;
 	}
@@ -78,15 +83,15 @@ public class BasicMovement extends BaseMovement {
 				if (collVec != null) {
 					collide = true;
 					hit = character;
-					if (((BaseCollision) hit.getComponent(TypeComponent.COLLISION)).getMoveBack() == true && !(BC instanceof HitCollision)) {
+					if ((((BaseCollision) hit.getComponent(TypeComponent.COLLISION)).getMoveBack() == true)
+							&& !(BC instanceof HitCollision)) {
 						moveBackX(e, moveVec, collVec);
 						newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
 					}
 					if ((e.getComponent(TypeComponent.COLLISION) != null)) {
 						BC.collision(e, hit);
 					}
-					BaseCollision EC = (BaseCollision) hit
-							.getComponent(TypeComponent.COLLISION);
+					BaseCollision EC = (BaseCollision) hit.getComponent(TypeComponent.COLLISION);
 					if (EC != null) {
 						EC.collision(hit, e);
 					}
@@ -95,7 +100,9 @@ public class BasicMovement extends BaseMovement {
 		}
 
 		ShootEmUp.currentLevel.eMap.removeEntity(BC.getGridPos(), e);
-		if(!e.isDestroy())ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
+		if (!e.isDestroy()) {
+			ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
+		}
 		BC.setGridPos(newGrid);
 		return collide;
 	}
@@ -116,9 +123,9 @@ public class BasicMovement extends BaseMovement {
 		}
 	}
 
+	@Override
 	public Vector4 doesCollide(Entity moving, Entity checked) {
-		BaseGraphics CG = (BaseGraphics) checked
-				.getComponent(TypeComponent.GRAPHICS);
+		BaseGraphics CG = (BaseGraphics) checked.getComponent(TypeComponent.GRAPHICS);
 		float x = BG.getX();
 		float y = BG.getY();
 		float w = BG.getWidth();
@@ -129,24 +136,22 @@ public class BasicMovement extends BaseMovement {
 		float cw = CG.getWidth();
 		float ch = CG.getHeight();
 
-		if ((x < (cx + cw) && (x + w) > cx && y < (cy + ch) && (y + h) > cy)) {
-			return new Vector4(x - (cx + cw), y - (cy + ch), (x + w) - cx,
-					(y + h) - cy);
+		if (((x < (cx + cw)) && ((x + w) > cx) && (y < (cy + ch)) && ((y + h) > cy))) {
+			return new Vector4(x - (cx + cw), y - (cy + ch), (x + w) - cx, (y + h) - cy);
 		}
 		return null;
 
 	}
 
+	@Override
 	public Vector4 collideFunction(BaseGraphics BG, float x, float y) {
 		if (((x >= BG.getX()) && (x <= (BG.getX() + BG.getWidth())))
 				&& ((y >= BG.getY()) && (y <= (BG.getY() + BG.getHeight())))) {
-			return new Vector4(x - BG.getX(), y - BG.getY(), x
-					- (BG.getX() + BG.getWidth()), y
-					- (BG.getY() + BG.getHeight()));
+			return new Vector4(x - BG.getX(), y - BG.getY(), x - (BG.getX() + BG.getWidth()),
+					y - (BG.getY() + BG.getHeight()));
 		}
 		return null;
 	}
-
 
 	@Override
 	public void update(Entity e) {
