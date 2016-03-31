@@ -7,7 +7,7 @@ import java.util.HashMap;
 import components.TypeComponent;
 import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
-import components.inventory.PlayerInventory;
+import components.inventory.BaseInventory;
 import components.inventory.SubTypeWeapon;
 import components.inventory.TypeArmour;
 import components.inventory.TypePickup;
@@ -62,7 +62,7 @@ public class CharacterSave implements Serializable{
 		
 		PlayerAttack tempAttack = (PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK);
 		
-		player = tempAttack.getTypeAttack();
+		player = tempAttack.getAttackType();
 		
 		lives = tempAttack.getLives();
 		
@@ -97,7 +97,7 @@ public class CharacterSave implements Serializable{
 		}
 		
 		
-		PlayerInventory tempInventory = (PlayerInventory) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory tempInventory = (BaseInventory) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY);
 		
 		coins = tempInventory.getCoins();
 		exp = tempInventory.getExp();

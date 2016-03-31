@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import components.TypeComponent;
-import components.inventory.PlayerInventory;
+import components.inventory.BaseInventory;
 import display.Art;
 import display.DPDTRenderer;
 import main.ShootEmUp;
@@ -53,7 +53,7 @@ public class Inventory extends GuiComponent{
 		while(Buttons.hasNext()){
 			itemButton = Buttons.next();
 			if(itemButton.hasClicked()){
-				((PlayerInventory)(ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY))).equipItem(position);
+				((BaseInventory)(ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY))).equipItem(position);
 				itemButton.postAction();
 				Buttons.remove();
 				change = true;

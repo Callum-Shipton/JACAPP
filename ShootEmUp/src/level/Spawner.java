@@ -66,7 +66,7 @@ public class Spawner {
 			if(wave < MAX_WAVE){
 				wave++;
 			} else if (ShootEmUp.currentLevel.getLevel() < MAX_LEVEL){
-				TypeAttack temp = ((PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK)).getTypeAttack();
+				TypeAttack temp = ((PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK)).getAttackType();
 				ShootEmUp.currentLevel = new Level(Art.levels, ShootEmUp.currentLevel.getLevel() + 1);
 				ShootEmUp.currentLevel.init();
 				ShootEmUp.save = SaveHandler.load(1);

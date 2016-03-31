@@ -27,7 +27,7 @@ public class Save implements Serializable{
 			level = ShootEmUp.currentLevel.getLevel();
 		}
 		
-		TypeAttack tempAttack = ((PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK)).getTypeAttack();
+		TypeAttack tempAttack = ((PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK)).getAttackType();
 		
 		switch(tempAttack){
 		case WARRIOR:

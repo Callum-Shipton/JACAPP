@@ -5,7 +5,7 @@ import components.attack.TypeAttack;
 import components.collision.RigidCollision;
 import components.control.PlayerControl;
 import components.graphical.PlayerGraphics;
-import components.inventory.PlayerInventory;
+import components.inventory.BaseInventory;
 import components.movement.BasicMovement;
 import components.spawn.PointSpawn;
 import display.Art;
@@ -22,7 +22,7 @@ public abstract class PlayerBuilder {
 	private static PlayerAttack a;
 	private static RigidCollision c; 
 	private static BasicMovement m;
-	private static PlayerInventory i;
+	private static BaseInventory i;
 	private static Entity player = new Entity();
 	
 	public static void buildPlayer(TypeAttack type){
@@ -34,7 +34,7 @@ public abstract class PlayerBuilder {
 		c = new RigidCollision(player);
 		player.addComponent(c);
 		m = new BasicMovement(player,c, g, 5);
-		i = new PlayerInventory(a, 0, 1);
+		i = new BaseInventory(g, a, 0);
 		
 		addComponents();
 	}
@@ -48,7 +48,7 @@ public abstract class PlayerBuilder {
 		c = new RigidCollision(player);
 		player.addComponent(c);
 		m = new BasicMovement(player,c, g, 5);
-		i = new PlayerInventory(a, save.getPlayerLevel(), save.getPlayerLevel() + 1, save);
+		i = new BaseInventory(g, a, save);
 		
 		addComponents();
 	}

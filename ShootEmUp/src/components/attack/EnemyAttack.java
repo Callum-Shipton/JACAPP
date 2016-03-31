@@ -7,7 +7,6 @@ import main.ShootEmUp;
 import components.Message;
 
 public class EnemyAttack extends BaseAttack implements AttackComponent {
-	protected TypeAttack type;
 	
 	public EnemyAttack(TypeAttack type, int health, Weapon weapon, Armour helmet, Armour chest, Armour legs, Armour boots){
 		this.type = type;

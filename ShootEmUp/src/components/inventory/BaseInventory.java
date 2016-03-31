@@ -1,23 +1,96 @@
 package components.inventory;
 
-import java.util.HashSet;
-
+import object.Armour;
+import object.ArmourBuilder;
+import object.DurationPotion;
 import object.Entity;
+import object.InventoryItem;
+import object.OneTimePotion;
+import object.Potion;
+import object.Weapon;
+import object.WeaponBuilder;
+import save.CharacterSave;
+
+import static components.inventory.TypePotion.HEALTH;
+import static components.inventory.TypePotion.KNOCKBACK;
+import static components.inventory.TypePotion.MANA;
+import static components.inventory.TypePotion.SPEED;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
+
 import components.Component;
 import components.TypeComponent;
+import components.attack.BaseAttack;
+import components.attack.PlayerAttack;
+import components.graphical.BaseGraphics;
+import main.ShootEmUp;
 import components.Message;
 
-public abstract class BaseInventory extends Component implements InventoryComponent {
-
+public class BaseInventory extends Component implements InventoryComponent {
+	
 	protected TypeComponent type = TypeComponent.INVENTORY;
 	
-	protected int level;
-	protected int exp;
 	protected int coins;
-	public HashSet<Entity> equipped;
 	
-	public void destroy(Entity e){
-		
+	protected final int MAX_LEVEL = 99;
+	protected int level;
+	
+	protected int exp;
+	protected int expBound;
+	protected int levelPoints = 0;
+
+	protected ArrayList<InventoryItem> inventory;
+	protected int inventorySize = 5;
+	protected HashMap<TypePotion,Potion> potions = new HashMap<TypePotion,Potion>();;
+	protected int maxPotions = 5;
+	
+	protected TypeWeapon[] weaponTypes = new TypeWeapon[2];
+
+	protected BaseAttack BA;
+	protected BaseGraphics BG;
+	
+	public BaseInventory(BaseGraphics BG, BaseAttack BA, int level){
+		this.level = level;
+		expBound = level + 1;
+		inventory = new ArrayList<InventoryItem>();
+		switch(BA.getAttackType()){
+		case ARCHER:
+			weaponTypes[0] = TypeWeapon.BOW;
+			weaponTypes[1] = TypeWeapon.DAGGAR;
+			break;
+		case MAGE:
+			weaponTypes[0] = TypeWeapon.STAFF;
+			weaponTypes[1] = TypeWeapon.DAGGAR;
+			break;
+		case WARRIOR:
+			weaponTypes[0] = TypeWeapon.ONE_HANDED;
+			weaponTypes[1] = TypeWeapon.TWO_HANDED;
+			break;
+		case BATTLE_MAGE:
+			weaponTypes[0] = TypeWeapon.ONE_HANDED;
+			weaponTypes[1] = TypeWeapon.STAFF;
+			break;
+		case ROGUE:
+			weaponTypes[0] = TypeWeapon.CROSSBOW;
+			weaponTypes[1] = TypeWeapon.DAGGAR;
+			break;
+		}
+	}
+	
+	public BaseInventory(BaseGraphics BG, PlayerAttack BA, CharacterSave save) {
+		for(SubTypeWeapon typeWeapon : save.getWeapons()){
+			inventory.add(WeaponBuilder.buildWeapon(typeWeapon, 0));
+		}
+		for(TypeArmour typeArmour : save.getArmour()){
+			inventory.add(ArmourBuilder.buildArmour(typeArmour));
+		}
+		inventorySize = save.getInventorySize();
+		potions = save.getPotions();
+		maxPotions = save.getMaxPotions();
+		exp = save.getExp();
+		coins = save.getCoins();
 	}
 	
 	public int getLevel() {
@@ -51,10 +124,7 @@ public abstract class BaseInventory extends Component implements InventoryCompon
 	public void setType(TypeComponent type) {
 		this.type = type;
 	}
-
-	@Override
-	public abstract void update(Entity e);
-
+	
 	@Override
 	public void receive(Message m, Entity e) {
 		// TODO Auto-generated method stub
@@ -63,5 +133,228 @@ public abstract class BaseInventory extends Component implements InventoryCompon
 	@Override
 	public TypeComponent getType() {
 		return type;
+	}
+	
+	@Override
+	public void update(Entity e){
+		for(TypePotion type: potions.keySet()){
+			potions.get(type).update(e);
+		}
+	}
+	
+	public void spendLevelPoints(int points){
+		levelPoints -= points;
+	}
+
+
+	public void equipItem(int itemNo) {
+		InventoryItem item = inventory.get(itemNo);
+		InventoryItem equipped = null;
+		inventory.remove(itemNo);
+		if (item instanceof Armour) {
+			switch (((Armour) item).getType()) {
+			case BOOTS:
+				equipped = BA.getBoots();
+				BA.setBoots((Armour) item);
+				break;
+			case LEGS:
+				equipped = BA.getLegs();
+				BA.setLegs((Armour) item);
+				break;
+			case CHESTPLATE:
+				equipped = BA.getChest();
+				BA.setChest((Armour) item);
+				break;
+			case HELMET:
+				equipped = BA.getHelmet();
+				BA.setHelmet((Armour) item);
+			}
+		} else {
+			equipped = BA.getWeapon();
+			if((((Weapon)item).getType() == weaponTypes[0]) || (((Weapon)item).getType() == weaponTypes[1])){
+				BA.setWeapon((Weapon) item);
+			} else {
+				inventory.add(item);
+				equipped = null;
+			}
+		}
+		if(equipped != null){
+			inventory.add(equipped);
+		}
+	}
+
+	public boolean giveItem(TypePickup type, SubType subtype, SubSubType subsubtype) {
+		switch (type) {
+		case COIN:
+			if (coins < 99) {
+				coins++;
+				return true;
+			}
+			break;
+		case POTION:
+			TypePotion potionType = (TypePotion) subtype;
+			if (getNumPotions() < maxPotions) {
+				if(potions.containsKey(potionType)){
+					potions.get(potionType).addPotion();
+				}
+				else{
+					switch(potionType){
+					case HEALTH: potions.put(HEALTH, new OneTimePotion(HEALTH));
+					break;
+					case MANA: potions.put(MANA, new OneTimePotion(MANA));
+					break;
+					case SPEED: potions.put(SPEED, new DurationPotion(SPEED,30));
+					break;
+					case KNOCKBACK: potions.put(KNOCKBACK, new DurationPotion(KNOCKBACK,30));
+					}
+				}
+				return true;
+			} 
+			break;
+		case ARMOUR:
+			if(inventory.size() < inventorySize){
+				TypeArmour armourType = (TypeArmour) subtype;
+				inventory.add(ArmourBuilder.buildArmour(armourType));
+				return true;
+			}
+			break;
+		case WEAPON:
+			if(inventory.size() < inventorySize){
+				SubTypeWeapon weaponType = (SubTypeWeapon) subsubtype;
+				inventory.add(WeaponBuilder.buildWeapon(weaponType, 0));
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void giveExp(int exp) {
+		this.exp += exp;
+		if (this.exp > expBound) {
+			if (level < MAX_LEVEL) {
+				this.exp = 0;
+				level++;
+				levelPoints++;
+				expBound++;
+			}
+		}
+	}
+
+	public int getExpBound() {
+		return expBound;
+	}
+
+	public void setExpBound(int expBound) {
+		this.expBound = expBound;
+	}
+
+	public ArrayList<InventoryItem> getInventory() {
+		return inventory;
+	}
+	
+	public int getLevelPoints(){
+		return levelPoints;
+	}
+	
+	public int getNumPotion(TypePotion type){
+		if(potions.containsKey(type)){
+		return potions.get(type).quantity;
+		}
+		return 0;
+	}
+	
+	public int getNumPotions(){
+		int sum = 0;
+		for(TypePotion type: potions.keySet()){
+			sum += getNumPotion(type);
+		}
+		return sum;
+	}
+	
+	public int getInventorySize(){
+		return inventorySize;
+	}
+	
+	public void addInventorySize(int addition){
+		inventorySize += addition;
+	}
+	
+	public void addMaxPotions(int addition){
+		maxPotions += addition;
+	}
+	
+	public HashMap<TypePotion,Potion> getPotions() {
+		return potions;
+	}
+
+	public int getMaxPotions() {
+		return maxPotions;
+	}
+
+	public void usePotion(TypePotion type) {
+		potions.get(type).usePotion();
+	}
+	
+	@Override
+	public void destroy(Entity e){
+		drop(e);
+	}
+
+	public void drop(Entity e) {
+		
+		//give player exp
+		((BaseInventory)ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)).giveExp(1);
+	
+		
+		//create a coin
+		PickupBuilder.buildPickup(TypePickup.COIN, TypeCoin.ONE, null, BG.getX() + BG.getWidth(), BG.getY() + BG.getHeight());
+		
+		//create armour, item or weapon
+		Random rand = new Random();
+		
+		switch(rand.nextInt(3)){
+		case 0:
+			PickupBuilder.buildPickup(TypePickup.WEAPON, BA.getWeapon().getType(), BA.getWeapon().getSubType(), BG.getX(), BG.getY() + BG.getHeight());
+			break;
+		case 1:
+			switch(rand.nextInt(4)){
+			case 0:
+				if(BA.getHelmet() != null){
+					PickupBuilder.buildPickup(TypePickup.ARMOUR, TypeArmour.HELMET, SubTypeArmour.LEATHER, BG.getX(), BG.getY() + BG.getHeight());
+				}
+				break;
+			case 1:
+				if(BA.getChest() != null){
+					PickupBuilder.buildPickup(TypePickup.ARMOUR, TypeArmour.CHESTPLATE, SubTypeArmour.LEATHER, BG.getX(), BG.getY() + BG.getHeight());
+				}
+				break;
+			case 2:
+				if(BA.getLegs() != null){
+					PickupBuilder.buildPickup(TypePickup.ARMOUR, TypeArmour.LEGS, SubTypeArmour.LEATHER, BG.getX(), BG.getY() + BG.getHeight());
+				}
+				break;
+			case 3:
+				if(BA.getBoots() != null){
+					PickupBuilder.buildPickup(TypePickup.ARMOUR, TypeArmour.BOOTS, SubTypeArmour.LEATHER, BG.getX(), BG.getY() + BG.getHeight());
+				}
+				break;
+			}
+			break;
+		case 2:
+			switch(rand.nextInt(4)){
+			case 0:
+				PickupBuilder.buildPickup(TypePickup.POTION, TypePotion.HEALTH, null, BG.getX(), BG.getY() + BG.getHeight());
+				break;
+			case 1:
+				PickupBuilder.buildPickup(TypePickup.POTION, TypePotion.MANA, null, BG.getX(), BG.getY() + BG.getHeight());
+				break;
+			case 2:
+				PickupBuilder.buildPickup(TypePickup.POTION, TypePotion.SPEED, null, BG.getX(), BG.getY() + BG.getHeight());
+				break;
+			case 3:
+				PickupBuilder.buildPickup(TypePickup.POTION, TypePotion.KNOCKBACK, null, BG.getX(), BG.getY() + BG.getHeight());
+				break;
+			}
+		}
 	}
 }

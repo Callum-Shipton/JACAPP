@@ -5,7 +5,7 @@ import gui.ItemSlot;
 import main.ShootEmUp;
 import components.TypeComponent;
 import components.attack.PlayerAttack;
-import components.inventory.PlayerInventory;
+import components.inventory.BaseInventory;
 import display.Art;
 import display.Image;
 
@@ -32,7 +32,7 @@ public class InventoryMenu extends PauseMenu {
         buildBoots();
         buildWeapon();
 	    
-	    inventory = new Inventory(30, 30, ((PlayerInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY))).getInventory());
+	    inventory = new Inventory(30, 30, ((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY))).getInventory());
     }
     
     public void render(){

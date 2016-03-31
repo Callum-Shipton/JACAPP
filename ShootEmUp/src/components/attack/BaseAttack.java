@@ -9,7 +9,9 @@ import math.Seconds;
 
 public abstract class BaseAttack extends Component implements AttackComponent {
 
-	protected TypeComponent type = TypeComponent.ATTACK;
+	protected TypeComponent componentType = TypeComponent.ATTACK;
+	
+	protected TypeAttack type;
 	
 	protected Weapon weapon;
 	
@@ -179,8 +181,12 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		this.maxManaRegen = maxManaRegen;
 	}
 
-	public TypeComponent getType() {
+	public TypeAttack getAttackType() {
 		return type;
+	}
+	
+	public TypeComponent getType() {
+		return componentType;
 	}
 
 	public Weapon getWeapon() {

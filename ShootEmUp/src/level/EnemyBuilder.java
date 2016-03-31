@@ -13,7 +13,6 @@ import components.control.BaseControl;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.inventory.BaseInventory;
-import components.inventory.EnemyInventory;
 import components.inventory.TypeArmour;
 import components.inventory.TypeWeapon;
 import components.movement.BaseMovement;
@@ -78,7 +77,7 @@ public abstract class EnemyBuilder {
 		}
 		
 		enemyControl = new AIControl(enemyGraphics,enemyAttack, enemyMovement);
-		enemyInventory = new EnemyInventory(enemyGraphics, enemyAttack, 1);
+		enemyInventory = new BaseInventory(enemyGraphics, enemyAttack, 1);
 		
 		newEnemy.addComponent(enemyAttack);
 		newEnemy.addComponent(enemyCollision);

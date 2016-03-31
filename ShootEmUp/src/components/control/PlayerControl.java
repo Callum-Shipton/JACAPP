@@ -8,7 +8,7 @@ import input.Keyboard;
 import components.Message;
 import components.attack.BaseAttack;
 import components.graphical.PlayerGraphics;
-import components.inventory.PlayerInventory;
+import components.inventory.BaseInventory;
 import components.inventory.TypePotion;
 import components.movement.BaseMovement;
 
@@ -17,9 +17,9 @@ public class PlayerControl extends BaseControl{
 	BaseMovement BM;
 	PlayerGraphics PG;
 	BaseAttack BA;
-	PlayerInventory PI;
+	BaseInventory PI;
 	
-	public PlayerControl(Entity e, PlayerGraphics PG, BaseAttack BA, BaseMovement BM, PlayerInventory PI){
+	public PlayerControl(Entity e, PlayerGraphics PG, BaseAttack BA, BaseMovement BM, BaseInventory PI){
 		PG.scrollScreen(e);
 		this.PG = PG;
 		this.BA = BA;

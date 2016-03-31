@@ -12,7 +12,6 @@ import components.inventory.SubTypeWeapon;
 import display.Art;
 
 public class PlayerAttack extends BaseAttack {
-	protected TypeAttack type;
 	
 	protected int lives;
 	
@@ -147,9 +146,5 @@ public class PlayerAttack extends BaseAttack {
 
 	public void setLives(int lives) {
 		this.lives = lives;
-	}
-	
-	public TypeAttack getTypeAttack(){
-		return type;
 	}
 }
