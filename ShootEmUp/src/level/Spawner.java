@@ -2,6 +2,8 @@ package level;
 
 import java.util.Random;
 
+import org.lwjgl.opengl.GL20;
+
 import object.Entity;
 import save.SaveHandler;
 import main.ShootEmUp;
@@ -23,11 +25,24 @@ public class Spawner {
 	private int totalEnemies = 0;
 	private int wave = 1;
 	private boolean newWave = true;
+	private int radiusLocation;
+	private int radiusLocationInst;
+	
+	private float radius = 250.0f;
+	private float radLevel = 25.0f;
 
 	private Random rand;
 	
 	public Spawner(){
 		rand = new Random();
+		radiusLocation = GL20.glGetUniformLocation(Art.ShaderBase,"radius");
+		radiusLocationInst = GL20.glGetUniformLocation(Art.ShaderInst,"radius");
+		GL20.glUseProgram(Art.ShaderBase);
+		GL20.glUniform1f(radiusLocation, radius);
+		GL20.glUseProgram(0);
+		GL20.glUseProgram(Art.ShaderInst);
+		GL20.glUniform1f(radiusLocationInst, radius);
+		GL20.glUseProgram(0);
 	}
 	
 	
@@ -65,6 +80,12 @@ public class Spawner {
 			totalEnemies = 0;
 			if(wave < MAX_WAVE){
 				wave++;
+				GL20.glUseProgram(Art.ShaderBase);
+				GL20.glUniform1f(radiusLocation, ((wave-1)*radLevel)+radius);
+				GL20.glUseProgram(0);
+				GL20.glUseProgram(Art.ShaderInst);
+				GL20.glUniform1f(radiusLocationInst, ((wave-1)*radLevel)+radius);
+				GL20.glUseProgram(0);
 			} else if (ShootEmUp.currentLevel.getLevel() < MAX_LEVEL){
 				TypeAttack temp = ((PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK)).getAttackType();
 				ShootEmUp.currentLevel = new Level(Art.levels, ShootEmUp.currentLevel.getLevel() + 1);

@@ -6,10 +6,10 @@ out vec4 color;
 
 uniform sampler2D image;
 uniform vec2 playerPos;
+uniform float radius;
 
 void main()
 {
-    float radius = 250.0f;
     vec4 origColor = texture(image, texCoords);
     float gray = dot(origColor.rgb, vec3(0.299, 0.587, 0.114));
     vec2 distVec = position - playerPos;

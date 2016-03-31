@@ -8,10 +8,11 @@ uniform sampler2D image;
 uniform mat4 textureMatrix;
 uniform vec2 playerPos;
 
+uniform float radius;
+
 void main()
 {
 	vec2 texC = (textureMatrix * vec4(texCoords.x, texCoords.y, 0.0f, 1.0f)).xy;
-    float radius = 250.0f;
     vec4 origColor = texture(image, texC);
     float gray = dot(origColor.rgb, vec3(0.299, 0.587, 0.114));
     vec2 distVec = position - playerPos;
