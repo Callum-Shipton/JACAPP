@@ -31,7 +31,7 @@ import math.Vector2;
 
 public class Weapon extends InventoryItem {
 
-	private static HashMap<String, ArrayList<Weapon>> weaponSystem;
+	private static HashMap<String, HashMap<String,Weapon>> weaponSystem;
 	private static Random rand = new Random();
 	private static Gson g;
 
@@ -46,16 +46,20 @@ public class Weapon extends InventoryItem {
 	private String particleImage;
 	private Element element;
 
-	public Weapon(String type, int team) {
-
+	
+	public Weapon(String type, String subType, int team){
 		if (weaponSystem == null) {
 			initWeapons();
 		}
-		
-		int temp = rand.nextInt(weaponSystem.get(type).size());
-		
-		Weapon w = weaponSystem.get(type).get(temp);
-
+		Weapon w;
+		if(subType == null){
+			int temp = rand.nextInt(weaponSystem.get(type).size());
+			Weapon[] typedWeapons = new Weapon[temp];
+			typedWeapons = weaponSystem.get(type).values().toArray(typedWeapons);
+			w = typedWeapons[temp];
+		}else{
+			w = weaponSystem.get(type).get(subType);
+		}
 		
 		this.type = type;
 		this.subType = w.subType;
@@ -70,25 +74,24 @@ public class Weapon extends InventoryItem {
 		this.inventoryImage = w.inventoryImage;
 		typePickup = TypePickup.WEAPON;
 	}
+	public Weapon(String type, int team) {
+		this(type,null,team);
+	}
 
 	private void initWeapons() {
 		g = (new GsonBuilder()).setPrettyPrinting().create();
-		weaponSystem = new HashMap<String, ArrayList<Weapon>>();
+		weaponSystem = new HashMap<String, HashMap<String,Weapon>>();
 		JsonReader in = null;
-		try {
-			in = new JsonReader(new InputStreamReader(new FileInputStream("/Items/Weapons.JSON")));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		in = new JsonReader(new InputStreamReader(getClass().getResourceAsStream("/Items/Weapons.JSON")));
 		if (in != null) {
 			JsonArray jsonObjects = new JsonParser().parse(in).getAsJsonArray();
 			for(JsonElement e : jsonObjects){
 				String type = e.getAsJsonObject().get("type").getAsString();
+				String subType = e.getAsJsonObject().get("subType").getAsString();
 				if(!weaponSystem.containsKey(type)){
-					weaponSystem.put(type, new ArrayList<Weapon>());
+					weaponSystem.put(type, new HashMap<String,Weapon>());
 				}
-				weaponSystem.get(type).add(g.fromJson(e, Weapon.class));
+				weaponSystem.get(type).put(subType,g.fromJson(e, Weapon.class));
 			}
 		}
 	}

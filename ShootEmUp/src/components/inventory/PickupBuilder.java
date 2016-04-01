@@ -135,6 +135,12 @@ public abstract class PickupBuilder {
 						break;
 				}
 		}
+		BS = new PointSpawn(BG, new Vector2(x - BG.getWidth(), y - BG.getHeight()), item);
+		item.addComponent(BG);
+		BC = new PickupCollision(item, type, subtype, subsubtype);
+		item.addComponent(BS);
+		item.addComponent(BC);
+		ShootEmUp.currentLevel.newEntities.add(item);
 		}
 		
 		public static void buildPickup(TypePickup type, String subtype, String subsubtype, float x, float y) {

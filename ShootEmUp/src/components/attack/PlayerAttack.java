@@ -25,7 +25,7 @@ public class PlayerAttack extends BaseAttack {
 
 		health = save.getHealth();
 		mana = save.getMana();
-		weapon = WeaponBuilder.buildWeapon(save.getWeapon(), 0);
+		weapon = new Weapon(save.getWeapon(), 0);
 		if (save.getBoots() != null) {
 			boots = ArmourBuilder.buildArmour(save.getBoots());
 			setArmourValue();
