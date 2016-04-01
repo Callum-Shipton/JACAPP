@@ -1,15 +1,16 @@
 package object;
 
 import components.inventory.TypePickup;
+import display.Art;
 import display.Image;
 
 public class InventoryItem {
 
-	protected Image inventoryImage;
-	protected TypePickup typePickup;
+	protected String inventoryImage;
+	protected transient TypePickup typePickup;
 
 	public Image getInventoryImage() {
-		return inventoryImage;
+		return Art.getImage(inventoryImage);
 	}
 
 	public TypePickup getTypePickup() {

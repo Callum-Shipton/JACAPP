@@ -36,7 +36,7 @@ public class CharacterSave implements Serializable {
 	private int manaRegen;
 	private int maxManaRegen;
 
-	private SubTypeWeapon weapon;
+	private String weapon;
 	private TypeArmour helmet;
 	private TypeArmour chest;
 	private TypeArmour legs;
@@ -46,7 +46,7 @@ public class CharacterSave implements Serializable {
 	private int exp;
 	private int playerLevel;
 
-	private ArrayList<SubTypeWeapon> weapons = new ArrayList<SubTypeWeapon>();
+	private ArrayList<String> weapons = new ArrayList<String>();
 	private ArrayList<TypeArmour> armour = new ArrayList<TypeArmour>();;
 	private int inventorySize;
 
@@ -162,7 +162,7 @@ public class CharacterSave implements Serializable {
 		return playerLevel;
 	}
 
-	public ArrayList<SubTypeWeapon> getWeapons() {
+	public ArrayList<String> getWeapons() {
 		return weapons;
 	}
 
@@ -174,7 +174,7 @@ public class CharacterSave implements Serializable {
 		return inventorySize;
 	}
 
-	public SubTypeWeapon getWeapon() {
+	public String getWeapon() {
 		return weapon;
 	}
 
