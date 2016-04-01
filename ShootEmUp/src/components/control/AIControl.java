@@ -142,13 +142,13 @@ public class AIControl extends BaseControl {
 			Node E = new Node(new Vector2(current.getPosition().x() + 1, current.getPosition().y()), current);
 			Node NE = new Node(new Vector2(current.getPosition().x() + 1, current.getPosition().y() - 1), current);
 
-			if (!closed.contains(N) && !open.contains(N)) {
+			if (!closed.contains(N)) {
 				if (ShootEmUp.currentLevel.map.getWall(N) && ShootEmUp.currentLevel.map.getWall(NE) ) {
 						open.add(N);
 						closed.add(N);
 					}
 				}
-			if (!closed.contains(NW) && !open.contains(NW)) {
+			if (!closed.contains(NW)) {
 				if (ShootEmUp.currentLevel.map.getWall(NW)  && ShootEmUp.currentLevel.map.getWall(N) 
 						&& ShootEmUp.currentLevel.map.getWall(W) 
 						&& ((ShootEmUp.currentLevel.map.getWall(SW) || ShootEmUp.currentLevel.map.getWall(NE)) )) {
@@ -156,13 +156,13 @@ public class AIControl extends BaseControl {
 					closed.add(NW);
 				}
 			}
-			if (!closed.contains(W) && !open.contains(W)) {
+			if (!closed.contains(W)) {
 				if (ShootEmUp.currentLevel.map.getWall(W) && ShootEmUp.currentLevel.map.getWall(SW) ) {
 					open.add(W);
 					closed.add(W);
 				}
 			}
-			if (!closed.contains(SW) && !open.contains(SW)) {
+			if (!closed.contains(SW)) {
 				if (ShootEmUp.currentLevel.map.getWall(SW)  && ShootEmUp.currentLevel.map.getWall(SSW) 
 						&& ShootEmUp.currentLevel.map.getWall(SS) 
 						&& (ShootEmUp.currentLevel.map.getWall(W)  || ShootEmUp.currentLevel.map.getWall(SSE) )) {
@@ -170,13 +170,13 @@ public class AIControl extends BaseControl {
 					closed.add(SW);
 				}
 			}
-			if (!closed.contains(S) && !open.contains(S)) {
+			if (!closed.contains(S)) {
 				if (ShootEmUp.currentLevel.map.getWall(SS)  && ShootEmUp.currentLevel.map.getWall(SSE) ) {
 					open.add(S);
 					closed.add(S);
 				}
 			}
-			if (!closed.contains(SE) && !open.contains(SE)) {
+			if (!closed.contains(SE) ) {
 				if (ShootEmUp.currentLevel.map.getWall(SSE)  && ShootEmUp.currentLevel.map.getWall(SSEE) 
 						&& ShootEmUp.currentLevel.map.getWall(SEE) 
 						&& (ShootEmUp.currentLevel.map.getWall(EE) || ShootEmUp.currentLevel.map.getWall(SS) )) {
@@ -184,13 +184,13 @@ public class AIControl extends BaseControl {
 					closed.add(SE);
 				}
 			}
-			if (!closed.contains(E) && !open.contains(E)) {
+			if (!closed.contains(E) ) {
 				if (ShootEmUp.currentLevel.map.getWall(EE)  && ShootEmUp.currentLevel.map.getWall(SEE) ) {
 					open.add(E);
 					closed.add(E);
 				}
 			}
-			if (!closed.contains(NE) && !open.contains(NE)) {
+			if (!closed.contains(NE)) {
 				if (ShootEmUp.currentLevel.map.getWall(NE)  && ShootEmUp.currentLevel.map.getWall(NEE) 
 						&& ShootEmUp.currentLevel.map.getWall(EE) 
 						&& (ShootEmUp.currentLevel.map.getWall(SEE) || ShootEmUp.currentLevel.map.getWall(N) )) {
