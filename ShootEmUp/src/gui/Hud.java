@@ -24,6 +24,7 @@ public class Hud extends GuiComponent {
 	private Counter moneyCounter;
 	private Counter levelCounter;
 	private Counter waveCounter;
+	private Counter livesCounter;
 	private Entity player;
 
 	private Icon fire;
@@ -55,6 +56,9 @@ public class Hud extends GuiComponent {
 		waveCounter = new Counter(170.0f, 82.0f, Art.getImage("WaveIcon"), false,
 				ShootEmUp.currentLevel.spawner.getWave(), 0.5f);
 		hudElems.add(waveCounter);
+		livesCounter = new Counter(250.0f, 82.0f, Art.getImage("LivesIcon"), false,
+				((PlayerAttack) player.getComponent(TypeComponent.ATTACK)).getLives(), 0.5f);
+		hudElems.add(livesCounter);
 		fire = new Icon(0.0f, 100.0f, Art.getImage("Fire"), false, 1f);
 		poison = new Icon(0.0f, 120.0f, Art.getImage("Poison"), false, 1f);
 		frost = new Icon(0.0f, 140.0f, Art.getImage("Frost"), false, 1f);
@@ -110,6 +114,7 @@ public class Hud extends GuiComponent {
 		moneyCounter.update(((BaseInventory) player.getComponent(TypeComponent.INVENTORY)).getCoins());
 		levelCounter.update(((BaseInventory) player.getComponent(TypeComponent.INVENTORY)).getLevel());
 		waveCounter.update(ShootEmUp.currentLevel.spawner.getWave());
+		livesCounter.update(((PlayerAttack) player.getComponent(TypeComponent.ATTACK)).getLives());
 
 		int maxHealth = ((BaseAttack) player.getComponent(TypeComponent.ATTACK)).getMaxHealth();
 		int health = ((BaseAttack) player.getComponent(TypeComponent.ATTACK)).getHealth();

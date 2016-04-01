@@ -109,10 +109,7 @@ public class AIControl extends BaseControl {
 				null); // makes a tile for the player 
 		open.add(start);
 		closed.add(start);
-		int counter = 0;
 		while (open.size() > 0) {
-			counter++;
-			System.out.println(counter);
 			Node current = open.poll(); // Tile current being checked
 			if (current.equals(goal)) { // if goal is reached
 				Node node = current;

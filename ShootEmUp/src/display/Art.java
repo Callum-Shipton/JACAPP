@@ -210,6 +210,7 @@ public class Art {
 		artFiles.put("ManaCostIcon", new Image("/Images/Menus/Icons/ManaCostIcon.png", 1, 1));
 		artFiles.put("CoinIcon", new Image("/Images/Menus/Icons/CoinIcon.png", 1, 1));
 		artFiles.put("WaveIcon", new Image("/Images/Menus/Icons/WaveIcon.png", 1, 1));
+		artFiles.put("LivesIcon", new Image("/Images/Menus/Icons/LivesIcon.png", 1, 1));
 
 		artFiles.put("InvButton", new Image("/Images/Menus/Buttons/Tabs/InventoryButton.png", 1, 2));
 		artFiles.put("SkillButton", new Image("/Images/Menus/Buttons/Tabs/SkillButton.png", 1, 2));

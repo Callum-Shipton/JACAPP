@@ -71,7 +71,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		if (fire == true) {
 			fireCounter++;
 			if (fireCounter >= Seconds.ticks(FIRE_TIME)) {
-				damage(1, null);
+				damage(1, e);
 				fireCounter = 0;
 				fireStop++;
 				if (fireStop > FIRE_HITS) {
@@ -83,7 +83,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		if (poison == true) {
 			poisonCounter++;
 			if (poisonCounter > Seconds.ticks(POISON_TIME)) {
-				damage(2, null);
+				damage(2, e);
 				poisonCounter = 0;
 			}
 		}
@@ -94,7 +94,12 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 			damage = damage / armourValue;
 		}
 		health -= damage;
+		if (health <= 0) {
+			die(e);
+		}
 	}
+	
+	public abstract void die(Entity e);
 
 	@Override
 	public void attack(Entity e, int dir) {

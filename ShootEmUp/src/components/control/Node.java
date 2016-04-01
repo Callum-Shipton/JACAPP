@@ -10,6 +10,7 @@ public class Node implements Comparable<Node> {
 
 	private Vector2 position;
 	private Node parent;
+	private Node child;
 
 	public Node(Vector2 position, Node parent) {
 		this.position = position;
@@ -63,5 +64,13 @@ public class Node implements Comparable<Node> {
 		hash = (int) ((467 * hash) + position.x());
 		hash = (int) ((467 * hash) + position.y());
 		return hash;
+	}
+
+	public Node getChild() {
+		return child;
+	}
+
+	public void setChild(Node child) {
+		this.child = child;
 	}
 }

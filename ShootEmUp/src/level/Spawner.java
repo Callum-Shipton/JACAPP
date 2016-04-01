@@ -38,12 +38,7 @@ public class Spawner {
 		rand = new Random();
 		radiusLocation = GL20.glGetUniformLocation(Art.ShaderBase, "radius");
 		radiusLocationInst = GL20.glGetUniformLocation(Art.ShaderInst, "radius");
-		GL20.glUseProgram(Art.ShaderBase);
-		GL20.glUniform1f(radiusLocation, radius);
-		GL20.glUseProgram(0);
-		GL20.glUseProgram(Art.ShaderInst);
-		GL20.glUniform1f(radiusLocationInst, radius);
-		GL20.glUseProgram(0);
+		changeRadius(0);
 	}
 
 	public void update() {
@@ -79,12 +74,7 @@ public class Spawner {
 			totalEnemies = 0;
 			if (wave < MAX_WAVE) {
 				wave++;
-				GL20.glUseProgram(Art.ShaderBase);
-				GL20.glUniform1f(radiusLocation, ((wave - 1) * radLevel) + radius);
-				GL20.glUseProgram(0);
-				GL20.glUseProgram(Art.ShaderInst);
-				GL20.glUniform1f(radiusLocationInst, ((wave - 1) * radLevel) + radius);
-				GL20.glUseProgram(0);
+				changeRadius((wave - 1) * radLevel);
 			} else if (ShootEmUp.currentLevel.getLevel() < MAX_LEVEL) {
 				if (ShootEmUp.save == null) {
 					ShootEmUp.save = new Save();
@@ -112,6 +102,15 @@ public class Spawner {
 		ShootEmUp.currentLevel.newEntities.add(e);
 		BM.checkCollisionY(e, new Vector2(0, 0));
 		BM.checkCollisionX(e, new Vector2(0, 0));
+	}
+	
+	public void changeRadius(float f){
+		GL20.glUseProgram(Art.ShaderBase);
+		GL20.glUniform1f(radiusLocation,f + radius);
+		GL20.glUseProgram(0);
+		GL20.glUseProgram(Art.ShaderInst);
+		GL20.glUniform1f(radiusLocationInst,f + radius);
+		GL20.glUseProgram(0);
 	}
 
 	public int getWave() {

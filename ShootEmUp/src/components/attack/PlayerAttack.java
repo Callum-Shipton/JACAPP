@@ -16,7 +16,6 @@ public class PlayerAttack extends BaseAttack {
 
 	public PlayerAttack(TypeAttack type, int health, int mana, Weapon weapon) {
 		super(type,health, mana, weapon);
-		
 		lives = 3;
 	}
 
@@ -49,20 +48,16 @@ public class PlayerAttack extends BaseAttack {
 		maxMana = save.getMaxMana();
 		maxManaRegen = save.getMaxManaRegen();
 	}
-
-	@Override
-	public void damage(int damage, Entity e) {
-		super.damage(damage, e);
-		if (health <= 0) {
-			health = maxHealth;
-			mana = maxMana;
-			removeLife();
-			e.send(Message.ENTITY_DIED);
-		}
+	
+	public void die(Entity e){
+		health = maxHealth;
+		mana = maxMana;
+		removeLife();
+		e.send(Message.ENTITY_DIED);
 	}
 
 	public void removeLife() {
-		if (lives == -99) {
+		if (lives == 1) {
 			ShootEmUp.paused = true;
 			ShootEmUp.menuStack.add(new GameOverMenu(Art.getImage("GameOverScreen")));
 		} else {

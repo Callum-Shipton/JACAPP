@@ -8,13 +8,16 @@ import components.inventory.SubSubType;
 import components.inventory.SubType;
 import components.inventory.TypePickup;
 import main.ShootEmUp;
+import math.Seconds;
 import object.Entity;
 
 public class PickupCollision extends BaseCollision {
 
-	TypePickup type;
-	SubType subtype;
-	SubSubType subsubtype;
+	private TypePickup type;
+	private SubType subtype;
+	private SubSubType subsubtype;
+	private final int DESPAWN_TIME = 10;
+	private int timer = 0;
 
 	public PickupCollision(Entity e, TypePickup type, SubType subtype, SubSubType subsubtype) {
 		this.type = type;
@@ -40,8 +43,10 @@ public class PickupCollision extends BaseCollision {
 
 	@Override
 	public void update(Entity e) {
-		// TODO Auto-generated method stub
-
+		if(timer >= Seconds.ticks(DESPAWN_TIME)){
+			e.destroy();
+		}
+		timer++;
 	}
 
 	@Override
