@@ -117,10 +117,14 @@ public class AIControl extends BaseControl {
 			if (current.equals(goal)) { // if goal is reached
 				Node node = current;
 				while (true) {
-					if (node.getParent().equals(start)) {
-						return node.getPosition();
+					if(node.getParent() != null){
+						if (node.getParent().equals(start)) {
+							return node.getPosition();
+						} else {
+							node = node.getParent();
+						}
 					} else {
-						node = node.getParent();
+						return new Vector2(0, 0);
 					}
 				}
 			}
