@@ -85,7 +85,6 @@ public class Spawner {
 				TypeAttack temp = ((PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))
 						.getAttackType();
 				ShootEmUp.currentLevel = new Level(Art.levels, ShootEmUp.currentLevel.getLevel() + 1);
-				ShootEmUp.currentLevel.init();
 				ShootEmUp.save = SaveHandler.load(1);
 				PlayerBuilder.buildPlayer(temp, ShootEmUp.save.getCharacter(temp));
 			}

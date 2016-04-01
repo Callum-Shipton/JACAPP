@@ -1,5 +1,7 @@
 package components.attack;
 
+import display.Art;
+import gui.HudBar;
 import main.ShootEmUp;
 import object.Armour;
 import object.Entity;
@@ -7,6 +9,8 @@ import object.Weapon;
 
 public class EnemyAttack extends BaseAttack implements AttackComponent {
 
+	HudBar healthBar;
+	
 	public EnemyAttack(TypeAttack type, int health, int mana, Weapon weapon, Armour helmet, Armour chest, Armour legs,
 			Armour boots) {
 		super(type,health, mana, weapon);
@@ -15,12 +19,21 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 		this.chest = chest;
 		this.legs = legs;
 		this.boots = boots;
+		
+		healthBar = new HudBar(10.0f, 10.0f, Art.getImage("BarHealth"), 0.25f);
 	}
 
 	@Override
 	public void die(Entity e) {
 		e.destroy();
 		ShootEmUp.currentLevel.spawner.removeEnemy();
+	}
+	
+	@Override
+	public void update(Entity e){
+		healthBar.update();
+		healthBar.setValue(health);
+		healthBar.setMaxValue(maxHealth);
 	}
 
 }

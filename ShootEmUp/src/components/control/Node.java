@@ -8,12 +8,16 @@ import math.Vector2;
 
 public class Node implements Comparable<Node> {
 
-	private Vector2 position;
+	protected Vector2 position;
 	private Node parent;
 	private Node child;
 
-	public Node(Vector2 position, Node parent) {
+	public Node(Vector2 position){
 		this.position = position;
+	}
+	
+	public Node(Vector2 position, Node parent) {
+		this(position);
 		this.parent = parent;
 	}
 
