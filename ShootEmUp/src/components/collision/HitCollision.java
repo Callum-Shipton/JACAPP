@@ -43,7 +43,7 @@ public class HitCollision extends BaseCollision {
 						hitAttack.setFire(true);
 					}
 				}
-				if (weapon.getElement() == Element.FROST) {
+				if (weapon.getElement() == Element.ICE) {
 					Random rand = new Random();
 					int prob = rand.nextInt(3);
 					if (prob == 0) {

@@ -118,7 +118,7 @@ public abstract class PickupBuilder {
 					case SWORD:
 						BG = new AnimatedGraphics(Art.getImage("Sword"), Art.base, true);
 						break;
-					case HORSEBOW:
+					case SHORTBOW:
 						BG = new AnimatedGraphics(Art.getImage("Bow"), Art.base, true);
 						break;
 					case IRON_DAGGAR:
@@ -135,6 +135,59 @@ public abstract class PickupBuilder {
 						break;
 				}
 		}
+		}
+		
+		public static void buildPickup(TypePickup type, String subtype, String subsubtype, float x, float y) {
+
+			Entity item = new Entity();
+			AnimatedGraphics BG = null;
+			PointSpawn BS;
+			PickupCollision BC;
+
+			switch (type) {
+				case WEAPON:
+					switch (subsubtype) {
+						case "BATTLEAXE":
+							BG = new AnimatedGraphics(Art.getImage("Battleaxe"), Art.base, true);
+							break;
+						case "LONGBOW":
+							BG = new AnimatedGraphics(Art.getImage("Bow"), Art.base, true);
+							break;
+						case "CROSSBOW":
+							BG = new AnimatedGraphics(Art.getImage("Crossbow"), Art.base, true);
+							break;
+						case "EARTH_STAFF":
+							BG = new AnimatedGraphics(Art.getImage("EarthStaff"), Art.base, true);
+							break;
+						case "FIRE_STAFF":
+							BG = new AnimatedGraphics(Art.getImage("FireStaff"), Art.base, true);
+							break;
+						case "ICE_STAFF":
+							BG = new AnimatedGraphics(Art.getImage("IceStaff"), Art.base, true);
+							break;
+						case "MACE":
+							BG = new AnimatedGraphics(Art.getImage("Mace"), Art.base, true);
+							break;
+						case "SWORD":
+							BG = new AnimatedGraphics(Art.getImage("Sword"), Art.base, true);
+							break;
+						case "SHORTBOW":
+							BG = new AnimatedGraphics(Art.getImage("Bow"), Art.base, true);
+							break;
+						case "IRON_DAGGER":
+							BG = new AnimatedGraphics(Art.getImage("Sword"), Art.base, true);
+							break;
+						case "LONGSWORD":
+							BG = new AnimatedGraphics(Art.getImage("Sword"), Art.base, true);
+							break;
+						case "QUICK_CROSSBOW":
+							BG = new AnimatedGraphics(Art.getImage("Crossbow"), Art.base, true);
+							break;
+						case "STEEL_DAGGAR":
+							BG = new AnimatedGraphics(Art.getImage("Sword"), Art.base, true);
+							break;
+					}
+			}
 
 		BS = new PointSpawn(BG, new Vector2(x - BG.getWidth(), y - BG.getHeight()), item);
 		item.addComponent(BG);

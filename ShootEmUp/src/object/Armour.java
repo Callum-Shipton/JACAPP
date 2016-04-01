@@ -9,7 +9,7 @@ public class Armour extends InventoryItem {
 	private TypeArmour type;
 	private int defence;
 
-	public Armour(TypeArmour type, int defence, Image inventoryImage) {
+	public Armour(TypeArmour type, int defence, String inventoryImage) {
 		this.type = type;
 		this.defence = defence;
 		this.inventoryImage = inventoryImage;

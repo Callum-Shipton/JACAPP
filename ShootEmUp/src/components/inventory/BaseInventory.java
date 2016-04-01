@@ -45,7 +45,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 	protected HashMap<TypePotion, Potion> potions = new HashMap<TypePotion, Potion>();;
 	protected int maxPotions = 5;
 
-	protected TypeWeapon[] weaponTypes = new TypeWeapon[2];
+	protected String[] weaponTypes = new String[2];
 
 	protected BaseAttack BA;
 	protected BaseGraphics BG;
@@ -58,32 +58,32 @@ public class BaseInventory extends Component implements InventoryComponent {
 		inventory = new ArrayList<InventoryItem>();
 		switch (BA.getAttackType()) {
 			case ARCHER:
-				weaponTypes[0] = TypeWeapon.BOW;
-				weaponTypes[1] = TypeWeapon.DAGGAR;
+				weaponTypes[0] = "BOW";
+				weaponTypes[1] = "DAGGER";
 				break;
 			case MAGE:
-				weaponTypes[0] = TypeWeapon.STAFF;
-				weaponTypes[1] = TypeWeapon.DAGGAR;
+				weaponTypes[0] = "STAFF";
+				weaponTypes[1] = "DAGGER";
 				break;
 			case WARRIOR:
-				weaponTypes[0] = TypeWeapon.ONE_HANDED;
-				weaponTypes[1] = TypeWeapon.TWO_HANDED;
+				weaponTypes[0] = "ONE_HANDED";
+				weaponTypes[1] = "TWO_HANDED";
 				break;
 			case BATTLE_MAGE:
-				weaponTypes[0] = TypeWeapon.ONE_HANDED;
-				weaponTypes[1] = TypeWeapon.STAFF;
+				weaponTypes[0] = "ONE_HANDED";
+				weaponTypes[1] = "STAFF" ;
 				break;
 			case ROGUE:
-				weaponTypes[0] = TypeWeapon.CROSSBOW;
-				weaponTypes[1] = TypeWeapon.DAGGAR;
+				weaponTypes[0] = "CROSSBOW";
+				weaponTypes[1] = "DAGGER";
 				break;
 		}
 	}
 
 	public BaseInventory(BaseGraphics BG, PlayerAttack BA, CharacterSave save) {
 		this(BG, BA, save.getPlayerLevel());
-		for (SubTypeWeapon typeWeapon : save.getWeapons()) {
-			inventory.add(WeaponBuilder.buildWeapon(typeWeapon, 0));
+		for (String typeWeapon : save.getWeapons()) {
+			inventory.add(new Weapon(typeWeapon, 0));
 		}
 		for (TypeArmour typeArmour : save.getArmour()) {
 			inventory.add(ArmourBuilder.buildArmour(typeArmour));
@@ -222,10 +222,14 @@ public class BaseInventory extends Component implements InventoryComponent {
 					return true;
 				}
 				break;
+		}
+		return false;
+	}
+	public boolean giveItem(TypePickup type, SubType subtype, String subsubtype) {
+		switch (type) {
 			case WEAPON:
 				if (inventory.size() < inventorySize) {
-					SubTypeWeapon weaponType = (SubTypeWeapon) subsubtype;
-					inventory.add(WeaponBuilder.buildWeapon(weaponType, 0));
+					inventory.add(new Weapon(subsubtype, 0));
 					return true;
 				}
 		}

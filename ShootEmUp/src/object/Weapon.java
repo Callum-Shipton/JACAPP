@@ -1,5 +1,20 @@
 package object;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
+
 import components.TypeComponent;
 import components.collision.HitCollision;
 import components.control.RangeControl;
@@ -7,7 +22,6 @@ import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.inventory.SubTypeWeapon;
 import components.inventory.TypePickup;
-import components.inventory.TypeWeapon;
 import components.movement.FlyingMovement;
 import components.spawn.PointSpawn;
 import display.Art;
@@ -17,31 +31,66 @@ import math.Vector2;
 
 public class Weapon extends InventoryItem {
 
-	private TypeWeapon type;
-	private SubTypeWeapon subType;
+	private static HashMap<String, ArrayList<Weapon>> weaponSystem;
+	private static Random rand = new Random();
+	private static Gson g;
+
+	private String type;
+	private String subType;
 	private int damage;
 	private int range;
 	private int fireRate;
 	private boolean melee;
 	private int manaCost;
-	private int team;
-	private Image particleImage;
+	private transient int team;
+	private String particleImage;
 	private Element element;
 
-	public Weapon(TypeWeapon type, SubTypeWeapon subType, int damage, int range, int fireRate, boolean melee,
-			int manaCost, Element element, int team, Image particleImage, Image inventoryImage) {
+	public Weapon(String type, int team) {
+
+		if (weaponSystem == null) {
+			initWeapons();
+		}
+		
+		int temp = rand.nextInt(weaponSystem.get(type).size());
+		
+		Weapon w = weaponSystem.get(type).get(temp);
+
+		
 		this.type = type;
-		this.subType = subType;
-		this.damage = damage;
-		this.range = range;
-		this.fireRate = fireRate;
-		this.melee = melee;
-		this.manaCost = manaCost;
-		this.element = element;
+		this.subType = w.subType;
+		this.damage = w.damage;
+		this.range = w.range;
+		this.fireRate = w.fireRate;
+		this.melee = w.melee;
+		this.manaCost = w.manaCost;
+		this.element = w.element;
 		this.team = team;
-		this.particleImage = particleImage;
-		this.inventoryImage = inventoryImage;
+		this.particleImage = w.particleImage;
+		this.inventoryImage = w.inventoryImage;
 		typePickup = TypePickup.WEAPON;
+	}
+
+	private void initWeapons() {
+		g = (new GsonBuilder()).setPrettyPrinting().create();
+		weaponSystem = new HashMap<String, ArrayList<Weapon>>();
+		JsonReader in = null;
+		try {
+			in = new JsonReader(new InputStreamReader(new FileInputStream("/Items/Weapons.JSON")));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (in != null) {
+			JsonArray jsonObjects = new JsonParser().parse(in).getAsJsonArray();
+			for(JsonElement e : jsonObjects){
+				String type = e.getAsJsonObject().get("type").getAsString();
+				if(!weaponSystem.containsKey(type)){
+					weaponSystem.put(type, new ArrayList<Weapon>());
+				}
+				weaponSystem.get(type).add(g.fromJson(e, Weapon.class));
+			}
+		}
 	}
 
 	public void attack(Entity e, int direction) {
@@ -50,7 +99,7 @@ public class Weapon extends InventoryItem {
 		float posY = BG.getY();
 		// create particle
 		Entity particle = new Entity();
-		AnimatedGraphics g = new AnimatedGraphics(particleImage, Art.base, false);
+		AnimatedGraphics g = new AnimatedGraphics(getParticleImage(), Art.base, false);
 		g.setDirection(direction);
 		particle.addComponent(g);
 		switch (direction) {
@@ -145,20 +194,20 @@ public class Weapon extends InventoryItem {
 		this.fireRate = fireRate;
 	}
 
-	public TypeWeapon getType() {
-		return type;
-	}
 
 	public Image getParticleImage() {
-		return particleImage;
+		return Art.getImage(particleImage);
 	}
 
 	public Element getElement() {
 		return element;
 	}
-
-	public SubTypeWeapon getSubType() {
+	
+	public String getSubType(){
 		return subType;
 	}
-
+	
+	public String getType(){
+		return type;
+	}
 }
