@@ -7,6 +7,7 @@ import java.util.HashMap;
 import javax.imageio.ImageIO;
 
 import components.collision.RigidCollision;
+import components.control.Node;
 import components.graphical.MapGraphics;
 import display.Art;
 import display.IRenderer;
@@ -408,5 +409,7 @@ public class Map {
 	public HashMap<Vector2, Entity> getWalls() {
 		return walls;
 	}
-
+	public boolean getWall(Node node){
+		return !walls.containsKey(node.getPosition());
+	}
 }

@@ -190,4 +190,8 @@ public class Vector2 implements Vector<Vector2> {
 		x = (float) Math.floor(x);
 		y = (float) Math.floor(y);
 	}
+	
+	public float dist(Vector2 vector){
+		return (float) Math.sqrt(Math.pow(this.x() - vector.x(), 2) + Math.pow(this.y() - vector.y(), 2));
+	}
 }

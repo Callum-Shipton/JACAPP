@@ -9,6 +9,7 @@ import components.graphical.BaseGraphics;
 import display.Art;
 import gui.Hud;
 import main.ShootEmUp;
+import math.Vector2;
 import object.Entity;
 import object.EntityMap;
 
@@ -24,7 +25,9 @@ public class Level {
 	public HashSet<Entity> entities;
 	public HashSet<Entity> oldEntities;
 	public HashSet<Entity> newEntities;
-
+	
+	public HashSet<Vector2> walls;
+	
 	public Spawner spawner;
 	public Map map;
 
@@ -105,5 +108,4 @@ public class Level {
 	public void setPlayer(Entity player) {
 		this.player = player;
 	}
-
 }

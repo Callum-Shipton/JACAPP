@@ -44,7 +44,7 @@ public abstract class ButtonHandler {
 				exit();
 				break;
 			case LEVEL1:
-				level(1);
+				level(2);
 				break;
 			case LEVEL2:
 				level(2);
