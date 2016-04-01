@@ -24,7 +24,6 @@ public abstract class WeaponBuilder {
 	static {
 		oneHandedWeapons.add(SubTypeWeapon.SWORD);
 		oneHandedWeapons.add(SubTypeWeapon.MACE);
-		;
 	}
 
 	private static ArrayList<SubTypeWeapon> twoHandedWeapons = new ArrayList<SubTypeWeapon>();
