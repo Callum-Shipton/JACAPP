@@ -6,6 +6,7 @@ import components.collision.RigidCollision;
 import components.control.PlayerControl;
 import components.graphical.PlayerGraphics;
 import components.inventory.BaseInventory;
+import components.inventory.SubTypeWeapon;
 import components.movement.BasicMovement;
 import components.spawn.PointSpawn;
 import display.Art;
@@ -13,6 +14,7 @@ import gui.Hud;
 import main.ShootEmUp;
 import math.Vector2;
 import object.Entity;
+import object.WeaponBuilder;
 import save.CharacterSave;
 
 public abstract class PlayerBuilder {
@@ -27,8 +29,6 @@ public abstract class PlayerBuilder {
 
 	public static void buildPlayer(TypeAttack type) {
 		chooseType(type);
-
-		a = new PlayerAttack(type);
 
 		player.addComponent(g);
 		c = new RigidCollision(player);
@@ -57,18 +57,23 @@ public abstract class PlayerBuilder {
 		switch (type) {
 			case ARCHER:
 				g = new PlayerGraphics(player, Art.getImage("Archer"), Art.base);
+				a = new PlayerAttack(type, 4, 5, WeaponBuilder.buildWeapon(SubTypeWeapon.LONGBOW, 0));
 				break;
 			case BATTLE_MAGE:
 				g = new PlayerGraphics(player, Art.getImage("BattleMage"), Art.base);
+				a = new PlayerAttack(type, 3, 5 , WeaponBuilder.buildWeapon(SubTypeWeapon.EARTH_STAFF, 0));
 				break;
 			case MAGE:
 				g = new PlayerGraphics(player, Art.getImage("Mage"), Art.base);
+				a = new PlayerAttack(type, 3, 5 , WeaponBuilder.buildWeapon(SubTypeWeapon.FIRE_STAFF, 0));
 				break;
 			case ROGUE:
 				g = new PlayerGraphics(player, Art.getImage("Rogue"), Art.base);
+				a = new PlayerAttack(type, 3, 5 , WeaponBuilder.buildWeapon(SubTypeWeapon.CROSSBOW, 0));
 				break;
 			case WARRIOR:
 				g = new PlayerGraphics(player, Art.getImage("Warrior"), Art.base);
+				a = new PlayerAttack(type, 5, 3 , WeaponBuilder.buildWeapon(SubTypeWeapon.SWORD, 0));
 				break;
 			default:
 				g = new PlayerGraphics(player, Art.getImage("Warrior"), Art.base);

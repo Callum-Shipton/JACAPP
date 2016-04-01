@@ -1,6 +1,7 @@
 package components.attack;
 
 import components.Component;
+import components.Message;
 import components.TypeComponent;
 import math.Seconds;
 import object.Armour;
@@ -41,8 +42,32 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	private int poisonCounter = 0;
 	private final int POISON_TIME = 2;
 
+	public BaseAttack(TypeAttack type, int health, int mana, Weapon weapon) {
+		
+		this(type);
+		
+		this.weapon = weapon;
+		this.health = health;
+		maxHealth = health;
+		maxHealthRegen = healthRegen;
+		this.mana = mana;
+		
+		maxMana = mana;
+		maxManaRegen = manaRegen;
+	}
+	
+	public BaseAttack(TypeAttack type){
+		this.type = type;
+		healthRegen = 100;
+		manaRegen = 100;
+	}
+	
 	@Override
 	public void update(Entity e) {
+		
+		healthRegen();
+		manaRegen();
+
 		if (fire == true) {
 			fireCounter++;
 			if (fireCounter >= Seconds.ticks(FIRE_TIME)) {
@@ -65,6 +90,9 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	}
 
 	public void damage(int damage, Entity e) {
+		if (armourValue != 0) {
+			damage = damage / armourValue;
+		}
 		health -= damage;
 	}
 
@@ -114,7 +142,6 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		}
 	}
 
-	@Override
 	public void destroy(Entity e) {
 
 	}
@@ -263,5 +290,11 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		} else if (helmet != null) {
 			armourValue += helmet.getDefence();
 		}
+	}
+
+	@Override
+	public void receive(Message m, Entity e) {
+		// TODO Auto-generated method stub
+
 	}
 }
