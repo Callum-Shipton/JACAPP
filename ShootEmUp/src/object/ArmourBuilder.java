@@ -1,7 +1,6 @@
 package object;
 
 import components.inventory.TypeArmour;
-import display.Art;
 
 public abstract class ArmourBuilder {
 

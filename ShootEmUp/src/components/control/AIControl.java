@@ -91,10 +91,7 @@ public class AIControl extends BaseControl {
 
 	public Vector2 ai() {
 		PriorityQueue<Node> open = new PriorityQueue<Node>(); // queue for tiles
-																// to be looked
-																// at
 		HashSet<Node> closed = new HashSet<Node>(); // list of already viewed
-													// tiles
 		Node start = new Node(new Vector2((float) Math.floor(BG.getX() / Map.TILE_WIDTH),
 				(float) Math.floor(BG.getY() / Map.TILE_WIDTH)), null);
 		// makes a tile for the enemy position
@@ -145,74 +142,74 @@ public class AIControl extends BaseControl {
 
 			if (!closed.contains(N)) {
 				if (ShootEmUp.currentLevel.map.getWall(N) && ShootEmUp.currentLevel.map.getWall(NE) ) {
-						//if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getNorth(), goal.getPosition())){
+						if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getNorth(), goal.getPosition())){
 							open.add(N);
 							closed.add(N);
-						//}
+						}
 					}
 				}
 			if (!closed.contains(NW)) {
 				if (ShootEmUp.currentLevel.map.getWall(NW)  && ShootEmUp.currentLevel.map.getWall(N) 
 						&& ShootEmUp.currentLevel.map.getWall(W) 
 						&& ((ShootEmUp.currentLevel.map.getWall(SW) || ShootEmUp.currentLevel.map.getWall(NE)) )) {
-					//if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getNorthWest(), goal.getPosition())){
+					if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getNorthWest(), goal.getPosition())){
 						open.add(NW);
 						closed.add(NW);
-					//}
+					}
 				}
 			}
 			if (!closed.contains(W)) {
 				if (ShootEmUp.currentLevel.map.getWall(W) && ShootEmUp.currentLevel.map.getWall(SW) ) {
-					//if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getWest(), goal.getPosition())){
+					if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getWest(), goal.getPosition())){
 						open.add(W);
 						closed.add(W);
-					//}
+					}
 				}
 			}
 			if (!closed.contains(SW)) {
 				if (ShootEmUp.currentLevel.map.getWall(SW)  && ShootEmUp.currentLevel.map.getWall(SSW) 
 						&& ShootEmUp.currentLevel.map.getWall(SS) 
 						&& (ShootEmUp.currentLevel.map.getWall(W)  || ShootEmUp.currentLevel.map.getWall(SSE) )) {
-					//if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getSouthWest(), goal.getPosition())){
+					if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getSouthWest(), goal.getPosition())){
 						open.add(SW);
 						closed.add(SW);
-					//}
+					}
 				}
 			}
 			if (!closed.contains(S)) {
 				if (ShootEmUp.currentLevel.map.getWall(SS)  && ShootEmUp.currentLevel.map.getWall(SSE) ) {
-					//if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getSouth(), goal.getPosition())){
+					if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getSouth(), goal.getPosition())){
 						open.add(S);
 						closed.add(S);
-					//}
+					}
 				}
 			}
 			if (!closed.contains(SE) ) {
 				if (ShootEmUp.currentLevel.map.getWall(SSE)  && ShootEmUp.currentLevel.map.getWall(SSEE) 
 						&& ShootEmUp.currentLevel.map.getWall(SEE) 
 						&& (ShootEmUp.currentLevel.map.getWall(EE) || ShootEmUp.currentLevel.map.getWall(SS) )) {
-					//if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getSouthEast(), goal.getPosition())){
+					if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getSouthEast(), goal.getPosition())){
 						open.add(SE);
 						closed.add(SE);
-					//}
+					}
 				}
 			}
 			if (!closed.contains(E) ) {
 				if (ShootEmUp.currentLevel.map.getWall(EE)  && ShootEmUp.currentLevel.map.getWall(SEE) ) {
-					//if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getEast(), goal.getPosition())){
+					if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getEast(), goal.getPosition())){
 						open.add(E);
 						closed.add(E);
-					//}
+					}
 				}
 			}
 			if (!closed.contains(NE)) {
 				if (ShootEmUp.currentLevel.map.getWall(NE)  && ShootEmUp.currentLevel.map.getWall(NEE) 
 						&& ShootEmUp.currentLevel.map.getWall(EE) 
 						&& (ShootEmUp.currentLevel.map.getWall(SEE) || ShootEmUp.currentLevel.map.getWall(N) )) {
-					//if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getNorthEast(), goal.getPosition())){
+					if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getNorthEast(), goal.getPosition())){
 						open.add(NE);
 						closed.add(NE);
-					//}
+					}
 				}
 			}
 		}

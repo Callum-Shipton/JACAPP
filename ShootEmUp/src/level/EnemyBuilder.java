@@ -22,7 +22,6 @@ import main.ShootEmUp;
 import object.ArmourBuilder;
 import object.Entity;
 import object.Weapon;
-import object.WeaponBuilder;
 
 public abstract class EnemyBuilder {
 

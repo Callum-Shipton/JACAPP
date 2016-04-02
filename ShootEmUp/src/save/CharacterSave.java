@@ -8,7 +8,6 @@ import components.TypeComponent;
 import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
 import components.inventory.BaseInventory;
-import components.inventory.SubTypeWeapon;
 import components.inventory.TypeArmour;
 import components.inventory.TypePickup;
 import components.inventory.TypePotion;

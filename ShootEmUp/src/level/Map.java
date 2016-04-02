@@ -215,7 +215,7 @@ public class Map {
 				new Vector2(Art.getImage("Walls").getFWidth(), Art.getImage("Walls").getFHeight()), Map.TILE_WIDTH,
 				Map.TILE_HEIGHT);
 		
-		//AI.SetAiTiles();
+		AI.SetAiTiles();
 	}
 
 	public void setTiles() {

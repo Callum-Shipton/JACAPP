@@ -6,7 +6,6 @@ import components.collision.RigidCollision;
 import components.control.PlayerControl;
 import components.graphical.PlayerGraphics;
 import components.inventory.BaseInventory;
-import components.inventory.SubTypeWeapon;
 import components.movement.BasicMovement;
 import components.spawn.PointSpawn;
 import display.Art;
@@ -15,7 +14,6 @@ import main.ShootEmUp;
 import math.Vector2;
 import object.Entity;
 import object.Weapon;
-import object.WeaponBuilder;
 import save.CharacterSave;
 
 public abstract class PlayerBuilder {

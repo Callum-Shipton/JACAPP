@@ -24,7 +24,6 @@ import object.InventoryItem;
 import object.OneTimePotion;
 import object.Potion;
 import object.Weapon;
-import object.WeaponBuilder;
 import save.CharacterSave;
 
 public class BaseInventory extends Component implements InventoryComponent {

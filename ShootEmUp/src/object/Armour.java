@@ -2,7 +2,6 @@ package object;
 
 import components.inventory.TypeArmour;
 import components.inventory.TypePickup;
-import display.Image;
 
 public class Armour extends InventoryItem {
 

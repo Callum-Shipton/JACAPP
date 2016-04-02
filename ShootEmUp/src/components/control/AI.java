@@ -14,10 +14,9 @@ public class AI {
 	public static void SetAiTiles(){
 		aiTiles = new Tile[ShootEmUp.currentLevel.map.getWidth()][ShootEmUp.currentLevel.map.getHeight()];
 		
-		for(int x = 0; x < aiTiles.length; x++){
+		for(int x = 2; x < aiTiles.length - 2; x++){
 			System.out.println(x);
-			for(int y = 0; y < aiTiles[0].length; y++){
-				System.out.print(y + " ");
+			for(int y = 2; y < aiTiles[0].length - 2; y++){
 				
 				Queue<TypeNode> open = new LinkedList<TypeNode>(); // queue for tiles
 				// to be looked
@@ -64,7 +63,6 @@ public class AI {
 				closed.add(NE);
 				
 				while (open.size() > 0) {
-					System.out.println(open.size());
 					TypeNode current = open.poll(); // Tile current being checked
 					
 					if(current.getPosition().x() < Boxes[current.getType()].x()){
@@ -99,16 +97,15 @@ public class AI {
 						}
 					}
 				}			
-				
 				aiTiles[x][y] = new Tile();
 				aiTiles[x][y].setNorth(Boxes[0]);
-				aiTiles[x][y].setNorth(Boxes[1]);
-				aiTiles[x][y].setNorth(Boxes[2]);
-				aiTiles[x][y].setNorth(Boxes[3]);
-				aiTiles[x][y].setNorth(Boxes[4]);
-				aiTiles[x][y].setNorth(Boxes[5]);
-				aiTiles[x][y].setNorth(Boxes[6]);
-				aiTiles[x][y].setNorth(Boxes[7]);
+				aiTiles[x][y].setNorthWest(Boxes[1]);
+				aiTiles[x][y].setWest(Boxes[2]);
+				aiTiles[x][y].setSouthWest(Boxes[3]);
+				aiTiles[x][y].setSouth(Boxes[4]);
+				aiTiles[x][y].setSouthEast(Boxes[5]);
+				aiTiles[x][y].setEast(Boxes[6]);
+				aiTiles[x][y].setNorthEast(Boxes[7]);
 			}
 		}
 	}
