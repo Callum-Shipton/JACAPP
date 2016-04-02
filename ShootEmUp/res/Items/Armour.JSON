@@ -22,5 +22,29 @@
   "subType": "LEATHER_HELMET",
   "defence": 7,
   "inventoryImage": "LeatherHelmetButton"
+},
+{
+  "type": "BOOTS",
+  "subType": "IRON_BOOTS",
+  "defence": 4,
+  "inventoryImage": "IronBootsButton"
+},
+{
+  "type": "LEGS",
+  "subType": "IRON_LEGS",
+  "defence": 10,
+  "inventoryImage": "IronLegsButton"
+},
+{
+  "type": "CHEST",
+  "subType": "IRON_CHEST",
+  "defence": 20,
+  "inventoryImage": "IronChestButton"
+},
+{
+  "type": "HELMET",
+  "subType": "IRON_HELMET",
+  "defence": 14,
+  "inventoryImage": "IronHelmetButton"
 }
 ]
