@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -33,7 +32,7 @@ public class Weapon extends InventoryItem {
 
 	private static HashMap<String, HashMap<String,Weapon>> weaponSystem;
 	private static Random rand = new Random();
-	private static Gson g;
+
 
 	private String type;
 	private String subType;
@@ -47,18 +46,22 @@ public class Weapon extends InventoryItem {
 	private Element element;
 
 	
-	public Weapon(String type, String subType, int team){
+	public Weapon(String type, int team){
 		if (weaponSystem == null) {
 			initWeapons();
 		}
 		Weapon w;
-		if(subType == null){
+		if(weaponSystem.containsKey(type)){
 			int temp = rand.nextInt(weaponSystem.get(type).size());
 			Weapon[] typedWeapons = new Weapon[temp];
 			typedWeapons = weaponSystem.get(type).values().toArray(typedWeapons);
 			w = typedWeapons[temp];
 		}else{
-			w = weaponSystem.get(type).get(subType);
+			HashMap<String, Weapon> tempWeapons = new HashMap<String,Weapon>();
+			for(HashMap<String,Weapon> typedWeapons : weaponSystem.values()){
+				tempWeapons.putAll(typedWeapons);
+			}
+			w = tempWeapons.get(type);
 		}
 		
 		this.type = type;
@@ -74,12 +77,9 @@ public class Weapon extends InventoryItem {
 		this.inventoryImage = w.inventoryImage;
 		typePickup = TypePickup.WEAPON;
 	}
-	public Weapon(String type, int team) {
-		this(type,null,team);
-	}
 
 	private void initWeapons() {
-		g = (new GsonBuilder()).setPrettyPrinting().create();
+		if(g == null)g = (new GsonBuilder()).setPrettyPrinting().create();
 		weaponSystem = new HashMap<String, HashMap<String,Weapon>>();
 		JsonReader in = null;
 		in = new JsonReader(new InputStreamReader(getClass().getResourceAsStream("/Items/Weapons.JSON")));
