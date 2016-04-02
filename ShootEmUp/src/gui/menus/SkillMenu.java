@@ -4,7 +4,7 @@ import components.TypeComponent;
 import components.inventory.BaseInventory;
 import display.Art;
 import display.Image;
-import gui.ButtonList;
+import gui.VerticalLayout;
 import gui.Counter;
 import gui.CounterButton;
 import gui.TypeButton;
@@ -17,7 +17,7 @@ public class SkillMenu extends PauseMenu {
 	public SkillMenu(Image menuImage) {
 		super(menuImage);
 
-		ButtonList buttonList = new ButtonList(30, 30, Art.getImage("HealthButton").getHeight() / 2, 20);
+		VerticalLayout buttonList = new VerticalLayout(30, 30, Art.getImage("HealthButton").getHeight() / 2, 20);
 		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.HEALTH_REGEN, Art.getImage("Coin"), 1, 1f));
 		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.HEALTH, Art.getImage("Coin"), 1, 1f));
 		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.MANA_REGEN, Art.getImage("Coin"), 1, 1f));

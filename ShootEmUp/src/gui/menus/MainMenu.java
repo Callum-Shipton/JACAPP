@@ -3,7 +3,7 @@ package gui.menus;
 import display.Art;
 import display.Image;
 import gui.ButtonBuilder;
-import gui.ButtonList;
+import gui.VerticalLayout;
 import gui.TypeButton;
 import main.ShootEmUp;
 
@@ -11,7 +11,7 @@ public class MainMenu extends GuiMenu {
 
 	public MainMenu(Image menuImage) {
 		super(menuImage);
-		ButtonList buttonList = new ButtonList((ShootEmUp.width / 2) - (Art.getImage("NewGameButton").getWidth() / 2),
+		VerticalLayout buttonList = new VerticalLayout((ShootEmUp.width / 2) - (Art.getImage("NewGameButton").getWidth() / 2),
 				150, Art.getImage("NewGameButton").getHeight() / 2, 20);
 		ShootEmUp.currentLevel = null;
 		buttonList.addMenuItem(ButtonBuilder.buildButton(TypeButton.NEW_GAME, 0, 0));

@@ -7,7 +7,7 @@ import java.util.HashMap;
 import javax.imageio.ImageIO;
 
 import components.collision.RigidCollision;
-import components.control.AI;
+import components.control.GoalBounder;
 import components.control.Node;
 import components.graphical.MapGraphics;
 import display.Art;
@@ -49,6 +49,7 @@ public class Map {
 
 	// collidable wall entities
 	public HashMap<Vector2, Entity> walls;
+	public GoalBounder goalBounder;
 
 	public Map(String file) {
 
@@ -215,7 +216,7 @@ public class Map {
 				new Vector2(Art.getImage("Walls").getFWidth(), Art.getImage("Walls").getFHeight()), Map.TILE_WIDTH,
 				Map.TILE_HEIGHT);
 		
-		AI.SetAiTiles();
+		goalBounder = new GoalBounder();
 	}
 
 	public void setTiles() {

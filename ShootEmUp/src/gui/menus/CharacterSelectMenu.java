@@ -4,7 +4,7 @@ import components.attack.TypeAttack;
 import display.Art;
 import display.Image;
 import gui.ButtonBuilder;
-import gui.ButtonList;
+import gui.VerticalLayout;
 import gui.CounterButton;
 import gui.TypeButton;
 import main.ShootEmUp;
@@ -38,7 +38,7 @@ public class CharacterSelectMenu extends GuiMenu {
 			}
 		}
 
-		ButtonList buttonList = new ButtonList((ShootEmUp.width / 2) - (Art.getImage("WarriorButton").getWidth() / 2),
+		VerticalLayout buttonList = new VerticalLayout((ShootEmUp.width / 2) - (Art.getImage("WarriorButton").getWidth() / 2),
 				150, Art.getImage("WarriorButton").getHeight() / 2, 20);
 		buttonList.addMenuItem(
 				new CounterButton(0, 0, TypeButton.WARRIOR, Art.getImage("LevelIcon"), warriorLevel, 0.5f));

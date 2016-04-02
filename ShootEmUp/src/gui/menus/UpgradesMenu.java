@@ -4,7 +4,7 @@ import components.TypeComponent;
 import components.inventory.BaseInventory;
 import display.Art;
 import display.Image;
-import gui.ButtonList;
+import gui.VerticalLayout;
 import gui.Counter;
 import gui.CounterButton;
 import gui.TypeButton;
@@ -16,7 +16,7 @@ public class UpgradesMenu extends PauseMenu {
 
 	public UpgradesMenu(Image menuImage) {
 		super(menuImage);
-		ButtonList buttonList = new ButtonList(30, 30, Art.getImage("InventoryButton").getHeight() / 2, 20);
+		VerticalLayout buttonList = new VerticalLayout(30, 30, Art.getImage("InventoryButton").getHeight() / 2, 20);
 		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.INVENTORY_UPGRADE, Art.getImage("Coin"), 5, 1f));
 		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.POTIONS_UPGRADE, Art.getImage("Coin"), 5, 1f));
 		menuItems.add(buttonList);

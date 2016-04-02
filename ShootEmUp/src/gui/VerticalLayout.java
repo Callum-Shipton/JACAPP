@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import display.Art;
 import display.DPDTRenderer;
 
-public class ButtonList extends GuiComponent {
+public class VerticalLayout extends GuiComponent {
 
 	ArrayList<GuiComponent> menuItems = new ArrayList<GuiComponent>();
 	float gap;
 	float height;
 
-	public ButtonList(float x, float y, float height, float gap) {
+	public VerticalLayout(float x, float y, float height, float gap) {
 		super(x, y);
 		this.gap = gap;
 		this.height = height;

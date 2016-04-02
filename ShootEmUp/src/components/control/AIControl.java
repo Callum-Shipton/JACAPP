@@ -22,13 +22,13 @@ public class AIControl extends BaseControl {
 
 	private int counter = 0;
 	private Vector2 target;
-
-	// private Vector2 target;
+	Map map;
 
 	public AIControl(BaseGraphics BG, BaseAttack BA, BaseMovement BM) {
 		this.BA = BA;
 		this.BG = BG;
 		this.BM = BM;
+		map = ShootEmUp.currentLevel.map;
 	}
 
 	@Override
@@ -141,72 +141,72 @@ public class AIControl extends BaseControl {
 			Node NE = new Node(new Vector2(current.getPosition().x() + 1, current.getPosition().y() - 1), current);
 
 			if (!closed.contains(N)) {
-				if (ShootEmUp.currentLevel.map.getWall(N) && ShootEmUp.currentLevel.map.getWall(NE) ) {
-						if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getNorth(), goal.getPosition())){
+				if (map.getWall(N) && map.getWall(NE) ) {
+						if (map.goalBounder.getTile(current.getPosition().x(), current.getPosition().y()).getNorth().boxContains(goal.getPosition())){
 							open.add(N);
 							closed.add(N);
 						}
 					}
 				}
 			if (!closed.contains(NW)) {
-				if (ShootEmUp.currentLevel.map.getWall(NW)  && ShootEmUp.currentLevel.map.getWall(N) 
-						&& ShootEmUp.currentLevel.map.getWall(W) 
-						&& ((ShootEmUp.currentLevel.map.getWall(SW) || ShootEmUp.currentLevel.map.getWall(NE)) )) {
-					if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getNorthWest(), goal.getPosition())){
+				if (map.getWall(NW)  && map.getWall(N) 
+						&& map.getWall(W) 
+						&& ((map.getWall(SW) || map.getWall(NE)) )) {
+					if (map.goalBounder.getTile(current.getPosition().x(), current.getPosition().y()).getNorthWest().boxContains(goal.getPosition())){
 						open.add(NW);
 						closed.add(NW);
 					}
 				}
 			}
 			if (!closed.contains(W)) {
-				if (ShootEmUp.currentLevel.map.getWall(W) && ShootEmUp.currentLevel.map.getWall(SW) ) {
-					if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getWest(), goal.getPosition())){
+				if (map.getWall(W) && map.getWall(SW) ) {
+					if (map.goalBounder.getTile(current.getPosition().x(), current.getPosition().y()).getWest().boxContains(goal.getPosition())){
 						open.add(W);
 						closed.add(W);
 					}
 				}
 			}
 			if (!closed.contains(SW)) {
-				if (ShootEmUp.currentLevel.map.getWall(SW)  && ShootEmUp.currentLevel.map.getWall(SSW) 
-						&& ShootEmUp.currentLevel.map.getWall(SS) 
-						&& (ShootEmUp.currentLevel.map.getWall(W)  || ShootEmUp.currentLevel.map.getWall(SSE) )) {
-					if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getSouthWest(), goal.getPosition())){
+				if (map.getWall(SW)  && map.getWall(SSW) 
+						&& map.getWall(SS) 
+						&& (map.getWall(W)  || map.getWall(SSE) )) {
+					if (map.goalBounder.getTile(current.getPosition().x(), current.getPosition().y()).getSouthWest().boxContains(goal.getPosition())){
 						open.add(SW);
 						closed.add(SW);
 					}
 				}
 			}
 			if (!closed.contains(S)) {
-				if (ShootEmUp.currentLevel.map.getWall(SS)  && ShootEmUp.currentLevel.map.getWall(SSE) ) {
-					if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getSouth(), goal.getPosition())){
+				if (map.getWall(SS)  && map.getWall(SSE) ) {
+					if (map.goalBounder.getTile(current.getPosition().x(), current.getPosition().y()).getSouth().boxContains(goal.getPosition())){
 						open.add(S);
 						closed.add(S);
 					}
 				}
 			}
 			if (!closed.contains(SE) ) {
-				if (ShootEmUp.currentLevel.map.getWall(SSE)  && ShootEmUp.currentLevel.map.getWall(SSEE) 
-						&& ShootEmUp.currentLevel.map.getWall(SEE) 
-						&& (ShootEmUp.currentLevel.map.getWall(EE) || ShootEmUp.currentLevel.map.getWall(SS) )) {
-					if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getSouthEast(), goal.getPosition())){
+				if (map.getWall(SSE)  && map.getWall(SSEE) 
+						&& map.getWall(SEE) 
+						&& (map.getWall(EE) || map.getWall(SS) )) {
+					if (map.goalBounder.getTile(current.getPosition().x(), current.getPosition().y()).getSouthEast().boxContains(goal.getPosition())){
 						open.add(SE);
 						closed.add(SE);
 					}
 				}
 			}
 			if (!closed.contains(E) ) {
-				if (ShootEmUp.currentLevel.map.getWall(EE)  && ShootEmUp.currentLevel.map.getWall(SEE) ) {
-					if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getEast(), goal.getPosition())){
+				if (map.getWall(EE)  && map.getWall(SEE) ) {
+					if (map.goalBounder.getTile(current.getPosition().x(), current.getPosition().y()).getEast().boxContains(goal.getPosition())){
 						open.add(E);
 						closed.add(E);
 					}
 				}
 			}
 			if (!closed.contains(NE)) {
-				if (ShootEmUp.currentLevel.map.getWall(NE)  && ShootEmUp.currentLevel.map.getWall(NEE) 
-						&& ShootEmUp.currentLevel.map.getWall(EE) 
-						&& (ShootEmUp.currentLevel.map.getWall(SEE) || ShootEmUp.currentLevel.map.getWall(N) )) {
-					if (AI.boxContains(AI.getTile(current.getPosition().x(), current.getPosition().y()).getNorthEast(), goal.getPosition())){
+				if (map.getWall(NE)  && map.getWall(NEE) 
+						&& map.getWall(EE) 
+						&& (map.getWall(SEE) || map.getWall(N) )) {
+					if (map.goalBounder.getTile(current.getPosition().x(), current.getPosition().y()).getNorthEast().boxContains(goal.getPosition())){
 						open.add(NE);
 						closed.add(NE);
 					}

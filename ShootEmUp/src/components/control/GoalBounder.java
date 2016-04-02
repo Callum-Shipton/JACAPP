@@ -8,10 +8,14 @@ import main.ShootEmUp;
 import math.Vector2;
 import math.Vector4;
 
-public class AI {
-	public static Tile[][] aiTiles;
+public class GoalBounder {
+	public Tile[][] aiTiles;
 	
-	public static void SetAiTiles(){
+	public GoalBounder(){
+		SetAiTiles();
+	}
+	
+	private void SetAiTiles(){
 		aiTiles = new Tile[ShootEmUp.currentLevel.map.getWidth()][ShootEmUp.currentLevel.map.getHeight()];
 		
 		for(int x = 2; x < aiTiles.length - 2; x++){
@@ -34,15 +38,15 @@ public class AI {
 				TypeNode E = new TypeNode(new Vector2(start.getPosition().x() + 1, start.getPosition().y()), 6);
 				TypeNode NE = new TypeNode(new Vector2(start.getPosition().x() + 1, start.getPosition().y() - 1), 7);
 				
-				Vector4[] Boxes = new Vector4[8];
-				Boxes[0] = new Vector4(N.getPosition().x(),N.getPosition().y(),0,0);
-				Boxes[1] = new Vector4(NW.getPosition().x(),NW.getPosition().y(),0,0);
-				Boxes[2] = new Vector4(W.getPosition().x(),W.getPosition().y(),0,0);
-				Boxes[3] = new Vector4(SW.getPosition().x(),SW.getPosition().y(),0,0);
-				Boxes[4] = new Vector4(S.getPosition().x(),S.getPosition().y(),0,0);
-				Boxes[5] = new Vector4(SE.getPosition().x(),SE.getPosition().y(),0,0);
-				Boxes[6] = new Vector4(E.getPosition().x(),E.getPosition().y(),0,0);
-				Boxes[7] = new Vector4(NE.getPosition().x(),NE.getPosition().y(),0,0);
+				BoundingBox[] Boxes = new BoundingBox[8];
+				Boxes[0] = new BoundingBox(new Vector4(N.getPosition().x(),N.getPosition().y(),0,0));
+				Boxes[1] = new BoundingBox(new Vector4(NW.getPosition().x(),NW.getPosition().y(),0,0));
+				Boxes[2] = new BoundingBox(new Vector4(W.getPosition().x(),W.getPosition().y(),0,0));
+				Boxes[3] = new BoundingBox(new Vector4(SW.getPosition().x(),SW.getPosition().y(),0,0));
+				Boxes[4] = new BoundingBox(new Vector4(S.getPosition().x(),S.getPosition().y(),0,0));
+				Boxes[5] = new BoundingBox(new Vector4(SE.getPosition().x(),SE.getPosition().y(),0,0));
+				Boxes[6] = new BoundingBox(new Vector4(E.getPosition().x(),E.getPosition().y(),0,0));
+				Boxes[7] = new BoundingBox(new Vector4(NE.getPosition().x(),NE.getPosition().y(),0,0));
 				
 				open.add(N);
 				open.add(NW);
@@ -110,14 +114,7 @@ public class AI {
 		}
 	}
 
-	public static Tile getTile(float x, float y) {
+	public Tile getTile(float x, float y) {
 		return aiTiles[(int)x][(int)y];
 	}	
-	
-	public static boolean boxContains(Vector4 box, Vector2 goal){
-		if(((goal.x() > box.x()) && (goal.x() < box.x()+box.z())) && ((goal.y() > box.y()) && (goal.y() < box.y()+box.w()))){
-			return true;
-		}
-		return false;
-	}
 }

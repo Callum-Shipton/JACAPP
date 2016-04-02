@@ -1,81 +1,80 @@
 package components.control;
 
-import math.Vector4;
-
 public class Tile {
-	Vector4 North;
-	Vector4 NorthEast;
-	Vector4 East;
-	Vector4 SouthEast;
-	Vector4 South;
-	Vector4 SouthWest;
-	Vector4 West;
-	Vector4 NorthWest;
+	BoundingBox North;
+	BoundingBox NorthEast;
+	BoundingBox East;
+	BoundingBox SouthEast;
+	BoundingBox South;
+	BoundingBox SouthWest;
+	BoundingBox West;
+	BoundingBox NorthWest;
 	
 	public Tile(){
+		
 	}
 
-	public Vector4 getNorth() {
+	public BoundingBox getNorth() {
 		return North;
 	}
 
-	public void setNorth(Vector4 north) {
+	public void setNorth(BoundingBox north) {
 		North = north;
 	}
 
-	public Vector4 getEast() {
+	public BoundingBox getEast() {
 		return East;
 	}
 
-	public void setEast(Vector4 east) {
+	public void setEast(BoundingBox east) {
 		East = east;
 	}
 
-	public Vector4 getSouth() {
+	public BoundingBox getSouth() {
 		return South;
 	}
 
-	public void setSouth(Vector4 south) {
+	public void setSouth(BoundingBox south) {
 		South = south;
 	}
 
-	public Vector4 getWest() {
+	public BoundingBox getWest() {
 		return West;
 	}
 
-	public void setWest(Vector4 west) {
+	public void setWest(BoundingBox west) {
 		West = west;
 	}
 
-	public Vector4 getNorthEast() {
+	public BoundingBox getNorthEast() {
 		return NorthEast;
 	}
 
-	public void setNorthEast(Vector4 northEast) {
+	public void setNorthEast(BoundingBox northEast) {
 		NorthEast = northEast;
 	}
 
-	public Vector4 getSouthEast() {
+	public BoundingBox getSouthEast() {
 		return SouthEast;
 	}
 
-	public void setSouthEast(Vector4 southEast) {
+	public void setSouthEast(BoundingBox southEast) {
 		SouthEast = southEast;
 	}
 
-	public Vector4 getSouthWest() {
+	public BoundingBox getSouthWest() {
 		return SouthWest;
 	}
 
-	public void setSouthWest(Vector4 southWest) {
+	public void setSouthWest(BoundingBox southWest) {
 		SouthWest = southWest;
 	}
 
-	public Vector4 getNorthWest() {
+	public BoundingBox getNorthWest() {
 		return NorthWest;
 	}
 
-	public void setNorthWest(Vector4 northWest) {
+	public void setNorthWest(BoundingBox northWest) {
 		NorthWest = northWest;
 	}
 }
