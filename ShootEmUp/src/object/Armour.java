@@ -71,6 +71,10 @@ public class Armour extends InventoryItem {
 	public String getType() {
 		return type;
 	}
+	
+	public String getSubType() {
+		return subType;
+	}
 
 	public void setDefence(int defence) {
 		this.defence = defence;

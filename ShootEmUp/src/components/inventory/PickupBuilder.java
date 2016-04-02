@@ -19,50 +19,7 @@ public abstract class PickupBuilder {
 		PickupCollision BC;
 
 		switch (type) {
-			case ARMOUR:
-				switch ((TypeArmour) subtype) {
-					case HELMET:
-						switch ((SubTypeArmour) subsubtype) {
-							case IRON:
-								BG = new AnimatedGraphics(Art.getImage("IronHelmet"), Art.base, true);
-								break;
-							case LEATHER:
-								BG = new AnimatedGraphics(Art.getImage("LeatherHelmet"), Art.base, true);
-								break;
-						}
-						break;
-					case CHESTPLATE:
-						switch ((SubTypeArmour) subsubtype) {
-							case IRON:
-								BG = new AnimatedGraphics(Art.getImage("IronChest"), Art.base, true);
-								break;
-							case LEATHER:
-								BG = new AnimatedGraphics(Art.getImage("LeatherChest"), Art.base, true);
-								break;
-						}
-						break;
-					case LEGS:
-						switch ((SubTypeArmour) subsubtype) {
-							case IRON:
-								BG = new AnimatedGraphics(Art.getImage("IronLegs"), Art.base, true);
-								break;
-							case LEATHER:
-								BG = new AnimatedGraphics(Art.getImage("LeatherLegs"), Art.base, true);
-								break;
-						}
-						break;
-					case BOOTS:
-						switch ((SubTypeArmour) subsubtype) {
-							case IRON:
-								BG = new AnimatedGraphics(Art.getImage("IronBoots"), Art.base, true);
-								break;
-							case LEATHER:
-								BG = new AnimatedGraphics(Art.getImage("LeatherBoots"), Art.base, true);
-								break;
-						}
-						break;
-				}
-				break;
+			
 			case COIN:
 				switch ((TypeCoin) subtype) {
 					case ONE:
@@ -151,6 +108,50 @@ public abstract class PickupBuilder {
 			PickupCollision BC;
 
 			switch (type) {
+				case ARMOUR:
+					switch (subtype) {
+						case "HELMET":
+							switch (subsubtype) {
+								case "IRON_HELMET":
+									BG = new AnimatedGraphics(Art.getImage("IronHelmet"), Art.base, true);
+									break;
+								case "LEATHER_HELMET":
+									BG = new AnimatedGraphics(Art.getImage("LeatherHelmet"), Art.base, true);
+									break;
+							}
+							break;
+						case "CHEST":
+							switch ( subsubtype) {
+								case "IRON_CHEST":
+									BG = new AnimatedGraphics(Art.getImage("IronChest"), Art.base, true);
+									break;
+								case "LEATHER_CHEST":
+									BG = new AnimatedGraphics(Art.getImage("LeatherChest"), Art.base, true);
+									break;
+							}
+							break;
+						case "LEGS":
+							switch (subsubtype) {
+								case "IRON_LEGS":
+									BG = new AnimatedGraphics(Art.getImage("IronLegs"), Art.base, true);
+									break;
+								case "LEATHER_LEGS":
+									BG = new AnimatedGraphics(Art.getImage("LeatherLegs"), Art.base, true);
+									break;
+							}
+							break;
+						case "BOOTS":
+							switch (subsubtype) {
+								case "IRON_BOOTS":
+									BG = new AnimatedGraphics(Art.getImage("IronBoots"), Art.base, true);
+									break;
+								case "LEATHER_BOOTS":
+									BG = new AnimatedGraphics(Art.getImage("LeatherBoots"), Art.base, true);
+									break;
+							}
+							break;
+					}
+					break;
 				case WEAPON:
 					switch (subsubtype) {
 						case "BATTLEAXE":

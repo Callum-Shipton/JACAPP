@@ -4,7 +4,7 @@ import components.Message;
 import display.Art;
 import gui.menus.GameOverMenu;
 import main.ShootEmUp;
-import object.ArmourBuilder;
+import object.Armour;
 import object.Entity;
 import object.Weapon;
 import save.CharacterSave;
@@ -26,19 +26,19 @@ public class PlayerAttack extends BaseAttack {
 		mana = save.getMana();
 		weapon = new Weapon(save.getWeapon(), 0);
 		if (save.getBoots() != null) {
-			boots = ArmourBuilder.buildArmour(save.getBoots());
+			boots = new Armour(save.getBoots());
 			setArmourValue();
 		}
 		if (save.getLegs() != null) {
-			legs = ArmourBuilder.buildArmour(save.getLegs());
+			legs = new Armour(save.getLegs());
 			setArmourValue();
 		}
 		if (save.getChest() != null) {
-			chest = ArmourBuilder.buildArmour(save.getChest());
+			chest = new Armour(save.getChest());
 			setArmourValue();
 		}
 		if (save.getHelmet() != null) {
-			helmet = ArmourBuilder.buildArmour(save.getHelmet());
+			helmet = new Armour(save.getHelmet());
 			setArmourValue();
 		}
 

@@ -13,13 +13,12 @@ import components.control.BaseControl;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.inventory.BaseInventory;
-import components.inventory.TypeArmour;
 import components.movement.BaseMovement;
 import components.movement.BasicMovement;
 import components.movement.FlyingMovement;
 import display.Art;
 import main.ShootEmUp;
-import object.ArmourBuilder;
+import object.Armour;
 import object.Entity;
 import object.Weapon;
 
@@ -49,7 +48,7 @@ public abstract class EnemyBuilder {
 					((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(),
 					((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX());
 			enemyAttack = new EnemyAttack(TypeAttack.WARRIOR, 1, 5, new Weapon("ONE_HANDED", 1),
-					ArmourBuilder.buildArmour(TypeArmour.HELMET), null, null, null);
+					new Armour("HELMET"), null, null, null);
 			newEnemy.addComponent(enemyGraphics);
 			enemyCollision = new RigidCollision(newEnemy);
 			enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 7);
@@ -59,7 +58,7 @@ public abstract class EnemyBuilder {
 					((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(),
 					((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX());
 			enemyAttack = new EnemyAttack(TypeAttack.ARCHER, 3, 5, new Weapon("BOW", 1), null,
-					ArmourBuilder.buildArmour(TypeArmour.CHESTPLATE), null, null);
+					new Armour("CHEST"), null, null);
 			newEnemy.addComponent(enemyGraphics);
 			enemyCollision = new RigidCollision(newEnemy);
 			enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 4);
@@ -69,7 +68,7 @@ public abstract class EnemyBuilder {
 					((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(),
 					((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX());
 			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 2, 5,new Weapon("STAFF", 1), null,
-					null, ArmourBuilder.buildArmour(TypeArmour.LEGS), null);
+					null, new Armour("LEGS"), null);
 			newEnemy.addComponent(enemyGraphics);
 			enemyCollision = new RigidCollision(newEnemy);
 			enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);
@@ -80,7 +79,7 @@ public abstract class EnemyBuilder {
 					((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(),
 					((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX());
 			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 100, 5, new Weapon("TWO_HANDED", 1),
-					null, null, null, ArmourBuilder.buildArmour(TypeArmour.BOOTS));
+					null, null, null, new Armour("BOOTS"));
 			newEnemy.addComponent(enemyGraphics);
 			enemyCollision = new RigidCollision(newEnemy);
 			enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);

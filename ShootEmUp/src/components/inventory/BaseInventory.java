@@ -17,7 +17,6 @@ import components.attack.PlayerAttack;
 import components.graphical.BaseGraphics;
 import main.ShootEmUp;
 import object.Armour;
-import object.ArmourBuilder;
 import object.DurationPotion;
 import object.Entity;
 import object.InventoryItem;
@@ -84,8 +83,8 @@ public class BaseInventory extends Component implements InventoryComponent {
 		for (String typeWeapon : save.getWeapons()) {
 			inventory.add(new Weapon(typeWeapon, 0));
 		}
-		for (TypeArmour typeArmour : save.getArmour()) {
-			inventory.add(ArmourBuilder.buildArmour(typeArmour));
+		for (String typeArmour : save.getArmour()) {
+			inventory.add(new Armour(typeArmour));
 		}
 		inventorySize = save.getInventorySize();
 		potions = save.getPotions();
@@ -153,19 +152,19 @@ public class BaseInventory extends Component implements InventoryComponent {
 		inventory.remove(itemNo);
 		if (item instanceof Armour) {
 			switch (((Armour) item).getType()) {
-				case BOOTS:
+				case "BOOTS":
 					equipped = BA.getBoots();
 					BA.setBoots((Armour) item);
 					break;
-				case LEGS:
+				case "LEGS":
 					equipped = BA.getLegs();
 					BA.setLegs((Armour) item);
 					break;
-				case CHESTPLATE:
+				case "CHEST":
 					equipped = BA.getChest();
 					BA.setChest((Armour) item);
 					break;
-				case HELMET:
+				case "HELMET":
 					equipped = BA.getHelmet();
 					BA.setHelmet((Armour) item);
 			}
@@ -214,13 +213,6 @@ public class BaseInventory extends Component implements InventoryComponent {
 					return true;
 				}
 				break;
-			case ARMOUR:
-				if (inventory.size() < inventorySize) {
-					TypeArmour armourType = (TypeArmour) subtype;
-					inventory.add(ArmourBuilder.buildArmour(armourType));
-					return true;
-				}
-				break;
 		}
 		return false;
 	}
@@ -231,6 +223,13 @@ public class BaseInventory extends Component implements InventoryComponent {
 					inventory.add(new Weapon(subsubtype, 0));
 					return true;
 				}
+				break;
+			case ARMOUR:
+				if (inventory.size() < inventorySize) {
+					inventory.add(new Armour(subsubtype));
+					return true;
+				}
+				break;
 		}
 		return false;
 	}
@@ -328,25 +327,25 @@ public class BaseInventory extends Component implements InventoryComponent {
 				switch (rand.nextInt(4)) {
 					case 0:
 						if (BA.getHelmet() != null) {
-							PickupBuilder.buildPickup(TypePickup.ARMOUR, TypeArmour.HELMET, SubTypeArmour.LEATHER,
+							PickupBuilder.buildPickup(TypePickup.ARMOUR, "HELMET", BA.getHelmet().getSubType(),
 									BG.getX(), BG.getY() + BG.getHeight());
 						}
 						break;
 					case 1:
 						if (BA.getChest() != null) {
-							PickupBuilder.buildPickup(TypePickup.ARMOUR, TypeArmour.CHESTPLATE, SubTypeArmour.LEATHER,
+							PickupBuilder.buildPickup(TypePickup.ARMOUR, "CHEST",BA.getChest().getSubType(),
 									BG.getX(), BG.getY() + BG.getHeight());
 						}
 						break;
 					case 2:
 						if (BA.getLegs() != null) {
-							PickupBuilder.buildPickup(TypePickup.ARMOUR, TypeArmour.LEGS, SubTypeArmour.LEATHER,
+							PickupBuilder.buildPickup(TypePickup.ARMOUR, "LEGS", BA.getLegs().getSubType(),
 									BG.getX(), BG.getY() + BG.getHeight());
 						}
 						break;
 					case 3:
 						if (BA.getBoots() != null) {
-							PickupBuilder.buildPickup(TypePickup.ARMOUR, TypeArmour.BOOTS, SubTypeArmour.LEATHER,
+							PickupBuilder.buildPickup(TypePickup.ARMOUR,"LEGS", BA.getBoots().getSubType(),
 									BG.getX(), BG.getY() + BG.getHeight());
 						}
 						break;

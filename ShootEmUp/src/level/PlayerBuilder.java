@@ -56,23 +56,23 @@ public abstract class PlayerBuilder {
 		switch (type) {
 			case ARCHER:
 				g = new PlayerGraphics(player, Art.getImage("Archer"), Art.base);
-				a = new PlayerAttack(type, 4, 5, new Weapon("BOW","LONGBOW",0));
+				a = new PlayerAttack(type, 4, 5, new Weapon("LONGBOW",0));
 				break;
 			case BATTLE_MAGE:
 				g = new PlayerGraphics(player, Art.getImage("BattleMage"), Art.base);
-				a = new PlayerAttack(type, 3, 5 , new Weapon("STAFF","FIRE_STAFF", 0));
+				a = new PlayerAttack(type, 3, 5 , new Weapon("FIRE_STAFF", 0));
 				break;
 			case MAGE:
 				g = new PlayerGraphics(player, Art.getImage("Mage"), Art.base);
-				a = new PlayerAttack(type, 3, 5 , new Weapon("STAFF","FIRE_STAFF", 0));
+				a = new PlayerAttack(type, 3, 5 , new Weapon("FIRE_STAFF", 0));
 				break;
 			case ROGUE:
 				g = new PlayerGraphics(player, Art.getImage("Rogue"), Art.base);
-				a = new PlayerAttack(type, 3, 5 ,new Weapon("DAGGER","IRON_DAGGER", 0));
+				a = new PlayerAttack(type, 3, 5 ,new Weapon("IRON_DAGGER", 0));
 				break;
 			case WARRIOR:
 				g = new PlayerGraphics(player, Art.getImage("Warrior"), Art.base);
-				a = new PlayerAttack(type, 5, 3 , new Weapon("TWO_HANDED","LONGSWORD", 0));
+				a = new PlayerAttack(type, 5, 3 , new Weapon("LONGSWORD", 0));
 				break;
 			default:
 				g = new PlayerGraphics(player, Art.getImage("Warrior"), Art.base);
