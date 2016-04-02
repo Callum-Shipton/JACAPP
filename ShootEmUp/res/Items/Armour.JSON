@@ -1,0 +1,26 @@
+[
+{
+  "type": "BOOTS",
+  "subType": "LEATHER_BOOTS",
+  "defence": 2,
+  "inventoryImage": "LeatherBootsButton"
+},
+{
+  "type": "LEGS",
+  "subType": "LEATHER_LEGS",
+  "defence": 5,
+  "inventoryImage": "LeatherLegsButton"
+},
+{
+  "type": "CHEST",
+  "subType": "LEATHER_CHEST",
+  "defence": 10,
+  "inventoryImage": "LeatherChestButton"
+},
+{
+  "type": "HELMET",
+  "subType": "LEATHER_HELMET",
+  "defence": 7,
+  "inventoryImage": "LeatherHelmetButton"
+}
+]
