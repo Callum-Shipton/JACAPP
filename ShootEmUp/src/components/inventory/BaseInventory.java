@@ -80,12 +80,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 	public BaseInventory(BaseGraphics BG, PlayerAttack BA, CharacterSave save) {
 		this(BG, BA, save.getPlayerLevel());
-		for (String typeWeapon : save.getWeapons()) {
-			inventory.add(new Weapon(typeWeapon, 0));
-		}
-		for (String typeArmour : save.getArmour()) {
-			inventory.add(new Armour(typeArmour));
-		}
+		inventory = save.getInventory();
 		inventorySize = save.getInventorySize();
 		potions = save.getPotions();
 		maxPotions = save.getMaxPotions();

@@ -8,7 +8,6 @@ import components.TypeComponent;
 import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
 import components.inventory.BaseInventory;
-import components.inventory.TypePickup;
 import components.inventory.TypePotion;
 import main.ShootEmUp;
 import object.Armour;
@@ -34,18 +33,17 @@ public class CharacterSave implements Serializable {
 	private int manaRegen;
 	private int maxManaRegen;
 
-	private String weapon;
-	private String helmet;
-	private String chest;
-	private String legs;
-	private String boots;
+	private Weapon weapon;
+	private Armour helmet;
+	private Armour chest;
+	private Armour legs;
+	private Armour boots;
 
 	private int coins;
 	private int exp;
 	private int playerLevel;
 
-	private ArrayList<String> weapons = new ArrayList<String>();
-	private ArrayList<String> armour = new ArrayList<String>();
+	private ArrayList<InventoryItem> inventory = new ArrayList<InventoryItem>();
 	private int inventorySize;
 
 	private HashMap<TypePotion, Potion> potions;
@@ -73,25 +71,11 @@ public class CharacterSave implements Serializable {
 		manaRegen = tempAttack.getManaRegen();
 		maxManaRegen = tempAttack.getMaxManaRegen();
 
-		weapon = tempAttack.getWeapon().getSubType();
-
-		Armour tempArmour;
-		tempArmour = tempAttack.getBoots();
-		if (tempArmour != null) {
-			boots = tempArmour.getType();
-		}
-		tempArmour = tempAttack.getLegs();
-		if (tempArmour != null) {
-			legs = tempArmour.getType();
-		}
-		tempArmour = tempAttack.getChest();
-		if (tempArmour != null) {
-			chest = tempArmour.getType();
-		}
-		tempArmour = tempAttack.getHelmet();
-		if (tempArmour != null) {
-			helmet = tempArmour.getType();
-		}
+		weapon = tempAttack.getWeapon();
+		boots = tempAttack.getBoots();
+		legs = tempAttack.getLegs();
+		chest = tempAttack.getChest();
+		helmet = tempAttack.getHelmet();
 
 		BaseInventory tempInventory = (BaseInventory) ShootEmUp.currentLevel.getPlayer()
 				.getComponent(TypeComponent.INVENTORY);
@@ -99,14 +83,7 @@ public class CharacterSave implements Serializable {
 		coins = tempInventory.getCoins();
 		exp = tempInventory.getExp();
 		playerLevel = tempInventory.getLevel();
-		ArrayList<InventoryItem> inventory = tempInventory.getInventory();
-		for (InventoryItem inventoryItem : inventory) {
-			if (inventoryItem.getTypePickup() == TypePickup.WEAPON) {
-				weapons.add(((Weapon) inventoryItem).getSubType());
-			} else {
-				armour.add(((Armour) inventoryItem).getType());
-			}
-		}
+		inventory = tempInventory.getInventory();
 		inventorySize = tempInventory.getInventorySize();
 		potions = tempInventory.getPotions();
 		maxPotions = tempInventory.getMaxPotions();
@@ -160,35 +137,31 @@ public class CharacterSave implements Serializable {
 		return playerLevel;
 	}
 
-	public ArrayList<String> getWeapons() {
-		return weapons;
-	}
-
-	public ArrayList<String> getArmour() {
-		return armour;
+	public ArrayList<InventoryItem> getInventory() {
+		return inventory;
 	}
 
 	public int getInventorySize() {
 		return inventorySize;
 	}
 
-	public String getWeapon() {
+	public Weapon getWeapon() {
 		return weapon;
 	}
 
-	public String getHelmet() {
+	public Armour getHelmet() {
 		return helmet;
 	}
 
-	public String getChest() {
+	public Armour getChest() {
 		return chest;
 	}
 
-	public String getLegs() {
+	public Armour getLegs() {
 		return legs;
 	}
 
-	public String getBoots() {
+	public Armour getBoots() {
 		return boots;
 	}
 

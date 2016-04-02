@@ -1,158 +1,144 @@
 [
 {
   "type": "STAFF",
-  "subType": "EARTH_STAFF",
+  "subType": "EarthStaff",
   "damage": 2,
   "range": 3,
   "fireRate": 10,
   "melee": false,
   "manaCost": 2,
   "particleImage": "EarthMagic",
-  "element": "EARTH",
-  "inventoryImage": "EarthStaffButton"
+  "element": "EARTH"
 },
 {
   "type": "STAFF",
-  "subType": "ICE_STAFF",
+  "subType": "IceStaff",
   "damage": 1,
   "range": 3,
   "fireRate": 10,
   "melee": false,
   "manaCost": 1,
-  "particleImage": "IceMagic",
-  "element": "FROST",
-  "inventoryImage": "IceStaffButton"
+  "particleImage": "IceMagic"
 },
 {
   "type": "STAFF",
-  "subType": "FIRE_STAFF",
+  "subType": "FireStaff",
   "damage": 1,
   "range": 3,
   "fireRate": 10,
   "melee": false,
   "manaCost": 1,
   "particleImage": "FireMagic",
-  "element": "FIRE",
-  "inventoryImage": "FireStaffButton"
+  "element": "FIRE"
 },
 {
   "type": "BOW",
-  "subType": "SHORTBOW",
+  "subType": "Shortbow",
   "damage": 1,
   "range": 5,
   "fireRate": 5,
   "melee": false,
   "manaCost": 1,
   "particleImage": "Arrow",
-  "element": null,
-  "inventoryImage": "BowButton"
+  "element": null
 },
 {
   "type": "BOW",
-  "subType": "LONGBOW",
+  "subType": "Longbow",
   "damage": 1,
   "range": 5,
   "fireRate": 5,
   "melee": false,
   "manaCost": 1,
   "particleImage": "Arrow",
-  "element": null,
-  "inventoryImage": "BowButton"
+  "element": null
 },
 {
   "type": "CROSSBOW",
-  "subType": "RECURVE_CROSSBOW",
+  "subType": "RecurveCrossbow",
   "damage": 2,
   "range": 5,
   "fireRate": 10,
   "melee": false,
   "manaCost": 2,
   "particleImage": "Arrow",
-  "element": null,
-  "inventoryImage": "CrossBowButton"
+  "element": null
 },
 {
   "type": "CROSSBOW",
-  "subType": "COMPOUND_CROSSBOW",
+  "subType": "CompoundCrossbow",
   "damage": 2,
   "range": 5,
   "fireRate": 10,
   "melee": false,
   "manaCost": 2,
   "particleImage": "Arrow",
-  "element": null,
-  "inventoryImage": "CrossBowButton"
+  "element": null
 },
 {
   "type": "TWO_HANDED",
-  "subType": "LONGSWORD",
+  "subType": "Longbow",
   "damage": 3,
   "range": 1,
   "fireRate": 5,
   "melee": true,
   "manaCost": 1,
   "particleImage": "SwordProjectile",
-  "element": null,
-  "inventoryImage": "SwordButton"
+  "element": null
 },
 {
   "type": "TWO_HANDED",
-  "subType": "BATTLEAXE",
+  "subType": "Battleaxe",
   "damage": 4,
   "range": 1,
   "fireRate": 10,
   "melee": true,
   "manaCost": 2,
   "particleImage": "SwordProjectile",
-  "element": null,
-  "inventoryImage": "BattleaxeButton"
+  "element": null
 },
 {
   "type": "ONE_HANDED",
-  "subType": "MACE",
+  "subType": "Mace",
   "damage": 5,
   "range": 1,
   "fireRate": 15,
   "melee": true,
   "manaCost": 3,
   "particleImage": "SwordProjectile",
-  "element": null,
-  "inventoryImage": "MaceButton"
+  "element": null
 },
 {
   "type": "ONE_HANDED",
-  "subType": "SWORD",
+  "subType": "Sword",
   "damage": 3,
   "range": 1,
   "fireRate": 5,
   "melee": true,
   "manaCost": 1,
   "particleImage": "SwordProjectile",
-  "element": null,
-  "inventoryImage": "SwordButton"
+  "element": null
 },
 {
   "type": "DAGGER",
-  "subType": "STEEL_DAGGER",
+  "subType": "SteelDagger",
   "damage": 3,
   "range": 1,
   "fireRate": 5,
   "melee": true,
   "manaCost": 1,
   "particleImage": "SwordProjectile",
-  "element": null,
-  "inventoryImage": "SwordButton"
+  "element": null
 },
 {
   "type": "DAGGER",
-  "subType": "IRON_DAGGER",
+  "subType": "SteelDagger",
   "damage": 3,
   "range": 1,
   "fireRate": 5,
   "melee": true,
   "manaCost": 1,
   "particleImage": "SwordProjectile",
-  "element": null,
-  "inventoryImage": "SwordButton"
+  "element": null
 }
 ]
