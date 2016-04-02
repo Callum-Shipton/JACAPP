@@ -18,35 +18,18 @@ public class BoundingBox {
 		return false;
 	}
 	
-	public float x(){
-		return box.x();
-	}
-	
-	public float y(){
-		return box.y();
-	}
-	
-	public float z(){
-		return box.z();
-	}
-	
-	public float w(){
-		return box.w();
-	}
-	
-	public void x(float x){
-		box.x(x);
-	}
-	
-	public void y(float y){
-		box.y(y);
-	}
-	
-	public void z(float z){
-		box.z(z);
-	}
-	
-	public void w(float w){
-		box.w(w);
+	public void addPoint(Vector2 point){
+		if(point.x() < box.x()){
+			box.x(point.x());
+		}
+		if(point.y() < box.y()){
+			box.y(point.y());
+		}
+		if(point.x() > box.x() + box.z()){
+			box.z(point.x()-box.x());
+		}
+		if(point.y() > box.y() + box.w()){
+			box.w(point.y()-box.y());
+		}
 	}
 }

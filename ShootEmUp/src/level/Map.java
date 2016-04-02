@@ -8,7 +8,6 @@ import javax.imageio.ImageIO;
 
 import components.collision.RigidCollision;
 import components.control.GoalBounder;
-import components.control.Node;
 import components.graphical.MapGraphics;
 import display.Art;
 import display.IRenderer;
@@ -216,7 +215,7 @@ public class Map {
 				new Vector2(Art.getImage("Walls").getFWidth(), Art.getImage("Walls").getFHeight()), Map.TILE_WIDTH,
 				Map.TILE_HEIGHT);
 		
-		goalBounder = new GoalBounder();
+		goalBounder = new GoalBounder(width, height, walls);
 	}
 
 	public void setTiles() {
@@ -412,8 +411,5 @@ public class Map {
 
 	public HashMap<Vector2, Entity> getWalls() {
 		return walls;
-	}
-	public boolean getWall(Node node){
-		return !walls.containsKey(node.getPosition());
 	}
 }

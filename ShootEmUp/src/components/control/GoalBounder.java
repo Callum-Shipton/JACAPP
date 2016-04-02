@@ -1,23 +1,23 @@
 package components.control;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import main.ShootEmUp;
 import math.Vector2;
 import math.Vector4;
+import object.Entity;
 
 public class GoalBounder {
-	public Tile[][] aiTiles;
+	private Tile[][] aiTiles;
 	
-	public GoalBounder(){
-		SetAiTiles();
+	public GoalBounder(int width, int height, HashMap<Vector2, Entity> walls){
+		aiTiles = new Tile[width][height];
+		SetAiTiles(walls);
 	}
 	
-	private void SetAiTiles(){
-		aiTiles = new Tile[ShootEmUp.currentLevel.map.getWidth()][ShootEmUp.currentLevel.map.getHeight()];
-		
+	private void SetAiTiles(HashMap<Vector2, Entity> walls){
 		for(int x = 2; x < aiTiles.length - 2; x++){
 			System.out.println(x);
 			for(int y = 2; y < aiTiles[0].length - 2; y++){
@@ -29,14 +29,17 @@ public class GoalBounder {
 				// tiles
 				TypeNode start = new TypeNode(new Vector2(x, y), 0);
 				
-				TypeNode N = new TypeNode(new Vector2(start.getPosition().x(), start.getPosition().y() - 1), 0);
-				TypeNode NW = new TypeNode(new Vector2(start.getPosition().x() - 1, start.getPosition().y() - 1), 1);
-				TypeNode W = new TypeNode(new Vector2(start.getPosition().x() - 1, start.getPosition().y()), 2);
-				TypeNode SW = new TypeNode(new Vector2(start.getPosition().x() - 1, start.getPosition().y() + 1), 3);
-				TypeNode S = new TypeNode(new Vector2(start.getPosition().x(), start.getPosition().y() + 1), 4);
-				TypeNode SE = new TypeNode(new Vector2(start.getPosition().x() + 1, start.getPosition().y() + 1), 5);
-				TypeNode E = new TypeNode(new Vector2(start.getPosition().x() + 1, start.getPosition().y()), 6);
-				TypeNode NE = new TypeNode(new Vector2(start.getPosition().x() + 1, start.getPosition().y() - 1), 7);
+				float startX = start.getPosition().x();
+				float startY = start.getPosition().y();
+				
+				TypeNode N = new TypeNode(new Vector2(startX, startY - 1), 0);
+				TypeNode NW = new TypeNode(new Vector2(startX - 1, startY - 1), 1);
+				TypeNode W = new TypeNode(new Vector2(startX - 1, startY), 2);
+				TypeNode SW = new TypeNode(new Vector2(startX - 1, startY + 1), 3);
+				TypeNode S = new TypeNode(new Vector2(startX, startY + 1), 4);
+				TypeNode SE = new TypeNode(new Vector2(startX + 1, startY + 1), 5);
+				TypeNode E = new TypeNode(new Vector2(startX + 1, startY), 6);
+				TypeNode NE = new TypeNode(new Vector2(startX + 1, startY - 1), 7);
 				
 				BoundingBox[] Boxes = new BoundingBox[8];
 				Boxes[0] = new BoundingBox(new Vector4(N.getPosition().x(),N.getPosition().y(),0,0));
@@ -69,32 +72,25 @@ public class GoalBounder {
 				while (open.size() > 0) {
 					TypeNode current = open.poll(); // Tile current being checked
 					
-					if(current.getPosition().x() < Boxes[current.getType()].x()){
-						Boxes[current.getType()].x(current.getPosition().x());
-					}
-					if(current.getPosition().y() < Boxes[current.getType()].y()){
-						Boxes[current.getType()].y(current.getPosition().y());
-					}
-					if(current.getPosition().x() > Boxes[current.getType()].x() + Boxes[current.getType()].z()){
-						Boxes[current.getType()].z(current.getPosition().x()-Boxes[current.getType()].x());
-					}
-					if(current.getPosition().y() > Boxes[current.getType()].y() + Boxes[current.getType()].w()){
-						Boxes[current.getType()].w(current.getPosition().y()-Boxes[current.getType()].y());
-					}
-						
+					int currentType = current.getType();
+					float currentX = current.getPosition().x();
+					float currentY = current.getPosition().y();
+					
+					Boxes[currentType].addPoint(current.getPosition());
+					
 					TypeNode[] nodes = new TypeNode[8];
-					nodes[0] = new TypeNode(new Vector2(current.getPosition().x(), current.getPosition().y() - 1), current.getType());
-					nodes[1] = new TypeNode(new Vector2(current.getPosition().x() - 1, current.getPosition().y() - 1), current.getType());
-					nodes[2] = new TypeNode(new Vector2(current.getPosition().x() - 1, current.getPosition().y()), current.getType());
-					nodes[3] = new TypeNode(new Vector2(current.getPosition().x() - 1, current.getPosition().y() + 1), current.getType());
-					nodes[4] = new TypeNode(new Vector2(current.getPosition().x(), current.getPosition().y() + 1), current.getType());
-					nodes[5] = new TypeNode(new Vector2(current.getPosition().x() + 1, current.getPosition().y() + 1), current.getType());
-					nodes[6] = new TypeNode(new Vector2(current.getPosition().x() + 1, current.getPosition().y()), current.getType());
-					nodes[7] = new TypeNode(new Vector2(current.getPosition().x() + 1, current.getPosition().y() - 1), current.getType());
+					nodes[0] = new TypeNode(new Vector2(currentX, currentY - 1), currentType);
+					nodes[1] = new TypeNode(new Vector2(currentX - 1, currentY - 1), currentType);
+					nodes[2] = new TypeNode(new Vector2(currentX - 1, currentY), currentType);
+					nodes[3] = new TypeNode(new Vector2(currentX - 1, currentY + 1), currentType);
+					nodes[4] = new TypeNode(new Vector2(currentX, currentY + 1), currentType);
+					nodes[5] = new TypeNode(new Vector2(currentX + 1, currentY + 1), currentType);
+					nodes[6] = new TypeNode(new Vector2(currentX + 1, currentY), currentType);
+					nodes[7] = new TypeNode(new Vector2(currentX + 1, currentY - 1), currentType);
 					
 					for(int i = 0; i < nodes.length; i++){
 						if (!closed.contains(nodes[i])) {
-							if (ShootEmUp.currentLevel.map.getWall(nodes[i]) ) {
+							if (walls.containsKey(nodes[i]) ) {
 									open.add(nodes[i]);
 									closed.add(nodes[i]);
 							}
@@ -102,14 +98,7 @@ public class GoalBounder {
 					}
 				}			
 				aiTiles[x][y] = new Tile();
-				aiTiles[x][y].setNorth(Boxes[0]);
-				aiTiles[x][y].setNorthWest(Boxes[1]);
-				aiTiles[x][y].setWest(Boxes[2]);
-				aiTiles[x][y].setSouthWest(Boxes[3]);
-				aiTiles[x][y].setSouth(Boxes[4]);
-				aiTiles[x][y].setSouthEast(Boxes[5]);
-				aiTiles[x][y].setEast(Boxes[6]);
-				aiTiles[x][y].setNorthEast(Boxes[7]);
+				aiTiles[x][y].setBoxes(Boxes);
 			}
 		}
 	}

@@ -1,10 +1,10 @@
 package components.control;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 
 import components.Message;
-import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
@@ -21,14 +21,23 @@ public class AIControl extends BaseControl {
 	private BaseAttack BA;
 
 	private int counter = 0;
+	private int aggression = 30;
 	private Vector2 target;
-	Map map;
+	private Vector2 goal;
+	
+	private static HashMap<Vector2, Entity> walls;
+	private static GoalBounder goalBounder;
 
 	public AIControl(BaseGraphics BG, BaseAttack BA, BaseMovement BM) {
 		this.BA = BA;
 		this.BG = BG;
 		this.BM = BM;
-		map = ShootEmUp.currentLevel.map;
+		if (walls == null) {
+			walls = ShootEmUp.currentLevel.map.walls;
+		}
+		if (goalBounder == null) {
+			goalBounder = ShootEmUp.currentLevel.map.goalBounder;
+		}
 	}
 
 	@Override
@@ -83,7 +92,7 @@ public class AIControl extends BaseControl {
 			}
 		}
 		counter++;
-		if (counter == 30) {
+		if (counter == aggression) {
 			BA.attack(e, (BG instanceof AnimatedGraphics) ? ((AnimatedGraphics) BG).getDirection() : 0);
 			counter = 0;
 		}
@@ -94,16 +103,7 @@ public class AIControl extends BaseControl {
 		HashSet<Node> closed = new HashSet<Node>(); // list of already viewed
 		Node start = new Node(new Vector2((float) Math.floor(BG.getX() / Map.TILE_WIDTH),
 				(float) Math.floor(BG.getY() / Map.TILE_WIDTH)), null);
-		// makes a tile for the enemy position
-		Node goal = new Node(
-				new Vector2(
-						(float) Math.floor(
-								((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS))
-										.getX() / Map.TILE_WIDTH),
-				(float) Math.floor(
-						((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS)).getY()
-								/ Map.TILE_WIDTH)),
-				null); // makes a tile for the player 
+
 		open.add(start);
 		closed.add(start);
 		while (open.size() > 0) {
@@ -111,7 +111,7 @@ public class AIControl extends BaseControl {
 			if (current.equals(goal)) { // if goal is reached
 				Node node = current;
 				while (true) {
-					if(node.getParent() != null){
+					if (node.getParent() != null) {
 						if (node.getParent().equals(start)) {
 							return node.getPosition();
 						} else {
@@ -123,90 +123,87 @@ public class AIControl extends BaseControl {
 				}
 			}
 
+			float currentX = current.getPosition().x();
+			float currentY = current.getPosition().y();
+
 			// add children
-			Node N = new Node(new Vector2(current.getPosition().x(), current.getPosition().y() - 1), current);
-			Node NW = new Node(new Vector2(current.getPosition().x() - 1, current.getPosition().y() - 1), current);
-			Node W = new Node(new Vector2(current.getPosition().x() - 1, current.getPosition().y()), current);
-			Node SW = new Node(new Vector2(current.getPosition().x() - 1, current.getPosition().y() + 1), current);
-			Node SSW = new Node(new Vector2(current.getPosition().x() - 1, current.getPosition().y() + 2), current);
-			Node S = new Node(new Vector2(current.getPosition().x(), current.getPosition().y() + 1), current);
-			Node SS = new Node(new Vector2(current.getPosition().x(), current.getPosition().y() + 2), current);
-			Node SSE = new Node(new Vector2(current.getPosition().x() + 1, current.getPosition().y() + 2), current);
-			Node SSEE = new Node(new Vector2(current.getPosition().x() + 2, current.getPosition().y() + 2), current);
-			Node SE = new Node(new Vector2(current.getPosition().x() + 1, current.getPosition().y() + 1), current);
-			Node SEE = new Node(new Vector2(current.getPosition().x() + 2, current.getPosition().y() + 1), current);
-			Node EE = new Node(new Vector2(current.getPosition().x() + 2, current.getPosition().y()), current);
-			Node NEE = new Node(new Vector2(current.getPosition().x() + 2, current.getPosition().y() - 1), current);
-			Node E = new Node(new Vector2(current.getPosition().x() + 1, current.getPosition().y()), current);
-			Node NE = new Node(new Vector2(current.getPosition().x() + 1, current.getPosition().y() - 1), current);
+			Node N = new Node(new Vector2(currentX, currentY - 1), current);
+			Node NW = new Node(new Vector2(currentX - 1, currentY - 1), current);
+			Node W = new Node(new Vector2(currentX - 1, currentY), current);
+			Node SW = new Node(new Vector2(currentX - 1, currentY + 1), current);
+			Node SSW = new Node(new Vector2(currentX - 1, currentY + 2), current);
+			Node S = new Node(new Vector2(currentX, currentY + 1), current);
+			Node SS = new Node(new Vector2(currentX, currentY + 2), current);
+			Node SSE = new Node(new Vector2(currentX + 1, currentY + 2), current);
+			Node SSEE = new Node(new Vector2(currentX + 2, currentY + 2), current);
+			Node SE = new Node(new Vector2(currentX + 1, currentY + 1), current);
+			Node SEE = new Node(new Vector2(currentX + 2, currentY + 1), current);
+			Node EE = new Node(new Vector2(currentX + 2, currentY), current);
+			Node NEE = new Node(new Vector2(currentX + 2, currentY - 1), current);
+			Node E = new Node(new Vector2(currentX + 1, currentY), current);
+			Node NE = new Node(new Vector2(currentX + 1, currentY - 1), current);
+
+			Tile currentTile = goalBounder.getTile(currentX, currentY);
 
 			if (!closed.contains(N)) {
-				if (map.getWall(N) && map.getWall(NE) ) {
-						if (map.goalBounder.getTile(current.getPosition().x(), current.getPosition().y()).getNorth().boxContains(goal.getPosition())){
-							open.add(N);
-							closed.add(N);
-						}
+				if (getWall(N) && getWall(NE)) {
+					if (currentTile.getNorth().boxContains(goal)) {
+						open.add(N);
+						closed.add(N);
 					}
 				}
+			}
 			if (!closed.contains(NW)) {
-				if (map.getWall(NW)  && map.getWall(N) 
-						&& map.getWall(W) 
-						&& ((map.getWall(SW) || map.getWall(NE)) )) {
-					if (map.goalBounder.getTile(current.getPosition().x(), current.getPosition().y()).getNorthWest().boxContains(goal.getPosition())){
+				if (getWall(NW) && getWall(N) && getWall(W) && ((getWall(SW) || getWall(NE)))) {
+					if (currentTile.getNorthWest().boxContains(goal)) {
 						open.add(NW);
 						closed.add(NW);
 					}
 				}
 			}
 			if (!closed.contains(W)) {
-				if (map.getWall(W) && map.getWall(SW) ) {
-					if (map.goalBounder.getTile(current.getPosition().x(), current.getPosition().y()).getWest().boxContains(goal.getPosition())){
+				if (getWall(W) && getWall(SW)) {
+					if (currentTile.getWest().boxContains(goal)) {
 						open.add(W);
 						closed.add(W);
 					}
 				}
 			}
 			if (!closed.contains(SW)) {
-				if (map.getWall(SW)  && map.getWall(SSW) 
-						&& map.getWall(SS) 
-						&& (map.getWall(W)  || map.getWall(SSE) )) {
-					if (map.goalBounder.getTile(current.getPosition().x(), current.getPosition().y()).getSouthWest().boxContains(goal.getPosition())){
+				if (getWall(SW) && getWall(SSW) && getWall(SS) && (getWall(W) || getWall(SSE))) {
+					if (currentTile.getSouthWest().boxContains(goal)) {
 						open.add(SW);
 						closed.add(SW);
 					}
 				}
 			}
 			if (!closed.contains(S)) {
-				if (map.getWall(SS)  && map.getWall(SSE) ) {
-					if (map.goalBounder.getTile(current.getPosition().x(), current.getPosition().y()).getSouth().boxContains(goal.getPosition())){
+				if (getWall(SS) && getWall(SSE)) {
+					if (currentTile.getSouth().boxContains(goal)) {
 						open.add(S);
 						closed.add(S);
 					}
 				}
 			}
-			if (!closed.contains(SE) ) {
-				if (map.getWall(SSE)  && map.getWall(SSEE) 
-						&& map.getWall(SEE) 
-						&& (map.getWall(EE) || map.getWall(SS) )) {
-					if (map.goalBounder.getTile(current.getPosition().x(), current.getPosition().y()).getSouthEast().boxContains(goal.getPosition())){
+			if (!closed.contains(SE)) {
+				if (getWall(SSE) && getWall(SSEE) && getWall(SEE) && (getWall(EE) || getWall(SS))) {
+					if (currentTile.getSouthEast().boxContains(goal)) {
 						open.add(SE);
 						closed.add(SE);
 					}
 				}
 			}
-			if (!closed.contains(E) ) {
-				if (map.getWall(EE)  && map.getWall(SEE) ) {
-					if (map.goalBounder.getTile(current.getPosition().x(), current.getPosition().y()).getEast().boxContains(goal.getPosition())){
+			if (!closed.contains(E)) {
+				if (getWall(EE) && getWall(SEE)) {
+					if (currentTile.getEast().boxContains(goal)) {
 						open.add(E);
 						closed.add(E);
 					}
 				}
 			}
 			if (!closed.contains(NE)) {
-				if (map.getWall(NE)  && map.getWall(NEE) 
-						&& map.getWall(EE) 
-						&& (map.getWall(SEE) || map.getWall(N) )) {
-					if (map.goalBounder.getTile(current.getPosition().x(), current.getPosition().y()).getNorthEast().boxContains(goal.getPosition())){
+				if (getWall(NE) && getWall(NEE) && getWall(EE) && (getWall(SEE) || getWall(N))) {
+					if (currentTile.getNorthEast().boxContains(goal)) {
 						open.add(NE);
 						closed.add(NE);
 					}
@@ -220,5 +217,9 @@ public class AIControl extends BaseControl {
 	@Override
 	public void receive(Message m, Entity e) {
 
+	}
+
+	private boolean getWall(Node node) {
+		return !walls.containsKey(node.getPosition());
 	}
 }

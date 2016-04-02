@@ -2,79 +2,58 @@ package components.control;
 
 public class Tile {
 	BoundingBox North;
-	BoundingBox NorthEast;
-	BoundingBox East;
-	BoundingBox SouthEast;
-	BoundingBox South;
-	BoundingBox SouthWest;
-	BoundingBox West;
 	BoundingBox NorthWest;
+	BoundingBox West;
+	BoundingBox SouthWest;
+	BoundingBox South;
+	BoundingBox SouthEast;
+	BoundingBox East;
+	BoundingBox NorthEast;
 	
 	public Tile(){
 		
 	}
 
+	public void setBoxes(BoundingBox[] boxes){
+		North  = boxes[0];
+		NorthWest  = boxes[1];
+		West  = boxes[2];
+		SouthWest  = boxes[3];
+		South  = boxes[4];
+		SouthEast  = boxes[5];
+		East  = boxes[6];
+		NorthEast  = boxes[7];
+	}
+	
 	public BoundingBox getNorth() {
 		return North;
-	}
-
-	public void setNorth(BoundingBox north) {
-		North = north;
 	}
 
 	public BoundingBox getEast() {
 		return East;
 	}
 
-	public void setEast(BoundingBox east) {
-		East = east;
-	}
-
 	public BoundingBox getSouth() {
 		return South;
-	}
-
-	public void setSouth(BoundingBox south) {
-		South = south;
 	}
 
 	public BoundingBox getWest() {
 		return West;
 	}
 
-	public void setWest(BoundingBox west) {
-		West = west;
-	}
-
 	public BoundingBox getNorthEast() {
 		return NorthEast;
 	}
-
-	public void setNorthEast(BoundingBox northEast) {
-		NorthEast = northEast;
-	}
-
+	
 	public BoundingBox getSouthEast() {
 		return SouthEast;
-	}
-
-	public void setSouthEast(BoundingBox southEast) {
-		SouthEast = southEast;
 	}
 
 	public BoundingBox getSouthWest() {
 		return SouthWest;
 	}
 
-	public void setSouthWest(BoundingBox southWest) {
-		SouthWest = southWest;
-	}
-
 	public BoundingBox getNorthWest() {
 		return NorthWest;
-	}
-
-	public void setNorthWest(BoundingBox northWest) {
-		NorthWest = northWest;
 	}
 }

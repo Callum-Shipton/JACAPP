@@ -184,11 +184,16 @@ public class Art {
 		artFiles.put("PotionsButton", new Image("/Images/Menus/Buttons/MenuButtons/PotionsButton.png", 1, 2));
 		artFiles.put("InventoryButton", new Image("/Images/Menus/Buttons/MenuButtons/InventoryButton.png", 1, 2));
 
+		artFiles.put("IronDaggerButton", new Image("/Images/Menus/Buttons/Items/IronDaggerButton.png", 1, 2));
+		artFiles.put("SteelDaggerButton", new Image("/Images/Menus/Buttons/Items/SteelDaggerButton.png", 1, 2));
+		artFiles.put("GreatswordButton", new Image("/Images/Menus/Buttons/Items/GreatswordButton.png", 1, 2));
 		artFiles.put("SwordButton", new Image("/Images/Menus/Buttons/Items/SwordButton.png", 1, 2));
 		artFiles.put("BattleaxeButton", new Image("/Images/Menus/Buttons/Items/BattleaxeButton.png", 1, 2));
 		artFiles.put("MaceButton", new Image("/Images/Menus/Buttons/Items/MaceButton.png", 1, 2));
-		artFiles.put("BowButton", new Image("/Images/Menus/Buttons/Items/BowButton.png", 1, 2));
-		artFiles.put("CrossBowButton", new Image("/Images/Menus/Buttons/Items/CrossbowButton.png", 1, 2));
+		artFiles.put("LongbowButton", new Image("/Images/Menus/Buttons/Items/LongbowButton.png", 1, 2));
+		artFiles.put("ShortbowButton", new Image("/Images/Menus/Buttons/Items/ShortbowButton.png", 1, 2));
+		artFiles.put("CompoundCrossbowButton", new Image("/Images/Menus/Buttons/Items/CompoundCrossbowButton.png", 1, 2));
+		artFiles.put("RecurveCrossbowButton", new Image("/Images/Menus/Buttons/Items/RecurveCrossbowButton.png", 1, 2));
 		artFiles.put("IceStaffButton", new Image("/Images/Menus/Buttons/Items/IceStaffButton.png", 1, 2));
 		artFiles.put("FireStaffButton", new Image("/Images/Menus/Buttons/Items/FireStaffButton.png", 1, 2));
 		artFiles.put("EarthStaffButton", new Image("/Images/Menus/Buttons/Items/EarthStaffButton.png", 1, 2));
@@ -267,11 +272,16 @@ public class Art {
 		artFiles.put("KnockbackPotion", new Image("/Images/Drops/Potions/KnockbackPotion.png", 3, 1));
 
 		// Load Weapon maps
+		artFiles.put("IronDagger", new Image("/Images/Drops/Weapons/IronDagger.png", 8, 1));
+		artFiles.put("SteelDagger", new Image("/Images/Drops/Weapons/SteelDagger.png", 8, 1));
+		artFiles.put("Greatsword", new Image("/Images/Drops/Weapons/Greatsword.png", 8, 1));
 		artFiles.put("Sword", new Image("/Images/Drops/Weapons/Sword.png", 8, 1));
 		artFiles.put("Battleaxe", new Image("/Images/Drops/Weapons/Battleaxe.png", 8, 1));
 		artFiles.put("Mace", new Image("/Images/Drops/Weapons/Mace.png", 8, 1));
-		artFiles.put("Bow", new Image("/Images/Drops/Weapons/Bow.png", 8, 1));
-		artFiles.put("Crossbow", new Image("/Images/Drops/Weapons/Crossbow.png", 8, 1));
+		artFiles.put("Longbow", new Image("/Images/Drops/Weapons/Longbow.png", 8, 1));
+		artFiles.put("Shortbow", new Image("/Images/Drops/Weapons/Shortbow.png", 8, 1));
+		artFiles.put("RecurveCrossbow", new Image("/Images/Drops/Weapons/RecurveCrossbow.png", 8, 1));
+		artFiles.put("CompoundCrossbow", new Image("/Images/Drops/Weapons/CompoundCrossbow.png", 8, 1));
 		artFiles.put("FireStaff", new Image("/Images/Drops/Weapons/FireStaff.png", 8, 1));
 		artFiles.put("IceStaff", new Image("/Images/Drops/Weapons/IceStaff.png", 8, 1));
 		artFiles.put("EarthStaff", new Image("/Images/Drops/Weapons/EarthStaff.png", 8, 1));
