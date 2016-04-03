@@ -1,0 +1,10 @@
+[
+{
+  "name": "LeatherChest",
+  "defence": 10
+},
+{
+  "name": "IronChest",
+  "defence": 20
+}
+]

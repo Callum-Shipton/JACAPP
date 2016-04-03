@@ -1,0 +1,22 @@
+[
+{
+  "name": "RecurveCrossbow",
+  "damage": 2,
+  "range": 5,
+  "fireRate": 10,
+  "melee": false,
+  "manaCost": 2,
+  "particleImage": "Arrow",
+  "element": null
+},
+{
+  "name": "CompoundCrossbow",
+  "damage": 2,
+  "range": 5,
+  "fireRate": 10,
+  "melee": false,
+  "manaCost": 2,
+  "particleImage": "Arrow",
+  "element": null
+}
+]

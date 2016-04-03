@@ -1,10 +1,11 @@
 package object;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Random;
 
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -17,18 +18,17 @@ public class Armour extends InventoryItem {
 	private static HashMap<String, HashMap<String,Armour>> armourSystem;
 	private static Random rand = new Random();
 	
-	private String type;
-	private String subType;
+	private transient String type;
 	private int defence;
 
 	public Armour(String type) {
 		if (armourSystem == null) {
-			initArmour();
+			initSystem();
 		}
 		Armour a;
 		if(armourSystem.containsKey(type)){
 			int temp = rand.nextInt(armourSystem.get(type).size());
-			Armour[] typedArmours = new Armour[temp];
+			Armour[] typedArmours = new Armour[armourSystem.get(type).size()];
 			typedArmours = armourSystem.get(type).values().toArray(typedArmours);
 			a = typedArmours[temp];
 		}else{
@@ -38,46 +38,50 @@ public class Armour extends InventoryItem {
 			}
 			a = tempArmours.get(type);
 		}
-		
 		this.type = type;
-		this.subType = a.subType;
+		this.name = a.name;
 		this.defence = a.defence;
-		this.inventoryImage = a.inventoryImage;
 		typePickup = TypePickup.ARMOUR;
 	}
 
-	private void initArmour() {
-		if(g == null)g = (new GsonBuilder()).setPrettyPrinting().create();
+	public void initSystem() {
 		armourSystem = new HashMap<String, HashMap<String,Armour>>();
+		findFiles("res\\Objects\\Items\\Armour");
+	}
+
+	@Override
+	public void readJSON(String path, String fileName) {
 		JsonReader in = null;
-		in = new JsonReader(new InputStreamReader(getClass().getResourceAsStream("/Items/Armour.JSON")));
+		try {
+			in = new JsonReader(new InputStreamReader(new FileInputStream(path)));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		if (in != null) {
 			JsonArray jsonObjects = new JsonParser().parse(in).getAsJsonArray();
 			for(JsonElement e : jsonObjects){
-				String type = e.getAsJsonObject().get("type").getAsString();
-				String subType = e.getAsJsonObject().get("subType").getAsString();
+				String type = fileName.substring(0, fileName.length()-5);
+				String name = e.getAsJsonObject().get("name").getAsString();
 				if(!armourSystem.containsKey(type)){
 					armourSystem.put(type, new HashMap<String,Armour>());
 				}
-				armourSystem.get(type).put(subType,g.fromJson(e, Armour.class));
+				Armour a = g.fromJson(e, Armour.class);
+				a.type = type;
+				armourSystem.get(type).put(name,a);
 			}
 		}
 	}
-
+	
 	public int getDefence() {
 		return defence;
-	}
-
-	public String getType() {
-		return type;
-	}
-	
-	public String getSubType() {
-		return subType;
 	}
 
 	public void setDefence(int defence) {
 		this.defence = defence;
 	}
 
+	public String getType() {
+		return type;
+	}
 }

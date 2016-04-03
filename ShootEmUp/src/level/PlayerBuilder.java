@@ -29,9 +29,7 @@ public abstract class PlayerBuilder {
 	public static void buildPlayer(TypeAttack type) {
 		chooseType(type);
 
-		player.addComponent(g);
-		c = new RigidCollision(player);
-		player.addComponent(c);
+		c = new RigidCollision(player, g);	
 		m = new BasicMovement(player, c, g, 5);
 		i = new BaseInventory(g, a, 0);
 
@@ -41,11 +39,8 @@ public abstract class PlayerBuilder {
 	public static void buildPlayer(TypeAttack type, CharacterSave save) {
 		chooseType(type);
 
-		a = new PlayerAttack(type, save);
-
-		player.addComponent(g);
-		c = new RigidCollision(player);
-		player.addComponent(c);
+		a = new PlayerAttack(type, save);	
+		c = new RigidCollision(player, g);
 		m = new BasicMovement(player, c, g, 5);
 		i = new BaseInventory(g, a, save);
 
@@ -56,23 +51,23 @@ public abstract class PlayerBuilder {
 		switch (type) {
 			case ARCHER:
 				g = new PlayerGraphics(player, Art.getImage("Archer"), Art.base);
-				a = new PlayerAttack(type, 4, 5, new Weapon("LONGBOW",0));
+				a = new PlayerAttack(type, 4, 5, new Weapon("Longbow",0));
 				break;
 			case BATTLE_MAGE:
 				g = new PlayerGraphics(player, Art.getImage("BattleMage"), Art.base);
-				a = new PlayerAttack(type, 3, 5 , new Weapon("FIRE_STAFF", 0));
+				a = new PlayerAttack(type, 3, 5 , new Weapon("FireStaff", 0));
 				break;
 			case MAGE:
 				g = new PlayerGraphics(player, Art.getImage("Mage"), Art.base);
-				a = new PlayerAttack(type, 3, 5 , new Weapon("FIRE_STAFF", 0));
+				a = new PlayerAttack(type, 3, 5 , new Weapon("FireStaff", 0));
 				break;
 			case ROGUE:
 				g = new PlayerGraphics(player, Art.getImage("Rogue"), Art.base);
-				a = new PlayerAttack(type, 3, 5 ,new Weapon("IRON_DAGGER", 0));
+				a = new PlayerAttack(type, 3, 5 ,new Weapon("IronDagger", 0));
 				break;
 			case WARRIOR:
 				g = new PlayerGraphics(player, Art.getImage("Warrior"), Art.base);
-				a = new PlayerAttack(type, 5, 3 , new Weapon("LONGSWORD", 0));
+				a = new PlayerAttack(type, 5, 3 , new Weapon("Longsword", 0));
 				break;
 			default:
 				g = new PlayerGraphics(player, Art.getImage("Warrior"), Art.base);
@@ -81,15 +76,19 @@ public abstract class PlayerBuilder {
 	}
 
 	private static void addComponents() {
+		player.addComponent(g);
+		player.addComponent(c);
 		player.addComponent(s);
 		player.addComponent(a);
 		player.addComponent(m);
 		player.addComponent(i);
 		player.addComponent(new PlayerControl(player, g, a, m, i));
 
-		ShootEmUp.currentLevel.entities.add(player);
-		ShootEmUp.currentLevel.hud = new Hud(player, 0, 0);
+		Level level = ShootEmUp.currentLevel;
+		
+		level.entities.add(player);
+		level.hud = new Hud(player, 0, 0);
 
-		ShootEmUp.currentLevel.setPlayer(player);
+		level.setPlayer(player);
 	}
 }

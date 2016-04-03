@@ -1,0 +1,22 @@
+[
+{
+  "name": "Longsword",
+  "damage": 3,
+  "range": 1,
+  "fireRate": 5,
+  "melee": true,
+  "manaCost": 1,
+  "particleImage": "SwordProjectile",
+  "element": null
+},
+{
+  "name": "Battleaxe",
+  "damage": 4,
+  "range": 1,
+  "fireRate": 10,
+  "melee": true,
+  "manaCost": 2,
+  "particleImage": "SwordProjectile",
+  "element": null
+}
+]

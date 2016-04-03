@@ -266,10 +266,10 @@ public class Art {
 		artFiles.put("IronHelmet", new Image("/Images/Drops/Armour/IronHelmet.png", 7, 1));
 
 		// Load Item maps
-		artFiles.put("HealthPotion", new Image("/Images/Drops/Potions/HealthPotion.png", 3, 1));
-		artFiles.put("ManaPotion", new Image("/Images/Drops/Potions/ManaPotion.png", 3, 1));
-		artFiles.put("SpeedPotion", new Image("/Images/Drops/Potions/SpeedPotion.png", 3, 1));
-		artFiles.put("KnockbackPotion", new Image("/Images/Drops/Potions/KnockbackPotion.png", 3, 1));
+		artFiles.put("Health", new Image("/Images/Drops/Potions/HealthPotion.png", 3, 1));
+		artFiles.put("Mana", new Image("/Images/Drops/Potions/ManaPotion.png", 3, 1));
+		artFiles.put("Speed", new Image("/Images/Drops/Potions/SpeedPotion.png", 3, 1));
+		artFiles.put("Knockback", new Image("/Images/Drops/Potions/KnockbackPotion.png", 3, 1));
 
 		// Load Weapon maps
 		artFiles.put("IronDagger", new Image("/Images/Drops/Weapons/IronDagger.png", 8, 1));

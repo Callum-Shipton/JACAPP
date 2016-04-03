@@ -3,7 +3,6 @@ package gui;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import components.TypeComponent;
-import components.attack.BaseAttack;
 import components.attack.PlayerAttack;
 import components.inventory.BaseInventory;
 import components.inventory.TypePotion;
@@ -25,7 +24,6 @@ public class Hud extends GuiComponent {
 	private Counter levelCounter;
 	private Counter waveCounter;
 	private Counter livesCounter;
-	private Entity player;
 
 	private Icon fire;
 	private Icon frost;
@@ -34,10 +32,18 @@ public class Hud extends GuiComponent {
 	private Icon infoBoxBottom;
 
 	private float hudW;
+	
+	BaseInventory PI;
+	PlayerAttack PA;
+	BasicMovement PM;
 
 	public Hud(Entity player, float x, float y) {
 		super(x, y);
-		this.player = player;
+		
+		PI = (BaseInventory) player.getComponent(TypeComponent.INVENTORY);
+		PA = (PlayerAttack) player.getComponent(TypeComponent.ATTACK);
+		PM = (BasicMovement) player.getComponent(TypeComponent.MOVEMENT);
+		
 		hudElems = new CopyOnWriteArrayList<Icon>();
 		infoBoxTop = new Icon(0.0f, 0.0f, Art.getImage("BarInfoTop"), false, 1f);
 		hudElems.add(infoBoxTop);
@@ -48,16 +54,16 @@ public class Hud extends GuiComponent {
 		xpBar = new HudBar(10.0f, 60.0f, Art.getImage("BarXP"), 1f);
 		hudElems.add(xpBar);
 		moneyCounter = new Counter(10.0f, 82.0f, Art.getImage("CoinIcon"), false,
-				((BaseInventory) player.getComponent(TypeComponent.INVENTORY)).getCoins(), 0.5f);
+				PI.getCoins(), 0.5f);
 		hudElems.add(moneyCounter);
 		levelCounter = new Counter(90.0f, 82.0f, Art.getImage("LevelIcon"), false,
-				((BaseInventory) player.getComponent(TypeComponent.INVENTORY)).getLevel(), 0.5f);
+				PI.getLevel(), 0.5f);
 		hudElems.add(levelCounter);
 		waveCounter = new Counter(170.0f, 82.0f, Art.getImage("WaveIcon"), false,
 				ShootEmUp.currentLevel.spawner.getWave(), 0.5f);
 		hudElems.add(waveCounter);
 		livesCounter = new Counter(250.0f, 82.0f, Art.getImage("LivesIcon"), false,
-				((PlayerAttack) player.getComponent(TypeComponent.ATTACK)).getLives(), 0.5f);
+				PA.getLives(), 0.5f);
 		hudElems.add(livesCounter);
 		fire = new Icon(0.0f, 100.0f, Art.getImage("Fire"), false, 1f);
 		poison = new Icon(0.0f, 120.0f, Art.getImage("Poison"), false, 1f);
@@ -71,27 +77,29 @@ public class Hud extends GuiComponent {
 
 	@Override
 	public void render(DPDTRenderer r) {
+
 		for (Icon h : hudElems) {
 			h.render(r);
 		}
 
-		if (((PlayerAttack) player.getComponent(TypeComponent.ATTACK)).isFire()) {
+		if (PA.isFire()) {
 			fire.render(r);
 		}
-		if (((PlayerAttack) player.getComponent(TypeComponent.ATTACK)).isPoison()) {
+		if (PA.isPoison()) {
 			poison.render(r);
 		}
-		if (((BasicMovement) player.getComponent(TypeComponent.MOVEMENT)).isFrost()) {
+		if (PM.isFrost()) {
 			frost.render(r);
 		}
 
 		Vector2 size = new Vector2(16, 16);
 		Vector2 maxTex = new Vector2(10, 1);
-
-		int hPot = ((BaseInventory) player.getComponent(TypeComponent.INVENTORY)).getNumPotion(TypePotion.HEALTH);
-		int mPot = ((BaseInventory) player.getComponent(TypeComponent.INVENTORY)).getNumPotion(TypePotion.MANA);
-		int sPot = ((BaseInventory) player.getComponent(TypeComponent.INVENTORY)).getNumPotion(TypePotion.SPEED);
-		int kPot = ((BaseInventory) player.getComponent(TypeComponent.INVENTORY)).getNumPotion(TypePotion.KNOCKBACK);
+		
+		int hPot = PI.getNumPotion(TypePotion.HEALTH);
+		int mPot = PI.getNumPotion(TypePotion.MANA);
+		int sPot = PI.getNumPotion(TypePotion.SPEED);
+		int kPot = PI.getNumPotion(TypePotion.KNOCKBACK);
+		
 		r.draw(Art.getImage("Numbers"), new Vector2(26, ShootEmUp.height - 55), size, 0.0f, new Vector2(hPot, 1),
 				maxTex);
 		r.draw(Art.getImage("Numbers"), new Vector2(70, ShootEmUp.height - 55), size, 0.0f, new Vector2(mPot, 1),
@@ -107,21 +115,21 @@ public class Hud extends GuiComponent {
 		for (Icon h : hudElems) {
 			h.update();
 		}
-
+		
 		fire.update();
 		poison.update();
 		frost.update();
-		moneyCounter.update(((BaseInventory) player.getComponent(TypeComponent.INVENTORY)).getCoins());
-		levelCounter.update(((BaseInventory) player.getComponent(TypeComponent.INVENTORY)).getLevel());
+		moneyCounter.update(PI.getCoins());
+		levelCounter.update(PI.getLevel());
 		waveCounter.update(ShootEmUp.currentLevel.spawner.getWave());
-		livesCounter.update(((PlayerAttack) player.getComponent(TypeComponent.ATTACK)).getLives());
-
-		int maxHealth = ((BaseAttack) player.getComponent(TypeComponent.ATTACK)).getMaxHealth();
-		int health = ((BaseAttack) player.getComponent(TypeComponent.ATTACK)).getHealth();
-		int maxMana = ((PlayerAttack) player.getComponent(TypeComponent.ATTACK)).getMaxMana();
-		int mana = ((PlayerAttack) player.getComponent(TypeComponent.ATTACK)).getMana();
-		int expBound = ((BaseInventory) player.getComponent(TypeComponent.INVENTORY)).getExpBound();
-		int exp = ((BaseInventory) player.getComponent(TypeComponent.INVENTORY)).getExp();
+		livesCounter.update(PA.getLives());
+		
+		int maxHealth = PA.getMaxHealth();
+		int health = PA.getHealth();
+		int maxMana = PA.getMaxMana();
+		int mana = PA.getMana();
+		int expBound = PI.getExpBound();
+		int exp = PI.getExp();
 
 		if (Math.max(maxHealth, maxMana) > 18.0f) {
 			hudW = ((Math.max(maxHealth, maxMana) - 18.0f) * 10.0f) + Art.getImage("BarInfoTop").getWidth();
@@ -134,9 +142,5 @@ public class Hud extends GuiComponent {
 		manaBar.setMaxValue(maxMana);
 		xpBar.setValue(exp);
 		xpBar.setMaxValue(expBound);
-		// healthBar.setMFrame((player.getMaxHealth()+1)/(player.getHealth()+1),
-		// Art.getImage("BarHealth").getFHeight());
-		// healthBar.setSize((((float)player.getHealth())/((float)player.getMaxHealth()))
-		// * Art.getImage("BarHealth").getWidth(), healthBar.getSize().y());
 	}
 }

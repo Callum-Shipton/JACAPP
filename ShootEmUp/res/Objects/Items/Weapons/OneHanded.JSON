@@ -1,0 +1,22 @@
+[
+{
+  "name": "Mace",
+  "damage": 5,
+  "range": 1,
+  "fireRate": 15,
+  "melee": true,
+  "manaCost": 3,
+  "particleImage": "SwordProjectile",
+  "element": null
+},
+{
+  "name": "Sword",
+  "damage": 3,
+  "range": 1,
+  "fireRate": 5,
+  "melee": true,
+  "manaCost": 1,
+  "particleImage": "SwordProjectile",
+  "element": null
+}
+]

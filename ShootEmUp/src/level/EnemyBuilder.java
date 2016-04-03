@@ -34,6 +34,8 @@ public abstract class EnemyBuilder {
 	private static BaseMovement enemyMovement;
 	private static BaseInventory enemyInventory;
 
+	private static BaseGraphics TG;
+
 	private static Random rand = new Random();
 
 	public static void buildEnemy(TypeEnemy type) {
@@ -44,44 +46,36 @@ public abstract class EnemyBuilder {
 
 		switch (type) {
 		case SMALL:
-			enemyGraphics = new AnimatedGraphics(Art.getImage("SmallEnemy"), Art.base, false,
-					((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(),
-					((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX());
-			enemyAttack = new EnemyAttack(TypeAttack.WARRIOR, 1, 5, new Weapon("ONE_HANDED", 1),
-					new Armour("HELMET"), null, null, null);
+			enemyGraphics = new AnimatedGraphics(Art.getImage("SmallEnemy"), Art.base, false, TG.getX(), TG.getX());
+			enemyAttack = new EnemyAttack(TypeAttack.WARRIOR, 1, 5, new Weapon("OneHanded", 1), new Armour("Helmet"),
+					null, null, null);
 			newEnemy.addComponent(enemyGraphics);
-			enemyCollision = new RigidCollision(newEnemy);
+			enemyCollision = new RigidCollision(newEnemy, enemyGraphics);
 			enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 7);
 			break;
 		case NORMAL:
-			enemyGraphics = new AnimatedGraphics(Art.getImage("Enemy"), Art.base, false,
-					((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(),
-					((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX());
-			enemyAttack = new EnemyAttack(TypeAttack.ARCHER, 3, 5, new Weapon("BOW", 1), null,
-					new Armour("CHEST"), null, null);
+			enemyGraphics = new AnimatedGraphics(Art.getImage("Enemy"), Art.base, false, TG.getX(), TG.getX());
+			enemyAttack = new EnemyAttack(TypeAttack.ARCHER, 3, 5, new Weapon("Bow", 1), null, new Armour("Chest"),
+					null, null);
 			newEnemy.addComponent(enemyGraphics);
-			enemyCollision = new RigidCollision(newEnemy);
+			enemyCollision = new RigidCollision(newEnemy, enemyGraphics);
 			enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, 4);
 			break;
 		case FLYING:
-			enemyGraphics = new AnimatedGraphics(Art.getImage("FlyingEnemy"), Art.base, false,
-					((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(),
-					((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX());
-			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 2, 5,new Weapon("STAFF", 1), null,
-					null, new Armour("LEGS"), null);
+			enemyGraphics = new AnimatedGraphics(Art.getImage("FlyingEnemy"), Art.base, false, TG.getX(), TG.getX());
+			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 2, 5, new Weapon("Staff", 1), null, null, new Armour("Legs"),
+					null);
 			newEnemy.addComponent(enemyGraphics);
-			enemyCollision = new RigidCollision(newEnemy);
+			enemyCollision = new RigidCollision(newEnemy, enemyGraphics);
 			enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);
 
 			break;
 		case BOSS:
-			enemyGraphics = new AnimatedGraphics(Art.getImage("BossEnemy"), Art.base, false,
-					((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX(),
-					((BaseGraphics) test.getComponent(TypeComponent.GRAPHICS)).getX());
-			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 100, 5, new Weapon("TWO_HANDED", 1),
-					null, null, null, new Armour("BOOTS"));
+			enemyGraphics = new AnimatedGraphics(Art.getImage("BossEnemy"), Art.base, false, TG.getX(), TG.getX());
+			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 100, 5, new Weapon("TwoHanded", 1), null, null, null,
+					new Armour("Boots"));
 			newEnemy.addComponent(enemyGraphics);
-			enemyCollision = new RigidCollision(newEnemy);
+			enemyCollision = new RigidCollision(newEnemy, enemyGraphics);
 			enemyMovement = new FlyingMovement(newEnemy, enemyCollision, enemyGraphics, 5);
 			break;
 		}
@@ -102,11 +96,11 @@ public abstract class EnemyBuilder {
 
 		boolean collide = false;
 		test = new Entity();
-		BaseGraphics BG = new AnimatedGraphics(Art.getImage("Enemy"), Art.base, false);
-		test.addComponent(BG);
-		BaseCollision BC = new RigidCollision(test);
+		TG = new AnimatedGraphics(Art.getImage("Enemy"), Art.base, false);
+		test.addComponent(TG);
+		BaseCollision BC = new RigidCollision(test, TG);
 		test.addComponent(BC);
-		test.addComponent(new BasicMovement(test, BC, BG, 5));
+		test.addComponent(new BasicMovement(test, BC, TG, 5));
 		BaseGraphics playerGraphics = (BaseGraphics) ShootEmUp.currentLevel.getPlayer()
 				.getComponent(TypeComponent.GRAPHICS);
 		float px = playerGraphics.getX();
@@ -116,12 +110,12 @@ public abstract class EnemyBuilder {
 		do {
 			collide = false;
 
-			BG.setX(rand.nextInt((ShootEmUp.currentLevel.map.getBackgroundTiles().length - 1) * Map.TILE_WIDTH));
-			BG.setY(rand.nextInt((ShootEmUp.currentLevel.map.getBackgroundTiles()[0].length - 1) * Map.TILE_WIDTH));
+			TG.setX(rand.nextInt((ShootEmUp.currentLevel.map.getBackgroundTiles().length - 1) * Map.TILE_WIDTH));
+			TG.setY(rand.nextInt((ShootEmUp.currentLevel.map.getBackgroundTiles()[0].length - 1) * Map.TILE_WIDTH));
 
-			if ((Math.abs((BG.getX() + (BG.getWidth() / 2)) - (px + (pw / 2))) <= (ShootEmUp.width + BG.getWidth()))
-					&& (Math.abs((BG.getY() + (BG.getHeight() / 2)) - (py + (ph / 2))) <= (ShootEmUp.height
-							+ BG.getHeight()))) {
+			if ((Math.abs((TG.getX() + (TG.getWidth() / 2)) - (px + (pw / 2))) <= (ShootEmUp.width + TG.getWidth()))
+					&& (Math.abs((TG.getY() + (TG.getHeight() / 2)) - (py + (ph / 2))) <= (ShootEmUp.height
+							+ TG.getHeight()))) {
 				collide = true;
 				continue;
 			}

@@ -14,8 +14,13 @@ import components.Message;
 import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.attack.PlayerAttack;
+import components.collision.PickupCollision;
+import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
+import components.spawn.PointSpawn;
+import display.Art;
 import main.ShootEmUp;
+import math.Vector2;
 import object.Armour;
 import object.DurationPotion;
 import object.Entity;
@@ -176,55 +181,49 @@ public class BaseInventory extends Component implements InventoryComponent {
 			inventory.add(equipped);
 		}
 	}
-
-	public boolean giveItem(TypePickup type, SubType subtype, SubSubType subsubtype) {
-		switch (type) {
-			case COIN:
-				if (coins < 99) {
-					coins++;
-					return true;
-				}
-				break;
-			case POTION:
-				TypePotion potionType = (TypePotion) subtype;
-				if (getNumPotions() < maxPotions) {
-					if (potions.containsKey(potionType)) {
-						potions.get(potionType).addPotion();
-					} else {
-						switch (potionType) {
-							case HEALTH:
-								potions.put(HEALTH, new OneTimePotion(HEALTH));
-								break;
-							case MANA:
-								potions.put(MANA, new OneTimePotion(MANA));
-								break;
-							case SPEED:
-								potions.put(SPEED, new DurationPotion(SPEED, 30));
-								break;
-							case KNOCKBACK:
-								potions.put(KNOCKBACK, new DurationPotion(KNOCKBACK, 30));
-						}
-					}
-					return true;
-				}
-				break;
-		}
-		return false;
-	}
-	public boolean giveItem(TypePickup type, SubType subtype, String subsubtype) {
+	
+	public boolean giveItem(TypePickup type, String name) {
 		switch (type) {
 			case WEAPON:
 				if (inventory.size() < inventorySize) {
-					inventory.add(new Weapon(subsubtype, 0));
+					inventory.add(new Weapon(name, 0));
 					return true;
 				}
 				break;
 			case ARMOUR:
 				if (inventory.size() < inventorySize) {
-					inventory.add(new Armour(subsubtype));
+					inventory.add(new Armour(name));
 					return true;
 				}
 				break;
+		case COIN:
+			if (coins < 99) {
+				coins++;
+				return true;
+			}
+			break;
+		case POTION:
+			String potionType = name;
+			if (getNumPotions() < maxPotions) {
+				if (potions.containsKey(potionType)) {
+					potions.get(potionType).addPotion();
+				} else {
+					switch (potionType) {
+						case "Health":
+							potions.put(HEALTH, new OneTimePotion("Health"));
+							break;
+						case "Mana":
+							potions.put(MANA, new OneTimePotion("Mana"));
+							break;
+						case "Speed":
+							potions.put(SPEED, new DurationPotion("Speed", 30));
+							break;
+						case "Knockback":
+							potions.put(KNOCKBACK, new DurationPotion("Knockback", 30));
+					}
+				}
+				return true;
+			}
 		}
 		return false;
 	}
@@ -306,65 +305,71 @@ public class BaseInventory extends Component implements InventoryComponent {
 		// give player exp
 		((BaseInventory) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)).giveExp(1);
 
-		// create a coin
-		PickupBuilder.buildPickup(TypePickup.COIN, TypeCoin.ONE, null, BG.getX() + BG.getWidth(),
-				BG.getY() + BG.getHeight());
+		dropCoin();
 
 		// create armour, item or weapon
 		Random rand = new Random();
 
 		switch (rand.nextInt(3)) {
 			case 0:
-				PickupBuilder.buildPickup(TypePickup.WEAPON, BA.getWeapon().getType(), BA.getWeapon().getSubType(),
-						BG.getX(), BG.getY() + BG.getHeight());
+				BA.getWeapon().drop(BG.getX(), BG.getY());
 				break;
 			case 1:
 				switch (rand.nextInt(4)) {
 					case 0:
 						if (BA.getHelmet() != null) {
-							PickupBuilder.buildPickup(TypePickup.ARMOUR, "HELMET", BA.getHelmet().getSubType(),
-									BG.getX(), BG.getY() + BG.getHeight());
+							BA.getHelmet().drop(BG.getX(), BG.getY());
 						}
 						break;
 					case 1:
 						if (BA.getChest() != null) {
-							PickupBuilder.buildPickup(TypePickup.ARMOUR, "CHEST",BA.getChest().getSubType(),
-									BG.getX(), BG.getY() + BG.getHeight());
+							BA.getChest().drop(BG.getX(), BG.getY());
 						}
 						break;
 					case 2:
 						if (BA.getLegs() != null) {
-							PickupBuilder.buildPickup(TypePickup.ARMOUR, "LEGS", BA.getLegs().getSubType(),
-									BG.getX(), BG.getY() + BG.getHeight());
+							BA.getLegs().drop(BG.getX(), BG.getY());
 						}
 						break;
 					case 3:
 						if (BA.getBoots() != null) {
-							PickupBuilder.buildPickup(TypePickup.ARMOUR,"LEGS", BA.getBoots().getSubType(),
-									BG.getX(), BG.getY() + BG.getHeight());
+							BA.getBoots().drop(BG.getX(), BG.getY());
 						}
 						break;
 				}
 				break;
 			case 2:
 				switch (rand.nextInt(4)) {
-					case 0:
-						PickupBuilder.buildPickup(TypePickup.POTION, TypePotion.HEALTH, null, BG.getX(),
-								BG.getY() + BG.getHeight());
-						break;
-					case 1:
-						PickupBuilder.buildPickup(TypePickup.POTION, TypePotion.MANA, null, BG.getX(),
-								BG.getY() + BG.getHeight());
-						break;
-					case 2:
-						PickupBuilder.buildPickup(TypePickup.POTION, TypePotion.SPEED, null, BG.getX(),
-								BG.getY() + BG.getHeight());
-						break;
-					case 3:
-						PickupBuilder.buildPickup(TypePickup.POTION, TypePotion.KNOCKBACK, null, BG.getX(),
-								BG.getY() + BG.getHeight());
-						break;
-				}
+				case 0:
+					new OneTimePotion("Health").drop(BG.getX(), BG.getY());
+					break;
+				case 1:
+					new OneTimePotion("Mana").drop(BG.getX(), BG.getY());
+					break;
+				case 2:
+					new DurationPotion("Speed", 30).drop(BG.getX(), BG.getY());
+					break;
+				case 3:
+					new DurationPotion("Knockback", 30).drop(BG.getX(), BG.getY());
+					break;
+			}	
 		}
+	}
+	
+	private void dropCoin(){
+		Entity item = new Entity();
+
+		AnimatedGraphics CoinG = null;
+		PointSpawn CoinS;
+		PickupCollision CoinC;
+
+		CoinG = new AnimatedGraphics(Art.getImage("Coin"), Art.base, true);
+		
+		CoinS = new PointSpawn(CoinG, new Vector2(BG.getX() - BG.getWidth(), BG.getY() - BG.getHeight()), item);
+		item.addComponent(CoinG);
+		CoinC = new PickupCollision(item, TypePickup.COIN, "Coin");
+		item.addComponent(CoinS);
+		item.addComponent(CoinC);
+		ShootEmUp.currentLevel.newEntities.add(item);
 	}
 }

@@ -42,6 +42,7 @@ public class AIControl extends BaseControl {
 
 	@Override
 	public void update(Entity e) {
+		goal = new Vector2(0,0);
 		target = ai();
 		float y = target.y() * Map.TILE_HEIGHT;
 		float x = target.x() * Map.TILE_WIDTH;

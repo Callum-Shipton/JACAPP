@@ -1,0 +1,22 @@
+[
+{
+  "name": "Shortbow",
+  "damage": 1,
+  "range": 5,
+  "fireRate": 5,
+  "melee": false,
+  "manaCost": 1,
+  "particleImage": "Arrow",
+  "element": null
+},
+{
+  "name": "Longbow",
+  "damage": 1,
+  "range": 5,
+  "fireRate": 5,
+  "melee": false,
+  "manaCost": 1,
+  "particleImage": "Arrow",
+  "element": null
+}
+]

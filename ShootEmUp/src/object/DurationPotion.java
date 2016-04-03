@@ -2,7 +2,6 @@ package object;
 
 import components.TypeComponent;
 import components.attack.BaseAttack;
-import components.inventory.TypePotion;
 import components.movement.BaseMovement;
 import main.ShootEmUp;
 
@@ -14,7 +13,7 @@ public class DurationPotion extends Potion {
 	private int maxDuration;
 	private int counter = 0;
 
-	public DurationPotion(TypePotion type, int maxDuration) {
+	public DurationPotion(String type, int maxDuration) {
 		super(type);
 		this.maxDuration = maxDuration;
 	}
@@ -25,14 +24,14 @@ public class DurationPotion extends Potion {
 			BaseMovement BM = (BaseMovement) e.getComponent(TypeComponent.MOVEMENT);
 			BaseAttack BA = (BaseAttack) e.getComponent(TypeComponent.ATTACK);
 			switch (type) {
-				case SPEED:
+				case "Speed":
 					if (duration == maxDuration) {
 						BM.increaseSpeed(2);
 					} else if (duration == 0) {
 						BM.increaseSpeed(-2);
 					}
 					break;
-				case KNOCKBACK:
+				case "Knockback":
 					if (duration == maxDuration) {
 						// Code for adding to knockback
 						BA.setHealth(100);

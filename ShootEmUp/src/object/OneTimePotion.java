@@ -2,13 +2,12 @@ package object;
 
 import components.TypeComponent;
 import components.attack.BaseAttack;
-import components.inventory.TypePotion;
 
 public class OneTimePotion extends Potion {
 
 	private static final long serialVersionUID = -5999484039194013016L;
 
-	public OneTimePotion(TypePotion type) {
+	public OneTimePotion(String type) {
 		super(type);
 	}
 
@@ -17,12 +16,12 @@ public class OneTimePotion extends Potion {
 		if (active) {
 			BaseAttack BA = (BaseAttack) e.getComponent(TypeComponent.ATTACK);
 			switch (type) {
-				case HEALTH:
+				case "Health":
 					BA.addHealth(5);
 					active = false;
 					break;
 
-				case MANA:
+				case "Mana":
 					BA.addMana(5);
 					active = false;
 					break;

@@ -1,0 +1,31 @@
+[
+{
+  "name": "EarthStaff",
+  "damage": 2,
+  "range": 3,
+  "fireRate": 10,
+  "melee": false,
+  "manaCost": 2,
+  "particleImage": "EarthMagic",
+  "element": "EARTH"
+},
+{
+  "name": "IceStaff",
+  "damage": 1,
+  "range": 3,
+  "fireRate": 10,
+  "melee": false,
+  "manaCost": 1,
+  "particleImage": "IceMagic"
+},
+{
+  "name": "FireStaff",
+  "damage": 1,
+  "range": 3,
+  "fireRate": 10,
+  "melee": false,
+  "manaCost": 1,
+  "particleImage": "FireMagic",
+  "element": "FIRE"
+}
+]

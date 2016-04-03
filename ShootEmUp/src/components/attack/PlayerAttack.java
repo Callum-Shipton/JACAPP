@@ -4,7 +4,6 @@ import components.Message;
 import display.Art;
 import gui.menus.GameOverMenu;
 import main.ShootEmUp;
-import object.Armour;
 import object.Entity;
 import object.Weapon;
 import save.CharacterSave;
