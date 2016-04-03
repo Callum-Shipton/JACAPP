@@ -24,7 +24,7 @@ import display.Image;
 import main.ShootEmUp;
 import math.Vector2;
 
-public class Weapon extends InventoryItem {
+public class Weapon extends InventoryItem{
 
 	private static HashMap<String, HashMap<String,Weapon>> weaponSystem;
 	private static Random rand = new Random();

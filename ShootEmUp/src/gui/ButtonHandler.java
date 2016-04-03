@@ -25,7 +25,6 @@ import level.Level;
 import level.PlayerBuilder;
 import main.ShootEmUp;
 import save.Save;
-import save.SaveHandler;
 
 public abstract class ButtonHandler {
 
@@ -130,7 +129,10 @@ public abstract class ButtonHandler {
 	}
 
 	private static void loadGame() {
-		ShootEmUp.save = SaveHandler.load(1);
+		if(ShootEmUp.save == null){
+			ShootEmUp.save = new Save();
+		}
+		ShootEmUp.save.load(1);
 		ShootEmUp.addMenu(new LevelSelectMenu(Art.getImage("MainMenuScreen")));
 	}
 
@@ -276,7 +278,7 @@ public abstract class ButtonHandler {
 			ShootEmUp.save = new Save();
 		}
 		ShootEmUp.save.saveCharacter();
-		SaveHandler.save(ShootEmUp.save, 1);
+		ShootEmUp.save.saveToSystem(1);
 		ShootEmUp.save = null;
 	}
 	// Extra Methods

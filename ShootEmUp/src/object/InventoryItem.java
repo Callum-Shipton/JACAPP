@@ -1,5 +1,7 @@
 package object;
 
+import java.io.Serializable;
+
 import components.collision.PickupCollision;
 import components.graphical.AnimatedGraphics;
 import components.inventory.TypePickup;
@@ -9,8 +11,10 @@ import display.Image;
 import main.ShootEmUp;
 import math.Vector2;
 
-public abstract class InventoryItem implements DatableObject{
+public abstract class InventoryItem implements DatableObject, Serializable {
 
+	private static final long serialVersionUID = 4785946601775436341L;
+	
 	protected String name;
 	protected transient TypePickup typePickup;
 	

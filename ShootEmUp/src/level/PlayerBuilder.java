@@ -67,7 +67,7 @@ public abstract class PlayerBuilder {
 				break;
 			case WARRIOR:
 				g = new PlayerGraphics(player, Art.getImage("Warrior"), Art.base);
-				a = new PlayerAttack(type, 5, 3 , new Weapon("Longsword", 0));
+				a = new PlayerAttack(type, 5, 3 , new Weapon("Greatsword", 0));
 				break;
 			default:
 				g = new PlayerGraphics(player, Art.getImage("Warrior"), Art.base);

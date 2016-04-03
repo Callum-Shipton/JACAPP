@@ -14,7 +14,6 @@ import math.Seconds;
 import math.Vector2;
 import object.Entity;
 import save.Save;
-import save.SaveHandler;
 
 public class Spawner {
 
@@ -81,11 +80,11 @@ public class Spawner {
 				} else {
 					ShootEmUp.save.saveCharacter();
 				}
-				SaveHandler.save(ShootEmUp.save, 1);
+				ShootEmUp.save.saveToSystem(1);
 				TypeAttack temp = ((PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))
 						.getAttackType();
 				ShootEmUp.currentLevel = new Level(Art.levels, ShootEmUp.currentLevel.getLevel() + 1);
-				ShootEmUp.save = SaveHandler.load(1);
+				ShootEmUp.save.load(1);
 				PlayerBuilder.buildPlayer(temp, ShootEmUp.save.getCharacter(temp));
 			}
 			newWave = true;
