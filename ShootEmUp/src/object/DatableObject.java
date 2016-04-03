@@ -16,7 +16,6 @@ public interface DatableObject {
 		File folder = new File(path);
 		File[] listOfFiles = folder.listFiles();
 		for (File file : listOfFiles) {
-			System.out.println(file.toString());
 			if (file.isFile()) {
 				readJSON(file.getPath(), file.getName());
 			}

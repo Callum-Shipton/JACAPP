@@ -37,7 +37,6 @@ import org.lwjgl.glfw.GLFWvidmode;
 import org.lwjgl.opengl.GLContext;
 
 import components.TypeComponent;
-import components.graphical.BaseGraphics;
 import components.graphical.PlayerGraphics;
 import input.Keyboard;
 import main.ShootEmUp;

@@ -20,7 +20,6 @@ import javax.crypto.spec.SecretKeySpec;
 
 import components.TypeComponent;
 import components.attack.BaseAttack;
-import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
 import main.ShootEmUp;
 

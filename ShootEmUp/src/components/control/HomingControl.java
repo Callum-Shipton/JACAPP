@@ -4,7 +4,6 @@ import components.Message;
 import components.TypeComponent;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
-import components.inventory.BaseInventory;
 import components.movement.BaseMovement;
 import main.ShootEmUp;
 import math.Vector2;

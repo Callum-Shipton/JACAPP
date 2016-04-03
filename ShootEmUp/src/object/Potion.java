@@ -2,8 +2,10 @@ package object;
 
 import java.io.Serializable;
 
+import components.TypeComponent;
 import components.collision.PickupCollision;
 import components.graphical.AnimatedGraphics;
+import components.graphical.BaseGraphics;
 import components.inventory.TypePickup;
 import components.spawn.PointSpawn;
 import display.Art;
@@ -37,15 +39,16 @@ public abstract class Potion implements Serializable {
 		quantity++;
 	}
 
-	public void drop(float x, float y) {
+	public void destroy(Entity e) {
 		Entity item = new Entity();
 		AnimatedGraphics BG = null;
 		PointSpawn BS;
 		PickupCollision BC;
 		
-		BG = new AnimatedGraphics(Art.getImage(type), Art.base, true);
+		BaseGraphics EntityG = e.getComponent(TypeComponent.GRAPHICS);
 		
-		BS = new PointSpawn(BG, new Vector2(x - BG.getWidth(), y - BG.getHeight()), item);
+		BG = new AnimatedGraphics(Art.getImage(type), Art.base, true);
+		BS = new PointSpawn(BG, new Vector2(EntityG.getX() - BG.getWidth(), EntityG.getY() - BG.getHeight()), item);
 		item.addComponent(BG);
 		BC = new PickupCollision(item, TypePickup.POTION, type);
 		item.addComponent(BS);

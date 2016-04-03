@@ -6,7 +6,6 @@ import java.util.Iterator;
 import components.TypeComponent;
 import components.collision.BaseCollision;
 import components.graphical.BaseGraphics;
-import components.inventory.BaseInventory;
 import display.Art;
 import gui.Hud;
 import main.ShootEmUp;

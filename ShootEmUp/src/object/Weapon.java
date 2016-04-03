@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-import java.util.Random;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -26,9 +25,9 @@ import math.Vector2;
 
 public class Weapon extends InventoryItem{
 
+	private static final long serialVersionUID = 529276641692099199L;
+	
 	private static HashMap<String, HashMap<String,Weapon>> weaponSystem;
-	private static Random rand = new Random();
-
 
 	private transient String type;
 	private int damage;
@@ -51,7 +50,7 @@ public class Weapon extends InventoryItem{
 			Weapon[] typedWeapons = new Weapon[weaponSystem.get(type).size()];
 			typedWeapons = weaponSystem.get(type).values().toArray(typedWeapons);
 			w = typedWeapons[temp];
-		}else{
+		} else{
 			HashMap<String, Weapon> tempWeapons = new HashMap<String,Weapon>();
 			for(HashMap<String,Weapon> typedWeapons : weaponSystem.values()){
 				tempWeapons.putAll(typedWeapons);

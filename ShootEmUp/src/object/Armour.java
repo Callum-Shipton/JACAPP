@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-import java.util.Random;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -15,8 +14,9 @@ import components.inventory.TypePickup;
 
 public class Armour extends InventoryItem {
 
+	private static final long serialVersionUID = 6126061373353659997L;
+	
 	private static HashMap<String, HashMap<String,Armour>> armourSystem;
-	private static Random rand = new Random();
 	
 	private transient String type;
 	private int defence;

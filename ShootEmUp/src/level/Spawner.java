@@ -6,9 +6,7 @@ import org.lwjgl.opengl.GL20;
 
 import components.TypeComponent;
 import components.attack.BaseAttack;
-import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
-import components.inventory.BaseInventory;
 import components.movement.BasicMovement;
 import display.Art;
 import main.ShootEmUp;

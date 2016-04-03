@@ -300,7 +300,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 		drop(e);
 	}
 
-	public void drop(Entity e) {
+	private void drop(Entity e) {
 
 		// give player exp
 		BaseInventory BI = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY);
@@ -313,28 +313,28 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 		switch (rand.nextInt(3)) {
 			case 0:
-				BA.getWeapon().drop(BG.getX(), BG.getY());
+				BA.getWeapon().destroy(e);
 				break;
 			case 1:
 				switch (rand.nextInt(4)) {
 					case 0:
 						if (BA.getHelmet() != null) {
-							BA.getHelmet().drop(BG.getX(), BG.getY());
+							BA.getHelmet().destroy(e);
 						}
 						break;
 					case 1:
 						if (BA.getChest() != null) {
-							BA.getChest().drop(BG.getX(), BG.getY());
+							BA.getChest().destroy(e);
 						}
 						break;
 					case 2:
 						if (BA.getLegs() != null) {
-							BA.getLegs().drop(BG.getX(), BG.getY());
+							BA.getLegs().destroy(e);
 						}
 						break;
 					case 3:
 						if (BA.getBoots() != null) {
-							BA.getBoots().drop(BG.getX(), BG.getY());
+							BA.getBoots().destroy(e);
 						}
 						break;
 				}
@@ -342,16 +342,16 @@ public class BaseInventory extends Component implements InventoryComponent {
 			case 2:
 				switch (rand.nextInt(4)) {
 				case 0:
-					new OneTimePotion("Health").drop(BG.getX(), BG.getY());
+					new OneTimePotion("Health").destroy(e);
 					break;
 				case 1:
-					new OneTimePotion("Mana").drop(BG.getX(), BG.getY());
+					new OneTimePotion("Mana").destroy(e);
 					break;
 				case 2:
-					new DurationPotion("Speed", 30).drop(BG.getX(), BG.getY());
+					new DurationPotion("Speed", 30).destroy(e);
 					break;
 				case 3:
-					new DurationPotion("Knockback", 30).drop(BG.getX(), BG.getY());
+					new DurationPotion("Knockback", 30).destroy(e);
 					break;
 			}	
 		}

@@ -1,9 +1,12 @@
 package object;
 
 import java.io.Serializable;
+import java.util.Random;
 
+import components.TypeComponent;
 import components.collision.PickupCollision;
 import components.graphical.AnimatedGraphics;
+import components.graphical.BaseGraphics;
 import components.inventory.TypePickup;
 import components.spawn.PointSpawn;
 import display.Art;
@@ -15,18 +18,21 @@ public abstract class InventoryItem implements DatableObject, Serializable {
 
 	private static final long serialVersionUID = 4785946601775436341L;
 	
+	protected static Random rand = new Random();
+	
 	protected String name;
 	protected transient TypePickup typePickup;
 	
-	public void drop(float x, float y){
+	public void destroy(Entity e){
 		Entity item = new Entity();
 		AnimatedGraphics BG = null;
 		PointSpawn BS;
 		PickupCollision BC;
 		
-		BG = new AnimatedGraphics(Art.getImage(name), Art.base, true);
+		BaseGraphics entityG = e.getComponent(TypeComponent.GRAPHICS);
 		
-		BS = new PointSpawn(BG, new Vector2(x - BG.getWidth(), y - BG.getHeight()), item);
+		BG = new AnimatedGraphics(Art.getImage(name), Art.base, true);
+		BS = new PointSpawn(BG, new Vector2(entityG.getX() - BG.getWidth(), entityG.getY() - BG.getHeight()), item);
 		item.addComponent(BG);
 		BC = new PickupCollision(item, typePickup, name);
 		item.addComponent(BS);
