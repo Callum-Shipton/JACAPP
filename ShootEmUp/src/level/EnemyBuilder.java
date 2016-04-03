@@ -101,7 +101,7 @@ public abstract class EnemyBuilder {
 		BaseCollision BC = new RigidCollision(test, TG);
 		test.addComponent(BC);
 		test.addComponent(new BasicMovement(test, BC, TG, 5));
-		BaseGraphics playerGraphics = (BaseGraphics) ShootEmUp.currentLevel.getPlayer()
+		BaseGraphics playerGraphics = ShootEmUp.currentLevel.getPlayer()
 				.getComponent(TypeComponent.GRAPHICS);
 		float px = playerGraphics.getX();
 		float py = playerGraphics.getY();
@@ -123,7 +123,8 @@ public abstract class EnemyBuilder {
 			// changed to grid position;
 
 			for (Entity character : ShootEmUp.currentLevel.entities) {
-				if ((((BaseMovement) test.getComponent(TypeComponent.MOVEMENT)).doesCollide(test, character) != null)) {
+				BaseMovement BM = test.getComponent(TypeComponent.MOVEMENT);
+				if ((BM.doesCollide(test, character) != null)) {
 					collide = true;
 					break;
 				}

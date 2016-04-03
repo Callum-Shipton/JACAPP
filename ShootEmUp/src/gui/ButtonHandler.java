@@ -216,49 +216,52 @@ public abstract class ButtonHandler {
 	}
 
 	private static void healthRegen() {
-		if (((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)))
+		BaseInventory BI = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY);
+		if (BI
 				.getLevelPoints() > 0) {
 			BaseAttack BA = (BaseAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK));
 			BA.setMaxHealthRegen((int) Math.ceil(BA.getMaxHealthRegen() / 2));
-			((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)))
+			BI
 					.spendLevelPoints(1);
 		}
 	}
 
 	private static void health() {
-		if (((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)))
+		BaseInventory BI = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY);
+		if (BI
 				.getLevelPoints() > 0) {
-			BaseAttack BA = (BaseAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK));
+			BaseAttack BA = (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK));
 			BA.setMaxHealth(BA.getMaxHealth() + 1);
 			BA.setHealth(BA.getHealth() + 1);
-			((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)))
+			BI
 					.spendLevelPoints(1);
 		}
 	}
 
 	private static void manaRegen() {
-		if (((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)))
+		BaseInventory BI = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY);
+		if (BI
 				.getLevelPoints() > 0) {
 			PlayerAttack PA = (PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK));
 			PA.setMaxManaRegen((int) Math.ceil(PA.getMaxManaRegen() / 2));
-			((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)))
+			BI
 					.spendLevelPoints(1);
 		}
 	}
 
 	private static void mana() {
-		if (((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)))
+		BaseInventory BI = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY);
+		if (BI
 				.getLevelPoints() > 0) {
-			PlayerAttack PA = (PlayerAttack) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK));
+			PlayerAttack PA =(ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK));
 			PA.setMaxMana(PA.getMaxMana() + 1);
 			PA.setMana(PA.getMana() + 1);
-			((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)))
-					.spendLevelPoints(1);
+			BI.spendLevelPoints(1);
 		}
 	}
 
 	private static void inventoryUpgrade() {
-		BaseInventory PI = (BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY));
+		BaseInventory PI = (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY));
 		if (PI.getCoins() >= 5) {
 			PI.addInventorySize(5);
 			PI.spendCoins(5);
@@ -266,7 +269,7 @@ public abstract class ButtonHandler {
 	}
 
 	private static void potionsUpgrade() {
-		BaseInventory PI = (BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY));
+		BaseInventory PI =  (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY));
 		if (PI.getCoins() >= 5) {
 			PI.addMaxPotions(5);
 			PI.spendCoins(5);

@@ -37,6 +37,7 @@ import org.lwjgl.glfw.GLFWvidmode;
 import org.lwjgl.opengl.GLContext;
 
 import components.TypeComponent;
+import components.graphical.BaseGraphics;
 import components.graphical.PlayerGraphics;
 import input.Keyboard;
 import main.ShootEmUp;
@@ -194,8 +195,9 @@ public class Display {
 		Keyboard.keyCheck(window);
 		Art.initShaderUniforms();
 		Art.refreshRenderers();
+		PlayerGraphics BG = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS);
 		if (ShootEmUp.currentLevel != null) {
-			((PlayerGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS))
+			BG
 					.scrollScreen(null);
 		}
 		fullscreen = !fullscreen;

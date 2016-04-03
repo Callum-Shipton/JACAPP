@@ -14,7 +14,7 @@ public class OneTimePotion extends Potion {
 	@Override
 	public void update(Entity e) {
 		if (active) {
-			BaseAttack BA = (BaseAttack) e.getComponent(TypeComponent.ATTACK);
+			BaseAttack BA = e.getComponent(TypeComponent.ATTACK);
 			switch (type) {
 				case "Health":
 					BA.addHealth(5);

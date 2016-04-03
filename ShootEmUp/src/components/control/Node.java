@@ -48,12 +48,13 @@ public class Node implements Comparable<Node> {
 	
 	@Override
 	public int compareTo(Node n) {
+		BaseGraphics BG = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS);
 		Vector2 player = new Vector2(
 				(float) Math.floor(
-						((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS))
+						BG
 								.getX() / Map.TILE_WIDTH),
 		(float) Math.floor(
-				((BaseGraphics) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS)).getY()
+				BG.getY()
 						/ Map.TILE_WIDTH));
 		
 		float distance1 = player.dist(n.getPosition());

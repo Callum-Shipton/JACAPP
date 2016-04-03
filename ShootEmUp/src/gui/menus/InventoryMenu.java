@@ -24,7 +24,7 @@ public class InventoryMenu extends PauseMenu {
 	public InventoryMenu(Image menuImage) {
 		super(menuImage);
 
-		playerAttack = (PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK);
+		playerAttack =  ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK);
 
 		buildHelmet();
 		buildChest();
@@ -32,8 +32,9 @@ public class InventoryMenu extends PauseMenu {
 		buildBoots();
 		buildWeapon();
 
+		BaseInventory BI = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY);
 		inventory = new Inventory(30, 30,
-				((BaseInventory) (ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)))
+				BI
 						.getInventory());
 	}
 

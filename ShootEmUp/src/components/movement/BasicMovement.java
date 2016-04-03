@@ -47,7 +47,8 @@ public class BasicMovement extends BaseMovement {
 				if (collVec != null) {
 					collide = true;
 					hit = character;
-					if ((((BaseCollision) hit.getComponent(TypeComponent.COLLISION)).getMoveBack() == true)
+					BaseCollision HC = hit.getComponent(TypeComponent.COLLISION);
+					if ((HC.getMoveBack() == true)
 							&& !(BC instanceof HitCollision)) {
 						moveBackY(e, moveVec, collVec);
 						newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
@@ -55,7 +56,7 @@ public class BasicMovement extends BaseMovement {
 					if ((e.getComponent(TypeComponent.COLLISION) != null)) {
 						BC.collision(e, hit);
 					}
-					BaseCollision EC = (BaseCollision) hit.getComponent(TypeComponent.COLLISION);
+					BaseCollision EC = hit.getComponent(TypeComponent.COLLISION);
 					if (EC != null) {
 						EC.collision(hit, e);
 					}
@@ -83,7 +84,8 @@ public class BasicMovement extends BaseMovement {
 				if (collVec != null) {
 					collide = true;
 					hit = character;
-					if ((((BaseCollision) hit.getComponent(TypeComponent.COLLISION)).getMoveBack() == true)
+					BaseCollision HC = hit.getComponent(TypeComponent.COLLISION);
+					if ((HC.getMoveBack() == true)
 							&& !(BC instanceof HitCollision)) {
 						moveBackX(e, moveVec, collVec);
 						newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
@@ -91,7 +93,7 @@ public class BasicMovement extends BaseMovement {
 					if ((e.getComponent(TypeComponent.COLLISION) != null)) {
 						BC.collision(e, hit);
 					}
-					BaseCollision EC = (BaseCollision) hit.getComponent(TypeComponent.COLLISION);
+					BaseCollision EC = hit.getComponent(TypeComponent.COLLISION);
 					if (EC != null) {
 						EC.collision(hit, e);
 					}
@@ -125,7 +127,7 @@ public class BasicMovement extends BaseMovement {
 
 	@Override
 	public Vector4 doesCollide(Entity moving, Entity checked) {
-		BaseGraphics CG = (BaseGraphics) checked.getComponent(TypeComponent.GRAPHICS);
+		BaseGraphics CG = checked.getComponent(TypeComponent.GRAPHICS);
 		float x = BG.getX();
 		float y = BG.getY();
 		float w = BG.getWidth();

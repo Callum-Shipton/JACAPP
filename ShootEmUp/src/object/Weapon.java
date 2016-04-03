@@ -103,7 +103,7 @@ public class Weapon extends InventoryItem{
 	}
 
 	public void attack(Entity e, int direction) {
-		BaseGraphics BG = (BaseGraphics) e.getComponent(TypeComponent.GRAPHICS);
+		BaseGraphics BG = e.getComponent(TypeComponent.GRAPHICS);
 		float posX = BG.getX();
 		float posY = BG.getY();
 		float BGWidth = BG.getWidth();

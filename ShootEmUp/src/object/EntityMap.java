@@ -46,7 +46,7 @@ public class EntityMap {
 
 	public HashSet<Vector2> getGridPos(Entity e) {
 		HashSet<Vector2> gridPos = new HashSet<Vector2>();
-		BaseGraphics BG = (BaseGraphics) e.getComponent(TypeComponent.GRAPHICS);
+		BaseGraphics BG = e.getComponent(TypeComponent.GRAPHICS);
 		for (int i = (int) Math.floor((BG.getX() / Map.TILE_WIDTH) / 6); i <= Math
 				.floor(((BG.getX() + BG.getWidth()) / Map.TILE_WIDTH) / 6); i++) {
 			for (int j = (int) Math.floor((BG.getY() / Map.TILE_WIDTH) / 6); j <= Math

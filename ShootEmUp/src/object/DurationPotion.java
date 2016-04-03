@@ -21,8 +21,8 @@ public class DurationPotion extends Potion {
 	@Override
 	public void update(Entity e) {
 		if (active && (counter == 0)) {
-			BaseMovement BM = (BaseMovement) e.getComponent(TypeComponent.MOVEMENT);
-			BaseAttack BA = (BaseAttack) e.getComponent(TypeComponent.ATTACK);
+			BaseMovement BM = e.getComponent(TypeComponent.MOVEMENT);
+			BaseAttack BA = e.getComponent(TypeComponent.ATTACK);
 			switch (type) {
 				case "Speed":
 					if (duration == maxDuration) {

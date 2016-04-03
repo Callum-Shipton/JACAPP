@@ -166,7 +166,7 @@ public class IRenderer extends Renderer {
 		Iterator<Entry<Vector2, Entity>> iterator = textures.entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entity wall = iterator.next().getValue();
-			MapGraphics MG = (MapGraphics) wall.getComponent(TypeComponent.GRAPHICS);
+			MapGraphics MG = wall.getComponent(TypeComponent.GRAPHICS);
 			Vector2 textured = MG.getMapPos();
 			Vector2 pos = new Vector2(MG.getX(), MG.getY());
 			texture[0] = textured.x() / texMax.x();

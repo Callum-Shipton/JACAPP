@@ -303,7 +303,8 @@ public class BaseInventory extends Component implements InventoryComponent {
 	public void drop(Entity e) {
 
 		// give player exp
-		((BaseInventory) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY)).giveExp(1);
+		BaseInventory BI = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BI.giveExp(1);
 
 		dropCoin();
 

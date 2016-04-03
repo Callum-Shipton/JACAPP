@@ -4,6 +4,7 @@ import components.Message;
 import components.TypeComponent;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
+import components.inventory.BaseInventory;
 import components.movement.BaseMovement;
 import main.ShootEmUp;
 import math.Vector2;
@@ -27,8 +28,9 @@ public class HomingControl extends BaseControl {
 	@Override
 	public void update(Entity e) {
 		target = ShootEmUp.currentLevel.getPlayer();
-		float y = ((BaseGraphics) target.getComponent(TypeComponent.GRAPHICS)).getY();
-		float x = ((BaseGraphics) target.getComponent(TypeComponent.GRAPHICS)).getX();
+		BaseGraphics BG = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS);
+		float y = BG.getY();
+		float x = BG.getX();
 
 		if (target != null) {
 			Vector2 movement = new Vector2(0.0f, 0.0f);

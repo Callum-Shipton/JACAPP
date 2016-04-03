@@ -80,8 +80,9 @@ public class Entity implements DatableObject{
 		components.put(c.getType(), c);
 	}
 
-	public Component getComponent(TypeComponent type) {
-		return components.get(type);
+	@SuppressWarnings("unchecked")
+	public <T extends Component> T getComponent(TypeComponent type){
+		return ( T ) components.get(type);
 	}
 
 	public HashMap<TypeComponent, Component> getComponents() {

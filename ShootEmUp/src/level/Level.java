@@ -6,6 +6,7 @@ import java.util.Iterator;
 import components.TypeComponent;
 import components.collision.BaseCollision;
 import components.graphical.BaseGraphics;
+import components.inventory.BaseInventory;
 import display.Art;
 import gui.Hud;
 import main.ShootEmUp;
@@ -67,8 +68,9 @@ public class Level {
 		Iterator<Entity> oldEntitiesIter = oldEntities.iterator();
 		while (oldEntitiesIter.hasNext()) {
 			Entity n = oldEntitiesIter.next();
+			BaseCollision BC = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.COLLISION);
 			ShootEmUp.currentLevel.eMap
-					.removeEntity(((BaseCollision) n.getComponent(TypeComponent.COLLISION)).getGridPos(), n);
+					.removeEntity(BC.getGridPos(), n);
 			boolean res = entities.remove(n);
 			if (!res) {
 				System.out.println("Old entity not removed. Name: " + n.toString() + ", HC: " + n.hashCode());
@@ -82,10 +84,11 @@ public class Level {
 		map.renderLowTiles();
 
 		for (Entity character : entities) {
-			((BaseGraphics) character.getComponent(TypeComponent.GRAPHICS)).render(character);
+			BaseGraphics BG = character.getComponent(TypeComponent.GRAPHICS);
+			BG.render(character);
 		}
-
-		((BaseGraphics) player.getComponent(TypeComponent.GRAPHICS)).render(player);
+		BaseGraphics BG = player.getComponent(TypeComponent.GRAPHICS);
+		BG.render(player);
 
 		map.renderHighTiles();
 

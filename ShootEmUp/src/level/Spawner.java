@@ -5,8 +5,10 @@ import java.util.Random;
 import org.lwjgl.opengl.GL20;
 
 import components.TypeComponent;
+import components.attack.BaseAttack;
 import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
+import components.inventory.BaseInventory;
 import components.movement.BasicMovement;
 import display.Art;
 import main.ShootEmUp;
@@ -81,7 +83,8 @@ public class Spawner {
 					ShootEmUp.save.saveCharacter();
 				}
 				ShootEmUp.save.saveToSystem(1);
-				TypeAttack temp = ((PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))
+				BaseAttack BA = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK);
+				TypeAttack temp = BA
 						.getAttackType();
 				ShootEmUp.currentLevel = new Level(Art.levels, ShootEmUp.currentLevel.getLevel() + 1);
 				ShootEmUp.save.load(1);
@@ -96,7 +99,7 @@ public class Spawner {
 	}
 
 	public void checkSpawn(Entity e) {
-		BasicMovement BM = (BasicMovement) e.getComponent(TypeComponent.MOVEMENT);
+		BasicMovement BM = e.getComponent(TypeComponent.MOVEMENT);
 		ShootEmUp.currentLevel.newEntities.add(e);
 		BM.checkCollisionY(e, new Vector2(0, 0));
 		BM.checkCollisionX(e, new Vector2(0, 0));

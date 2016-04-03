@@ -40,9 +40,9 @@ public class Hud extends GuiComponent {
 	public Hud(Entity player, float x, float y) {
 		super(x, y);
 		
-		PI = (BaseInventory) player.getComponent(TypeComponent.INVENTORY);
-		PA = (PlayerAttack) player.getComponent(TypeComponent.ATTACK);
-		PM = (BasicMovement) player.getComponent(TypeComponent.MOVEMENT);
+		PI =  player.getComponent(TypeComponent.INVENTORY);
+		PA = player.getComponent(TypeComponent.ATTACK);
+		PM = player.getComponent(TypeComponent.MOVEMENT);
 		
 		hudElems = new CopyOnWriteArrayList<Icon>();
 		infoBoxTop = new Icon(0.0f, 0.0f, Art.getImage("BarInfoTop"), false, 1f);

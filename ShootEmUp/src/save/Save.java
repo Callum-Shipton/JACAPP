@@ -19,6 +19,7 @@ import javax.crypto.SealedObject;
 import javax.crypto.spec.SecretKeySpec;
 
 import components.TypeComponent;
+import components.attack.BaseAttack;
 import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
 import main.ShootEmUp;
@@ -43,8 +44,8 @@ public class Save implements Serializable {
 		if (ShootEmUp.currentLevel.getLevel() > level) {
 			level = ShootEmUp.currentLevel.getLevel();
 		}
-
-		TypeAttack tempAttack = ((PlayerAttack) ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK))
+		BaseAttack BA = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK);
+		TypeAttack tempAttack = BA
 				.getAttackType();
 
 		switch (tempAttack) {

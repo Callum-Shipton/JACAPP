@@ -25,8 +25,8 @@ public class HitCollision extends BaseCollision {
 	@Override
 	public void collision(Entity e, Entity hit) {
 
-		BaseAttack hitAttack = (BaseAttack) hit.getComponent(TypeComponent.ATTACK);
-		BaseMovement hitMove = (BaseMovement) hit.getComponent(TypeComponent.MOVEMENT);
+		BaseAttack hitAttack = hit.getComponent(TypeComponent.ATTACK);
+		BaseMovement hitMove = hit.getComponent(TypeComponent.MOVEMENT);
 		if (hitAttack != null) {
 			if (hitAttack.getWeapon().getTeam() == weapon.getTeam()) {
 				return;
