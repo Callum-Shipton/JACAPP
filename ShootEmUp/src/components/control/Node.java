@@ -66,8 +66,8 @@ public class Node implements Comparable<Node> {
 	@Override
 	public int hashCode() {
 		int hash = 139;
-		hash = (int) ((467 * hash) + position.x());
-		hash = (int) ((467 * hash) + position.y());
+		hash = (int) ((467 * hash) + (int)position.x());
+		hash = (int) ((467 * hash) + (int)position.y());
 		return hash;
 	}
 

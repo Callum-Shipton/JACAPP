@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.PriorityQueue;
 
 import components.Message;
+import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
@@ -42,7 +43,8 @@ public class AIControl extends BaseControl {
 
 	@Override
 	public void update(Entity e) {
-		goal = new Vector2(0,0);
+		BaseGraphics BG = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS);
+		goal = new Vector2((float)Math.floor(BG.getX()/Map.TILE_WIDTH),(float)Math.floor(BG.getY()/Map.TILE_HEIGHT));
 		target = ai();
 		float y = target.y() * Map.TILE_HEIGHT;
 		float x = target.x() * Map.TILE_WIDTH;

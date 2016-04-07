@@ -90,7 +90,7 @@ public class GoalBounder {
 					
 					for(int i = 0; i < nodes.length; i++){
 						if (!closed.contains(nodes[i])) {
-							if (walls.containsKey(nodes[i]) ) {
+							if (!walls.containsKey(nodes[i].position)){
 									open.add(nodes[i]);
 									closed.add(nodes[i]);
 							}
