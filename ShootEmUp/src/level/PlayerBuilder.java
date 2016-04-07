@@ -50,27 +50,27 @@ public abstract class PlayerBuilder {
 	private static void chooseType(TypeAttack type) {
 		switch (type) {
 			case ARCHER:
-				g = new PlayerGraphics(player, Art.getImage("Archer"), Art.base);
+				g = new PlayerGraphics(player, Art.getImage("Archer"), Art.base, 1f);
 				a = new PlayerAttack(type, 4, 5, new Weapon("Longbow",0));
 				break;
 			case BATTLE_MAGE:
-				g = new PlayerGraphics(player, Art.getImage("BattleMage"), Art.base);
+				g = new PlayerGraphics(player, Art.getImage("BattleMage"), Art.base, 1f);
 				a = new PlayerAttack(type, 3, 5 , new Weapon("FireStaff", 0));
 				break;
 			case MAGE:
-				g = new PlayerGraphics(player, Art.getImage("Mage"), Art.base);
+				g = new PlayerGraphics(player, Art.getImage("Mage"), Art.base, 1f);
 				a = new PlayerAttack(type, 3, 5 , new Weapon("FireStaff", 0));
 				break;
 			case ROGUE:
-				g = new PlayerGraphics(player, Art.getImage("Rogue"), Art.base);
+				g = new PlayerGraphics(player, Art.getImage("Rogue"), Art.base, 1f);
 				a = new PlayerAttack(type, 3, 5 ,new Weapon("IronDagger", 0));
 				break;
 			case WARRIOR:
-				g = new PlayerGraphics(player, Art.getImage("Warrior"), Art.base);
+				g = new PlayerGraphics(player, Art.getImage("Warrior"), Art.base, 2f);
 				a = new PlayerAttack(type, 5, 3 , new Weapon("Greatsword", 0));
 				break;
 			default:
-				g = new PlayerGraphics(player, Art.getImage("Warrior"), Art.base);
+				g = new PlayerGraphics(player, Art.getImage("Warrior"), Art.base, 2f);
 		}
 		s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
 	}

@@ -31,7 +31,7 @@ public abstract class InventoryItem implements DatableObject, Serializable {
 		
 		BaseGraphics entityG = e.getComponent(TypeComponent.GRAPHICS);
 		
-		BG = new AnimatedGraphics(Art.getImage(name), Art.base, true);
+		BG = new AnimatedGraphics(Art.getImage(name), Art.base, true, 1f);
 		BS = new PointSpawn(BG, new Vector2(entityG.getX() - BG.getWidth(), entityG.getY() - BG.getHeight()), item);
 		item.addComponent(BG);
 		BC = new PickupCollision(item, typePickup, name);

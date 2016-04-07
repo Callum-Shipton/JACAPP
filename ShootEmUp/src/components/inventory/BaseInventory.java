@@ -364,7 +364,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 		PointSpawn CoinS;
 		PickupCollision CoinC;
 
-		CoinG = new AnimatedGraphics(Art.getImage("Coin"), Art.base, true);
+		CoinG = new AnimatedGraphics(Art.getImage("Coin"), Art.base, true, 1f);
 		
 		CoinS = new PointSpawn(CoinG, new Vector2(BG.getX() - BG.getWidth(), BG.getY() - BG.getHeight()), item);
 		item.addComponent(CoinG);

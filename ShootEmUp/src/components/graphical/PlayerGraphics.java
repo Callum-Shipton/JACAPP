@@ -22,8 +22,8 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 	private int posLocation;
 	private int posLocationInst;
 
-	public PlayerGraphics(Entity e, Image image, Renderer r) {
-		super(image, r, false);
+	public PlayerGraphics(Entity e, Image image, Renderer r, float scale) {
+		super(image, r, false, scale);
 		viewMatrix = new Matrix4();
 		matrix44Buffer = BufferUtils.createFloatBuffer(16);
 		viewMatrixLocation = GL20.glGetUniformLocation(Art.ShaderBase, "viewMatrix");

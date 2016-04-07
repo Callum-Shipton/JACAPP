@@ -24,10 +24,10 @@ public class AnimatedGraphics extends BaseGraphics {
 		this.y = y;
 	}
 
-	public AnimatedGraphics(Image image, Renderer r, boolean animating) {
+	public AnimatedGraphics(Image image, Renderer r, boolean animating, float scale) {
 		this.image = image;
-		width = image.getWidth() / image.getFWidth();
-		height = image.getHeight() / image.getFHeight();
+		width = (image.getWidth() / image.getFWidth())*scale;
+		height = (image.getHeight() / image.getFHeight()*scale);
 		this.r = r;
 		this.animating = animating;
 	}

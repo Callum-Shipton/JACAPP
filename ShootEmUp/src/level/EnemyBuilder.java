@@ -96,7 +96,7 @@ public abstract class EnemyBuilder {
 
 		boolean collide = false;
 		test = new Entity();
-		TG = new AnimatedGraphics(Art.getImage("Enemy"), Art.base, false);
+		TG = new AnimatedGraphics(Art.getImage("Enemy"), Art.base, false, 1f);
 		test.addComponent(TG);
 		BaseCollision BC = new RigidCollision(test, TG);
 		test.addComponent(BC);
