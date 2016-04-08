@@ -5,7 +5,6 @@ import display.Image;
 import gui.ButtonBuilder;
 import gui.VerticalLayout;
 import gui.TypeButton;
-import main.ShootEmUp;
 
 public abstract class PauseMenu extends GuiMenu {
 
@@ -20,7 +19,7 @@ public abstract class PauseMenu extends GuiMenu {
 		tabs.addMenuItem(ButtonBuilder.buildButton(TypeButton.SAVE, 0, 0));
 		menuItems.add(tabs);
 
-		VerticalLayout nativeButtons = new VerticalLayout(30, ShootEmUp.height - 94, Art.getImage("ExitButton").getHeight() / 2,
+		VerticalLayout nativeButtons = new VerticalLayout(30, display.getHeight() - 94, Art.getImage("ExitButton").getHeight() / 2,
 				20);
 		nativeButtons.addMenuItem(ButtonBuilder.buildButton(TypeButton.BACK, 0, 0));
 		nativeButtons.addMenuItem(ButtonBuilder.buildButton(TypeButton.MAIN_MENU, 0, 0));

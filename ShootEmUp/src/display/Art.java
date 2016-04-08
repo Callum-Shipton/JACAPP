@@ -299,7 +299,7 @@ public class Art {
 	public static void initShaderUniforms() {
 
 		Matrix4 projectionMatrix = new Matrix4();
-		projectionMatrix.clearToOrtho(0, ShootEmUp.width, ShootEmUp.height, 0, -1.0f, 1.0f);
+		projectionMatrix.clearToOrtho(0, ShootEmUp.getDisplay().getWidth(), ShootEmUp.getDisplay().getHeight(), 0, -1.0f, 1.0f);
 		FloatBuffer matrix44Buffer = BufferUtils.createFloatBuffer(16);
 		matrix44Buffer = projectionMatrix.toBuffer();
 

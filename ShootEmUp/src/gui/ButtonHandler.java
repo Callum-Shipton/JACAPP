@@ -141,7 +141,7 @@ public abstract class ButtonHandler {
 	}
 
 	private static void exit() {
-		glfwSetWindowShouldClose(ShootEmUp.display.getWindow(), GL_TRUE);
+		glfwSetWindowShouldClose(ShootEmUp.getDisplay().getWindow(), GL_TRUE);
 	}
 
 	private static void level(int level) {

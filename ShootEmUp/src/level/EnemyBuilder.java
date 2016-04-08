@@ -113,8 +113,8 @@ public abstract class EnemyBuilder {
 			TG.setX(rand.nextInt((ShootEmUp.currentLevel.map.getBackgroundTiles().length - 1) * Map.TILE_WIDTH));
 			TG.setY(rand.nextInt((ShootEmUp.currentLevel.map.getBackgroundTiles()[0].length - 1) * Map.TILE_WIDTH));
 
-			if ((Math.abs((TG.getX() + (TG.getWidth() / 2)) - (px + (pw / 2))) <= (ShootEmUp.width + TG.getWidth()))
-					&& (Math.abs((TG.getY() + (TG.getHeight() / 2)) - (py + (ph / 2))) <= (ShootEmUp.height
+			if ((Math.abs((TG.getX() + (TG.getWidth() / 2)) - (px + (pw / 2))) <= (ShootEmUp.getDisplay().getWidth() + TG.getWidth()))
+					&& (Math.abs((TG.getY() + (TG.getHeight() / 2)) - (py + (ph / 2))) <= (ShootEmUp.getDisplay().getHeight()
 							+ TG.getHeight()))) {
 				collide = true;
 				continue;

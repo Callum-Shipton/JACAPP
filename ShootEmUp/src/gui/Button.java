@@ -39,12 +39,12 @@ public class Button extends GuiComponent {
 		this.id = id;
 		w = id.getWidth();
 		h = id.getHeight() / 2;
-		window = ShootEmUp.display.getWindow();
+		window = ShootEmUp.getDisplay().getWindow();
 	}
 
 	@Override
 	public void update() {
-		window = ShootEmUp.display.getWindow();
+		window = ShootEmUp.getDisplay().getWindow();
 		Bx.clear();
 		By.clear();
 

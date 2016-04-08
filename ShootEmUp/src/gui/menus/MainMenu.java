@@ -11,7 +11,7 @@ public class MainMenu extends GuiMenu {
 
 	public MainMenu(Image menuImage) {
 		super(menuImage);
-		VerticalLayout buttonList = new VerticalLayout((ShootEmUp.width / 2) - (Art.getImage("NewGameButton").getWidth() / 2),
+		VerticalLayout buttonList = new VerticalLayout((display.getWidth() / 2) - (Art.getImage("NewGameButton").getWidth() / 2),
 				150, Art.getImage("NewGameButton").getHeight() / 2, 20);
 		ShootEmUp.currentLevel = null;
 		buttonList.addMenuItem(ButtonBuilder.buildButton(TypeButton.NEW_GAME, 0, 0));

@@ -228,7 +228,7 @@ public class Map {
 		}
 	}
 
-	public void setTiles() {
+	private void setTiles() {
 		// Set Background Tiles
 		for (int y = 0; y < map.getHeight(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
@@ -334,7 +334,7 @@ public class Map {
 	}
 
 	// create wall
-	public void insertWall(int x, int y, float tileMapX, float tileMapY, int wallType) {
+	private void insertWall(int x, int y, float tileMapX, float tileMapY, int wallType) {
 		MapGraphics wallG;
 		switch (wallType) {
 			case BROWNWALL:
@@ -360,7 +360,7 @@ public class Map {
 	}
 
 	// create water
-	public void insertWater(int x, int y, float tileMapX, float tileMapY, int waterType) {
+	private void insertWater(int x, int y, float tileMapX, float tileMapY, int waterType) {
 		MapGraphics wallG;
 		switch (map.getRGB(x, y)) {
 			case LIGHTWATER:

@@ -30,12 +30,8 @@ import save.Save;
 
 public class ShootEmUp {
 
-	// Screen Width & Height
-	public static int width = 1024;
-	public static int height = 512;
-
 	// Handle for monitor/window funcs
-	public static Display display;
+	private static Display display;
 	public static BackgroundMusic backgroundMusic;
 	public static int currentMusic = BackgroundMusic.MENU;
 	public static boolean musicPause = false;
@@ -69,7 +65,7 @@ public class ShootEmUp {
 	}
 
 	private void init() {
-		display = new Display(width, height);
+		display = new Display();
 		backgroundMusic = new BackgroundMusic();
 		backgroundMusic.initAL();
 
@@ -187,6 +183,10 @@ public class ShootEmUp {
 
 	public static void addMenu(GuiMenu menu) {
 		menuStack.add(menu);
+	}
+
+	public static Display getDisplay() {
+		return display;
 	}
 
 }

@@ -53,14 +53,17 @@ public class Display {
 	private ByteBuffer vidmode;
 	private GLFWvidmode vm;
 
-	private int width;
-	private int height;
+	// Screen Width & Height
+	private static final int INITIAL_SCREEN_WIDTH = 1024;
+	private static final int INITIAL_SCREEN_HEIGHT = 512;
+	private int screenWidth;
+	private int screenHeight;
 
 	boolean fullscreen = false;
 
-	public Display(int width, int height) {
-		this.width = width;
-		this.height = height;
+	public Display() {
+		screenWidth = INITIAL_SCREEN_WIDTH;
+		screenHeight = INITIAL_SCREEN_HEIGHT;
 		initGLFW();
 	}
 
@@ -94,13 +97,13 @@ public class Display {
 		vm = new GLFWvidmode(vidmode);
 
 		// Create the window
-		window = glfwCreateWindow(width, height, "THE MAZE", NULL, NULL);
+		window = glfwCreateWindow(screenWidth, screenHeight, "THE MAZE", NULL, NULL);
 		if (window == NULL) {
 			throw new RuntimeException("Failed to create the GLFW window");
 		}
 
 		// Center our window
-		glfwSetWindowPos(window, (GLFWvidmode.width(vidmode) - width) / 2, (GLFWvidmode.height(vidmode) - height) / 2);
+		glfwSetWindowPos(window, (GLFWvidmode.width(vidmode) - screenWidth) / 2, (GLFWvidmode.height(vidmode) - screenHeight) / 2);
 
 		// Make the GLFW OpenGL context current
 		glfwMakeContextCurrent(window);
@@ -126,7 +129,7 @@ public class Display {
 
 	private void initGL() {
 		glClearColor(0.4f, 0.6f, 0.9f, 1.0f);
-		glViewport(0, 0, width, height);
+		glViewport(0, 0, screenWidth, screenHeight);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
@@ -161,26 +164,22 @@ public class Display {
 		long newWindow;
 		if (fullscreen) {
 			// ShootEmUp.menuStack.peek().reset(width, height, 1024, 512);
-			ShootEmUp.width = 1024;
-			ShootEmUp.height = 512;
-			width = 1024;
-			height = 512;
-			newWindow = glfwCreateWindow(width, height, "THE MAZE", NULL, window);
+			screenWidth = INITIAL_SCREEN_WIDTH;
+			screenHeight = INITIAL_SCREEN_HEIGHT;
+			newWindow = glfwCreateWindow(screenWidth, screenHeight, "THE MAZE", NULL, window);
 			if (newWindow == NULL) {
 				throw new RuntimeException("Failed to create the NEW GLFW window");
 			}
 
 			// Center our window
-			glfwSetWindowPos(newWindow, (GLFWvidmode.width(vidmode) - width) / 2,
-					(GLFWvidmode.height(vidmode) - height) / 2);
+			glfwSetWindowPos(newWindow, (GLFWvidmode.width(vidmode) - screenWidth) / 2,
+					(GLFWvidmode.height(vidmode) - screenHeight) / 2);
 		} else {
 			// ShootEmUp.menuStack.peek().reset(width, height, vm.getWidth(),
 			// vm.getHeight());
-			ShootEmUp.width = vm.getWidth();
-			ShootEmUp.height = vm.getHeight();
-			width = vm.getWidth();
-			height = vm.getHeight();
-			newWindow = glfwCreateWindow(width, height, "THE MAZE", monitor, window);
+			screenWidth = vm.getWidth();
+			screenHeight = vm.getHeight();
+			newWindow = glfwCreateWindow(screenWidth, screenHeight, "THE MAZE", monitor, window);
 			if (newWindow == NULL) {
 				throw new RuntimeException("Failed to create the GLFW window");
 			}
@@ -200,5 +199,21 @@ public class Display {
 					.scrollScreen(null);
 		}
 		fullscreen = !fullscreen;
+	}
+
+	public int getWidth() {
+		return screenWidth;
+	}
+
+	public void setWidth(int width) {
+		this.screenWidth = width;
+	}
+
+	public int getHeight() {
+		return screenHeight;
+	}
+
+	public void setHeight(int height) {
+		this.screenHeight = height;
 	}
 }

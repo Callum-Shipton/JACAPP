@@ -3,6 +3,7 @@ package gui.menus;
 import java.util.ArrayList;
 
 import display.Art;
+import display.Display;
 import display.Image;
 import gui.Button;
 import gui.GuiComponent;
@@ -18,6 +19,7 @@ public abstract class GuiMenu {
 	protected int y;
 	protected int w;
 	protected int h;
+	protected Display display;
 
 	public GuiMenu(Image menuImage) {
 		this.menuImage = menuImage;
@@ -25,10 +27,11 @@ public abstract class GuiMenu {
 		y = 0;
 		w = menuImage.getWidth();
 		h = menuImage.getHeight();
+		display = ShootEmUp.getDisplay();
 	}
 
 	public void render() {
-		Art.stat.draw(menuImage, new Vector2(x, y), new Vector2(ShootEmUp.width, ShootEmUp.height), 0,
+		Art.stat.draw(menuImage, new Vector2(x, y), new Vector2(display.getWidth(), display.getHeight()), 0,
 				new Vector2(0, 0));
 		for (GuiComponent menuItem : menuItems) {
 			menuItem.render(Art.stat);

@@ -45,8 +45,8 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 	public void scrollScreen(Entity e) {
 
 		viewMatrix.clearToIdentity();
-		viewMatrix.translate(-getX() + ((ShootEmUp.width - getWidth()) / 2),
-				-getY() + ((ShootEmUp.height - getHeight()) / 2), 0);
+		viewMatrix.translate(-getX() + ((ShootEmUp.getDisplay().getWidth() - getWidth()) / 2),
+				-getY() + ((ShootEmUp.getDisplay().getHeight() - getHeight()) / 2), 0);
 		matrix44Buffer.clear();
 		matrix44Buffer = viewMatrix.toBuffer();
 

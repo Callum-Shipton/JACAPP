@@ -70,7 +70,7 @@ public class Hud extends GuiComponent {
 		frost = new Icon(0.0f, 140.0f, Art.getImage("Frost"), false, 1f);
 
 		// Potions bar
-		infoBoxBottom = new Icon(0.0f, ShootEmUp.height - Art.getImage("BarInfoBottom").getHeight(),
+		infoBoxBottom = new Icon(0.0f, ShootEmUp.getDisplay().getHeight() - Art.getImage("BarInfoBottom").getHeight(),
 				Art.getImage("BarInfoBottom"), false, 1f);
 		hudElems.add(infoBoxBottom);
 	}
@@ -100,13 +100,13 @@ public class Hud extends GuiComponent {
 		int sPot = PI.getNumPotion(TypePotion.SPEED);
 		int kPot = PI.getNumPotion(TypePotion.KNOCKBACK);
 		
-		r.draw(Art.getImage("Numbers"), new Vector2(26, ShootEmUp.height - 55), size, 0.0f, new Vector2(hPot, 1),
+		r.draw(Art.getImage("Numbers"), new Vector2(26, ShootEmUp.getDisplay().getHeight() - 55), size, 0.0f, new Vector2(hPot, 1),
 				maxTex);
-		r.draw(Art.getImage("Numbers"), new Vector2(70, ShootEmUp.height - 55), size, 0.0f, new Vector2(mPot, 1),
+		r.draw(Art.getImage("Numbers"), new Vector2(70, ShootEmUp.getDisplay().getHeight() - 55), size, 0.0f, new Vector2(mPot, 1),
 				maxTex);
-		r.draw(Art.getImage("Numbers"), new Vector2(114, ShootEmUp.height - 55), size, 0.0f, new Vector2(sPot, 1),
+		r.draw(Art.getImage("Numbers"), new Vector2(114, ShootEmUp.getDisplay().getHeight() - 55), size, 0.0f, new Vector2(sPot, 1),
 				maxTex);
-		r.draw(Art.getImage("Numbers"), new Vector2(159, ShootEmUp.height - 55), size, 0.0f, new Vector2(kPot, 1),
+		r.draw(Art.getImage("Numbers"), new Vector2(159, ShootEmUp.getDisplay().getHeight() - 55), size, 0.0f, new Vector2(kPot, 1),
 				maxTex);
 	}
 

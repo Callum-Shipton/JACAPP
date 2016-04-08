@@ -38,7 +38,7 @@ public class CharacterSelectMenu extends GuiMenu {
 			}
 		}
 
-		VerticalLayout buttonList = new VerticalLayout((ShootEmUp.width / 2) - (Art.getImage("WarriorButton").getWidth() / 2),
+		VerticalLayout buttonList = new VerticalLayout((display.getWidth() / 2) - (Art.getImage("WarriorButton").getWidth() / 2),
 				150, Art.getImage("WarriorButton").getHeight() / 2, 20);
 		buttonList.addMenuItem(
 				new CounterButton(0, 0, TypeButton.WARRIOR, Art.getImage("LevelIcon"), warriorLevel, 0.5f));
