@@ -73,8 +73,132 @@ public class Map {
 		}
 	}
 
+	public void init(){
+		
+		setTileTypes();
+		
+		generateWalls();
+
+		setTiles();
+
+		Art.irBack = new IRenderer(backgroundTiles,
+				new Vector2(Art.getImage("Floor").getFWidth(), Art.getImage("Floor").getFHeight()), Map.TILE_WIDTH,
+				Map.TILE_HEIGHT);
+		Art.irWall = new IRenderer(walls,
+				new Vector2(Art.getImage("Walls").getFWidth(), Art.getImage("Walls").getFHeight()), Map.TILE_WIDTH,
+				Map.TILE_HEIGHT);
+		Art.irFore = new IRenderer(foregroundTiles,
+				new Vector2(Art.getImage("Walls").getFWidth(), Art.getImage("Walls").getFHeight()), Map.TILE_WIDTH,
+				Map.TILE_HEIGHT);
+		
+		goalBounder = new GoalBounder(width, height, walls);
+	}
+	
+	private void generateWalls(){
+		// Set Wall & Water tile types
+				for (int y = 0; y < map.getHeight(); y++) {
+					for (int x = 0; x < map.getWidth(); x++) {
+						// if a wall
+						if (wallTileTypes[x][y] == 7) {
+							if (x > 0) {
+								if ((wallTileTypes[x - 1][y] == 0) || (wallTileTypes[x - 1][y] > 11)) {
+									if (y < (map.getHeight() - 2)) {
+										if ((wallTileTypes[x][y + 2] == 0) || (wallTileTypes[x][y + 2] > 11)) {
+											if ((wallTileTypes[x][y + 1] == 0) || (wallTileTypes[x][y + 1] > 11)) {
+												wallTileTypes[x][y] = 4;
+											} else {
+												wallTileTypes[x][y] = 1;
+											}
+										}
+									}
+								}
+								if ((wallTileTypes[x - 1][y] == 7) || (wallTileTypes[x - 1][y] == 8)) {
+									if (y < (map.getHeight() - 2)) {
+										if ((wallTileTypes[x][y + 2] == 0) || (wallTileTypes[x][y + 2] > 11)) {
+											wallTileTypes[x][y] = 2;
+											wallTileTypes[x - 1][y] = 9;
+										} else {
+											wallTileTypes[x][y] = 8;
+										}
+									}
+								}
+								if (x < (map.getWidth() - 1)) {
+									if ((wallTileTypes[x + 1][y] == 0) || (wallTileTypes[x + 1][y] > 11)) {
+										wallTileTypes[x][y] = 9;
+									}
+									if ((wallTileTypes[x - 1][y] == 1) || (wallTileTypes[x - 1][y] == 2)) {
+										if (y < (map.getHeight() - 2)) {
+											if ((wallTileTypes[x][y + 2] == 0) || (wallTileTypes[x][y + 2] > 11)) {
+												if ((wallTileTypes[x + 1][y] == 0) || (wallTileTypes[x + 1][y] > 11)) {
+													wallTileTypes[x][y] = 3;
+												} else {
+													wallTileTypes[x][y] = 2;
+												}
+											}
+										}
+									}
+								}
+								if ((wallTileTypes[x - 1][y] == 4) || (wallTileTypes[x - 1][y] == 5)) {
+									if (y < (map.getHeight() - 1)) {
+										if ((wallTileTypes[x][y + 1] == 0) || (wallTileTypes[x][y + 1] > 11)) {
+											wallTileTypes[x][y] = 5;
+										}
+									}
+									if (x < (map.getWidth() - 1)) {
+										if ((wallTileTypes[x + 1][y] == 0) || (wallTileTypes[x + 1][y] > 11)) {
+											wallTileTypes[x][y] = 6;
+										}
+									}
+								}
+							}
+						}
+						// if water
+						if (wallTileTypes[x][y] == 12) {
+							wallTileTypes[x][y] = 16;
+						}
+					}
+				}
+				for (int y = 0; y < map.getHeight(); y++) {
+					for (int x = 0; x < map.getWidth(); x++) {
+						if (wallTileTypes[x][y] == 0) {
+							if (y < (map.getHeight() - 1)) {
+								if (wallTileTypes[x][y + 1] == 1) {
+									foregroundTileTypes[x][y] = 1;
+								} else if (wallTileTypes[x][y + 1] == 2) {
+									foregroundTileTypes[x][y] = 2;
+									if ((x > 0) && (x < (map.getWidth() - 1))) {
+										if (foregroundTileTypes[x - 1][y] == 3) {
+											foregroundTileTypes[x - 1][y] = 2;
+										}
+										if (wallTileTypes[x - 1][y] == 9) {
+											wallTileTypes[x - 1][y] = 8;
+										}
+										if (wallTileTypes[x + 1][y] == 7) {
+											wallTileTypes[x + 1][y] = 8;
+										}
+									}
+								} else if (wallTileTypes[x][y + 1] == 3) {
+									foregroundTileTypes[x][y] = 3;
+								}
+								if ((x > 0) && (x < (map.getWidth() - 1))) {
+									if (wallTileTypes[x][y + 1] == 7) {
+										if (foregroundTileTypes[x - 1][y] != 0) {
+											foregroundTileTypes[x][y] = 2;
+										} else {
+											foregroundTileTypes[x][y] = 1;
+										}
+									} else if (wallTileTypes[x][y + 1] == 9) {
+										foregroundTileTypes[x][y] = 3;
+									}
+								}
+							}
+						}
+					}
+				}
+	}
+	
 	// fill the tile type arrays
-	public void setTileTypes() {
+	private void setTileTypes() {
 		// take the map image and use it to fill the tile type array
 		for (int y = 0; y < map.getHeight(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
@@ -102,120 +226,6 @@ public class Map {
 				}
 			}
 		}
-		// Set Wall & Water tile types
-		for (int y = 0; y < map.getHeight(); y++) {
-			for (int x = 0; x < map.getWidth(); x++) {
-				// if a wall
-				if (wallTileTypes[x][y] == 7) {
-					if (x > 0) {
-						if ((wallTileTypes[x - 1][y] == 0) || (wallTileTypes[x - 1][y] > 11)) {
-							if (y < (map.getHeight() - 2)) {
-								if ((wallTileTypes[x][y + 2] == 0) || (wallTileTypes[x][y + 2] > 11)) {
-									if ((wallTileTypes[x][y + 1] == 0) || (wallTileTypes[x][y + 1] > 11)) {
-										wallTileTypes[x][y] = 4;
-									} else {
-										wallTileTypes[x][y] = 1;
-									}
-								}
-							}
-						}
-						if ((wallTileTypes[x - 1][y] == 7) || (wallTileTypes[x - 1][y] == 8)) {
-							if (y < (map.getHeight() - 2)) {
-								if ((wallTileTypes[x][y + 2] == 0) || (wallTileTypes[x][y + 2] > 11)) {
-									wallTileTypes[x][y] = 2;
-									wallTileTypes[x - 1][y] = 9;
-								} else {
-									wallTileTypes[x][y] = 8;
-								}
-							}
-						}
-						if (x < (map.getWidth() - 1)) {
-							if ((wallTileTypes[x + 1][y] == 0) || (wallTileTypes[x + 1][y] > 11)) {
-								wallTileTypes[x][y] = 9;
-							}
-							if ((wallTileTypes[x - 1][y] == 1) || (wallTileTypes[x - 1][y] == 2)) {
-								if (y < (map.getHeight() - 2)) {
-									if ((wallTileTypes[x][y + 2] == 0) || (wallTileTypes[x][y + 2] > 11)) {
-										if ((wallTileTypes[x + 1][y] == 0) || (wallTileTypes[x + 1][y] > 11)) {
-											wallTileTypes[x][y] = 3;
-										} else {
-											wallTileTypes[x][y] = 2;
-										}
-									}
-								}
-							}
-						}
-						if ((wallTileTypes[x - 1][y] == 4) || (wallTileTypes[x - 1][y] == 5)) {
-							if (y < (map.getHeight() - 1)) {
-								if ((wallTileTypes[x][y + 1] == 0) || (wallTileTypes[x][y + 1] > 11)) {
-									wallTileTypes[x][y] = 5;
-								}
-							}
-							if (x < (map.getWidth() - 1)) {
-								if ((wallTileTypes[x + 1][y] == 0) || (wallTileTypes[x + 1][y] > 11)) {
-									wallTileTypes[x][y] = 6;
-								}
-							}
-						}
-					}
-				}
-				// if water
-				if (wallTileTypes[x][y] == 12) {
-					wallTileTypes[x][y] = 16;
-				}
-			}
-		}
-		for (int y = 0; y < map.getHeight(); y++) {
-			for (int x = 0; x < map.getWidth(); x++) {
-				if (wallTileTypes[x][y] == 0) {
-					if (y < (map.getHeight() - 1)) {
-						if (wallTileTypes[x][y + 1] == 1) {
-							foregroundTileTypes[x][y] = 1;
-						} else if (wallTileTypes[x][y + 1] == 2) {
-							foregroundTileTypes[x][y] = 2;
-							if ((x > 0) && (x < (map.getWidth() - 1))) {
-								if (foregroundTileTypes[x - 1][y] == 3) {
-									foregroundTileTypes[x - 1][y] = 2;
-								}
-								if (wallTileTypes[x - 1][y] == 9) {
-									wallTileTypes[x - 1][y] = 8;
-								}
-								if (wallTileTypes[x + 1][y] == 7) {
-									wallTileTypes[x + 1][y] = 8;
-								}
-							}
-						} else if (wallTileTypes[x][y + 1] == 3) {
-							foregroundTileTypes[x][y] = 3;
-						}
-						if ((x > 0) && (x < (map.getWidth() - 1))) {
-							if (wallTileTypes[x][y + 1] == 7) {
-								if (foregroundTileTypes[x - 1][y] != 0) {
-									foregroundTileTypes[x][y] = 2;
-								} else {
-									foregroundTileTypes[x][y] = 1;
-								}
-							} else if (wallTileTypes[x][y + 1] == 9) {
-								foregroundTileTypes[x][y] = 3;
-							}
-						}
-					}
-				}
-			}
-		}
-
-		setTiles();
-
-		Art.irBack = new IRenderer(backgroundTiles,
-				new Vector2(Art.getImage("Floor").getFWidth(), Art.getImage("Floor").getFHeight()), Map.TILE_WIDTH,
-				Map.TILE_HEIGHT);
-		Art.irWall = new IRenderer(walls,
-				new Vector2(Art.getImage("Walls").getFWidth(), Art.getImage("Walls").getFHeight()), Map.TILE_WIDTH,
-				Map.TILE_HEIGHT);
-		Art.irFore = new IRenderer(foregroundTiles,
-				new Vector2(Art.getImage("Walls").getFWidth(), Art.getImage("Walls").getFHeight()), Map.TILE_WIDTH,
-				Map.TILE_HEIGHT);
-		
-		goalBounder = new GoalBounder(width, height, walls);
 	}
 
 	public void setTiles() {

@@ -181,8 +181,8 @@ public class Vector2 implements Vector<Vector2> {
 	@Override
 	public int hashCode() {
 		int hash = 139;
-		hash = (int) ((467 * hash) + (int)x);
-		hash = (int) ((467 * hash) + (int)y);
+		hash = (int) ((467 * hash) + x);
+		hash = (int) ((467 * hash) + y);
 		return hash;
 	}
 

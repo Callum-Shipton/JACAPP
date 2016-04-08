@@ -42,7 +42,7 @@ public class Level {
 	}
 
 	public void init() {
-		map.setTileTypes();
+		map.init();
 	}
 
 	public void update() {
