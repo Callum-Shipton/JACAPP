@@ -37,8 +37,8 @@ public class BasicMovement extends BaseMovement {
 
 	public boolean checkCollisionY(Entity e, Vector2 moveVec) {
 		boolean collide = false;
-		HashSet<Vector2> newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
-		HashSet<Entity> entities = ShootEmUp.currentLevel.eMap.getEntites(newGrid);
+		HashSet<Vector2> newGrid = ShootEmUp.getCurrentLevel().eMap.getGridPos(e);
+		HashSet<Entity> entities = ShootEmUp.getCurrentLevel().eMap.getEntites(newGrid);
 		Vector4 collVec = null;
 		Entity hit = null;
 		for (Entity character : entities) {
@@ -51,7 +51,7 @@ public class BasicMovement extends BaseMovement {
 					if ((HC.getMoveBack() == true)
 							&& !(BC instanceof HitCollision)) {
 						moveBackY(e, moveVec, collVec);
-						newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
+						newGrid = ShootEmUp.getCurrentLevel().eMap.getGridPos(e);
 					}
 					if ((e.getComponent(TypeComponent.COLLISION) != null)) {
 						BC.collision(e, hit);
@@ -64,9 +64,9 @@ public class BasicMovement extends BaseMovement {
 			}
 		}
 
-		ShootEmUp.currentLevel.eMap.removeEntity(BC.getGridPos(), e);
+		ShootEmUp.getCurrentLevel().eMap.removeEntity(BC.getGridPos(), e);
 		if (!e.isDestroy()) {
-			ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
+			ShootEmUp.getCurrentLevel().eMap.addEntity(newGrid, e);
 		}
 		BC.setGridPos(newGrid);
 		return collide;
@@ -74,8 +74,8 @@ public class BasicMovement extends BaseMovement {
 
 	public boolean checkCollisionX(Entity e, Vector2 moveVec) {
 		boolean collide = false;
-		HashSet<Vector2> newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
-		HashSet<Entity> entities = ShootEmUp.currentLevel.eMap.getEntites(newGrid);
+		HashSet<Vector2> newGrid = ShootEmUp.getCurrentLevel().eMap.getGridPos(e);
+		HashSet<Entity> entities = ShootEmUp.getCurrentLevel().eMap.getEntites(newGrid);
 		Vector4 collVec = null;
 		Entity hit = null;
 		for (Entity character : entities) {
@@ -88,7 +88,7 @@ public class BasicMovement extends BaseMovement {
 					if ((HC.getMoveBack() == true)
 							&& !(BC instanceof HitCollision)) {
 						moveBackX(e, moveVec, collVec);
-						newGrid = ShootEmUp.currentLevel.eMap.getGridPos(e);
+						newGrid = ShootEmUp.getCurrentLevel().eMap.getGridPos(e);
 					}
 					if ((e.getComponent(TypeComponent.COLLISION) != null)) {
 						BC.collision(e, hit);
@@ -101,9 +101,9 @@ public class BasicMovement extends BaseMovement {
 			}
 		}
 
-		ShootEmUp.currentLevel.eMap.removeEntity(BC.getGridPos(), e);
+		ShootEmUp.getCurrentLevel().eMap.removeEntity(BC.getGridPos(), e);
 		if (!e.isDestroy()) {
-			ShootEmUp.currentLevel.eMap.addEntity(newGrid, e);
+			ShootEmUp.getCurrentLevel().eMap.addEntity(newGrid, e);
 		}
 		BC.setGridPos(newGrid);
 		return collide;

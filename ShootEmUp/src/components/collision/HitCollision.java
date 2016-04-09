@@ -18,8 +18,8 @@ public class HitCollision extends BaseCollision {
 	public HitCollision(Entity e, Weapon weapon) {
 		this.weapon = weapon;
 		moveBack = false;
-		setGridPos(ShootEmUp.currentLevel.eMap.getGridPos(e));
-		ShootEmUp.currentLevel.eMap.addEntity(getGridPos(), e);
+		setGridPos(ShootEmUp.getCurrentLevel().eMap.getGridPos(e));
+		ShootEmUp.getCurrentLevel().eMap.addEntity(getGridPos(), e);
 	}
 
 	@Override

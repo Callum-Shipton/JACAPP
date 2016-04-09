@@ -22,8 +22,8 @@ public class PickupCollision extends BaseCollision {
 		this.type = type;
 
 		moveBack = false;
-		setGridPos(ShootEmUp.currentLevel.eMap.getGridPos(e));
-		ShootEmUp.currentLevel.eMap.addEntity(getGridPos(), e);
+		setGridPos(ShootEmUp.getCurrentLevel().eMap.getGridPos(e));
+		ShootEmUp.getCurrentLevel().eMap.addEntity(getGridPos(), e);
 	}
 
 	public PickupCollision(Entity e, TypePickup type, String name) {
@@ -31,26 +31,26 @@ public class PickupCollision extends BaseCollision {
 		this.name = name;
 		
 		moveBack = false;
-		setGridPos(ShootEmUp.currentLevel.eMap.getGridPos(e));
-		ShootEmUp.currentLevel.eMap.addEntity(getGridPos(), e);
+		setGridPos(ShootEmUp.getCurrentLevel().eMap.getGridPos(e));
+		ShootEmUp.getCurrentLevel().eMap.addEntity(getGridPos(), e);
 	}
 	
 	public PickupCollision(Entity e, TypePickup type, String subtype, String subsubtype) {
 		this.type = type;
 
 		moveBack = false;
-		setGridPos(ShootEmUp.currentLevel.eMap.getGridPos(e));
-		ShootEmUp.currentLevel.eMap.addEntity(getGridPos(), e);
+		setGridPos(ShootEmUp.getCurrentLevel().eMap.getGridPos(e));
+		ShootEmUp.getCurrentLevel().eMap.addEntity(getGridPos(), e);
 	}
 
 	@Override
 	public void collision(Entity e, Entity hit) {
-		BaseInventory BI = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory BI = ShootEmUp.getCurrentLevel().getPlayer().getComponent(TypeComponent.INVENTORY);
 		if (hit.getComponent(TypeComponent.CONTROL) instanceof PlayerControl) {
 			if ((BI)
 					.giveItem(type, name)) {
-				ShootEmUp.currentLevel.eMap.removeEntity(gridPos, e);
-				ShootEmUp.currentLevel.oldEntities.add(e);
+				ShootEmUp.getCurrentLevel().eMap.removeEntity(gridPos, e);
+				ShootEmUp.getCurrentLevel().oldEntities.add(e);
 				e.destroy();
 			}
 		}

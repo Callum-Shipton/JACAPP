@@ -28,18 +28,12 @@ import save.Save;
 public class ShootEmUp {
 
 	// Handle for monitor/window funcs
-	private static Display display;
-	
+	private static Display display;	
 	private static MusicPlayer musicPlayer;
-
-	public static Level currentLevel;
-	
-	private static boolean paused;
-	
+	private static Level currentLevel;	
+	private static boolean paused;	
 	private static MenuSystem menuSystem;
-
 	private static Save save;
-
 	private static double FPS = 60.0;
 
 	public void run() {
@@ -120,7 +114,7 @@ public class ShootEmUp {
 		Controllers.poll();
 		menuSystem.update();
 		if (!paused) {
-			currentLevel.update();
+			getCurrentLevel().update();
 		}
 		// dealing with pausing music
 		musicPlayer.update();
@@ -134,7 +128,7 @@ public class ShootEmUp {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		if (!paused) {
-			currentLevel.render();
+			getCurrentLevel().render();
 		}
 		menuSystem.render();
 
@@ -185,5 +179,13 @@ public class ShootEmUp {
 
 	public static MenuSystem getMenuSystem() {
 		return menuSystem;
+	}
+
+	public static Level getCurrentLevel() {
+		return currentLevel;
+	}
+
+	public static void setCurrentLevel(Level currentLevel) {
+		ShootEmUp.currentLevel = currentLevel;
 	}
 }

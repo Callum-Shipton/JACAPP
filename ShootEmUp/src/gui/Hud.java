@@ -60,7 +60,7 @@ public class Hud extends GuiComponent {
 				PI.getLevel(), 0.5f);
 		hudElems.add(levelCounter);
 		waveCounter = new Counter(170.0f, 82.0f, Art.getImage("WaveIcon"), false,
-				ShootEmUp.currentLevel.spawner.getWave(), 0.5f);
+				ShootEmUp.getCurrentLevel().spawner.getWave(), 0.5f);
 		hudElems.add(waveCounter);
 		livesCounter = new Counter(250.0f, 82.0f, Art.getImage("LivesIcon"), false,
 				PA.getLives(), 0.5f);
@@ -121,7 +121,7 @@ public class Hud extends GuiComponent {
 		frost.update();
 		moneyCounter.update(PI.getCoins());
 		levelCounter.update(PI.getLevel());
-		waveCounter.update(ShootEmUp.currentLevel.spawner.getWave());
+		waveCounter.update(ShootEmUp.getCurrentLevel().spawner.getWave());
 		livesCounter.update(PA.getLives());
 		
 		int maxHealth = PA.getMaxHealth();

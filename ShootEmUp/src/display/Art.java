@@ -343,12 +343,12 @@ public class Art {
 	public static void refreshRenderers() {
 		base.initRenderData();
 		stat.initRenderData();
-		if (ShootEmUp.currentLevel != null) {
-			irWall.initRenderData(ShootEmUp.currentLevel.map.getWalls(),
+		if (ShootEmUp.getCurrentLevel() != null) {
+			irWall.initRenderData(ShootEmUp.getCurrentLevel().map.getWalls(),
 					new Vector2(artFiles.get("Walls").getFWidth(), artFiles.get("Walls").getFHeight()));
-			irBack.initRenderData(ShootEmUp.currentLevel.map.getBackgroundTiles(),
+			irBack.initRenderData(ShootEmUp.getCurrentLevel().map.getBackgroundTiles(),
 					new Vector2(artFiles.get("Floor").getFWidth(), artFiles.get("Floor").getFHeight()));
-			irFore.initRenderData(ShootEmUp.currentLevel.map.getForegroundTiles(),
+			irFore.initRenderData(ShootEmUp.getCurrentLevel().map.getForegroundTiles(),
 					new Vector2(artFiles.get("Walls").getFWidth(), artFiles.get("Walls").getFHeight()));
 		}
 	}

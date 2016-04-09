@@ -8,8 +8,8 @@ public class RigidCollision extends BaseCollision {
 
 	public RigidCollision(Entity e , BaseGraphics BG) {
 		moveBack = true;
-		setGridPos(ShootEmUp.currentLevel.eMap.getGridPos(e, BG));
-		ShootEmUp.currentLevel.eMap.addEntity(getGridPos(), e);
+		setGridPos(ShootEmUp.getCurrentLevel().eMap.getGridPos(e, BG));
+		ShootEmUp.getCurrentLevel().eMap.addEntity(getGridPos(), e);
 	}
 
 	@Override

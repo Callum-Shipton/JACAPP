@@ -53,6 +53,6 @@ public abstract class Potion implements Serializable {
 		BC = new PickupCollision(item, TypePickup.POTION, type);
 		item.addComponent(BS);
 		item.addComponent(BC);
-		ShootEmUp.currentLevel.newEntities.add(item);
+		ShootEmUp.getCurrentLevel().newEntities.add(item);
 	}
 }

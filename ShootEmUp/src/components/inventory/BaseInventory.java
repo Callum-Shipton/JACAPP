@@ -303,7 +303,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 	private void drop(Entity e) {
 
 		// give player exp
-		BaseInventory BI = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory BI = ShootEmUp.getCurrentLevel().getPlayer().getComponent(TypeComponent.INVENTORY);
 		BI.giveExp(1);
 
 		dropCoin();
@@ -371,6 +371,6 @@ public class BaseInventory extends Component implements InventoryComponent {
 		CoinC = new PickupCollision(item, TypePickup.COIN, "Coin");
 		item.addComponent(CoinS);
 		item.addComponent(CoinC);
-		ShootEmUp.currentLevel.newEntities.add(item);
+		ShootEmUp.getCurrentLevel().newEntities.add(item);
 	}
 }

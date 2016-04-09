@@ -34,16 +34,16 @@ public class AIControl extends BaseControl {
 		this.BG = BG;
 		this.BM = BM;
 		if (walls == null) {
-			walls = ShootEmUp.currentLevel.map.walls;
+			walls = ShootEmUp.getCurrentLevel().map.walls;
 		}
 		if (goalBounder == null) {
-			goalBounder = ShootEmUp.currentLevel.map.goalBounder;
+			goalBounder = ShootEmUp.getCurrentLevel().map.goalBounder;
 		}
 	}
 
 	@Override
 	public void update(Entity e) {
-		BaseGraphics PlayerG = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.GRAPHICS);
+		BaseGraphics PlayerG = ShootEmUp.getCurrentLevel().getPlayer().getComponent(TypeComponent.GRAPHICS);
 		goal = new Vector2((float) Math.floor(PlayerG.getX() / Map.TILE_WIDTH),
 				(float) Math.floor(PlayerG.getY() / Map.TILE_HEIGHT));
 		target = ai();

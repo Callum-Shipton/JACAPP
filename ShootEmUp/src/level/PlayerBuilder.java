@@ -84,7 +84,7 @@ public abstract class PlayerBuilder {
 		player.addComponent(i);
 		player.addComponent(new PlayerControl(player, g, a, m, i));
 
-		Level level = ShootEmUp.currentLevel;
+		Level level = ShootEmUp.getCurrentLevel();
 		
 		level.entities.add(player);
 		level.hud = new Hud(player, 0, 0);

@@ -74,17 +74,17 @@ public class Spawner {
 			if (wave < MAX_WAVE) {
 				wave++;
 				changeRadius((wave - 1) * radLevel);
-			} else if (ShootEmUp.currentLevel.getLevel() < MAX_LEVEL) {
+			} else if (ShootEmUp.getCurrentLevel().getLevel() < MAX_LEVEL) {
 				if (ShootEmUp.getSave()== null) {
 					ShootEmUp.setSave(new Save());
 				} else {
 					ShootEmUp.getSave().saveCharacter();
 				}
 				ShootEmUp.getSave().saveToSystem(1);
-				BaseAttack BA = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK);
+				BaseAttack BA = ShootEmUp.getCurrentLevel().getPlayer().getComponent(TypeComponent.ATTACK);
 				TypeAttack temp = BA
 						.getAttackType();
-				ShootEmUp.currentLevel = new Level(Art.levels, ShootEmUp.currentLevel.getLevel() + 1);
+				ShootEmUp.setCurrentLevel(new Level(Art.levels, ShootEmUp.getCurrentLevel().getLevel() + 1));
 				ShootEmUp.getSave().load(1);
 				PlayerBuilder.buildPlayer(temp, ShootEmUp.getSave().getCharacter(temp));
 			}
@@ -98,7 +98,7 @@ public class Spawner {
 
 	public void checkSpawn(Entity e) {
 		BasicMovement BM = e.getComponent(TypeComponent.MOVEMENT);
-		ShootEmUp.currentLevel.newEntities.add(e);
+		ShootEmUp.getCurrentLevel().newEntities.add(e);
 		BM.checkCollisionY(e, new Vector2(0, 0));
 		BM.checkCollisionX(e, new Vector2(0, 0));
 	}

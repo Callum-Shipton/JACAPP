@@ -53,7 +53,7 @@ public class Inventory extends GuiComponent {
 		Button itemButton;
 		boolean change = false;
 		int position = 0;
-		BaseInventory BI = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory BI = ShootEmUp.getCurrentLevel().getPlayer().getComponent(TypeComponent.INVENTORY);
 		while (Buttons.hasNext()) {
 			itemButton = Buttons.next();
 			if (itemButton.hasClicked()) {
