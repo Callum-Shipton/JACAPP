@@ -10,49 +10,49 @@ public class MenuSystem {
 	private boolean mainMenu = true;
 	private Stack<GuiMenu> menuStack = new Stack<GuiMenu>();
 
-	public MenuSystem(){
-		
+	public MenuSystem() {
+
 	}
-	
-	public void update() {
-		if (!menuStack.isEmpty()) {
-			menuStack.peek().update();
+
+	public void addMenu(GuiMenu menu) {
+		this.menuStack.add(menu);
+	}
+
+	public void clearMenus() {
+		while (!this.menuStack.isEmpty()) {
+			this.menuStack.pop();
 		}
 	}
-	
-	public void pause(){
-		if (menuStack.isEmpty()) {
+
+	public boolean isMainMenu() {
+		return this.mainMenu;
+	}
+
+	public void pause() {
+		if (this.menuStack.isEmpty()) {
 			addMenu(new InventoryMenu(Art.getImage("InventoryScreen")));
 		} else {
 			clearMenus();
 		}
 	}
-	
-	public void render(){
-		if (!menuStack.isEmpty()) {
-			menuStack.peek().render();
-		}
-	}
-	
-	public void clearMenus() {
-		while (!menuStack.isEmpty()) {
-			menuStack.pop();
-		}
+
+	public void popMenu() {
+		this.menuStack.pop();
 	}
 
-	public void addMenu(GuiMenu menu) {
-		menuStack.add(menu);
-	}
-	
-	public void popMenu(){
-		menuStack.pop();
-	}
-
-	public boolean isMainMenu() {
-		return mainMenu;
+	public void render() {
+		if (!this.menuStack.isEmpty()) {
+			this.menuStack.peek().render();
+		}
 	}
 
 	public void setMainMenu(boolean mainMenu) {
 		this.mainMenu = mainMenu;
+	}
+
+	public void update() {
+		if (!this.menuStack.isEmpty()) {
+			this.menuStack.peek().update();
+		}
 	}
 }

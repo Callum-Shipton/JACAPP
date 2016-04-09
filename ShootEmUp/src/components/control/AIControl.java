@@ -17,17 +17,17 @@ import object.Entity;
 
 public class AIControl extends BaseControl {
 
-	private BaseMovement BM;
-	private BaseGraphics BG;
-	private BaseAttack BA;
-
-	private int counter = 0;
-	private int aggression = 30;
-	private Vector2 target;
-	private Vector2 goal;
-
 	private static HashMap<Vector2, Entity> walls;
 	private static GoalBounder goalBounder;
+	private BaseMovement BM;
+
+	private BaseGraphics BG;
+	private BaseAttack BA;
+	private int counter = 0;
+	private int aggression = 30;
+
+	private Vector2 target;
+	private Vector2 goal;
 
 	public AIControl(BaseGraphics BG, BaseAttack BA, BaseMovement BM) {
 		this.BA = BA;
@@ -42,72 +42,11 @@ public class AIControl extends BaseControl {
 		}
 	}
 
-	@Override
-	public void update(Entity e) {
-		BaseGraphics PlayerG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		goal = new Vector2((float) Math.floor(PlayerG.getX() / Map.getTileWidth()),
-				(float) Math.floor(PlayerG.getY() / Map.getTileHeight()));
-		target = ai();
-		float y = target.y() * Map.getTileHeight();
-		float x = target.x() * Map.getTileWidth();
-
-		if (target != null) {
-			Vector2 movement = new Vector2(0.0f, 0.0f);
-			if (y < BG.getY()) {
-				if ((y - BG.getY()) > -BM.getSpeed()) {
-					movement.add(0.0f, ((1.0f / BM.getSpeed()) * (y - BG.getY())));
-				} else {
-					movement.add(0.0f, -1.0f);
-				}
-			}
-			if (x < BG.getX()) {
-				if ((x - BG.getX()) > -BM.getSpeed()) {
-					movement.add(((1.0f / BM.getSpeed()) * (x - BG.getX())), 0.0f);
-				} else {
-					movement.add(-1.0f, 0.0f);
-				}
-			}
-			if (y > BG.getY()) {
-				if ((y - BG.getY()) < BM.getSpeed()) {
-					movement.add(0.0f, ((1.0f / BM.getSpeed()) * (y - BG.getY())));
-				} else {
-					movement.add(0.0f, 1.0f);
-				}
-			}
-			if (x > BG.getX()) {
-				if ((x - BG.getX()) < BM.getSpeed()) {
-					movement.add(((1.0f / BM.getSpeed()) * (x - BG.getX())), 0.0f);
-				} else {
-					movement.add(1.0f, 0.0f);
-				}
-			}
-			if (movement.length() > 0) {
-				if (movement.length() > 1) {
-					movement.normalize();
-				}
-				if (BG instanceof AnimatedGraphics) {
-					((AnimatedGraphics) BG).setAnimating(true);
-				}
-				BM.move(e, movement);
-				if (BG instanceof AnimatedGraphics) {
-					((AnimatedGraphics) BG).setDirection((int) (Math.round(movement.Angle()) / 45));
-				}
-			} else if (BG instanceof AnimatedGraphics) {
-				((AnimatedGraphics) BG).setAnimating(false);
-			}
-		}
-		counter++;
-		if (counter == aggression) {
-			BA.attack(e, (BG instanceof AnimatedGraphics) ? ((AnimatedGraphics) BG).getDirection() : 0);
-			counter = 0;
-		}
-	}
-
 	public Vector2 ai() {
 		PriorityQueue<Node> open = new PriorityQueue<Node>(); // queue for tiles
 		HashSet<Node> closed = new HashSet<Node>(); // list of already viewed
-		Node start = new Node(new Vector2((float) Math.floor(BG.getX() / Map.getTileWidth()),
-				(float) Math.floor(BG.getY() / Map.getTileHeight())), null);
+		Node start = new Node(new Vector2((float) Math.floor(this.BG.getX() / Map.getTileWidth()),
+				(float) Math.floor(this.BG.getY() / Map.getTileHeight())), null);
 
 		open.add(start);
 		closed.add(start);
@@ -115,7 +54,7 @@ public class AIControl extends BaseControl {
 		while (open.size() > 0) {
 			nodes++;
 			Node current = open.poll(); // Tile current being checked
-			if (current.equals(goal)) { // if goal is reached
+			if (current.equals(this.goal)) { // if goal is reached
 				Node node = current;
 				while (true) {
 					if (node.getParent() != null) {
@@ -150,7 +89,7 @@ public class AIControl extends BaseControl {
 			Node E = new Node(new Vector2(currentX + 1, currentY), current);
 			Node NE = new Node(new Vector2(currentX + 1, currentY - 1), current);
 
-			Tile currentTile = goalBounder.getTile(currentX, currentY);
+			goalBounder.getTile(currentX, currentY);
 
 			if (!closed.contains(N)) {
 				if (getWall(N) && getWall(NE)) {
@@ -222,12 +161,73 @@ public class AIControl extends BaseControl {
 		return new Vector2(0, 0);
 	}
 
+	private boolean getWall(Node node) {
+		return !walls.containsKey(node.getPosition());
+	}
+
 	@Override
 	public void receive(Message m, Entity e) {
 
 	}
 
-	private boolean getWall(Node node) {
-		return !walls.containsKey(node.getPosition());
+	@Override
+	public void update(Entity e) {
+		BaseGraphics PlayerG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
+		this.goal = new Vector2((float) Math.floor(PlayerG.getX() / Map.getTileWidth()),
+				(float) Math.floor(PlayerG.getY() / Map.getTileHeight()));
+		this.target = ai();
+		float y = this.target.y() * Map.getTileHeight();
+		float x = this.target.x() * Map.getTileWidth();
+
+		if (this.target != null) {
+			Vector2 movement = new Vector2(0.0f, 0.0f);
+			if (y < this.BG.getY()) {
+				if ((y - this.BG.getY()) > -this.BM.getSpeed()) {
+					movement.add(0.0f, ((1.0f / this.BM.getSpeed()) * (y - this.BG.getY())));
+				} else {
+					movement.add(0.0f, -1.0f);
+				}
+			}
+			if (x < this.BG.getX()) {
+				if ((x - this.BG.getX()) > -this.BM.getSpeed()) {
+					movement.add(((1.0f / this.BM.getSpeed()) * (x - this.BG.getX())), 0.0f);
+				} else {
+					movement.add(-1.0f, 0.0f);
+				}
+			}
+			if (y > this.BG.getY()) {
+				if ((y - this.BG.getY()) < this.BM.getSpeed()) {
+					movement.add(0.0f, ((1.0f / this.BM.getSpeed()) * (y - this.BG.getY())));
+				} else {
+					movement.add(0.0f, 1.0f);
+				}
+			}
+			if (x > this.BG.getX()) {
+				if ((x - this.BG.getX()) < this.BM.getSpeed()) {
+					movement.add(((1.0f / this.BM.getSpeed()) * (x - this.BG.getX())), 0.0f);
+				} else {
+					movement.add(1.0f, 0.0f);
+				}
+			}
+			if (movement.length() > 0) {
+				if (movement.length() > 1) {
+					movement.normalize();
+				}
+				if (this.BG instanceof AnimatedGraphics) {
+					((AnimatedGraphics) this.BG).setAnimating(true);
+				}
+				this.BM.move(e, movement);
+				if (this.BG instanceof AnimatedGraphics) {
+					((AnimatedGraphics) this.BG).setDirection((int) (Math.round(movement.Angle()) / 45));
+				}
+			} else if (this.BG instanceof AnimatedGraphics) {
+				((AnimatedGraphics) this.BG).setAnimating(false);
+			}
+		}
+		this.counter++;
+		if (this.counter == this.aggression) {
+			this.BA.attack(e, (this.BG instanceof AnimatedGraphics) ? ((AnimatedGraphics) this.BG).getDirection() : 0);
+			this.counter = 0;
+		}
 	}
 }

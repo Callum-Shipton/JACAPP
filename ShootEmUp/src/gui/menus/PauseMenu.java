@@ -17,12 +17,12 @@ public abstract class PauseMenu extends GuiMenu {
 		tabs.addMenuItem(ButtonBuilder.buildButton(TypeButton.UPGRADES, 0, 0));
 		tabs.addMenuItem(ButtonBuilder.buildButton(TypeButton.MAP, 0, 0));
 		tabs.addMenuItem(ButtonBuilder.buildButton(TypeButton.SAVE, 0, 0));
-		menuItems.add(tabs);
+		this.menuItems.add(tabs);
 
-		VerticalLayout nativeButtons = new VerticalLayout(30, display.getHeight() - 94, Art.getImage("ExitButton").getHeight() / 2,
-				20);
+		VerticalLayout nativeButtons = new VerticalLayout(30, this.display.getHeight() - 94,
+				Art.getImage("ExitButton").getHeight() / 2, 20);
 		nativeButtons.addMenuItem(ButtonBuilder.buildButton(TypeButton.BACK, 0, 0));
 		nativeButtons.addMenuItem(ButtonBuilder.buildButton(TypeButton.MAIN_MENU, 0, 0));
-		menuItems.add(nativeButtons);
+		this.menuItems.add(nativeButtons);
 	}
 }

@@ -6,19 +6,19 @@ public interface Vector<V> {
 
 	V add(V v);
 
-	V sub(V v);
-
-	V mult(V v);
-
-	V mult(float f);
-
-	V divide(V v);
+	V copy();
 
 	V divide(float f);
 
+	V divide(V v);
+
 	float length();
 
-	V copy();
+	V mult(float f);
+
+	V mult(V v);
+
+	V sub(V v);
 
 	FloatBuffer toBuffer();
 }

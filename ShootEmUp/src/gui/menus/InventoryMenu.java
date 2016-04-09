@@ -24,7 +24,7 @@ public class InventoryMenu extends PauseMenu {
 	public InventoryMenu(Image menuImage) {
 		super(menuImage);
 
-		playerAttack =  ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
+		this.playerAttack = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
 
 		buildHelmet();
 		buildChest();
@@ -33,99 +33,98 @@ public class InventoryMenu extends PauseMenu {
 		buildWeapon();
 
 		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
-		inventory = new Inventory(30, 30,
-				BI
-						.getInventory());
+		this.inventory = new Inventory(30, 30, BI.getInventory());
+	}
+
+	private void buildBoots() {
+		if (this.playerAttack.getBoots() != null) {
+			this.boots = new ItemSlot(560, 126, this.playerAttack.getBoots());
+		}
+	}
+
+	private void buildChest() {
+		if (this.playerAttack.getChest() != null) {
+			this.chest = new ItemSlot(560, 62, this.playerAttack.getChest());
+		}
+	}
+
+	private void buildHelmet() {
+		if (this.playerAttack.getHelmet() != null) {
+			this.helmet = new ItemSlot(560, 30, this.playerAttack.getHelmet());
+		}
+	}
+
+	private void buildLegs() {
+		if (this.playerAttack.getLegs() != null) {
+			this.legs = new ItemSlot(560, 94, this.playerAttack.getLegs());
+		}
+	}
+
+	private void buildWeapon() {
+		if (this.playerAttack.getWeapon() != null) {
+			this.weapon = new ItemSlot(560, 158, this.playerAttack.getWeapon());
+		}
 	}
 
 	@Override
 	public void render() {
 		super.render();
-		if (boots != null) {
-			boots.render(Art.stat);
+		if (this.boots != null) {
+			this.boots.render(Art.stat);
 		}
-		if (legs != null) {
-			legs.render(Art.stat);
+		if (this.legs != null) {
+			this.legs.render(Art.stat);
 		}
-		if (chest != null) {
-			chest.render(Art.stat);
+		if (this.chest != null) {
+			this.chest.render(Art.stat);
 		}
-		if (helmet != null) {
-			helmet.render(Art.stat);
+		if (this.helmet != null) {
+			this.helmet.render(Art.stat);
 		}
-		if (weapon != null) {
-			weapon.render(Art.stat);
+		if (this.weapon != null) {
+			this.weapon.render(Art.stat);
 		}
 
-		inventory.render(Art.stat);
+		this.inventory.render(Art.stat);
 	}
 
 	@Override
 	public void update() {
 		super.update();
 
-		if (boots != null) {
-			boots.updateImage(playerAttack.getBoots().getInventoryImage());
-			boots.updateStats(new int[] { playerAttack.getBoots().getDefence() });
+		if (this.boots != null) {
+			this.boots.updateImage(this.playerAttack.getBoots().getInventoryImage());
+			this.boots.updateStats(new int[] { this.playerAttack.getBoots().getDefence() });
 		} else {
 			buildBoots();
 		}
-		if (legs != null) {
-			legs.updateImage(playerAttack.getLegs().getInventoryImage());
-			legs.updateStats(new int[] { playerAttack.getLegs().getDefence() });
+		if (this.legs != null) {
+			this.legs.updateImage(this.playerAttack.getLegs().getInventoryImage());
+			this.legs.updateStats(new int[] { this.playerAttack.getLegs().getDefence() });
 		} else {
 			buildLegs();
 		}
-		if (chest != null) {
-			chest.updateImage(playerAttack.getChest().getInventoryImage());
-			chest.updateStats(new int[] { playerAttack.getChest().getDefence() });
+		if (this.chest != null) {
+			this.chest.updateImage(this.playerAttack.getChest().getInventoryImage());
+			this.chest.updateStats(new int[] { this.playerAttack.getChest().getDefence() });
 		} else {
 			buildChest();
 		}
-		if (helmet != null) {
-			helmet.updateImage(playerAttack.getHelmet().getInventoryImage());
-			helmet.updateStats(new int[] { playerAttack.getHelmet().getDefence() });
+		if (this.helmet != null) {
+			this.helmet.updateImage(this.playerAttack.getHelmet().getInventoryImage());
+			this.helmet.updateStats(new int[] { this.playerAttack.getHelmet().getDefence() });
 		} else {
 			buildHelmet();
 		}
-		if (weapon != null) {
-			weapon.updateImage(playerAttack.getWeapon().getInventoryImage());
-			int[] stats = new int[] { playerAttack.getWeapon().getDamage(), playerAttack.getWeapon().getRange(),
-					playerAttack.getWeapon().getFireRate(), playerAttack.getWeapon().getManaCost() };
-			weapon.updateStats(stats);
+		if (this.weapon != null) {
+			this.weapon.updateImage(this.playerAttack.getWeapon().getInventoryImage());
+			int[] stats = new int[] { this.playerAttack.getWeapon().getDamage(),
+					this.playerAttack.getWeapon().getRange(), this.playerAttack.getWeapon().getFireRate(),
+					this.playerAttack.getWeapon().getManaCost() };
+			this.weapon.updateStats(stats);
 		} else {
 			buildWeapon();
 		}
-		inventory.update();
-	}
-
-	private void buildHelmet() {
-		if (playerAttack.getHelmet() != null) {
-			helmet = new ItemSlot(560, 30, playerAttack.getHelmet());
-		}
-	}
-
-	private void buildChest() {
-		if (playerAttack.getChest() != null) {
-			chest = new ItemSlot(560, 62, playerAttack.getChest());
-		}
-	}
-
-	private void buildLegs() {
-		if (playerAttack.getLegs() != null) {
-			legs = new ItemSlot(560, 94, playerAttack.getLegs());
-		}
-	}
-
-	private void buildBoots() {
-		if (playerAttack.getBoots() != null) {
-			boots = new ItemSlot(560, 126, playerAttack.getBoots());
-		}
-	}
-
-	private void buildWeapon() {
-		if (playerAttack.getWeapon() != null) {
-			weapon = new ItemSlot(560, 158, playerAttack.getWeapon());
-		}
+		this.inventory.update();
 	}
 }

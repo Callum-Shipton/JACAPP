@@ -17,17 +17,17 @@ public class PointSpawn extends BaseSpawn implements SpawnComponent {
 	}
 
 	@Override
-	public void spawn(Entity e) {
-		BG.setX(spawnLoc.x());
-		BG.setY(spawnLoc.y());
-		e.send(Message.ENTITY_MOVED);
-	}
-
-	@Override
 	public void receive(Message m, Entity e) {
 		if (m == Message.ENTITY_DIED) {
 			spawn(e);
 		}
+	}
+
+	@Override
+	public void spawn(Entity e) {
+		this.BG.setX(this.spawnLoc.x());
+		this.BG.setY(this.spawnLoc.y());
+		e.send(Message.ENTITY_MOVED);
 	}
 
 	@Override

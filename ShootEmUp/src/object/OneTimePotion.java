@@ -13,22 +13,22 @@ public class OneTimePotion extends Potion {
 
 	@Override
 	public void update(Entity e) {
-		if (active) {
+		if (this.active) {
 			BaseAttack BA = e.getComponent(TypeComponent.ATTACK);
-			switch (type) {
-				case "Health":
-					BA.addHealth(5);
-					active = false;
-					break;
+			switch (this.type) {
+			case "Health":
+				BA.addHealth(5);
+				this.active = false;
+				break;
 
-				case "Mana":
-					BA.addMana(5);
-					active = false;
-					break;
+			case "Mana":
+				BA.addMana(5);
+				this.active = false;
+				break;
 
-				default:
-					System.err.println("Invalid Potion Type");
-					break;
+			default:
+				System.err.println("Invalid Potion Type");
+				break;
 			}
 		}
 	}

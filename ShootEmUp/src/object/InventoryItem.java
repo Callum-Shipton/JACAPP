@@ -17,38 +17,38 @@ import math.Vector2;
 public abstract class InventoryItem implements DatableObject, Serializable {
 
 	private static final long serialVersionUID = 4785946601775436341L;
-	
+
 	protected static Random rand = new Random();
-	
+
 	protected String name;
 	protected transient TypePickup typePickup;
-	
-	public void destroy(Entity e){
+
+	public void destroy(Entity e) {
 		Entity item = new Entity();
 		AnimatedGraphics BG = null;
 		PointSpawn BS;
 		PickupCollision BC;
-		
+
 		BaseGraphics entityG = e.getComponent(TypeComponent.GRAPHICS);
-		
-		BG = new AnimatedGraphics(Art.getImage(name), Art.base, true, 1f);
+
+		BG = new AnimatedGraphics(Art.getImage(this.name), Art.base, true, 1f);
 		BS = new PointSpawn(BG, new Vector2(entityG.getX() - BG.getWidth(), entityG.getY() - BG.getHeight()), item);
 		item.addComponent(BG);
-		BC = new PickupCollision(item, typePickup, name);
+		BC = new PickupCollision(item, this.typePickup, this.name);
 		item.addComponent(BS);
 		item.addComponent(BC);
 		ShootEmUp.getCurrentLevel().addEntity(item);
 	}
-	
+
 	public Image getInventoryImage() {
-		return Art.getImage(name + "Button");
+		return Art.getImage(this.name + "Button");
+	}
+
+	public String getName() {
+		return this.name;
 	}
 
 	public TypePickup getTypePickup() {
-		return typePickup;
-	}
-	
-	public String getName(){
-		return name;
+		return this.typePickup;
 	}
 }

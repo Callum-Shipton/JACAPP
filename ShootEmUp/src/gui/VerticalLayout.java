@@ -18,22 +18,22 @@ public class VerticalLayout extends GuiComponent {
 	}
 
 	public void addMenuItem(GuiComponent menuItem) {
-		menuItem.setX(x);
-		menuItem.setY(y + ((gap + height) * menuItems.size()));
-		menuItems.add(menuItem);
-	}
-
-	@Override
-	public void update() {
-		for (GuiComponent menuItem : menuItems) {
-			menuItem.update();
-		}
+		menuItem.setX(this.x);
+		menuItem.setY(this.y + ((this.gap + this.height) * this.menuItems.size()));
+		this.menuItems.add(menuItem);
 	}
 
 	@Override
 	public void render(DPDTRenderer d) {
-		for (GuiComponent menuItem : menuItems) {
+		for (GuiComponent menuItem : this.menuItems) {
 			menuItem.render(Art.stat);
+		}
+	}
+
+	@Override
+	public void update() {
+		for (GuiComponent menuItem : this.menuItems) {
+			menuItem.update();
 		}
 	}
 }

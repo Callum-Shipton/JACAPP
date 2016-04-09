@@ -29,7 +29,7 @@ public class Save implements Serializable {
 
 	private final static byte[] KEY = "funbrella0000000".getBytes();
 	private final static String TRANSFORMATION = "AES";
-	
+
 	private CharacterSave warrior;
 	private CharacterSave archer;
 	private CharacterSave mage;
@@ -39,79 +39,28 @@ public class Save implements Serializable {
 	private int level = 1;
 
 	public Save() {
-		
-	}
 
-	public void saveCharacter() {
-		if (ShootEmUp.getCurrentLevel().getLevel() > level) {
-			level = ShootEmUp.getCurrentLevel().getLevel();
-		}
-		BaseAttack BA = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
-		TypeAttack tempAttack = BA
-				.getAttackType();
-
-		switch (tempAttack) {
-			case WARRIOR:
-				warrior = new CharacterSave();
-				break;
-			case ARCHER:
-				archer = new CharacterSave();
-				break;
-			case MAGE:
-				mage = new CharacterSave();
-				break;
-			case BATTLE_MAGE:
-				battleMage = new CharacterSave();
-				break;
-			case ROGUE:
-				rogue = new CharacterSave();
-				break;
-		}
 	}
 
 	public CharacterSave getCharacter(TypeAttack type) {
 		switch (type) {
-			case ARCHER:
-				return archer;
-			case BATTLE_MAGE:
-				return battleMage;
-			case MAGE:
-				return mage;
-			case ROGUE:
-				return rogue;
-			case WARRIOR:
-				return warrior;
-			default:
-				return warrior;
+		case ARCHER:
+			return this.archer;
+		case BATTLE_MAGE:
+			return this.battleMage;
+		case MAGE:
+			return this.mage;
+		case ROGUE:
+			return this.rogue;
+		case WARRIOR:
+			return this.warrior;
+		default:
+			return this.warrior;
 		}
 	}
 
 	public int getLevel() {
-		return level;
-	}
-
-	public void saveToSystem(int num) {
-
-		try {
-			FileOutputStream fileOut = new FileOutputStream("save" + num + ".ser");
-
-			// Length is 16 byte
-			SecretKeySpec sks = new SecretKeySpec(KEY, TRANSFORMATION);
-
-			// Create cipher
-			Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-			cipher.init(Cipher.ENCRYPT_MODE, sks);
-			SealedObject sealedObject = new SealedObject(this, cipher);
-
-			// Wrap the output stream
-			CipherOutputStream cos = new CipherOutputStream(fileOut, cipher);
-			ObjectOutputStream outputStream = new ObjectOutputStream(cos);
-			outputStream.writeObject(sealedObject);
-			outputStream.close();
-		} catch (IllegalBlockSizeException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException
-				| IOException e) {
-			e.printStackTrace();
-		}
+		return this.level;
 	}
 
 	public void load(int num) {
@@ -137,11 +86,61 @@ public class Save implements Serializable {
 			e.printStackTrace();
 			s = null;
 		}
-		
+
 		this.warrior = s.warrior;
 		this.archer = s.archer;
 		this.mage = s.mage;
 		this.battleMage = s.battleMage;
 		this.rogue = s.rogue;
+	}
+
+	public void saveCharacter() {
+		if (ShootEmUp.getCurrentLevel().getLevel() > this.level) {
+			this.level = ShootEmUp.getCurrentLevel().getLevel();
+		}
+		BaseAttack BA = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
+		TypeAttack tempAttack = BA.getAttackType();
+
+		switch (tempAttack) {
+		case WARRIOR:
+			this.warrior = new CharacterSave();
+			break;
+		case ARCHER:
+			this.archer = new CharacterSave();
+			break;
+		case MAGE:
+			this.mage = new CharacterSave();
+			break;
+		case BATTLE_MAGE:
+			this.battleMage = new CharacterSave();
+			break;
+		case ROGUE:
+			this.rogue = new CharacterSave();
+			break;
+		}
+	}
+
+	public void saveToSystem(int num) {
+
+		try {
+			FileOutputStream fileOut = new FileOutputStream("save" + num + ".ser");
+
+			// Length is 16 byte
+			SecretKeySpec sks = new SecretKeySpec(KEY, TRANSFORMATION);
+
+			// Create cipher
+			Cipher cipher = Cipher.getInstance(TRANSFORMATION);
+			cipher.init(Cipher.ENCRYPT_MODE, sks);
+			SealedObject sealedObject = new SealedObject(this, cipher);
+
+			// Wrap the output stream
+			CipherOutputStream cos = new CipherOutputStream(fileOut, cipher);
+			ObjectOutputStream outputStream = new ObjectOutputStream(cos);
+			outputStream.writeObject(sealedObject);
+			outputStream.close();
+		} catch (IllegalBlockSizeException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException
+				| IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

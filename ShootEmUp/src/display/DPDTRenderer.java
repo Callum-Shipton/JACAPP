@@ -39,36 +39,36 @@ public class DPDTRenderer extends Renderer {
 	private Matrix4 texture;
 
 	public DPDTRenderer(int pID) {
-		shaderProgramID = pID;
+		this.shaderProgramID = pID;
 		initRenderData();
 	}
 
 	public void draw(Image Texid, Vector2 pos, Vector2 size, float rotate, Vector2 texPos) {
 
-		glUseProgram(shaderProgramID);
-		glBindVertexArray(VAO);
+		glUseProgram(this.shaderProgramID);
+		glBindVertexArray(this.VAO);
 		glBindTexture(GL_TEXTURE_2D, Texid.getID());
 
-		model.clearToIdentity();
-		model.translate(pos.x(), pos.y(), 0.0f);
-		model.translate(0.5f * size.x(), 0.5f * size.y(), 0.0f);
-		model.rotateDeg(rotate, 0.0f, 0.0f, 1.0f);
-		model.translate(-0.5f * size.x(), -0.5f * size.y(), 0.0f);
-		model.scale(size.x(), size.y(), 1.0f);
+		this.model.clearToIdentity();
+		this.model.translate(pos.x(), pos.y(), 0.0f);
+		this.model.translate(0.5f * size.x(), 0.5f * size.y(), 0.0f);
+		this.model.rotateDeg(rotate, 0.0f, 0.0f, 1.0f);
+		this.model.translate(-0.5f * size.x(), -0.5f * size.y(), 0.0f);
+		this.model.scale(size.x(), size.y(), 1.0f);
 
-		texture.clearToIdentity();
-		texture.translate(texPos.x() / Texid.getFWidth(), texPos.y() / Texid.getFHeight(), 0.0f);
-		texture.scale(1 / Texid.getFWidth(), 1 / Texid.getFHeight(), 1.0f);
+		this.texture.clearToIdentity();
+		this.texture.translate(texPos.x() / Texid.getFWidth(), texPos.y() / Texid.getFHeight(), 0.0f);
+		this.texture.scale(1 / Texid.getFWidth(), 1 / Texid.getFHeight(), 1.0f);
 
-		matrix44Buffer = model.toBuffer();
+		this.matrix44Buffer = this.model.toBuffer();
 
-		glUniformMatrix4(modelMatrixLocation, false, matrix44Buffer);
+		glUniformMatrix4(this.modelMatrixLocation, false, this.matrix44Buffer);
 
-		matrix44Buffer.clear();
+		this.matrix44Buffer.clear();
 
-		matrix44Buffer = texture.toBuffer();
+		this.matrix44Buffer = this.texture.toBuffer();
 
-		glUniformMatrix4(textureMatrixLocation, false, matrix44Buffer);
+		glUniformMatrix4(this.textureMatrixLocation, false, this.matrix44Buffer);
 
 		// glEnableVertexAttribArray(0);
 		// glEnableVertexAttribArray(1);
@@ -81,16 +81,58 @@ public class DPDTRenderer extends Renderer {
 		glUseProgram(0);
 	}
 
+	public void draw(Image Texid, Vector2 pos, Vector2 size, float rotate, Vector2 texPos, Vector2 maxFrame) {
+		glUseProgram(this.shaderProgramID);
+		glBindVertexArray(this.VAO);
+		glBindTexture(GL_TEXTURE_2D, Texid.getID());
+
+		this.model.clearToIdentity();
+		this.model.translate(pos.x(), pos.y(), 0.0f);
+		this.model.translate(0.5f * size.x(), 0.5f * size.y(), 0.0f);
+		this.model.rotateDeg(rotate, 0.0f, 0.0f, 1.0f);
+		this.model.translate(-0.5f * size.x(), -0.5f * size.y(), 0.0f);
+		this.model.scale(size.x(), size.y(), 1.0f);
+
+		this.texture.clearToIdentity();
+		this.texture.translate(texPos.x() / maxFrame.x(), texPos.y() / maxFrame.y(), 0.0f);
+		this.texture.scale(1 / maxFrame.x(), 1 / maxFrame.y(), 1.0f);
+
+		this.matrix44Buffer = this.model.toBuffer();
+
+		glUniformMatrix4(this.modelMatrixLocation, false, this.matrix44Buffer);
+
+		this.matrix44Buffer.clear();
+
+		this.matrix44Buffer = this.texture.toBuffer();
+
+		glUniformMatrix4(this.textureMatrixLocation, false, this.matrix44Buffer);
+
+		// glEnableVertexAttribArray(0);
+		// glEnableVertexAttribArray(1);
+
+		// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, 0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glBindVertexArray(0);
+		glUseProgram(0);
+
+	}
+
+	public int getVAO() {
+		return this.VAO;
+	}
+
 	public void initRenderData() {
 
-		matrix44Buffer = BufferUtils.createFloatBuffer(16);
-		model = new Matrix4();
-		texture = new Matrix4();
+		this.matrix44Buffer = BufferUtils.createFloatBuffer(16);
+		this.model = new Matrix4();
+		this.texture = new Matrix4();
 
-		glUseProgram(shaderProgramID);
+		glUseProgram(this.shaderProgramID);
 
-		modelMatrixLocation = glGetUniformLocation(shaderProgramID, "modelMatrix");
-		textureMatrixLocation = glGetUniformLocation(shaderProgramID, "textureMatrix");
+		this.modelMatrixLocation = glGetUniformLocation(this.shaderProgramID, "modelMatrix");
+		this.textureMatrixLocation = glGetUniformLocation(this.shaderProgramID, "textureMatrix");
 
 		glUseProgram(0);
 
@@ -124,11 +166,11 @@ public class DPDTRenderer extends Renderer {
 		indicesBuffer.put(indices);
 		indicesBuffer.flip();
 
-		VAO = glGenVertexArrays();
-		glBindVertexArray(VAO);
+		this.VAO = glGenVertexArrays();
+		glBindVertexArray(this.VAO);
 
-		VBO = glGenBuffers();
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		this.VBO = glGenBuffers();
+		glBindBuffer(GL_ARRAY_BUFFER, this.VBO);
 		glBufferData(GL_ARRAY_BUFFER, verticesFloatBuffer, GL_DYNAMIC_DRAW);
 
 		glVertexAttribPointer(0, TexturedVertex.positionElementCount, GL_FLOAT, false, TexturedVertex.stride,
@@ -142,55 +184,13 @@ public class DPDTRenderer extends Renderer {
 
 		glEnableVertexAttribArray(1);
 
-		EBO = glGenBuffers();
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+		this.EBO = glGenBuffers();
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this.EBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL_STATIC_DRAW);
 
 		// glBindVertexArray(0);
 
 		// glBindBuffer(GL_ARRAY_BUFFER, 0);
 		// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	}
-
-	public int getVAO() {
-		return VAO;
-	}
-
-	public void draw(Image Texid, Vector2 pos, Vector2 size, float rotate, Vector2 texPos, Vector2 maxFrame) {
-		glUseProgram(shaderProgramID);
-		glBindVertexArray(VAO);
-		glBindTexture(GL_TEXTURE_2D, Texid.getID());
-
-		model.clearToIdentity();
-		model.translate(pos.x(), pos.y(), 0.0f);
-		model.translate(0.5f * size.x(), 0.5f * size.y(), 0.0f);
-		model.rotateDeg(rotate, 0.0f, 0.0f, 1.0f);
-		model.translate(-0.5f * size.x(), -0.5f * size.y(), 0.0f);
-		model.scale(size.x(), size.y(), 1.0f);
-
-		texture.clearToIdentity();
-		texture.translate(texPos.x() / maxFrame.x(), texPos.y() / maxFrame.y(), 0.0f);
-		texture.scale(1 / maxFrame.x(), 1 / maxFrame.y(), 1.0f);
-
-		matrix44Buffer = model.toBuffer();
-
-		glUniformMatrix4(modelMatrixLocation, false, matrix44Buffer);
-
-		matrix44Buffer.clear();
-
-		matrix44Buffer = texture.toBuffer();
-
-		glUniformMatrix4(textureMatrixLocation, false, matrix44Buffer);
-
-		// glEnableVertexAttribArray(0);
-		// glEnableVertexAttribArray(1);
-
-		// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, 0);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		glBindVertexArray(0);
-		glUseProgram(0);
-
 	}
 }

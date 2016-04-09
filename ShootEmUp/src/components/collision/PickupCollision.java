@@ -19,18 +19,12 @@ public class PickupCollision extends BaseCollision {
 	private final int DESPAWN_TIME = 10;
 	private int timer = 0;
 
-	public PickupCollision(Entity e, TypePickup type, SubType subtype, SubSubType subsubtype) {
-		this.type = type;
-
-		moveBack = false;
-	}
-
 	public PickupCollision(Entity e, TypePickup type, String name) {
 		this.type = type;
 		this.name = name;
 
-		moveBack = false;
-		
+		this.moveBack = false;
+
 		EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
 		setGridPos(eMap.getGridPos(e));
 		eMap.addEntity(getGridPos(), e);
@@ -39,35 +33,41 @@ public class PickupCollision extends BaseCollision {
 	public PickupCollision(Entity e, TypePickup type, String subtype, String subsubtype) {
 		this.type = type;
 
-		moveBack = false;
+		this.moveBack = false;
 		EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
 		setGridPos(eMap.getGridPos(e));
 		eMap.addEntity(getGridPos(), e);
+	}
+
+	public PickupCollision(Entity e, TypePickup type, SubType subtype, SubSubType subsubtype) {
+		this.type = type;
+
+		this.moveBack = false;
 	}
 
 	@Override
 	public void collision(Entity e, Entity hit) {
 		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
 		if (hit.getComponent(TypeComponent.CONTROL) instanceof PlayerControl) {
-			if ((BI).giveItem(type, name)) {
-				ShootEmUp.getCurrentLevel().removeEntity(gridPos, e);
+			if ((BI).giveItem(this.type, this.name)) {
+				ShootEmUp.getCurrentLevel().removeEntity(this.gridPos, e);
 				e.destroy();
 			}
 		}
 	}
 
 	@Override
-	public void update(Entity e) {
-		if (timer >= Seconds.ticks(DESPAWN_TIME)) {
-			e.destroy();
-		}
-		timer++;
-	}
-
-	@Override
 	public void receive(Message m, Entity e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void update(Entity e) {
+		if (this.timer >= Seconds.ticks(this.DESPAWN_TIME)) {
+			e.destroy();
+		}
+		this.timer++;
 	}
 
 }

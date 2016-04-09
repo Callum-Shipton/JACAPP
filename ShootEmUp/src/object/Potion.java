@@ -26,17 +26,8 @@ public abstract class Potion implements Serializable {
 		this.type = type;
 	}
 
-	public abstract void update(Entity e);
-
-	public void usePotion() {
-		if (quantity > 0) {
-			active = true;
-			quantity--;
-		}
-	}
-
 	public void addPotion() {
-		quantity++;
+		this.quantity++;
 	}
 
 	public void destroy(Entity e) {
@@ -44,19 +35,28 @@ public abstract class Potion implements Serializable {
 		AnimatedGraphics BG = null;
 		PointSpawn BS;
 		PickupCollision BC;
-		
+
 		BaseGraphics EntityG = e.getComponent(TypeComponent.GRAPHICS);
-		
-		BG = new AnimatedGraphics(Art.getImage(type), Art.base, true, 1f);
+
+		BG = new AnimatedGraphics(Art.getImage(this.type), Art.base, true, 1f);
 		BS = new PointSpawn(BG, new Vector2(EntityG.getX() - BG.getWidth(), EntityG.getY() - BG.getHeight()), item);
 		item.addComponent(BG);
-		BC = new PickupCollision(item, TypePickup.POTION, type);
+		BC = new PickupCollision(item, TypePickup.POTION, this.type);
 		item.addComponent(BS);
 		item.addComponent(BC);
 		ShootEmUp.getCurrentLevel().addEntity(item);
 	}
-	
+
 	public int getQuantity() {
-		return quantity;
+		return this.quantity;
+	}
+
+	public abstract void update(Entity e);
+
+	public void usePotion() {
+		if (this.quantity > 0) {
+			this.active = true;
+			this.quantity--;
+		}
 	}
 }

@@ -12,48 +12,49 @@ public class PlayerAttack extends BaseAttack {
 
 	protected int lives;
 
-	public PlayerAttack(TypeAttack type, int health, int mana, Weapon weapon) {
-		super(type,health, mana, weapon);
-		lives = 3;
-	}
-
 	public PlayerAttack(TypeAttack type, CharacterSave save) {
 		super(type);
-		lives = save.getLives();
+		this.lives = save.getLives();
 
-		health = save.getHealth();
-		mana = save.getMana();
-		weapon = save.getWeapon();
-		boots = save.getBoots();
-		legs = save.getLegs();
-		chest = save.getChest();
-		helmet = save.getHelmet();
+		this.health = save.getHealth();
+		this.mana = save.getMana();
+		this.weapon = save.getWeapon();
+		this.boots = save.getBoots();
+		this.legs = save.getLegs();
+		this.chest = save.getChest();
+		this.helmet = save.getHelmet();
 		setArmourValue();
 
-		maxHealth = save.getMaxHealth();
-		maxHealthRegen = save.getMaxHealthRegen();
-		maxMana = save.getMaxMana();
-		maxManaRegen = save.getMaxManaRegen();
+		this.maxHealth = save.getMaxHealth();
+		this.maxHealthRegen = save.getMaxHealthRegen();
+		this.maxMana = save.getMaxMana();
+		this.maxManaRegen = save.getMaxManaRegen();
 	}
-	
-	public void die(Entity e){
-		health = maxHealth;
-		mana = maxMana;
+
+	public PlayerAttack(TypeAttack type, int health, int mana, Weapon weapon) {
+		super(type, health, mana, weapon);
+		this.lives = 3;
+	}
+
+	@Override
+	public void die(Entity e) {
+		this.health = this.maxHealth;
+		this.mana = this.maxMana;
 		removeLife();
 		e.send(Message.ENTITY_DIED);
 	}
 
+	public int getLives() {
+		return this.lives;
+	}
+
 	public void removeLife() {
-		if (lives == 1) {
+		if (this.lives == 1) {
 			ShootEmUp.setPaused(true);
 			ShootEmUp.getMenuSystem().addMenu(new GameOverMenu(Art.getImage("GameOverScreen")));
 		} else {
-			lives--;
+			this.lives--;
 		}
-	}
-
-	public int getLives() {
-		return lives;
 	}
 
 	public void setLives(int lives) {

@@ -21,28 +21,28 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 
 	@Override
 	public void destroy(Entity e) {
-		ShootEmUp.getCurrentLevel().removeEntity(gridPos, e);
+		ShootEmUp.getCurrentLevel().removeEntity(this.gridPos, e);
+	}
+
+	public HashSet<Vector2> getGridPos() {
+		return this.gridPos;
+	}
+
+	public boolean getMoveBack() {
+		return this.moveBack;
 	}
 
 	@Override
 	public TypeComponent getType() {
-		return type;
-	}
-
-	public HashSet<Vector2> getGridPos() {
-		return gridPos;
-	}
-
-	public void setGridPos(HashSet<Vector2> gridPos) {
-		this.gridPos = gridPos;
-	}
-
-	public boolean getMoveBack() {
-		return moveBack;
+		return this.type;
 	}
 
 	@Override
 	public void receive(Message m, Entity e) {
 
+	}
+
+	public void setGridPos(HashSet<Vector2> gridPos) {
+		this.gridPos = gridPos;
 	}
 }

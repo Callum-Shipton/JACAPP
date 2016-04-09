@@ -6,13 +6,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public interface DatableObject {
-	
+
 	static Gson g = (new GsonBuilder()).setPrettyPrinting().create();
-    
-	void initSystem();
-	
+
 	default void findFiles(String path) {
-		
+
 		File folder = new File(path);
 		File[] listOfFiles = folder.listFiles();
 		for (File file : listOfFiles) {
@@ -24,6 +22,8 @@ public interface DatableObject {
 			}
 		}
 	}
-	
+
+	void initSystem();
+
 	void readJSON(String path, String fileName);
 }

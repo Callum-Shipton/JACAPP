@@ -15,9 +15,9 @@ import components.inventory.TypePickup;
 public class Armour extends InventoryItem {
 
 	private static final long serialVersionUID = 6126061373353659997L;
-	
-	private static HashMap<String, HashMap<String,Armour>> armourSystem;
-	
+
+	private static HashMap<String, HashMap<String, Armour>> armourSystem;
+
 	private transient String type;
 	private int defence;
 
@@ -26,14 +26,14 @@ public class Armour extends InventoryItem {
 			initSystem();
 		}
 		Armour a;
-		if(armourSystem.containsKey(type)){
+		if (armourSystem.containsKey(type)) {
 			int temp = rand.nextInt(armourSystem.get(type).size());
 			Armour[] typedArmours = new Armour[armourSystem.get(type).size()];
 			typedArmours = armourSystem.get(type).values().toArray(typedArmours);
 			a = typedArmours[temp];
-		}else{
-			HashMap<String, Armour> tempArmours = new HashMap<String,Armour>();
-			for(HashMap<String,Armour> typedArmours : armourSystem.values()){
+		} else {
+			HashMap<String, Armour> tempArmours = new HashMap<String, Armour>();
+			for (HashMap<String, Armour> typedArmours : armourSystem.values()) {
 				tempArmours.putAll(typedArmours);
 			}
 			a = tempArmours.get(type);
@@ -41,11 +41,20 @@ public class Armour extends InventoryItem {
 		this.type = type;
 		this.name = a.name;
 		this.defence = a.defence;
-		typePickup = TypePickup.ARMOUR;
+		this.typePickup = TypePickup.ARMOUR;
 	}
 
+	public int getDefence() {
+		return this.defence;
+	}
+
+	public String getType() {
+		return this.type;
+	}
+
+	@Override
 	public void initSystem() {
-		armourSystem = new HashMap<String, HashMap<String,Armour>>();
+		armourSystem = new HashMap<String, HashMap<String, Armour>>();
 		findFiles("res\\Objects\\Items\\Armour");
 	}
 
@@ -60,28 +69,20 @@ public class Armour extends InventoryItem {
 		}
 		if (in != null) {
 			JsonArray jsonObjects = new JsonParser().parse(in).getAsJsonArray();
-			for(JsonElement e : jsonObjects){
-				String type = fileName.substring(0, fileName.length()-5);
+			for (JsonElement e : jsonObjects) {
+				String type = fileName.substring(0, fileName.length() - 5);
 				String name = e.getAsJsonObject().get("name").getAsString();
-				if(!armourSystem.containsKey(type)){
-					armourSystem.put(type, new HashMap<String,Armour>());
+				if (!armourSystem.containsKey(type)) {
+					armourSystem.put(type, new HashMap<String, Armour>());
 				}
 				Armour a = g.fromJson(e, Armour.class);
 				a.type = type;
-				armourSystem.get(type).put(name,a);
+				armourSystem.get(type).put(name, a);
 			}
 		}
-	}
-	
-	public int getDefence() {
-		return defence;
 	}
 
 	public void setDefence(int defence) {
 		this.defence = defence;
-	}
-
-	public String getType() {
-		return type;
 	}
 }

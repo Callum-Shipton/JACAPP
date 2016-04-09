@@ -42,226 +42,175 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	private int poisonCounter = 0;
 	private final int POISON_TIME = 2;
 
+	public BaseAttack(TypeAttack type) {
+		this.type = type;
+		this.healthRegen = 100;
+		this.manaRegen = 100;
+	}
+
 	public BaseAttack(TypeAttack type, int health, int mana, Weapon weapon) {
-		
+
 		this(type);
-		
+
 		this.weapon = weapon;
 		this.health = health;
-		maxHealth = health;
-		maxHealthRegen = healthRegen;
+		this.maxHealth = health;
+		this.maxHealthRegen = this.healthRegen;
 		this.mana = mana;
-		
-		maxMana = mana;
-		maxManaRegen = manaRegen;
-	}
-	
-	public BaseAttack(TypeAttack type){
-		this.type = type;
-		healthRegen = 100;
-		manaRegen = 100;
-	}
-	
-	@Override
-	public void update(Entity e) {
-		
-		healthRegen();
-		manaRegen();
 
-		if (fire == true) {
-			fireCounter++;
-			if (fireCounter >= Seconds.ticks(FIRE_TIME)) {
-				damage(1, e);
-				fireCounter = 0;
-				fireStop++;
-				if (fireStop > FIRE_HITS) {
-					fire = false;
-					fireStop = 0;
-				}
-			}
-		}
-		if (poison == true) {
-			poisonCounter++;
-			if (poisonCounter > Seconds.ticks(POISON_TIME)) {
-				damage(2, e);
-				poisonCounter = 0;
-			}
-		}
-	}
-
-	public void damage(int damage, Entity e) {
-		if (armourValue != 0) {
-			damage = damage / armourValue;
-		}
-		health -= damage;
-		if (health <= 0) {
-			die(e);
-		}
-	}
-	
-	public abstract void die(Entity e);
-
-	@Override
-	public void attack(Entity e, int dir) {
-		if (fireCountdown <= 0) {
-			if (mana >= weapon.getManaCost()) {
-				weapon.attack(e, dir);
-				mana -= weapon.getManaCost();
-			}
-			fireCountdown = weapon.getFireRate();
-		}
-		fireCountdown--;
-	}
-
-	public void healthRegen() {
-		if (health < maxHealth) {
-			if (healthRegen <= 0) {
-				healthRegen = maxHealthRegen;
-				health++;
-			}
-			healthRegen--;
-		}
-	}
-
-	public void manaRegen() {
-		if (mana < maxMana) {
-			if (manaRegen <= 0) {
-				manaRegen = maxManaRegen;
-				mana++;
-			}
-			manaRegen--;
-		}
+		this.maxMana = mana;
+		this.maxManaRegen = this.manaRegen;
 	}
 
 	public void addHealth(int i) {
-		health += i;
-		if (health > maxHealth) {
-			health = maxHealth;
+		this.health += i;
+		if (this.health > this.maxHealth) {
+			this.health = this.maxHealth;
 		}
 	}
 
 	public void addMana(int i) {
-		mana += i;
-		if (mana > maxMana) {
-			mana = maxMana;
+		this.mana += i;
+		if (this.mana > this.maxMana) {
+			this.mana = this.maxMana;
 		}
 	}
 
+	@Override
+	public void attack(Entity e, int dir) {
+		if (this.fireCountdown <= 0) {
+			if (this.mana >= this.weapon.getManaCost()) {
+				this.weapon.attack(e, dir);
+				this.mana -= this.weapon.getManaCost();
+			}
+			this.fireCountdown = this.weapon.getFireRate();
+		}
+		this.fireCountdown--;
+	}
+
+	public void damage(int damage, Entity e) {
+		if (this.armourValue != 0) {
+			damage = damage / this.armourValue;
+		}
+		this.health -= damage;
+		if (this.health <= 0) {
+			die(e);
+		}
+	}
+
+	@Override
 	public void destroy(Entity e) {
 
 	}
 
-	public int getHealth() {
-		return health;
+	public abstract void die(Entity e);
+
+	public TypeAttack getAttackType() {
+		return this.type;
 	}
 
-	public void setHealth(int health) {
-		this.health = health;
+	public Armour getBoots() {
+		return this.boots;
+	}
+
+	public Armour getChest() {
+		return this.chest;
+	}
+
+	public int getHealth() {
+		return this.health;
 	}
 
 	public int getHealthRegen() {
-		return healthRegen;
+		return this.healthRegen;
 	}
 
-	public void setHealthRegen(int healthRegen) {
-		this.healthRegen = healthRegen;
+	public Armour getHelmet() {
+		return this.helmet;
 	}
 
-	public int getMaxHealthRegen() {
-		return maxHealthRegen;
-	}
-
-	public void setMaxHealthRegen(int maxHealthRegen) {
-		this.maxHealthRegen = maxHealthRegen;
-	}
-
-	public int getMaxHealth() {
-		return maxHealth;
-	}
-
-	public void setMaxHealth(int maxHealth) {
-		this.maxHealth = maxHealth;
+	public Armour getLegs() {
+		return this.legs;
 	}
 
 	public int getMana() {
-		return mana;
-	}
-
-	public void setMana(int mana) {
-		this.mana = mana;
+		return this.mana;
 	}
 
 	public int getManaRegen() {
-		return manaRegen;
+		return this.manaRegen;
 	}
 
-	public void setManaRegen(int manaRegen) {
-		this.manaRegen = manaRegen;
+	public int getMaxHealth() {
+		return this.maxHealth;
+	}
+
+	public int getMaxHealthRegen() {
+		return this.maxHealthRegen;
 	}
 
 	public int getMaxMana() {
-		return maxMana;
-	}
-
-	public void setMaxMana(int maxMana) {
-		this.maxMana = maxMana;
+		return this.maxMana;
 	}
 
 	public int getMaxManaRegen() {
-		return maxManaRegen;
-	}
-
-	public void setMaxManaRegen(int maxManaRegen) {
-		this.maxManaRegen = maxManaRegen;
-	}
-
-	public TypeAttack getAttackType() {
-		return type;
+		return this.maxManaRegen;
 	}
 
 	@Override
 	public TypeComponent getType() {
-		return componentType;
+		return this.componentType;
 	}
 
 	public Weapon getWeapon() {
-		return weapon;
+		return this.weapon;
 	}
 
-	public void setWeapon(Weapon weapon) {
-		this.weapon = weapon;
-	}
-
-	public void setFire(boolean fire) {
-		this.fire = fire;
+	public void healthRegen() {
+		if (this.health < this.maxHealth) {
+			if (this.healthRegen <= 0) {
+				this.healthRegen = this.maxHealthRegen;
+				this.health++;
+			}
+			this.healthRegen--;
+		}
 	}
 
 	public boolean isFire() {
-		return fire;
+		return this.fire;
 	}
 
 	public boolean isPoison() {
-		return poison;
+		return this.poison;
 	}
 
-	public void setPoison(boolean poison) {
-		this.poison = poison;
+	public void manaRegen() {
+		if (this.mana < this.maxMana) {
+			if (this.manaRegen <= 0) {
+				this.manaRegen = this.maxManaRegen;
+				this.mana++;
+			}
+			this.manaRegen--;
+		}
 	}
 
-	public Armour getBoots() {
-		return boots;
+	@Override
+	public void receive(Message m, Entity e) {
+		// TODO Auto-generated method stub
+
 	}
 
-	public Armour getLegs() {
-		return legs;
-	}
-
-	public Armour getChest() {
-		return chest;
-	}
-
-	public Armour getHelmet() {
-		return helmet;
+	protected void setArmourValue() {
+		this.armourValue = 0;
+		if (this.boots != null) {
+			this.armourValue += this.boots.getDefence();
+		} else if (this.legs != null) {
+			this.armourValue += this.legs.getDefence();
+		} else if (this.chest != null) {
+			this.armourValue += this.chest.getDefence();
+		} else if (this.helmet != null) {
+			this.armourValue += this.helmet.getDefence();
+		}
 	}
 
 	public void setBoots(Armour boots) {
@@ -274,9 +223,16 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		setArmourValue();
 	}
 
-	public void setLegs(Armour legs) {
-		this.legs = legs;
-		setArmourValue();
+	public void setFire(boolean fire) {
+		this.fire = fire;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+
+	public void setHealthRegen(int healthRegen) {
+		this.healthRegen = healthRegen;
 	}
 
 	public void setHelmet(Armour helmet) {
@@ -284,22 +240,67 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		setArmourValue();
 	}
 
-	protected void setArmourValue() {
-		armourValue = 0;
-		if (boots != null) {
-			armourValue += boots.getDefence();
-		} else if (legs != null) {
-			armourValue += legs.getDefence();
-		} else if (chest != null) {
-			armourValue += chest.getDefence();
-		} else if (helmet != null) {
-			armourValue += helmet.getDefence();
-		}
+	public void setLegs(Armour legs) {
+		this.legs = legs;
+		setArmourValue();
+	}
+
+	public void setMana(int mana) {
+		this.mana = mana;
+	}
+
+	public void setManaRegen(int manaRegen) {
+		this.manaRegen = manaRegen;
+	}
+
+	public void setMaxHealth(int maxHealth) {
+		this.maxHealth = maxHealth;
+	}
+
+	public void setMaxHealthRegen(int maxHealthRegen) {
+		this.maxHealthRegen = maxHealthRegen;
+	}
+
+	public void setMaxMana(int maxMana) {
+		this.maxMana = maxMana;
+	}
+
+	public void setMaxManaRegen(int maxManaRegen) {
+		this.maxManaRegen = maxManaRegen;
+	}
+
+	public void setPoison(boolean poison) {
+		this.poison = poison;
+	}
+
+	public void setWeapon(Weapon weapon) {
+		this.weapon = weapon;
 	}
 
 	@Override
-	public void receive(Message m, Entity e) {
-		// TODO Auto-generated method stub
+	public void update(Entity e) {
 
+		healthRegen();
+		manaRegen();
+
+		if (this.fire == true) {
+			this.fireCounter++;
+			if (this.fireCounter >= Seconds.ticks(this.FIRE_TIME)) {
+				damage(1, e);
+				this.fireCounter = 0;
+				this.fireStop++;
+				if (this.fireStop > this.FIRE_HITS) {
+					this.fire = false;
+					this.fireStop = 0;
+				}
+			}
+		}
+		if (this.poison == true) {
+			this.poisonCounter++;
+			if (this.poisonCounter > Seconds.ticks(this.POISON_TIME)) {
+				damage(2, e);
+				this.poisonCounter = 0;
+			}
+		}
 	}
 }

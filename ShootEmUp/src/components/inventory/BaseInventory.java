@@ -57,242 +57,48 @@ public class BaseInventory extends Component implements InventoryComponent {
 		this.BG = BG;
 		this.BA = BA;
 		this.level = level;
-		expBound = level + 1;
-		inventory = new ArrayList<InventoryItem>();
+		this.expBound = level + 1;
+		this.inventory = new ArrayList<InventoryItem>();
 		switch (BA.getAttackType()) {
-			case ARCHER:
-				weaponTypes[0] = "BOW";
-				weaponTypes[1] = "DAGGER";
-				break;
-			case MAGE:
-				weaponTypes[0] = "STAFF";
-				weaponTypes[1] = "DAGGER";
-				break;
-			case WARRIOR:
-				weaponTypes[0] = "ONE_HANDED";
-				weaponTypes[1] = "TWO_HANDED";
-				break;
-			case BATTLE_MAGE:
-				weaponTypes[0] = "ONE_HANDED";
-				weaponTypes[1] = "STAFF" ;
-				break;
-			case ROGUE:
-				weaponTypes[0] = "CROSSBOW";
-				weaponTypes[1] = "DAGGER";
-				break;
+		case ARCHER:
+			this.weaponTypes[0] = "BOW";
+			this.weaponTypes[1] = "DAGGER";
+			break;
+		case MAGE:
+			this.weaponTypes[0] = "STAFF";
+			this.weaponTypes[1] = "DAGGER";
+			break;
+		case WARRIOR:
+			this.weaponTypes[0] = "ONE_HANDED";
+			this.weaponTypes[1] = "TWO_HANDED";
+			break;
+		case BATTLE_MAGE:
+			this.weaponTypes[0] = "ONE_HANDED";
+			this.weaponTypes[1] = "STAFF";
+			break;
+		case ROGUE:
+			this.weaponTypes[0] = "CROSSBOW";
+			this.weaponTypes[1] = "DAGGER";
+			break;
 		}
 	}
 
 	public BaseInventory(BaseGraphics BG, PlayerAttack BA, CharacterSave save) {
 		this(BG, BA, save.getPlayerLevel());
-		inventory = save.getInventory();
-		inventorySize = save.getInventorySize();
-		potions = save.getPotions();
-		maxPotions = save.getMaxPotions();
-		exp = save.getExp();
-		coins = save.getCoins();
-	}
-
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
-	}
-
-	public int getExp() {
-		return exp;
-	}
-
-	public void setExp(int exp) {
-		this.exp = exp;
-	}
-
-	public int getCoins() {
-		return coins;
-	}
-
-	public void setCoins(int coins) {
-		this.coins = coins;
-	}
-
-	public void spendCoins(int coins) {
-		this.coins -= coins;
-	}
-
-	public void setType(TypeComponent type) {
-		this.type = type;
-	}
-
-	@Override
-	public void receive(Message m, Entity e) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public TypeComponent getType() {
-		return type;
-	}
-
-	@Override
-	public void update(Entity e) {
-		for (TypePotion type : potions.keySet()) {
-			potions.get(type).update(e);
-		}
-	}
-
-	public void spendLevelPoints(int points) {
-		levelPoints -= points;
-	}
-
-	public void equipItem(int itemNo) {
-		InventoryItem item = inventory.get(itemNo);
-		InventoryItem equipped = null;
-		inventory.remove(itemNo);
-		if (item instanceof Armour) {
-			switch (((Armour) item).getType()) {
-				case "BOOTS":
-					equipped = BA.getBoots();
-					BA.setBoots((Armour) item);
-					break;
-				case "LEGS":
-					equipped = BA.getLegs();
-					BA.setLegs((Armour) item);
-					break;
-				case "CHEST":
-					equipped = BA.getChest();
-					BA.setChest((Armour) item);
-					break;
-				case "HELMET":
-					equipped = BA.getHelmet();
-					BA.setHelmet((Armour) item);
-			}
-		} else {
-			equipped = BA.getWeapon();
-			if ((((Weapon) item).getType() == weaponTypes[0]) || (((Weapon) item).getType() == weaponTypes[1])) {
-				BA.setWeapon((Weapon) item);
-			} else {
-				inventory.add(item);
-				equipped = null;
-			}
-		}
-		if (equipped != null) {
-			inventory.add(equipped);
-		}
-	}
-	
-	public boolean giveItem(TypePickup type, String name) {
-		switch (type) {
-			case WEAPON:
-				if (inventory.size() < inventorySize) {
-					inventory.add(new Weapon(name, 0));
-					return true;
-				}
-				break;
-			case ARMOUR:
-				if (inventory.size() < inventorySize) {
-					inventory.add(new Armour(name));
-					return true;
-				}
-				break;
-		case COIN:
-			if (coins < 99) {
-				coins++;
-				return true;
-			}
-			break;
-		case POTION:
-			String potionType = name;
-			if (getNumPotions() < maxPotions) {
-				if (potions.containsKey(potionType)) {
-					potions.get(potionType).addPotion();
-				} else {
-					switch (potionType) {
-						case "Health":
-							potions.put(HEALTH, new OneTimePotion("Health"));
-							break;
-						case "Mana":
-							potions.put(MANA, new OneTimePotion("Mana"));
-							break;
-						case "Speed":
-							potions.put(SPEED, new DurationPotion("Speed", 30));
-							break;
-						case "Knockback":
-							potions.put(KNOCKBACK, new DurationPotion("Knockback", 30));
-					}
-				}
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public void giveExp(int exp) {
-		this.exp += exp;
-		if (this.exp > expBound) {
-			if (level < MAX_LEVEL) {
-				this.exp = 0;
-				level++;
-				levelPoints++;
-				expBound++;
-			}
-		}
-	}
-
-	public int getExpBound() {
-		return expBound;
-	}
-
-	public void setExpBound(int expBound) {
-		this.expBound = expBound;
-	}
-
-	public ArrayList<InventoryItem> getInventory() {
-		return inventory;
-	}
-
-	public int getLevelPoints() {
-		return levelPoints;
-	}
-
-	public int getNumPotion(TypePotion type) {
-		if (potions.containsKey(type)) {
-			return potions.get(type).getQuantity();
-		}
-		return 0;
-	}
-
-	public int getNumPotions() {
-		int sum = 0;
-		for (TypePotion type : potions.keySet()) {
-			sum += getNumPotion(type);
-		}
-		return sum;
-	}
-
-	public int getInventorySize() {
-		return inventorySize;
+		this.inventory = save.getInventory();
+		this.inventorySize = save.getInventorySize();
+		this.potions = save.getPotions();
+		this.maxPotions = save.getMaxPotions();
+		this.exp = save.getExp();
+		this.coins = save.getCoins();
 	}
 
 	public void addInventorySize(int addition) {
-		inventorySize += addition;
+		this.inventorySize += addition;
 	}
 
 	public void addMaxPotions(int addition) {
-		maxPotions += addition;
-	}
-
-	public HashMap<TypePotion, Potion> getPotions() {
-		return potions;
-	}
-
-	public int getMaxPotions() {
-		return maxPotions;
-	}
-
-	public void usePotion(TypePotion type) {
-		potions.get(type).usePotion();
+		this.maxPotions += addition;
 	}
 
 	@Override
@@ -312,52 +118,52 @@ public class BaseInventory extends Component implements InventoryComponent {
 		Random rand = new Random();
 
 		switch (rand.nextInt(3)) {
+		case 0:
+			this.BA.getWeapon().destroy(e);
+			break;
+		case 1:
+			switch (rand.nextInt(4)) {
 			case 0:
-				BA.getWeapon().destroy(e);
+				if (this.BA.getHelmet() != null) {
+					this.BA.getHelmet().destroy(e);
+				}
 				break;
 			case 1:
-				switch (rand.nextInt(4)) {
-					case 0:
-						if (BA.getHelmet() != null) {
-							BA.getHelmet().destroy(e);
-						}
-						break;
-					case 1:
-						if (BA.getChest() != null) {
-							BA.getChest().destroy(e);
-						}
-						break;
-					case 2:
-						if (BA.getLegs() != null) {
-							BA.getLegs().destroy(e);
-						}
-						break;
-					case 3:
-						if (BA.getBoots() != null) {
-							BA.getBoots().destroy(e);
-						}
-						break;
+				if (this.BA.getChest() != null) {
+					this.BA.getChest().destroy(e);
 				}
 				break;
 			case 2:
-				switch (rand.nextInt(4)) {
-				case 0:
-					new OneTimePotion("Health").destroy(e);
-					break;
-				case 1:
-					new OneTimePotion("Mana").destroy(e);
-					break;
-				case 2:
-					new DurationPotion("Speed", 30).destroy(e);
-					break;
-				case 3:
-					new DurationPotion("Knockback", 30).destroy(e);
-					break;
-			}	
+				if (this.BA.getLegs() != null) {
+					this.BA.getLegs().destroy(e);
+				}
+				break;
+			case 3:
+				if (this.BA.getBoots() != null) {
+					this.BA.getBoots().destroy(e);
+				}
+				break;
+			}
+			break;
+		case 2:
+			switch (rand.nextInt(4)) {
+			case 0:
+				new OneTimePotion("Health").destroy(e);
+				break;
+			case 1:
+				new OneTimePotion("Mana").destroy(e);
+				break;
+			case 2:
+				new DurationPotion("Speed", 30).destroy(e);
+				break;
+			case 3:
+				new DurationPotion("Knockback", 30).destroy(e);
+				break;
+			}
 		}
 	}
-	
-	private void dropCoin(){
+
+	private void dropCoin() {
 		Entity item = new Entity();
 
 		AnimatedGraphics CoinG = null;
@@ -365,12 +171,208 @@ public class BaseInventory extends Component implements InventoryComponent {
 		PickupCollision CoinC;
 
 		CoinG = new AnimatedGraphics(Art.getImage("Coin"), Art.base, true, 1f);
-		
-		CoinS = new PointSpawn(CoinG, new Vector2(BG.getX() - BG.getWidth(), BG.getY() - BG.getHeight()), item);
+
+		CoinS = new PointSpawn(CoinG,
+				new Vector2(this.BG.getX() - this.BG.getWidth(), this.BG.getY() - this.BG.getHeight()), item);
 		item.addComponent(CoinG);
 		CoinC = new PickupCollision(item, TypePickup.COIN, "Coin");
 		item.addComponent(CoinS);
 		item.addComponent(CoinC);
 		ShootEmUp.getCurrentLevel().addEntity(item);
+	}
+
+	public void equipItem(int itemNo) {
+		InventoryItem item = this.inventory.get(itemNo);
+		InventoryItem equipped = null;
+		this.inventory.remove(itemNo);
+		if (item instanceof Armour) {
+			switch (((Armour) item).getType()) {
+			case "BOOTS":
+				equipped = this.BA.getBoots();
+				this.BA.setBoots((Armour) item);
+				break;
+			case "LEGS":
+				equipped = this.BA.getLegs();
+				this.BA.setLegs((Armour) item);
+				break;
+			case "CHEST":
+				equipped = this.BA.getChest();
+				this.BA.setChest((Armour) item);
+				break;
+			case "HELMET":
+				equipped = this.BA.getHelmet();
+				this.BA.setHelmet((Armour) item);
+			}
+		} else {
+			equipped = this.BA.getWeapon();
+			if ((((Weapon) item).getType() == this.weaponTypes[0])
+					|| (((Weapon) item).getType() == this.weaponTypes[1])) {
+				this.BA.setWeapon((Weapon) item);
+			} else {
+				this.inventory.add(item);
+				equipped = null;
+			}
+		}
+		if (equipped != null) {
+			this.inventory.add(equipped);
+		}
+	}
+
+	public int getCoins() {
+		return this.coins;
+	}
+
+	public int getExp() {
+		return this.exp;
+	}
+
+	public int getExpBound() {
+		return this.expBound;
+	}
+
+	public ArrayList<InventoryItem> getInventory() {
+		return this.inventory;
+	}
+
+	public int getInventorySize() {
+		return this.inventorySize;
+	}
+
+	public int getLevel() {
+		return this.level;
+	}
+
+	public int getLevelPoints() {
+		return this.levelPoints;
+	}
+
+	public int getMaxPotions() {
+		return this.maxPotions;
+	}
+
+	public int getNumPotion(TypePotion type) {
+		if (this.potions.containsKey(type)) {
+			return this.potions.get(type).getQuantity();
+		}
+		return 0;
+	}
+
+	public int getNumPotions() {
+		int sum = 0;
+		for (TypePotion type : this.potions.keySet()) {
+			sum += getNumPotion(type);
+		}
+		return sum;
+	}
+
+	public HashMap<TypePotion, Potion> getPotions() {
+		return this.potions;
+	}
+
+	@Override
+	public TypeComponent getType() {
+		return this.type;
+	}
+
+	public void giveExp(int exp) {
+		this.exp += exp;
+		if (this.exp > this.expBound) {
+			if (this.level < this.MAX_LEVEL) {
+				this.exp = 0;
+				this.level++;
+				this.levelPoints++;
+				this.expBound++;
+			}
+		}
+	}
+
+	public boolean giveItem(TypePickup type, String name) {
+		switch (type) {
+		case WEAPON:
+			if (this.inventory.size() < this.inventorySize) {
+				this.inventory.add(new Weapon(name, 0));
+				return true;
+			}
+			break;
+		case ARMOUR:
+			if (this.inventory.size() < this.inventorySize) {
+				this.inventory.add(new Armour(name));
+				return true;
+			}
+			break;
+		case COIN:
+			if (this.coins < 99) {
+				this.coins++;
+				return true;
+			}
+			break;
+		case POTION:
+			String potionType = name;
+			if (getNumPotions() < this.maxPotions) {
+				if (this.potions.containsKey(potionType)) {
+					this.potions.get(potionType).addPotion();
+				} else {
+					switch (potionType) {
+					case "Health":
+						this.potions.put(HEALTH, new OneTimePotion("Health"));
+						break;
+					case "Mana":
+						this.potions.put(MANA, new OneTimePotion("Mana"));
+						break;
+					case "Speed":
+						this.potions.put(SPEED, new DurationPotion("Speed", 30));
+						break;
+					case "Knockback":
+						this.potions.put(KNOCKBACK, new DurationPotion("Knockback", 30));
+					}
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void receive(Message m, Entity e) {
+		// TODO Auto-generated method stub
+	}
+
+	public void setCoins(int coins) {
+		this.coins = coins;
+	}
+
+	public void setExp(int exp) {
+		this.exp = exp;
+	}
+
+	public void setExpBound(int expBound) {
+		this.expBound = expBound;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public void setType(TypeComponent type) {
+		this.type = type;
+	}
+
+	public void spendCoins(int coins) {
+		this.coins -= coins;
+	}
+
+	public void spendLevelPoints(int points) {
+		this.levelPoints -= points;
+	}
+
+	@Override
+	public void update(Entity e) {
+		for (TypePotion type : this.potions.keySet()) {
+			this.potions.get(type).update(e);
+		}
+	}
+
+	public void usePotion(TypePotion type) {
+		this.potions.get(type).usePotion();
 	}
 }

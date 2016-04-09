@@ -5,8 +5,8 @@ import object.Entity;
 
 public class RigidCollision extends BaseCollision {
 
-	public RigidCollision(Entity e , BaseGraphics BG) {
-		moveBack = true;
+	public RigidCollision(Entity e, BaseGraphics BG) {
+		this.moveBack = true;
 	}
 
 	@Override

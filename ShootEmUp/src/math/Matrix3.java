@@ -7,10 +7,12 @@ import org.lwjgl.BufferUtils;
 
 public class Matrix3 {
 
+	private final static FloatBuffer direct = BufferUtils.createFloatBuffer(9);
+
 	private float[] matrix;
 
 	public Matrix3() {
-		matrix = new float[9];
+		this.matrix = new float[9];
 	}
 
 	public Matrix3(float[] m) {
@@ -29,7 +31,7 @@ public class Matrix3 {
 	}
 
 	public Matrix3 clear() {
-		Arrays.fill(matrix, 0);
+		Arrays.fill(this.matrix, 0);
 		return this;
 	}
 
@@ -37,48 +39,35 @@ public class Matrix3 {
 		return clear().put(0, 1).put(4, 1).put(8, 1);
 	}
 
+	public float determinant() {
+		return ((+get(0) * get(4) * get(8)) + (get(3) * get(7) * get(2)) + (get(6) * get(1) * get(5)))
+				- (get(2) * get(4) * get(6)) - (get(5) * get(7) * get(0)) - (get(8) * get(1) * get(3));
+	}
+
 	public float get(int index) {
-		return matrix[index];
+		return this.matrix[index];
 	}
 
-	public Matrix3 put(int index, float f) {
-		matrix[index] = f;
-		return this;
-	}
+	public Matrix3 inverse() {
+		Matrix3 inv = new Matrix3();
 
-	public Matrix3 putColumn(int index, Vector3 v) {
-		put((index * 3) + 0, v.x());
-		put((index * 3) + 1, v.y());
-		put((index * 3) + 2, v.z());
-		return this;
-	}
+		inv.put(0, +((get(4) * get(8)) - (get(5) * get(7))));
+		inv.put(1, -((get(3) * get(8)) - (get(5) * get(6))));
+		inv.put(2, +((get(3) * get(7)) - (get(4) * get(6))));
 
-	public Matrix3 put(float[] m) {
-		if (m.length < matrix.length) {
-			throw new IllegalArgumentException("float array must have at least " + matrix.length + " values.");
-		}
+		inv.put(3, -((get(1) * get(8)) - (get(2) * get(7))));
+		inv.put(4, +((get(0) * get(8)) - (get(2) * get(6))));
+		inv.put(5, -((get(0) * get(7)) - (get(1) * get(6))));
 
-		System.arraycopy(m, 0, matrix, 0, matrix.length);
+		inv.put(6, +((get(1) * get(5)) - (get(2) * get(4))));
+		inv.put(7, -((get(0) * get(5)) - (get(2) * get(3))));
+		inv.put(8, +((get(0) * get(4)) - (get(1) * get(3))));
 
-		return this;
-	}
-
-	public Matrix3 put(Matrix3 m) {
-		return put(m.matrix);
-	}
-
-	public Matrix3 put(Matrix4 m) {
-		for (int a = 0; a < 3; a++) {
-			put((a * 3) + 0, m.get((a * 4) + 0));
-			put((a * 3) + 1, m.get((a * 4) + 1));
-			put((a * 3) + 2, m.get((a * 4) + 2));
-		}
-
-		return this;
+		return put(inv.transpose().mult(1 / determinant()));
 	}
 
 	public Matrix3 mult(float f) {
-		for (int a = 0; a < matrix.length; a++) {
+		for (int a = 0; a < this.matrix.length; a++) {
 			put(a, get(a) * f);
 		}
 
@@ -86,9 +75,9 @@ public class Matrix3 {
 	}
 
 	public Matrix3 mult(float[] m) {
-		float[] newm = new float[matrix.length];
+		float[] newm = new float[this.matrix.length];
 
-		for (int a = 0; a < matrix.length; a += 3) {
+		for (int a = 0; a < this.matrix.length; a += 3) {
 			newm[a + 0] = (get(0) * m[a]) + (get(3) * m[a + 1]) + (get(6) * m[a + 2]);
 			newm[a + 1] = (get(1) * m[a]) + (get(4) * m[a + 1]) + (get(7) * m[a + 2]);
 			newm[a + 2] = (get(2) * m[a]) + (get(5) * m[a + 1]) + (get(8) * m[a + 2]);
@@ -113,6 +102,49 @@ public class Matrix3 {
 		return v;
 	}
 
+	public Matrix3 put(float[] m) {
+		if (m.length < this.matrix.length) {
+			throw new IllegalArgumentException("float array must have at least " + this.matrix.length + " values.");
+		}
+
+		System.arraycopy(m, 0, this.matrix, 0, this.matrix.length);
+
+		return this;
+	}
+
+	public Matrix3 put(int index, float f) {
+		this.matrix[index] = f;
+		return this;
+	}
+
+	public Matrix3 put(Matrix3 m) {
+		return put(m.matrix);
+	}
+
+	public Matrix3 put(Matrix4 m) {
+		for (int a = 0; a < 3; a++) {
+			put((a * 3) + 0, m.get((a * 4) + 0));
+			put((a * 3) + 1, m.get((a * 4) + 1));
+			put((a * 3) + 2, m.get((a * 4) + 2));
+		}
+
+		return this;
+	}
+
+	public Matrix3 putColumn(int index, Vector3 v) {
+		put((index * 3) + 0, v.x());
+		put((index * 3) + 1, v.y());
+		put((index * 3) + 2, v.z());
+		return this;
+	}
+
+	public FloatBuffer toBuffer() {
+		direct.clear();
+		direct.put(this.matrix);
+		direct.flip();
+		return direct;
+	}
+
 	public Matrix3 transpose() {
 		float old = get(1);
 		put(1, get(3));
@@ -127,37 +159,5 @@ public class Matrix3 {
 		put(7, old);
 
 		return this;
-	}
-
-	public float determinant() {
-		return ((+get(0) * get(4) * get(8)) + (get(3) * get(7) * get(2)) + (get(6) * get(1) * get(5)))
-				- (get(2) * get(4) * get(6)) - (get(5) * get(7) * get(0)) - (get(8) * get(1) * get(3));
-	}
-
-	public Matrix3 inverse() {
-		Matrix3 inv = new Matrix3();
-
-		inv.put(0, +((get(4) * get(8)) - (get(5) * get(7))));
-		inv.put(1, -((get(3) * get(8)) - (get(5) * get(6))));
-		inv.put(2, +((get(3) * get(7)) - (get(4) * get(6))));
-
-		inv.put(3, -((get(1) * get(8)) - (get(2) * get(7))));
-		inv.put(4, +((get(0) * get(8)) - (get(2) * get(6))));
-		inv.put(5, -((get(0) * get(7)) - (get(1) * get(6))));
-
-		inv.put(6, +((get(1) * get(5)) - (get(2) * get(4))));
-		inv.put(7, -((get(0) * get(5)) - (get(2) * get(3))));
-		inv.put(8, +((get(0) * get(4)) - (get(1) * get(3))));
-
-		return put(inv.transpose().mult(1 / determinant()));
-	}
-
-	private final static FloatBuffer direct = BufferUtils.createFloatBuffer(9);
-
-	public FloatBuffer toBuffer() {
-		direct.clear();
-		direct.put(matrix);
-		direct.flip();
-		return direct;
 	}
 }

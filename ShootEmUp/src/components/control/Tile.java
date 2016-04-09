@@ -9,51 +9,51 @@ public class Tile {
 	private BoundingBox SouthEast;
 	private BoundingBox East;
 	private BoundingBox NorthEast;
-	
-	public Tile(){
-		
-	}
 
-	public void setBoxes(BoundingBox[] boxes){
-		North  = boxes[0];
-		NorthWest  = boxes[1];
-		West  = boxes[2];
-		SouthWest  = boxes[3];
-		South  = boxes[4];
-		SouthEast  = boxes[5];
-		East  = boxes[6];
-		NorthEast  = boxes[7];
-	}
-	
-	public BoundingBox getNorth() {
-		return North;
+	public Tile() {
+
 	}
 
 	public BoundingBox getEast() {
-		return East;
+		return this.East;
 	}
 
-	public BoundingBox getSouth() {
-		return South;
-	}
-
-	public BoundingBox getWest() {
-		return West;
+	public BoundingBox getNorth() {
+		return this.North;
 	}
 
 	public BoundingBox getNorthEast() {
-		return NorthEast;
-	}
-	
-	public BoundingBox getSouthEast() {
-		return SouthEast;
-	}
-
-	public BoundingBox getSouthWest() {
-		return SouthWest;
+		return this.NorthEast;
 	}
 
 	public BoundingBox getNorthWest() {
-		return NorthWest;
+		return this.NorthWest;
+	}
+
+	public BoundingBox getSouth() {
+		return this.South;
+	}
+
+	public BoundingBox getSouthEast() {
+		return this.SouthEast;
+	}
+
+	public BoundingBox getSouthWest() {
+		return this.SouthWest;
+	}
+
+	public BoundingBox getWest() {
+		return this.West;
+	}
+
+	public void setBoxes(BoundingBox[] boxes) {
+		this.North = boxes[0];
+		this.NorthWest = boxes[1];
+		this.West = boxes[2];
+		this.SouthWest = boxes[3];
+		this.South = boxes[4];
+		this.SouthEast = boxes[5];
+		this.East = boxes[6];
+		this.NorthEast = boxes[7];
 	}
 }

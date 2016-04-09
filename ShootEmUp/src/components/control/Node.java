@@ -12,25 +12,29 @@ public class Node implements Comparable<Node> {
 	private Node parent;
 	private Node child;
 
-	public Node(Vector2 position){
+	public Node(Vector2 position) {
 		this.position = position;
 	}
-	
+
 	public Node(Vector2 position, Node parent) {
 		this(position);
 		this.parent = parent;
 	}
 
-	public Vector2 getPosition() {
-		return position;
-	}
+	@Override
+	public int compareTo(Node n) {
+		BaseGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
+		Vector2 player = new Vector2((float) Math.floor(BG.getX() / Map.getTileWidth()),
+				(float) Math.floor(BG.getY() / Map.getTileWidth()));
 
-	public Node getParent() {
-		return parent;
+		float distance1 = player.dist(n.getPosition());
+		float distance2 = player.dist(getPosition());
+
+		return Float.compare(distance2, distance1);
 	}
 
 	public boolean equals(Node node) {
-		if (node.getPosition().equals(position)) {
+		if (node.getPosition().equals(this.position)) {
 			return true;
 		}
 		return false;
@@ -38,41 +42,32 @@ public class Node implements Comparable<Node> {
 
 	@Override
 	public boolean equals(Object o) {
-		if(o instanceof Node){
-			if (((Node)o).getPosition().equals(position)) {
+		if (o instanceof Node) {
+			if (((Node) o).getPosition().equals(this.position)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
-	@Override
-	public int compareTo(Node n) {
-		BaseGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		Vector2 player = new Vector2(
-				(float) Math.floor(
-						BG
-								.getX() / Map.getTileWidth()),
-		(float) Math.floor(
-				BG.getY()
-						/ Map.getTileWidth()));
-		
-		float distance1 = player.dist(n.getPosition());
-		float distance2 = player.dist(getPosition());
-		
-		return Float.compare(distance2, distance1);
+
+	public Node getChild() {
+		return this.child;
 	}
-	
+
+	public Node getParent() {
+		return this.parent;
+	}
+
+	public Vector2 getPosition() {
+		return this.position;
+	}
+
 	@Override
 	public int hashCode() {
 		int hash = 139;
-		hash = (int) ((467 * hash) + position.x());
-		hash = (int) ((467 * hash) + position.y());
+		hash = (int) ((467 * hash) + this.position.x());
+		hash = (int) ((467 * hash) + this.position.y());
 		return hash;
-	}
-
-	public Node getChild() {
-		return child;
 	}
 
 	public void setChild(Node child) {

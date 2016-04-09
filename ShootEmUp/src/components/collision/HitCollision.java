@@ -16,7 +16,7 @@ public class HitCollision extends BaseCollision {
 
 	public HitCollision(Entity e, Weapon weapon) {
 		this.weapon = weapon;
-		moveBack = false;
+		this.moveBack = false;
 	}
 
 	@Override
@@ -25,29 +25,29 @@ public class HitCollision extends BaseCollision {
 		BaseAttack hitAttack = hit.getComponent(TypeComponent.ATTACK);
 		BaseMovement hitMove = hit.getComponent(TypeComponent.MOVEMENT);
 		if (hitAttack != null) {
-			if (hitAttack.getWeapon().getTeam() == weapon.getTeam()) {
+			if (hitAttack.getWeapon().getTeam() == this.weapon.getTeam()) {
 				return;
 			}
 		}
 		if (hit.getComponent(TypeComponent.COLLISION) instanceof RigidCollision) {
 			e.destroy();
 			if (hitAttack != null) {
-				hitAttack.damage(weapon.getDamage(), hit);
-				if (weapon.getElement() == Element.FIRE) {
+				hitAttack.damage(this.weapon.getDamage(), hit);
+				if (this.weapon.getElement() == Element.FIRE) {
 					Random rand = new Random();
 					int prob = rand.nextInt(3);
 					if (prob == 0) {
 						hitAttack.setFire(true);
 					}
 				}
-				if (weapon.getElement() == Element.ICE) {
+				if (this.weapon.getElement() == Element.ICE) {
 					Random rand = new Random();
 					int prob = rand.nextInt(3);
 					if (prob == 0) {
 						hitMove.setFrost(true);
 					}
 				}
-				if (weapon.getElement() == Element.EARTH) {
+				if (this.weapon.getElement() == Element.EARTH) {
 					Random rand = new Random();
 					int prob = rand.nextInt(3);
 					if (prob == 0) {

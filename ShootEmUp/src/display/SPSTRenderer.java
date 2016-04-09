@@ -39,7 +39,7 @@ public class SPSTRenderer {
 	private FloatBuffer matrix44Buffer;
 
 	public SPSTRenderer(int pID) {
-		shaderProgramID = pID;
+		this.shaderProgramID = pID;
 		initRenderData();
 	}
 
@@ -69,11 +69,11 @@ public class SPSTRenderer {
 		 * glUniform2f(vertexColorLocation, 0.0f, (float) greenValue);
 		 */
 
-		matrix44Buffer = model.toBuffer();
+		this.matrix44Buffer = model.toBuffer();
 
-		glUniformMatrix4(modelMatrixLocation, true, matrix44Buffer);
+		glUniformMatrix4(this.modelMatrixLocation, true, this.matrix44Buffer);
 
-		matrix44Buffer.clear();
+		this.matrix44Buffer.clear();
 
 		// glEnableVertexAttribArray(0);
 		// glEnableVertexAttribArray(1);
@@ -85,13 +85,17 @@ public class SPSTRenderer {
 		// glBindVertexArray(0);
 	}
 
+	public int getVAO() {
+		return this.VAO;
+	}
+
 	private void initRenderData() {
 
-		matrix44Buffer = BufferUtils.createFloatBuffer(16);
+		this.matrix44Buffer = BufferUtils.createFloatBuffer(16);
 
-		glUseProgram(shaderProgramID);
+		glUseProgram(this.shaderProgramID);
 
-		modelMatrixLocation = glGetUniformLocation(shaderProgramID, "modelMatrix");
+		this.modelMatrixLocation = glGetUniformLocation(this.shaderProgramID, "modelMatrix");
 
 		glUseProgram(0);
 
@@ -128,8 +132,8 @@ public class SPSTRenderer {
 		setVAO(glGenVertexArrays());
 		glBindVertexArray(getVAO());
 
-		VBO = glGenBuffers();
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		this.VBO = glGenBuffers();
+		glBindBuffer(GL_ARRAY_BUFFER, this.VBO);
 		glBufferData(GL_ARRAY_BUFFER, verticesFloatBuffer, GL_DYNAMIC_DRAW);
 
 		glVertexAttribPointer(0, TexturedVertex.positionElementCount, GL_FLOAT, false, TexturedVertex.stride,
@@ -143,8 +147,8 @@ public class SPSTRenderer {
 
 		glEnableVertexAttribArray(1);
 
-		EBO = glGenBuffers();
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+		this.EBO = glGenBuffers();
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this.EBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL_STATIC_DRAW);
 
 		// glBindVertexArray(0);
@@ -153,11 +157,7 @@ public class SPSTRenderer {
 		// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
-	public int getVAO() {
-		return VAO;
-	}
-
 	private void setVAO(int vAO) {
-		VAO = vAO;
+		this.VAO = vAO;
 	}
 }

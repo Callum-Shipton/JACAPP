@@ -13,7 +13,7 @@ public class FlyingMovement extends BasicMovement {
 
 	@Override
 	public Vector4 doesCollide(Entity moving, Entity checked) {
-		if (flat == true) {
+		if (this.flat == true) {
 			return null;
 		}
 		return super.doesCollide(moving, checked);

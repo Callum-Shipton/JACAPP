@@ -101,24 +101,24 @@ public abstract class EnemyBuilder {
 		BaseCollision BC = new RigidCollision(test, TG);
 		test.addComponent(BC);
 		test.addComponent(new BasicMovement(test, BC, TG, 5));
-		BaseGraphics playerGraphics = ShootEmUp.getPlayer()
-				.getComponent(TypeComponent.GRAPHICS);
+		BaseGraphics playerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
 		float px = playerGraphics.getX();
 		float py = playerGraphics.getY();
 		float pw = playerGraphics.getWidth();
 		float ph = playerGraphics.getHeight();
-		
+
 		Level level = ShootEmUp.getCurrentLevel();
-		
+
 		do {
 			collide = false;
 
 			TG.setX(rand.nextInt((level.getMap().getBackgroundTiles().length - 1) * Map.getTileWidth()));
 			TG.setY(rand.nextInt((level.getMap().getBackgroundTiles()[0].length - 1) * Map.getTileWidth()));
 
-			if ((Math.abs((TG.getX() + (TG.getWidth() / 2)) - (px + (pw / 2))) <= (ShootEmUp.getDisplay().getWidth() + TG.getWidth()))
-					&& (Math.abs((TG.getY() + (TG.getHeight() / 2)) - (py + (ph / 2))) <= (ShootEmUp.getDisplay().getHeight()
-							+ TG.getHeight()))) {
+			if ((Math.abs((TG.getX() + (TG.getWidth() / 2)) - (px + (pw / 2))) <= (ShootEmUp.getDisplay().getWidth()
+					+ TG.getWidth()))
+					&& (Math.abs((TG.getY() + (TG.getHeight() / 2))
+							- (py + (ph / 2))) <= (ShootEmUp.getDisplay().getHeight() + TG.getHeight()))) {
 				collide = true;
 				continue;
 			}

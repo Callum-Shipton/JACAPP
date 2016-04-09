@@ -25,38 +25,44 @@ public class HomingControl extends BaseControl {
 	}
 
 	@Override
+	public void receive(Message m, Entity e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
 	public void update(Entity e) {
-		target = ShootEmUp.getPlayer();
+		this.target = ShootEmUp.getPlayer();
 		BaseGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
 		float y = BG.getY();
 		float x = BG.getX();
 
-		if (target != null) {
+		if (this.target != null) {
 			Vector2 movement = new Vector2(0.0f, 0.0f);
-			if (y < AG.getY()) {
-				if ((y - AG.getY()) > -BM.getSpeed()) {
-					movement.add(0.0f, ((1.0f / BM.getSpeed()) * (y - AG.getY())));
+			if (y < this.AG.getY()) {
+				if ((y - this.AG.getY()) > -this.BM.getSpeed()) {
+					movement.add(0.0f, ((1.0f / this.BM.getSpeed()) * (y - this.AG.getY())));
 				} else {
 					movement.add(0.0f, -1.0f);
 				}
 			}
-			if (x < AG.getX()) {
-				if ((x - AG.getX()) > -BM.getSpeed()) {
-					movement.add(((1.0f / BM.getSpeed()) * (x - AG.getX())), 0.0f);
+			if (x < this.AG.getX()) {
+				if ((x - this.AG.getX()) > -this.BM.getSpeed()) {
+					movement.add(((1.0f / this.BM.getSpeed()) * (x - this.AG.getX())), 0.0f);
 				} else {
 					movement.add(-1.0f, 0.0f);
 				}
 			}
-			if (y > AG.getY()) {
-				if ((y - AG.getY()) < BM.getSpeed()) {
-					movement.add(0.0f, ((1.0f / BM.getSpeed()) * (y - AG.getY())));
+			if (y > this.AG.getY()) {
+				if ((y - this.AG.getY()) < this.BM.getSpeed()) {
+					movement.add(0.0f, ((1.0f / this.BM.getSpeed()) * (y - this.AG.getY())));
 				} else {
 					movement.add(0.0f, 1.0f);
 				}
 			}
-			if (x > AG.getX()) {
-				if ((x - AG.getX()) < BM.getSpeed()) {
-					movement.add(((1.0f / BM.getSpeed()) * (x - AG.getX())), 0.0f);
+			if (x > this.AG.getX()) {
+				if ((x - this.AG.getX()) < this.BM.getSpeed()) {
+					movement.add(((1.0f / this.BM.getSpeed()) * (x - this.AG.getX())), 0.0f);
 				} else {
 					movement.add(1.0f, 0.0f);
 				}
@@ -65,23 +71,17 @@ public class HomingControl extends BaseControl {
 				if (movement.length() > 1) {
 					movement.normalize();
 				}
-				AG.setAnimating(true);
-				BM.move(e, movement);
-				AG.setDirection((int) (Math.round(movement.Angle()) / 45));
+				this.AG.setAnimating(true);
+				this.BM.move(e, movement);
+				this.AG.setDirection((int) (Math.round(movement.Angle()) / 45));
 			} else {
-				AG.setAnimating(false);
+				this.AG.setAnimating(false);
 			}
 		}
-		counter++;
-		if (counter == 30) {
+		this.counter++;
+		if (this.counter == 30) {
 			// weapon.attack(AG.getX(), AG.getY(), getDirection(), getTeam());
-			counter = 0;
+			this.counter = 0;
 		}
-	}
-
-	@Override
-	public void receive(Message m, Entity e) {
-		// TODO Auto-generated method stub
-
 	}
 }

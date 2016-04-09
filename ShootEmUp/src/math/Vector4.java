@@ -6,6 +6,8 @@ import org.lwjgl.BufferUtils;
 
 public class Vector4 implements Vector<Vector4> {
 
+	private final static FloatBuffer direct = BufferUtils.createFloatBuffer(4);
+
 	private float x, y, z, w;
 
 	public Vector4() {
@@ -40,55 +42,91 @@ public class Vector4 implements Vector<Vector4> {
 		set(vec);
 	}
 
+	public Vector4 add(float x, float y, float z, float w) {
+		this.x += x;
+		this.y += y;
+		this.z += z;
+		this.w += w;
+		return this;
+	}
+
+	@Override
+	public Vector4 add(Vector4 vec) {
+		return add(vec.x, vec.y, vec.z, vec.w);
+	}
+
 	@Override
 	public Vector4 copy() {
 		return new Vector4(this);
 	}
 
-	public float x() {
-		return x;
+	@Override
+	public Vector4 divide(float f) {
+		return divide(f, f, f, f);
 	}
 
-	public Vector4 x(float x) {
-		this.x = x;
+	public Vector4 divide(float x, float y, float z, float w) {
+		this.x /= x;
+		this.y /= y;
+		this.z /= z;
+		this.w /= w;
 		return this;
 	}
 
-	public float y() {
-		return y;
+	@Override
+	public Vector4 divide(Vector4 vec) {
+		return divide(vec.x, vec.y, vec.z, vec.w);
 	}
 
-	public Vector4 y(float y) {
-		this.y = y;
-		return this;
-	}
-
-	public float z() {
-		return z;
-	}
-
-	public Vector4 z(float z) {
-		this.z = z;
-		return this;
-	}
-
-	public float w() {
-		return w;
-	}
-
-	public Vector4 w(float w) {
-		this.w = w;
-		return this;
+	public float dot(Vector4 vec) {
+		return (this.x * vec.x) + (this.y * vec.y) + (this.z * vec.z) + (this.w * vec.w);
 	}
 
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Vector4) {
 			Vector4 v = (Vector4) o;
-			return (x == v.x) && (y == v.y) && (z == v.z) && (w == v.w);
+			return (this.x == v.x) && (this.y == v.y) && (this.z == v.z) && (this.w == v.w);
 		}
 
 		return false;
+	}
+
+	@Override
+	public float length() {
+		return (float) Math.sqrt((this.x * this.x) + (this.y * this.y) + (this.z * this.z) + (this.w * this.w));
+	}
+
+	@Override
+	public Vector4 mult(float f) {
+		return mult(f, f, f, f);
+	}
+
+	public Vector4 mult(float x, float y, float z, float w) {
+		this.x *= x;
+		this.y *= y;
+		this.z *= z;
+		this.w *= w;
+		return this;
+	}
+
+	@Override
+	public Vector4 mult(Vector4 vec) {
+		return mult(vec.x, vec.y, vec.z, vec.w);
+	}
+
+	public Vector4 normalize() {
+		float length = length();
+		this.x /= length;
+		this.y /= length;
+		this.z /= length;
+		this.w /= length;
+		return this;
+	}
+
+	public Vector4 reset() {
+		this.x = this.y = this.z = this.w = 0;
+		return this;
 	}
 
 	public Vector4 set(float x, float y, float z, float w) {
@@ -119,42 +157,6 @@ public class Vector4 implements Vector<Vector4> {
 		return set(vec.x, vec.y, vec.z, vec.w);
 	}
 
-	public Vector4 reset() {
-		x = y = z = w = 0;
-		return this;
-	}
-
-	@Override
-	public float length() {
-		return (float) Math.sqrt((x * x) + (y * y) + (z * z) + (w * w));
-	}
-
-	public Vector4 normalize() {
-		float length = length();
-		x /= length;
-		y /= length;
-		z /= length;
-		w /= length;
-		return this;
-	}
-
-	public float dot(Vector4 vec) {
-		return (x * vec.x) + (y * vec.y) + (z * vec.z) + (w * vec.w);
-	}
-
-	public Vector4 add(float x, float y, float z, float w) {
-		this.x += x;
-		this.y += y;
-		this.z += z;
-		this.w += w;
-		return this;
-	}
-
-	@Override
-	public Vector4 add(Vector4 vec) {
-		return add(vec.x, vec.y, vec.z, vec.w);
-	}
-
 	public Vector4 sub(float x, float y, float z, float w) {
 		this.x -= x;
 		this.y -= y;
@@ -169,48 +171,46 @@ public class Vector4 implements Vector<Vector4> {
 	}
 
 	@Override
-	public Vector4 mult(float f) {
-		return mult(f, f, f, f);
-	}
-
-	public Vector4 mult(float x, float y, float z, float w) {
-		this.x *= x;
-		this.y *= y;
-		this.z *= z;
-		this.w *= w;
-		return this;
-	}
-
-	@Override
-	public Vector4 mult(Vector4 vec) {
-		return mult(vec.x, vec.y, vec.z, vec.w);
-	}
-
-	@Override
-	public Vector4 divide(float f) {
-		return divide(f, f, f, f);
-	}
-
-	public Vector4 divide(float x, float y, float z, float w) {
-		this.x /= x;
-		this.y /= y;
-		this.z /= z;
-		this.w /= w;
-		return this;
-	}
-
-	@Override
-	public Vector4 divide(Vector4 vec) {
-		return divide(vec.x, vec.y, vec.z, vec.w);
-	}
-
-	private final static FloatBuffer direct = BufferUtils.createFloatBuffer(4);
-
-	@Override
 	public FloatBuffer toBuffer() {
 		direct.clear();
-		direct.put(x).put(y).put(z).put(w);
+		direct.put(this.x).put(this.y).put(this.z).put(this.w);
 		direct.flip();
 		return direct;
+	}
+
+	public float w() {
+		return this.w;
+	}
+
+	public Vector4 w(float w) {
+		this.w = w;
+		return this;
+	}
+
+	public float x() {
+		return this.x;
+	}
+
+	public Vector4 x(float x) {
+		this.x = x;
+		return this;
+	}
+
+	public float y() {
+		return this.y;
+	}
+
+	public Vector4 y(float y) {
+		this.y = y;
+		return this;
+	}
+
+	public float z() {
+		return this.z;
+	}
+
+	public Vector4 z(float z) {
+		this.z = z;
+		return this;
 	}
 }

@@ -63,6 +63,35 @@ public class WaveFileReader extends SunFileReader {
 	}
 
 	/**
+	 * Obtains the audio file format of the File provided. The File must point
+	 * to valid audio file data.
+	 *
+	 * @param file
+	 *            the File from which file format information should be
+	 *            extracted
+	 * @return an <code>AudioFileFormat</code> object describing the audio file
+	 *         format
+	 * @throws UnsupportedAudioFileException
+	 *             if the File does not point to valid audio file data
+	 *             recognized by the system
+	 * @throws IOException
+	 *             if an I/O exception occurs
+	 */
+	@Override
+	public AudioFileFormat getAudioFileFormat(File file) throws UnsupportedAudioFileException, IOException {
+		AudioFileFormat fileFormat = null;
+		FileInputStream fis = new FileInputStream(file); // throws IOException
+		// part of fix for 4325421
+		try {
+			fileFormat = getFMT(fis, false);
+		} finally {
+			fis.close();
+		}
+
+		return fileFormat;
+	}
+
+	/**
 	 * Obtains the audio file format of the input stream provided. The stream
 	 * must point to valid audio file data. In general, audio file providers may
 	 * need to read some data from the stream before determining whether they
@@ -70,7 +99,7 @@ public class WaveFileReader extends SunFileReader {
 	 * data to determine whether they support the stream, and, if not, reset the
 	 * stream's read pointer to its original position. If the input stream does
 	 * not support this, this method may fail with an IOException.
-	 * 
+	 *
 	 * @param stream
 	 *            the input stream from which file format information should be
 	 *            extracted
@@ -99,7 +128,7 @@ public class WaveFileReader extends SunFileReader {
 	/**
 	 * Obtains the audio file format of the URL provided. The URL must point to
 	 * valid audio file data.
-	 * 
+	 *
 	 * @param url
 	 *            the URL from which file format information should be extracted
 	 * @return an <code>AudioFileFormat</code> object describing the audio file
@@ -123,14 +152,14 @@ public class WaveFileReader extends SunFileReader {
 	}
 
 	/**
-	 * Obtains the audio file format of the File provided. The File must point
-	 * to valid audio file data.
-	 * 
+	 * Obtains an audio stream from the File provided. The File must point to
+	 * valid audio file data.
+	 *
 	 * @param file
-	 *            the File from which file format information should be
-	 *            extracted
-	 * @return an <code>AudioFileFormat</code> object describing the audio file
-	 *         format
+	 *            the File for which the <code>AudioInputStream</code> should be
+	 *            constructed
+	 * @return an <code>AudioInputStream</code> object based on the audio file
+	 *         data pointed to by the File
 	 * @throws UnsupportedAudioFileException
 	 *             if the File does not point to valid audio file data
 	 *             recognized by the system
@@ -138,17 +167,18 @@ public class WaveFileReader extends SunFileReader {
 	 *             if an I/O exception occurs
 	 */
 	@Override
-	public AudioFileFormat getAudioFileFormat(File file) throws UnsupportedAudioFileException, IOException {
-		AudioFileFormat fileFormat = null;
+	public AudioInputStream getAudioInputStream(File file) throws UnsupportedAudioFileException, IOException {
 		FileInputStream fis = new FileInputStream(file); // throws IOException
+		AudioFileFormat fileFormat = null;
 		// part of fix for 4325421
 		try {
 			fileFormat = getFMT(fis, false);
 		} finally {
-			fis.close();
+			if (fileFormat == null) {
+				fis.close();
+			}
 		}
-
-		return fileFormat;
+		return new AudioInputStream(fis, fileFormat.getFormat(), fileFormat.getFrameLength());
 	}
 
 	/**
@@ -159,7 +189,7 @@ public class WaveFileReader extends SunFileReader {
 	 * determine whether they support the stream, and, if not, reset the
 	 * stream's read pointer to its original position. If the input stream does
 	 * not support this, this method may fail with an IOException.
-	 * 
+	 *
 	 * @param stream
 	 *            the input stream from which the <code>AudioInputStream</code>
 	 *            should be constructed
@@ -188,7 +218,7 @@ public class WaveFileReader extends SunFileReader {
 	/**
 	 * Obtains an audio stream from the URL provided. The URL must point to
 	 * valid audio file data.
-	 * 
+	 *
 	 * @param url
 	 *            the URL for which the <code>AudioInputStream</code> should be
 	 *            constructed
@@ -212,36 +242,6 @@ public class WaveFileReader extends SunFileReader {
 			}
 		}
 		return new AudioInputStream(urlStream, fileFormat.getFormat(), fileFormat.getFrameLength());
-	}
-
-	/**
-	 * Obtains an audio stream from the File provided. The File must point to
-	 * valid audio file data.
-	 * 
-	 * @param file
-	 *            the File for which the <code>AudioInputStream</code> should be
-	 *            constructed
-	 * @return an <code>AudioInputStream</code> object based on the audio file
-	 *         data pointed to by the File
-	 * @throws UnsupportedAudioFileException
-	 *             if the File does not point to valid audio file data
-	 *             recognized by the system
-	 * @throws IOException
-	 *             if an I/O exception occurs
-	 */
-	@Override
-	public AudioInputStream getAudioInputStream(File file) throws UnsupportedAudioFileException, IOException {
-		FileInputStream fis = new FileInputStream(file); // throws IOException
-		AudioFileFormat fileFormat = null;
-		// part of fix for 4325421
-		try {
-			fileFormat = getFMT(fis, false);
-		} finally {
-			if (fileFormat == null) {
-				fis.close();
-			}
-		}
-		return new AudioInputStream(fis, fileFormat.getFormat(), fileFormat.getFrameLength());
 	}
 
 	// --------------------------------------------------------------------

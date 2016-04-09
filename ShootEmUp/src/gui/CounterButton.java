@@ -10,32 +10,32 @@ public class CounterButton extends GuiComponent {
 
 	public CounterButton(float x, float y, TypeButton type, Image image, int count, float scale) {
 		super(x, y);
-		button = ButtonBuilder.buildButton(type, x, y);
-		counter = new Counter(x + button.getId().getWidth(), y, image, false, count, scale);
-	}
-
-	@Override
-	public void update() {
-		button.update();
+		this.button = ButtonBuilder.buildButton(type, x, y);
+		this.counter = new Counter(x + this.button.getId().getWidth(), y, image, false, count, scale);
 	}
 
 	@Override
 	public void render(DPDTRenderer d) {
-		button.render(d);
-		counter.render(d);
+		this.button.render(d);
+		this.counter.render(d);
 	}
 
 	@Override
 	public void setX(float x) {
 		super.setX(x);
-		button.setX(x);
-		counter.setX(x + button.getId().getWidth());
+		this.button.setX(x);
+		this.counter.setX(x + this.button.getId().getWidth());
 	}
 
 	@Override
 	public void setY(float y) {
 		super.setY(y);
-		button.setY(y);
-		counter.setY(y);
+		this.button.setY(y);
+		this.counter.setY(y);
+	}
+
+	@Override
+	public void update() {
+		this.button.update();
 	}
 }

@@ -9,8 +9,8 @@ public class ControlsMenu extends GuiMenu {
 
 	public ControlsMenu(Image menuImage) {
 		super(menuImage);
-		menuItems.add(ButtonBuilder.buildButton(TypeButton.BACK,
-				(display.getWidth() / 2) - (Art.getImage("BackButton").getWidth() / 2),
-				(display.getHeight() / 2) - (Art.getImage("BackButton").getHeight() / 2)));
+		this.menuItems.add(ButtonBuilder.buildButton(TypeButton.BACK,
+				(this.display.getWidth() / 2) - (Art.getImage("BackButton").getWidth() / 2),
+				(this.display.getHeight() / 2) - (Art.getImage("BackButton").getHeight() / 2)));
 	}
 }

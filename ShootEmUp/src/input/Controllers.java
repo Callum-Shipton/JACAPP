@@ -57,8 +57,27 @@ public class Controllers {
 	private static boolean created;
 
 	/**
+	 * Add an event to the stack of events that have been caused
+	 *
+	 * @param controllerEvent
+	 *            The event to add to the list
+	 */
+	static void addEvent(ControllerEvent controllerEvent) {
+		if (controllerEvent != null) {
+			events.add(controllerEvent);
+		}
+	}
+
+	/**
+	 * Clear any events stored for the controllers in this set
+	 */
+	public static void clearEvents() {
+		events.clear();
+	}
+
+	/**
 	 * Initialise the controllers collection
-	 * 
+	 *
 	 * @throws RuntimeException
 	 *
 	 * @throws LWJGLException
@@ -112,66 +131,6 @@ public class Controllers {
 	}
 
 	/**
-	 * Get a controller from the collection
-	 *
-	 * @param index
-	 *            The index of the controller to retrieve
-	 * @return The controller requested
-	 */
-	public static Controller getController(int index) {
-		return controllers.get(index);
-	}
-
-	/**
-	 * Retrieve a count of the number of controllers
-	 *
-	 * @return The number of controllers available
-	 */
-	public static int getControllerCount() {
-		return controllers.size();
-	}
-
-	/**
-	 * Poll the controllers available. This will both update their state and
-	 * generate events that must be cleared.
-	 */
-	public static void poll() {
-		for (int i = 0; i < controllers.size(); i++) {
-			getController(i).poll();
-		}
-	}
-
-	/**
-	 * Clear any events stored for the controllers in this set
-	 */
-	public static void clearEvents() {
-		events.clear();
-	}
-
-	/**
-	 * Move to the next event that has been stored.
-	 *
-	 * @return True if there is still an event to process
-	 */
-	public static boolean next() {
-		if (events.size() == 0) {
-			event = null;
-			return false;
-		}
-
-		event = events.remove(0);
-
-		return event != null;
-	}
-
-	/**
-	 * @return True if Controllers has been created
-	 */
-	public static boolean isCreated() {
-		return created;
-	}
-
-	/**
 	 * Destroys any resources used by the controllers
 	 */
 	public static void destroy() {
@@ -194,12 +153,32 @@ public class Controllers {
 	}
 
 	/**
-	 * Get the source of the current event
+	 * Get a controller from the collection
 	 *
-	 * @return The source of the current event
+	 * @param index
+	 *            The index of the controller to retrieve
+	 * @return The controller requested
 	 */
-	public static Controller getEventSource() {
-		return event.getSource();
+	public static Controller getController(int index) {
+		return controllers.get(index);
+	}
+
+	/**
+	 * Retrieve a count of the number of controllers
+	 *
+	 * @return The number of controllers available
+	 */
+	public static int getControllerCount() {
+		return controllers.size();
+	}
+
+	/**
+	 * Gets the state of the button that generated the current event
+	 *
+	 * @return True if button was down, or false if released
+	 */
+	public static boolean getEventButtonState() {
+		return event.getButtonState();
 	}
 
 	/**
@@ -212,12 +191,46 @@ public class Controllers {
 	}
 
 	/**
-	 * Check if the current event was caused by a button
+	 * Get the timestamp assigned to the current event
 	 *
-	 * @return True if the current event was caused by a button
+	 * @return The timestamp assigned to the current event
 	 */
-	public static boolean isEventButton() {
-		return event.isButton();
+	public static long getEventNanoseconds() {
+		return event.getTimeStamp();
+	}
+
+	/**
+	 * Get the source of the current event
+	 *
+	 * @return The source of the current event
+	 */
+	public static Controller getEventSource() {
+		return event.getSource();
+	}
+
+	/**
+	 * Get the value on an X axis of the current event
+	 *
+	 * @return The value on a x axis of the current event
+	 */
+	public static float getEventXAxisValue() {
+		return event.getXAxisValue();
+	}
+
+	/**
+	 * Get the value on an Y axis of the current event
+	 *
+	 * @return The value on a y axis of the current event
+	 */
+	public static float getEventYAxisValue() {
+		return event.getYAxisValue();
+	}
+
+	/**
+	 * @return True if Controllers has been created
+	 */
+	public static boolean isCreated() {
+		return created;
 	}
 
 	/**
@@ -230,21 +243,12 @@ public class Controllers {
 	}
 
 	/**
-	 * Check if the current event was caused by movement on the x-axis
+	 * Check if the current event was caused by a button
 	 *
-	 * @return True if the current event was cause by movement on the x-axis
+	 * @return True if the current event was caused by a button
 	 */
-	public static boolean isEventXAxis() {
-		return event.isXAxis();
-	}
-
-	/**
-	 * Check if the current event was caused by movement on the y-axis
-	 *
-	 * @return True if the current event was caused by movement on the y-axis
-	 */
-	public static boolean isEventYAxis() {
-		return event.isYAxis();
+	public static boolean isEventButton() {
+		return event.isButton();
 	}
 
 	/**
@@ -266,50 +270,46 @@ public class Controllers {
 	}
 
 	/**
-	 * Get the timestamp assigned to the current event
+	 * Check if the current event was caused by movement on the x-axis
 	 *
-	 * @return The timestamp assigned to the current event
+	 * @return True if the current event was cause by movement on the x-axis
 	 */
-	public static long getEventNanoseconds() {
-		return event.getTimeStamp();
+	public static boolean isEventXAxis() {
+		return event.isXAxis();
 	}
 
 	/**
-	 * Gets the state of the button that generated the current event
-	 * 
-	 * @return True if button was down, or false if released
-	 */
-	public static boolean getEventButtonState() {
-		return event.getButtonState();
-	}
-
-	/**
-	 * Get the value on an X axis of the current event
-	 * 
-	 * @return The value on a x axis of the current event
-	 */
-	public static float getEventXAxisValue() {
-		return event.getXAxisValue();
-	}
-
-	/**
-	 * Get the value on an Y axis of the current event
-	 * 
-	 * @return The value on a y axis of the current event
-	 */
-	public static float getEventYAxisValue() {
-		return event.getYAxisValue();
-	}
-
-	/**
-	 * Add an event to the stack of events that have been caused
+	 * Check if the current event was caused by movement on the y-axis
 	 *
-	 * @param controllerEvent
-	 *            The event to add to the list
+	 * @return True if the current event was caused by movement on the y-axis
 	 */
-	static void addEvent(ControllerEvent controllerEvent) {
-		if (controllerEvent != null) {
-			events.add(controllerEvent);
+	public static boolean isEventYAxis() {
+		return event.isYAxis();
+	}
+
+	/**
+	 * Move to the next event that has been stored.
+	 *
+	 * @return True if there is still an event to process
+	 */
+	public static boolean next() {
+		if (events.size() == 0) {
+			event = null;
+			return false;
+		}
+
+		event = events.remove(0);
+
+		return event != null;
+	}
+
+	/**
+	 * Poll the controllers available. This will both update their state and
+	 * generate events that must be cleared.
+	 */
+	public static void poll() {
+		for (int i = 0; i < controllers.size(); i++) {
+			getController(i).poll();
 		}
 	}
 }

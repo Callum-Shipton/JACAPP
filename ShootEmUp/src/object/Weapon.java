@@ -23,11 +23,11 @@ import display.Image;
 import main.ShootEmUp;
 import math.Vector2;
 
-public class Weapon extends InventoryItem{
+public class Weapon extends InventoryItem {
 
 	private static final long serialVersionUID = 529276641692099199L;
-	
-	private static HashMap<String, HashMap<String,Weapon>> weaponSystem;
+
+	private static HashMap<String, HashMap<String, Weapon>> weaponSystem;
 
 	private transient String type;
 	private int damage;
@@ -39,25 +39,24 @@ public class Weapon extends InventoryItem{
 	private String particleImage;
 	private Element element;
 
-	
-	public Weapon(String type, int team){
+	public Weapon(String type, int team) {
 		if (weaponSystem == null) {
 			initSystem();
 		}
 		Weapon w;
-		if(weaponSystem.containsKey(type)){
+		if (weaponSystem.containsKey(type)) {
 			int temp = rand.nextInt(weaponSystem.get(type).size());
 			Weapon[] typedWeapons = new Weapon[weaponSystem.get(type).size()];
 			typedWeapons = weaponSystem.get(type).values().toArray(typedWeapons);
 			w = typedWeapons[temp];
-		} else{
-			HashMap<String, Weapon> tempWeapons = new HashMap<String,Weapon>();
-			for(HashMap<String,Weapon> typedWeapons : weaponSystem.values()){
+		} else {
+			HashMap<String, Weapon> tempWeapons = new HashMap<String, Weapon>();
+			for (HashMap<String, Weapon> typedWeapons : weaponSystem.values()) {
 				tempWeapons.putAll(typedWeapons);
 			}
 			w = tempWeapons.get(type);
 		}
-		
+
 		this.type = type;
 		this.name = w.name;
 		this.damage = w.damage;
@@ -68,15 +67,112 @@ public class Weapon extends InventoryItem{
 		this.element = w.element;
 		this.team = team;
 		this.particleImage = w.particleImage;
-		typePickup = TypePickup.WEAPON;
+		this.typePickup = TypePickup.WEAPON;
+	}
+
+	public void attack(Entity e, int direction) {
+		BaseGraphics BG = e.getComponent(TypeComponent.GRAPHICS);
+		float posX = BG.getX();
+		float posY = BG.getY();
+		float BGWidth = BG.getWidth();
+		float BGHeight = BG.getHeight();
+
+		// create particle
+		Entity particle = new Entity();
+		AnimatedGraphics g = new AnimatedGraphics(getParticleImage(), Art.base, false, 1f);
+		g.setDirection(direction);
+		particle.addComponent(g);
+
+		switch (direction) {
+		case 0:
+			posX += (BGWidth - g.getWidth()) / 2;
+			posY -= g.getHeight();
+			break;
+		case 1:
+			posX += BGWidth;
+			posY -= g.getHeight();
+			break;
+		case 2:
+			posX += BGWidth;
+			posY += (BGHeight - g.getHeight()) / 2;
+			break;
+		case 3:
+			posX += BGWidth;
+			posY += BGHeight;
+			break;
+		case 4:
+			posX += (BGWidth - g.getWidth()) / 2;
+			posY += BGHeight;
+			break;
+		case 5:
+			posX -= g.getWidth();
+			posY += BGHeight;
+			break;
+		case 6:
+			posX -= g.getWidth();
+			posY += (BGHeight - g.getHeight()) / 2;
+			break;
+		case 7:
+			posX -= g.getWidth();
+			posY -= g.getHeight();
+		}
+		PointSpawn s = new PointSpawn(g, new Vector2(posX, posY), particle);
+		HitCollision c = new HitCollision(particle, this);
+		FlyingMovement m = new FlyingMovement(particle, c, g, 10);
+		particle.addComponent(s);
+		particle.addComponent(c);
+		particle.addComponent(m);
+		particle.addComponent(new RangeControl(g, m, this.range));
+
+		ShootEmUp.getCurrentLevel().getSpawner().checkSpawn(particle);
+	}
+
+	public int getDamage() {
+		return this.damage;
+	}
+
+	public Element getElement() {
+		return this.element;
+	}
+
+	public int getFireRate() {
+		return this.fireRate;
+	}
+
+	public int getManaCost() {
+		return this.manaCost;
+	}
+
+	public Image getParticleImage() {
+		return Art.getImage(this.particleImage);
+	}
+
+	public int getRange() {
+		return this.range;
+	}
+
+	public String getSubType() {
+		return this.name;
+	}
+
+	public int getTeam() {
+		return this.team;
+	}
+
+	public String getType() {
+		return this.type;
 	}
 
 	@Override
 	public void initSystem() {
-		weaponSystem = new HashMap<String, HashMap<String,Weapon>>();
+		weaponSystem = new HashMap<String, HashMap<String, Weapon>>();
 		findFiles("res\\Objects\\Items\\Weapons");
 	}
-	
+
+	public boolean isMelee() {
+		return this.melee;
+	}
+
 	@Override
 	public void readJSON(String path, String fileName) {
 		JsonReader in = null;
@@ -88,138 +184,40 @@ public class Weapon extends InventoryItem{
 		}
 		if (in != null) {
 			JsonArray jsonObjects = new JsonParser().parse(in).getAsJsonArray();
-			for(JsonElement e : jsonObjects){
-				String type = fileName.substring(0, fileName.length()-5);
+			for (JsonElement e : jsonObjects) {
+				String type = fileName.substring(0, fileName.length() - 5);
 				String name = e.getAsJsonObject().get("name").getAsString();
-				if(!weaponSystem.containsKey(type)){
-					weaponSystem.put(type, new HashMap<String,Weapon>());
+				if (!weaponSystem.containsKey(type)) {
+					weaponSystem.put(type, new HashMap<String, Weapon>());
 				}
 				Weapon w = g.fromJson(e, Weapon.class);
 				w.type = type;
-				weaponSystem.get(type).put(name,w);
+				weaponSystem.get(type).put(name, w);
 			}
 		}
-	}
-
-	public void attack(Entity e, int direction) {
-		BaseGraphics BG = e.getComponent(TypeComponent.GRAPHICS);
-		float posX = BG.getX();
-		float posY = BG.getY();
-		float BGWidth = BG.getWidth();
-		float BGHeight = BG.getHeight();
-		
-		// create particle
-		Entity particle = new Entity();
-		AnimatedGraphics g = new AnimatedGraphics(getParticleImage(), Art.base, false, 1f);
-		g.setDirection(direction);
-		particle.addComponent(g);
-		
-		switch (direction) {
-			case 0:
-				posX += (BGWidth - g.getWidth()) / 2;
-				posY -= g.getHeight();
-				break;
-			case 1:
-				posX += BGWidth;
-				posY -= g.getHeight();
-				break;
-			case 2:
-				posX += BGWidth;
-				posY += (BGHeight - g.getHeight()) / 2;
-				break;
-			case 3:
-				posX += BGWidth;
-				posY += BGHeight;
-				break;
-			case 4:
-				posX += (BGWidth - g.getWidth()) / 2;
-				posY += BGHeight;
-				break;
-			case 5:
-				posX -= g.getWidth();
-				posY += BGHeight;
-				break;
-			case 6:
-				posX -= g.getWidth();
-				posY += (BGHeight - g.getHeight()) / 2;
-				break;
-			case 7:
-				posX -= g.getWidth();
-				posY -= g.getHeight();
-		}
-		PointSpawn s = new PointSpawn(g, new Vector2(posX, posY), particle);
-		HitCollision c = new HitCollision(particle, this);
-		FlyingMovement m = new FlyingMovement(particle, c, g, 10);
-		particle.addComponent(s);
-		particle.addComponent(c);
-		particle.addComponent(m);
-		particle.addComponent(new RangeControl(g, m, range));
-
-		ShootEmUp.getCurrentLevel().getSpawner().checkSpawn(particle);
-	}
-	
-	public int getDamage() {
-		return damage;
 	}
 
 	public void setDamage(int damage) {
 		this.damage = damage;
 	}
 
-	public int getRange() {
-		return range;
-	}
-
-	public void setRange(int range) {
-		this.range = range;
-	}
-
-	public boolean isMelee() {
-		return melee;
-	}
-
-	public void setMelee(boolean melee) {
-		this.melee = melee;
-	}
-
-	public int getManaCost() {
-		return manaCost;
+	public void setFireRate(int fireRate) {
+		this.fireRate = fireRate;
 	}
 
 	public void setManaCost(int manaCost) {
 		this.manaCost = manaCost;
 	}
 
-	public int getTeam() {
-		return team;
+	public void setMelee(boolean melee) {
+		this.melee = melee;
+	}
+
+	public void setRange(int range) {
+		this.range = range;
 	}
 
 	public void setTeam(int team) {
 		this.team = team;
-	}
-
-	public int getFireRate() {
-		return fireRate;
-	}
-
-	public void setFireRate(int fireRate) {
-		this.fireRate = fireRate;
-	}
-
-
-	public Image getParticleImage() {
-		return Art.getImage(particleImage);
-	}
-
-	public Element getElement() {
-		return element;
-	}
-	
-	public String getSubType(){
-		return name;
-	}
-	
-	public String getType(){
-		return type;
 	}
 }

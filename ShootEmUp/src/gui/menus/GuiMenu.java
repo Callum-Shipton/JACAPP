@@ -23,23 +23,27 @@ public abstract class GuiMenu {
 
 	public GuiMenu(Image menuImage) {
 		this.menuImage = menuImage;
-		x = 0;
-		y = 0;
-		w = menuImage.getWidth();
-		h = menuImage.getHeight();
-		display = ShootEmUp.getDisplay();
+		this.x = 0;
+		this.y = 0;
+		this.w = menuImage.getWidth();
+		this.h = menuImage.getHeight();
+		this.display = ShootEmUp.getDisplay();
+	}
+
+	public void buttonPressed(Button button) {
+
 	}
 
 	public void render() {
-		Art.stat.draw(menuImage, new Vector2(x, y), new Vector2(display.getWidth(), display.getHeight()), 0,
-				new Vector2(0, 0));
-		for (GuiComponent menuItem : menuItems) {
+		Art.stat.draw(this.menuImage, new Vector2(this.x, this.y),
+				new Vector2(this.display.getWidth(), this.display.getHeight()), 0, new Vector2(0, 0));
+		for (GuiComponent menuItem : this.menuItems) {
 			menuItem.render(Art.stat);
 		}
 	}
 
 	public void update() {
-		for (GuiComponent menuItem : menuItems) {
+		for (GuiComponent menuItem : this.menuItems) {
 			menuItem.update();
 		}
 		/*
@@ -57,10 +61,6 @@ public abstract class GuiMenu {
 		 * (buttonPointer < 0) { buttonPointer = buttons.size() - 1; }
 		 * buttons.get(buttonPointer).setHovered(true); }
 		 */
-	}
-
-	public void buttonPressed(Button button) {
-
 	}
 
 	/*

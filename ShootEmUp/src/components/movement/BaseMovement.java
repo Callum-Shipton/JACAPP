@@ -26,22 +26,6 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	private int frostTime = 5;
 
 	@Override
-	public void move(Entity e, Vector2 moveVec) {
-		if (frost == true) {
-			speed = speed / 2;
-			frostCounter++;
-			if (frostCounter > Seconds.ticks(frostTime)) {
-				frost = false;
-				speed = realSpeed;
-				frostCounter = 0;
-			}
-		}
-	}
-
-	@Override
-	public abstract Vector4 doesCollide(Entity moving, Entity checked);
-
-	@Override
 	public abstract Vector4 collideFunction(BaseGraphics BG, float x, float y);
 
 	@Override
@@ -49,47 +33,63 @@ public abstract class BaseMovement extends Component implements MovementComponen
 
 	}
 
+	@Override
+	public abstract Vector4 doesCollide(Entity moving, Entity checked);
+
 	public boolean getFlat() {
-		return flat;
+		return this.flat;
 	}
 
-	public void setFlat(boolean flat) {
-		this.flat = flat;
+	public int getSpeed() {
+		return this.speed;
 	}
 
 	@Override
 	public TypeComponent getType() {
-		return type;
+		return this.type;
+	}
+
+	public void increaseSpeed(int increase) {
+		this.speed += increase;
+	}
+
+	public boolean isFrost() {
+		return this.frost;
+	}
+
+	@Override
+	public void move(Entity e, Vector2 moveVec) {
+		if (this.frost == true) {
+			this.speed = this.speed / 2;
+			this.frostCounter++;
+			if (this.frostCounter > Seconds.ticks(this.frostTime)) {
+				this.frost = false;
+				this.speed = this.realSpeed;
+				this.frostCounter = 0;
+			}
+		}
 	}
 
 	@Override
 	public void receive(Message m, Entity e) {
 		if (m == Message.ENTITY_MOVED) {
 			EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
-			eMap.removeEntity(BC.getGridPos(), e);
-			BC.setGridPos(eMap.getGridPos(e));
-			eMap.addEntity(BC.getGridPos(), e);
+			eMap.removeEntity(this.BC.getGridPos(), e);
+			this.BC.setGridPos(eMap.getGridPos(e));
+			eMap.addEntity(this.BC.getGridPos(), e);
 		}
 
 	}
 
-	public void increaseSpeed(int increase) {
-		speed += increase;
-	}
-
-	public int getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(int speed) {
-		this.speed = speed;
+	public void setFlat(boolean flat) {
+		this.flat = flat;
 	}
 
 	public void setFrost(boolean frost) {
 		this.frost = frost;
 	}
 
-	public boolean isFrost() {
-		return frost;
+	public void setSpeed(int speed) {
+		this.speed = speed;
 	}
 }

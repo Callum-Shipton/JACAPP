@@ -34,24 +34,48 @@ public class Spawner {
 	private Random rand;
 
 	public Spawner() {
-		rand = new Random();
-		radiusLocation = GL20.glGetUniformLocation(Art.ShaderBase, "radius");
-		radiusLocationInst = GL20.glGetUniformLocation(Art.ShaderInst, "radius");
+		this.rand = new Random();
+		this.radiusLocation = GL20.glGetUniformLocation(Art.ShaderBase, "radius");
+		this.radiusLocationInst = GL20.glGetUniformLocation(Art.ShaderInst, "radius");
 		changeRadius(0);
 	}
 
+	public void changeRadius(float f) {
+		GL20.glUseProgram(Art.ShaderBase);
+		GL20.glUniform1f(this.radiusLocation, f + this.radius);
+		GL20.glUseProgram(0);
+		GL20.glUseProgram(Art.ShaderInst);
+		GL20.glUniform1f(this.radiusLocationInst, f + this.radius);
+		GL20.glUseProgram(0);
+	}
+
+	public void checkSpawn(Entity e) {
+		BasicMovement BM = e.getComponent(TypeComponent.MOVEMENT);
+		ShootEmUp.getCurrentLevel().addEntity(e);
+		BM.checkCollisionY(e, new Vector2(0, 0));
+		BM.checkCollisionX(e, new Vector2(0, 0));
+	}
+
+	public int getWave() {
+		return this.wave;
+	}
+
+	public void removeEnemy() {
+		this.enemies--;
+	}
+
 	public void update() {
-		if (newWave) {
-			counter++;
-			if (counter == Seconds.ticks(ENEMY_SPAWN_RATE)) {
+		if (this.newWave) {
+			this.counter++;
+			if (this.counter == Seconds.ticks(this.ENEMY_SPAWN_RATE)) {
 				// creating new Enemy
 
-				if ((totalEnemies == 0) && (wave == MAX_WAVE)) {
+				if ((this.totalEnemies == 0) && (this.wave == this.MAX_WAVE)) {
 					EnemyBuilder.buildEnemy(TypeEnemy.BOSS);
 				} else {
 
 					// randomly chooses an enemy
-					int prob = rand.nextInt(3);
+					int prob = this.rand.nextInt(3);
 					if (prob == 0) {
 						EnemyBuilder.buildEnemy(TypeEnemy.SMALL);
 					} else if (prob == 1) {
@@ -62,57 +86,32 @@ public class Spawner {
 
 				}
 				// creates the enemy and adds it to the level
-				totalEnemies++;
-				enemies++;
-				if (totalEnemies == wave) {
-					newWave = false;
+				this.totalEnemies++;
+				this.enemies++;
+				if (this.totalEnemies == this.wave) {
+					this.newWave = false;
 				}
-				counter = 0;
+				this.counter = 0;
 			}
-		} else if (enemies == 0) {
-			totalEnemies = 0;
-			if (wave < MAX_WAVE) {
-				wave++;
-				changeRadius((wave - 1) * radLevel);
-			} else if (ShootEmUp.getCurrentLevel().getLevel() < MAX_LEVEL) {
-				if (ShootEmUp.getSave()== null) {
+		} else if (this.enemies == 0) {
+			this.totalEnemies = 0;
+			if (this.wave < this.MAX_WAVE) {
+				this.wave++;
+				changeRadius((this.wave - 1) * this.radLevel);
+			} else if (ShootEmUp.getCurrentLevel().getLevel() < this.MAX_LEVEL) {
+				if (ShootEmUp.getSave() == null) {
 					ShootEmUp.setSave(new Save());
 				} else {
 					ShootEmUp.getSave().saveCharacter();
 				}
 				ShootEmUp.getSave().saveToSystem(1);
 				BaseAttack BA = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
-				TypeAttack temp = BA
-						.getAttackType();
+				TypeAttack temp = BA.getAttackType();
 				ShootEmUp.setCurrentLevel(new Level(Art.levels, ShootEmUp.getCurrentLevel().getLevel() + 1));
 				ShootEmUp.getSave().load(1);
 				PlayerBuilder.buildPlayer(temp, ShootEmUp.getSave().getCharacter(temp));
 			}
-			newWave = true;
+			this.newWave = true;
 		}
-	}
-
-	public void removeEnemy() {
-		enemies--;
-	}
-
-	public void checkSpawn(Entity e) {
-		BasicMovement BM = e.getComponent(TypeComponent.MOVEMENT);
-		ShootEmUp.getCurrentLevel().addEntity(e);
-		BM.checkCollisionY(e, new Vector2(0, 0));
-		BM.checkCollisionX(e, new Vector2(0, 0));
-	}
-	
-	public void changeRadius(float f){
-		GL20.glUseProgram(Art.ShaderBase);
-		GL20.glUniform1f(radiusLocation,f + radius);
-		GL20.glUseProgram(0);
-		GL20.glUseProgram(Art.ShaderInst);
-		GL20.glUniform1f(radiusLocationInst,f + radius);
-		GL20.glUseProgram(0);
-	}
-
-	public int getWave() {
-		return wave;
 	}
 }

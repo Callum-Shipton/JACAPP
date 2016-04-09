@@ -24,40 +24,17 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 
 	public PlayerGraphics(Entity e, Image image, Renderer r, float scale) {
 		super(image, r, false, scale);
-		viewMatrix = new Matrix4();
-		matrix44Buffer = BufferUtils.createFloatBuffer(16);
-		viewMatrixLocation = GL20.glGetUniformLocation(Art.ShaderBase, "viewMatrix");
-		viewMatrixLocationInst = GL20.glGetUniformLocation(Art.ShaderInst, "viewMatrix");
-		posLocation = GL20.glGetUniformLocation(Art.ShaderBase, "playerPos");
-		posLocationInst = GL20.glGetUniformLocation(Art.ShaderInst, "playerPos");
+		this.viewMatrix = new Matrix4();
+		this.matrix44Buffer = BufferUtils.createFloatBuffer(16);
+		this.viewMatrixLocation = GL20.glGetUniformLocation(Art.ShaderBase, "viewMatrix");
+		this.viewMatrixLocationInst = GL20.glGetUniformLocation(Art.ShaderInst, "viewMatrix");
+		this.posLocation = GL20.glGetUniformLocation(Art.ShaderBase, "playerPos");
+		this.posLocationInst = GL20.glGetUniformLocation(Art.ShaderInst, "playerPos");
 	}
 
 	@Override
 	public int getDirection() {
-		return direction;
-	}
-
-	@Override
-	public void setDirection(int direction) {
-		this.direction = direction;
-	}
-
-	public void scrollScreen(Entity e) {
-
-		viewMatrix.clearToIdentity();
-		viewMatrix.translate(-getX() + ((ShootEmUp.getDisplay().getWidth() - getWidth()) / 2),
-				-getY() + ((ShootEmUp.getDisplay().getHeight() - getHeight()) / 2), 0);
-		matrix44Buffer.clear();
-		matrix44Buffer = viewMatrix.toBuffer();
-
-		GL20.glUseProgram(Art.ShaderBase);
-		GL20.glUniformMatrix4(viewMatrixLocation, false, matrix44Buffer);
-		GL20.glUniform2f(posLocation, x + (width / 2), y + (height / 2));
-		GL20.glUseProgram(0);
-		GL20.glUseProgram(Art.ShaderInst);
-		GL20.glUniformMatrix4(viewMatrixLocationInst, false, matrix44Buffer);
-		GL20.glUniform2f(posLocationInst, x + (width / 2), y + (height / 2));
-		GL20.glUseProgram(0);
+		return this.direction;
 	}
 
 	@Override
@@ -66,5 +43,28 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 			scrollScreen(e);
 		}
 
+	}
+
+	public void scrollScreen(Entity e) {
+
+		this.viewMatrix.clearToIdentity();
+		this.viewMatrix.translate(-getX() + ((ShootEmUp.getDisplay().getWidth() - getWidth()) / 2),
+				-getY() + ((ShootEmUp.getDisplay().getHeight() - getHeight()) / 2), 0);
+		this.matrix44Buffer.clear();
+		this.matrix44Buffer = this.viewMatrix.toBuffer();
+
+		GL20.glUseProgram(Art.ShaderBase);
+		GL20.glUniformMatrix4(this.viewMatrixLocation, false, this.matrix44Buffer);
+		GL20.glUniform2f(this.posLocation, this.x + (this.width / 2), this.y + (this.height / 2));
+		GL20.glUseProgram(0);
+		GL20.glUseProgram(Art.ShaderInst);
+		GL20.glUniformMatrix4(this.viewMatrixLocationInst, false, this.matrix44Buffer);
+		GL20.glUniform2f(this.posLocationInst, this.x + (this.width / 2), this.y + (this.height / 2));
+		GL20.glUseProgram(0);
+	}
+
+	@Override
+	public void setDirection(int direction) {
+		this.direction = direction;
 	}
 }

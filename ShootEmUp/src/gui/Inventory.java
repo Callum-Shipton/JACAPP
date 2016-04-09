@@ -25,31 +25,43 @@ public class Inventory extends GuiComponent {
 		addButtons();
 	}
 
-	private void addButtons() {
-		row = 0;
-		column = 0;
+	private Button addButton(Button button) {
+		this.buttons.add(button);
+		return button;
+	}
 
-		Iterator<InventoryItem> items = i.iterator();
+	private void addButtons() {
+		this.row = 0;
+		this.column = 0;
+
+		Iterator<InventoryItem> items = this.i.iterator();
 
 		while (items.hasNext()) {
 			InventoryItem item = items.next();
 			addButton(new Button(TypeButton.OTHER, item.getInventoryImage(),
-					x + ((item.getInventoryImage().getWidth() * row)),
-					y + (((item.getInventoryImage().getHeight() / 2) * column))));
-			row++;
-			if (row > 10) {
-				row = 0;
-				column++;
+					this.x + ((item.getInventoryImage().getWidth() * this.row)),
+					this.y + (((item.getInventoryImage().getHeight() / 2) * this.column))));
+			this.row++;
+			if (this.row > 10) {
+				this.row = 0;
+				this.column++;
 			}
 		}
 	}
 
 	@Override
+	public void render(DPDTRenderer d) {
+		for (Button button : this.buttons) {
+			button.render(Art.stat);
+		}
+	}
+
+	@Override
 	public void update() {
-		for (Button button : buttons) {
+		for (Button button : this.buttons) {
 			button.update();
 		}
-		Iterator<Button> Buttons = buttons.iterator();
+		Iterator<Button> Buttons = this.buttons.iterator();
 		Button itemButton;
 		boolean change = false;
 		int position = 0;
@@ -57,8 +69,7 @@ public class Inventory extends GuiComponent {
 		while (Buttons.hasNext()) {
 			itemButton = Buttons.next();
 			if (itemButton.hasClicked()) {
-				BI
-						.equipItem(position);
+				BI.equipItem(position);
 				itemButton.postAction();
 				Buttons.remove();
 				change = true;
@@ -68,21 +79,9 @@ public class Inventory extends GuiComponent {
 		}
 
 		if (change == true) {
-			buttons.clear();
+			this.buttons.clear();
 			addButtons();
 		}
 
-	}
-
-	@Override
-	public void render(DPDTRenderer d) {
-		for (Button button : buttons) {
-			button.render(Art.stat);
-		}
-	}
-
-	private Button addButton(Button button) {
-		buttons.add(button);
-		return button;
 	}
 }

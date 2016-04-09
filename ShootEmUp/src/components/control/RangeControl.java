@@ -19,8 +19,8 @@ public class RangeControl extends LineControl {
 	@Override
 	public void update(Entity e) {
 		super.update(e);
-		range--;
-		if (range <= 0) {
+		this.range--;
+		if (this.range <= 0) {
 			e.destroy();
 			e.send(Message.ENTITY_DIED);
 		}

@@ -12,8 +12,6 @@ public abstract class GuiComponent {
 		this.y = y;
 	}
 
-	public abstract void update();
-
 	public abstract void render(DPDTRenderer d);
 
 	public void setX(float x) {
@@ -23,4 +21,6 @@ public abstract class GuiComponent {
 	public void setY(float y) {
 		this.y = y;
 	}
+
+	public abstract void update();
 }

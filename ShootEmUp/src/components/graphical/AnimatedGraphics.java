@@ -14,68 +14,63 @@ public class AnimatedGraphics extends BaseGraphics {
 	protected int animTime = 6;
 	protected int direction = 0;
 
+	public AnimatedGraphics(Image image, Renderer r, boolean animating, float scale) {
+		this.image = image;
+		this.width = (image.getWidth() / image.getFWidth()) * scale;
+		this.height = ((image.getHeight() / image.getFHeight()) * scale);
+		this.r = r;
+		this.animating = animating;
+	}
+
 	public AnimatedGraphics(Image image, Renderer r, boolean animating, float x, float y) {
 		this.image = image;
-		width = image.getWidth() / image.getFWidth();
-		height = image.getHeight() / image.getFHeight();
+		this.width = image.getWidth() / image.getFWidth();
+		this.height = image.getHeight() / image.getFHeight();
 		this.r = r;
 		this.animating = animating;
 		this.x = x;
 		this.y = y;
 	}
 
-	public AnimatedGraphics(Image image, Renderer r, boolean animating, float scale) {
-		this.image = image;
-		width = (image.getWidth() / image.getFWidth())*scale;
-		height = (image.getHeight() / image.getFHeight()*scale);
-		this.r = r;
-		this.animating = animating;
+	public int getAnimID() {
+		return this.animID;
+	}
+
+	public int getAnimTime() {
+		return this.animTime;
+	}
+
+	public int getDirection() {
+		return this.direction;
+	}
+
+	public boolean isAnimating() {
+		return this.animating;
 	}
 
 	@Override
-	public void update(Entity e) {
+	public void receive(Message m, Entity e) {
+		// TODO Auto-generated method stub
 
-		if (isAnimating()) {
-			animID++;
-			if (animID >= (image.getFWidth() * animTime)) {
-				animID = 0;
-			}
-		}
 	}
 
 	@Override
 	public void render(Entity e) {
-		((DPDTRenderer) r).draw(image, new Vector2(getX(), getY()), new Vector2(getWidth(), getHeight()), 0.0f,
-				new Vector2((float) Math.floor(animID / animTime), getDirection()),
-				new Vector2(image.getFWidth(), image.getFHeight()));
-	}
-
-	public boolean isAnimating() {
-		return animating;
+		((DPDTRenderer) this.r).draw(this.image, new Vector2(getX(), getY()), new Vector2(getWidth(), getHeight()),
+				0.0f, new Vector2((float) Math.floor(this.animID / this.animTime), getDirection()),
+				new Vector2(this.image.getFWidth(), this.image.getFHeight()));
 	}
 
 	public void setAnimating(boolean animating) {
 		this.animating = animating;
 	}
 
-	public int getAnimID() {
-		return animID;
-	}
-
 	public void setAnimID(int animID) {
 		this.animID = animID;
 	}
 
-	public int getAnimTime() {
-		return animTime;
-	}
-
 	public void setAnimTime(int animTime) {
 		this.animTime = animTime;
-	}
-
-	public int getDirection() {
-		return direction;
 	}
 
 	public void setDirection(int direction) {
@@ -83,8 +78,13 @@ public class AnimatedGraphics extends BaseGraphics {
 	}
 
 	@Override
-	public void receive(Message m, Entity e) {
-		// TODO Auto-generated method stub
+	public void update(Entity e) {
 
+		if (isAnimating()) {
+			this.animID++;
+			if (this.animID >= (this.image.getFWidth() * this.animTime)) {
+				this.animID = 0;
+			}
+		}
 	}
 }

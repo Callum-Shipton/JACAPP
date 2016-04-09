@@ -19,35 +19,31 @@ public class ItemSlot extends GuiComponent {
 	public ItemSlot(int x, int y, InventoryItem item) {
 		super(x, y);
 		int gap = 0;
-		icon = new Icon(x, y, item.getInventoryImage(), false, 1.0f);
-		gap += icon.getSize().x() + BUFFER;
+		this.icon = new Icon(x, y, item.getInventoryImage(), false, 1.0f);
+		gap += this.icon.getSize().x() + this.BUFFER;
 		if (item.getTypePickup() == TypePickup.ARMOUR) {
-			stats.add(new Counter(x + gap, y + (icon.getSize().y() / 4), Art.getImage("ArmourIcon"), false,
+			this.stats.add(new Counter(x + gap, y + (this.icon.getSize().y() / 4), Art.getImage("ArmourIcon"), false,
 					((Armour) item).getDefence(), 0.5f));
 		} else if (item.getTypePickup() == TypePickup.WEAPON) {
-			stats.add(new Counter(x + gap, y + (icon.getSize().y() / 4), Art.getImage("DamageIcon"), false,
+			this.stats.add(new Counter(x + gap, y + (this.icon.getSize().y() / 4), Art.getImage("DamageIcon"), false,
 					((Weapon) item).getDamage(), 0.5f));
-			gap += stats.get(0).getFullSize().x() + BUFFER;
-			stats.add(new Counter(x + gap, y + (icon.getSize().y() / 4), Art.getImage("RangeIcon"), false,
+			gap += this.stats.get(0).getFullSize().x() + this.BUFFER;
+			this.stats.add(new Counter(x + gap, y + (this.icon.getSize().y() / 4), Art.getImage("RangeIcon"), false,
 					((Weapon) item).getRange(), 0.5f));
-			gap += stats.get(1).getFullSize().x() + BUFFER;
-			stats.add(new Counter(x + gap, y + (icon.getSize().y() / 4), Art.getImage("FireRateIcon"), false,
+			gap += this.stats.get(1).getFullSize().x() + this.BUFFER;
+			this.stats.add(new Counter(x + gap, y + (this.icon.getSize().y() / 4), Art.getImage("FireRateIcon"), false,
 					((Weapon) item).getFireRate(), 0.5f));
-			gap += stats.get(2).getFullSize().x() + BUFFER;
-			stats.add(new Counter(x + gap, y + (icon.getSize().y() / 4), Art.getImage("ManaCostIcon"), false,
+			gap += this.stats.get(2).getFullSize().x() + this.BUFFER;
+			this.stats.add(new Counter(x + gap, y + (this.icon.getSize().y() / 4), Art.getImage("ManaCostIcon"), false,
 					((Weapon) item).getManaCost(), 0.5f));
 		}
 	}
 
-	public void updateImage(Image image) {
-		icon.setI(image);
-	}
-
-	public void updateStats(int[] nums) {
-		int count = 0;
-		for (Counter counter : stats) {
-			counter.update(nums[count]);
-			count++;
+	@Override
+	public void render(DPDTRenderer d) {
+		this.icon.render(d);
+		for (Counter counter : this.stats) {
+			counter.render(d);
 		}
 	}
 
@@ -57,11 +53,15 @@ public class ItemSlot extends GuiComponent {
 
 	}
 
-	@Override
-	public void render(DPDTRenderer d) {
-		icon.render(d);
-		for (Counter counter : stats) {
-			counter.render(d);
+	public void updateImage(Image image) {
+		this.icon.setI(image);
+	}
+
+	public void updateStats(int[] nums) {
+		int count = 0;
+		for (Counter counter : this.stats) {
+			counter.update(nums[count]);
+			count++;
 		}
 	}
 }

@@ -19,14 +19,14 @@ public class Counter extends Icon {
 		super(x, y, i, animating, scale);
 		this.scale = scale;
 		this.count = count;
-		width = (int) ((i.getWidth() / i.getFWidth()) * scale);
-		numberSize = new Vector2((i.getHeight() / i.getFHeight()) * scale, (i.getHeight() / i.getFHeight()) * scale);
-		fullSize = new Vector2(width + numberSize.x(), numberSize.y());
+		this.width = (int) ((i.getWidth() / i.getFWidth()) * scale);
+		this.numberSize = new Vector2((i.getHeight() / i.getFHeight()) * scale,
+				(i.getHeight() / i.getFHeight()) * scale);
+		this.fullSize = new Vector2(this.width + this.numberSize.x(), this.numberSize.y());
 	}
 
-	public void update(int count) {
-		super.update();
-		this.count = count;
+	public Vector2 getFullSize() {
+		return this.fullSize;
 	}
 
 	@Override
@@ -35,18 +35,22 @@ public class Counter extends Icon {
 
 		Vector2 maxTex = new Vector2(10, 1);
 
-		if (count < 10) {
-			Art.stat.draw(Art.getImage("Numbers"), new Vector2(x + width + (FIRST_GAP * scale), y), numberSize, 0.0f,
-					new Vector2(count, 1), maxTex);
+		if (this.count < 10) {
+			Art.stat.draw(Art.getImage("Numbers"),
+					new Vector2(this.x + this.width + (this.FIRST_GAP * this.scale), this.y), this.numberSize, 0.0f,
+					new Vector2(this.count, 1), maxTex);
 		} else {
-			Art.stat.draw(Art.getImage("Numbers"), new Vector2(x + width + (FIRST_GAP * scale), y), numberSize, 0.0f,
-					new Vector2((int) Math.floor(count / 10), 1), maxTex);
-			Art.stat.draw(Art.getImage("Numbers"), new Vector2(x + width + (NUMBER_GAP * scale), y), numberSize, 0.0f,
-					new Vector2(count % 10, 1), maxTex);
+			Art.stat.draw(Art.getImage("Numbers"),
+					new Vector2(this.x + this.width + (this.FIRST_GAP * this.scale), this.y), this.numberSize, 0.0f,
+					new Vector2((int) Math.floor(this.count / 10), 1), maxTex);
+			Art.stat.draw(Art.getImage("Numbers"),
+					new Vector2(this.x + this.width + (this.NUMBER_GAP * this.scale), this.y), this.numberSize, 0.0f,
+					new Vector2(this.count % 10, 1), maxTex);
 		}
 	}
 
-	public Vector2 getFullSize() {
-		return fullSize;
+	public void update(int count) {
+		super.update();
+		this.count = count;
 	}
 }

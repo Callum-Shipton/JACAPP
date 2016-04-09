@@ -52,90 +52,39 @@ public class Art {
 	public static IRenderer irWall;
 	public static IRenderer irFore;
 
-	private void initShaders() {
-
-		// Load the vertex shader
-		int vsId = loadShader("/Shaders/VertexShader.glsl", GL_VERTEX_SHADER);
-		// Load the fragment shader
-		int fsId = loadShader("/Shaders/FragmentShader.glsl", GL_FRAGMENT_SHADER);
-
-		int IvsId = loadShader("/Shaders/IVertexShader.glsl", GL_VERTEX_SHADER);
-		// Load the fragment shader
-		int IfsId = loadShader("/Shaders/IFragmentShader.glsl", GL_FRAGMENT_SHADER);
-
-		int SvsId = loadShader("/Shaders/StatVertexShader.glsl", GL_VERTEX_SHADER);
-
-		int SfsId = loadShader("/Shaders/StatFragmentShader.glsl", GL_FRAGMENT_SHADER);
-
-		// Create a new shader program that links both shaders
-		ShaderBase = glCreateProgram();
-		glAttachShader(ShaderBase, vsId);
-		glAttachShader(ShaderBase, fsId);
-
-		// Position information will be attribute 0
-		glBindAttribLocation(ShaderBase, 0, "pos");
-		// Textute information will be attribute 1
-		glBindAttribLocation(ShaderBase, 1, "tex");
-
-		glLinkProgram(ShaderBase);
-		glValidateProgram(ShaderBase);
-
-		ShaderInst = glCreateProgram();
-		glAttachShader(ShaderInst, IvsId);
-		glAttachShader(ShaderInst, IfsId);
-
-		glBindAttribLocation(ShaderInst, 0, "pos");
-		// Textute information will be attribute 1
-		glBindAttribLocation(ShaderInst, 1, "tex");
-		glBindAttribLocation(ShaderInst, 2, "trans");
-		// Textute information will be attribute 1
-		glBindAttribLocation(ShaderInst, 3, "text");
-
-		glLinkProgram(ShaderInst);
-		glValidateProgram(ShaderInst);
-
-		ShaderStat = glCreateProgram();
-		glAttachShader(ShaderStat, SvsId);
-		glAttachShader(ShaderStat, SfsId);
-
-		// Position information will be attribute 0
-		glBindAttribLocation(ShaderStat, 0, "pos");
-		// Textute information will be attribute 1
-		glBindAttribLocation(ShaderStat, 1, "tex");
-
-		glLinkProgram(ShaderStat);
-		glValidateProgram(ShaderStat);
-
+	public static Image getImage(String filename) {
+		return artFiles.get(filename);
 	}
 
-	public int loadShader(String filename, int type) {
-		StringBuilder shaderSource = new StringBuilder();
-		int shaderID = 0;
+	public static void initShaderUniforms() {
 
-		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(filename)));
-			String line;
-			while ((line = reader.readLine()) != null) {
-				shaderSource.append(line).append("\n");
-			}
-			reader.close();
-		} catch (IOException e) {
-			System.err.println("Could not read file.");
-			e.printStackTrace();
-			System.exit(-1);
+		Matrix4 projectionMatrix = new Matrix4();
+		projectionMatrix.clearToOrtho(0, ShootEmUp.getDisplay().getWidth(), ShootEmUp.getDisplay().getHeight(), 0,
+				-1.0f, 1.0f);
+		FloatBuffer matrix44Buffer = BufferUtils.createFloatBuffer(16);
+		matrix44Buffer = projectionMatrix.toBuffer();
+
+		glUseProgram(ShaderBase);
+
+		int Error = glGetError();
+
+		if (Error != GL_NO_ERROR) {
+			System.out.println("OpenGL Error: " + Error);
 		}
+		int projectionMatrixLocation = glGetUniformLocation(ShaderBase, "projectionMatrix");
+		glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
+		glUseProgram(0);
 
-		shaderID = glCreateShader(type);
-		glShaderSource(shaderID, shaderSource);
-		glCompileShader(shaderID);
+		glUseProgram(ShaderInst);
+		projectionMatrixLocation = glGetUniformLocation(ShaderInst, "projectionMatrix");
+		glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
+		glUseProgram(0);
 
-		String infoLog = glGetShaderInfoLog(shaderID, glGetShaderi(shaderID, GL_INFO_LOG_LENGTH));
+		glUseProgram(ShaderStat);
+		projectionMatrixLocation = glGetUniformLocation(ShaderStat, "projectionMatrix");
+		glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
+		glUseProgram(0);
 
-		if (glGetShaderi(shaderID, GL_COMPILE_STATUS) == GL_FALSE) {
-			throw new RuntimeException("Failure in compiling " + filename + " shader. Error log:\n" + infoLog);
-		}
-
-		return shaderID;
 	}
 
 	private static void initTextures() {
@@ -298,51 +247,6 @@ public class Art {
 		artFiles.put("BarInfoBottom", new Image("/Images/HUD/BarInfoBottom.png", 1, 1));
 	}
 
-	public static void initShaderUniforms() {
-
-		Matrix4 projectionMatrix = new Matrix4();
-		projectionMatrix.clearToOrtho(0, ShootEmUp.getDisplay().getWidth(), ShootEmUp.getDisplay().getHeight(), 0,
-				-1.0f, 1.0f);
-		FloatBuffer matrix44Buffer = BufferUtils.createFloatBuffer(16);
-		matrix44Buffer = projectionMatrix.toBuffer();
-
-		glUseProgram(ShaderBase);
-
-		int Error = glGetError();
-
-		if (Error != GL_NO_ERROR) {
-			System.out.println("OpenGL Error: " + Error);
-		}
-		int projectionMatrixLocation = glGetUniformLocation(ShaderBase, "projectionMatrix");
-		glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
-		glUseProgram(0);
-
-		glUseProgram(ShaderInst);
-		projectionMatrixLocation = glGetUniformLocation(ShaderInst, "projectionMatrix");
-		glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
-		glUseProgram(0);
-
-		glUseProgram(ShaderStat);
-		projectionMatrixLocation = glGetUniformLocation(ShaderStat, "projectionMatrix");
-		glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
-		glUseProgram(0);
-
-	}
-
-	private void initRenderers() {
-		base = new DPDTRenderer(ShaderBase);
-		stat = new DPDTRenderer(ShaderStat);
-	}
-
-	public void init() {
-
-		initShaders();
-		initShaderUniforms();
-		initTextures();
-		initRenderers();
-
-	}
-
 	public static void refreshRenderers() {
 		base.initRenderData();
 		stat.initRenderData();
@@ -357,8 +261,104 @@ public class Art {
 		}
 	}
 
-	public static Image getImage(String filename) {
-		return artFiles.get(filename);
+	public void init() {
+
+		initShaders();
+		initShaderUniforms();
+		initTextures();
+		initRenderers();
+
+	}
+
+	private void initRenderers() {
+		base = new DPDTRenderer(ShaderBase);
+		stat = new DPDTRenderer(ShaderStat);
+	}
+
+	private void initShaders() {
+
+		// Load the vertex shader
+		int vsId = loadShader("/Shaders/VertexShader.glsl", GL_VERTEX_SHADER);
+		// Load the fragment shader
+		int fsId = loadShader("/Shaders/FragmentShader.glsl", GL_FRAGMENT_SHADER);
+
+		int IvsId = loadShader("/Shaders/IVertexShader.glsl", GL_VERTEX_SHADER);
+		// Load the fragment shader
+		int IfsId = loadShader("/Shaders/IFragmentShader.glsl", GL_FRAGMENT_SHADER);
+
+		int SvsId = loadShader("/Shaders/StatVertexShader.glsl", GL_VERTEX_SHADER);
+
+		int SfsId = loadShader("/Shaders/StatFragmentShader.glsl", GL_FRAGMENT_SHADER);
+
+		// Create a new shader program that links both shaders
+		ShaderBase = glCreateProgram();
+		glAttachShader(ShaderBase, vsId);
+		glAttachShader(ShaderBase, fsId);
+
+		// Position information will be attribute 0
+		glBindAttribLocation(ShaderBase, 0, "pos");
+		// Textute information will be attribute 1
+		glBindAttribLocation(ShaderBase, 1, "tex");
+
+		glLinkProgram(ShaderBase);
+		glValidateProgram(ShaderBase);
+
+		ShaderInst = glCreateProgram();
+		glAttachShader(ShaderInst, IvsId);
+		glAttachShader(ShaderInst, IfsId);
+
+		glBindAttribLocation(ShaderInst, 0, "pos");
+		// Textute information will be attribute 1
+		glBindAttribLocation(ShaderInst, 1, "tex");
+		glBindAttribLocation(ShaderInst, 2, "trans");
+		// Textute information will be attribute 1
+		glBindAttribLocation(ShaderInst, 3, "text");
+
+		glLinkProgram(ShaderInst);
+		glValidateProgram(ShaderInst);
+
+		ShaderStat = glCreateProgram();
+		glAttachShader(ShaderStat, SvsId);
+		glAttachShader(ShaderStat, SfsId);
+
+		// Position information will be attribute 0
+		glBindAttribLocation(ShaderStat, 0, "pos");
+		// Textute information will be attribute 1
+		glBindAttribLocation(ShaderStat, 1, "tex");
+
+		glLinkProgram(ShaderStat);
+		glValidateProgram(ShaderStat);
+
+	}
+
+	public int loadShader(String filename, int type) {
+		StringBuilder shaderSource = new StringBuilder();
+		int shaderID = 0;
+
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(filename)));
+			String line;
+			while ((line = reader.readLine()) != null) {
+				shaderSource.append(line).append("\n");
+			}
+			reader.close();
+		} catch (IOException e) {
+			System.err.println("Could not read file.");
+			e.printStackTrace();
+			System.exit(-1);
+		}
+
+		shaderID = glCreateShader(type);
+		glShaderSource(shaderID, shaderSource);
+		glCompileShader(shaderID);
+
+		String infoLog = glGetShaderInfoLog(shaderID, glGetShaderi(shaderID, GL_INFO_LOG_LENGTH));
+
+		if (glGetShaderi(shaderID, GL_COMPILE_STATUS) == GL_FALSE) {
+			throw new RuntimeException("Failure in compiling " + filename + " shader. Error log:\n" + infoLog);
+		}
+
+		return shaderID;
 	}
 
 }

@@ -13,14 +13,18 @@ public class GoalBounder {
 	private Tile[][] aiTiles;
 
 	public GoalBounder(int width, int height, HashMap<Vector2, Entity> walls) {
-		aiTiles = new Tile[width][height];
+		this.aiTiles = new Tile[width][height];
 		SetAiTiles(walls);
 	}
 
+	public Tile getTile(float x, float y) {
+		return this.aiTiles[(int) x][(int) y];
+	}
+
 	private void SetAiTiles(HashMap<Vector2, Entity> walls) {
-		for (int x = 2; x < aiTiles.length - 2; x++) {
+		for (int x = 2; x < (this.aiTiles.length - 2); x++) {
 			System.out.println(x);
-			for (int y = 2; y < aiTiles[0].length - 2; y++) {
+			for (int y = 2; y < (this.aiTiles[0].length - 2); y++) {
 
 				Queue<TypeNode> open = new LinkedList<TypeNode>(); // queue for
 																	// tiles
@@ -73,7 +77,8 @@ public class GoalBounder {
 				closed.add(NE);
 
 				while (open.size() > 0) {
-					TypeNode current = open.poll(); // Tile current being checked
+					TypeNode current = open.poll(); // Tile current being
+													// checked
 
 					int currentType = current.getType();
 					float currentX = current.getPosition().x();
@@ -103,13 +108,9 @@ public class GoalBounder {
 						}
 					}
 				}
-				aiTiles[x][y] = new Tile();
-				aiTiles[x][y].setBoxes(Boxes);
+				this.aiTiles[x][y] = new Tile();
+				this.aiTiles[x][y].setBoxes(Boxes);
 			}
 		}
-	}
-
-	public Tile getTile(float x, float y) {
-		return aiTiles[(int) x][(int) y];
 	}
 }

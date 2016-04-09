@@ -13,28 +13,28 @@ public class HudBar extends Icon {
 		super(x, y, i, false, scale);
 	}
 
-	@Override
-	public void render(DPDTRenderer r) {
-		for (int j = 0; j < maxValue; j++) {
-			r.draw(i, new Vector2(x + (j * 10.0f), y), size, 0.0f,
-					j >= value ? getCurrFrame() : new Vector2(0.0f, 1.0f), maxFrame);
-		}
+	public float getMaxValue() {
+		return this.maxValue;
 	}
 
 	public float getValue() {
-		return value;
+		return this.value;
 	}
 
-	public void setValue(float value) {
-		this.value = value;
-	}
-
-	public float getMaxValue() {
-		return maxValue;
+	@Override
+	public void render(DPDTRenderer r) {
+		for (int j = 0; j < this.maxValue; j++) {
+			r.draw(this.i, new Vector2(this.x + (j * 10.0f), this.y), this.size, 0.0f,
+					j >= this.value ? getCurrFrame() : new Vector2(0.0f, 1.0f), this.maxFrame);
+		}
 	}
 
 	public void setMaxValue(float maxValue) {
 		this.maxValue = maxValue;
+	}
+
+	public void setValue(float value) {
+		this.value = value;
 	}
 
 }

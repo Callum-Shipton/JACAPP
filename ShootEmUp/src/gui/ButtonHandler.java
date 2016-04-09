@@ -27,126 +27,8 @@ import save.Save;
 
 public abstract class ButtonHandler {
 
-	public static void selectButton(TypeButton type) {
-		switch (type) {
-			case NEW_GAME:
-				newGame();
-				break;
-			case LOAD_GAME:
-				loadGame();
-				break;
-			case OPTIONS:
-				options();
-				break;
-			case EXIT:
-				exit();
-				break;
-			case LEVEL1:
-				level(1);
-				break;
-			case LEVEL2:
-				level(2);
-				break;
-			case LEVEL3:
-				level(3);
-				break;
-			case WARRIOR:
-				character(TypeAttack.WARRIOR);
-				break;
-			case ARCHER:
-				character(TypeAttack.ARCHER);
-				break;
-			case MAGE:
-				character(TypeAttack.MAGE);
-				break;
-			case BATTLE_MAGE:
-				character(TypeAttack.BATTLE_MAGE);
-				break;
-			case ROGUE:
-				character(TypeAttack.ROGUE);
-				break;
-			case BACK:
-				back();
-				break;
-			case SOUND:
-				sound();
-				break;
-			case MUTE:
-				mute();
-				break;
-			case CONTROLS:
-				controls();
-				break;
-			case RESUME:
-				resume();
-				break;
-			case MAIN_MENU:
-				mainMenu();
-				break;
-			case INVENTORY:
-				inventory();
-				break;
-			case UPGRADES:
-				magic();
-				break;
-			case SKILLS:
-				skills();
-				break;
-			case MAP:
-				map();
-				break;
-			case SAVE:
-				save();
-				break;
-			case HEALTH_REGEN:
-				healthRegen();
-				break;
-			case HEALTH:
-				health();
-				break;
-			case MANA_REGEN:
-				manaRegen();
-				break;
-			case MANA:
-				mana();
-				break;
-			case POTIONS_UPGRADE:
-				potionsUpgrade();
-				break;
-			case INVENTORY_UPGRADE:
-				inventoryUpgrade();
-				break;
-			case SAVE_GAME:
-				saveGame();
-				break;
-			default:
-		}
-	}
-
-	private static void newGame() {
-		ShootEmUp.getMenuSystem().addMenu(new CharacterSelectMenu(Art.getImage("MainMenuScreen")));
-	}
-
-	private static void loadGame() {
-		if(ShootEmUp.getSave() == null){
-			ShootEmUp.setSave(new Save());
-		}
-		ShootEmUp.getSave().load(1);
-		ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(Art.getImage("MainMenuScreen")));
-	}
-
-	private static void options() {
-		ShootEmUp.getMenuSystem().addMenu(new OptionsMenu(Art.getImage("MainMenuScreen")));
-	}
-
-	private static void exit() {
-		glfwSetWindowShouldClose(ShootEmUp.getDisplay().getWindow(), GL_TRUE);
-	}
-
-	private static void level(int level) {
-		ShootEmUp.setCurrentLevel(new Level(Art.levels, level));
-		ShootEmUp.getCurrentLevel().init();
-		ShootEmUp.startGame();
+	private static void back() {
+		ShootEmUp.getMenuSystem().popMenu();
 	}
 
 	private static void character(TypeAttack type) {
@@ -162,96 +44,35 @@ public abstract class ButtonHandler {
 		ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(Art.getImage("MainMenuScreen")));
 	}
 
-	private static void back() {
-		ShootEmUp.getMenuSystem().popMenu();
-	}
-
 	private static void controls() {
 		ShootEmUp.getMenuSystem().addMenu(new ControlsMenu(Art.getImage("MainMenuScreen")));
 	}
 
-	private static void sound() {
-		ShootEmUp.getMenuSystem().addMenu(new SoundMenu(Art.getImage("MainMenuScreen")));
-	}
-
-	private static void mute() {
-		ShootEmUp.getMusicPlayer().pause();
-	}
-
-	private static void inventory() {
-		ShootEmUp.getMenuSystem().addMenu(new InventoryMenu(Art.getImage("InventoryScreen")));
-	}
-
-	private static void magic() {
-		ShootEmUp.getMenuSystem().addMenu(new UpgradesMenu(Art.getImage("UpgradesScreen")));
-	}
-
-	private static void skills() {
-		ShootEmUp.getMenuSystem().addMenu(new SkillMenu(Art.getImage("SkillScreen")));
-	}
-
-	private static void map() {
-		ShootEmUp.getMenuSystem().addMenu(new MapMenu(Art.getImage("MapScreen")));
-	}
-
-	private static void save() {
-		ShootEmUp.getMenuSystem().addMenu(new SaveMenu(Art.getImage("SaveScreen")));
-	}
-
-	private static void resume() {
-		ShootEmUp.getMenuSystem().clearMenus();
-		ShootEmUp.setPaused(false);
-	}
-
-	private static void mainMenu() {
-		ShootEmUp.getMenuSystem().setMainMenu(true);
-		ShootEmUp.getMenuSystem().clearMenus();
-		ShootEmUp.getMenuSystem().addMenu(new MainMenu(Art.getImage("MainMenuScreen")));
-	}
-
-	private static void healthRegen() {
-		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
-		if (BI
-				.getLevelPoints() > 0) {
-			BaseAttack BA = (BaseAttack) (ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK));
-			BA.setMaxHealthRegen((int) Math.ceil(BA.getMaxHealthRegen() / 2));
-			BI
-					.spendLevelPoints(1);
-		}
+	private static void exit() {
+		glfwSetWindowShouldClose(ShootEmUp.getDisplay().getWindow(), GL_TRUE);
 	}
 
 	private static void health() {
 		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
-		if (BI
-				.getLevelPoints() > 0) {
+		if (BI.getLevelPoints() > 0) {
 			BaseAttack BA = (ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK));
 			BA.setMaxHealth(BA.getMaxHealth() + 1);
 			BA.setHealth(BA.getHealth() + 1);
-			BI
-					.spendLevelPoints(1);
-		}
-	}
-
-	private static void manaRegen() {
-		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
-		if (BI
-				.getLevelPoints() > 0) {
-			PlayerAttack PA = (PlayerAttack) (ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK));
-			PA.setMaxManaRegen((int) Math.ceil(PA.getMaxManaRegen() / 2));
-			BI
-					.spendLevelPoints(1);
-		}
-	}
-
-	private static void mana() {
-		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
-		if (BI
-				.getLevelPoints() > 0) {
-			PlayerAttack PA =(ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK));
-			PA.setMaxMana(PA.getMaxMana() + 1);
-			PA.setMana(PA.getMana() + 1);
 			BI.spendLevelPoints(1);
 		}
+	}
+
+	private static void healthRegen() {
+		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
+		if (BI.getLevelPoints() > 0) {
+			BaseAttack BA = (BaseAttack) (ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK));
+			BA.setMaxHealthRegen((int) Math.ceil(BA.getMaxHealthRegen() / 2));
+			BI.spendLevelPoints(1);
+		}
+	}
+
+	private static void inventory() {
+		ShootEmUp.getMenuSystem().addMenu(new InventoryMenu(Art.getImage("InventoryScreen")));
 	}
 
 	private static void inventoryUpgrade() {
@@ -262,12 +83,80 @@ public abstract class ButtonHandler {
 		}
 	}
 
+	private static void level(int level) {
+		ShootEmUp.setCurrentLevel(new Level(Art.levels, level));
+		ShootEmUp.getCurrentLevel().init();
+		ShootEmUp.startGame();
+	}
+
+	private static void loadGame() {
+		if (ShootEmUp.getSave() == null) {
+			ShootEmUp.setSave(new Save());
+		}
+		ShootEmUp.getSave().load(1);
+		ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(Art.getImage("MainMenuScreen")));
+	}
+
+	private static void magic() {
+		ShootEmUp.getMenuSystem().addMenu(new UpgradesMenu(Art.getImage("UpgradesScreen")));
+	}
+
+	private static void mainMenu() {
+		ShootEmUp.getMenuSystem().setMainMenu(true);
+		ShootEmUp.getMenuSystem().clearMenus();
+		ShootEmUp.getMenuSystem().addMenu(new MainMenu(Art.getImage("MainMenuScreen")));
+	}
+
+	private static void mana() {
+		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
+		if (BI.getLevelPoints() > 0) {
+			PlayerAttack PA = (ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK));
+			PA.setMaxMana(PA.getMaxMana() + 1);
+			PA.setMana(PA.getMana() + 1);
+			BI.spendLevelPoints(1);
+		}
+	}
+
+	private static void manaRegen() {
+		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
+		if (BI.getLevelPoints() > 0) {
+			PlayerAttack PA = (PlayerAttack) (ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK));
+			PA.setMaxManaRegen((int) Math.ceil(PA.getMaxManaRegen() / 2));
+			BI.spendLevelPoints(1);
+		}
+	}
+
+	private static void map() {
+		ShootEmUp.getMenuSystem().addMenu(new MapMenu(Art.getImage("MapScreen")));
+	}
+
+	private static void mute() {
+		ShootEmUp.getMusicPlayer().pause();
+	}
+
+	private static void newGame() {
+		ShootEmUp.getMenuSystem().addMenu(new CharacterSelectMenu(Art.getImage("MainMenuScreen")));
+	}
+
+	private static void options() {
+		ShootEmUp.getMenuSystem().addMenu(new OptionsMenu(Art.getImage("MainMenuScreen")));
+	}
+
 	private static void potionsUpgrade() {
-		BaseInventory PI =  (ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY));
+		BaseInventory PI = (ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY));
 		if (PI.getCoins() >= 5) {
 			PI.addMaxPotions(5);
 			PI.spendCoins(5);
 		}
+	}
+
+	private static void resume() {
+		ShootEmUp.getMenuSystem().clearMenus();
+		ShootEmUp.setPaused(false);
+	}
+
+	private static void save() {
+		ShootEmUp.getMenuSystem().addMenu(new SaveMenu(Art.getImage("SaveScreen")));
 	}
 
 	private static void saveGame() {
@@ -277,5 +166,109 @@ public abstract class ButtonHandler {
 		ShootEmUp.getSave().saveCharacter();
 		ShootEmUp.getSave().saveToSystem(1);
 		ShootEmUp.setSave(null);
+	}
+
+	public static void selectButton(TypeButton type) {
+		switch (type) {
+		case NEW_GAME:
+			newGame();
+			break;
+		case LOAD_GAME:
+			loadGame();
+			break;
+		case OPTIONS:
+			options();
+			break;
+		case EXIT:
+			exit();
+			break;
+		case LEVEL1:
+			level(1);
+			break;
+		case LEVEL2:
+			level(2);
+			break;
+		case LEVEL3:
+			level(3);
+			break;
+		case WARRIOR:
+			character(TypeAttack.WARRIOR);
+			break;
+		case ARCHER:
+			character(TypeAttack.ARCHER);
+			break;
+		case MAGE:
+			character(TypeAttack.MAGE);
+			break;
+		case BATTLE_MAGE:
+			character(TypeAttack.BATTLE_MAGE);
+			break;
+		case ROGUE:
+			character(TypeAttack.ROGUE);
+			break;
+		case BACK:
+			back();
+			break;
+		case SOUND:
+			sound();
+			break;
+		case MUTE:
+			mute();
+			break;
+		case CONTROLS:
+			controls();
+			break;
+		case RESUME:
+			resume();
+			break;
+		case MAIN_MENU:
+			mainMenu();
+			break;
+		case INVENTORY:
+			inventory();
+			break;
+		case UPGRADES:
+			magic();
+			break;
+		case SKILLS:
+			skills();
+			break;
+		case MAP:
+			map();
+			break;
+		case SAVE:
+			save();
+			break;
+		case HEALTH_REGEN:
+			healthRegen();
+			break;
+		case HEALTH:
+			health();
+			break;
+		case MANA_REGEN:
+			manaRegen();
+			break;
+		case MANA:
+			mana();
+			break;
+		case POTIONS_UPGRADE:
+			potionsUpgrade();
+			break;
+		case INVENTORY_UPGRADE:
+			inventoryUpgrade();
+			break;
+		case SAVE_GAME:
+			saveGame();
+			break;
+		default:
+		}
+	}
+
+	private static void skills() {
+		ShootEmUp.getMenuSystem().addMenu(new SkillMenu(Art.getImage("SkillScreen")));
+	}
+
+	private static void sound() {
+		ShootEmUp.getMenuSystem().addMenu(new SoundMenu(Art.getImage("MainMenuScreen")));
 	}
 }

@@ -37,72 +37,74 @@ public class Button extends GuiComponent {
 		super(x, y);
 		this.type = type;
 		this.id = id;
-		w = id.getWidth();
-		h = id.getHeight() / 2;
-		window = ShootEmUp.getDisplay().getWindow();
+		this.w = id.getWidth();
+		this.h = id.getHeight() / 2;
+		this.window = ShootEmUp.getDisplay().getWindow();
 	}
 
-	@Override
-	public void update() {
-		window = ShootEmUp.getDisplay().getWindow();
-		Bx.clear();
-		By.clear();
+	public Image getId() {
+		return this.id;
+	}
 
-		glfwGetCursorPos(window, Bx, By);
+	public TypeButton getType() {
+		return this.type;
+	}
 
-		double mx = Bx.get();
-		double my = By.get();
-
-		if ((mx >= x) && (my >= y) && (mx < (x + w)) && (my < (y + h))) {
-
-			if (isPressed && (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE)) {
-				performClick = true;
-				isPressed = false;
-			} else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
-				isPressed = true;
-			}
-		}
-		if (isPressed && (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE)) {
-			isPressed = false;
-		}
-
-		if (performClick && (type != TypeButton.OTHER)) {
-			ButtonHandler.selectButton(type);
-			postAction();
-		}
+	public boolean hasClicked() {
+		return this.performClick;
 	}
 
 	public void postAction() {
-		performClick = false;
+		this.performClick = false;
 	}
 
 	@Override
 	public void render(DPDTRenderer stat) {
-		if (isPressed || hovered) {
-			stat.draw(id, new Vector2(x, y), new Vector2(w, h), 0, new Vector2(0, 1), new Vector2(1, 2));
+		if (this.isPressed || this.hovered) {
+			stat.draw(this.id, new Vector2(this.x, this.y), new Vector2(this.w, this.h), 0, new Vector2(0, 1),
+					new Vector2(1, 2));
 		} else {
-			stat.draw(id, new Vector2(x, y), new Vector2(w, h), 0, new Vector2(0, 0), new Vector2(1, 2));
+			stat.draw(this.id, new Vector2(this.x, this.y), new Vector2(this.w, this.h), 0, new Vector2(0, 0),
+					new Vector2(1, 2));
 		}
 	}
 
 	public void reset(int oldWidth, int oldHeight, int newWidth, int newHeight) {
-		x = (int) ((x / oldWidth) * newWidth);
-		y = (int) ((y / oldHeight) * newHeight);
-	}
-
-	public boolean hasClicked() {
-		return performClick;
-	}
-
-	public Image getId() {
-		return id;
-	}
-
-	public TypeButton getType() {
-		return type;
+		this.x = (int) ((this.x / oldWidth) * newWidth);
+		this.y = (int) ((this.y / oldHeight) * newHeight);
 	}
 
 	public void setHovered(boolean b) {
-		hovered = b;
+		this.hovered = b;
+	}
+
+	@Override
+	public void update() {
+		this.window = ShootEmUp.getDisplay().getWindow();
+		this.Bx.clear();
+		this.By.clear();
+
+		glfwGetCursorPos(this.window, this.Bx, this.By);
+
+		double mx = this.Bx.get();
+		double my = this.By.get();
+
+		if ((mx >= this.x) && (my >= this.y) && (mx < (this.x + this.w)) && (my < (this.y + this.h))) {
+
+			if (this.isPressed && (glfwGetMouseButton(this.window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE)) {
+				this.performClick = true;
+				this.isPressed = false;
+			} else if (glfwGetMouseButton(this.window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+				this.isPressed = true;
+			}
+		}
+		if (this.isPressed && (glfwGetMouseButton(this.window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE)) {
+			this.isPressed = false;
+		}
+
+		if (this.performClick && (this.type != TypeButton.OTHER)) {
+			ButtonHandler.selectButton(this.type);
+			postAction();
+		}
 	}
 }

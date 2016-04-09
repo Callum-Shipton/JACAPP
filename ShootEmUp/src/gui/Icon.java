@@ -14,43 +14,28 @@ public class Icon extends GuiComponent {
 
 	public Icon(float x, float y, Image i, boolean animating, float scale) {
 		super(x, y);
-		size = new Vector2((i.getWidth() / i.getFWidth()) * scale, (i.getHeight() / i.getFHeight()) * scale);
+		this.size = new Vector2((i.getWidth() / i.getFWidth()) * scale, (i.getHeight() / i.getFHeight()) * scale);
 		setCurrFrame(new Vector2(0.0f, 0.0f));
-		maxFrame = new Vector2(i.getFWidth(), i.getFHeight());
+		this.maxFrame = new Vector2(i.getFWidth(), i.getFHeight());
 		this.i = i;
-		isAnimated = animating;
+		this.isAnimated = animating;
+	}
+
+	public Vector2 getCurrFrame() {
+		return this.currFrame;
+	}
+
+	public Image getI() {
+		return this.i;
+	}
+
+	public Vector2 getSize() {
+		return this.size;
 	}
 
 	@Override
 	public void render(DPDTRenderer d) {
-		d.draw(i, new Vector2(x, y), getSize(), 0.0f, getCurrFrame(), maxFrame);
-	}
-
-	@Override
-	public void update() {
-		if (isAnimated) {
-			if (currFrame.x() < maxFrame.x()) {
-				currFrame.set((currFrame.x() + 1), currFrame.y());
-			} else {
-				currFrame.set(0.0f, currFrame.y());
-			}
-		}
-	}
-
-	public void setMFrame(float w, float h) {
-		maxFrame.set(w, h);
-	}
-
-	public Vector2 getSize() {
-		return size;
-	}
-
-	public void setSize(float w, float h) {
-		size.set(w, h);
-	}
-
-	public Vector2 getCurrFrame() {
-		return currFrame;
+		d.draw(this.i, new Vector2(this.x, this.y), getSize(), 0.0f, getCurrFrame(), this.maxFrame);
 	}
 
 	public void setCurrFrame(Vector2 currFrame) {
@@ -61,7 +46,22 @@ public class Icon extends GuiComponent {
 		this.i = i;
 	}
 
-	public Image getI() {
-		return i;
+	public void setMFrame(float w, float h) {
+		this.maxFrame.set(w, h);
+	}
+
+	public void setSize(float w, float h) {
+		this.size.set(w, h);
+	}
+
+	@Override
+	public void update() {
+		if (this.isAnimated) {
+			if (this.currFrame.x() < this.maxFrame.x()) {
+				this.currFrame.set((this.currFrame.x() + 1), this.currFrame.y());
+			} else {
+				this.currFrame.set(0.0f, this.currFrame.y());
+			}
+		}
 	}
 }

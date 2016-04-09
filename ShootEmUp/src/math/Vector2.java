@@ -6,6 +6,8 @@ import org.lwjgl.BufferUtils;
 
 public class Vector2 implements Vector<Vector2> {
 
+	private final static FloatBuffer direct = BufferUtils.createFloatBuffer(2);
+
 	private float x, y;
 
 	public Vector2() {
@@ -32,37 +34,110 @@ public class Vector2 implements Vector<Vector2> {
 		set(vec);
 	}
 
+	public Vector2 add(float x, float y) {
+		this.x += x;
+		this.y += y;
+		return this;
+	}
+
+	@Override
+	public Vector2 add(Vector2 vec) {
+		return add(vec.x, vec.y);
+	}
+
+	public double Angle() {
+		double a = Math.asin(this.x);
+		if (this.y > 0) {
+			a = Math.PI - a;
+		} else if (this.x < 0) {
+			a = (2 * Math.PI) + a;
+		}
+		return a * (180 / Math.PI);
+	}
+
 	@Override
 	public Vector2 copy() {
 		return new Vector2(this);
 	}
 
-	public float x() {
-		return x;
+	public float dist(Vector2 vector) {
+		return (float) Math.sqrt(Math.pow(this.x() - vector.x(), 2) + Math.pow(this.y() - vector.y(), 2));
 	}
 
-	public Vector2 x(float x) {
-		this.x = x;
+	@Override
+	public Vector2 divide(float f) {
+		return divide(f, f);
+	}
+
+	public Vector2 divide(float x, float y) {
+		this.x /= x;
+		this.y /= y;
 		return this;
 	}
 
-	public float y() {
-		return y;
+	@Override
+	public Vector2 divide(Vector2 vec) {
+		return divide(vec.x, vec.y);
 	}
 
-	public Vector2 y(float y) {
-		this.y = y;
-		return this;
+	public float dot(Vector2 vec) {
+		return (this.x * vec.x) + (this.y * vec.y);
 	}
 
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Vector2) {
 			Vector2 v = (Vector2) o;
-			return (x == v.x) && (y == v.y);
+			return (this.x == v.x) && (this.y == v.y);
 		}
 
 		return false;
+	}
+
+	public void floor() {
+		this.x = (float) Math.floor(this.x);
+		this.y = (float) Math.floor(this.y);
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 139;
+		hash = (int) ((467 * hash) + this.x);
+		hash = (int) ((467 * hash) + this.y);
+		return hash;
+	}
+
+	@Override
+	public float length() {
+		return (float) Math.sqrt((this.x * this.x) + (this.y * this.y));
+	}
+
+	@Override
+	public Vector2 mult(float f) {
+		return mult(f, f);
+	}
+
+	public Vector2 mult(float x, float y) {
+		this.x *= x;
+		this.y *= y;
+		return this;
+	}
+
+	@Override
+	public Vector2 mult(Vector2 vec) {
+		return mult(vec.x, vec.y);
+	}
+
+	public Vector2 normalize() {
+		float length = length();
+		this.x /= length;
+		this.y /= length;
+		return this;
+	}
+
+	public Vector2 reset() {
+		this.x = this.y = 0;
+		return this;
 	}
 
 	public Vector2 set(float x, float y) {
@@ -83,38 +158,6 @@ public class Vector2 implements Vector<Vector2> {
 		return set(vec.x(), vec.y());
 	}
 
-	public Vector2 reset() {
-		x = y = 0;
-		return this;
-	}
-
-	@Override
-	public float length() {
-		return (float) Math.sqrt((x * x) + (y * y));
-	}
-
-	public Vector2 normalize() {
-		float length = length();
-		x /= length;
-		y /= length;
-		return this;
-	}
-
-	public float dot(Vector2 vec) {
-		return (x * vec.x) + (y * vec.y);
-	}
-
-	public Vector2 add(float x, float y) {
-		this.x += x;
-		this.y += y;
-		return this;
-	}
-
-	@Override
-	public Vector2 add(Vector2 vec) {
-		return add(vec.x, vec.y);
-	}
-
 	public Vector2 sub(float x, float y) {
 		this.x -= x;
 		this.y -= y;
@@ -127,71 +170,28 @@ public class Vector2 implements Vector<Vector2> {
 	}
 
 	@Override
-	public Vector2 mult(float f) {
-		return mult(f, f);
-	}
-
-	public Vector2 mult(float x, float y) {
-		this.x *= x;
-		this.y *= y;
-		return this;
-	}
-
-	@Override
-	public Vector2 mult(Vector2 vec) {
-		return mult(vec.x, vec.y);
-	}
-
-	@Override
-	public Vector2 divide(float f) {
-		return divide(f, f);
-	}
-
-	public Vector2 divide(float x, float y) {
-		this.x /= x;
-		this.y /= y;
-		return this;
-	}
-
-	@Override
-	public Vector2 divide(Vector2 vec) {
-		return divide(vec.x, vec.y);
-	}
-
-	private final static FloatBuffer direct = BufferUtils.createFloatBuffer(2);
-
-	@Override
 	public FloatBuffer toBuffer() {
 		direct.clear();
-		direct.put(x).put(y);
+		direct.put(this.x).put(this.y);
 		direct.flip();
 		return direct;
 	}
 
-	public double Angle() {
-		double a = Math.asin(x);
-		if (y > 0) {
-			a = Math.PI - a;
-		} else if (x < 0) {
-			a = (2 * Math.PI) + a;
-		}
-		return a * (180 / Math.PI);
+	public float x() {
+		return this.x;
 	}
 
-	@Override
-	public int hashCode() {
-		int hash = 139;
-		hash = (int) ((467 * hash) + x);
-		hash = (int) ((467 * hash) + y);
-		return hash;
+	public Vector2 x(float x) {
+		this.x = x;
+		return this;
 	}
 
-	public void floor() {
-		x = (float) Math.floor(x);
-		y = (float) Math.floor(y);
+	public float y() {
+		return this.y;
 	}
-	
-	public float dist(Vector2 vector){
-		return (float) Math.sqrt(Math.pow(this.x() - vector.x(), 2) + Math.pow(this.y() - vector.y(), 2));
+
+	public Vector2 y(float y) {
+		this.y = y;
+		return this;
 	}
 }

@@ -20,53 +20,53 @@ public class DurationPotion extends Potion {
 
 	@Override
 	public void update(Entity e) {
-		if (active && (counter == 0)) {
+		if (this.active && (this.counter == 0)) {
 			BaseMovement BM = e.getComponent(TypeComponent.MOVEMENT);
 			BaseAttack BA = e.getComponent(TypeComponent.ATTACK);
-			switch (type) {
-				case "Speed":
-					if (duration == maxDuration) {
-						BM.increaseSpeed(2);
-					} else if (duration == 0) {
-						BM.increaseSpeed(-2);
-					}
-					break;
-				case "Knockback":
-					if (duration == maxDuration) {
-						// Code for adding to knockback
-						BA.setHealth(100);
-						BA.setMaxHealth(100);
-						BA.setMana(100);
-						BA.setMaxMana(100);
-					}
-					break;
+			switch (this.type) {
+			case "Speed":
+				if (this.duration == this.maxDuration) {
+					BM.increaseSpeed(2);
+				} else if (this.duration == 0) {
+					BM.increaseSpeed(-2);
+				}
+				break;
+			case "Knockback":
+				if (this.duration == this.maxDuration) {
+					// Code for adding to knockback
+					BA.setHealth(100);
+					BA.setMaxHealth(100);
+					BA.setMana(100);
+					BA.setMaxMana(100);
+				}
+				break;
 
-				default:
-					System.err.println("Invalid Potion Type");
-					break;
+			default:
+				System.err.println("Invalid Potion Type");
+				break;
 			}
-			duration--;
-			if (duration < 0) {
-				active = false;
+			this.duration--;
+			if (this.duration < 0) {
+				this.active = false;
 			}
 		}
-		counter++;
-		if (counter == Seconds.ticks(1)) {
-			counter = 0;
+		this.counter++;
+		if (this.counter == Seconds.ticks(1)) {
+			this.counter = 0;
 		}
 	}
 
 	@Override
 	public void usePotion() {
-		if (quantity > 0) {
-			if (active) {
-				duration = maxDuration - 1;
+		if (this.quantity > 0) {
+			if (this.active) {
+				this.duration = this.maxDuration - 1;
 			} else {
-				active = true;
-				duration = maxDuration;
+				this.active = true;
+				this.duration = this.maxDuration;
 			}
-			quantity--;
-			counter = 0;
+			this.quantity--;
+			this.counter = 0;
 		}
 	}
 }

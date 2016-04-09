@@ -53,127 +53,126 @@ public class CharacterSave implements Serializable {
 		getData();
 	}
 
+	public Armour getBoots() {
+		return this.boots;
+	}
+
+	public Armour getChest() {
+		return this.chest;
+	}
+
+	public int getCoins() {
+		return this.coins;
+	}
+
 	private void getData() {
 
 		PlayerAttack tempAttack = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
 
-		player = tempAttack.getAttackType();
+		this.player = tempAttack.getAttackType();
 
-		lives = tempAttack.getLives();
+		this.lives = tempAttack.getLives();
 
-		health = tempAttack.getHealth();
-		maxHealth = tempAttack.getMaxHealth();
-		healthRegen = tempAttack.getHealthRegen();
-		maxHealthRegen = tempAttack.getMaxHealthRegen();
+		this.health = tempAttack.getHealth();
+		this.maxHealth = tempAttack.getMaxHealth();
+		this.healthRegen = tempAttack.getHealthRegen();
+		this.maxHealthRegen = tempAttack.getMaxHealthRegen();
 
-		mana = tempAttack.getMana();
-		maxMana = tempAttack.getMaxMana();
-		manaRegen = tempAttack.getManaRegen();
-		maxManaRegen = tempAttack.getMaxManaRegen();
+		this.mana = tempAttack.getMana();
+		this.maxMana = tempAttack.getMaxMana();
+		this.manaRegen = tempAttack.getManaRegen();
+		this.maxManaRegen = tempAttack.getMaxManaRegen();
 
-		weapon = tempAttack.getWeapon();
-		boots = tempAttack.getBoots();
-		legs = tempAttack.getLegs();
-		chest = tempAttack.getChest();
-		helmet = tempAttack.getHelmet();
+		this.weapon = tempAttack.getWeapon();
+		this.boots = tempAttack.getBoots();
+		this.legs = tempAttack.getLegs();
+		this.chest = tempAttack.getChest();
+		this.helmet = tempAttack.getHelmet();
 
-		BaseInventory tempInventory = ShootEmUp.getPlayer()
-				.getComponent(TypeComponent.INVENTORY);
+		BaseInventory tempInventory = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
 
-		coins = tempInventory.getCoins();
-		exp = tempInventory.getExp();
-		playerLevel = tempInventory.getLevel();
-		inventory = tempInventory.getInventory();
-		inventorySize = tempInventory.getInventorySize();
-		potions = tempInventory.getPotions();
-		maxPotions = tempInventory.getMaxPotions();
-	}
-
-	public int getMaxHealthRegen() {
-		return maxHealthRegen;
-	}
-
-	public int getMaxManaRegen() {
-		return maxManaRegen;
-	}
-
-	public TypeAttack getPlayer() {
-		return player;
-	}
-
-	public int getHealth() {
-		return health;
-	}
-
-	public int getMaxHealth() {
-		return maxHealth;
-	}
-
-	public int getHealthRegen() {
-		return healthRegen;
-	}
-
-	public int getMana() {
-		return mana;
-	}
-
-	public int getMaxMana() {
-		return maxMana;
-	}
-
-	public int getManaRegen() {
-		return manaRegen;
-	}
-
-	public int getCoins() {
-		return coins;
+		this.coins = tempInventory.getCoins();
+		this.exp = tempInventory.getExp();
+		this.playerLevel = tempInventory.getLevel();
+		this.inventory = tempInventory.getInventory();
+		this.inventorySize = tempInventory.getInventorySize();
+		this.potions = tempInventory.getPotions();
+		this.maxPotions = tempInventory.getMaxPotions();
 	}
 
 	public int getExp() {
-		return exp;
+		return this.exp;
 	}
 
-	public int getPlayerLevel() {
-		return playerLevel;
+	public int getHealth() {
+		return this.health;
 	}
 
-	public ArrayList<InventoryItem> getInventory() {
-		return inventory;
-	}
-
-	public int getInventorySize() {
-		return inventorySize;
-	}
-
-	public Weapon getWeapon() {
-		return weapon;
+	public int getHealthRegen() {
+		return this.healthRegen;
 	}
 
 	public Armour getHelmet() {
-		return helmet;
+		return this.helmet;
 	}
 
-	public Armour getChest() {
-		return chest;
+	public ArrayList<InventoryItem> getInventory() {
+		return this.inventory;
+	}
+
+	public int getInventorySize() {
+		return this.inventorySize;
 	}
 
 	public Armour getLegs() {
-		return legs;
-	}
-
-	public Armour getBoots() {
-		return boots;
-	}
-
-	public HashMap<TypePotion, Potion> getPotions() {
-		return potions;
-	}
-
-	public int getMaxPotions() {
-		return maxPotions;
+		return this.legs;
 	}
 
 	public int getLives() {
-		return lives;
+		return this.lives;
+	}
+
+	public int getMana() {
+		return this.mana;
+	}
+
+	public int getManaRegen() {
+		return this.manaRegen;
+	}
+
+	public int getMaxHealth() {
+		return this.maxHealth;
+	}
+
+	public int getMaxHealthRegen() {
+		return this.maxHealthRegen;
+	}
+
+	public int getMaxMana() {
+		return this.maxMana;
+	}
+
+	public int getMaxManaRegen() {
+		return this.maxManaRegen;
+	}
+
+	public int getMaxPotions() {
+		return this.maxPotions;
+	}
+
+	public TypeAttack getPlayer() {
+		return this.player;
+	}
+
+	public int getPlayerLevel() {
+		return this.playerLevel;
+	}
+
+	public HashMap<TypePotion, Potion> getPotions() {
+		return this.potions;
+	}
+
+	public Weapon getWeapon() {
+		return this.weapon;
 	}
 }

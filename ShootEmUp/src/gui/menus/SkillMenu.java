@@ -22,25 +22,21 @@ public class SkillMenu extends PauseMenu {
 		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.HEALTH, Art.getImage("Coin"), 1, 1f));
 		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.MANA_REGEN, Art.getImage("Coin"), 1, 1f));
 		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.MANA, Art.getImage("Coin"), 1, 1f));
-		menuItems.add(buttonList);
+		this.menuItems.add(buttonList);
 		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
-		skillPoints = new Counter(30.0f, 191.0f, Art.getImage("Coin"), false,
-				BI
-						.getLevelPoints(),
-				1f);
+		this.skillPoints = new Counter(30.0f, 191.0f, Art.getImage("Coin"), false, BI.getLevelPoints(), 1f);
+	}
+
+	@Override
+	public void render() {
+		super.render();
+		this.skillPoints.render(Art.stat);
 	}
 
 	@Override
 	public void update() {
 		super.update();
 		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
-		skillPoints.update(BI
-				.getLevelPoints());
-	}
-
-	@Override
-	public void render() {
-		super.render();
-		skillPoints.render(Art.stat);
+		this.skillPoints.update(BI.getLevelPoints());
 	}
 }

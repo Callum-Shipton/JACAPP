@@ -4,15 +4,11 @@ public class TexturedVertex {
 
 	/* Vertex data: [pos.x,pos.y,tex.s,tex.t] */
 
-	// Vertex data
-	private float[] xy = new float[] { 0.0f, 0.0f };
-	private float[] st = new float[] { 0.0f, 0.0f };
-
 	// The amount of bytes an element has
 	public static final int elementBytes = 4;
-
 	// Elements per parameter
 	public static final int positionElementCount = 2;
+
 	public static final int textureElementCount = 2;
 
 	// Bytes per parameter
@@ -28,14 +24,9 @@ public class TexturedVertex {
 	// The size of a vertex in bytes
 	public static final int stride = positionBytesCount + textureByteCount;
 
-	// Setters
-	public void setXY(float x, float y) {
-		xy = new float[] { x, y };
-	}
-
-	public void setST(float s, float t) {
-		st = new float[] { s, t };
-	}
+	// Vertex data
+	private float[] xy = new float[] { 0.0f, 0.0f };
+	private float[] st = new float[] { 0.0f, 0.0f };
 
 	// Getters
 	public float[] getElements() {
@@ -43,21 +34,30 @@ public class TexturedVertex {
 		int i = 0;
 
 		// Insert XY elements
-		out[i++] = xy[0];
-		out[i++] = xy[1];
+		out[i++] = this.xy[0];
+		out[i++] = this.xy[1];
 
 		// Insert ST elements
-		out[i++] = st[0];
-		out[i++] = st[1];
+		out[i++] = this.st[0];
+		out[i++] = this.st[1];
 
 		return out;
 	}
 
-	public float[] getXY() {
-		return new float[] { xy[0], xy[1] };
+	public float[] getST() {
+		return new float[] { this.st[0], this.st[1] };
 	}
 
-	public float[] getST() {
-		return new float[] { st[0], st[1] };
+	public float[] getXY() {
+		return new float[] { this.xy[0], this.xy[1] };
+	}
+
+	public void setST(float s, float t) {
+		this.st = new float[] { s, t };
+	}
+
+	// Setters
+	public void setXY(float x, float y) {
+		this.xy = new float[] { x, y };
 	}
 }

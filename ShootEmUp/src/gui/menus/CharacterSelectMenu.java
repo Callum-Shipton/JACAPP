@@ -38,8 +38,9 @@ public class CharacterSelectMenu extends GuiMenu {
 			}
 		}
 
-		VerticalLayout buttonList = new VerticalLayout((display.getWidth() / 2) - (Art.getImage("WarriorButton").getWidth() / 2),
-				150, Art.getImage("WarriorButton").getHeight() / 2, 20);
+		VerticalLayout buttonList = new VerticalLayout(
+				(this.display.getWidth() / 2) - (Art.getImage("WarriorButton").getWidth() / 2), 150,
+				Art.getImage("WarriorButton").getHeight() / 2, 20);
 		buttonList.addMenuItem(
 				new CounterButton(0, 0, TypeButton.WARRIOR, Art.getImage("LevelIcon"), warriorLevel, 0.5f));
 		buttonList
@@ -48,7 +49,7 @@ public class CharacterSelectMenu extends GuiMenu {
 		buttonList.addMenuItem(
 				new CounterButton(0, 0, TypeButton.BATTLE_MAGE, Art.getImage("LevelIcon"), battleMageLevel, 0.5f));
 		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.ROGUE, Art.getImage("LevelIcon"), rogueLevel, 0.5f));
-		buttonList.addMenuItem(ButtonBuilder.buildButton(TypeButton.BACK, x, y));
-		menuItems.add(buttonList);
+		buttonList.addMenuItem(ButtonBuilder.buildButton(TypeButton.BACK, this.x, this.y));
+		this.menuItems.add(buttonList);
 	}
 }

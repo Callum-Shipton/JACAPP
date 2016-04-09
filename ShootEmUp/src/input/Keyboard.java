@@ -12,6 +12,16 @@ public class Keyboard {
 	private static GLFWKeyCallback keyCallback;
 	private static int keys[] = new int[1024];
 
+	public static void destroy() {
+		if (keyCallback != null) {
+			keyCallback.release();
+		}
+	}
+
+	public static int getKey(int key) {
+		return keys[key];
+	}
+
 	public static void keyCheck(long window) {
 		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
 
@@ -35,22 +45,8 @@ public class Keyboard {
 		});
 	}
 
-	public static int getKey(int key) {
-		return keys[key];
-	}
-
-	public static void destroy() {
-		if (keyCallback != null) {
-			keyCallback.release();
-		}
-	}
-
 	public static void setKey(int key) {
 		keys[key] = 0;
-	}
-
-	public static void setKey(int key, int value) {
-		keys[key] = value;
 	}
 
 	public static void setKey(int key, boolean value) {
@@ -59,5 +55,9 @@ public class Keyboard {
 		} else {
 			keys[key] = 0;
 		}
+	}
+
+	public static void setKey(int key, int value) {
+		keys[key] = value;
 	}
 }

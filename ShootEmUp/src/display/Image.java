@@ -33,43 +33,17 @@ public class Image {
 	private int texID;
 
 	public Image(String file, int fw, int fh) {
-		frameWidth = fw;
-		frameHeight = fh;
+		this.frameWidth = fw;
+		this.frameHeight = fh;
 		this.file = file;
 		setID(glGenTextures());
-		buf = byteBuffer();
+		this.buf = byteBuffer();
 		bindTexture();
-	}
-
-	public ByteBuffer byteBuffer() {
-		try {
-			// Open the PNG file as an InputStream
-			InputStream in = getClass().getResourceAsStream(file);
-			// Link the PNG decoder to this stream
-			PNGDecoder decoder = new PNGDecoder(in);
-
-			// Get the width and height of the texture
-			texWidth = decoder.getWidth();
-			texHeight = decoder.getHeight();
-
-			// Decode the PNG file in a ByteBuffer
-			buf = ByteBuffer.allocateDirect(4 * decoder.getWidth() * decoder.getHeight());
-			decoder.decode(buf, decoder.getWidth() * 4, Format.RGBA);
-			buf.flip();
-
-			in.close();
-			return buf;
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(-1);
-		}
-		return null;
-
 	}
 
 	private void bindTexture() {
 
-		glBindTexture(GL_TEXTURE_2D, texID);
+		glBindTexture(GL_TEXTURE_2D, this.texID);
 
 		// All RGB bytes are aligned to each other and each component is 1 byte
 		// glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -83,33 +57,59 @@ public class Image {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 		// Upload the texture data and generate mip maps (for scaling)
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texWidth, texHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, buf);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this.texWidth, this.texHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, this.buf);
 		glGenerateMipmap(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, 0);
 
 	}
 
-	public int getHeight() {
-		return texHeight;
-	}
+	public ByteBuffer byteBuffer() {
+		try {
+			// Open the PNG file as an InputStream
+			InputStream in = getClass().getResourceAsStream(this.file);
+			// Link the PNG decoder to this stream
+			PNGDecoder decoder = new PNGDecoder(in);
 
-	public int getWidth() {
-		return texWidth;
+			// Get the width and height of the texture
+			this.texWidth = decoder.getWidth();
+			this.texHeight = decoder.getHeight();
+
+			// Decode the PNG file in a ByteBuffer
+			this.buf = ByteBuffer.allocateDirect(4 * decoder.getWidth() * decoder.getHeight());
+			decoder.decode(this.buf, decoder.getWidth() * 4, Format.RGBA);
+			this.buf.flip();
+
+			in.close();
+			return this.buf;
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		return null;
+
 	}
 
 	public int getFHeight() {
-		return frameHeight;
+		return this.frameHeight;
 	}
 
 	public int getFWidth() {
-		return frameWidth;
+		return this.frameWidth;
+	}
+
+	public int getHeight() {
+		return this.texHeight;
 	}
 
 	public int getID() {
-		return texID;
+		return this.texID;
+	}
+
+	public int getWidth() {
+		return this.texWidth;
 	}
 
 	public void setID(int id) {
-		texID = id;
+		this.texID = id;
 	}
 }

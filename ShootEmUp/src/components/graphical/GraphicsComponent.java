@@ -4,8 +4,8 @@ import object.Entity;
 
 public interface GraphicsComponent {
 
-	void update(Entity e);
-
 	void render(Entity e);
+
+	void update(Entity e);
 
 }

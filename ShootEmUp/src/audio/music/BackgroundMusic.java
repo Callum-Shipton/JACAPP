@@ -39,7 +39,7 @@ import audio.libraries.WaveData;
  * <p>
  * Lesson 3: Multiple Sources
  * </p>
- * 
+ *
  * @author Brian Matzon <brian@matzon.dk>
  * @version $Revision$
  */
@@ -95,84 +95,15 @@ public class BackgroundMusic {
 		// CRUCIAL!
 		// any buffer that has data added, must be flipped to establish its
 		// position and limits
-		listenerPos.flip();
-		listenerVel.flip();
-		listenerOri.flip();
+		this.listenerPos.flip();
+		this.listenerVel.flip();
+		this.listenerOri.flip();
 	}
 
-	/**
-	 * boolean LoadALData()
-	 *
-	 * This function will load our sample data from the disk using the Alut
-	 * utility and send the data into OpenAL as a buffer. A source is then also
-	 * created to play that buffer.
-	 */
-	int loadALData() {
-		// Load wav data into a buffers.
-		alGenBuffers(buffer);
-
-		if (alGetError() != AL_NO_ERROR) {
-			return AL_FALSE;
-		}
-
-		WaveData waveFile = WaveData.create("Music/Menu.wav");
-		alBufferData(buffer.get(MENU), waveFile.format, waveFile.data, waveFile.samplerate);
-		waveFile.dispose();
-
-		waveFile = WaveData.create("Music/Main.wav");
-		alBufferData(buffer.get(MAIN), waveFile.format, waveFile.data, waveFile.samplerate);
-		waveFile.dispose();
-
-		// Bind buffers into audio sources.
-		alGenSources(source);
-
-		if (alGetError() != AL_NO_ERROR) {
-			return AL_FALSE;
-		}
-
-		alSourcei(source.get(MENU), AL_BUFFER, buffer.get(MENU));
-		alSourcef(source.get(MENU), AL_PITCH, 1.0f);
-		alSourcef(source.get(MENU), AL_GAIN, 1.0f);
-		alSource(source.get(MENU), AL_POSITION, (FloatBuffer) sourcePos.position(MENU * 3));
-		alSource(source.get(MENU), AL_VELOCITY, (FloatBuffer) sourceVel.position(MENU * 3));
-		alSourcei(source.get(MENU), AL_LOOPING, AL_TRUE);
-
-		alSourcei(source.get(MAIN), AL_BUFFER, buffer.get(MAIN));
-		alSourcef(source.get(MAIN), AL_PITCH, 1.0f);
-		alSourcef(source.get(MAIN), AL_GAIN, 1.0f);
-		alSource(source.get(MAIN), AL_POSITION, (FloatBuffer) sourcePos.position(MAIN * 3));
-		alSource(source.get(MAIN), AL_VELOCITY, (FloatBuffer) sourceVel.position(MAIN * 3));
-		alSourcei(source.get(MAIN), AL_LOOPING, AL_TRUE);
-
-		// Do another error check and return.
-		if (alGetError() == AL_NO_ERROR) {
-			return AL_TRUE;
-		}
-
-		return AL_FALSE;
-	}
-
-	/**
-	 * void setListenerValues()
-	 *
-	 * We already defined certain values for the Listener, but we need to tell
-	 * OpenAL to use that data. This function does just that.
-	 */
-	void setListenerValues() {
-		alListener(AL_POSITION, listenerPos);
-		alListener(AL_VELOCITY, listenerVel);
-		alListener(AL_ORIENTATION, listenerOri);
-	}
-
-	/**
-	 * void killALData()
-	 *
-	 * We have allocated memory for our buffers and sources which needs to be
-	 * returned to the system. This function frees that memory.
-	 */
-	void killALData() {
-		alDeleteSources(source);
-		alDeleteBuffers(buffer);
+	public void destoyAL() {
+		audioContext.destroy();
+		audioDevice.destroy();
+		AL.destroy(audioContext);
 	}
 
 	public void initAL() {
@@ -202,22 +133,91 @@ public class BackgroundMusic {
 		setListenerValues();
 	}
 
-	public void destoyAL() {
-		audioContext.destroy();
-		audioDevice.destroy();
-		AL.destroy(audioContext);
+	/**
+	 * void killALData()
+	 *
+	 * We have allocated memory for our buffers and sources which needs to be
+	 * returned to the system. This function frees that memory.
+	 */
+	void killALData() {
+		alDeleteSources(this.source);
+		alDeleteBuffers(this.buffer);
 	}
 
-	public void play(int musicId) {
-		alSourcePlay(source.get(musicId));
+	/**
+	 * boolean LoadALData()
+	 *
+	 * This function will load our sample data from the disk using the Alut
+	 * utility and send the data into OpenAL as a buffer. A source is then also
+	 * created to play that buffer.
+	 */
+	int loadALData() {
+		// Load wav data into a buffers.
+		alGenBuffers(this.buffer);
+
+		if (alGetError() != AL_NO_ERROR) {
+			return AL_FALSE;
+		}
+
+		WaveData waveFile = WaveData.create("Music/Menu.wav");
+		alBufferData(this.buffer.get(MENU), waveFile.format, waveFile.data, waveFile.samplerate);
+		waveFile.dispose();
+
+		waveFile = WaveData.create("Music/Main.wav");
+		alBufferData(this.buffer.get(MAIN), waveFile.format, waveFile.data, waveFile.samplerate);
+		waveFile.dispose();
+
+		// Bind buffers into audio sources.
+		alGenSources(this.source);
+
+		if (alGetError() != AL_NO_ERROR) {
+			return AL_FALSE;
+		}
+
+		alSourcei(this.source.get(MENU), AL_BUFFER, this.buffer.get(MENU));
+		alSourcef(this.source.get(MENU), AL_PITCH, 1.0f);
+		alSourcef(this.source.get(MENU), AL_GAIN, 1.0f);
+		alSource(this.source.get(MENU), AL_POSITION, (FloatBuffer) this.sourcePos.position(MENU * 3));
+		alSource(this.source.get(MENU), AL_VELOCITY, (FloatBuffer) this.sourceVel.position(MENU * 3));
+		alSourcei(this.source.get(MENU), AL_LOOPING, AL_TRUE);
+
+		alSourcei(this.source.get(MAIN), AL_BUFFER, this.buffer.get(MAIN));
+		alSourcef(this.source.get(MAIN), AL_PITCH, 1.0f);
+		alSourcef(this.source.get(MAIN), AL_GAIN, 1.0f);
+		alSource(this.source.get(MAIN), AL_POSITION, (FloatBuffer) this.sourcePos.position(MAIN * 3));
+		alSource(this.source.get(MAIN), AL_VELOCITY, (FloatBuffer) this.sourceVel.position(MAIN * 3));
+		alSourcei(this.source.get(MAIN), AL_LOOPING, AL_TRUE);
+
+		// Do another error check and return.
+		if (alGetError() == AL_NO_ERROR) {
+			return AL_TRUE;
+		}
+
+		return AL_FALSE;
 	}
 
 	public void pause(int musicId) {
-		alSourcePause(source.get(musicId));
+		alSourcePause(this.source.get(musicId));
+	}
+
+	public void play(int musicId) {
+		alSourcePlay(this.source.get(musicId));
+	}
+
+	/**
+	 * void setListenerValues()
+	 *
+	 * We already defined certain values for the Listener, but we need to tell
+	 * OpenAL to use that data. This function does just that.
+	 */
+	void setListenerValues() {
+		alListener(AL_POSITION, this.listenerPos);
+		alListener(AL_VELOCITY, this.listenerVel);
+		alListener(AL_ORIENTATION, this.listenerOri);
 	}
 
 	public void stop(int musicId) {
-		alSourceStop(source.get(musicId));
+		alSourceStop(this.source.get(musicId));
 	}
 
 }

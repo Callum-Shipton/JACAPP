@@ -17,8 +17,14 @@ public class LineControl extends BaseControl {
 	}
 
 	@Override
+	public void receive(Message m, Entity e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
 	public void update(Entity e) {
-		int direction = AG.getDirection();
+		int direction = this.AG.getDirection();
 		Vector2 movement = new Vector2(0.0f, 0.0f);
 		if ((direction >= 1) && (direction <= 3)) {
 			movement.add(1.0f, 0.0f);
@@ -33,13 +39,7 @@ public class LineControl extends BaseControl {
 			movement.add(0.0f, 1.0f);
 		}
 		movement.normalize();
-		BM.move(e, movement);
-	}
-
-	@Override
-	public void receive(Message m, Entity e) {
-		// TODO Auto-generated method stub
-
+		this.BM.move(e, movement);
 	}
 
 }

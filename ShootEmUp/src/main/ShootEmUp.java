@@ -33,33 +33,84 @@ import save.Save;
 public class ShootEmUp {
 
 	// Handle for monitor/window funcs
-	private static Display display;	
+	private static Display display;
 	private static MusicPlayer musicPlayer;
 	private static Level currentLevel;
 	private static Entity player;
-	private static boolean paused;	
+	private static boolean paused;
 	private static MenuSystem menuSystem;
 	private static Save save;
 	private static double FPS = 60.0;
 	private static Keys keys;
 	private static Hud hud;
 
-	public void run() {
-		try {
-			init();
-			loop();
+	public static Level getCurrentLevel() {
+		return currentLevel;
+	}
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
+	public static Display getDisplay() {
+		return display;
+	}
 
-			// Release window and window callbacks Terminate GLFW and release
-			// the GLFWerrorfun
-			Keyboard.destroy();
-			display.destroyGLFW();
-			musicPlayer.destroy();
+	public static double getFPS() {
+		return FPS;
+	}
 
-		}
+	public static Keys getKeys() {
+		return keys;
+	}
+
+	public static MenuSystem getMenuSystem() {
+		return menuSystem;
+	}
+
+	public static MusicPlayer getMusicPlayer() {
+		return musicPlayer;
+	}
+
+	public static Entity getPlayer() {
+		return player;
+	}
+
+	public static Save getSave() {
+		return save;
+	}
+
+	public static boolean isPaused() {
+		return paused;
+	}
+
+	public static void main(String[] args) {
+		System.setProperty("org.lwjgl.librarypath", new File("natives").getAbsolutePath());
+		System.setProperty("net.java.games.input.librarypath", new File("natives/JInput").getAbsolutePath());
+		new ShootEmUp().run();
+	}
+
+	public static void setCurrentLevel(Level currentLevel) {
+		ShootEmUp.currentLevel = currentLevel;
+	}
+
+	public static void setHud(Hud hud) {
+		ShootEmUp.hud = hud;
+	}
+
+	public static void setPaused(boolean p) {
+		paused = p;
+	}
+
+	public static void setPlayer(Entity p) {
+		player = p;
+	}
+
+	public static void setSave(Save save) {
+		ShootEmUp.save = save;
+	}
+
+	public static void startGame() {
+		paused = false;
+		menuSystem.setMainMenu(false);
+		menuSystem.clearMenus();
+		musicPlayer.changeCurrentMusic(BackgroundMusic.MAIN);
 	}
 
 	private void init() {
@@ -115,6 +166,40 @@ public class ShootEmUp {
 		}
 	}
 
+	private void render() {
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		if (!paused) {
+			getCurrentLevel().render();
+			BaseGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
+			BG.render(ShootEmUp.getPlayer());
+			hud.render(Art.stat);
+		}
+		menuSystem.render();
+
+		glfwSwapBuffers(display.getWindow()); // Swaps front and back buffers to
+		// render changes
+	}
+
+	public void run() {
+		try {
+			init();
+			loop();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			// Release window and window callbacks Terminate GLFW and release
+			// the GLFWerrorfun
+			Keyboard.destroy();
+			display.destroyGLFW();
+			musicPlayer.destroy();
+
+		}
+	}
+
 	private void update() {
 		// Poll for window events. The key callback above will only be
 		// invoked during this call.
@@ -135,94 +220,8 @@ public class ShootEmUp {
 		}
 		// dealing with pausing music
 		musicPlayer.update();
-		
-		
+
 		display.update();
 
-	}
-
-	private void render() {
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		if (!paused) {
-			getCurrentLevel().render();
-			BaseGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-			BG.render(ShootEmUp.getPlayer());
-			hud.render(Art.stat);
-		}
-		menuSystem.render();
-
-		glfwSwapBuffers(display.getWindow()); // Swaps front and back buffers to
-		// render changes
-	}
-
-	public static void main(String[] args) {
-		System.setProperty("org.lwjgl.librarypath", new File("natives").getAbsolutePath());
-		System.setProperty("net.java.games.input.librarypath", new File("natives/JInput").getAbsolutePath());
-		new ShootEmUp().run();
-	}
-
-	public static void startGame() {
-		paused = false;
-		menuSystem.setMainMenu(false);
-		menuSystem.clearMenus();
-		musicPlayer.changeCurrentMusic(BackgroundMusic.MAIN);
-	}
-	
-	public static Display getDisplay() {
-		return display;
-	}
-
-	public static Save getSave() {
-		return save;
-	}
-
-	public static void setSave(Save save) {
-		ShootEmUp.save = save;
-	}
-
-	public static double getFPS() {
-		return FPS;
-	}
-
-	public static MusicPlayer getMusicPlayer() {
-		return musicPlayer;
-	}
-
-	public static boolean isPaused() {
-		return paused;
-	}
-
-	public static void setPaused(boolean p) {
-		paused = p;
-	}
-
-	public static MenuSystem getMenuSystem() {
-		return menuSystem;
-	}
-
-	public static Level getCurrentLevel() {
-		return currentLevel;
-	}
-
-	public static void setCurrentLevel(Level currentLevel) {
-		ShootEmUp.currentLevel = currentLevel;
-	}
-
-	public static Keys getKeys() {
-		return keys;
-	}
-	
-	public static Entity getPlayer() {
-		return player;
-	}
-	
-	public static void setPlayer(Entity p) {
-		player = p;
-	}
-
-	public static void setHud(Hud hud) {
-		ShootEmUp.hud = hud;
 	}
 }

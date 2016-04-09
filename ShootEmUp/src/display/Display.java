@@ -41,27 +41,52 @@ import main.ShootEmUp;
 
 public class Display {
 
-	private GLFWErrorCallback errorCallback;
-
-	// The window handle
-	private long window;
-
-	// The monitor handle (for Fullscreen mode)
-	private long monitor;
-	private ByteBuffer vidmode;
-	private GLFWvidmode vm;
-
 	// Screen Width & Height
 	private static final int INITIAL_SCREEN_WIDTH = 1024;
+
 	private static final int INITIAL_SCREEN_HEIGHT = 512;
+
+	private GLFWErrorCallback errorCallback;
+	// The window handle
+	private long window;
+	// The monitor handle (for Fullscreen mode)
+	private long monitor;
+
+	private ByteBuffer vidmode;
+	private GLFWvidmode vm;
 	private int width;
 	private int height;
 
 	boolean fullscreen = false;
 
 	public Display() {
-		width = INITIAL_SCREEN_WIDTH;
-		height = INITIAL_SCREEN_HEIGHT;
+		this.width = INITIAL_SCREEN_WIDTH;
+		this.height = INITIAL_SCREEN_HEIGHT;
+	}
+
+	public void destroyGLFW() {
+		glfwDestroyWindow(this.window);
+		glfwTerminate();
+		this.errorCallback.release();
+	}
+
+	public int getHeight() {
+		return this.height;
+	}
+
+	public int getWidth() {
+		return this.width;
+	}
+
+	public long getWindow() {
+		return this.window;
+	}
+
+	private void initGL() {
+		glClearColor(0.4f, 0.6f, 0.9f, 1.0f);
+		glViewport(0, 0, this.width, this.height);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
 	public void initGLFW() {
@@ -73,7 +98,7 @@ public class Display {
 			throw new IllegalStateException("Unable to initialize GLFW");
 		}
 
-		glfwSetErrorCallback(errorCallback = errorCallbackPrint(System.err));
+		glfwSetErrorCallback(this.errorCallback = errorCallbackPrint(System.err));
 
 		// Configure our window
 		glfwDefaultWindowHints(); // optional, the current window hints are
@@ -85,30 +110,31 @@ public class Display {
 		// resizable
 
 		// Find primary monitor
-		monitor = glfwGetPrimaryMonitor();
-		if (monitor == NULL) {
+		this.monitor = glfwGetPrimaryMonitor();
+		if (this.monitor == NULL) {
 			throw new RuntimeException("Failed to find primary monitor");
 		}
 
-		vidmode = glfwGetVideoMode(monitor);
-		vm = new GLFWvidmode(vidmode);
+		this.vidmode = glfwGetVideoMode(this.monitor);
+		this.vm = new GLFWvidmode(this.vidmode);
 
 		// Create the window
-		window = glfwCreateWindow(width, height, "THE MAZE", NULL, NULL);
-		if (window == NULL) {
+		this.window = glfwCreateWindow(this.width, this.height, "THE MAZE", NULL, NULL);
+		if (this.window == NULL) {
 			throw new RuntimeException("Failed to create the GLFW window");
 		}
 
 		// Center our window
-		glfwSetWindowPos(window, (GLFWvidmode.width(vidmode) - width) / 2, (GLFWvidmode.height(vidmode) - height) / 2);
+		glfwSetWindowPos(this.window, (GLFWvidmode.width(this.vidmode) - this.width) / 2,
+				(GLFWvidmode.height(this.vidmode) - this.height) / 2);
 
 		// Make the GLFW OpenGL context current
-		glfwMakeContextCurrent(window);
+		glfwMakeContextCurrent(this.window);
 
 		glfwSwapInterval(1);
 
 		// Make the window visible
-		glfwShowWindow(window);
+		glfwShowWindow(this.window);
 
 		// This line is critical for LWJGL's interoperation with GLFW's
 		// OpenGL context, or any context that is managed externally.
@@ -121,32 +147,63 @@ public class Display {
 		new Art().init();
 
 		// Initialise key handling
-		Keyboard.keyCheck(window);
+		Keyboard.keyCheck(this.window);
 	}
 
-	private void initGL() {
-		glClearColor(0.4f, 0.6f, 0.9f, 1.0f);
-		glViewport(0, 0, width, height);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	public void setHeight(int height) {
+		this.height = height;
 	}
 
-	public void destroyGLFW() {
-		glfwDestroyWindow(window);
-		glfwTerminate();
-		errorCallback.release();
+	public void setWidth(int width) {
+		this.width = width;
 	}
 
-	public long getWindow() {
-		return window;
+	public void toggleFullscreen() {
+		long newWindow;
+		if (this.fullscreen) {
+			// ShootEmUp.menuStack.peek().reset(width, height, 1024, 512);
+			this.width = INITIAL_SCREEN_WIDTH;
+			this.height = INITIAL_SCREEN_HEIGHT;
+			newWindow = glfwCreateWindow(this.width, this.height, "THE MAZE", NULL, this.window);
+			if (newWindow == NULL) {
+				throw new RuntimeException("Failed to create the NEW GLFW window");
+			}
+
+			// Center our window
+			glfwSetWindowPos(newWindow, (GLFWvidmode.width(this.vidmode) - this.width) / 2,
+					(GLFWvidmode.height(this.vidmode) - this.height) / 2);
+		} else {
+			// ShootEmUp.menuStack.peek().reset(width, height, vm.getWidth(),
+			// vm.getHeight());
+			this.width = this.vm.getWidth();
+			this.height = this.vm.getHeight();
+			newWindow = glfwCreateWindow(this.width, this.height, "THE MAZE", this.monitor, this.window);
+			if (newWindow == NULL) {
+				throw new RuntimeException("Failed to create the GLFW window");
+			}
+		}
+		glfwMakeContextCurrent(newWindow);
+		glfwSwapInterval(1);
+		glfwShowWindow(newWindow);
+		glfwDestroyWindow(this.window);
+		this.window = newWindow;
+		initGL();
+		Keyboard.keyCheck(this.window);
+		Art.initShaderUniforms();
+		Art.refreshRenderers();
+		PlayerGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
+		if (ShootEmUp.getCurrentLevel() != null) {
+			BG.scrollScreen(null);
+		}
+		this.fullscreen = !this.fullscreen;
 	}
 
 	public void update() {
 		if (Keyboard.getKey(ShootEmUp.getKeys().quit) == 1) {
-			if (fullscreen) {
+			if (this.fullscreen) {
 				toggleFullscreen();
 			}
-			glfwSetWindowShouldClose(window, GL_TRUE);
+			glfwSetWindowShouldClose(this.window, GL_TRUE);
 			Keyboard.setKey(ShootEmUp.getKeys().quit);
 		}
 		if (Keyboard.getKey(ShootEmUp.getKeys().fullscreen) == 1) {
@@ -155,62 +212,5 @@ public class Display {
 			// our update loop
 			Keyboard.setKey(ShootEmUp.getKeys().fullscreen);
 		}
-	}
-
-	public void toggleFullscreen() {
-		long newWindow;
-		if (fullscreen) {
-			// ShootEmUp.menuStack.peek().reset(width, height, 1024, 512);
-			width = INITIAL_SCREEN_WIDTH;
-			height = INITIAL_SCREEN_HEIGHT;
-			newWindow = glfwCreateWindow(width, height, "THE MAZE", NULL, window);
-			if (newWindow == NULL) {
-				throw new RuntimeException("Failed to create the NEW GLFW window");
-			}
-
-			// Center our window
-			glfwSetWindowPos(newWindow, (GLFWvidmode.width(vidmode) - width) / 2,
-					(GLFWvidmode.height(vidmode) - height) / 2);
-		} else {
-			// ShootEmUp.menuStack.peek().reset(width, height, vm.getWidth(),
-			// vm.getHeight());
-			width = vm.getWidth();
-			height = vm.getHeight();
-			newWindow = glfwCreateWindow(width, height, "THE MAZE", monitor, window);
-			if (newWindow == NULL) {
-				throw new RuntimeException("Failed to create the GLFW window");
-			}
-		}
-		glfwMakeContextCurrent(newWindow);
-		glfwSwapInterval(1);
-		glfwShowWindow(newWindow);
-		glfwDestroyWindow(window);
-		window = newWindow;
-		initGL();
-		Keyboard.keyCheck(window);
-		Art.initShaderUniforms();
-		Art.refreshRenderers();
-		PlayerGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		if (ShootEmUp.getCurrentLevel() != null) {
-			BG
-					.scrollScreen(null);
-		}
-		fullscreen = !fullscreen;
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
 	}
 }
