@@ -10,6 +10,7 @@ import math.Seconds;
 import math.Vector2;
 import math.Vector4;
 import object.Entity;
+import object.EntityMap;
 
 public abstract class BaseMovement extends Component implements MovementComponent {
 
@@ -64,9 +65,10 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	@Override
 	public void receive(Message m, Entity e) {
 		if (m == Message.ENTITY_MOVED) {
-			ShootEmUp.getCurrentLevel().eMap.removeEntity(BC.getGridPos(), e);
-			BC.setGridPos(ShootEmUp.getCurrentLevel().eMap.getGridPos(e));
-			ShootEmUp.getCurrentLevel().eMap.addEntity(BC.getGridPos(), e);
+			EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
+			eMap.removeEntity(BC.getGridPos(), e);
+			BC.setGridPos(eMap.getGridPos(e));
+			eMap.addEntity(BC.getGridPos(), e);
 		}
 
 	}

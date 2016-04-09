@@ -12,7 +12,7 @@ public class RangeControl extends LineControl {
 
 	public RangeControl(AnimatedGraphics AG, BaseMovement BM, int range) {
 		super(AG, BM);
-		this.range = (range * (Map.TILE_WIDTH)) / BM.getSpeed();
+		this.range = (range * (Map.getTileWidth())) / BM.getSpeed();
 		// TODO Auto-generated constructor stub
 	}
 

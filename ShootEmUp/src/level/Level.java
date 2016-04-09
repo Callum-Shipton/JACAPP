@@ -16,16 +16,14 @@ public class Level {
 
 	private int level;
 	
-	public EntityMap eMap;
+	private EntityMap eMap;
 
 	private HashSet<Entity> entities;
 	private HashSet<Entity> oldEntities;
 	private HashSet<Entity> newEntities;
 	
-	public HashSet<Vector2> walls;
-	
-	public Spawner spawner;
-	public Map map;
+	private Spawner spawner;
+	private Map map;
 
 	public Level(String file, int level) {
 		this.level = level;
@@ -119,5 +117,13 @@ public class Level {
 
 	public HashSet<Entity> getEntities() {
 		return entities;
+	}
+
+	public Map getMap() {
+		return map;
+	}
+
+	public EntityMap geteMap() {
+		return eMap;
 	}
 }

@@ -41,7 +41,7 @@ public abstract class InventoryItem implements DatableObject, Serializable {
 	}
 	
 	public Image getInventoryImage() {
-		return Art.getImage(name);
+		return Art.getImage(name + "Button");
 	}
 
 	public TypePickup getTypePickup() {

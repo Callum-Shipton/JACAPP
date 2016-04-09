@@ -29,6 +29,7 @@ import java.util.HashMap;
 
 import org.lwjgl.BufferUtils;
 
+import level.Map;
 import main.ShootEmUp;
 import math.Matrix4;
 import math.Vector2;
@@ -192,7 +193,8 @@ public class Art {
 		artFiles.put("MaceButton", new Image("/Images/Menus/Buttons/Items/MaceButton.png", 1, 2));
 		artFiles.put("LongbowButton", new Image("/Images/Menus/Buttons/Items/LongbowButton.png", 1, 2));
 		artFiles.put("ShortbowButton", new Image("/Images/Menus/Buttons/Items/ShortbowButton.png", 1, 2));
-		artFiles.put("CompoundCrossbowButton", new Image("/Images/Menus/Buttons/Items/CompoundCrossbowButton.png", 1, 2));
+		artFiles.put("CompoundCrossbowButton",
+				new Image("/Images/Menus/Buttons/Items/CompoundCrossbowButton.png", 1, 2));
 		artFiles.put("RecurveCrossbowButton", new Image("/Images/Menus/Buttons/Items/RecurveCrossbowButton.png", 1, 2));
 		artFiles.put("IceStaffButton", new Image("/Images/Menus/Buttons/Items/IceStaffButton.png", 1, 2));
 		artFiles.put("FireStaffButton", new Image("/Images/Menus/Buttons/Items/FireStaffButton.png", 1, 2));
@@ -299,7 +301,8 @@ public class Art {
 	public static void initShaderUniforms() {
 
 		Matrix4 projectionMatrix = new Matrix4();
-		projectionMatrix.clearToOrtho(0, ShootEmUp.getDisplay().getWidth(), ShootEmUp.getDisplay().getHeight(), 0, -1.0f, 1.0f);
+		projectionMatrix.clearToOrtho(0, ShootEmUp.getDisplay().getWidth(), ShootEmUp.getDisplay().getHeight(), 0,
+				-1.0f, 1.0f);
 		FloatBuffer matrix44Buffer = BufferUtils.createFloatBuffer(16);
 		matrix44Buffer = projectionMatrix.toBuffer();
 
@@ -343,12 +346,13 @@ public class Art {
 	public static void refreshRenderers() {
 		base.initRenderData();
 		stat.initRenderData();
+		Map map = ShootEmUp.getCurrentLevel().getMap();
 		if (ShootEmUp.getCurrentLevel() != null) {
-			irWall.initRenderData(ShootEmUp.getCurrentLevel().map.getWalls(),
+			irWall.initRenderData(map.getWalls(),
 					new Vector2(artFiles.get("Walls").getFWidth(), artFiles.get("Walls").getFHeight()));
-			irBack.initRenderData(ShootEmUp.getCurrentLevel().map.getBackgroundTiles(),
+			irBack.initRenderData(map.getBackgroundTiles(),
 					new Vector2(artFiles.get("Floor").getFWidth(), artFiles.get("Floor").getFHeight()));
-			irFore.initRenderData(ShootEmUp.getCurrentLevel().map.getForegroundTiles(),
+			irFore.initRenderData(map.getForegroundTiles(),
 					new Vector2(artFiles.get("Walls").getFWidth(), artFiles.get("Walls").getFHeight()));
 		}
 	}

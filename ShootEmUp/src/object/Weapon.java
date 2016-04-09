@@ -155,7 +155,7 @@ public class Weapon extends InventoryItem{
 		particle.addComponent(m);
 		particle.addComponent(new RangeControl(g, m, range));
 
-		ShootEmUp.getCurrentLevel().spawner.checkSpawn(particle);
+		ShootEmUp.getCurrentLevel().getSpawner().checkSpawn(particle);
 	}
 	
 	public int getDamage() {

@@ -33,22 +33,23 @@ public class AIControl extends BaseControl {
 		this.BA = BA;
 		this.BG = BG;
 		this.BM = BM;
+		Map map = ShootEmUp.getCurrentLevel().getMap();
 		if (walls == null) {
-			walls = ShootEmUp.getCurrentLevel().map.walls;
+			walls = map.getWalls();
 		}
 		if (goalBounder == null) {
-			goalBounder = ShootEmUp.getCurrentLevel().map.goalBounder;
+			goalBounder = map.getGoalBounder();
 		}
 	}
 
 	@Override
 	public void update(Entity e) {
 		BaseGraphics PlayerG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		goal = new Vector2((float) Math.floor(PlayerG.getX() / Map.TILE_WIDTH),
-				(float) Math.floor(PlayerG.getY() / Map.TILE_HEIGHT));
+		goal = new Vector2((float) Math.floor(PlayerG.getX() / Map.getTileWidth()),
+				(float) Math.floor(PlayerG.getY() / Map.getTileHeight()));
 		target = ai();
-		float y = target.y() * Map.TILE_HEIGHT;
-		float x = target.x() * Map.TILE_WIDTH;
+		float y = target.y() * Map.getTileHeight();
+		float x = target.x() * Map.getTileWidth();
 
 		if (target != null) {
 			Vector2 movement = new Vector2(0.0f, 0.0f);
@@ -105,8 +106,8 @@ public class AIControl extends BaseControl {
 	public Vector2 ai() {
 		PriorityQueue<Node> open = new PriorityQueue<Node>(); // queue for tiles
 		HashSet<Node> closed = new HashSet<Node>(); // list of already viewed
-		Node start = new Node(new Vector2((float) Math.floor(BG.getX() / Map.TILE_WIDTH),
-				(float) Math.floor(BG.getY() / Map.TILE_HEIGHT)), null);
+		Node start = new Node(new Vector2((float) Math.floor(BG.getX() / Map.getTileWidth()),
+				(float) Math.floor(BG.getY() / Map.getTileHeight())), null);
 
 		open.add(start);
 		closed.add(start);

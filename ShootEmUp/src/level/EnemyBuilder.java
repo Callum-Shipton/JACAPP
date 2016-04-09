@@ -107,11 +107,14 @@ public abstract class EnemyBuilder {
 		float py = playerGraphics.getY();
 		float pw = playerGraphics.getWidth();
 		float ph = playerGraphics.getHeight();
+		
+		Level level = ShootEmUp.getCurrentLevel();
+		
 		do {
 			collide = false;
 
-			TG.setX(rand.nextInt((ShootEmUp.getCurrentLevel().map.getBackgroundTiles().length - 1) * Map.TILE_WIDTH));
-			TG.setY(rand.nextInt((ShootEmUp.getCurrentLevel().map.getBackgroundTiles()[0].length - 1) * Map.TILE_WIDTH));
+			TG.setX(rand.nextInt((level.getMap().getBackgroundTiles().length - 1) * Map.getTileWidth()));
+			TG.setY(rand.nextInt((level.getMap().getBackgroundTiles()[0].length - 1) * Map.getTileWidth()));
 
 			if ((Math.abs((TG.getX() + (TG.getWidth() / 2)) - (px + (pw / 2))) <= (ShootEmUp.getDisplay().getWidth() + TG.getWidth()))
 					&& (Math.abs((TG.getY() + (TG.getHeight() / 2)) - (py + (ph / 2))) <= (ShootEmUp.getDisplay().getHeight()
@@ -122,7 +125,7 @@ public abstract class EnemyBuilder {
 
 			// changed to grid position;
 
-			for (Entity character : ShootEmUp.getCurrentLevel().getEntities()) {
+			for (Entity character : level.getEntities()) {
 				BaseMovement BM = test.getComponent(TypeComponent.MOVEMENT);
 				if ((BM.doesCollide(test, character) != null)) {
 					collide = true;

@@ -52,10 +52,10 @@ public class Node implements Comparable<Node> {
 		Vector2 player = new Vector2(
 				(float) Math.floor(
 						BG
-								.getX() / Map.TILE_WIDTH),
+								.getX() / Map.getTileWidth()),
 		(float) Math.floor(
 				BG.getY()
-						/ Map.TILE_WIDTH));
+						/ Map.getTileWidth()));
 		
 		float distance1 = player.dist(n.getPosition());
 		float distance2 = player.dist(getPosition());
