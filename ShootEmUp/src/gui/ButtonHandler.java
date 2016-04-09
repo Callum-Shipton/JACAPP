@@ -3,7 +3,6 @@ package gui;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
 
-import audio.music.BackgroundMusic;
 import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.attack.PlayerAttack;
@@ -160,7 +159,7 @@ public abstract class ButtonHandler {
 				PlayerBuilder.buildPlayer(type);
 			}
 		}
-		startGame();
+		ShootEmUp.startGame();
 	}
 
 	private static void back() {
@@ -201,7 +200,7 @@ public abstract class ButtonHandler {
 
 	private static void resume() {
 		ShootEmUp.menuStack.clear();
-		ShootEmUp.paused = false;
+		ShootEmUp.setPaused(false);
 	}
 
 	private static void mainMenu() {
@@ -278,13 +277,5 @@ public abstract class ButtonHandler {
 		ShootEmUp.getSave().saveCharacter();
 		ShootEmUp.getSave().saveToSystem(1);
 		ShootEmUp.setSave(null);
-	}
-	// Extra Methods
-
-	private static void startGame() {
-		ShootEmUp.paused = false;
-		ShootEmUp.mainMenu = false;
-		ShootEmUp.clearMenus();
-		ShootEmUp.getMusicPlayer().changeCurrentMusic(BackgroundMusic.MAIN);
 	}
 }

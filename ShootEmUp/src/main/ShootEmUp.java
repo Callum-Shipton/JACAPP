@@ -17,6 +17,7 @@ import java.util.Stack;
 import org.lwjgl.glfw.GLFW;
 
 import audio.MusicPlayer;
+import audio.music.BackgroundMusic;
 import display.Art;
 import display.Display;
 import gui.menus.GuiMenu;
@@ -34,10 +35,11 @@ public class ShootEmUp {
 	
 	private static MusicPlayer musicPlayer;
 
-	public static boolean paused;
-	public static boolean mainMenu = true;
-
 	public static Level currentLevel;
+	
+	private static boolean paused;
+	
+	public static boolean mainMenu = true;
 	public static Stack<GuiMenu> menuStack = new Stack<GuiMenu>();
 
 	private static Save save;
@@ -175,6 +177,14 @@ public class ShootEmUp {
 		menuStack.add(menu);
 	}
 
+
+	public static void startGame() {
+		paused = false;
+		mainMenu = false;
+		clearMenus();
+		musicPlayer.changeCurrentMusic(BackgroundMusic.MAIN);
+	}
+	
 	public static Display getDisplay() {
 		return display;
 	}
@@ -195,4 +205,11 @@ public class ShootEmUp {
 		return musicPlayer;
 	}
 
+	public static boolean isPaused() {
+		return paused;
+	}
+
+	public static void setPaused(boolean p) {
+		paused = p;
+	}
 }
