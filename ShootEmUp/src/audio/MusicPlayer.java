@@ -1,9 +1,8 @@
 package audio;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_M;
-
 import audio.music.BackgroundMusic;
 import input.Keyboard;
+import main.ShootEmUp;
 
 public class MusicPlayer {
 	
@@ -17,8 +16,8 @@ public class MusicPlayer {
 	}
 	
 	public void update(){
-		if (Keyboard.getKey(GLFW_KEY_M) == 1) {
-			Keyboard.setKey(GLFW_KEY_M);
+		if (Keyboard.getKey(ShootEmUp.getKeys().mute) == 1) {
+			Keyboard.setKey(ShootEmUp.getKeys().mute);
 			pause();
 		}
 	}

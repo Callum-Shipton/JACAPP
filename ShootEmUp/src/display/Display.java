@@ -1,8 +1,6 @@
 package display;
 
 import static org.lwjgl.glfw.Callbacks.errorCallbackPrint;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_F;
 import static org.lwjgl.glfw.GLFW.GLFW_RESIZABLE;
 import static org.lwjgl.glfw.GLFW.GLFW_VISIBLE;
 import static org.lwjgl.glfw.GLFW.glfwCreateWindow;
@@ -144,18 +142,18 @@ public class Display {
 	}
 
 	public void update() {
-		if (Keyboard.getKey(GLFW_KEY_ESCAPE) == 1) {
+		if (Keyboard.getKey(ShootEmUp.getKeys().quit) == 1) {
 			if (fullscreen) {
 				toggleFullscreen();
 			}
 			glfwSetWindowShouldClose(window, GL_TRUE);
-			Keyboard.setKey(GLFW_KEY_ESCAPE);
+			Keyboard.setKey(ShootEmUp.getKeys().quit);
 		}
-		if (Keyboard.getKey(GLFW_KEY_F) == 1) {
+		if (Keyboard.getKey(ShootEmUp.getKeys().fullscreen) == 1) {
 			toggleFullscreen();
 			// We will detect this in
 			// our update loop
-			Keyboard.setKey(GLFW_KEY_F);
+			Keyboard.setKey(ShootEmUp.getKeys().fullscreen);
 		}
 	}
 

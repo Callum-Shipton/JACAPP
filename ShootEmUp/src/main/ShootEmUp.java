@@ -1,6 +1,5 @@
 package main;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_P;
 import static org.lwjgl.glfw.GLFW.glfwPollEvents;
 import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
@@ -23,6 +22,7 @@ import gui.MenuSystem;
 import gui.menus.MainMenu;
 import input.Controllers;
 import input.Keyboard;
+import input.Keys;
 import level.Level;
 import save.Save;
 
@@ -36,6 +36,7 @@ public class ShootEmUp {
 	private static MenuSystem menuSystem;
 	private static Save save;
 	private static double FPS = 60.0;
+	private static Keys keys;
 
 	public void run() {
 		try {
@@ -60,7 +61,7 @@ public class ShootEmUp {
 		display.initGLFW();
 		musicPlayer = new MusicPlayer();
 		menuSystem = new MenuSystem();
-		
+		keys = new Keys();
 		Controllers.create();
 
 		paused = true;
@@ -114,9 +115,9 @@ public class ShootEmUp {
 		glfwPollEvents();
 		Controllers.poll();
 		if (!menuSystem.isMainMenu()) {
-			if (Keyboard.getKey(GLFW_KEY_P) == 1) {
+			if (Keyboard.getKey(keys.pause) == 1) {
 				ShootEmUp.setPaused(!ShootEmUp.isPaused());
-				Keyboard.setKey(GLFW_KEY_P);
+				Keyboard.setKey(keys.pause);
 				menuSystem.pause();
 			}
 		}
@@ -196,5 +197,9 @@ public class ShootEmUp {
 
 	public static void setCurrentLevel(Level currentLevel) {
 		ShootEmUp.currentLevel = currentLevel;
+	}
+
+	public static Keys getKeys() {
+		return keys;
 	}
 }
