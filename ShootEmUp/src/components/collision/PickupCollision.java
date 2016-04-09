@@ -22,8 +22,6 @@ public class PickupCollision extends BaseCollision {
 		this.type = type;
 
 		moveBack = false;
-		setGridPos(ShootEmUp.getCurrentLevel().eMap.getGridPos(e));
-		ShootEmUp.getCurrentLevel().eMap.addEntity(getGridPos(), e);
 	}
 
 	public PickupCollision(Entity e, TypePickup type, String name) {

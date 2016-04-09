@@ -9,7 +9,6 @@ import components.inventory.BaseInventory;
 import components.movement.BasicMovement;
 import components.spawn.PointSpawn;
 import display.Art;
-import gui.Hud;
 import main.ShootEmUp;
 import math.Vector2;
 import object.Entity;
@@ -83,11 +82,6 @@ public abstract class PlayerBuilder {
 		player.addComponent(m);
 		player.addComponent(i);
 		player.addComponent(new PlayerControl(player, g, a, m, i));
-
-		Level level = ShootEmUp.getCurrentLevel();
-		
-		level.entities.add(player);
-		level.hud = new Hud(player, 0, 0);
 
 		ShootEmUp.setPlayer(player);
 	}

@@ -6,7 +6,6 @@ import components.Message;
 import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.movement.BaseMovement;
-import main.ShootEmUp;
 import object.Element;
 import object.Entity;
 import object.Weapon;
@@ -18,8 +17,6 @@ public class HitCollision extends BaseCollision {
 	public HitCollision(Entity e, Weapon weapon) {
 		this.weapon = weapon;
 		moveBack = false;
-		setGridPos(ShootEmUp.getCurrentLevel().eMap.getGridPos(e));
-		ShootEmUp.getCurrentLevel().eMap.addEntity(getGridPos(), e);
 	}
 
 	@Override

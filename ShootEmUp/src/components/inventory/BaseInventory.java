@@ -371,6 +371,6 @@ public class BaseInventory extends Component implements InventoryComponent {
 		CoinC = new PickupCollision(item, TypePickup.COIN, "Coin");
 		item.addComponent(CoinS);
 		item.addComponent(CoinC);
-		ShootEmUp.getCurrentLevel().newEntities.add(item);
+		ShootEmUp.getCurrentLevel().addEntity(item);
 	}
 }

@@ -1,15 +1,12 @@
 package components.collision;
 
 import components.graphical.BaseGraphics;
-import main.ShootEmUp;
 import object.Entity;
 
 public class RigidCollision extends BaseCollision {
 
 	public RigidCollision(Entity e , BaseGraphics BG) {
 		moveBack = true;
-		setGridPos(ShootEmUp.getCurrentLevel().eMap.getGridPos(e, BG));
-		ShootEmUp.getCurrentLevel().eMap.addEntity(getGridPos(), e);
 	}
 
 	@Override

@@ -98,7 +98,7 @@ public class Spawner {
 
 	public void checkSpawn(Entity e) {
 		BasicMovement BM = e.getComponent(TypeComponent.MOVEMENT);
-		ShootEmUp.getCurrentLevel().newEntities.add(e);
+		ShootEmUp.getCurrentLevel().addEntity(e);
 		BM.checkCollisionY(e, new Vector2(0, 0));
 		BM.checkCollisionX(e, new Vector2(0, 0));
 	}

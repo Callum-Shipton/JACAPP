@@ -16,8 +16,11 @@ import org.lwjgl.glfw.GLFW;
 
 import audio.MusicPlayer;
 import audio.music.BackgroundMusic;
+import components.TypeComponent;
+import components.graphical.BaseGraphics;
 import display.Art;
 import display.Display;
+import gui.Hud;
 import gui.MenuSystem;
 import gui.menus.MainMenu;
 import input.Controllers;
@@ -39,6 +42,7 @@ public class ShootEmUp {
 	private static Save save;
 	private static double FPS = 60.0;
 	private static Keys keys;
+	private static Hud hud;
 
 	public void run() {
 		try {
@@ -125,12 +129,14 @@ public class ShootEmUp {
 		}
 		if (!paused) {
 			getCurrentLevel().update();
+			hud.update();
 		} else {
 			menuSystem.update();
 		}
 		// dealing with pausing music
 		musicPlayer.update();
-
+		
+		
 		display.update();
 
 	}
@@ -141,6 +147,9 @@ public class ShootEmUp {
 
 		if (!paused) {
 			getCurrentLevel().render();
+			BaseGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
+			BG.render(ShootEmUp.getPlayer());
+			hud.render(Art.stat);
 		}
 		menuSystem.render();
 
@@ -211,5 +220,9 @@ public class ShootEmUp {
 	
 	public static void setPlayer(Entity p) {
 		player = p;
+	}
+
+	public static void setHud(Hud hud) {
+		ShootEmUp.hud = hud;
 	}
 }

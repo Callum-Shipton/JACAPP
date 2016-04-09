@@ -6,7 +6,6 @@ import java.util.Iterator;
 import components.TypeComponent;
 import components.collision.BaseCollision;
 import components.graphical.BaseGraphics;
-import display.Art;
 import gui.Hud;
 import main.ShootEmUp;
 import math.Vector2;
@@ -16,10 +15,7 @@ import object.EntityMap;
 public class Level {
 
 	private int level;
-
-	//private Entity player;
-	public Hud hud;
-
+	
 	public EntityMap eMap;
 
 	public HashSet<Entity> entities;
@@ -42,17 +38,13 @@ public class Level {
 	}
 
 	public void init() {
+		addEntity(ShootEmUp.getPlayer());
+		ShootEmUp.setHud(new Hud(ShootEmUp.getPlayer(), 0, 0));
 		map.init();
 	}
 
 	public void update() {
 		spawner.update();
-
-		Iterator<Entity> charIter = entities.iterator();
-		while (charIter.hasNext()) {
-			Entity c = charIter.next();
-			c.update();
-		}
 
 		Iterator<Entity> newEntitiesIter = newEntities.iterator();
 		while (newEntitiesIter.hasNext()) {
@@ -63,6 +55,12 @@ public class Level {
 			}
 		}
 		newEntities.clear();
+		
+		Iterator<Entity> charIter = entities.iterator();
+		while (charIter.hasNext()) {
+			Entity c = charIter.next();
+			c.update();
+		}
 
 		Iterator<Entity> oldEntitiesIter = oldEntities.iterator();
 		while (oldEntitiesIter.hasNext()) {
@@ -76,7 +74,6 @@ public class Level {
 			}
 		}
 		oldEntities.clear();
-		hud.update();
 	}
 
 	public void render() {
@@ -86,15 +83,19 @@ public class Level {
 			BaseGraphics BG = character.getComponent(TypeComponent.GRAPHICS);
 			BG.render(character);
 		}
-		BaseGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		BG.render(ShootEmUp.getPlayer());
 
 		map.renderHighTiles();
-
-		hud.render(Art.stat);
-
 	}
 
+	public void addEntity(Entity e){
+		newEntities.add(e);
+		BaseCollision BC = e.getComponent(TypeComponent.COLLISION);
+		if(BC != null){
+			BC.setGridPos(eMap.getGridPos(e, e.getComponent(TypeComponent.GRAPHICS)));
+			ShootEmUp.getCurrentLevel().eMap.addEntity(eMap.getGridPos(e, e.getComponent(TypeComponent.GRAPHICS)), e);
+		}
+	}
+	
 	public int getLevel() {
 		return level;
 	}

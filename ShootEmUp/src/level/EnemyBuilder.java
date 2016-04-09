@@ -89,7 +89,7 @@ public abstract class EnemyBuilder {
 		newEnemy.addComponent(enemyMovement);
 		newEnemy.addComponent(enemyInventory);
 
-		ShootEmUp.getCurrentLevel().entities.add(newEnemy);
+		ShootEmUp.getCurrentLevel().addEntity(newEnemy);
 	}
 
 	private static void testEnemy() {

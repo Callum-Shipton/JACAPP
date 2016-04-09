@@ -124,7 +124,7 @@ public abstract class ButtonHandler {
 	}
 
 	private static void newGame() {
-		ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new CharacterSelectMenu(Art.getImage("MainMenuScreen")));
 	}
 
 	private static void loadGame() {
@@ -146,7 +146,7 @@ public abstract class ButtonHandler {
 	private static void level(int level) {
 		ShootEmUp.setCurrentLevel(new Level(Art.levels, level));
 		ShootEmUp.getCurrentLevel().init();
-		ShootEmUp.getMenuSystem().addMenu(new CharacterSelectMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.startGame();
 	}
 
 	private static void character(TypeAttack type) {
@@ -159,7 +159,7 @@ public abstract class ButtonHandler {
 				PlayerBuilder.buildPlayer(type);
 			}
 		}
-		ShootEmUp.startGame();
+		ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(Art.getImage("MainMenuScreen")));
 	}
 
 	private static void back() {

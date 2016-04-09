@@ -37,7 +37,7 @@ public abstract class InventoryItem implements DatableObject, Serializable {
 		BC = new PickupCollision(item, typePickup, name);
 		item.addComponent(BS);
 		item.addComponent(BC);
-		ShootEmUp.getCurrentLevel().newEntities.add(item);
+		ShootEmUp.getCurrentLevel().addEntity(item);
 	}
 	
 	public Image getInventoryImage() {
