@@ -46,6 +46,18 @@ public class Level {
 	public void update() {
 		spawner.update();
 
+		addEntities();
+		
+		Iterator<Entity> EntityIter = entities.iterator();
+		while (EntityIter.hasNext()) {
+			Entity c = EntityIter.next();
+			c.update();
+		}
+		
+		removeEntities();
+	}
+	
+	public void addEntities(){
 		Iterator<Entity> newEntitiesIter = newEntities.iterator();
 		while (newEntitiesIter.hasNext()) {
 			Entity n = newEntitiesIter.next();
@@ -55,13 +67,9 @@ public class Level {
 			}
 		}
 		newEntities.clear();
-		
-		Iterator<Entity> charIter = entities.iterator();
-		while (charIter.hasNext()) {
-			Entity c = charIter.next();
-			c.update();
-		}
-
+	}
+	
+	public void removeEntities(){
 		Iterator<Entity> oldEntitiesIter = oldEntities.iterator();
 		while (oldEntitiesIter.hasNext()) {
 			Entity n = oldEntitiesIter.next();
