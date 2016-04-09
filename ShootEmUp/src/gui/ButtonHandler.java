@@ -176,12 +176,7 @@ public abstract class ButtonHandler {
 	}
 
 	private static void mute() {
-		if (ShootEmUp.musicPause) {
-			ShootEmUp.backgroundMusic.play(ShootEmUp.currentMusic);
-		} else {
-			ShootEmUp.backgroundMusic.pause(ShootEmUp.currentMusic);
-		}
-		ShootEmUp.musicPause = !ShootEmUp.musicPause;
+		ShootEmUp.getMusicPlayer().pause();
 	}
 
 	private static void inventory() {
@@ -290,10 +285,6 @@ public abstract class ButtonHandler {
 		ShootEmUp.paused = false;
 		ShootEmUp.mainMenu = false;
 		ShootEmUp.clearMenus();
-		ShootEmUp.backgroundMusic.stop(ShootEmUp.currentMusic);
-		ShootEmUp.currentMusic = BackgroundMusic.MAIN;
-		if (!ShootEmUp.musicPause) {
-			ShootEmUp.backgroundMusic.play(ShootEmUp.currentMusic);
-		}
+		ShootEmUp.getMusicPlayer().changeCurrentMusic(BackgroundMusic.MAIN);
 	}
 }

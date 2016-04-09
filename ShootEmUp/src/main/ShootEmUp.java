@@ -1,6 +1,5 @@
 package main;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_M;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_P;
 import static org.lwjgl.glfw.GLFW.glfwPollEvents;
 import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
@@ -17,7 +16,7 @@ import java.util.Stack;
 
 import org.lwjgl.glfw.GLFW;
 
-import audio.music.BackgroundMusic;
+import audio.MusicPlayer;
 import display.Art;
 import display.Display;
 import gui.menus.GuiMenu;
@@ -33,9 +32,7 @@ public class ShootEmUp {
 	// Handle for monitor/window funcs
 	private static Display display;
 	
-	public static BackgroundMusic backgroundMusic;
-	public static int currentMusic = BackgroundMusic.MENU;
-	public static boolean musicPause = false;
+	private static MusicPlayer musicPlayer;
 
 	public static boolean paused;
 	public static boolean mainMenu = true;
@@ -60,7 +57,7 @@ public class ShootEmUp {
 			// the GLFWerrorfun
 			Keyboard.destroy();
 			display.destroyGLFW();
-			backgroundMusic.destoyAL();
+			musicPlayer.destroy();
 
 		}
 	}
@@ -68,14 +65,13 @@ public class ShootEmUp {
 	private void init() {
 		display = new Display();
 		display.initGLFW();
-		backgroundMusic = new BackgroundMusic();
-		backgroundMusic.initAL();
+		musicPlayer = new MusicPlayer();
 
 		Controllers.create();
 
 		paused = true;
 		addMenu(new MainMenu(Art.getImage("MainMenuScreen")));
-		backgroundMusic.play(currentMusic);
+		musicPlayer.play();
 	}
 
 	private void loop() {
@@ -142,15 +138,7 @@ public class ShootEmUp {
 		}
 
 		// dealing with pausing music
-		if (Keyboard.getKey(GLFW_KEY_M) == 1) {
-			Keyboard.setKey(GLFW_KEY_M);
-			if (musicPause) {
-				backgroundMusic.play(currentMusic);
-			} else {
-				backgroundMusic.pause(currentMusic);
-			}
-			musicPause = !musicPause;
-		}
+		musicPlayer.update();
 
 		display.update();
 
@@ -201,6 +189,10 @@ public class ShootEmUp {
 
 	public static double getFPS() {
 		return FPS;
+	}
+
+	public static MusicPlayer getMusicPlayer() {
+		return musicPlayer;
 	}
 
 }

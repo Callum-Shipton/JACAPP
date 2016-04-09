@@ -3,7 +3,6 @@ package object;
 import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.movement.BaseMovement;
-import main.ShootEmUp;
 import math.Seconds;
 
 public class DurationPotion extends Potion {
