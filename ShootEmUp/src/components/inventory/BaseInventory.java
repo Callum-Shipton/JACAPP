@@ -258,7 +258,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 	public int getNumPotion(TypePotion type) {
 		if (potions.containsKey(type)) {
-			return potions.get(type).quantity;
+			return potions.get(type).getQuantity();
 		}
 		return 0;
 	}

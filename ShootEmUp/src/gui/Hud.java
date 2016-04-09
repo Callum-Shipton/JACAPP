@@ -15,7 +15,7 @@ import object.Entity;
 
 public class Hud extends GuiComponent {
 
-	public CopyOnWriteArrayList<Icon> hudElems;
+	private CopyOnWriteArrayList<Icon> hudElems;
 	private Icon infoBoxTop;
 	private HudBar healthBar;
 	private HudBar manaBar;
@@ -33,9 +33,9 @@ public class Hud extends GuiComponent {
 
 	private float hudW;
 	
-	BaseInventory PI;
-	PlayerAttack PA;
-	BasicMovement PM;
+	private BaseInventory PI;
+	private PlayerAttack PA;
+	private BasicMovement PM;
 
 	public Hud(Entity player, float x, float y) {
 		super(x, y);

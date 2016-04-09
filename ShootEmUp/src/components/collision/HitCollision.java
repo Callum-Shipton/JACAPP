@@ -12,7 +12,7 @@ import object.Weapon;
 
 public class HitCollision extends BaseCollision {
 
-	Weapon weapon;
+	private Weapon weapon;
 
 	public HitCollision(Entity e, Weapon weapon) {
 		this.weapon = weapon;

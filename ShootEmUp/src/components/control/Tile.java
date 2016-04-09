@@ -1,14 +1,14 @@
 package components.control;
 
 public class Tile {
-	BoundingBox North;
-	BoundingBox NorthWest;
-	BoundingBox West;
-	BoundingBox SouthWest;
-	BoundingBox South;
-	BoundingBox SouthEast;
-	BoundingBox East;
-	BoundingBox NorthEast;
+	private BoundingBox North;
+	private BoundingBox NorthWest;
+	private BoundingBox West;
+	private BoundingBox SouthWest;
+	private BoundingBox South;
+	private BoundingBox SouthEast;
+	private BoundingBox East;
+	private BoundingBox NorthEast;
 	
 	public Tile(){
 		

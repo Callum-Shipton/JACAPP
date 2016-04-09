@@ -30,8 +30,8 @@ public class Button extends GuiComponent {
 
 	private boolean performClick = false;
 
-	DoubleBuffer Bx = BufferUtils.createDoubleBuffer(1);
-	DoubleBuffer By = BufferUtils.createDoubleBuffer(1);
+	private DoubleBuffer Bx = BufferUtils.createDoubleBuffer(1);
+	private DoubleBuffer By = BufferUtils.createDoubleBuffer(1);
 
 	public Button(TypeButton type, Image id, float x, float y) {
 		super(x, y);

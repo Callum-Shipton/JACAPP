@@ -13,10 +13,10 @@ import object.Entity;
 
 public class PlayerControl extends BaseControl {
 
-	BaseMovement BM;
-	PlayerGraphics PG;
-	BaseAttack BA;
-	BaseInventory PI;
+	private BaseMovement BM;
+	private PlayerGraphics PG;
+	private BaseAttack BA;
+	private BaseInventory PI;
 
 	public PlayerControl(Entity e, PlayerGraphics PG, BaseAttack BA, BaseMovement BM, BaseInventory PI) {
 		PG.scrollScreen(e);

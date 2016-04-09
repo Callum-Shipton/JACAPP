@@ -9,7 +9,7 @@ import object.Weapon;
 
 public class EnemyAttack extends BaseAttack implements AttackComponent {
 
-	HudBar healthBar;
+	private HudBar healthBar;
 	
 	public EnemyAttack(TypeAttack type, int health, int mana, Weapon weapon, Armour helmet, Armour chest, Armour legs,
 			Armour boots) {

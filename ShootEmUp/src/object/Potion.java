@@ -18,7 +18,7 @@ public abstract class Potion implements Serializable {
 
 	protected String type;
 
-	public int quantity = 1;
+	protected int quantity = 1;
 
 	protected boolean active = false;
 
@@ -54,5 +54,9 @@ public abstract class Potion implements Serializable {
 		item.addComponent(BS);
 		item.addComponent(BC);
 		ShootEmUp.getCurrentLevel().addEntity(item);
+	}
+	
+	public int getQuantity() {
+		return quantity;
 	}
 }

@@ -7,9 +7,9 @@ import display.DPDTRenderer;
 
 public class VerticalLayout extends GuiComponent {
 
-	ArrayList<GuiComponent> menuItems = new ArrayList<GuiComponent>();
-	float gap;
-	float height;
+	private ArrayList<GuiComponent> menuItems = new ArrayList<GuiComponent>();
+	private float gap;
+	private float height;
 
 	public VerticalLayout(float x, float y, float height, float gap) {
 		super(x, y);

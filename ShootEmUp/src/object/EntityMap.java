@@ -11,7 +11,7 @@ import math.Vector2;
 
 public class EntityMap {
 
-	public HashMap<Integer, HashMap<Integer, HashSet<Entity>>> map;
+	private HashMap<Integer, HashMap<Integer, HashSet<Entity>>> map;
 
 	public EntityMap(int w, int h) {
 		map = new HashMap<Integer, HashMap<Integer, HashSet<Entity>>>();
