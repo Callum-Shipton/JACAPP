@@ -1,5 +1,6 @@
 package main;
 
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_P;
 import static org.lwjgl.glfw.GLFW.glfwPollEvents;
 import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
@@ -112,9 +113,17 @@ public class ShootEmUp {
 		// invoked during this call.
 		glfwPollEvents();
 		Controllers.poll();
-		menuSystem.update();
+		if (!menuSystem.isMainMenu()) {
+			if (Keyboard.getKey(GLFW_KEY_P) == 1) {
+				ShootEmUp.setPaused(!ShootEmUp.isPaused());
+				Keyboard.setKey(GLFW_KEY_P);
+				menuSystem.pause();
+			}
+		}
 		if (!paused) {
 			getCurrentLevel().update();
+		} else {
+			menuSystem.update();
 		}
 		// dealing with pausing music
 		musicPlayer.update();

@@ -1,14 +1,10 @@
 package gui;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_P;
-
 import java.util.Stack;
 
 import display.Art;
 import gui.menus.GuiMenu;
 import gui.menus.InventoryMenu;
-import input.Keyboard;
-import main.ShootEmUp;
 
 public class MenuSystem {
 	private boolean mainMenu = true;
@@ -19,19 +15,16 @@ public class MenuSystem {
 	}
 	
 	public void update() {
-		if (!mainMenu) {
-			if (Keyboard.getKey(GLFW_KEY_P) == 1) {
-				ShootEmUp.setPaused(!ShootEmUp.isPaused());
-				Keyboard.setKey(GLFW_KEY_P);
-				if (ShootEmUp.isPaused()) {
-					addMenu(new InventoryMenu(Art.getImage("InventoryScreen")));
-				} else {
-					clearMenus();
-				}
-			}
-		}
 		if (!menuStack.isEmpty()) {
 			menuStack.peek().update();
+		}
+	}
+	
+	public void pause(){
+		if (menuStack.isEmpty()) {
+			addMenu(new InventoryMenu(Art.getImage("InventoryScreen")));
+		} else {
+			clearMenus();
 		}
 	}
 	
