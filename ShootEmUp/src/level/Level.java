@@ -18,9 +18,9 @@ public class Level {
 	
 	public EntityMap eMap;
 
-	public HashSet<Entity> entities;
-	public HashSet<Entity> oldEntities;
-	public HashSet<Entity> newEntities;
+	private HashSet<Entity> entities;
+	private HashSet<Entity> oldEntities;
+	private HashSet<Entity> newEntities;
 	
 	public HashSet<Vector2> walls;
 	
@@ -104,11 +104,20 @@ public class Level {
 		}
 	}
 	
+	public void removeEntity(HashSet<Vector2> gridPos, Entity e){
+		ShootEmUp.getCurrentLevel().eMap.removeEntity(gridPos, e);
+		oldEntities.add(e);
+	}
+	
 	public int getLevel() {
 		return level;
 	}
 
 	public Spawner getSpawner() {
 		return spawner;
+	}
+
+	public HashSet<Entity> getEntities() {
+		return entities;
 	}
 }

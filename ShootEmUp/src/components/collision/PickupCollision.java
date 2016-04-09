@@ -27,12 +27,12 @@ public class PickupCollision extends BaseCollision {
 	public PickupCollision(Entity e, TypePickup type, String name) {
 		this.type = type;
 		this.name = name;
-		
+
 		moveBack = false;
 		setGridPos(ShootEmUp.getCurrentLevel().eMap.getGridPos(e));
 		ShootEmUp.getCurrentLevel().eMap.addEntity(getGridPos(), e);
 	}
-	
+
 	public PickupCollision(Entity e, TypePickup type, String subtype, String subsubtype) {
 		this.type = type;
 
@@ -45,10 +45,8 @@ public class PickupCollision extends BaseCollision {
 	public void collision(Entity e, Entity hit) {
 		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
 		if (hit.getComponent(TypeComponent.CONTROL) instanceof PlayerControl) {
-			if ((BI)
-					.giveItem(type, name)) {
-				ShootEmUp.getCurrentLevel().eMap.removeEntity(gridPos, e);
-				ShootEmUp.getCurrentLevel().oldEntities.add(e);
+			if ((BI).giveItem(type, name)) {
+				ShootEmUp.getCurrentLevel().removeEntity(gridPos, e);
 				e.destroy();
 			}
 		}
@@ -56,7 +54,7 @@ public class PickupCollision extends BaseCollision {
 
 	@Override
 	public void update(Entity e) {
-		if(timer >= Seconds.ticks(DESPAWN_TIME)){
+		if (timer >= Seconds.ticks(DESPAWN_TIME)) {
 			e.destroy();
 		}
 		timer++;

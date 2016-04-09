@@ -122,7 +122,7 @@ public abstract class EnemyBuilder {
 
 			// changed to grid position;
 
-			for (Entity character : ShootEmUp.getCurrentLevel().entities) {
+			for (Entity character : ShootEmUp.getCurrentLevel().getEntities()) {
 				BaseMovement BM = test.getComponent(TypeComponent.MOVEMENT);
 				if ((BM.doesCollide(test, character) != null)) {
 					collide = true;

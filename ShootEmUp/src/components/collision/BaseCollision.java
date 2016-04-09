@@ -21,8 +21,7 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 
 	@Override
 	public void destroy(Entity e) {
-		ShootEmUp.getCurrentLevel().eMap.removeEntity(gridPos, e);
-		ShootEmUp.getCurrentLevel().oldEntities.add(e);
+		ShootEmUp.getCurrentLevel().removeEntity(gridPos, e);
 	}
 
 	@Override
