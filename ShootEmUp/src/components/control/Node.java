@@ -48,7 +48,7 @@ public class Node implements Comparable<Node> {
 	
 	@Override
 	public int compareTo(Node n) {
-		BaseGraphics BG = ShootEmUp.getCurrentLevel().getPlayer().getComponent(TypeComponent.GRAPHICS);
+		BaseGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
 		Vector2 player = new Vector2(
 				(float) Math.floor(
 						BG

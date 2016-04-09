@@ -45,7 +45,7 @@ public class PickupCollision extends BaseCollision {
 
 	@Override
 	public void collision(Entity e, Entity hit) {
-		BaseInventory BI = ShootEmUp.getCurrentLevel().getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
 		if (hit.getComponent(TypeComponent.CONTROL) instanceof PlayerControl) {
 			if ((BI)
 					.giveItem(type, name)) {

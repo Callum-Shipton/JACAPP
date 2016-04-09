@@ -17,7 +17,7 @@ public class Level {
 
 	private int level;
 
-	private Entity player;
+	//private Entity player;
 	public Hud hud;
 
 	public EntityMap eMap;
@@ -67,7 +67,7 @@ public class Level {
 		Iterator<Entity> oldEntitiesIter = oldEntities.iterator();
 		while (oldEntitiesIter.hasNext()) {
 			Entity n = oldEntitiesIter.next();
-			BaseCollision BC = ShootEmUp.getCurrentLevel().getPlayer().getComponent(TypeComponent.COLLISION);
+			BaseCollision BC = ShootEmUp.getPlayer().getComponent(TypeComponent.COLLISION);
 			ShootEmUp.getCurrentLevel().eMap
 					.removeEntity(BC.getGridPos(), n);
 			boolean res = entities.remove(n);
@@ -86,17 +86,13 @@ public class Level {
 			BaseGraphics BG = character.getComponent(TypeComponent.GRAPHICS);
 			BG.render(character);
 		}
-		BaseGraphics BG = player.getComponent(TypeComponent.GRAPHICS);
-		BG.render(player);
+		BaseGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
+		BG.render(ShootEmUp.getPlayer());
 
 		map.renderHighTiles();
 
 		hud.render(Art.stat);
 
-	}
-
-	public Entity getPlayer() {
-		return player;
 	}
 
 	public int getLevel() {
@@ -105,9 +101,5 @@ public class Level {
 
 	public Spawner getSpawner() {
 		return spawner;
-	}
-
-	public void setPlayer(Entity player) {
-		this.player = player;
 	}
 }

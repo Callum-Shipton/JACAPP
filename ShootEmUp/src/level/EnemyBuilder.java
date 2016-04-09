@@ -101,7 +101,7 @@ public abstract class EnemyBuilder {
 		BaseCollision BC = new RigidCollision(test, TG);
 		test.addComponent(BC);
 		test.addComponent(new BasicMovement(test, BC, TG, 5));
-		BaseGraphics playerGraphics = ShootEmUp.getCurrentLevel().getPlayer()
+		BaseGraphics playerGraphics = ShootEmUp.getPlayer()
 				.getComponent(TypeComponent.GRAPHICS);
 		float px = playerGraphics.getX();
 		float py = playerGraphics.getY();

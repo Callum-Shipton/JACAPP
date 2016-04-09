@@ -43,7 +43,7 @@ public class AIControl extends BaseControl {
 
 	@Override
 	public void update(Entity e) {
-		BaseGraphics PlayerG = ShootEmUp.getCurrentLevel().getPlayer().getComponent(TypeComponent.GRAPHICS);
+		BaseGraphics PlayerG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
 		goal = new Vector2((float) Math.floor(PlayerG.getX() / Map.TILE_WIDTH),
 				(float) Math.floor(PlayerG.getY() / Map.TILE_HEIGHT));
 		target = ai();

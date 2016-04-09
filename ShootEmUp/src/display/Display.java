@@ -190,7 +190,7 @@ public class Display {
 		Keyboard.keyCheck(window);
 		Art.initShaderUniforms();
 		Art.refreshRenderers();
-		PlayerGraphics BG = ShootEmUp.getCurrentLevel().getPlayer().getComponent(TypeComponent.GRAPHICS);
+		PlayerGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
 		if (ShootEmUp.getCurrentLevel() != null) {
 			BG
 					.scrollScreen(null);

@@ -24,6 +24,7 @@ import input.Controllers;
 import input.Keyboard;
 import input.Keys;
 import level.Level;
+import object.Entity;
 import save.Save;
 
 public class ShootEmUp {
@@ -31,7 +32,8 @@ public class ShootEmUp {
 	// Handle for monitor/window funcs
 	private static Display display;	
 	private static MusicPlayer musicPlayer;
-	private static Level currentLevel;	
+	private static Level currentLevel;
+	private static Entity player;
 	private static boolean paused;	
 	private static MenuSystem menuSystem;
 	private static Save save;
@@ -201,5 +203,13 @@ public class ShootEmUp {
 
 	public static Keys getKeys() {
 		return keys;
+	}
+	
+	public static Entity getPlayer() {
+		return player;
+	}
+	
+	public static void setPlayer(Entity p) {
+		player = p;
 	}
 }

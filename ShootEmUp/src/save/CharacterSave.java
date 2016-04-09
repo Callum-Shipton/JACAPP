@@ -55,7 +55,7 @@ public class CharacterSave implements Serializable {
 
 	private void getData() {
 
-		PlayerAttack tempAttack = ShootEmUp.getCurrentLevel().getPlayer().getComponent(TypeComponent.ATTACK);
+		PlayerAttack tempAttack = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
 
 		player = tempAttack.getAttackType();
 
@@ -77,7 +77,7 @@ public class CharacterSave implements Serializable {
 		chest = tempAttack.getChest();
 		helmet = tempAttack.getHelmet();
 
-		BaseInventory tempInventory = ShootEmUp.getCurrentLevel().getPlayer()
+		BaseInventory tempInventory = ShootEmUp.getPlayer()
 				.getComponent(TypeComponent.INVENTORY);
 
 		coins = tempInventory.getCoins();
