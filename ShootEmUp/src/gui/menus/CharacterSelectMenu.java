@@ -4,9 +4,9 @@ import components.attack.TypeAttack;
 import display.Art;
 import display.Image;
 import gui.ButtonBuilder;
-import gui.VerticalLayout;
 import gui.CounterButton;
 import gui.TypeButton;
+import gui.VerticalLayout;
 import main.ShootEmUp;
 
 public class CharacterSelectMenu extends GuiMenu {

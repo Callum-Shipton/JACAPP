@@ -3,8 +3,8 @@ package gui.menus;
 import display.Art;
 import display.Image;
 import gui.ButtonBuilder;
-import gui.VerticalLayout;
 import gui.TypeButton;
+import gui.VerticalLayout;
 
 public class OptionsMenu extends GuiMenu {
 

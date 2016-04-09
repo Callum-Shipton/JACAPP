@@ -4,10 +4,10 @@ import components.TypeComponent;
 import components.inventory.BaseInventory;
 import display.Art;
 import display.Image;
-import gui.VerticalLayout;
 import gui.Counter;
 import gui.CounterButton;
 import gui.TypeButton;
+import gui.VerticalLayout;
 import main.ShootEmUp;
 
 public class SkillMenu extends PauseMenu {
