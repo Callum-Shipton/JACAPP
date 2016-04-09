@@ -75,18 +75,18 @@ public class Spawner {
 				wave++;
 				changeRadius((wave - 1) * radLevel);
 			} else if (ShootEmUp.currentLevel.getLevel() < MAX_LEVEL) {
-				if (ShootEmUp.save == null) {
-					ShootEmUp.save = new Save();
+				if (ShootEmUp.getSave()== null) {
+					ShootEmUp.setSave(new Save());
 				} else {
-					ShootEmUp.save.saveCharacter();
+					ShootEmUp.getSave().saveCharacter();
 				}
-				ShootEmUp.save.saveToSystem(1);
+				ShootEmUp.getSave().saveToSystem(1);
 				BaseAttack BA = ShootEmUp.currentLevel.getPlayer().getComponent(TypeComponent.ATTACK);
 				TypeAttack temp = BA
 						.getAttackType();
 				ShootEmUp.currentLevel = new Level(Art.levels, ShootEmUp.currentLevel.getLevel() + 1);
-				ShootEmUp.save.load(1);
-				PlayerBuilder.buildPlayer(temp, ShootEmUp.save.getCharacter(temp));
+				ShootEmUp.getSave().load(1);
+				PlayerBuilder.buildPlayer(temp, ShootEmUp.getSave().getCharacter(temp));
 			}
 			newWave = true;
 		}

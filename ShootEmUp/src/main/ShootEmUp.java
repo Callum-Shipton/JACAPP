@@ -32,6 +32,7 @@ public class ShootEmUp {
 
 	// Handle for monitor/window funcs
 	private static Display display;
+	
 	public static BackgroundMusic backgroundMusic;
 	public static int currentMusic = BackgroundMusic.MENU;
 	public static boolean musicPause = false;
@@ -42,9 +43,9 @@ public class ShootEmUp {
 	public static Level currentLevel;
 	public static Stack<GuiMenu> menuStack = new Stack<GuiMenu>();
 
-	public static Save save;
+	private static Save save;
 
-	public static double FPS = 60.0;
+	private static double FPS = 60.0;
 
 	public void run() {
 		try {
@@ -66,6 +67,7 @@ public class ShootEmUp {
 
 	private void init() {
 		display = new Display();
+		display.initGLFW();
 		backgroundMusic = new BackgroundMusic();
 		backgroundMusic.initAL();
 
@@ -187,6 +189,18 @@ public class ShootEmUp {
 
 	public static Display getDisplay() {
 		return display;
+	}
+
+	public static Save getSave() {
+		return save;
+	}
+
+	public static void setSave(Save save) {
+		ShootEmUp.save = save;
+	}
+
+	public static double getFPS() {
+		return FPS;
 	}
 
 }

@@ -129,10 +129,10 @@ public abstract class ButtonHandler {
 	}
 
 	private static void loadGame() {
-		if(ShootEmUp.save == null){
-			ShootEmUp.save = new Save();
+		if(ShootEmUp.getSave() == null){
+			ShootEmUp.setSave(new Save());
 		}
-		ShootEmUp.save.load(1);
+		ShootEmUp.getSave().load(1);
 		ShootEmUp.addMenu(new LevelSelectMenu(Art.getImage("MainMenuScreen")));
 	}
 
@@ -151,11 +151,11 @@ public abstract class ButtonHandler {
 	}
 
 	private static void character(TypeAttack type) {
-		if (ShootEmUp.save == null) {
+		if (ShootEmUp.getSave() == null) {
 			PlayerBuilder.buildPlayer(type);
 		} else {
-			if (ShootEmUp.save.getCharacter(type) != null) {
-				PlayerBuilder.buildPlayer(type, ShootEmUp.save.getCharacter(type));
+			if (ShootEmUp.getSave().getCharacter(type) != null) {
+				PlayerBuilder.buildPlayer(type, ShootEmUp.getSave().getCharacter(type));
 			} else {
 				PlayerBuilder.buildPlayer(type);
 			}
@@ -277,12 +277,12 @@ public abstract class ButtonHandler {
 	}
 
 	private static void saveGame() {
-		if (ShootEmUp.save == null) {
-			ShootEmUp.save = new Save();
+		if (ShootEmUp.getSave() == null) {
+			ShootEmUp.setSave(new Save());
 		}
-		ShootEmUp.save.saveCharacter();
-		ShootEmUp.save.saveToSystem(1);
-		ShootEmUp.save = null;
+		ShootEmUp.getSave().saveCharacter();
+		ShootEmUp.getSave().saveToSystem(1);
+		ShootEmUp.setSave(null);
 	}
 	// Extra Methods
 

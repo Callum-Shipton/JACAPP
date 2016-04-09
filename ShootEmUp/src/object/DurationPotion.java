@@ -4,6 +4,7 @@ import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.movement.BaseMovement;
 import main.ShootEmUp;
+import math.Seconds;
 
 public class DurationPotion extends Potion {
 
@@ -51,7 +52,7 @@ public class DurationPotion extends Potion {
 			}
 		}
 		counter++;
-		if (counter == (int) ShootEmUp.FPS) {
+		if (counter == Seconds.ticks(1)) {
 			counter = 0;
 		}
 	}

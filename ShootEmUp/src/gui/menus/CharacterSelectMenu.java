@@ -20,21 +20,21 @@ public class CharacterSelectMenu extends GuiMenu {
 		int battleMageLevel = 0;
 		int rogueLevel = 0;
 
-		if (ShootEmUp.save != null) {
-			if (ShootEmUp.save.getCharacter(TypeAttack.WARRIOR) != null) {
-				warriorLevel = ShootEmUp.save.getCharacter(TypeAttack.WARRIOR).getPlayerLevel();
+		if (ShootEmUp.getSave() != null) {
+			if (ShootEmUp.getSave().getCharacter(TypeAttack.WARRIOR) != null) {
+				warriorLevel = ShootEmUp.getSave().getCharacter(TypeAttack.WARRIOR).getPlayerLevel();
 			}
-			if (ShootEmUp.save.getCharacter(TypeAttack.ARCHER) != null) {
-				archerLevel = ShootEmUp.save.getCharacter(TypeAttack.ARCHER).getPlayerLevel();
+			if (ShootEmUp.getSave().getCharacter(TypeAttack.ARCHER) != null) {
+				archerLevel = ShootEmUp.getSave().getCharacter(TypeAttack.ARCHER).getPlayerLevel();
 			}
-			if (ShootEmUp.save.getCharacter(TypeAttack.MAGE) != null) {
-				mageLevel = ShootEmUp.save.getCharacter(TypeAttack.MAGE).getPlayerLevel();
+			if (ShootEmUp.getSave().getCharacter(TypeAttack.MAGE) != null) {
+				mageLevel = ShootEmUp.getSave().getCharacter(TypeAttack.MAGE).getPlayerLevel();
 			}
-			if (ShootEmUp.save.getCharacter(TypeAttack.BATTLE_MAGE) != null) {
-				battleMageLevel = ShootEmUp.save.getCharacter(TypeAttack.BATTLE_MAGE).getPlayerLevel();
+			if (ShootEmUp.getSave().getCharacter(TypeAttack.BATTLE_MAGE) != null) {
+				battleMageLevel = ShootEmUp.getSave().getCharacter(TypeAttack.BATTLE_MAGE).getPlayerLevel();
 			}
-			if (ShootEmUp.save.getCharacter(TypeAttack.ROGUE) != null) {
-				rogueLevel = ShootEmUp.save.getCharacter(TypeAttack.ROGUE).getPlayerLevel();
+			if (ShootEmUp.getSave().getCharacter(TypeAttack.ROGUE) != null) {
+				rogueLevel = ShootEmUp.getSave().getCharacter(TypeAttack.ROGUE).getPlayerLevel();
 			}
 		}
 
