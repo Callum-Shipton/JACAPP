@@ -27,6 +27,9 @@ public class Save implements Serializable {
 
 	private static final long serialVersionUID = 7179389236763035983L;
 
+	private final static byte[] KEY = "funbrella0000000".getBytes();
+	private final static String TRANSFORMATION = "AES";
+	
 	private CharacterSave warrior;
 	private CharacterSave archer;
 	private CharacterSave mage;
@@ -86,9 +89,6 @@ public class Save implements Serializable {
 	public int getLevel() {
 		return level;
 	}
-	
-	private final static byte[] KEY = "funbrella0000000".getBytes();
-	private final static String TRANSFORMATION = "AES";
 
 	public void saveToSystem(int num) {
 
