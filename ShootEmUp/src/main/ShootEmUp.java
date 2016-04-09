@@ -1,6 +1,5 @@
 package main;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_P;
 import static org.lwjgl.glfw.GLFW.glfwPollEvents;
 import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
@@ -12,7 +11,6 @@ import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.opengl.GL11.glGetError;
 
 import java.io.File;
-import java.util.Stack;
 
 import org.lwjgl.glfw.GLFW;
 
@@ -20,8 +18,7 @@ import audio.MusicPlayer;
 import audio.music.BackgroundMusic;
 import display.Art;
 import display.Display;
-import gui.menus.GuiMenu;
-import gui.menus.InventoryMenu;
+import gui.MenuSystem;
 import gui.menus.MainMenu;
 import input.Controllers;
 import input.Keyboard;
@@ -39,8 +36,7 @@ public class ShootEmUp {
 	
 	private static boolean paused;
 	
-	public static boolean mainMenu = true;
-	public static Stack<GuiMenu> menuStack = new Stack<GuiMenu>();
+	private static MenuSystem menuSystem;
 
 	private static Save save;
 
@@ -68,11 +64,12 @@ public class ShootEmUp {
 		display = new Display();
 		display.initGLFW();
 		musicPlayer = new MusicPlayer();
-
+		menuSystem = new MenuSystem();
+		
 		Controllers.create();
 
 		paused = true;
-		addMenu(new MainMenu(Art.getImage("MainMenuScreen")));
+		menuSystem.addMenu(new MainMenu(Art.getImage("MainMenuScreen")));
 		musicPlayer.play();
 	}
 
@@ -121,24 +118,10 @@ public class ShootEmUp {
 		// invoked during this call.
 		glfwPollEvents();
 		Controllers.poll();
-		if (!mainMenu) {
-			if (Keyboard.getKey(GLFW_KEY_P) == 1) {
-				paused = !paused;
-				Keyboard.setKey(GLFW_KEY_P);
-				if (paused) {
-					addMenu(new InventoryMenu(Art.getImage("InventoryScreen")));
-				} else {
-					clearMenus();
-				}
-			}
-			if (!paused) {
-				currentLevel.update();
-			}
+		menuSystem.update();
+		if (!paused) {
+			currentLevel.update();
 		}
-		if (!menuStack.isEmpty()) {
-			menuStack.peek().update();
-		}
-
 		// dealing with pausing music
 		musicPlayer.update();
 
@@ -153,9 +136,7 @@ public class ShootEmUp {
 		if (!paused) {
 			currentLevel.render();
 		}
-		if (!menuStack.isEmpty()) {
-			menuStack.peek().render();
-		}
+		menuSystem.render();
 
 		glfwSwapBuffers(display.getWindow()); // Swaps front and back buffers to
 		// render changes
@@ -167,21 +148,10 @@ public class ShootEmUp {
 		new ShootEmUp().run();
 	}
 
-	public static void clearMenus() {
-		while (!menuStack.isEmpty()) {
-			menuStack.pop();
-		}
-	}
-
-	public static void addMenu(GuiMenu menu) {
-		menuStack.add(menu);
-	}
-
-
 	public static void startGame() {
 		paused = false;
-		mainMenu = false;
-		clearMenus();
+		menuSystem.setMainMenu(false);
+		menuSystem.clearMenus();
 		musicPlayer.changeCurrentMusic(BackgroundMusic.MAIN);
 	}
 	
@@ -211,5 +181,9 @@ public class ShootEmUp {
 
 	public static void setPaused(boolean p) {
 		paused = p;
+	}
+
+	public static MenuSystem getMenuSystem() {
+		return menuSystem;
 	}
 }

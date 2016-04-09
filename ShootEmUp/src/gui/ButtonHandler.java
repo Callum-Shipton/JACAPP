@@ -124,7 +124,7 @@ public abstract class ButtonHandler {
 	}
 
 	private static void newGame() {
-		ShootEmUp.addMenu(new LevelSelectMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(Art.getImage("MainMenuScreen")));
 	}
 
 	private static void loadGame() {
@@ -132,11 +132,11 @@ public abstract class ButtonHandler {
 			ShootEmUp.setSave(new Save());
 		}
 		ShootEmUp.getSave().load(1);
-		ShootEmUp.addMenu(new LevelSelectMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(Art.getImage("MainMenuScreen")));
 	}
 
 	private static void options() {
-		ShootEmUp.addMenu(new OptionsMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new OptionsMenu(Art.getImage("MainMenuScreen")));
 	}
 
 	private static void exit() {
@@ -146,7 +146,7 @@ public abstract class ButtonHandler {
 	private static void level(int level) {
 		ShootEmUp.currentLevel = new Level(Art.levels, level);
 		ShootEmUp.currentLevel.init();
-		ShootEmUp.addMenu(new CharacterSelectMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new CharacterSelectMenu(Art.getImage("MainMenuScreen")));
 	}
 
 	private static void character(TypeAttack type) {
@@ -163,15 +163,15 @@ public abstract class ButtonHandler {
 	}
 
 	private static void back() {
-		ShootEmUp.menuStack.pop();
+		ShootEmUp.getMenuSystem().popMenu();
 	}
 
 	private static void controls() {
-		ShootEmUp.addMenu(new ControlsMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new ControlsMenu(Art.getImage("MainMenuScreen")));
 	}
 
 	private static void sound() {
-		ShootEmUp.addMenu(new SoundMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new SoundMenu(Art.getImage("MainMenuScreen")));
 	}
 
 	private static void mute() {
@@ -179,34 +179,34 @@ public abstract class ButtonHandler {
 	}
 
 	private static void inventory() {
-		ShootEmUp.addMenu(new InventoryMenu(Art.getImage("InventoryScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new InventoryMenu(Art.getImage("InventoryScreen")));
 	}
 
 	private static void magic() {
-		ShootEmUp.addMenu(new UpgradesMenu(Art.getImage("UpgradesScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new UpgradesMenu(Art.getImage("UpgradesScreen")));
 	}
 
 	private static void skills() {
-		ShootEmUp.addMenu(new SkillMenu(Art.getImage("SkillScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new SkillMenu(Art.getImage("SkillScreen")));
 	}
 
 	private static void map() {
-		ShootEmUp.addMenu(new MapMenu(Art.getImage("MapScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new MapMenu(Art.getImage("MapScreen")));
 	}
 
 	private static void save() {
-		ShootEmUp.addMenu(new SaveMenu(Art.getImage("SaveScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new SaveMenu(Art.getImage("SaveScreen")));
 	}
 
 	private static void resume() {
-		ShootEmUp.menuStack.clear();
+		ShootEmUp.getMenuSystem().clearMenus();
 		ShootEmUp.setPaused(false);
 	}
 
 	private static void mainMenu() {
-		ShootEmUp.mainMenu = true;
-		ShootEmUp.menuStack.clear();
-		ShootEmUp.addMenu(new MainMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().setMainMenu(true);
+		ShootEmUp.getMenuSystem().clearMenus();
+		ShootEmUp.getMenuSystem().addMenu(new MainMenu(Art.getImage("MainMenuScreen")));
 	}
 
 	private static void healthRegen() {

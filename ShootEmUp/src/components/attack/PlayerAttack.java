@@ -46,7 +46,7 @@ public class PlayerAttack extends BaseAttack {
 	public void removeLife() {
 		if (lives == 1) {
 			ShootEmUp.setPaused(true);
-			ShootEmUp.menuStack.add(new GameOverMenu(Art.getImage("GameOverScreen")));
+			ShootEmUp.getMenuSystem().addMenu(new GameOverMenu(Art.getImage("GameOverScreen")));
 		} else {
 			lives--;
 		}

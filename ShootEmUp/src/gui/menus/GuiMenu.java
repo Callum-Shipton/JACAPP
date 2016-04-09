@@ -63,10 +63,6 @@ public abstract class GuiMenu {
 
 	}
 
-	protected void popMenu() {
-		ShootEmUp.menuStack.pop();
-	}
-
 	/*
 	 * public void reset (int oldWidth, int oldHeight, int newWidth, int
 	 * newHeight){ for(Button b : buttons){ b.reset(oldWidth, oldHeight,
