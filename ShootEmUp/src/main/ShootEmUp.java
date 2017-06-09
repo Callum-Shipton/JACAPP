@@ -40,10 +40,129 @@ public class ShootEmUp {
 	private static boolean paused;
 	private static MenuSystem menuSystem;
 	private static Save save;
-	private static double FPS = 60.0;
+	private static double fps = 60.0;
 	private static Keys keys;
 	private static Hud hud;
+	
+	public static void main(String[] args) {
+		System.setProperty("org.lwjgl.librarypath", new File("natives").getAbsolutePath());
+		System.setProperty("net.java.games.input.librarypath", new File("natives/JInput").getAbsolutePath());
+		ShootEmUp.run();
+	}
+	
+	public static void run() {
+		try {
+			init();
+			loop();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// Release window and window callbacks Terminate GLFW and release
+			// the GLFWerrorfun
+			Keyboard.destroy();
+			display.destroyGLFW();
+			musicPlayer.destroy();
 
+		}
+	}
+
+	public static void startGame() {
+		paused = false;
+		menuSystem.setMainMenu(false);
+		menuSystem.clearMenus();
+		musicPlayer.changeCurrentMusic(BackgroundMusic.MAIN);
+	}
+
+	private static void init() {
+		display = new Display();
+		display.initGLFW();
+		musicPlayer = new MusicPlayer();
+		menuSystem = new MenuSystem();
+		keys = new Keys();
+		Controllers.create();
+
+		paused = true;
+		menuSystem.addMenu(new MainMenu(Art.getImage("MainMenuScreen")));
+		musicPlayer.play();
+	}
+
+	private static void loop() {
+		// Run the rendering loop until the user has attempted to close
+		// the window or has pressed the ESCAPE key.
+
+		double oldTime = GLFW.glfwGetTime();
+		double newTime = GLFW.glfwGetTime();
+		double delta;
+		double sleepTime;
+		int error;
+
+		while (glfwWindowShouldClose(display.getWindow()) == GL_FALSE) {
+
+			error = glGetError();
+
+			if (error != GL_NO_ERROR) {
+				Logger.error("OpenGL Error: " + error);
+			}
+
+			delta = newTime - oldTime;
+			oldTime = newTime;
+			sleepTime = (1.0 / fps) - delta;
+			Logger.debug(1.0/delta);
+			if (sleepTime > 0.01) {
+				try {
+					Thread.sleep((long) (sleepTime * 1000));
+					Logger.debug("I slept for " + sleepTime + "seconds." );
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			update();
+			render();
+
+			newTime = GLFW.glfwGetTime();
+
+		}
+	}
+
+	private static void render() {
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		if (!paused) {
+			getCurrentLevel().render();
+			BaseGraphics baseGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
+			baseGraphics.render(ShootEmUp.getPlayer());
+			hud.render(Art.stat);
+		}
+		menuSystem.render();
+
+		glfwSwapBuffers(display.getWindow()); // Swaps front and back buffers to
+		// render changes
+	}
+
+	private static void update() {
+		// Poll for window events. The key callback above will only be
+		// invoked during this call.
+		glfwPollEvents();
+		Controllers.poll();
+		if (!menuSystem.isMainMenu() && Keyboard.getKey(keys.pause) == 1) {
+				ShootEmUp.setPaused(!ShootEmUp.isPaused());
+				Keyboard.setKey(keys.pause);
+				menuSystem.pause();
+		}
+		if (!paused) {
+			getCurrentLevel().update();
+			hud.update();
+		} else {
+			menuSystem.update();
+		}
+		// dealing with pausing music
+		musicPlayer.update();
+
+		display.update();
+
+	}
+	
 	public static Level getCurrentLevel() {
 		return currentLevel;
 	}
@@ -53,7 +172,7 @@ public class ShootEmUp {
 	}
 
 	public static double getFPS() {
-		return FPS;
+		return fps;
 	}
 
 	public static Keys getKeys() {
@@ -80,12 +199,6 @@ public class ShootEmUp {
 		return paused;
 	}
 
-	public static void main(String[] args) {
-		System.setProperty("org.lwjgl.librarypath", new File("natives").getAbsolutePath());
-		System.setProperty("net.java.games.input.librarypath", new File("natives/JInput").getAbsolutePath());
-		new ShootEmUp().run();
-	}
-
 	public static void setCurrentLevel(Level currentLevel) {
 		ShootEmUp.currentLevel = currentLevel;
 	}
@@ -105,123 +218,5 @@ public class ShootEmUp {
 	public static void setSave(Save save) {
 		ShootEmUp.save = save;
 	}
-
-	public static void startGame() {
-		paused = false;
-		menuSystem.setMainMenu(false);
-		menuSystem.clearMenus();
-		musicPlayer.changeCurrentMusic(BackgroundMusic.MAIN);
-	}
-
-	private void init() {
-		display = new Display();
-		display.initGLFW();
-		musicPlayer = new MusicPlayer();
-		menuSystem = new MenuSystem();
-		keys = new Keys();
-		Controllers.create();
-
-		paused = true;
-		menuSystem.addMenu(new MainMenu(Art.getImage("MainMenuScreen")));
-		musicPlayer.play();
-	}
-
-	private void loop() {
-		// Run the rendering loop until the user has attempted to close
-		// the window or has pressed the ESCAPE key.
-
-		double oldTime = GLFW.glfwGetTime();
-		double newTime = GLFW.glfwGetTime();
-		double delta = newTime - oldTime;
-		double sleepTime = (1.0 / FPS) - delta;
-
-		int Error = glGetError();
-
-		while (glfwWindowShouldClose(display.getWindow()) == GL_FALSE) {
-
-			Error = glGetError();
-
-			if (Error != GL_NO_ERROR) {
-				System.out.println("OpenGL Error: " + Error);
-			}
-
-			delta = newTime - oldTime;
-			oldTime = newTime;
-			sleepTime = (1.0 / FPS) - delta;
-			// System.out.println(1.0/delta);
-			if (sleepTime > 0.01) {
-				try {
-					Thread.sleep((long) (sleepTime * 1000));
-					// System.out.println("I slept for " + sleepTime + "
-					// seconds." );
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-			update();
-			render();
-
-			newTime = GLFW.glfwGetTime();
-
-		}
-	}
-
-	private void render() {
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		if (!paused) {
-			getCurrentLevel().render();
-			BaseGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-			BG.render(ShootEmUp.getPlayer());
-			hud.render(Art.stat);
-		}
-		menuSystem.render();
-
-		glfwSwapBuffers(display.getWindow()); // Swaps front and back buffers to
-		// render changes
-	}
-
-	public void run() {
-		try {
-			init();
-			loop();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-
-			// Release window and window callbacks Terminate GLFW and release
-			// the GLFWerrorfun
-			Keyboard.destroy();
-			display.destroyGLFW();
-			musicPlayer.destroy();
-
-		}
-	}
-
-	private void update() {
-		// Poll for window events. The key callback above will only be
-		// invoked during this call.
-		glfwPollEvents();
-		Controllers.poll();
-		if (!menuSystem.isMainMenu()) {
-			if (Keyboard.getKey(keys.pause) == 1) {
-				ShootEmUp.setPaused(!ShootEmUp.isPaused());
-				Keyboard.setKey(keys.pause);
-				menuSystem.pause();
-			}
-		}
-		if (!paused) {
-			getCurrentLevel().update();
-			hud.update();
-		} else {
-			menuSystem.update();
-		}
-		// dealing with pausing music
-		musicPlayer.update();
-
-		display.update();
-
-	}
+	
 }
