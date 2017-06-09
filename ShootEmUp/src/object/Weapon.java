@@ -1,7 +1,6 @@
 package object;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -52,7 +51,7 @@ public class Weapon extends InventoryItem {
 			typedWeapons = weaponSystem.get(type).values().toArray(typedWeapons);
 			w = typedWeapons[temp];
 		} else {
-			HashMap<String, Weapon> tempWeapons = new HashMap<String, Weapon>();
+			HashMap<String, Weapon> tempWeapons = new HashMap<>();
 			for (HashMap<String, Weapon> typedWeapons : weaponSystem.values()) {
 				tempWeapons.putAll(typedWeapons);
 			}
@@ -117,6 +116,11 @@ public class Weapon extends InventoryItem {
 		case 7:
 			posX -= g.getWidth();
 			posY -= g.getHeight();
+			break;
+		default:
+			Logger.warn("Entity attacked in non-uniform direction: " + direction);
+			posX += (BGWidth - g.getWidth()) / 2;
+			posY -= g.getHeight();
 		}
 		PointSpawn s = new PointSpawn(g, new Vector2(posX, posY), particle);
 		HitCollision c = new HitCollision(particle, this);
@@ -167,7 +171,7 @@ public class Weapon extends InventoryItem {
 
 	@Override
 	public void initSystem() {
-		weaponSystem = new HashMap<String, HashMap<String, Weapon>>();
+		weaponSystem = new HashMap<>();
 		findFiles("res/Objects/Items/Weapons");
 	}
 
@@ -183,14 +187,14 @@ public class Weapon extends InventoryItem {
 		
 			JsonArray jsonObjects = new JsonParser().parse(in).getAsJsonArray();
 			for (JsonElement e : jsonObjects) {
-				String type = fileName.substring(0, fileName.length() - 5);
+				String subType = fileName.substring(0, fileName.length() - 5);
 				String name = e.getAsJsonObject().get("name").getAsString();
-				if (!weaponSystem.containsKey(type)) {
-					weaponSystem.put(type, new HashMap<String, Weapon>());
+				if (!weaponSystem.containsKey(subType)) {
+					weaponSystem.put(subType, new HashMap<String, Weapon>());
 				}
 				Weapon w = g.fromJson(e, Weapon.class);
-				w.type = type;
-				weaponSystem.get(type).put(name, w);
+				w.type = subType;
+				weaponSystem.get(subType).put(name, w);
 			}
 		} catch (IOException e) {
 			Logger.error(e);
