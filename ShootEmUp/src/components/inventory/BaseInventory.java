@@ -34,6 +34,13 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 	protected TypeComponent type = TypeComponent.INVENTORY;
 
+	protected final String BOW = "BOW";
+	protected final String DAGGER = "DAGGER";
+	protected final String ONE_HANDED = "ONE_HANDED";
+	protected final String TWO_HANDED = "TWO_HANDED";
+	protected final String STAFF = "STAFF";
+	protected final String CROSSBOW = "CROSSBOW";
+
 	protected int coins;
 
 	protected final int MAX_LEVEL = 99;
@@ -61,25 +68,28 @@ public class BaseInventory extends Component implements InventoryComponent {
 		this.inventory = new ArrayList<InventoryItem>();
 		switch (BA.getAttackType()) {
 		case ARCHER:
-			this.weaponTypes[0] = "BOW";
-			this.weaponTypes[1] = "DAGGER";
+			this.weaponTypes[0] = BOW;
+			this.weaponTypes[1] = DAGGER;
 			break;
 		case MAGE:
-			this.weaponTypes[0] = "STAFF";
-			this.weaponTypes[1] = "DAGGER";
+			this.weaponTypes[0] = STAFF;
+			this.weaponTypes[1] = DAGGER;
 			break;
 		case WARRIOR:
-			this.weaponTypes[0] = "ONE_HANDED";
-			this.weaponTypes[1] = "TWO_HANDED";
+			this.weaponTypes[0] = ONE_HANDED;
+			this.weaponTypes[1] = TWO_HANDED;
 			break;
 		case BATTLE_MAGE:
-			this.weaponTypes[0] = "ONE_HANDED";
-			this.weaponTypes[1] = "STAFF";
+			this.weaponTypes[0] = ONE_HANDED;
+			this.weaponTypes[1] = STAFF;
 			break;
 		case ROGUE:
-			this.weaponTypes[0] = "CROSSBOW";
-			this.weaponTypes[1] = "DAGGER";
+			this.weaponTypes[0] = CROSSBOW;
+			this.weaponTypes[1] = DAGGER;
 			break;
+		default:
+			this.weaponTypes[0] = ONE_HANDED;
+			this.weaponTypes[1] = TWO_HANDED;
 		}
 	}
 
@@ -143,6 +153,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 					this.BA.getBoots().destroy(e);
 				}
 				break;
+			default:
 			}
 			break;
 		case 2:
@@ -159,8 +170,11 @@ public class BaseInventory extends Component implements InventoryComponent {
 			case 3:
 				new DurationPotion("Knockback", 30).destroy(e);
 				break;
+			default:
 			}
+		default:
 		}
+
 	}
 
 	private void dropCoin() {
@@ -202,6 +216,8 @@ public class BaseInventory extends Component implements InventoryComponent {
 			case "HELMET":
 				equipped = this.BA.getHelmet();
 				this.BA.setHelmet((Armour) item);
+				break;
+			default:
 			}
 		} else {
 			equipped = this.BA.getWeapon();
@@ -324,10 +340,13 @@ public class BaseInventory extends Component implements InventoryComponent {
 						break;
 					case "Knockback":
 						this.potions.put(KNOCKBACK, new DurationPotion("Knockback", 30));
+						break;
+					default:
 					}
 				}
 				return true;
 			}
+		default:
 		}
 		return false;
 	}
