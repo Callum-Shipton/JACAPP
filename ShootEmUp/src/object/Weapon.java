@@ -1,6 +1,7 @@
 package object;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -179,10 +180,7 @@ public class Weapon extends InventoryItem {
 		JsonReader in = null;
 		try (FileInputStream fileInput = new FileInputStream(path)) {
 			in = new JsonReader(new InputStreamReader(fileInput));
-		} catch (IOException e) {
-			Logger.error(e);
-		}
-		if (in != null) {
+		
 			JsonArray jsonObjects = new JsonParser().parse(in).getAsJsonArray();
 			for (JsonElement e : jsonObjects) {
 				String type = fileName.substring(0, fileName.length() - 5);
@@ -194,6 +192,8 @@ public class Weapon extends InventoryItem {
 				w.type = type;
 				weaponSystem.get(type).put(name, w);
 			}
+		} catch (IOException e) {
+			Logger.error(e);
 		}
 	}
 

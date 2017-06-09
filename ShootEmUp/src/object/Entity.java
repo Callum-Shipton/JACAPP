@@ -97,16 +97,15 @@ public class Entity implements DatableObject {
 		JsonReader in = null;
 		try (FileInputStream fileInput = new FileInputStream(path)) {
 			in = new JsonReader(new InputStreamReader(fileInput));
-		} catch (IOException e) {
-			Logger.error(e);
-		}
-		if (in != null) {
+
 			JsonArray jsonObjects = new JsonParser().parse(in).getAsJsonArray();
 			for (JsonElement e : jsonObjects) {
 				String name = e.getAsJsonObject().get("name").getAsString();
 				Entity entity = g.fromJson(e, Entity.class);
 				entitySystem.get(directory).get(type).put(name, entity);
 			}
+		} catch (IOException e) {
+			Logger.error(e);
 		}
 	}
 
