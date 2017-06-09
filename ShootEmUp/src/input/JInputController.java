@@ -258,12 +258,6 @@ class JInputController implements Controller {
 			case 1: // B
 				Keyboard.setKey(GLFW.GLFW_KEY_M, value);
 				break;
-			case 2: // X
-
-				break;
-			case 3: // Y
-
-				break;
 			case 4: // LB
 				Keyboard.setKey(GLFW.GLFW_KEY_LEFT_SHIFT, value);
 				break;
@@ -276,11 +270,10 @@ class JInputController implements Controller {
 			case 7: // Pause
 				Keyboard.setKey(GLFW.GLFW_KEY_P, value);
 				break;
+			case 2: // X
+			case 3: // Y
 			case 8: // Left Stick In
-
-				break;
 			case 9: // Right Stick In
-
 				break;
 			}
 		}
@@ -384,7 +377,7 @@ class JInputController implements Controller {
 	 * @see org.lwjgl.input.Controller#getPovX()
 	 */
 	public float getPovX() {
-		if (this.pov.size() == 0) {
+		if (this.pov.isEmpty()) {
 			return 0;
 		}
 
@@ -405,7 +398,7 @@ class JInputController implements Controller {
 	 * @see org.lwjgl.input.Controller#getPovY()
 	 */
 	public float getPovY() {
-		if (this.pov.size() == 0) {
+		if (this.pov.isEmpty()) {
 			return 0;
 		}
 
@@ -677,13 +670,14 @@ class JInputController implements Controller {
 				switch (Math.round(value * 8)) {
 				// No Input
 				case 0:
-					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
-					break;
-				// Top Right
+					// Top Right
 				case 1:
+					// Bottom Right
+				case 3:
+					// Bottom Left
+				case 5:
+					// Top Left
+				case 7:
 					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
@@ -696,13 +690,6 @@ class JInputController implements Controller {
 					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
 					break;
-				// Bottom Right
-				case 3:
-					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
-					break;
 				// Bottom
 				case 4:
 					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
@@ -710,25 +697,11 @@ class JInputController implements Controller {
 					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_2, 1);
 					break;
-				// Bottom Left
-				case 5:
-					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
-					break;
 				// Left
 				case 6:
 					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_3, 1);
-					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
-					break;
-				// Top Left
-				case 7:
-					Keyboard.setKey(GLFW.GLFW_KEY_1, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_4, 0);
-					Keyboard.setKey(GLFW.GLFW_KEY_3, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_2, 0);
 					break;
 				// Top

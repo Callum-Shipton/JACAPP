@@ -293,7 +293,7 @@ public class Controllers {
 	 * @return True if there is still an event to process
 	 */
 	public static boolean next() {
-		if (events.size() == 0) {
+		if (events.isEmpty()) {
 			event = null;
 			return false;
 		}

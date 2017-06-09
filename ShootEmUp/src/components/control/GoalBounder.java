@@ -76,7 +76,7 @@ public class GoalBounder {
 				closed.add(E);
 				closed.add(NE);
 
-				while (open.size() > 0) {
+				while (open.isEmpty()) {
 					TypeNode current = open.poll(); // Tile current being
 													// checked
 

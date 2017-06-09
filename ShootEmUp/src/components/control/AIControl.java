@@ -51,7 +51,7 @@ public class AIControl extends BaseControl {
 		open.add(start);
 		closed.add(start);
 		int nodes = 0;
-		while (open.size() > 0) {
+		while (open.isEmpty()) {
 			nodes++;
 			Node current = open.poll(); // Tile current being checked
 			if (current.equals(this.goal)) { // if goal is reached
