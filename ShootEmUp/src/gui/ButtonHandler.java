@@ -22,6 +22,7 @@ import gui.menus.SoundMenu;
 import gui.menus.UpgradesMenu;
 import level.Level;
 import level.PlayerBuilder;
+import main.Logger;
 import main.ShootEmUp;
 import save.Save;
 
@@ -89,7 +90,7 @@ public abstract class ButtonHandler {
 		ShootEmUp.startGame();
 	}
 
-	private static void loadGame() {
+	private static void loadGame() throws Exception {
 		if (ShootEmUp.getSave() == null) {
 			ShootEmUp.setSave(new Save());
 		}
@@ -174,7 +175,11 @@ public abstract class ButtonHandler {
 			newGame();
 			break;
 		case LOAD_GAME:
-			loadGame();
+			try {
+				loadGame();
+			} catch (Exception e) {
+				Logger.error(e);
+			}
 			break;
 		case OPTIONS:
 			options();

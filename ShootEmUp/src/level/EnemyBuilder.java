@@ -21,7 +21,7 @@ import object.Armour;
 import object.Entity;
 import object.Weapon;
 
-public abstract class EnemyBuilder {
+public final class EnemyBuilder {
 
 	private static Entity newEnemy;
 

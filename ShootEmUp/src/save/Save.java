@@ -21,6 +21,7 @@ import javax.crypto.spec.SecretKeySpec;
 import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.attack.TypeAttack;
+import main.Logger;
 import main.ShootEmUp;
 
 public class Save implements Serializable {
@@ -39,7 +40,6 @@ public class Save implements Serializable {
 	private int level = 1;
 
 	public Save() {
-
 	}
 
 	public CharacterSave getCharacter(TypeAttack type) {
@@ -55,7 +55,7 @@ public class Save implements Serializable {
 		case WARRIOR:
 			return this.warrior;
 		default:
-			return this.warrior;
+			return null;
 		}
 	}
 
@@ -63,7 +63,7 @@ public class Save implements Serializable {
 		return this.level;
 	}
 
-	public void load(int num) {
+	public void load(int num) throws Exception {
 
 		Save s = null;
 
@@ -82,8 +82,7 @@ public class Save implements Serializable {
 			inputStream.close();
 		} catch (ClassNotFoundException | IllegalBlockSizeException | BadPaddingException | InvalidKeyException
 				| NoSuchAlgorithmException | NoSuchPaddingException | IOException e) {
-			e.printStackTrace();
-			s = null;
+			throw e;
 		}
 
 		this.warrior = s.warrior;
@@ -137,7 +136,7 @@ public class Save implements Serializable {
 			outputStream.close();
 		} catch (IllegalBlockSizeException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException
 				| IOException e) {
-			e.printStackTrace();
+			Logger.error(e);
 		}
 	}
 }

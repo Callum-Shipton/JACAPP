@@ -34,18 +34,13 @@ public class Node implements Comparable<Node> {
 	}
 
 	public boolean equals(Node node) {
-		if (node.getPosition().equals(this.position)) {
-			return true;
-		}
-		return false;
+		return node != null && node.getPosition().equals(this.position);
 	}
 
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Node) {
-			if (((Node) o).getPosition().equals(this.position)) {
-				return true;
-			}
+			return ((Node) o).getPosition().equals(this.position);
 		}
 		return false;
 	}
