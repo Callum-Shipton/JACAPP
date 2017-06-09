@@ -67,8 +67,7 @@ public class Save implements Serializable {
 
 		Save s = null;
 
-		try {
-			FileInputStream fileIn = new FileInputStream("save" + num + ".ser");
+		try (FileInputStream fileIn = new FileInputStream("save" + num + ".ser")) {
 
 			SecretKeySpec sks = new SecretKeySpec(KEY, TRANSFORMATION);
 			Cipher cipher = Cipher.getInstance(TRANSFORMATION);
@@ -122,9 +121,7 @@ public class Save implements Serializable {
 
 	public void saveToSystem(int num) {
 
-		try {
-			FileOutputStream fileOut = new FileOutputStream("save" + num + ".ser");
-
+		try (FileOutputStream fileOut = new FileOutputStream("save" + num + ".ser")) {
 			// Length is 16 byte
 			SecretKeySpec sks = new SecretKeySpec(KEY, TRANSFORMATION);
 

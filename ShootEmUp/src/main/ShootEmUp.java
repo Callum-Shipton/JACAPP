@@ -30,7 +30,9 @@ import level.Level;
 import object.Entity;
 import save.Save;
 
-public class ShootEmUp {
+public final class ShootEmUp {
+	
+	private ShootEmUp() {}
 
 	// Handle for monitor/window funcs
 	private static Display display;
@@ -55,7 +57,7 @@ public class ShootEmUp {
 			init();
 			loop();
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.error(e);
 		} finally {
 			// Release window and window callbacks Terminate GLFW and release
 			// the GLFWerrorfun
@@ -113,7 +115,7 @@ public class ShootEmUp {
 					Thread.sleep((long) (sleepTime * 1000));
 					Logger.debug("I slept for " + sleepTime + "seconds." );
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					Logger.error(e);
 				}
 			}
 			update();

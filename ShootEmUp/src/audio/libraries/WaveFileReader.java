@@ -54,7 +54,7 @@ public class WaveFileReader extends SunFileReader {
 	 * WAVE reader type
 	 */
 
-	public static final AudioFileFormat.Type types[] = { AudioFileFormat.Type.WAVE };
+	protected static final AudioFileFormat.Type types[] = { AudioFileFormat.Type.WAVE };
 
 	/**
 	 * Constructs a new WaveFileReader object.

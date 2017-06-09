@@ -1,7 +1,7 @@
 package object;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
@@ -11,6 +11,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
 import components.inventory.TypePickup;
+import main.Logger;
 
 public class Armour extends InventoryItem {
 
@@ -61,13 +62,9 @@ public class Armour extends InventoryItem {
 	@Override
 	public void readJSON(String path, String fileName) {
 		JsonReader in = null;
-		try {
-			in = new JsonReader(new InputStreamReader(new FileInputStream(path)));
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		if (in != null) {
+		try (FileInputStream fileInput = new FileInputStream(path)) {
+			in = new JsonReader(new InputStreamReader(fileInput));
+
 			JsonArray jsonObjects = new JsonParser().parse(in).getAsJsonArray();
 			for (JsonElement e : jsonObjects) {
 				String type = fileName.substring(0, fileName.length() - 5);
@@ -79,7 +76,11 @@ public class Armour extends InventoryItem {
 				a.type = type;
 				armourSystem.get(type).put(name, a);
 			}
+
+		} catch (IOException e) {
+			Logger.error(e);
 		}
+
 	}
 
 	public void setDefence(int defence) {

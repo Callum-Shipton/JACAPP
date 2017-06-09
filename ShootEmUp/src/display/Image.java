@@ -21,6 +21,7 @@ import java.nio.ByteBuffer;
 
 import de.matthiasmann.twl.utils.PNGDecoder;
 import de.matthiasmann.twl.utils.PNGDecoder.Format;
+import main.Logger;
 
 public class Image {
 
@@ -82,7 +83,7 @@ public class Image {
 			in.close();
 			return this.buf;
 		} catch (IOException e) {
-			e.printStackTrace();
+			Logger.error(e);
 			System.exit(-1);
 		}
 		return null;

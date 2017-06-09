@@ -1,7 +1,7 @@
 package object;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
@@ -20,6 +20,7 @@ import components.movement.FlyingMovement;
 import components.spawn.PointSpawn;
 import display.Art;
 import display.Image;
+import main.Logger;
 import main.ShootEmUp;
 import math.Vector2;
 
@@ -176,11 +177,10 @@ public class Weapon extends InventoryItem {
 	@Override
 	public void readJSON(String path, String fileName) {
 		JsonReader in = null;
-		try {
-			in = new JsonReader(new InputStreamReader(new FileInputStream(path)));
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		try (FileInputStream fileInput = new FileInputStream(path)) {
+			in = new JsonReader(new InputStreamReader(fileInput));
+		} catch (IOException e) {
+			Logger.error(e);
 		}
 		if (in != null) {
 			JsonArray jsonObjects = new JsonParser().parse(in).getAsJsonArray();

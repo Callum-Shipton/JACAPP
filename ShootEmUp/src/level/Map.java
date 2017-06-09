@@ -11,6 +11,7 @@ import components.control.GoalBounder;
 import components.graphical.MapGraphics;
 import display.Art;
 import display.IRenderer;
+import main.Logger;
 import main.ShootEmUp;
 import math.Vector2;
 import object.Entity;
@@ -436,7 +437,7 @@ public class Map {
 					this.wallTileTypes[x][y] = 12;
 					break;
 				default:
-					System.out.println(this.map.getRGB(x, y));
+					Logger.warn("Unknown tile code: " + this.map.getRGB(x, y));
 				}
 			}
 		}

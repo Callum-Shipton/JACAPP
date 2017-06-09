@@ -1,7 +1,7 @@
 package object;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Random;
@@ -14,6 +14,7 @@ import com.google.gson.stream.JsonReader;
 import components.Component;
 import components.Message;
 import components.TypeComponent;
+import main.Logger;
 
 public class Entity implements DatableObject {
 
@@ -94,11 +95,10 @@ public class Entity implements DatableObject {
 			entitySystem.get(directory).put(type, new HashMap<String, Entity>());
 		}
 		JsonReader in = null;
-		try {
-			in = new JsonReader(new InputStreamReader(new FileInputStream(path)));
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		try (FileInputStream fileInput = new FileInputStream(path)) {
+			in = new JsonReader(new InputStreamReader(fileInput));
+		} catch (IOException e) {
+			Logger.error(e);
 		}
 		if (in != null) {
 			JsonArray jsonObjects = new JsonParser().parse(in).getAsJsonArray();

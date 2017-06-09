@@ -14,13 +14,13 @@ import object.EntityMap;
 
 public class PickupCollision extends BaseCollision {
 
-	private TypePickup type;
+	private TypePickup typePickup;
 	private String name;
 	private final int DESPAWN_TIME = 10;
 	private int timer = 0;
 
 	public PickupCollision(Entity e, TypePickup type, String name) {
-		this.type = type;
+		this.typePickup = type;
 		this.name = name;
 
 		this.moveBack = false;
@@ -31,7 +31,7 @@ public class PickupCollision extends BaseCollision {
 	}
 
 	public PickupCollision(Entity e, TypePickup type, String subtype, String subsubtype) {
-		this.type = type;
+		this.typePickup = type;
 
 		this.moveBack = false;
 		EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
@@ -40,7 +40,7 @@ public class PickupCollision extends BaseCollision {
 	}
 
 	public PickupCollision(Entity e, TypePickup type, SubType subtype, SubSubType subsubtype) {
-		this.type = type;
+		this.typePickup = type;
 
 		this.moveBack = false;
 	}
@@ -49,7 +49,7 @@ public class PickupCollision extends BaseCollision {
 	public void collision(Entity e, Entity hit) {
 		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
 		if (hit.getComponent(TypeComponent.CONTROL) instanceof PlayerControl) {
-			if ((BI).giveItem(this.type, this.name)) {
+			if ((BI).giveItem(this.typePickup, this.name)) {
 				ShootEmUp.getCurrentLevel().removeEntity(this.gridPos, e);
 				e.destroy();
 			}
