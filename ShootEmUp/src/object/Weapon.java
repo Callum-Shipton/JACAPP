@@ -166,7 +166,7 @@ public class Weapon extends InventoryItem {
 	@Override
 	public void initSystem() {
 		weaponSystem = new HashMap<String, HashMap<String, Weapon>>();
-		findFiles("res\\Objects\\Items\\Weapons");
+		findFiles("res/Objects/Items/Weapons");
 	}
 
 	public boolean isMelee() {

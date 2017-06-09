@@ -55,7 +55,7 @@ public class Armour extends InventoryItem {
 	@Override
 	public void initSystem() {
 		armourSystem = new HashMap<String, HashMap<String, Armour>>();
-		findFiles("res\\Objects\\Items\\Armour");
+		findFiles("res/Objects/Items/Armour");
 	}
 
 	@Override

@@ -75,7 +75,7 @@ public class Entity implements DatableObject {
 	@Override
 	public void initSystem() {
 		entitySystem = new HashMap<String, HashMap<String, HashMap<String, Entity>>>();
-		findFiles("res\\Objects\\Entities");
+		findFiles("res/Objects/Entities");
 	}
 
 	public boolean isDestroy() {
