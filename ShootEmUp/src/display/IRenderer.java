@@ -97,7 +97,7 @@ public class IRenderer extends Renderer {
 		v3.setST(1.0f / texMax.x(), 1.0f / texMax.y());
 
 		vertices = new TexturedVertex[] { v0, v1, v2, v3 };
-		FloatBuffer verticesFloatBuffer = BufferUtils.createByteBuffer(vertices.length * TexturedVertex.stride)
+		FloatBuffer verticesFloatBuffer = BufferUtils.createByteBuffer(vertices.length * TexturedVertex.STRIDE)
 				.asFloatBuffer();
 		for (TexturedVertex vertice : vertices) {
 			// Add position, color and texture floats to the buffer
@@ -121,14 +121,14 @@ public class IRenderer extends Renderer {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this.EBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL_STATIC_DRAW);
 
-		glVertexAttribPointer(0, TexturedVertex.positionElementCount, GL_FLOAT, false, TexturedVertex.stride,
-				TexturedVertex.positionByteOffset);
+		glVertexAttribPointer(0, TexturedVertex.POSITION_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE,
+				TexturedVertex.POSITION_BYTE_OFFSET);
 
 		glEnableVertexAttribArray(0);
 
 		// Put the texture coordinates in attribute list 1
-		glVertexAttribPointer(1, TexturedVertex.textureElementCount, GL_FLOAT, false, TexturedVertex.stride,
-				TexturedVertex.textureByteOffset);
+		glVertexAttribPointer(1, TexturedVertex.TEXTURE_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE,
+				TexturedVertex.TEXTURE_BYTE_OFFSET);
 
 		glEnableVertexAttribArray(1);
 
@@ -136,12 +136,12 @@ public class IRenderer extends Renderer {
 		glBindBuffer(GL15.GL_ARRAY_BUFFER, IVBO);
 		glBufferData(GL15.GL_ARRAY_BUFFER, instanceFloatBuffer, GL_STATIC_DRAW);
 
-		glVertexAttribPointer(2, TexturedVertex.positionElementCount, GL_FLOAT, false, TexturedVertex.stride,
-				TexturedVertex.positionByteOffset);
+		glVertexAttribPointer(2, TexturedVertex.POSITION_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE,
+				TexturedVertex.POSITION_BYTE_OFFSET);
 		glEnableVertexAttribArray(2);
 
-		glVertexAttribPointer(3, TexturedVertex.textureElementCount, GL_FLOAT, false, TexturedVertex.stride,
-				TexturedVertex.textureByteOffset);
+		glVertexAttribPointer(3, TexturedVertex.TEXTURE_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE,
+				TexturedVertex.TEXTURE_BYTE_OFFSET);
 		glEnableVertexAttribArray(3);
 
 		glVertexAttribDivisor(2, 1);
@@ -195,7 +195,7 @@ public class IRenderer extends Renderer {
 		v3.setST(1.0f / texMax.x(), 1.0f / texMax.y());
 
 		vertices = new TexturedVertex[] { v0, v1, v2, v3 };
-		FloatBuffer verticesFloatBuffer = BufferUtils.createByteBuffer(vertices.length * TexturedVertex.stride)
+		FloatBuffer verticesFloatBuffer = BufferUtils.createByteBuffer(vertices.length * TexturedVertex.STRIDE)
 				.asFloatBuffer();
 		for (TexturedVertex vertice : vertices) {
 			// Add position, color and texture floats to the buffer
@@ -219,14 +219,14 @@ public class IRenderer extends Renderer {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this.EBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL_STATIC_DRAW);
 
-		glVertexAttribPointer(0, TexturedVertex.positionElementCount, GL_FLOAT, false, TexturedVertex.stride,
-				TexturedVertex.positionByteOffset);
+		glVertexAttribPointer(0, TexturedVertex.POSITION_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE,
+				TexturedVertex.POSITION_BYTE_OFFSET);
 
 		glEnableVertexAttribArray(0);
 
 		// Put the texture coordinates in attribute list 1
-		glVertexAttribPointer(1, TexturedVertex.textureElementCount, GL_FLOAT, false, TexturedVertex.stride,
-				TexturedVertex.textureByteOffset);
+		glVertexAttribPointer(1, TexturedVertex.TEXTURE_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE,
+				TexturedVertex.TEXTURE_BYTE_OFFSET);
 
 		glEnableVertexAttribArray(1);
 
@@ -234,12 +234,12 @@ public class IRenderer extends Renderer {
 		glBindBuffer(GL15.GL_ARRAY_BUFFER, IVBO);
 		glBufferData(GL15.GL_ARRAY_BUFFER, instanceFloatBuffer, GL_STATIC_DRAW);
 
-		glVertexAttribPointer(2, TexturedVertex.positionElementCount, GL_FLOAT, false, TexturedVertex.stride,
-				TexturedVertex.positionByteOffset);
+		glVertexAttribPointer(2, TexturedVertex.POSITION_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE,
+				TexturedVertex.POSITION_BYTE_OFFSET);
 		glEnableVertexAttribArray(2);
 
-		glVertexAttribPointer(3, TexturedVertex.textureElementCount, GL_FLOAT, false, TexturedVertex.stride,
-				TexturedVertex.textureByteOffset);
+		glVertexAttribPointer(3, TexturedVertex.TEXTURE_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE,
+				TexturedVertex.TEXTURE_BYTE_OFFSET);
 		glEnableVertexAttribArray(3);
 
 		glVertexAttribDivisor(2, 1);

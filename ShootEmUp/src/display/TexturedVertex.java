@@ -5,24 +5,24 @@ public class TexturedVertex {
 	/* Vertex data: [pos.x,pos.y,tex.s,tex.t] */
 
 	// The amount of bytes an element has
-	public static final int elementBytes = 4;
+	public static final int ELEMENT_BYTES = 4;
 	// Elements per parameter
-	public static final int positionElementCount = 2;
+	public static final int POSITION_ELEMENT_COUNT = 2;
 
-	public static final int textureElementCount = 2;
+	public static final int TEXTURE_ELEMENT_COUNT = 2;
 
 	// Bytes per parameter
-	public static final int positionBytesCount = positionElementCount * elementBytes;
-	public static final int textureByteCount = textureElementCount * elementBytes;
+	public static final int POSITION_BYTES_COUNT = POSITION_ELEMENT_COUNT * ELEMENT_BYTES;
+	public static final int TEXTURE_BYTE_COUNT = TEXTURE_ELEMENT_COUNT * ELEMENT_BYTES;
 
 	// Byte offsets per parameter
-	public static final int positionByteOffset = 0;
-	public static final int textureByteOffset = positionByteOffset + positionBytesCount;
+	public static final int POSITION_BYTE_OFFSET = 0;
+	public static final int TEXTURE_BYTE_OFFSET = POSITION_BYTE_OFFSET + POSITION_BYTES_COUNT;
 
 	// The amount of elements that a vertex has
-	public static final int elementCount = positionElementCount + textureElementCount;
+	public static final int ELEMENT_COUNT = POSITION_ELEMENT_COUNT + TEXTURE_ELEMENT_COUNT;
 	// The size of a vertex in bytes
-	public static final int stride = positionBytesCount + textureByteCount;
+	public static final int STRIDE = POSITION_BYTES_COUNT + TEXTURE_BYTE_COUNT;
 
 	// Vertex data
 	private float[] xy = new float[] { 0.0f, 0.0f };
@@ -30,7 +30,7 @@ public class TexturedVertex {
 
 	// Getters
 	public float[] getElements() {
-		float[] out = new float[TexturedVertex.elementCount];
+		float[] out = new float[TexturedVertex.ELEMENT_COUNT];
 		int i = 0;
 
 		// Insert XY elements
@@ -39,7 +39,7 @@ public class TexturedVertex {
 
 		// Insert ST elements
 		out[i++] = this.st[0];
-		out[i++] = this.st[1];
+		out[i] = this.st[1];
 
 		return out;
 	}

@@ -115,7 +115,7 @@ public class SPSTRenderer {
 		v3.setST(1.0f, 1.0f);
 
 		vertices = new TexturedVertex[] { v0, v1, v2, v3 };
-		FloatBuffer verticesFloatBuffer = BufferUtils.createByteBuffer(vertices.length * TexturedVertex.stride)
+		FloatBuffer verticesFloatBuffer = BufferUtils.createByteBuffer(vertices.length * TexturedVertex.STRIDE)
 				.asFloatBuffer();
 		for (TexturedVertex vertice : vertices) {
 			// Add position, color and texture floats to the buffer
@@ -136,14 +136,14 @@ public class SPSTRenderer {
 		glBindBuffer(GL_ARRAY_BUFFER, this.VBO);
 		glBufferData(GL_ARRAY_BUFFER, verticesFloatBuffer, GL_DYNAMIC_DRAW);
 
-		glVertexAttribPointer(0, TexturedVertex.positionElementCount, GL_FLOAT, false, TexturedVertex.stride,
-				TexturedVertex.positionByteOffset);
+		glVertexAttribPointer(0, TexturedVertex.POSITION_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE,
+				TexturedVertex.POSITION_BYTE_OFFSET);
 
 		glEnableVertexAttribArray(0);
 
 		// Put the texture coordinates in attribute list 1
-		glVertexAttribPointer(1, TexturedVertex.textureElementCount, GL_FLOAT, false, TexturedVertex.stride,
-				TexturedVertex.textureByteOffset);
+		glVertexAttribPointer(1, TexturedVertex.TEXTURE_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE,
+				TexturedVertex.TEXTURE_BYTE_OFFSET);
 
 		glEnableVertexAttribArray(1);
 

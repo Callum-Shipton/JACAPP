@@ -44,7 +44,7 @@ import javax.sound.sampled.spi.AudioFileReader;
 abstract class SunFileReader extends AudioFileReader {
 
 	// buffer size for temporary input streams
-	protected static final int bisBufferSize = 4096;
+	protected static final int BIS_BUFFER_SIZE = 4096;
 
 	/**
 	 * Calculates the frame size for PCM frames. Note that this method is
