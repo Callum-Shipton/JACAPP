@@ -255,7 +255,7 @@ public class Map {
 
 		Entity wall = new Entity();
 		wall.addComponent(wallG);
-		RigidCollision MC = new RigidCollision(wall, wallG);
+		RigidCollision MC = new RigidCollision();
 		wall.addComponent(MC);
 		ShootEmUp.getCurrentLevel().addEntity(wall);
 		this.walls.put(new Vector2(x, y), wall);
@@ -280,7 +280,7 @@ public class Map {
 
 		Entity wall = new Entity();
 		wall.addComponent(wallG);
-		RigidCollision MC = new RigidCollision(wall, wallG);
+		RigidCollision MC = new RigidCollision();
 		wall.addComponent(MC);
 		ShootEmUp.getCurrentLevel().addEntity(wall);
 		this.walls.put(new Vector2(x, y), wall);

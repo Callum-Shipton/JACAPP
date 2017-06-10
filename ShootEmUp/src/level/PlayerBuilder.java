@@ -32,7 +32,7 @@ public abstract class PlayerBuilder {
 		player.addComponent(a);
 		player.addComponent(m);
 		player.addComponent(i);
-		player.addComponent(new PlayerControl(player, g, a, m, i));
+		player.addComponent(new PlayerControl(g, a, m, i));
 
 		ShootEmUp.setPlayer(player);
 	}
@@ -40,7 +40,7 @@ public abstract class PlayerBuilder {
 	public static void buildPlayer(TypeAttack type) {
 		chooseType(type);
 
-		c = new RigidCollision(player, g);
+		c = new RigidCollision();
 		m = new BasicMovement(player, c, g, 5);
 		i = new BaseInventory(g, a, 0);
 
@@ -51,7 +51,7 @@ public abstract class PlayerBuilder {
 		chooseType(type);
 
 		a = new PlayerAttack(type, save);
-		c = new RigidCollision(player, g);
+		c = new RigidCollision();
 		m = new BasicMovement(player, c, g, 5);
 		i = new BaseInventory(g, a, save);
 

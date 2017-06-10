@@ -123,7 +123,7 @@ public class Weapon extends InventoryItem {
 			posY -= g.getHeight();
 		}
 		PointSpawn s = new PointSpawn(g, new Vector2(posX, posY), particle);
-		HitCollision c = new HitCollision(particle, this);
+		HitCollision c = new HitCollision(this);
 		FlyingMovement m = new FlyingMovement(particle, c, g, 10);
 		particle.addComponent(s);
 		particle.addComponent(c);

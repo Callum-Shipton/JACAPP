@@ -18,8 +18,8 @@ public class PlayerControl extends BaseControl {
 	private BaseAttack BA;
 	private BaseInventory PI;
 
-	public PlayerControl(Entity e, PlayerGraphics PG, BaseAttack BA, BaseMovement BM, BaseInventory PI) {
-		PG.scrollScreen(e);
+	public PlayerControl(PlayerGraphics PG, BaseAttack BA, BaseMovement BM, BaseInventory PI) {
+		PG.scrollScreen();
 		this.PG = PG;
 		this.BA = BA;
 		this.BM = BM;
@@ -57,7 +57,7 @@ public class PlayerControl extends BaseControl {
 			}
 			this.PG.setAnimating(true);
 			this.BM.move(e, movement);
-			this.PG.scrollScreen(e);
+			this.PG.scrollScreen();
 
 		} else {
 			this.PG.setAnimating(false);

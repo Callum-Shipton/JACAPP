@@ -79,7 +79,7 @@ public final class EnemyBuilder {
 		enemyGraphics = new AnimatedGraphics(Art.getImage(art), Art.base, false, testGraphics.getX(),
 				testGraphics.getX());
 		newEnemy.addComponent(enemyGraphics);
-		enemyCollision = new RigidCollision(newEnemy, enemyGraphics);
+		enemyCollision = new RigidCollision();
 		enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, speed);
 	}
 
@@ -89,7 +89,7 @@ public final class EnemyBuilder {
 		Entity test = new Entity();
 		testGraphics = new AnimatedGraphics(Art.getImage("Enemy"), Art.base, false, 1f);
 		test.addComponent(testGraphics);
-		BaseCollision baseCollision = new RigidCollision(test, testGraphics);
+		BaseCollision baseCollision = new RigidCollision();
 		test.addComponent(baseCollision);
 		test.addComponent(new BasicMovement(test, baseCollision, testGraphics, 5));
 		BaseGraphics playerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);

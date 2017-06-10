@@ -40,12 +40,12 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 	@Override
 	public void receive(Message m, Entity e) {
 		if (m == Message.ENTITY_MOVED) {
-			scrollScreen(e);
+			scrollScreen();
 		}
 
 	}
 
-	public void scrollScreen(Entity e) {
+	public void scrollScreen() {
 
 		this.viewMatrix.clearToIdentity();
 		this.viewMatrix.translate(-getX() + ((ShootEmUp.getDisplay().getWidth() - getWidth()) / 2),

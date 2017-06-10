@@ -14,7 +14,7 @@ public class HitCollision extends BaseCollision {
 
 	private Weapon weapon;
 
-	public HitCollision(Entity e, Weapon weapon) {
+	public HitCollision(Weapon weapon) {
 		this.weapon = weapon;
 		this.moveBack = false;
 	}

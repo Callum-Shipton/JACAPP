@@ -42,7 +42,7 @@ public class Counter extends Icon {
 		} else {
 			Art.stat.draw(Art.getImage("Numbers"),
 					new Vector2(this.x + this.width + (this.FIRST_GAP * this.scale), this.y), this.numberSize, 0.0f,
-					new Vector2((int) Math.floor(this.count / 10), 1), maxTex);
+					new Vector2(this.count / 10, 1), maxTex);
 			Art.stat.draw(Art.getImage("Numbers"),
 					new Vector2(this.x + this.width + (this.NUMBER_GAP * this.scale), this.y), this.numberSize, 0.0f,
 					new Vector2(this.count % 10, 1), maxTex);

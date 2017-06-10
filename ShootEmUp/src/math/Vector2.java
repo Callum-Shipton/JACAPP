@@ -18,15 +18,7 @@ public class Vector2 implements Vector<Vector2> {
 		this(v, v);
 	}
 
-	public Vector2(int v) {
-		this(v, v);
-	}
-
 	public Vector2(float x, float y) {
-		set(x, y);
-	}
-
-	public Vector2(int x, int y) {
 		set(x, y);
 	}
 
@@ -96,7 +88,7 @@ public class Vector2 implements Vector<Vector2> {
 	public boolean equals(Object o) {
 		if (o instanceof Vector2) {
 			Vector2 v = (Vector2) o;
-			return (this.x == v.x) && (this.y == v.y);
+			return (Float.compare(this.x, v.x) == 0 && Float.compare(this.y, v.y) == 0);
 		}
 
 		return false;

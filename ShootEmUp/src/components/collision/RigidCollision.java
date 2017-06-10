@@ -1,11 +1,10 @@
 package components.collision;
 
-import components.graphical.BaseGraphics;
 import object.Entity;
 
 public class RigidCollision extends BaseCollision {
 
-	public RigidCollision(Entity e, BaseGraphics BG) {
+	public RigidCollision() {
 		this.moveBack = true;
 	}
 

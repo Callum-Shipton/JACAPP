@@ -193,7 +193,7 @@ public class Display {
 		Art.refreshRenderers();
 		PlayerGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
 		if (ShootEmUp.getCurrentLevel() != null) {
-			BG.scrollScreen(null);
+			BG.scrollScreen();
 		}
 		this.fullscreen = !this.fullscreen;
 	}

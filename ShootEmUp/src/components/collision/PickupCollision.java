@@ -39,7 +39,7 @@ public class PickupCollision extends BaseCollision {
 		eMap.addEntity(getGridPos(), e);
 	}
 
-	public PickupCollision(Entity e, TypePickup type, SubType subtype, SubSubType subsubtype) {
+	public PickupCollision(TypePickup type, SubType subtype, SubSubType subsubtype) {
 		this.typePickup = type;
 
 		this.moveBack = false;

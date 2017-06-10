@@ -38,7 +38,7 @@ public class BasicMovement extends BaseMovement {
 					hit = character;
 					BaseCollision HC = hit.getComponent(TypeComponent.COLLISION);
 					if ((HC.getMoveBack() == true) && !(this.BC instanceof HitCollision)) {
-						moveBackX(e, moveVec, collVec);
+						moveBackX(moveVec, collVec);
 						newGrid = eMap.getGridPos(e);
 					}
 					if ((e.getComponent(TypeComponent.COLLISION) != null)) {
@@ -75,7 +75,7 @@ public class BasicMovement extends BaseMovement {
 					hit = character;
 					BaseCollision HC = hit.getComponent(TypeComponent.COLLISION);
 					if ((HC.getMoveBack() == true) && !(this.BC instanceof HitCollision)) {
-						moveBackY(e, moveVec, collVec);
+						moveBackY(moveVec, collVec);
 						newGrid = eMap.getGridPos(e);
 					}
 					if ((e.getComponent(TypeComponent.COLLISION) != null)) {
@@ -140,7 +140,7 @@ public class BasicMovement extends BaseMovement {
 		}
 	}
 
-	public void moveBackX(Entity e, Vector2 moveVec, Vector4 collVec) {
+	public void moveBackX(Vector2 moveVec, Vector4 collVec) {
 		if (Math.abs(collVec.x()) <= this.speed) {
 			this.BG.setX(this.BG.getX() - collVec.x());
 		} else if (Math.abs(collVec.z()) <= this.speed) {
@@ -148,7 +148,7 @@ public class BasicMovement extends BaseMovement {
 		}
 	}
 
-	public void moveBackY(Entity e, Vector2 moveVec, Vector4 collVec) {
+	public void moveBackY(Vector2 moveVec, Vector4 collVec) {
 		if (Math.abs(collVec.y()) <= this.speed) {
 			this.BG.setY(this.BG.getY() - collVec.y());
 		} else if (Math.abs(collVec.w()) <= this.speed) {
@@ -158,5 +158,7 @@ public class BasicMovement extends BaseMovement {
 
 	@Override
 	public void update(Entity e) {
+		// TODO Auto-generated method stub
+
 	}
 }
