@@ -67,7 +67,7 @@ public abstract class ButtonHandler {
 		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
 		if (BI.getLevelPoints() > 0) {
 			BaseAttack BA = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
-			BA.setMaxHealthRegen(BA.getMaxHealthRegen() / 2);
+			BA.setMaxHealthRegen((int) Math.ceil(BA.getMaxHealthRegen() / 2.0));
 			BI.spendLevelPoints(1);
 		}
 	}
@@ -118,11 +118,11 @@ public abstract class ButtonHandler {
 		}
 	}
 
-	private static void manaRegen() {
+	private static void upgradeManaRegen() {
 		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
 		if (BI.getLevelPoints() > 0) {
 			PlayerAttack PA = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
-			PA.setMaxManaRegen(PA.getMaxManaRegen() / 2);
+			PA.setMaxManaRegen((int) Math.ceil(PA.getMaxManaRegen() / 2.0));
 			BI.spendLevelPoints(1);
 		}
 	}
@@ -251,7 +251,7 @@ public abstract class ButtonHandler {
 			health();
 			break;
 		case MANA_REGEN:
-			manaRegen();
+			upgradeManaRegen();
 			break;
 		case MANA:
 			mana();
