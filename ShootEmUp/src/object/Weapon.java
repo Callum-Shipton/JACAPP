@@ -184,7 +184,7 @@ public class Weapon extends InventoryItem {
 		JsonReader in = null;
 		try (FileInputStream fileInput = new FileInputStream(path)) {
 			in = new JsonReader(new InputStreamReader(fileInput));
-		
+
 			JsonArray jsonObjects = new JsonParser().parse(in).getAsJsonArray();
 			for (JsonElement e : jsonObjects) {
 				String subType = fileName.substring(0, fileName.length() - 5);

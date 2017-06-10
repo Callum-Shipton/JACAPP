@@ -9,6 +9,7 @@ import components.attack.BaseAttack;
 import components.attack.TypeAttack;
 import components.movement.BasicMovement;
 import display.Art;
+import main.Logger;
 import main.ShootEmUp;
 import math.Seconds;
 import math.Vector2;
@@ -18,9 +19,9 @@ import save.Save;
 public class Spawner {
 
 	private int counter = 0;
-	private final int ENEMY_SPAWN_RATE = 1;
-	private final int MAX_WAVE = 10;
-	private final int MAX_LEVEL = 3;
+	private final int enemySpawnRate;
+	private final int maxWave;
+	private final int maxLevel;
 	private int enemies = 0;
 	private int totalEnemies = 0;
 	private int wave = 1;
@@ -28,12 +29,18 @@ public class Spawner {
 	private int radiusLocation;
 	private int radiusLocationInst;
 
-	private float radius = 250.0f;
-	private float radLevel = 25.0f;
+	private float radius;
+	private final float radiusIncreasePerLevel;
 
 	private Random rand;
 
-	public Spawner() {
+	public Spawner(int enemySpawnRate, int maxWave, int maxLevel, float radius, float radLevel) {
+		this.enemySpawnRate = enemySpawnRate;
+		this.maxWave = maxWave;
+		this.maxLevel = maxLevel;
+		this.radius = radius;
+		this.radiusIncreasePerLevel = radLevel;
+
 		this.rand = new Random();
 		this.radiusLocation = GL20.glGetUniformLocation(Art.ShaderBase, "radius");
 		this.radiusLocationInst = GL20.glGetUniformLocation(Art.ShaderInst, "radius");
@@ -67,10 +74,10 @@ public class Spawner {
 	public void update() {
 		if (this.newWave) {
 			this.counter++;
-			if (this.counter == Seconds.ticks(this.ENEMY_SPAWN_RATE)) {
+			if (this.counter == Seconds.ticks(this.enemySpawnRate)) {
 				// creating new Enemy
 
-				if ((this.totalEnemies == 0) && (this.wave == this.MAX_WAVE)) {
+				if ((this.totalEnemies == 0) && (this.wave == this.maxWave)) {
 					EnemyBuilder.buildEnemy(TypeEnemy.BOSS);
 				} else {
 
@@ -95,10 +102,10 @@ public class Spawner {
 			}
 		} else if (this.enemies == 0) {
 			this.totalEnemies = 0;
-			if (this.wave < this.MAX_WAVE) {
+			if (this.wave < this.maxWave) {
 				this.wave++;
-				changeRadius((this.wave - 1) * this.radLevel);
-			} else if (ShootEmUp.getCurrentLevel().getLevel() < this.MAX_LEVEL) {
+				changeRadius((this.wave - 1) * this.radiusIncreasePerLevel);
+			} else if (ShootEmUp.getCurrentLevel().getLevel() < this.maxLevel) {
 				if (ShootEmUp.getSave() == null) {
 					ShootEmUp.setSave(new Save());
 				} else {
@@ -111,7 +118,7 @@ public class Spawner {
 				try {
 					ShootEmUp.getSave().load(1);
 				} catch (Exception e) {
-					e.printStackTrace();
+					Logger.error(e);
 				}
 				PlayerBuilder.buildPlayer(temp, ShootEmUp.getSave().getCharacter(temp));
 			}

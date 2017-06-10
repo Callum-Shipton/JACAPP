@@ -31,8 +31,9 @@ import object.Entity;
 import save.Save;
 
 public final class ShootEmUp {
-	
-	private ShootEmUp() {}
+
+	private ShootEmUp() {
+	}
 
 	// Handle for monitor/window funcs
 	private static Display display;
@@ -45,13 +46,13 @@ public final class ShootEmUp {
 	private static double fps = 60.0;
 	private static Keys keys;
 	private static Hud hud;
-	
+
 	public static void main(String[] args) {
 		System.setProperty("org.lwjgl.librarypath", new File("natives").getAbsolutePath());
 		System.setProperty("net.java.games.input.librarypath", new File("natives/JInput").getAbsolutePath());
 		ShootEmUp.run();
 	}
-	
+
 	public static void run() {
 		try {
 			init();
@@ -109,11 +110,11 @@ public final class ShootEmUp {
 			delta = newTime - oldTime;
 			oldTime = newTime;
 			sleepTime = (1.0 / fps) - delta;
-			Logger.debug(1.0/delta);
+			Logger.debug(1.0 / delta, Logger.Category.ENGINE_STATS);
 			if (sleepTime > 0.01) {
 				try {
 					Thread.sleep((long) (sleepTime * 1000));
-					Logger.debug("I slept for " + sleepTime + "seconds." );
+					Logger.debug("I slept for " + sleepTime + "seconds.", Logger.Category.ENGINE_STATS);
 				} catch (InterruptedException e) {
 					Logger.error(e);
 				}
@@ -148,9 +149,9 @@ public final class ShootEmUp {
 		glfwPollEvents();
 		Controllers.poll();
 		if (!menuSystem.isMainMenu() && Keyboard.getKey(keys.pause) == 1) {
-				ShootEmUp.setPaused(!ShootEmUp.isPaused());
-				Keyboard.setKey(keys.pause);
-				menuSystem.pause();
+			ShootEmUp.setPaused(!ShootEmUp.isPaused());
+			Keyboard.setKey(keys.pause);
+			menuSystem.pause();
 		}
 		if (!paused) {
 			getCurrentLevel().update();
@@ -164,7 +165,7 @@ public final class ShootEmUp {
 		display.update();
 
 	}
-	
+
 	public static Level getCurrentLevel() {
 		return currentLevel;
 	}
@@ -220,5 +221,5 @@ public final class ShootEmUp {
 	public static void setSave(Save save) {
 		ShootEmUp.save = save;
 	}
-	
+
 }

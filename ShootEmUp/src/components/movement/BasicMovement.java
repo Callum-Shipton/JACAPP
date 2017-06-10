@@ -1,6 +1,6 @@
 package components.movement;
 
-import java.util.HashSet;
+import java.util.Set;
 
 import components.TypeComponent;
 import components.collision.BaseCollision;
@@ -26,8 +26,8 @@ public class BasicMovement extends BaseMovement {
 	public boolean checkCollisionX(Entity e, Vector2 moveVec) {
 		EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
 		boolean collide = false;
-		HashSet<Vector2> newGrid = eMap.getGridPos(e);
-		HashSet<Entity> entities = eMap.getEntites(newGrid);
+		Set<Vector2> newGrid = eMap.getGridPos(e);
+		Set<Entity> entities = eMap.getEntites(newGrid);
 		Vector4 collVec = null;
 		Entity hit = null;
 		for (Entity character : entities) {
@@ -63,8 +63,8 @@ public class BasicMovement extends BaseMovement {
 	public boolean checkCollisionY(Entity e, Vector2 moveVec) {
 		EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
 		boolean collide = false;
-		HashSet<Vector2> newGrid = eMap.getGridPos(e);
-		HashSet<Entity> entities = eMap.getEntites(newGrid);
+		Set<Vector2> newGrid = eMap.getGridPos(e);
+		Set<Entity> entities = eMap.getEntites(newGrid);
 		Vector4 collVec = null;
 		Entity hit = null;
 		for (Entity character : entities) {

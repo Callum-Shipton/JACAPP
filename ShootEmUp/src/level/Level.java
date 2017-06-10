@@ -2,6 +2,7 @@ package level;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import components.TypeComponent;
 import components.collision.BaseCollision;
@@ -18,9 +19,9 @@ public class Level {
 
 	private EntityMap eMap;
 
-	private HashSet<Entity> entities;
-	private HashSet<Entity> oldEntities;
-	private HashSet<Entity> newEntities;
+	private Set<Entity> entities;
+	private Set<Entity> oldEntities;
+	private Set<Entity> newEntities;
 
 	private Spawner spawner;
 	private Map map;
@@ -29,10 +30,10 @@ public class Level {
 		this.level = level;
 		this.map = new Map(file + level + ".png");
 		this.eMap = new EntityMap(this.map.getWidth(), this.map.getHeight());
-		this.spawner = new Spawner();
-		this.entities = new HashSet<Entity>();
-		this.oldEntities = new HashSet<Entity>();
-		this.newEntities = new HashSet<Entity>();
+		this.spawner = new Spawner(1, 10, 3, 250.0f, 25.0f);
+		this.entities = new HashSet<>();
+		this.oldEntities = new HashSet<>();
+		this.newEntities = new HashSet<>();
 	}
 
 	public void addEntities() {
@@ -51,9 +52,8 @@ public class Level {
 		this.newEntities.add(e);
 		BaseCollision BC = e.getComponent(TypeComponent.COLLISION);
 		if (BC != null) {
-			BC.setGridPos(this.eMap.getGridPos(e, e.getComponent(TypeComponent.GRAPHICS)));
-			ShootEmUp.getCurrentLevel().eMap.addEntity(this.eMap.getGridPos(e, e.getComponent(TypeComponent.GRAPHICS)),
-					e);
+			BC.setGridPos(this.eMap.getGridPos(e));
+			ShootEmUp.getCurrentLevel().eMap.addEntity(this.eMap.getGridPos(e), e);
 		}
 	}
 
@@ -61,7 +61,7 @@ public class Level {
 		return this.eMap;
 	}
 
-	public HashSet<Entity> getEntities() {
+	public Set<Entity> getEntities() {
 		return this.entities;
 	}
 
@@ -97,7 +97,7 @@ public class Level {
 		this.oldEntities.clear();
 	}
 
-	public void removeEntity(HashSet<Vector2> gridPos, Entity e) {
+	public void removeEntity(Set<Vector2> gridPos, Entity e) {
 		ShootEmUp.getCurrentLevel().eMap.removeEntity(gridPos, e);
 		this.oldEntities.add(e);
 	}

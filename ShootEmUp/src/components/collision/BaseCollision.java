@@ -1,6 +1,6 @@
 package components.collision;
 
-import java.util.HashSet;
+import java.util.Set;
 
 import components.Component;
 import components.Message;
@@ -13,7 +13,7 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 
 	protected TypeComponent type = TypeComponent.COLLISION;
 
-	protected HashSet<Vector2> gridPos;
+	protected Set<Vector2> gridPos;
 	protected boolean moveBack;
 
 	@Override
@@ -24,7 +24,7 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 		ShootEmUp.getCurrentLevel().removeEntity(this.gridPos, e);
 	}
 
-	public HashSet<Vector2> getGridPos() {
+	public Set<Vector2> getGridPos() {
 		return this.gridPos;
 	}
 
@@ -42,7 +42,7 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 
 	}
 
-	public void setGridPos(HashSet<Vector2> gridPos) {
+	public void setGridPos(Set<Vector2> gridPos) {
 		this.gridPos = gridPos;
 	}
 }
