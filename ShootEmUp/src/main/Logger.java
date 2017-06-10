@@ -17,19 +17,17 @@ public final class Logger {
 
 	public static void info(String message) {
 		if (info) {
-			System.out.println(new Timestamp(System.currentTimeMillis()).toString() + "LOG INFO: " + message);
+			System.out.println(new Timestamp(System.currentTimeMillis()).toString() + "LOG INFO: " + message); // NOSONAR
 		}
 	}
 
 	public static void warn(String message) {
-		System.out.println(new Timestamp(System.currentTimeMillis()).toString() + "LOG WARNING: " + message);
+		System.out.println(new Timestamp(System.currentTimeMillis()).toString() + "LOG WARNING: " + message); // NOSONAR
 	}
 
 	public static void debug(String message, Category c) {
-		if (debug) {
-			if (categories.contains(c) || categories.contains(Category.ALL))
-				System.out.println(new Timestamp(System.currentTimeMillis()).toString() + "LOG DEBUG: " + message);
-		}
+		if (debug && (categories.contains(c) || categories.contains(Category.ALL)))
+			System.out.println(new Timestamp(System.currentTimeMillis()).toString() + "LOG DEBUG: " + message); // NOSONAR
 	}
 
 	public static void debug(double d, Category c) {
@@ -37,12 +35,12 @@ public final class Logger {
 	}
 
 	public static void error(String message) {
-		System.err.println(new Timestamp(System.currentTimeMillis()).toString() + "LOG ERROR: " + message);
+		System.err.println(new Timestamp(System.currentTimeMillis()).toString() + "LOG ERROR: " + message); // NOSONAR
 	}
 
 	public static void error(Exception e) {
-		System.err.println(new Timestamp(System.currentTimeMillis()).toString() + "LOG ERROR: " + e.getMessage());
-		e.printStackTrace();
+		System.err.println(new Timestamp(System.currentTimeMillis()).toString() + "LOG ERROR: " + e.getMessage()); // NOSONAR
+		e.printStackTrace(); // NOSONAR
 	}
 
 	public enum Category {

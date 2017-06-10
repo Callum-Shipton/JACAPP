@@ -18,7 +18,15 @@ public class Vector2 implements Vector<Vector2> {
 		this(v, v);
 	}
 
+	public Vector2(int v) {
+		this(v, v);
+	}
+
 	public Vector2(float x, float y) {
+		set(x, y);
+	}
+
+	public Vector2(int x, int y) {
 		set(x, y);
 	}
 
