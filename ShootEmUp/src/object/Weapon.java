@@ -1,14 +1,10 @@
 package object;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
 
 import components.TypeComponent;
 import components.collision.HitCollision;
@@ -24,13 +20,14 @@ import main.Logger;
 import main.ShootEmUp;
 import math.Vector2;
 
-public class Weapon extends InventoryItem {
+public final class Weapon extends InventoryItem<Weapon> {
 
 	private static final long serialVersionUID = 529276641692099199L;
 
-	private static HashMap<String, HashMap<String, Weapon>> weaponSystem;
+	protected static String directoryPath = "res/Objects/Items/Weapons";
 
-	private transient String type;
+	private static Map<String, Map<String, Weapon>> weaponSystem = new HashMap<>();
+
 	private int damage;
 	private int range;
 	private int fireRate;
@@ -41,7 +38,7 @@ public class Weapon extends InventoryItem {
 	private Element element;
 
 	public Weapon(String type, int team) {
-		if (weaponSystem == null) {
+		if (weaponSystem.isEmpty()) {
 			initSystem();
 		}
 		Weapon w;
@@ -51,8 +48,8 @@ public class Weapon extends InventoryItem {
 			typedWeapons = weaponSystem.get(type).values().toArray(typedWeapons);
 			w = typedWeapons[temp];
 		} else {
-			HashMap<String, Weapon> tempWeapons = new HashMap<>();
-			for (HashMap<String, Weapon> typedWeapons : weaponSystem.values()) {
+			Map<String, Weapon> tempWeapons = new HashMap<>();
+			for (Map<String, Weapon> typedWeapons : weaponSystem.values()) {
 				tempWeapons.putAll(typedWeapons);
 			}
 			w = tempWeapons.get(type);
@@ -133,6 +130,17 @@ public class Weapon extends InventoryItem {
 		ShootEmUp.getCurrentLevel().getSpawner().checkSpawn(particle);
 	}
 
+	public void initSystem() {
+		Map<String, JsonArray> jsonObjects = findFiles(directoryPath);
+		for (Entry<String, JsonArray> type : jsonObjects.entrySet()) {
+			addToSystem(type.getKey(), type.getValue(), Weapon.class);
+		}
+	}
+
+	public boolean isMelee() {
+		return this.melee;
+	}
+
 	public int getDamage() {
 		return this.damage;
 	}
@@ -169,38 +177,6 @@ public class Weapon extends InventoryItem {
 		return this.type;
 	}
 
-	@Override
-	public void initSystem() {
-		weaponSystem = new HashMap<>();
-		findFiles("res/Objects/Items/Weapons");
-	}
-
-	public boolean isMelee() {
-		return this.melee;
-	}
-
-	@Override
-	public void readJSON(String path, String fileName) {
-		JsonReader in = null;
-		try (FileInputStream fileInput = new FileInputStream(path)) {
-			in = new JsonReader(new InputStreamReader(fileInput));
-
-			JsonArray jsonObjects = new JsonParser().parse(in).getAsJsonArray();
-			for (JsonElement e : jsonObjects) {
-				String subType = fileName.substring(0, fileName.length() - 5);
-				String name = e.getAsJsonObject().get("name").getAsString();
-				if (!weaponSystem.containsKey(subType)) {
-					weaponSystem.put(subType, new HashMap<String, Weapon>());
-				}
-				Weapon w = g.fromJson(e, Weapon.class);
-				w.type = subType;
-				weaponSystem.get(subType).put(name, w);
-			}
-		} catch (IOException e) {
-			Logger.error(e);
-		}
-	}
-
 	public void setDamage(int damage) {
 		this.damage = damage;
 	}
@@ -223,5 +199,15 @@ public class Weapon extends InventoryItem {
 
 	public void setTeam(int team) {
 		this.team = team;
+	}
+
+	@Override
+	public Map<String, Map<String, Weapon>> getSystem() {
+		return weaponSystem;
+	}
+
+	@Override
+	protected String getDirectoryPath() {
+		return directoryPath;
 	}
 }

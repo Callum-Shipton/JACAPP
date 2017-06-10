@@ -1,30 +1,23 @@
 package object;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashMap;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
+import java.util.Map;
 
 import components.inventory.TypePickup;
-import main.Logger;
 
-public class Armour extends InventoryItem {
+public final class Armour extends InventoryItem<Armour> {
 
 	private static final long serialVersionUID = 6126061373353659997L;
 
-	private static HashMap<String, HashMap<String, Armour>> armourSystem;
+	private static Map<String, Map<String, Armour>> armourSystem = new HashMap<>();
 
-	private transient String type;
+	protected static String directoryPath = "res/Objects/Items/Armour";
+
 	private int defence;
 
 	public Armour(String type) {
-		if (armourSystem == null) {
-			initSystem();
+		if (armourSystem.isEmpty()) {
+			initSystem(Armour.class);
 		}
 		Armour a;
 		if (armourSystem.containsKey(type)) {
@@ -33,8 +26,8 @@ public class Armour extends InventoryItem {
 			typedArmours = armourSystem.get(type).values().toArray(typedArmours);
 			a = typedArmours[temp];
 		} else {
-			HashMap<String, Armour> tempArmours = new HashMap<String, Armour>();
-			for (HashMap<String, Armour> typedArmours : armourSystem.values()) {
+			Map<String, Armour> tempArmours = new HashMap<>();
+			for (Map<String, Armour> typedArmours : armourSystem.values()) {
 				tempArmours.putAll(typedArmours);
 			}
 			a = tempArmours.get(type);
@@ -53,37 +46,18 @@ public class Armour extends InventoryItem {
 		return this.type;
 	}
 
-	@Override
-	public void initSystem() {
-		armourSystem = new HashMap<String, HashMap<String, Armour>>();
-		findFiles("res/Objects/Items/Armour");
-	}
-
-	@Override
-	public void readJSON(String path, String fileName) {
-		JsonReader in = null;
-		try (FileInputStream fileInput = new FileInputStream(path)) {
-			in = new JsonReader(new InputStreamReader(fileInput));
-
-			JsonArray jsonObjects = new JsonParser().parse(in).getAsJsonArray();
-			for (JsonElement e : jsonObjects) {
-				String type = fileName.substring(0, fileName.length() - 5);
-				String name = e.getAsJsonObject().get("name").getAsString();
-				if (!armourSystem.containsKey(type)) {
-					armourSystem.put(type, new HashMap<String, Armour>());
-				}
-				Armour a = g.fromJson(e, Armour.class);
-				a.type = type;
-				armourSystem.get(type).put(name, a);
-			}
-
-		} catch (IOException e) {
-			Logger.error(e);
-		}
-
-	}
-
 	public void setDefence(int defence) {
 		this.defence = defence;
 	}
+
+	@Override
+	public Map<String, Map<String, Armour>> getSystem() {
+		return armourSystem;
+	}
+
+	@Override
+	protected String getDirectoryPath() {
+		return directoryPath;
+	}
+
 }

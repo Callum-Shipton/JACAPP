@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import com.google.gson.JsonArray;
@@ -16,7 +17,7 @@ import components.Message;
 import components.TypeComponent;
 import main.Logger;
 
-public class Entity implements DatableObject {
+public class Entity implements DatableObject<Entity> {
 
 	private static HashMap<String, HashMap<String, HashMap<String, Entity>>> entitySystem;
 	private static Random rand = new Random();
@@ -73,7 +74,6 @@ public class Entity implements DatableObject {
 		return this.components;
 	}
 
-	@Override
 	public void initSystem() {
 		entitySystem = new HashMap<String, HashMap<String, HashMap<String, Entity>>>();
 		findFiles("res/Objects/Entities");
@@ -84,7 +84,7 @@ public class Entity implements DatableObject {
 	}
 
 	@Override
-	public void readJSON(String path, String fileName) {
+	public JsonArray readJSON(String path, String fileName) {
 		String directory = path.substring(path.indexOf("Entities") + 9, path.length() - fileName.length() - 1);
 		String type = fileName.substring(0, fileName.length() - 5);
 
@@ -104,9 +104,13 @@ public class Entity implements DatableObject {
 				Entity entity = g.fromJson(e, Entity.class);
 				entitySystem.get(directory).get(type).put(name, entity);
 			}
+
+			return jsonObjects;
 		} catch (IOException e) {
 			Logger.error(e);
 		}
+
+		return null;
 	}
 
 	public void send(Message m) {
@@ -125,5 +129,10 @@ public class Entity implements DatableObject {
 				component.update(this);
 			}
 		}
+	}
+
+	@Override
+	public Map getSystem() {
+		return entitySystem;
 	}
 }

@@ -6,7 +6,8 @@ import static components.inventory.TypePotion.MANA;
 import static components.inventory.TypePotion.SPEED;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.Random;
 
 import components.Component;
@@ -52,7 +53,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 	protected ArrayList<InventoryItem> inventory;
 	protected int inventorySize = 5;
-	protected HashMap<TypePotion, Potion> potions = new HashMap<TypePotion, Potion>();;
+	protected Map<TypePotion, Potion> potions = new EnumMap<TypePotion, Potion>(TypePotion.class); // NOSONAR
 	protected int maxPotions = 5;
 
 	protected String[] weaponTypes = new String[2];
@@ -281,7 +282,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 		return sum;
 	}
 
-	public HashMap<TypePotion, Potion> getPotions() {
+	public Map<TypePotion, Potion> getPotions() {
 		return this.potions;
 	}
 
@@ -392,6 +393,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 	}
 
 	public void usePotion(TypePotion type) {
-		this.potions.get(type).usePotion();
+		if (this.potions.containsKey(type))
+			this.potions.get(type).usePotion();
 	}
 }

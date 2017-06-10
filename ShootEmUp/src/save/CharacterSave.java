@@ -2,7 +2,7 @@ package save;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 import components.TypeComponent;
 import components.attack.PlayerAttack;
@@ -46,7 +46,7 @@ public class CharacterSave implements Serializable {
 	private ArrayList<InventoryItem> inventory = new ArrayList<InventoryItem>();
 	private int inventorySize;
 
-	private HashMap<TypePotion, Potion> potions;
+	private Map<TypePotion, Potion> potions;
 	private int maxPotions;
 
 	public CharacterSave() {
@@ -168,7 +168,7 @@ public class CharacterSave implements Serializable {
 		return this.playerLevel;
 	}
 
-	public HashMap<TypePotion, Potion> getPotions() {
+	public Map<TypePotion, Potion> getPotions() {
 		return this.potions;
 	}
 
