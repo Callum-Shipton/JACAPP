@@ -12,7 +12,6 @@ import display.Art;
 import main.Logger;
 import main.ShootEmUp;
 import math.Seconds;
-import math.Vector2;
 import object.Entity;
 import save.Save;
 
@@ -59,8 +58,8 @@ public class Spawner {
 	public void checkSpawn(Entity e) {
 		BasicMovement BM = e.getComponent(TypeComponent.MOVEMENT);
 		ShootEmUp.getCurrentLevel().addEntity(e);
-		BM.checkCollisionY(e, new Vector2(0, 0));
-		BM.checkCollisionX(e, new Vector2(0, 0));
+		BM.checkCollisionY(e);
+		BM.checkCollisionX(e);
 	}
 
 	public int getWave() {

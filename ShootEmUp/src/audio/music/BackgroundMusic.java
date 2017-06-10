@@ -33,6 +33,7 @@ import org.lwjgl.openal.ALContext;
 import org.lwjgl.openal.ALDevice;
 
 import audio.libraries.WaveData;
+import main.Logger;
 
 /**
  * $Id$
@@ -126,7 +127,7 @@ public class BackgroundMusic {
 
 		// Load the wav data.
 		if (loadALData() == AL_FALSE) {
-			System.out.println("Error loading data.");
+			Logger.error("Error loading audio data.");
 			return;
 		}
 

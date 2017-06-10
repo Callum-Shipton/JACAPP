@@ -35,6 +35,7 @@ import java.util.ArrayList;
 
 import org.lwjgl.glfw.GLFW;
 
+import main.Logger;
 import net.java.games.input.Component;
 import net.java.games.input.Component.Identifier;
 import net.java.games.input.Component.Identifier.Axis;
@@ -106,13 +107,16 @@ class JInputController implements Controller {
 		for (Component sourceAxis : sourceAxes) {
 			if (sourceAxis.getIdentifier() instanceof Button) {
 				this.buttons.add(sourceAxis);
-				System.out.println("Button: " + sourceAxis.getName() + ", index: " + this.buttons.indexOf(sourceAxis));
+				Logger.debug("Button: " + sourceAxis.getName() + ", index: " + this.buttons.indexOf(sourceAxis),
+						Logger.Category.CONTROLLER);
 			} else if (sourceAxis.getIdentifier().equals(Axis.POV)) {
 				this.pov.add(sourceAxis);
-				System.out.println("POV: " + sourceAxis.getName() + ", index: " + this.pov.indexOf(sourceAxis));
+				Logger.debug("POV: " + sourceAxis.getName() + ", index: " + this.pov.indexOf(sourceAxis),
+						Logger.Category.CONTROLLER);
 			} else {
 				this.axes.add(sourceAxis);
-				System.out.println("Axis: " + sourceAxis.getName() + ", index: " + this.axes.indexOf(sourceAxis));
+				Logger.debug("Axis: " + sourceAxis.getName() + ", index: " + this.axes.indexOf(sourceAxis),
+						Logger.Category.CONTROLLER);
 			}
 		}
 

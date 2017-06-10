@@ -85,7 +85,8 @@ public class Vector3 implements Vector<Vector3> {
 	public boolean equals(Object o) {
 		if (o instanceof Vector3) {
 			Vector3 v = (Vector3) o;
-			return (this.x == v.x) && (this.y == v.y) && (this.z == v.z);
+			return Float.compare(this.x, v.x) == 0 && Float.compare(this.y, v.y) == 0
+					&& Float.compare(this.z, v.z) == 0;
 		}
 
 		return false;

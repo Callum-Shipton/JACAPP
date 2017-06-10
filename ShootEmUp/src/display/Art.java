@@ -27,9 +27,8 @@ import java.io.InputStreamReader;
 import java.nio.FloatBuffer;
 import java.util.HashMap;
 
-import org.lwjgl.BufferUtils;
-
 import level.Map;
+import main.Logger;
 import main.ShootEmUp;
 import math.Matrix4;
 import math.Vector2;
@@ -61,15 +60,14 @@ public class Art {
 		Matrix4 projectionMatrix = new Matrix4();
 		projectionMatrix.clearToOrtho(0, ShootEmUp.getDisplay().getWidth(), ShootEmUp.getDisplay().getHeight(), 0,
 				-1.0f, 1.0f);
-		FloatBuffer matrix44Buffer = BufferUtils.createFloatBuffer(16);
-		matrix44Buffer = projectionMatrix.toBuffer();
+		FloatBuffer matrix44Buffer = projectionMatrix.toBuffer();
 
 		glUseProgram(ShaderBase);
 
 		int Error = glGetError();
 
 		if (Error != GL_NO_ERROR) {
-			System.out.println("OpenGL Error: " + Error);
+			Logger.error("OpenGL Error: " + Error);
 		}
 		int projectionMatrixLocation = glGetUniformLocation(ShaderBase, "projectionMatrix");
 		glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
@@ -343,8 +341,8 @@ public class Art {
 			}
 			reader.close();
 		} catch (IOException e) {
-			System.err.println("Could not read file.");
-			e.printStackTrace();
+			Logger.error("Could not read shader file.");
+			Logger.error(e);
 			System.exit(-1);
 		}
 

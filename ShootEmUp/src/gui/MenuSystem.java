@@ -1,6 +1,7 @@
 package gui;
 
-import java.util.Stack;
+import java.util.Deque;
+import java.util.LinkedList;
 
 import display.Art;
 import gui.menus.GuiMenu;
@@ -8,19 +9,19 @@ import gui.menus.InventoryMenu;
 
 public class MenuSystem {
 	private boolean mainMenu = true;
-	private Stack<GuiMenu> menuStack = new Stack<GuiMenu>();
+	private Deque<GuiMenu> menuStack = new LinkedList<>();
 
 	public MenuSystem() {
 
 	}
 
 	public void addMenu(GuiMenu menu) {
-		this.menuStack.add(menu);
+		this.menuStack.addFirst(menu);
 	}
 
 	public void clearMenus() {
 		while (!this.menuStack.isEmpty()) {
-			this.menuStack.pop();
+			this.menuStack.removeFirst();
 		}
 	}
 
@@ -37,7 +38,7 @@ public class MenuSystem {
 	}
 
 	public void popMenu() {
-		this.menuStack.pop();
+		this.menuStack.removeFirst();
 	}
 
 	public void render() {

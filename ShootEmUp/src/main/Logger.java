@@ -8,9 +8,9 @@ import java.util.Set;
 public final class Logger {
 
 	private static boolean info = true;
-	private static boolean debug = false;
+	private static boolean debug = true;
 
-	private static Set<Category> categories = new HashSet<>(Arrays.asList());
+	private static Set<Category> categories = new HashSet<>(Arrays.asList(Category.ALL));
 
 	private Logger() {
 	}
@@ -44,7 +44,7 @@ public final class Logger {
 	}
 
 	public enum Category {
-		ALL, ENGINE_STATS
+		ALL, ENGINE_STATS, CONTROLLER, AI
 	}
 
 }

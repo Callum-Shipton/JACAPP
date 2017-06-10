@@ -8,6 +8,7 @@ import components.TypeComponent;
 import components.collision.BaseCollision;
 import components.graphical.BaseGraphics;
 import gui.Hud;
+import main.Logger;
 import main.ShootEmUp;
 import math.Vector2;
 import object.Entity;
@@ -42,7 +43,7 @@ public class Level {
 			Entity n = newEntitiesIter.next();
 			boolean res = this.entities.add(n);
 			if (!res) {
-				System.out.println("New entity not added. Name: " + n.toString() + ", HC: " + n.hashCode());
+				Logger.warn("New entity not added. Name: " + n.toString() + ", HC: " + n.hashCode());
 			}
 		}
 		this.newEntities.clear();
@@ -91,7 +92,7 @@ public class Level {
 			ShootEmUp.getCurrentLevel().eMap.removeEntity(BC.getGridPos(), n);
 			boolean res = this.entities.remove(n);
 			if (!res) {
-				System.out.println("Old entity not removed. Name: " + n.toString() + ", HC: " + n.hashCode());
+				Logger.warn("Old entity not removed. Name: " + n.toString() + ", HC: " + n.hashCode());
 			}
 		}
 		this.oldEntities.clear();

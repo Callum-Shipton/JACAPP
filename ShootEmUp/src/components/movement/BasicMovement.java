@@ -16,14 +16,14 @@ public class BasicMovement extends BaseMovement {
 
 	protected BaseGraphics BG;
 
-	public BasicMovement(Entity e, BaseCollision BC, BaseGraphics BG, int speed) {
+	public BasicMovement(BaseCollision BC, BaseGraphics BG, int speed) {
 		this.BG = BG;
 		this.BC = BC;
 		this.speed = speed;
 		this.realSpeed = speed;
 	}
 
-	public boolean checkCollisionX(Entity e, Vector2 moveVec) {
+	public boolean checkCollisionX(Entity e) {
 		EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
 		boolean collide = false;
 		Set<Vector2> newGrid = eMap.getGridPos(e);
@@ -37,8 +37,8 @@ public class BasicMovement extends BaseMovement {
 					collide = true;
 					hit = character;
 					BaseCollision HC = hit.getComponent(TypeComponent.COLLISION);
-					if ((HC.getMoveBack() == true) && !(this.BC instanceof HitCollision)) {
-						moveBackX(moveVec, collVec);
+					if ((HC.getMoveBack()) && !(this.BC instanceof HitCollision)) {
+						moveBackX(collVec);
 						newGrid = eMap.getGridPos(e);
 					}
 					if ((e.getComponent(TypeComponent.COLLISION) != null)) {
@@ -60,7 +60,7 @@ public class BasicMovement extends BaseMovement {
 		return collide;
 	}
 
-	public boolean checkCollisionY(Entity e, Vector2 moveVec) {
+	public boolean checkCollisionY(Entity e) {
 		EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
 		boolean collide = false;
 		Set<Vector2> newGrid = eMap.getGridPos(e);
@@ -74,8 +74,8 @@ public class BasicMovement extends BaseMovement {
 					collide = true;
 					hit = character;
 					BaseCollision HC = hit.getComponent(TypeComponent.COLLISION);
-					if ((HC.getMoveBack() == true) && !(this.BC instanceof HitCollision)) {
-						moveBackY(moveVec, collVec);
+					if ((HC.getMoveBack()) && !(this.BC instanceof HitCollision)) {
+						moveBackY(collVec);
 						newGrid = eMap.getGridPos(e);
 					}
 					if ((e.getComponent(TypeComponent.COLLISION) != null)) {
@@ -132,15 +132,15 @@ public class BasicMovement extends BaseMovement {
 		super.move(e, moveVec);
 		if (Math.abs(moveVec.x()) > 0) {
 			this.BG.setX((this.BG.getX() + Math.round(moveVec.x() * this.speed)));
-			checkCollisionX(e, moveVec);
+			checkCollisionX(e);
 		}
 		if (Math.abs(moveVec.y()) > 0) {
 			this.BG.setY(this.BG.getY() + Math.round(moveVec.y() * this.speed));
-			checkCollisionY(e, moveVec);
+			checkCollisionY(e);
 		}
 	}
 
-	public void moveBackX(Vector2 moveVec, Vector4 collVec) {
+	public void moveBackX(Vector4 collVec) {
 		if (Math.abs(collVec.x()) <= this.speed) {
 			this.BG.setX(this.BG.getX() - collVec.x());
 		} else if (Math.abs(collVec.z()) <= this.speed) {
@@ -148,7 +148,7 @@ public class BasicMovement extends BaseMovement {
 		}
 	}
 
-	public void moveBackY(Vector2 moveVec, Vector4 collVec) {
+	public void moveBackY(Vector4 collVec) {
 		if (Math.abs(collVec.y()) <= this.speed) {
 			this.BG.setY(this.BG.getY() - collVec.y());
 		} else if (Math.abs(collVec.w()) <= this.speed) {

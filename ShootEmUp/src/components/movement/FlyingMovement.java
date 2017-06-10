@@ -7,13 +7,13 @@ import object.Entity;
 
 public class FlyingMovement extends BasicMovement {
 
-	public FlyingMovement(Entity e, BaseCollision BC, BaseGraphics BG, int speed) {
-		super(e, BC, BG, speed);
+	public FlyingMovement(BaseCollision BC, BaseGraphics BG, int speed) {
+		super(BC, BG, speed);
 	}
 
 	@Override
 	public Vector4 doesCollide(Entity moving, Entity checked) {
-		if (this.flat == true) {
+		if (this.flat) {
 			return null;
 		}
 		return super.doesCollide(moving, checked);

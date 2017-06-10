@@ -4,8 +4,6 @@ import components.Message;
 import components.TypeComponent;
 import components.control.PlayerControl;
 import components.inventory.BaseInventory;
-import components.inventory.SubSubType;
-import components.inventory.SubType;
 import components.inventory.TypePickup;
 import main.ShootEmUp;
 import math.Seconds;
@@ -28,21 +26,6 @@ public class PickupCollision extends BaseCollision {
 		EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
 		setGridPos(eMap.getGridPos(e));
 		eMap.addEntity(getGridPos(), e);
-	}
-
-	public PickupCollision(Entity e, TypePickup type, String subtype, String subsubtype) {
-		this.typePickup = type;
-
-		this.moveBack = false;
-		EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
-		setGridPos(eMap.getGridPos(e));
-		eMap.addEntity(getGridPos(), e);
-	}
-
-	public PickupCollision(TypePickup type, SubType subtype, SubSubType subsubtype) {
-		this.typePickup = type;
-
-		this.moveBack = false;
 	}
 
 	@Override

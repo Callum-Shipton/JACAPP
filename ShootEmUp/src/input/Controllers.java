@@ -33,6 +33,7 @@ package input;
 
 import java.util.ArrayList;
 
+import main.Logger;
 import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
 
@@ -96,7 +97,7 @@ public class Controllers {
 			for (net.java.games.input.Controller c : found) {
 				if (((c.getType() == Controller.Type.GAMEPAD) || (c.getType() == Controller.Type.STICK))) {
 					lollers.add(c);
-					System.out.println("Gamepad found: " + c.getType());
+					Logger.info("Gamepad found: " + c.getType());
 				}
 			}
 

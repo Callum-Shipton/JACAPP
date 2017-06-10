@@ -80,7 +80,7 @@ public final class EnemyBuilder {
 				testGraphics.getX());
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision();
-		enemyMovement = new BasicMovement(newEnemy, enemyCollision, enemyGraphics, speed);
+		enemyMovement = new BasicMovement(enemyCollision, enemyGraphics, speed);
 	}
 
 	private static void testEnemy() {
@@ -91,7 +91,7 @@ public final class EnemyBuilder {
 		test.addComponent(testGraphics);
 		BaseCollision baseCollision = new RigidCollision();
 		test.addComponent(baseCollision);
-		test.addComponent(new BasicMovement(test, baseCollision, testGraphics, 5));
+		test.addComponent(new BasicMovement(baseCollision, testGraphics, 5));
 		BaseGraphics playerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
 		float px = playerGraphics.getX();
 		float py = playerGraphics.getY();

@@ -3,6 +3,7 @@ package object;
 import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.movement.BaseMovement;
+import main.Logger;
 import math.Seconds;
 
 public class DurationPotion extends Potion {
@@ -42,7 +43,7 @@ public class DurationPotion extends Potion {
 				break;
 
 			default:
-				System.err.println("Invalid Potion Type");
+				Logger.warn("Invalid Potion Type");
 				break;
 			}
 			this.duration--;

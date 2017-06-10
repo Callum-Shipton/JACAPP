@@ -386,8 +386,8 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 	@Override
 	public void update(Entity e) {
-		for (TypePotion type : this.potions.keySet()) {
-			this.potions.get(type).update(e);
+		for (Potion potion : this.potions.values()) {
+			potion.update(e);
 		}
 	}
 

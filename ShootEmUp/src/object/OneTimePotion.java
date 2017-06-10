@@ -2,6 +2,7 @@ package object;
 
 import components.TypeComponent;
 import components.attack.BaseAttack;
+import main.Logger;
 
 public class OneTimePotion extends Potion {
 
@@ -27,7 +28,7 @@ public class OneTimePotion extends Potion {
 				break;
 
 			default:
-				System.err.println("Invalid Potion Type");
+				Logger.warn("Invalid Potion Type");
 				break;
 			}
 		}

@@ -233,12 +233,15 @@ public class Map {
 				Map.getTileHeight());
 
 		setGoalBounder(new GoalBounder(this.width, this.height, this.walls));
+
+		Logger.info("Map Loaded");
 	}
 
 	// create wall
-	private void insertWall(int x, int y, float tileMapX, float tileMapY, int wallType) {
+	private void insertWall(int x, int y, float tileMapX, float tileMapY) {
 		MapGraphics wallG;
-		switch (wallType) {
+		switch (this.map.getRGB(x, y)) {
+		default:
 		case BROWNWALL:
 			wallG = new MapGraphics(Art.getImage("Walls"), new Vector2(tileMapX, tileMapY), x * Map.getTileWidth(),
 					y * Map.getTileHeight());
@@ -246,10 +249,6 @@ public class Map {
 		case GREYWALL:
 			wallG = new MapGraphics(Art.getImage("Walls"), new Vector2(tileMapX + 3.0f, tileMapY),
 					x * Map.getTileWidth(), y * Map.getTileHeight());
-			break;
-		default:
-			wallG = new MapGraphics(Art.getImage("Walls"), new Vector2(tileMapX, tileMapY), x * Map.getTileWidth(),
-					y * Map.getTileHeight());
 			break;
 		}
 
@@ -262,7 +261,7 @@ public class Map {
 	}
 
 	// create water
-	private void insertWater(int x, int y, float tileMapX, float tileMapY, int waterType) {
+	private void insertWater(int x, int y, float tileMapX, float tileMapY) {
 		MapGraphics wallG;
 		switch (this.map.getRGB(x, y)) {
 		case LIGHTWATER:
@@ -326,64 +325,64 @@ public class Map {
 			for (int x = 0; x < this.map.getWidth(); x++) {
 				switch (this.wallTileTypes[x][y]) {
 				case 1:
-					insertWall(x, y, 0.0f, 2.0f, this.map.getRGB(x, y));
+					insertWall(x, y, 0.0f, 2.0f);
 					break;
 				case 2:
-					insertWall(x, y, 1.0f, 2.0f, this.map.getRGB(x, y));
+					insertWall(x, y, 1.0f, 2.0f);
 					break;
 				case 3:
-					insertWall(x, y, 2.0f, 2.0f, this.map.getRGB(x, y));
+					insertWall(x, y, 2.0f, 2.0f);
 					break;
 				case 4:
-					insertWall(x, y, 0.0f, 3.0f, this.map.getRGB(x, y));
+					insertWall(x, y, 0.0f, 3.0f);
 					break;
 				case 5:
-					insertWall(x, y, 1.0f, 3.0f, this.map.getRGB(x, y));
+					insertWall(x, y, 1.0f, 3.0f);
 					break;
 				case 6:
-					insertWall(x, y, 2.0f, 3.0f, this.map.getRGB(x, y));
+					insertWall(x, y, 2.0f, 3.0f);
 					break;
 				case 7:
-					insertWall(x, y, 0.0f, 1.0f, this.map.getRGB(x, y));
+					insertWall(x, y, 0.0f, 1.0f);
 					break;
 				case 8:
-					insertWall(x, y, 1.0f, 1.0f, this.map.getRGB(x, y));
+					insertWall(x, y, 1.0f, 1.0f);
 					break;
 				case 9:
-					insertWall(x, y, 2.0f, 1.0f, this.map.getRGB(x, y));
+					insertWall(x, y, 2.0f, 1.0f);
 					break;
 				case 10:
-					insertWall(x, y, 0.0f, 0.0f, this.map.getRGB(x, y));
+					insertWall(x, y, 0.0f, 0.0f);
 					break;
 				case 11:
-					insertWall(x, y, 2.0f, 0.0f, this.map.getRGB(x, y));
+					insertWall(x, y, 2.0f, 0.0f);
 					break;
 				case 12:
-					insertWater(x, y, 0.0f, 0.0f, this.map.getRGB(x, y));
+					insertWater(x, y, 0.0f, 0.0f);
 					break;
 				case 13:
-					insertWater(x, y, 1.0f, 0.0f, this.map.getRGB(x, y));
+					insertWater(x, y, 1.0f, 0.0f);
 					break;
 				case 14:
-					insertWater(x, y, 2.0f, 0.0f, this.map.getRGB(x, y));
+					insertWater(x, y, 2.0f, 0.0f);
 					break;
 				case 15:
-					insertWater(x, y, 0.0f, 1.0f, this.map.getRGB(x, y));
+					insertWater(x, y, 0.0f, 1.0f);
 					break;
 				case 16:
-					insertWater(x, y, 1.0f, 1.0f, this.map.getRGB(x, y));
+					insertWater(x, y, 1.0f, 1.0f);
 					break;
 				case 17:
-					insertWater(x, y, 2.0f, 1.0f, this.map.getRGB(x, y));
+					insertWater(x, y, 2.0f, 1.0f);
 					break;
 				case 18:
-					insertWater(x, y, 0.0f, 2.0f, this.map.getRGB(x, y));
+					insertWater(x, y, 0.0f, 2.0f);
 					break;
 				case 19:
-					insertWater(x, y, 1.0f, 2.0f, this.map.getRGB(x, y));
+					insertWater(x, y, 1.0f, 2.0f);
 					break;
 				case 20:
-					insertWater(x, y, 2.0f, 2.0f, this.map.getRGB(x, y));
+					insertWater(x, y, 2.0f, 2.0f);
 					break;
 				}
 			}

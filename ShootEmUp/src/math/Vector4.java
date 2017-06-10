@@ -86,7 +86,9 @@ public class Vector4 implements Vector<Vector4> {
 	public boolean equals(Object o) {
 		if (o instanceof Vector4) {
 			Vector4 v = (Vector4) o;
-			return (this.x == v.x) && (this.y == v.y) && (this.z == v.z) && (this.w == v.w);
+
+			return new Vector2(this.x, this.y).equals(new Vector2(v.x, v.y))
+					&& new Vector2(this.z, this.w).equals(new Vector2(v.z, v.w));
 		}
 
 		return false;

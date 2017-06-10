@@ -22,7 +22,7 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 	private int posLocation;
 	private int posLocationInst;
 
-	public PlayerGraphics(Entity e, Image image, Renderer r, float scale) {
+	public PlayerGraphics(Image image, Renderer r, float scale) {
 		super(image, r, false, scale);
 		this.viewMatrix = new Matrix4();
 		this.matrix44Buffer = BufferUtils.createFloatBuffer(16);

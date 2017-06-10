@@ -23,7 +23,6 @@ public class GoalBounder {
 
 	private void SetAiTiles(HashMap<Vector2, Entity> walls) {
 		for (int x = 2; x < (this.aiTiles.length - 2); x++) {
-			System.out.println(x);
 			for (int y = 2; y < (this.aiTiles[0].length - 2); y++) {
 
 				Queue<TypeNode> open = new LinkedList<TypeNode>(); // queue for
