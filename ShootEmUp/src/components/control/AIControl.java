@@ -3,6 +3,7 @@ package components.control;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
 
 import components.Message;
@@ -21,14 +22,17 @@ public class AIControl extends BaseControl {
 
 	private static HashMap<Vector2, Entity> walls;
 	private static GoalBounder goalBounder;
-	private BaseMovement BM;
+	private Queue<Node> open;
+	private Set<Node> closed;
+	private Node start;
 
+	private BaseMovement BM;
 	private BaseGraphics BG;
 	private BaseAttack BA;
 	private int counter = 0;
 	private int aggression = 30;
 
-	private Vector2 goal;
+	private Node goal;
 
 	public AIControl(BaseGraphics BG, BaseAttack BA, BaseMovement BM) {
 		this.BA = BA;
@@ -43,19 +47,28 @@ public class AIControl extends BaseControl {
 		}
 	}
 
-	public Vector2 ai() {
-		PriorityQueue<Node> open = new PriorityQueue<Node>(); // queue for tiles
-		Set<Node> closed = new HashSet<>(); // list of already viewed
-		Node start = new Node(new Vector2((float) Math.floor(this.BG.getX() / Map.getTileWidth()),
-				(float) Math.floor(this.BG.getY() / Map.getTileHeight())), null);
+	private Vector2 getGridPosition(float x, float y) {
+		return new Vector2((float) Math.floor(x / Map.getTileWidth()), (float) Math.floor(y / Map.getTileHeight()));
+	}
 
+	private void initData() {
+		open = new PriorityQueue<>(); // queue for nodes to be searched
+		closed = new HashSet<>(); // list of nodes already searched or being
+									// searched
+		start = new Node(getGridPosition(BG.getX(), BG.getY()), null); // entity's
+																		// node
 		open.add(start);
 		closed.add(start);
-		int nodes = 0;
-		while (open.isEmpty()) {
-			nodes++;
+	}
+
+	public Vector2 findPath() {
+		initData();
+
+		int searchedNodes = 0;
+		while (!open.isEmpty()) {
+			searchedNodes++;
 			Node current = open.poll(); // Tile current being checked
-			if (current.equals(this.goal)) { // if goal is reached
+			if (current.equals(goal)) { // if goal is reached
 				Node node = current;
 				while (true) {
 					if (node.getParent() != null) {
@@ -158,7 +171,7 @@ public class AIControl extends BaseControl {
 			}
 		}
 		Logger.warn("cannot find player");
-		Logger.debug(nodes, Logger.Category.AI);
+		Logger.debug(searchedNodes, Logger.Category.AI);
 		return new Vector2(0, 0);
 	}
 
@@ -175,9 +188,8 @@ public class AIControl extends BaseControl {
 	public void update(Entity e) {
 
 		BaseGraphics PlayerG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		this.goal = new Vector2((float) Math.floor(PlayerG.getX() / Map.getTileWidth()),
-				(float) Math.floor(PlayerG.getY() / Map.getTileHeight()));
-		Vector2 target = ai();
+		goal = new Node(getGridPosition(PlayerG.getX(), PlayerG.getY()), null);
+		Vector2 target = findPath();
 		float y = target.y() * Map.getTileHeight();
 		float x = target.x() * Map.getTileWidth();
 

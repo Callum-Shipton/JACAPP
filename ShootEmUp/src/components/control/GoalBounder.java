@@ -1,9 +1,10 @@
 package components.control;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 
 import math.Vector2;
 import math.Vector4;
@@ -12,7 +13,7 @@ import object.Entity;
 public class GoalBounder {
 	private Tile[][] aiTiles;
 
-	public GoalBounder(int width, int height, HashMap<Vector2, Entity> walls) {
+	public GoalBounder(int width, int height, Map<Vector2, Entity> walls) {
 		this.aiTiles = new Tile[width][height];
 		SetAiTiles(walls);
 	}
@@ -21,18 +22,14 @@ public class GoalBounder {
 		return this.aiTiles[(int) x][(int) y];
 	}
 
-	private void SetAiTiles(HashMap<Vector2, Entity> walls) {
+	private void SetAiTiles(Map<Vector2, Entity> walls) {
 		for (int x = 2; x < (this.aiTiles.length - 2); x++) {
 			for (int y = 2; y < (this.aiTiles[0].length - 2); y++) {
 
-				Queue<TypeNode> open = new LinkedList<TypeNode>(); // queue for
-																	// tiles
-				// to be looked
-				// at
-				HashSet<TypeNode> closed = new HashSet<TypeNode>(); // list of
-																	// already
-																	// viewed
-				// tiles
+				Queue<TypeNode> open = new LinkedList<>(); // queue for tiles to
+															// be looked at
+				Set<TypeNode> closed = new HashSet<>(); // list of already
+														// viewed tiles
 				TypeNode start = new TypeNode(new Vector2(x, y), 0);
 
 				float startX = start.getPosition().x();
