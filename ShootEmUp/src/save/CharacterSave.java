@@ -2,6 +2,7 @@ package save;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import components.TypeComponent;
@@ -43,7 +44,7 @@ public class CharacterSave implements Serializable {
 	private int exp;
 	private int playerLevel;
 
-	private ArrayList<InventoryItem> inventory = new ArrayList<InventoryItem>();
+	private List<InventoryItem<?>> inventory = new ArrayList<>();
 	private int inventorySize;
 
 	private Map<TypePotion, Potion> potions;
@@ -116,7 +117,7 @@ public class CharacterSave implements Serializable {
 		return this.helmet;
 	}
 
-	public ArrayList<InventoryItem> getInventory() {
+	public List<InventoryItem<?>> getInventory() {
 		return this.inventory;
 	}
 

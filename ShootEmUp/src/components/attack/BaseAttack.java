@@ -105,67 +105,6 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 	public abstract void die(Entity e);
 
-	public TypeAttack getAttackType() {
-		return this.type;
-	}
-
-	public Armour getBoots() {
-		return this.boots;
-	}
-
-	public Armour getChest() {
-		return this.chest;
-	}
-
-	public int getHealth() {
-		return this.health;
-	}
-
-	public int getHealthRegen() {
-		return this.healthRegen;
-	}
-
-	public Armour getHelmet() {
-		return this.helmet;
-	}
-
-	public Armour getLegs() {
-		return this.legs;
-	}
-
-	public int getMana() {
-		return this.mana;
-	}
-
-	public int getManaRegen() {
-		return this.manaRegen;
-	}
-
-	public int getMaxHealth() {
-		return this.maxHealth;
-	}
-
-	public int getMaxHealthRegen() {
-		return this.maxHealthRegen;
-	}
-
-	public int getMaxMana() {
-		return this.maxMana;
-	}
-
-	public int getMaxManaRegen() {
-		return this.maxManaRegen;
-	}
-
-	@Override
-	public TypeComponent getType() {
-		return this.componentType;
-	}
-
-	public Weapon getWeapon() {
-		return this.weapon;
-	}
-
 	public void healthRegen() {
 		if (this.health < this.maxHealth) {
 			if (this.healthRegen <= 0) {
@@ -174,14 +113,6 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 			}
 			this.healthRegen--;
 		}
-	}
-
-	public boolean isFire() {
-		return this.fire;
-	}
-
-	public boolean isPoison() {
-		return this.poison;
 	}
 
 	public void manaRegen() {
@@ -212,6 +143,34 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 			this.armourValue += this.helmet.getDefence();
 		}
 	}
+
+	@Override
+	public void update(Entity e) {
+
+		healthRegen();
+		manaRegen();
+
+		if (this.fire == true) {
+			this.fireCounter++;
+			if (this.fireCounter >= Seconds.ticks(this.FIRE_TIME)) {
+				damage(1, e);
+				this.fireCounter = 0;
+				this.fireStop++;
+				if (this.fireStop > this.FIRE_HITS) {
+					this.fire = false;
+					this.fireStop = 0;
+				}
+			}
+		}
+		if (this.poison == true) {
+			this.poisonCounter++;
+			if (this.poisonCounter > Seconds.ticks(this.POISON_TIME)) {
+				damage(2, e);
+				this.poisonCounter = 0;
+			}
+		}
+	}
+	
 
 	public void setBoots(Armour boots) {
 		this.boots = boots;
@@ -276,31 +235,73 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	public void setWeapon(Weapon weapon) {
 		this.weapon = weapon;
 	}
+	
+	public boolean isFire() {
+		return this.fire;
+	}
+
+	public boolean isPoison() {
+		return this.poison;
+	}
+	
+	public TypeAttack getAttackType() {
+		return this.type;
+	}
+
+	public Armour getBoots() {
+		return this.boots;
+	}
+
+	public Armour getChest() {
+		return this.chest;
+	}
+
+	public int getHealth() {
+		return this.health;
+	}
+
+	public int getHealthRegen() {
+		return this.healthRegen;
+	}
+
+	public Armour getHelmet() {
+		return this.helmet;
+	}
+
+	public Armour getLegs() {
+		return this.legs;
+	}
+
+	public int getMana() {
+		return this.mana;
+	}
+
+	public int getManaRegen() {
+		return this.manaRegen;
+	}
+
+	public int getMaxHealth() {
+		return this.maxHealth;
+	}
+
+	public int getMaxHealthRegen() {
+		return this.maxHealthRegen;
+	}
+
+	public int getMaxMana() {
+		return this.maxMana;
+	}
+
+	public int getMaxManaRegen() {
+		return this.maxManaRegen;
+	}
 
 	@Override
-	public void update(Entity e) {
+	public TypeComponent getType() {
+		return this.componentType;
+	}
 
-		healthRegen();
-		manaRegen();
-
-		if (this.fire == true) {
-			this.fireCounter++;
-			if (this.fireCounter >= Seconds.ticks(this.FIRE_TIME)) {
-				damage(1, e);
-				this.fireCounter = 0;
-				this.fireStop++;
-				if (this.fireStop > this.FIRE_HITS) {
-					this.fire = false;
-					this.fireStop = 0;
-				}
-			}
-		}
-		if (this.poison == true) {
-			this.poisonCounter++;
-			if (this.poisonCounter > Seconds.ticks(this.POISON_TIME)) {
-				damage(2, e);
-				this.poisonCounter = 0;
-			}
-		}
+	public Weapon getWeapon() {
+		return this.weapon;
 	}
 }

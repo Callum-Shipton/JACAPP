@@ -19,11 +19,11 @@ import main.Logger;
 
 public class Entity implements DatableObject<Entity> {
 
-	private static HashMap<String, HashMap<String, HashMap<String, Entity>>> entitySystem;
+	private static Map<String, HashMap<String, HashMap<String, Entity>>> entitySystem;
 	private static Random rand = new Random();
 
 	private String name;
-	private transient HashMap<TypeComponent, Component> components;
+	private transient Map<TypeComponent, Component> components;
 
 	private transient boolean destroy;
 
@@ -70,12 +70,12 @@ public class Entity implements DatableObject<Entity> {
 		return (T) this.components.get(type);
 	}
 
-	public HashMap<TypeComponent, Component> getComponents() {
+	public Map<TypeComponent, Component> getComponents() {
 		return this.components;
 	}
 
 	public void initSystem() {
-		entitySystem = new HashMap<String, HashMap<String, HashMap<String, Entity>>>();
+		entitySystem = new HashMap<>();
 		findFiles("res/Objects/Entities");
 	}
 

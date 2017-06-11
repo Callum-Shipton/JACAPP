@@ -7,6 +7,7 @@ import static components.inventory.TypePotion.SPEED;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -51,7 +52,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 	protected int expBound;
 	protected int levelPoints = 0;
 
-	protected ArrayList<InventoryItem> inventory;
+	protected List<InventoryItem<?>> inventory;
 	protected int inventorySize = 5;
 	protected Map<TypePotion, Potion> potions = new EnumMap<TypePotion, Potion>(TypePotion.class); // NOSONAR
 	protected int maxPotions = 5;
@@ -66,7 +67,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 		this.BA = BA;
 		this.level = level;
 		this.expBound = level + 1;
-		this.inventory = new ArrayList<InventoryItem>();
+		this.inventory = new ArrayList<>();
 		switch (BA.getAttackType()) {
 		case ARCHER:
 			this.weaponTypes[0] = BOW;
@@ -197,8 +198,8 @@ public class BaseInventory extends Component implements InventoryComponent {
 	}
 
 	public void equipItem(int itemNo) {
-		InventoryItem item = this.inventory.get(itemNo);
-		InventoryItem equipped = null;
+		InventoryItem<?> item = this.inventory.get(itemNo);
+		InventoryItem<?> equipped = null;
 		this.inventory.remove(itemNo);
 		if (item instanceof Armour) {
 			switch (((Armour) item).getType()) {
@@ -247,7 +248,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 		return this.expBound;
 	}
 
-	public ArrayList<InventoryItem> getInventory() {
+	public List<InventoryItem<?>> getInventory() {
 		return this.inventory;
 	}
 

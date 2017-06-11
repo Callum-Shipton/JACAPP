@@ -16,7 +16,7 @@ public class ItemSlot extends GuiComponent {
 	private ArrayList<Counter> stats = new ArrayList<Counter>();
 	private int BUFFER = 5;
 
-	public ItemSlot(int x, int y, InventoryItem item) {
+	public ItemSlot(int x, int y, InventoryItem<?> item) {
 		super(x, y);
 		int gap = 0;
 		this.icon = new Icon(x, y, item.getInventoryImage(), false, 1.0f);

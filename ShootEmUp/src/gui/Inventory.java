@@ -16,10 +16,10 @@ public class Inventory extends GuiComponent {
 	private int row = 0;
 	private int column = 0;
 
-	private ArrayList<InventoryItem> i;
-	private List<Button> buttons = new ArrayList<Button>();
+	private List<InventoryItem<?>> i;
+	private List<Button> buttons = new ArrayList<>();
 
-	public Inventory(int x, int y, ArrayList<InventoryItem> i) {
+	public Inventory(int x, int y, List<InventoryItem<?>> i) {
 		super(x, y);
 		this.i = i;
 		addButtons();
@@ -34,10 +34,10 @@ public class Inventory extends GuiComponent {
 		this.row = 0;
 		this.column = 0;
 
-		Iterator<InventoryItem> items = this.i.iterator();
+		Iterator<InventoryItem<?>> items = this.i.iterator();
 
 		while (items.hasNext()) {
-			InventoryItem item = items.next();
+			InventoryItem<?> item = items.next();
 			addButton(new Button(TypeButton.OTHER, item.getInventoryImage(),
 					this.x + ((item.getInventoryImage().getWidth() * this.row)),
 					this.y + (((item.getInventoryImage().getHeight() / 2) * this.column))));

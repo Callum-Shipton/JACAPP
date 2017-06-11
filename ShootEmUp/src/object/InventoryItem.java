@@ -26,7 +26,7 @@ import main.Logger;
 import main.ShootEmUp;
 import math.Vector2;
 
-public abstract class InventoryItem<I extends InventoryItem> implements DatableObject, Serializable {
+public abstract class InventoryItem<I extends InventoryItem<?>> implements DatableObject, Serializable {
 
 	private static final long serialVersionUID = 4785946601775436341L;
 
