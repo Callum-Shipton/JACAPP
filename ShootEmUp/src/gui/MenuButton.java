@@ -15,7 +15,7 @@ import display.Image;
 import main.ShootEmUp;
 import math.Vector2;
 
-public class Button extends GuiComponent {
+public class MenuButton extends GuiComponent {
 
 	private TypeButton type;
 
@@ -33,7 +33,7 @@ public class Button extends GuiComponent {
 	private DoubleBuffer Bx = BufferUtils.createDoubleBuffer(1);
 	private DoubleBuffer By = BufferUtils.createDoubleBuffer(1);
 
-	public Button(TypeButton type, Image id, float x, float y) {
+	public MenuButton(TypeButton type, Image id, float x, float y) {
 		super(x, y);
 		this.type = type;
 		this.id = id;

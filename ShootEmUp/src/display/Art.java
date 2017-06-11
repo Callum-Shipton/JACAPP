@@ -156,6 +156,12 @@ public class Art {
 		artFiles.put("IronChestButton", new Image("/Images/Menus/Buttons/Items/IronChestButton.png", 1, 2));
 		artFiles.put("IronHelmetButton", new Image("/Images/Menus/Buttons/Items/IronHelmetButton.png", 1, 2));
 
+		artFiles.put("InvButton", new Image("/Images/Menus/Buttons/Tabs/InventoryButton.png", 1, 2));
+		artFiles.put("SkillButton", new Image("/Images/Menus/Buttons/Tabs/SkillButton.png", 1, 2));
+		artFiles.put("UpgradesButton", new Image("/Images/Menus/Buttons/Tabs/UpgradesButton.png", 1, 2));
+		artFiles.put("MapButton", new Image("/Images/Menus/Buttons/Tabs/MapButton.png", 1, 2));
+		artFiles.put("SaveButton", new Image("/Images/Menus/Buttons/Tabs/SaveButton.png", 1, 2));
+
 		artFiles.put("LevelIcon", new Image("/Images/Menus/Icons/LevelIcon.png", 1, 1));
 		artFiles.put("DamageIcon", new Image("/Images/Menus/Icons/DamageIcon.png", 1, 1));
 		artFiles.put("ArmourIcon", new Image("/Images/Menus/Icons/ArmourIcon.png", 1, 1));
@@ -165,12 +171,6 @@ public class Art {
 		artFiles.put("CoinIcon", new Image("/Images/Menus/Icons/CoinIcon.png", 1, 1));
 		artFiles.put("WaveIcon", new Image("/Images/Menus/Icons/WaveIcon.png", 1, 1));
 		artFiles.put("LivesIcon", new Image("/Images/Menus/Icons/LivesIcon.png", 1, 1));
-
-		artFiles.put("InvButton", new Image("/Images/Menus/Buttons/Tabs/InventoryButton.png", 1, 2));
-		artFiles.put("SkillButton", new Image("/Images/Menus/Buttons/Tabs/SkillButton.png", 1, 2));
-		artFiles.put("UpgradesButton", new Image("/Images/Menus/Buttons/Tabs/UpgradesButton.png", 1, 2));
-		artFiles.put("MapButton", new Image("/Images/Menus/Buttons/Tabs/MapButton.png", 1, 2));
-		artFiles.put("SaveButton", new Image("/Images/Menus/Buttons/Tabs/SaveButton.png", 1, 2));
 
 		// Load tile maps
 		artFiles.put("Floor", new Image("/Images/Tiles/Floor.png", 2, 2));

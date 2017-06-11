@@ -88,7 +88,7 @@ public class Level {
 		Iterator<Entity> oldEntitiesIter = this.oldEntities.iterator();
 		while (oldEntitiesIter.hasNext()) {
 			Entity n = oldEntitiesIter.next();
-			BaseCollision BC = ShootEmUp.getPlayer().getComponent(TypeComponent.COLLISION);
+			BaseCollision BC = n.getComponent(TypeComponent.COLLISION);
 			ShootEmUp.getCurrentLevel().eMap.removeEntity(BC.getGridPos(), n);
 			boolean res = this.entities.remove(n);
 			if (!res) {

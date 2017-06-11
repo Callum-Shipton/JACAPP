@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import display.Art;
 import display.Display;
 import display.Image;
-import gui.Button;
+import gui.MenuButton;
 import gui.GuiComponent;
 import main.ShootEmUp;
 import math.Vector2;
@@ -30,7 +30,7 @@ public abstract class GuiMenu {
 		this.display = ShootEmUp.getDisplay();
 	}
 
-	public void buttonPressed(Button button) {
+	public void buttonPressed(MenuButton button) {
 
 	}
 

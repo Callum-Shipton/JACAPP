@@ -5,7 +5,7 @@ import display.Image;
 
 public class CounterButton extends GuiComponent {
 
-	private Button button;
+	private MenuButton button;
 	private Counter counter;
 
 	public CounterButton(float x, float y, TypeButton type, Image image, int count, float scale) {

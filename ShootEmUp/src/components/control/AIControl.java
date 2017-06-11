@@ -3,6 +3,7 @@ package components.control;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.PriorityQueue;
+import java.util.Set;
 
 import components.Message;
 import components.TypeComponent;
@@ -11,6 +12,7 @@ import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.movement.BaseMovement;
 import level.Map;
+import main.Logger;
 import main.ShootEmUp;
 import math.Vector2;
 import object.Entity;
@@ -26,7 +28,6 @@ public class AIControl extends BaseControl {
 	private int counter = 0;
 	private int aggression = 30;
 
-	private Vector2 target;
 	private Vector2 goal;
 
 	public AIControl(BaseGraphics BG, BaseAttack BA, BaseMovement BM) {
@@ -44,7 +45,7 @@ public class AIControl extends BaseControl {
 
 	public Vector2 ai() {
 		PriorityQueue<Node> open = new PriorityQueue<Node>(); // queue for tiles
-		HashSet<Node> closed = new HashSet<Node>(); // list of already viewed
+		Set<Node> closed = new HashSet<>(); // list of already viewed
 		Node start = new Node(new Vector2((float) Math.floor(this.BG.getX() / Map.getTileWidth()),
 				(float) Math.floor(this.BG.getY() / Map.getTileHeight())), null);
 
@@ -156,8 +157,8 @@ public class AIControl extends BaseControl {
 				}
 			}
 		}
-		System.out.println("cannot find player");
-		System.out.println(nodes);
+		Logger.warn("cannot find player");
+		Logger.debug(nodes, Logger.Category.AI);
 		return new Vector2(0, 0);
 	}
 
@@ -172,14 +173,15 @@ public class AIControl extends BaseControl {
 
 	@Override
 	public void update(Entity e) {
+
 		BaseGraphics PlayerG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
 		this.goal = new Vector2((float) Math.floor(PlayerG.getX() / Map.getTileWidth()),
 				(float) Math.floor(PlayerG.getY() / Map.getTileHeight()));
-		this.target = ai();
-		float y = this.target.y() * Map.getTileHeight();
-		float x = this.target.x() * Map.getTileWidth();
+		Vector2 target = ai();
+		float y = target.y() * Map.getTileHeight();
+		float x = target.x() * Map.getTileWidth();
 
-		if (this.target != null) {
+		if (target != null) {
 			Vector2 movement = new Vector2(0.0f, 0.0f);
 			if (y < this.BG.getY()) {
 				if ((y - this.BG.getY()) > -this.BM.getSpeed()) {

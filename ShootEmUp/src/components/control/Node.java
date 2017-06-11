@@ -33,10 +33,6 @@ public class Node implements Comparable<Node> {
 		return Float.compare(distance2, distance1);
 	}
 
-	public boolean equals(Node node) {
-		return node != null && node.getPosition().equals(this.position);
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Node) {

@@ -14,12 +14,14 @@ public class EntityMap {
 
 	private HashMap<Integer, HashMap<Integer, HashSet<Entity>>> map;
 
+	private static final int SPLITS = 6;
+
 	public EntityMap(int w, int h) {
 		this.map = new HashMap<>();
-		for (int i = 0; i < ((w / 6) + 1); i++) {
+		for (int i = 0; i < ((w / SPLITS) + 1); i++) {
 			HashMap<Integer, HashSet<Entity>> mapi = new HashMap<>();
 			this.map.put(i, mapi);
-			for (int j = 0; j < ((h / 6) + 1); j++) {
+			for (int j = 0; j < ((h / SPLITS) + 1); j++) {
 				mapi.put(j, new HashSet<Entity>());
 			}
 		}

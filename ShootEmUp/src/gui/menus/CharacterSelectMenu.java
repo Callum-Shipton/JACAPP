@@ -3,7 +3,7 @@ package gui.menus;
 import components.attack.TypeAttack;
 import display.Art;
 import display.Image;
-import gui.ButtonBuilder;
+import gui.MenuButton;
 import gui.CounterButton;
 import gui.TypeButton;
 import gui.VerticalLayout;
@@ -49,7 +49,7 @@ public class CharacterSelectMenu extends GuiMenu {
 		buttonList.addMenuItem(
 				new CounterButton(0, 0, TypeButton.BATTLE_MAGE, Art.getImage("LevelIcon"), battleMageLevel, 0.5f));
 		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.ROGUE, Art.getImage("LevelIcon"), rogueLevel, 0.5f));
-		buttonList.addMenuItem(ButtonBuilder.buildButton(TypeButton.BACK, this.x, this.y));
+		buttonList.addMenuItem(new MenuButton(TypeButton.BACK, Art.getImage("BackButton"), x, y));
 		this.menuItems.add(buttonList);
 	}
 }

@@ -5,7 +5,7 @@ import display.Image;
 
 public abstract class ButtonBuilder {
 
-	public static Button buildButton(TypeButton type, float x, float y) {
+	public static MenuButton buildButton(TypeButton type, float x, float y) {
 
 		Image image;
 
@@ -20,6 +20,7 @@ public abstract class ButtonBuilder {
 			image = Art.getImage("OptionsButton");
 			break;
 		case EXIT:
+		case MAIN_MENU:
 			image = Art.getImage("ExitButton");
 			break;
 		case LEVEL1:
@@ -47,24 +48,17 @@ public abstract class ButtonBuilder {
 			image = Art.getImage("RogueButton");
 			break;
 		case BACK:
+		case RESUME:
 			image = Art.getImage("BackButton");
 			break;
 		case SOUND:
 			image = Art.getImage("SoundButton");
-			;
 			break;
 		case MUTE:
 			image = Art.getImage("MuteButton");
 			break;
 		case CONTROLS:
 			image = Art.getImage("ControlsButton");
-			break;
-		case RESUME:
-			image = Art.getImage("BackButton");
-			break;
-		case MAIN_MENU:
-			image = Art.getImage("ExitButton");
-			;
 			break;
 		case INVENTORY:
 			image = Art.getImage("InvButton");
@@ -107,6 +101,6 @@ public abstract class ButtonBuilder {
 			break;
 		}
 
-		return new Button(type, image, x, y);
+		return new MenuButton(type, image, x, y);
 	}
 }

@@ -95,6 +95,16 @@ public class Vector4 implements Vector<Vector4> {
 	}
 
 	@Override
+	public int hashCode() {
+		int hash = 139;
+		hash = (int) ((467 * hash) + this.x);
+		hash = (int) ((467 * hash) + this.y);
+		hash = (int) ((467 * hash) + this.z);
+		hash = (int) ((467 * hash) + this.w);
+		return hash;
+	}
+
+	@Override
 	public float length() {
 		return (float) Math.sqrt((this.x * this.x) + (this.y * this.y) + (this.z * this.z) + (this.w * this.w));
 	}

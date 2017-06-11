@@ -26,6 +26,7 @@ public class HitCollision extends BaseCollision {
 		BaseMovement hitMove = hit.getComponent(TypeComponent.MOVEMENT);
 		if (hitAttack != null) {
 			if (hitAttack.getWeapon().getTeam() == this.weapon.getTeam()) {
+				e.destroy();
 				return;
 			}
 		}
@@ -56,10 +57,6 @@ public class HitCollision extends BaseCollision {
 				}
 			}
 		}
-		/*
-		 * if (hit != null && getTeam() != hit.getTeam()) {
-		 * hit.damage(weapon.getDamage()); }
-		 */
 	}
 
 	@Override

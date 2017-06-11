@@ -93,6 +93,15 @@ public class Vector3 implements Vector<Vector3> {
 	}
 
 	@Override
+	public int hashCode() {
+		int hash = 139;
+		hash = (int) ((467 * hash) + this.x);
+		hash = (int) ((467 * hash) + this.y);
+		hash = (int) ((467 * hash) + this.z);
+		return hash;
+	}
+
+	@Override
 	public float length() {
 		return (float) Math.sqrt((this.x * this.x) + (this.y * this.y) + (this.z * this.z));
 	}

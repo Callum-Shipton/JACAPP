@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -23,11 +24,13 @@ public class Entity implements DatableObject<Entity> {
 	private static Random rand = new Random();
 
 	private String name;
+	private transient UUID id;
 	private transient Map<TypeComponent, Component> components;
 
 	private transient boolean destroy;
 
 	public Entity() {
+		id = UUID.randomUUID();
 		this.components = new HashMap<TypeComponent, Component>();
 	}
 
@@ -134,5 +137,22 @@ public class Entity implements DatableObject<Entity> {
 	@Override
 	public Map getSystem() {
 		return entitySystem;
+	}
+
+	public UUID getId() {
+		return id;
+	}
+
+	@Override
+	public boolean equals(Object e) {
+		if (e instanceof Entity) {
+			return id.compareTo(((Entity) e).getId()) == 0;
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return id.hashCode();
 	}
 }
