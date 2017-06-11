@@ -190,7 +190,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 				this.BG.getY() - this.BG.getHeight());
 
 		CoinS = new PointSpawn(CoinG,
-				new Vector2(this.BG.getX() - this.BG.getWidth(), this.BG.getY() - this.BG.getHeight()), item);
+				new Vector2(this.BG.getX(), this.BG.getY()), item);
 		item.addComponent(CoinG);
 		CoinC = new PickupCollision(item, TypePickup.COIN, "Coin");
 		item.addComponent(CoinS);

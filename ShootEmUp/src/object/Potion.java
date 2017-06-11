@@ -39,7 +39,7 @@ public abstract class Potion implements Serializable {
 		BaseGraphics EntityG = e.getComponent(TypeComponent.GRAPHICS);
 
 		BG = new AnimatedGraphics(Art.getImage(this.type), Art.base, true, 1f);
-		BS = new PointSpawn(BG, new Vector2(EntityG.getX() - BG.getWidth(), EntityG.getY() - BG.getHeight()), item);
+		BS = new PointSpawn(BG, new Vector2(EntityG.getX() + BG.getWidth(), EntityG.getY()), item);
 		item.addComponent(BG);
 		BC = new PickupCollision(item, TypePickup.POTION, this.type);
 		item.addComponent(BS);
