@@ -18,10 +18,14 @@ public class SkillMenu extends PauseMenu {
 		super(menuImage);
 
 		VerticalLayout buttonList = new VerticalLayout(30, 30, Art.getImage("HealthButton").getHeight() / 2, 20);
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.HEALTH_REGEN, Art.getImage("Coin"), 1, 1f));
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.HEALTH, Art.getImage("Coin"), 1, 1f));
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.MANA_REGEN, Art.getImage("Coin"), 1, 1f));
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.MANA, Art.getImage("Coin"), 1, 1f));
+		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.HEALTH_REGEN, Art.getImage("HealthRegenButton"),
+				Art.getImage("Coin"), 1, 1f));
+		buttonList.addMenuItem(
+				new CounterButton(0, 0, TypeButton.HEALTH, Art.getImage("HealthButton"), Art.getImage("Coin"), 1, 1f));
+		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.MANA_REGEN, Art.getImage("ManaRegenButton"),
+				Art.getImage("Coin"), 1, 1f));
+		buttonList.addMenuItem(
+				new CounterButton(0, 0, TypeButton.MANA, Art.getImage("ManaButton"), Art.getImage("Coin"), 1, 1f));
 		this.menuItems.add(buttonList);
 		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
 		this.skillPoints = new Counter(30.0f, 191.0f, Art.getImage("Coin"), false, BI.getLevelPoints(), 1f);

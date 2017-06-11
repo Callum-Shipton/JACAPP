@@ -8,10 +8,11 @@ public class CounterButton extends GuiComponent {
 	private MenuButton button;
 	private Counter counter;
 
-	public CounterButton(float x, float y, TypeButton type, Image image, int count, float scale) {
+	public CounterButton(float x, float y, TypeButton type, Image buttonImage, Image counterImage, int count,
+			float scale) {
 		super(x, y);
-		this.button = ButtonBuilder.buildButton(type, x, y);
-		this.counter = new Counter(x + this.button.getId().getWidth(), y, image, false, count, scale);
+		this.button = new MenuButton(type, buttonImage, x, y);
+		this.counter = new Counter(x + this.button.getId().getWidth(), y, counterImage, false, count, scale);
 	}
 
 	@Override
