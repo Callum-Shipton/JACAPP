@@ -3,6 +3,7 @@ package level;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -16,7 +17,7 @@ import main.ShootEmUp;
 import math.Vector2;
 import object.Entity;
 
-public class Map {
+public class LevelMap {
 
 	private static final int TILE_WIDTH = 32;
 	private static final int TILE_HEIGHT = 32;
@@ -61,7 +62,7 @@ public class Map {
 
 	private GoalBounder goalBounder;
 
-	public Map(String file) {
+	public LevelMap(String file) {
 
 		this.file = file;
 		loadMap();
@@ -200,7 +201,7 @@ public class Map {
 		return this.map;
 	}
 
-	public HashMap<Vector2, Entity> getWalls() {
+	public Map<Vector2, Entity> getWalls() {
 		return this.walls;
 	}
 
@@ -223,14 +224,14 @@ public class Map {
 		setTiles();
 
 		Art.irBack = new IRenderer(this.backgroundTiles,
-				new Vector2(Art.getImage("Floor").getFWidth(), Art.getImage("Floor").getFHeight()), Map.getTileWidth(),
-				Map.getTileHeight());
+				new Vector2(Art.getImage("Floor").getFWidth(), Art.getImage("Floor").getFHeight()),
+				LevelMap.getTileWidth(), LevelMap.getTileHeight());
 		Art.irWall = new IRenderer(this.walls,
-				new Vector2(Art.getImage("Walls").getFWidth(), Art.getImage("Walls").getFHeight()), Map.getTileWidth(),
-				Map.getTileHeight());
+				new Vector2(Art.getImage("Walls").getFWidth(), Art.getImage("Walls").getFHeight()),
+				LevelMap.getTileWidth(), LevelMap.getTileHeight());
 		Art.irFore = new IRenderer(this.foregroundTiles,
-				new Vector2(Art.getImage("Walls").getFWidth(), Art.getImage("Walls").getFHeight()), Map.getTileWidth(),
-				Map.getTileHeight());
+				new Vector2(Art.getImage("Walls").getFWidth(), Art.getImage("Walls").getFHeight()),
+				LevelMap.getTileWidth(), LevelMap.getTileHeight());
 
 		setGoalBounder(new GoalBounder(this.width, this.height, this.walls));
 
@@ -243,12 +244,12 @@ public class Map {
 		switch (this.map.getRGB(x, y)) {
 		default:
 		case BROWNWALL:
-			wallG = new MapGraphics(Art.getImage("Walls"), new Vector2(tileMapX, tileMapY), x * Map.getTileWidth(),
-					y * Map.getTileHeight());
+			wallG = new MapGraphics(Art.getImage("Walls"), new Vector2(tileMapX, tileMapY), x * LevelMap.getTileWidth(),
+					y * LevelMap.getTileHeight());
 			break;
 		case GREYWALL:
 			wallG = new MapGraphics(Art.getImage("Walls"), new Vector2(tileMapX + 3.0f, tileMapY),
-					x * Map.getTileWidth(), y * Map.getTileHeight());
+					x * LevelMap.getTileWidth(), y * LevelMap.getTileHeight());
 			break;
 		}
 
@@ -266,15 +267,15 @@ public class Map {
 		switch (this.map.getRGB(x, y)) {
 		case LIGHTWATER:
 			wallG = new MapGraphics(Art.getImage("Walls"), new Vector2(tileMapX, tileMapY + 4.0f),
-					x * Map.getTileWidth(), y * Map.getTileHeight());
+					x * LevelMap.getTileWidth(), y * LevelMap.getTileHeight());
 			break;
 		case DARKWATER:
 			wallG = new MapGraphics(Art.getImage("Walls"), new Vector2(tileMapX + 3.0f, tileMapY + 4.0f),
-					x * Map.getTileWidth(), y * Map.getTileHeight());
+					x * LevelMap.getTileWidth(), y * LevelMap.getTileHeight());
 			break;
 		default:
 			wallG = new MapGraphics(Art.getImage("Walls"), new Vector2(tileMapX, tileMapY + 4.0f),
-					x * Map.getTileWidth(), y * Map.getTileHeight());
+					x * LevelMap.getTileWidth(), y * LevelMap.getTileHeight());
 		}
 
 		Entity wall = new Entity();

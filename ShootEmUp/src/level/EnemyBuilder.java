@@ -103,8 +103,8 @@ public final class EnemyBuilder {
 		do {
 			collide = false;
 
-			testGraphics.setX(rand.nextInt((level.getMap().getBackgroundTiles().length - 1) * Map.getTileWidth()));
-			testGraphics.setY(rand.nextInt((level.getMap().getBackgroundTiles()[0].length - 1) * Map.getTileWidth()));
+			testGraphics.setX(rand.nextInt((level.getMap().getBackgroundTiles().length - 1) * LevelMap.getTileWidth()));
+			testGraphics.setY(rand.nextInt((level.getMap().getBackgroundTiles()[0].length - 1) * LevelMap.getTileWidth()));
 
 			if ((Math.abs((testGraphics.getX() + (testGraphics.getWidth() / 2))
 					- (px + (pw / 2))) <= (ShootEmUp.getDisplay().getWidth() + testGraphics.getWidth()))

@@ -27,7 +27,7 @@ import java.io.InputStreamReader;
 import java.nio.FloatBuffer;
 import java.util.HashMap;
 
-import level.Map;
+import level.LevelMap;
 import main.Logger;
 import main.ShootEmUp;
 import math.Matrix4;
@@ -248,7 +248,7 @@ public class Art {
 	public static void refreshRenderers() {
 		base.initRenderData();
 		stat.initRenderData();
-		Map map = ShootEmUp.getCurrentLevel().getMap();
+		LevelMap map = ShootEmUp.getCurrentLevel().getMap();
 		if (ShootEmUp.getCurrentLevel() != null) {
 			irWall.initRenderData(map.getWalls(),
 					new Vector2(artFiles.get("Walls").getFWidth(), artFiles.get("Walls").getFHeight()));

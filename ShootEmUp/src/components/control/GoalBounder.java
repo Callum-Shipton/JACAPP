@@ -19,7 +19,7 @@ public class GoalBounder {
 	}
 
 	public Tile getTile(float x, float y) {
-		return this.aiTiles[(int) x][(int) y];
+		return aiTiles[(int) x][(int) y];
 	}
 
 	private void SetAiTiles(Map<Vector2, Entity> walls) {

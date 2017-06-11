@@ -7,7 +7,7 @@ import java.util.Set;
 import components.TypeComponent;
 import components.collision.RigidCollision;
 import components.graphical.BaseGraphics;
-import level.Map;
+import level.LevelMap;
 import math.Vector2;
 
 public class EntityMap {
@@ -50,10 +50,10 @@ public class EntityMap {
 
 	public Set<Vector2> getGridPos(BaseGraphics BG) {
 		Set<Vector2> gridPos = new HashSet<>();
-		for (int i = (int) Math.floor((BG.getX() / Map.getTileWidth()) / 6); i <= Math
-				.floor(((BG.getX() + BG.getWidth()) / Map.getTileWidth()) / 6); i++) {
-			for (int j = (int) Math.floor((BG.getY() / Map.getTileWidth()) / 6); j <= Math
-					.floor(((BG.getY() + BG.getHeight()) / Map.getTileWidth()) / 6); j++) {
+		for (int i = (int) Math.floor((BG.getX() / LevelMap.getTileWidth()) / 6); i <= Math
+				.floor(((BG.getX() + BG.getWidth()) / LevelMap.getTileWidth()) / 6); i++) {
+			for (int j = (int) Math.floor((BG.getY() / LevelMap.getTileWidth()) / 6); j <= Math
+					.floor(((BG.getY() + BG.getHeight()) / LevelMap.getTileWidth()) / 6); j++) {
 				gridPos.add(new Vector2(i, j));
 			}
 		}

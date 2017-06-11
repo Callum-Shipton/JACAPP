@@ -3,7 +3,7 @@ package components.control;
 import components.Message;
 import components.graphical.AnimatedGraphics;
 import components.movement.BaseMovement;
-import level.Map;
+import level.LevelMap;
 import object.Entity;
 
 public class RangeControl extends LineControl {
@@ -12,7 +12,7 @@ public class RangeControl extends LineControl {
 
 	public RangeControl(AnimatedGraphics AG, BaseMovement BM, int range) {
 		super(AG, BM);
-		this.range = (range * (Map.getTileWidth())) / BM.getSpeed();
+		this.range = (range * (LevelMap.getTileWidth())) / BM.getSpeed();
 		// TODO Auto-generated constructor stub
 	}
 

@@ -20,6 +20,7 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.lwjgl.BufferUtils;
@@ -58,7 +59,7 @@ public class IRenderer extends Renderer {
 		glUseProgram(0);
 	}
 
-	public void initRenderData(HashMap<Vector2, Entity> textures, Vector2 texMax) {
+	public void initRenderData(Map<Vector2, Entity> textures, Vector2 texMax) {
 
 		this.amount = textures.size();
 

@@ -25,11 +25,11 @@ public class Level {
 	private Set<Entity> newEntities;
 
 	private Spawner spawner;
-	private Map map;
+	private LevelMap map;
 
 	public Level(String file, int level) {
 		this.level = level;
-		this.map = new Map(file + level + ".png");
+		this.map = new LevelMap(file + level + ".png");
 		this.eMap = new EntityMap(this.map.getWidth(), this.map.getHeight());
 		this.spawner = new Spawner(1, 10, 3, 250.0f, 25.0f);
 		this.entities = new HashSet<>();
@@ -70,7 +70,7 @@ public class Level {
 		return this.level;
 	}
 
-	public Map getMap() {
+	public LevelMap getMap() {
 		return this.map;
 	}
 
