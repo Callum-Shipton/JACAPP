@@ -29,12 +29,18 @@ public class Level {
 
 	public Level(String file, int level) {
 		this.level = level;
-		this.map = new LevelMap(file + level + ".png");
-		this.eMap = new EntityMap(this.map.getWidth(), this.map.getHeight());
-		this.spawner = new Spawner(1, 10, 3, 250.0f, 25.0f);
-		this.entities = new HashSet<>();
-		this.oldEntities = new HashSet<>();
-		this.newEntities = new HashSet<>();
+		map = new LevelMap(file + level + ".png");
+		eMap = new EntityMap(map.getWidth(), map.getHeight());
+		spawner = new Spawner(1, 10, 3, 250.0f, 25.0f);
+		entities = new HashSet<>();
+		oldEntities = new HashSet<>();
+		newEntities = new HashSet<>();
+	}
+
+	public void init() {
+		addEntity(ShootEmUp.getPlayer());
+		ShootEmUp.setHud(new Hud(ShootEmUp.getPlayer(), 0, 0));
+		map.init();
 	}
 
 	public void addEntities() {
@@ -53,35 +59,9 @@ public class Level {
 		this.newEntities.add(e);
 		BaseCollision BC = e.getComponent(TypeComponent.COLLISION);
 		if (BC != null) {
-			BC.setGridPos(this.eMap.getGridPos(e));
-			ShootEmUp.getCurrentLevel().eMap.addEntity(this.eMap.getGridPos(e), e);
+			BC.setGridPos(eMap.getGridPos(e));
+			ShootEmUp.getCurrentLevel().eMap.addEntity(eMap.getGridPos(e), e);
 		}
-	}
-
-	public EntityMap geteMap() {
-		return this.eMap;
-	}
-
-	public Set<Entity> getEntities() {
-		return this.entities;
-	}
-
-	public int getLevel() {
-		return this.level;
-	}
-
-	public LevelMap getMap() {
-		return this.map;
-	}
-
-	public Spawner getSpawner() {
-		return this.spawner;
-	}
-
-	public void init() {
-		addEntity(ShootEmUp.getPlayer());
-		ShootEmUp.setHud(new Hud(ShootEmUp.getPlayer(), 0, 0));
-		this.map.init();
 	}
 
 	public void removeEntities() {
@@ -126,5 +106,25 @@ public class Level {
 		}
 
 		removeEntities();
+	}
+
+	public EntityMap geteMap() {
+		return this.eMap;
+	}
+
+	public Set<Entity> getEntities() {
+		return this.entities;
+	}
+
+	public int getLevel() {
+		return this.level;
+	}
+
+	public LevelMap getMap() {
+		return this.map;
+	}
+
+	public Spawner getSpawner() {
+		return this.spawner;
 	}
 }

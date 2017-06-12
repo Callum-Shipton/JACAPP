@@ -1,4 +1,4 @@
-package AI;
+package ai;
 
 import java.util.HashSet;
 import java.util.LinkedList;

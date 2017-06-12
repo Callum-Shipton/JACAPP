@@ -17,10 +17,10 @@ public class EntityMap {
 	private static final int SPLITS = 6;
 
 	public EntityMap(int w, int h) {
-		this.map = new HashMap<>();
+		map = new HashMap<>();
 		for (int i = 0; i < ((w / SPLITS) + 1); i++) {
 			HashMap<Integer, HashSet<Entity>> mapi = new HashMap<>();
-			this.map.put(i, mapi);
+			map.put(i, mapi);
 			for (int j = 0; j < ((h / SPLITS) + 1); j++) {
 				mapi.put(j, new HashSet<Entity>());
 			}

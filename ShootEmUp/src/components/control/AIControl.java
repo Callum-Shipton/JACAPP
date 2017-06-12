@@ -1,7 +1,7 @@
 package components.control;
 
-import AI.AStarSearch;
-import AI.Node;
+import ai.AStarSearch;
+import ai.Node;
 import components.Message;
 import components.TypeComponent;
 import components.attack.BaseAttack;

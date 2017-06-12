@@ -1,4 +1,4 @@
-package AI;
+package ai;
 
 public class Tile {
 	private BoundingBox North;

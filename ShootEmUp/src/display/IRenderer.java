@@ -18,7 +18,6 @@ import static org.lwjgl.opengl.GL33.glVertexAttribDivisor;
 
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -38,21 +37,21 @@ public class IRenderer extends Renderer {
 	private float height;
 	private int amount;
 
-	public IRenderer(HashMap<Vector2, Entity> Textures, Vector2 texMax, float width, float height) {
+	public IRenderer(Map<Vector2, Entity> textures, Vector2 texMax, float width, float height) {
 		this.width = width;
 		this.height = height;
-		initRenderData(Textures, texMax);
+		initRenderData(textures, texMax);
 	}
 
-	public IRenderer(Vector2[][] Textures, Vector2 texMax, float width, float height) {
+	public IRenderer(Vector2[][] textures, Vector2 texMax, float width, float height) {
 		this.width = width;
 		this.height = height;
-		initRenderData(Textures, texMax);
+		initRenderData(textures, texMax);
 	}
 
-	public void draw(int Texid) {
+	public void draw(int texid) {
 		glUseProgram(Art.ShaderInst);
-		glBindTexture(GL11.GL_TEXTURE_2D, Texid);
+		glBindTexture(GL11.GL_TEXTURE_2D, texid);
 		glBindVertexArray(this.VAO);
 		glDrawElementsInstanced(GL11.GL_TRIANGLES, 6, GL11.GL_UNSIGNED_BYTE, 0, this.amount);
 		glBindVertexArray(0);

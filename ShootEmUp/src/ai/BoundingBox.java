@@ -1,4 +1,4 @@
-package AI;
+package ai;
 
 import math.Vector2;
 import math.Vector4;

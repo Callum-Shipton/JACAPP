@@ -1,4 +1,4 @@
-package AI;
+package ai;
 
 import components.TypeComponent;
 import components.graphical.BaseGraphics;
