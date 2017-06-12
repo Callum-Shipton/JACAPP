@@ -39,34 +39,36 @@ public class AIControl extends BaseControl {
 
 		if (y < BG.getY()) {
 			if ((y - BG.getY()) > -BM.getSpeed()) {
-				movementVector.add(0.0f, ((1.0f / BM.getSpeed()) * (y - BG.getY())));
+				movementVector.add(0.0f, getDifference(BM.getSpeed(), y, BG.getY()));
 			} else {
 				movementVector.add(0.0f, -1.0f);
 			}
-		}
-		if (x < BG.getX()) {
-			if ((x - BG.getX()) > -BM.getSpeed()) {
-				movementVector.add(((1.0f / BM.getSpeed()) * (x - BG.getX())), 0.0f);
-			} else {
-				movementVector.add(-1.0f, 0.0f);
-			}
-		}
-		if (y > BG.getY()) {
+		} else if (y > BG.getY()) {
 			if ((y - BG.getY()) < BM.getSpeed()) {
-				movementVector.add(0.0f, ((1.0f / BM.getSpeed()) * (y - BG.getY())));
+				movementVector.add(0.0f, getDifference(BM.getSpeed(), y, BG.getY()));
 			} else {
 				movementVector.add(0.0f, 1.0f);
 			}
 		}
-		if (x > BG.getX()) {
+		if (x < BG.getX()) {
+			if ((x - BG.getX()) > -BM.getSpeed()) {
+				movementVector.add(getDifference(BM.getSpeed(), x, BG.getX()), 0.0f);
+			} else {
+				movementVector.add(-1.0f, 0.0f);
+			}
+		} else if (x > BG.getX()) {
 			if ((x - BG.getX()) < BM.getSpeed()) {
-				movementVector.add(((1.0f / BM.getSpeed()) * (x - BG.getX())), 0.0f);
+				movementVector.add(getDifference(BM.getSpeed(), x, BG.getX()), 0.0f);
 			} else {
 				movementVector.add(1.0f, 0.0f);
 			}
 		}
 
 		return movementVector;
+	}
+
+	private float getDifference(float speed, float pos1, float pos2) {
+		return (1.0f / speed) * (pos1 - pos2);
 	}
 
 	private void attack(Entity e) {

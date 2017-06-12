@@ -19,7 +19,7 @@ public class MapGenerator {
 
 	private BufferedImage map = null;
 
-	private static final String TEXTURE_FILE = "walls";
+	private static final String TEXTURE_FILE = "Walls";
 
 	// size of map
 	private int width;
