@@ -19,6 +19,8 @@ public class MapGenerator {
 
 	private BufferedImage map = null;
 
+	private static final String TEXTURE_FILE = "walls";
+
 	// size of map
 	private int width;
 	private int height;
@@ -68,31 +70,33 @@ public class MapGenerator {
 		try {
 			map = ImageIO.read(getClass().getResource(file));
 		} catch (IOException e) {
+			Logger.error(e);
 		}
+
 	}
 
 	// fill the tile type arrays
 	private void setTileTypes() {
 		// take the map image and use it to fill the tile type array
-		for (int y = 0; y < this.map.getHeight(); y++) {
-			for (int x = 0; x < this.map.getWidth(); x++) {
-				switch (this.map.getRGB(x, y)) {
+		for (int y = 0; y < map.getHeight(); y++) {
+			for (int x = 0; x < map.getWidth(); x++) {
+				switch (map.getRGB(x, y)) {
 				case GRASS:
-					this.backgroundTileTypes[x][y] = 1;
+					backgroundTileTypes[x][y] = 1;
 					break;
 				case PATH:
-					this.backgroundTileTypes[x][y] = 2;
+					backgroundTileTypes[x][y] = 2;
 					break;
 				case BROWNWALL:
 				case GREYWALL:
-					this.wallTileTypes[x][y] = 7;
+					wallTileTypes[x][y] = 7;
 					break;
 				case LIGHTWATER:
 				case DARKWATER:
-					this.wallTileTypes[x][y] = 12;
+					wallTileTypes[x][y] = 12;
 					break;
 				default:
-					Logger.warn("Unknown tile code: " + this.map.getRGB(x, y));
+					Logger.warn("Unknown tile code: " + map.getRGB(x, y));
 				}
 			}
 		}
@@ -100,100 +104,99 @@ public class MapGenerator {
 
 	private void generateWalls() {
 		// Set Wall & Water tile types
-		for (int y = 0; y < this.map.getHeight(); y++) {
-			for (int x = 0; x < this.map.getWidth(); x++) {
+		for (int y = 0; y < map.getHeight(); y++) {
+			for (int x = 0; x < map.getWidth(); x++) {
 				// if a wall
-				if (this.wallTileTypes[x][y] == 7) {
+				if (wallTileTypes[x][y] == 7) {
 					if (x > 0) {
-						if ((this.wallTileTypes[x - 1][y] == 0) || (this.wallTileTypes[x - 1][y] > 11)) {
-							if (y < (this.map.getHeight() - 2)) {
-								if ((this.wallTileTypes[x][y + 2] == 0) || (this.wallTileTypes[x][y + 2] > 11)) {
-									if ((this.wallTileTypes[x][y + 1] == 0) || (this.wallTileTypes[x][y + 1] > 11)) {
-										this.wallTileTypes[x][y] = 4;
+						if ((wallTileTypes[x - 1][y] == 0) || (wallTileTypes[x - 1][y] > 11)) {
+							if (y < (map.getHeight() - 2)) {
+								if ((wallTileTypes[x][y + 2] == 0) || (wallTileTypes[x][y + 2] > 11)) {
+									if ((wallTileTypes[x][y + 1] == 0) || (wallTileTypes[x][y + 1] > 11)) {
+										wallTileTypes[x][y] = 4;
 									} else {
-										this.wallTileTypes[x][y] = 1;
+										wallTileTypes[x][y] = 1;
 									}
 								}
 							}
 						}
-						if ((this.wallTileTypes[x - 1][y] == 7) || (this.wallTileTypes[x - 1][y] == 8)) {
-							if (y < (this.map.getHeight() - 2)) {
-								if ((this.wallTileTypes[x][y + 2] == 0) || (this.wallTileTypes[x][y + 2] > 11)) {
-									this.wallTileTypes[x][y] = 2;
-									this.wallTileTypes[x - 1][y] = 9;
+						if ((wallTileTypes[x - 1][y] == 7) || (wallTileTypes[x - 1][y] == 8)) {
+							if (y < (map.getHeight() - 2)) {
+								if ((wallTileTypes[x][y + 2] == 0) || (wallTileTypes[x][y + 2] > 11)) {
+									wallTileTypes[x][y] = 2;
+									wallTileTypes[x - 1][y] = 9;
 								} else {
-									this.wallTileTypes[x][y] = 8;
+									wallTileTypes[x][y] = 8;
 								}
 							}
 						}
-						if (x < (this.map.getWidth() - 1)) {
-							if ((this.wallTileTypes[x + 1][y] == 0) || (this.wallTileTypes[x + 1][y] > 11)) {
-								this.wallTileTypes[x][y] = 9;
+						if (x < (map.getWidth() - 1)) {
+							if ((wallTileTypes[x + 1][y] == 0) || (wallTileTypes[x + 1][y] > 11)) {
+								wallTileTypes[x][y] = 9;
 							}
-							if ((this.wallTileTypes[x - 1][y] == 1) || (this.wallTileTypes[x - 1][y] == 2)) {
-								if (y < (this.map.getHeight() - 2)) {
-									if ((this.wallTileTypes[x][y + 2] == 0) || (this.wallTileTypes[x][y + 2] > 11)) {
-										if ((this.wallTileTypes[x + 1][y] == 0)
-												|| (this.wallTileTypes[x + 1][y] > 11)) {
-											this.wallTileTypes[x][y] = 3;
+							if ((wallTileTypes[x - 1][y] == 1) || (wallTileTypes[x - 1][y] == 2)) {
+								if (y < (map.getHeight() - 2)) {
+									if ((wallTileTypes[x][y + 2] == 0) || (wallTileTypes[x][y + 2] > 11)) {
+										if ((wallTileTypes[x + 1][y] == 0) || (wallTileTypes[x + 1][y] > 11)) {
+											wallTileTypes[x][y] = 3;
 										} else {
-											this.wallTileTypes[x][y] = 2;
+											wallTileTypes[x][y] = 2;
 										}
 									}
 								}
 							}
 						}
-						if ((this.wallTileTypes[x - 1][y] == 4) || (this.wallTileTypes[x - 1][y] == 5)) {
-							if (y < (this.map.getHeight() - 1)) {
-								if ((this.wallTileTypes[x][y + 1] == 0) || (this.wallTileTypes[x][y + 1] > 11)) {
-									this.wallTileTypes[x][y] = 5;
+						if ((wallTileTypes[x - 1][y] == 4) || (wallTileTypes[x - 1][y] == 5)) {
+							if (y < (map.getHeight() - 1)) {
+								if ((wallTileTypes[x][y + 1] == 0) || (wallTileTypes[x][y + 1] > 11)) {
+									wallTileTypes[x][y] = 5;
 								}
 							}
-							if (x < (this.map.getWidth() - 1)) {
-								if ((this.wallTileTypes[x + 1][y] == 0) || (this.wallTileTypes[x + 1][y] > 11)) {
-									this.wallTileTypes[x][y] = 6;
+							if (x < (map.getWidth() - 1)) {
+								if ((wallTileTypes[x + 1][y] == 0) || (wallTileTypes[x + 1][y] > 11)) {
+									wallTileTypes[x][y] = 6;
 								}
 							}
 						}
 					}
 				}
 				// if water
-				if (this.wallTileTypes[x][y] == 12) {
-					this.wallTileTypes[x][y] = 16;
+				if (wallTileTypes[x][y] == 12) {
+					wallTileTypes[x][y] = 16;
 				}
 			}
 		}
-		for (int y = 0; y < this.map.getHeight(); y++) {
-			for (int x = 0; x < this.map.getWidth(); x++) {
-				if (this.wallTileTypes[x][y] == 0) {
-					if (y < (this.map.getHeight() - 1)) {
-						if (this.wallTileTypes[x][y + 1] == 1) {
-							this.foregroundTileTypes[x][y] = 1;
-						} else if (this.wallTileTypes[x][y + 1] == 2) {
-							this.foregroundTileTypes[x][y] = 2;
-							if ((x > 0) && (x < (this.map.getWidth() - 1))) {
-								if (this.foregroundTileTypes[x - 1][y] == 3) {
-									this.foregroundTileTypes[x - 1][y] = 2;
+		for (int y = 0; y < map.getHeight(); y++) {
+			for (int x = 0; x < map.getWidth(); x++) {
+				if (wallTileTypes[x][y] == 0) {
+					if (y < (map.getHeight() - 1)) {
+						if (wallTileTypes[x][y + 1] == 1) {
+							foregroundTileTypes[x][y] = 1;
+						} else if (wallTileTypes[x][y + 1] == 2) {
+							foregroundTileTypes[x][y] = 2;
+							if ((x > 0) && (x < (map.getWidth() - 1))) {
+								if (foregroundTileTypes[x - 1][y] == 3) {
+									foregroundTileTypes[x - 1][y] = 2;
 								}
-								if (this.wallTileTypes[x - 1][y] == 9) {
-									this.wallTileTypes[x - 1][y] = 8;
+								if (wallTileTypes[x - 1][y] == 9) {
+									wallTileTypes[x - 1][y] = 8;
 								}
-								if (this.wallTileTypes[x + 1][y] == 7) {
-									this.wallTileTypes[x + 1][y] = 8;
+								if (wallTileTypes[x + 1][y] == 7) {
+									wallTileTypes[x + 1][y] = 8;
 								}
 							}
-						} else if (this.wallTileTypes[x][y + 1] == 3) {
-							this.foregroundTileTypes[x][y] = 3;
+						} else if (wallTileTypes[x][y + 1] == 3) {
+							foregroundTileTypes[x][y] = 3;
 						}
-						if ((x > 0) && (x < (this.map.getWidth() - 1))) {
-							if (this.wallTileTypes[x][y + 1] == 7) {
-								if (this.foregroundTileTypes[x - 1][y] != 0) {
-									this.foregroundTileTypes[x][y] = 2;
+						if ((x > 0) && (x < (map.getWidth() - 1))) {
+							if (wallTileTypes[x][y + 1] == 7) {
+								if (foregroundTileTypes[x - 1][y] != 0) {
+									foregroundTileTypes[x][y] = 2;
 								} else {
-									this.foregroundTileTypes[x][y] = 1;
+									foregroundTileTypes[x][y] = 1;
 								}
-							} else if (this.wallTileTypes[x][y + 1] == 9) {
-								this.foregroundTileTypes[x][y] = 3;
+							} else if (wallTileTypes[x][y + 1] == 9) {
+								foregroundTileTypes[x][y] = 3;
 							}
 						}
 					}
@@ -204,14 +207,14 @@ public class MapGenerator {
 
 	private void setTiles() {
 		// Set Background Tiles
-		for (int y = 0; y < this.map.getHeight(); y++) {
-			for (int x = 0; x < this.map.getWidth(); x++) {
-				switch (this.backgroundTileTypes[x][y]) {
+		for (int y = 0; y < map.getHeight(); y++) {
+			for (int x = 0; x < map.getWidth(); x++) {
+				switch (backgroundTileTypes[x][y]) {
 				case 1:
-					this.backgroundTiles[x][y] = new Vector2(0.0f, 0.0f);
+					backgroundTiles[x][y] = new Vector2(0.0f, 0.0f);
 					break;
 				case 2:
-					this.backgroundTiles[x][y] = new Vector2(1.0f, 0.0f);
+					backgroundTiles[x][y] = new Vector2(1.0f, 0.0f);
 					break;
 				}
 			}
@@ -284,23 +287,23 @@ public class MapGenerator {
 			}
 		}
 		// Set Foreground Tiles
-		for (int y = 0; y < this.map.getHeight(); y++) {
-			for (int x = 0; x < this.map.getWidth(); x++) {
-				switch (this.foregroundTileTypes[x][y]) {
+		for (int y = 0; y < map.getHeight(); y++) {
+			for (int x = 0; x < map.getWidth(); x++) {
+				switch (foregroundTileTypes[x][y]) {
 				case 1:
-					this.foregroundTiles[x][y] = new Vector2(0.0f, 1.0f);
+					foregroundTiles[x][y] = new Vector2(0.0f, 1.0f);
 					break;
 				case 2:
-					this.foregroundTiles[x][y] = new Vector2(1.0f, 1.0f);
+					foregroundTiles[x][y] = new Vector2(1.0f, 1.0f);
 					break;
 				case 3:
-					this.foregroundTiles[x][y] = new Vector2(2.0f, 1.0f);
+					foregroundTiles[x][y] = new Vector2(2.0f, 1.0f);
 					break;
 				case 4:
-					this.foregroundTiles[x][y] = new Vector2(0.0f, 0.0f);
+					foregroundTiles[x][y] = new Vector2(0.0f, 0.0f);
 					break;
 				case 5:
-					this.foregroundTiles[x][y] = new Vector2(2.0f, 0.0f);
+					foregroundTiles[x][y] = new Vector2(2.0f, 0.0f);
 					break;
 				}
 			}
@@ -312,22 +315,17 @@ public class MapGenerator {
 		MapGraphics wallG;
 		switch (this.map.getRGB(x, y)) {
 		case GREYWALL:
-			wallG = new MapGraphics(Art.getImage("Walls"), new Vector2(tileMapX + 3.0f, tileMapY),
+			wallG = new MapGraphics(Art.getImage(TEXTURE_FILE), new Vector2(tileMapX + 3.0f, tileMapY),
 					x * LevelMap.getTileWidth(), y * LevelMap.getTileHeight());
 			break;
 		case BROWNWALL:
 		default:
-			wallG = new MapGraphics(Art.getImage("Walls"), new Vector2(tileMapX, tileMapY), x * LevelMap.getTileWidth(),
-					y * LevelMap.getTileHeight());
+			wallG = new MapGraphics(Art.getImage(TEXTURE_FILE), new Vector2(tileMapX, tileMapY),
+					x * LevelMap.getTileWidth(), y * LevelMap.getTileHeight());
 			break;
 		}
 
-		Entity wall = new Entity();
-		wall.addComponent(wallG);
-		RigidCollision MC = new RigidCollision();
-		wall.addComponent(MC);
-		ShootEmUp.getCurrentLevel().addEntity(wall);
-		this.walls.put(new Vector2(x, y), wall);
+		createEntity(wallG, x, y);
 	}
 
 	// create water
@@ -335,24 +333,28 @@ public class MapGenerator {
 		MapGraphics wallG;
 		switch (this.map.getRGB(x, y)) {
 		case LIGHTWATER:
-			wallG = new MapGraphics(Art.getImage("Walls"), new Vector2(tileMapX, tileMapY + 4.0f),
+			wallG = new MapGraphics(Art.getImage(TEXTURE_FILE), new Vector2(tileMapX, tileMapY + 4.0f),
 					x * LevelMap.getTileWidth(), y * LevelMap.getTileHeight());
 			break;
 		case DARKWATER:
-			wallG = new MapGraphics(Art.getImage("Walls"), new Vector2(tileMapX + 3.0f, tileMapY + 4.0f),
+			wallG = new MapGraphics(Art.getImage(TEXTURE_FILE), new Vector2(tileMapX + 3.0f, tileMapY + 4.0f),
 					x * LevelMap.getTileWidth(), y * LevelMap.getTileHeight());
 			break;
 		default:
-			wallG = new MapGraphics(Art.getImage("Walls"), new Vector2(tileMapX, tileMapY + 4.0f),
+			wallG = new MapGraphics(Art.getImage(TEXTURE_FILE), new Vector2(tileMapX, tileMapY + 4.0f),
 					x * LevelMap.getTileWidth(), y * LevelMap.getTileHeight());
 		}
 
+		createEntity(wallG, x, y);
+	}
+
+	private void createEntity(MapGraphics wallG, int x, int y) {
 		Entity wall = new Entity();
 		wall.addComponent(wallG);
-		RigidCollision MC = new RigidCollision();
-		wall.addComponent(MC);
+		RigidCollision rigidCollision = new RigidCollision();
+		wall.addComponent(rigidCollision);
 		ShootEmUp.getCurrentLevel().addEntity(wall);
-		this.walls.put(new Vector2(x, y), wall);
+		walls.put(new Vector2(x, y), wall);
 	}
 
 	public int getWidth() {
