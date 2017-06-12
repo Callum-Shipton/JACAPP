@@ -1,4 +1,4 @@
-package components.control;
+package AI;
 
 public class Tile {
 	private BoundingBox North;

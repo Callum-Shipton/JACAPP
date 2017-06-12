@@ -7,8 +7,8 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
+import AI.GoalBounder;
 import components.collision.RigidCollision;
-import components.control.GoalBounder;
 import components.graphical.MapGraphics;
 import display.Art;
 import display.IRenderer;

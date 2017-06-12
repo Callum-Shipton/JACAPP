@@ -1,4 +1,4 @@
-package components.control;
+package AI;
 
 import math.Vector2;
 
