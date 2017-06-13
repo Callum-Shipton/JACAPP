@@ -77,36 +77,36 @@ public class GoalBounder {
 		for (int x = 2; x < (aiTiles.length - 2); x++) {
 			for (int y = 2; y < (aiTiles[0].length - 2); y++) {
 
-				// if (walls.containsKey(new Vector2(x, y))) {
+				if (!walls.containsKey(new Vector2(x, y))) {
 
-				// queue for tiles to be looked at
-				Queue<TypeNode> open = new LinkedList<>();
+					// queue for tiles to be looked at
+					Queue<TypeNode> open = new LinkedList<>();
 
-				// list of already viewed tiles
-				Set<TypeNode> closed = new HashSet<>();
+					// list of already viewed tiles
+					Set<TypeNode> closed = new HashSet<>();
 
-				Node start = new Node(new Vector2(x, y));
+					Node start = new Node(new Vector2(x, y));
 
-				TypeNode[] startingNodes = generateChildNodes(start);
-				addNodesToQueues(startingNodes, open, closed);
+					TypeNode[] startingNodes = generateChildNodes(start);
+					addNodesToQueues(startingNodes, open, closed);
 
-				BoundingBox[] boxes = initBoundingBoxes(startingNodes);
+					BoundingBox[] boxes = initBoundingBoxes(startingNodes);
 
-				while (!open.isEmpty()) {
-					TypeNode current = open.poll(); // Tile current being
-													// checked
-					int currentType = current.getType();
+					while (!open.isEmpty()) {
+						TypeNode current = open.poll(); // Tile current being
+														// checked
+						int currentType = current.getType();
 
-					boxes[currentType].addPoint(current.getPosition());
+						boxes[currentType].addPoint(current.getPosition());
 
-					TypeNode[] childNodes = generateChildNodes(current, currentType);
+						TypeNode[] childNodes = generateChildNodes(current, currentType);
 
-					addNodesToQueue(childNodes, walls, open, closed);
+						addNodesToQueue(childNodes, walls, open, closed);
+					}
+
+					aiTiles[x][y] = new GoalboundingTile(boxes);
+
 				}
-
-				aiTiles[x][y] = new GoalboundingTile(boxes);
-
-				// }
 			}
 		}
 	}
