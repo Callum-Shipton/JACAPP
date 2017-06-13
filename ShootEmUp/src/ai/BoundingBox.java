@@ -12,16 +12,16 @@ public class BoundingBox {
 	}
 
 	public void addPoint(Vector2 point) {
-		if (point.x() < this.box.x()) {
+		if (point.x() < box.x()) {
 			box.x(point.x());
 		}
-		if (point.y() < this.box.y()) {
+		if (point.y() < box.y()) {
 			box.y(point.y());
 		}
-		if (point.x() > this.box.z()) {
+		if (point.x() > box.z()) {
 			box.z(point.x());
 		}
-		if (point.y() > this.box.w()) {
+		if (point.y() > box.w()) {
 			box.w(point.y());
 		}
 	}

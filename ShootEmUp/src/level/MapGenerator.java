@@ -60,7 +60,7 @@ public class MapGenerator {
 	public void generateMap() {
 		setTileTypes();
 
-		generateWalls();
+		// generateWalls();
 
 		setTiles();
 	}
@@ -220,9 +220,9 @@ public class MapGenerator {
 			}
 		}
 		// insert correct wall/water type and side
-		for (int y = 0; y < this.map.getHeight(); y++) {
-			for (int x = 0; x < this.map.getWidth(); x++) {
-				switch (this.wallTileTypes[x][y]) {
+		for (int y = 0; y < map.getHeight(); y++) {
+			for (int x = 0; x < map.getWidth(); x++) {
+				switch (wallTileTypes[x][y]) {
 				case 1:
 					insertWall(x, y, 0.0f, 2.0f);
 					break;
@@ -313,7 +313,7 @@ public class MapGenerator {
 	// create wall
 	private void insertWall(int x, int y, float tileMapX, float tileMapY) {
 		MapGraphics wallG;
-		switch (this.map.getRGB(x, y)) {
+		switch (map.getRGB(x, y)) {
 		case GREYWALL:
 			wallG = new MapGraphics(Art.getImage(TEXTURE_FILE), new Vector2(tileMapX + 3.0f, tileMapY),
 					x * LevelMap.getTileWidth(), y * LevelMap.getTileHeight());

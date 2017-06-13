@@ -85,8 +85,8 @@ public class AIControl extends BaseControl {
 		BaseGraphics PlayerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
 		Node goalNode = new Node(Node.getGridPosition(PlayerGraphics.getX(), PlayerGraphics.getY()), null);
 		Node startNode = new Node(Node.getGridPosition(BG.getX(), BG.getY()), null);
-		AStarSearch search = new AStarSearch(goalNode, startNode);
-		Vector2 target = search.findPath();
+		AStarSearch search = new AStarSearch();
+		Vector2 target = search.findPath(goalNode, startNode);
 
 		if (target != null) {
 			Vector2 movementVector = calculateMovementVector(target);

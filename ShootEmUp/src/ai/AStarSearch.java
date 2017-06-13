@@ -23,10 +23,7 @@ public class AStarSearch {
 	private Map<String, Node> childNodes;
 	private Node goalNode;
 
-	public AStarSearch(Node goalNode, Node startNode) {
-		this.startNode = startNode;
-		this.goalNode = goalNode;
-
+	public AStarSearch() {
 		LevelMap map = ShootEmUp.getCurrentLevel().getMap();
 		if (walls == null) {
 			walls = map.getWalls();
@@ -36,7 +33,10 @@ public class AStarSearch {
 		}
 	}
 
-	private void initData() {
+	private void initData(Node goalNode, Node startNode) {
+
+		this.startNode = startNode;
+		this.goalNode = goalNode;
 		openNodes = new PriorityQueue<>(); // queue for nodes to be searched
 		closedNodes = new HashSet<>(); // list of nodes already searched or
 										// being
@@ -65,81 +65,66 @@ public class AStarSearch {
 		childNodes.put("NEE", new Node(new Vector2(currentX + 2, currentY - 1), currentNode));
 		childNodes.put("E", new Node(new Vector2(currentX + 1, currentY), currentNode));
 		childNodes.put("NE", new Node(new Vector2(currentX + 1, currentY - 1), currentNode));
-
-		goalBounder.getTile(currentX, currentY);
 	}
 
-	private void addUnobstructedChildNodes() {
+	private void addNode(BoundingBox box, Node node) {
+		// if (box.boxContains(goalNode.getPosition())) {
+		openNodes.add(node);
+		closedNodes.add(node);
+		// }
+	}
+
+	private void addUnobstructedChildNodes(GoalboundingTile goalboundingTile) {
 		if (!closedNodes.contains(childNodes.get("N"))) {
 			if (isNodeNotWall(childNodes.get("N")) && isNodeNotWall(childNodes.get("NE"))) {
-				// if (currentTile.getNorth().boxContains(goal)) {
-				openNodes.add(childNodes.get("N"));
-				closedNodes.add(childNodes.get("N"));
-				// }
+				addNode(goalboundingTile.getNorth(), childNodes.get("N"));
 			}
 		}
 		if (!closedNodes.contains(childNodes.get("SSW"))) {
 			if (isNodeNotWall(childNodes.get("SSW")) && isNodeNotWall(childNodes.get("N"))
 					&& isNodeNotWall(childNodes.get("W"))
 					&& ((isNodeNotWall(childNodes.get("SW")) || isNodeNotWall(childNodes.get("NE"))))) {
-				// if (currentTile.getNorthWest().boxContains(goal)) {
-				openNodes.add(childNodes.get("SSW"));
-				closedNodes.add(childNodes.get("SSW"));
-				// }
+				if (goalboundingTile.getNorthWest().boxContains(goalNode.getPosition())) {
+					addNode(goalboundingTile.getNorthWest(), childNodes.get("SSW"));
+				}
 			}
 		}
 		if (!closedNodes.contains(childNodes.get("W"))) {
 			if (isNodeNotWall(childNodes.get("W")) && isNodeNotWall(childNodes.get("SW"))) {
-				// if (currentTile.getWest().boxContains(goal)) {
-				openNodes.add(childNodes.get("W"));
-				closedNodes.add(childNodes.get("W"));
-				// }
+				if (goalboundingTile.getWest().boxContains(goalNode.getPosition())) {
+					addNode(goalboundingTile.getWest(), childNodes.get("W"));
+				}
 			}
 		}
 		if (!closedNodes.contains(childNodes.get("SW"))) {
 			if (isNodeNotWall(childNodes.get("SW")) && isNodeNotWall(childNodes.get("SSW"))
 					&& isNodeNotWall(childNodes.get("SS"))
 					&& (isNodeNotWall(childNodes.get("W")) || isNodeNotWall(childNodes.get("SSE")))) {
-				// if (currentTile.getSouthWest().boxContains(goal)) {
-				openNodes.add(childNodes.get("SW"));
-				closedNodes.add(childNodes.get("SW"));
-				// }
+				addNode(goalboundingTile.getSouthWest(), childNodes.get("SW"));
 			}
 		}
 		if (!closedNodes.contains(childNodes.get("S"))) {
 			if (isNodeNotWall(childNodes.get("SS")) && isNodeNotWall(childNodes.get("SSE"))) {
-				// if (currentTile.getSouth().boxContains(goal)) {
-				openNodes.add(childNodes.get("S"));
-				closedNodes.add(childNodes.get("S"));
-				// }
+				addNode(goalboundingTile.getSouth(), childNodes.get("S"));
 			}
 		}
 		if (!closedNodes.contains(childNodes.get("SE"))) {
 			if (isNodeNotWall(childNodes.get("SSE")) && isNodeNotWall(childNodes.get("SSEE"))
 					&& isNodeNotWall(childNodes.get("SEE"))
 					&& (isNodeNotWall(childNodes.get("EE")) || isNodeNotWall(childNodes.get("SS")))) {
-				// if (currentTile.getSouthEast().boxContains(goal)) {
-				openNodes.add(childNodes.get("SE"));
-				closedNodes.add(childNodes.get("SE"));
-				// }
+				addNode(goalboundingTile.getSouthEast(), childNodes.get("SE"));
 			}
 		}
 		if (!closedNodes.contains(childNodes.get("E"))) {
 			if (isNodeNotWall(childNodes.get("EE")) && isNodeNotWall(childNodes.get("SEE"))) {
-				// if (currentTile.getEast().boxContains(goal)) {
-				openNodes.add(childNodes.get("E"));
-				closedNodes.add(childNodes.get("E"));
-				// }
+				addNode(goalboundingTile.getEast(), childNodes.get("E"));
 			}
 		}
 		if (!closedNodes.contains(childNodes.get("NE"))) {
 			if (isNodeNotWall(childNodes.get("NE")) && isNodeNotWall(childNodes.get("NEE"))
 					&& isNodeNotWall(childNodes.get("EE"))
 					&& (isNodeNotWall(childNodes.get("SEE")) || isNodeNotWall(childNodes.get("N")))) {
-				// if (currentTile.getNorthEast().boxContains(goal)) {
-				openNodes.add(childNodes.get("NE"));
-				closedNodes.add(childNodes.get("NE"));
-				// }
+				addNode(goalboundingTile.getNorthEast(), childNodes.get("NE"));
 			}
 		}
 	}
@@ -159,8 +144,8 @@ public class AStarSearch {
 		}
 	}
 
-	public Vector2 findPath() {
-		initData();
+	public Vector2 findPath(Node goalNode, Node startNode) {
+		initData(goalNode, startNode);
 
 		int searchedNodes = 0;
 		while (!openNodes.isEmpty()) {
@@ -172,7 +157,9 @@ public class AStarSearch {
 			}
 
 			generateChildNodes(currentNode);
-			addUnobstructedChildNodes();
+			GoalboundingTile goalboundingTile = goalBounder.getTile(currentNode.getPosition().x(),
+					currentNode.getPosition().y());
+			addUnobstructedChildNodes(goalboundingTile);
 		}
 
 		Logger.warn("cannot find player");

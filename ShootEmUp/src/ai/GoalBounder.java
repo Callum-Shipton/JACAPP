@@ -11,16 +11,14 @@ import math.Vector4;
 import object.Entity;
 
 public class GoalBounder {
-	private Tile[][] aiTiles;
-	private Queue<TypeNode> open;
-	private Set<TypeNode> closed;
+	private GoalboundingTile[][] aiTiles;
 
 	public GoalBounder(int width, int height, Map<Vector2, Entity> walls) {
-		this.aiTiles = new Tile[width][height];
+		this.aiTiles = new GoalboundingTile[width][height];
 		createGoalBoundingBoxes(walls);
 	}
 
-	public Tile getTile(float x, float y) {
+	public GoalboundingTile getTile(float x, float y) {
 		return aiTiles[(int) x][(int) y];
 	}
 
@@ -56,23 +54,21 @@ public class GoalBounder {
 		return boxes;
 	}
 
-	private void addNodesToQueues(TypeNode[] childNodes) {
+	private void addNodesToQueues(TypeNode[] childNodes, Queue<TypeNode> open, Set<TypeNode> closed) {
 		for (TypeNode node : childNodes) {
 			open.add(node);
 			closed.add(node);
 		}
 	}
 
-	private void fillGoalboundBoxes(TypeNode[] nodes, Map<Vector2, Entity> walls) {
+	private void addNodesToQueue(TypeNode[] nodes, Map<Vector2, Entity> walls, Queue<TypeNode> open,
+			Set<TypeNode> closed) {
 		for (int i = 0; i < nodes.length; i++) {
 			if (!closed.contains(nodes[i])) {
 				if (!walls.containsKey(nodes[i].position)) {
-
 					open.add(nodes[i]);
-					closed.add(nodes[i]);
-				} else {
-					closed.add(nodes[i]);
 				}
+				closed.add(nodes[i]);
 			}
 		}
 	}
@@ -81,16 +77,18 @@ public class GoalBounder {
 		for (int x = 2; x < (aiTiles.length - 2); x++) {
 			for (int y = 2; y < (aiTiles[0].length - 2); y++) {
 
+				// if (walls.containsKey(new Vector2(x, y))) {
+
 				// queue for tiles to be looked at
-				open = new LinkedList<>();
+				Queue<TypeNode> open = new LinkedList<>();
 
 				// list of already viewed tiles
-				closed = new HashSet<>();
+				Set<TypeNode> closed = new HashSet<>();
 
 				Node start = new Node(new Vector2(x, y));
 
 				TypeNode[] startingNodes = generateChildNodes(start);
-				addNodesToQueues(startingNodes);
+				addNodesToQueues(startingNodes, open, closed);
 
 				BoundingBox[] boxes = initBoundingBoxes(startingNodes);
 
@@ -103,11 +101,12 @@ public class GoalBounder {
 
 					TypeNode[] childNodes = generateChildNodes(current, currentType);
 
-					fillGoalboundBoxes(childNodes, walls);
+					addNodesToQueue(childNodes, walls, open, closed);
 				}
 
-				aiTiles[x][y] = new Tile();
-				aiTiles[x][y].setBoxes(boxes);
+				aiTiles[x][y] = new GoalboundingTile(boxes);
+
+				// }
 			}
 		}
 	}

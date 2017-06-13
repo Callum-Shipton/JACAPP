@@ -50,17 +50,17 @@ public class LevelMap {
 		foregroundTiles = generator.getForegroundTiles();
 		walls = generator.getWalls();
 
-		Art.irBack = new IRenderer(this.backgroundTiles,
+		Art.irBack = new IRenderer(backgroundTiles,
 				new Vector2(Art.getImage("Floor").getFWidth(), Art.getImage("Floor").getFHeight()),
 				LevelMap.getTileWidth(), LevelMap.getTileHeight());
-		Art.irWall = new IRenderer(this.walls,
+		Art.irWall = new IRenderer(walls,
 				new Vector2(Art.getImage("Walls").getFWidth(), Art.getImage("Walls").getFHeight()),
 				LevelMap.getTileWidth(), LevelMap.getTileHeight());
-		Art.irFore = new IRenderer(this.foregroundTiles,
+		Art.irFore = new IRenderer(foregroundTiles,
 				new Vector2(Art.getImage("Walls").getFWidth(), Art.getImage("Walls").getFHeight()),
 				LevelMap.getTileWidth(), LevelMap.getTileHeight());
 
-		setGoalBounder(new GoalBounder(this.width, this.height, this.walls));
+		setGoalBounder(new GoalBounder(width, height, walls));
 
 		Logger.info("Map Loaded");
 	}
