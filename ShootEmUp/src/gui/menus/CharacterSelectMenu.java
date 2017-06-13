@@ -43,7 +43,7 @@ public class CharacterSelectMenu extends GuiMenu {
 				Art.getImage("WarriorButton").getHeight() / 2, 20);
 		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.WARRIOR, Art.getImage("WarriorButton"),
 				Art.getImage("LevelIcon"), warriorLevel, 0.5f));
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.ARCHER, Art.getImage("WarriorButton"),
+		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.ARCHER, Art.getImage("ArcherButton"),
 				Art.getImage("LevelIcon"), archerLevel, 0.5f));
 		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.MAGE, Art.getImage("MageButton"),
 				Art.getImage("LevelIcon"), mageLevel, 0.5f));
