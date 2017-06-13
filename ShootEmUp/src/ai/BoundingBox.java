@@ -27,6 +27,6 @@ public class BoundingBox {
 	}
 
 	public boolean boxContains(Vector2 point) {
-		return (((point.x() >= box.x()) && (point.x() <= box.z())) && ((point.y() >= box.y()) && (point.y() <= box.w())));
+		return ((point.x() >= box.x()) && (point.x() <= box.z())) && ((point.y() >= box.y()) && (point.y() <= box.w()));
 	}
 }

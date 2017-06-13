@@ -28,11 +28,11 @@ public class Node implements Comparable<Node> {
 
 	@Override
 	public int compareTo(Node n) {
-		BaseGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		Vector2 playerDistance = Node.getGridPosition(BG.getX(), BG.getY());
+		BaseGraphics baseGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
+		Vector2 playerPosition = Node.getGridPosition(baseGraphics.getX(), baseGraphics.getY());
 
-		float distance1 = playerDistance.dist(n.getPosition());
-		float distance2 = playerDistance.dist(getPosition());
+		float distance1 = playerPosition.dist(n.getPosition());
+		float distance2 = playerPosition.dist(getPosition());
 
 		return Float.compare(distance2, distance1);
 	}

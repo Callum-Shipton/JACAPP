@@ -15,16 +15,16 @@ import object.Entity;
 
 public class AIControl extends BaseControl {
 
-	private BaseMovement BM;
-	private BaseGraphics BG;
-	private BaseAttack BA;
+	private BaseMovement movement;
+	private BaseGraphics graphics;
+	private BaseAttack attack;
 	private int counter = 0;
 	private int aggression = 30;
 
-	public AIControl(BaseGraphics BG, BaseAttack BA, BaseMovement BM) {
-		this.BA = BA;
-		this.BG = BG;
-		this.BM = BM;
+	public AIControl(BaseGraphics graphics, BaseAttack attack, BaseMovement movement) {
+		this.graphics = graphics;
+		this.attack = attack;
+		this.movement = movement;
 	}
 
 	@Override
@@ -34,31 +34,35 @@ public class AIControl extends BaseControl {
 
 	private Vector2 calculateMovementVector(Vector2 target) {
 		Vector2 movementVector = new Vector2(0.0f, 0.0f);
-		float y = target.y() * LevelMap.getTileHeight();
-		float x = target.x() * LevelMap.getTileWidth();
+		float targetY = target.y() * LevelMap.getTileHeight();
+		float targetX = target.x() * LevelMap.getTileWidth();
 
-		if (y < BG.getY()) {
-			if ((y - BG.getY()) > -BM.getSpeed()) {
-				movementVector.add(0.0f, getDifference(BM.getSpeed(), y, BG.getY()));
+		float x = graphics.getX();
+		float y = graphics.getY();
+		int speed = movement.getSpeed();
+
+		if (targetY < y) {
+			if ((targetY - y) > -speed) {
+				movementVector.add(0.0f, getDifference(speed, targetY, y));
 			} else {
 				movementVector.add(0.0f, -1.0f);
 			}
-		} else if (y > BG.getY()) {
-			if ((y - BG.getY()) < BM.getSpeed()) {
-				movementVector.add(0.0f, getDifference(BM.getSpeed(), y, BG.getY()));
+		} else if (targetY > y) {
+			if ((targetY - y) < speed) {
+				movementVector.add(0.0f, getDifference(speed, targetY, y));
 			} else {
 				movementVector.add(0.0f, 1.0f);
 			}
 		}
-		if (x < BG.getX()) {
-			if ((x - BG.getX()) > -BM.getSpeed()) {
-				movementVector.add(getDifference(BM.getSpeed(), x, BG.getX()), 0.0f);
+		if (targetX < x) {
+			if ((targetX - x) > -speed) {
+				movementVector.add(getDifference(speed, targetX, x), 0.0f);
 			} else {
 				movementVector.add(-1.0f, 0.0f);
 			}
-		} else if (x > BG.getX()) {
-			if ((x - BG.getX()) < BM.getSpeed()) {
-				movementVector.add(getDifference(BM.getSpeed(), x, BG.getX()), 0.0f);
+		} else if (targetX > x) {
+			if ((targetX - x) < speed) {
+				movementVector.add(getDifference(speed, targetX, x), 0.0f);
 			} else {
 				movementVector.add(1.0f, 0.0f);
 			}
@@ -74,7 +78,7 @@ public class AIControl extends BaseControl {
 	private void attack(Entity e) {
 		counter++;
 		if (counter == aggression) {
-			BA.attack(e, (BG instanceof AnimatedGraphics) ? ((AnimatedGraphics) BG).getDirection() : 0);
+			attack.attack(e, (graphics instanceof AnimatedGraphics) ? ((AnimatedGraphics) graphics).getDirection() : 0);
 			counter = 0;
 		}
 	}
@@ -82,9 +86,9 @@ public class AIControl extends BaseControl {
 	@Override
 	public void update(Entity e) {
 
-		BaseGraphics PlayerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		Node goalNode = new Node(Node.getGridPosition(PlayerGraphics.getX(), PlayerGraphics.getY()), null);
-		Node startNode = new Node(Node.getGridPosition(BG.getX(), BG.getY()), null);
+		BaseGraphics playerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
+		Node goalNode = new Node(Node.getGridPosition(playerGraphics.getX(), playerGraphics.getY()), null);
+		Node startNode = new Node(Node.getGridPosition(graphics.getX(), graphics.getY()), null);
 		AStarSearch search = new AStarSearch();
 		Vector2 target = search.findPath(goalNode, startNode);
 
@@ -95,16 +99,16 @@ public class AIControl extends BaseControl {
 				if (movementVector.length() > 1) {
 					movementVector.normalize();
 				}
-				if (BG instanceof AnimatedGraphics) {
-					((AnimatedGraphics) BG).setAnimating(true);
+				if (graphics instanceof AnimatedGraphics) {
+					((AnimatedGraphics) graphics).setAnimating(true);
 				}
-				BM.move(e, movementVector);
-				if (BG instanceof AnimatedGraphics) {
-					((AnimatedGraphics) BG).setDirection((int) (Math.round(movementVector.Angle()) / 45));
+				movement.move(e, movementVector);
+				if (graphics instanceof AnimatedGraphics) {
+					((AnimatedGraphics) graphics).setDirection((int) (Math.round(movementVector.Angle()) / 45));
 				}
 
-			} else if (BG instanceof AnimatedGraphics) {
-				((AnimatedGraphics) BG).setAnimating(false);
+			} else if (graphics instanceof AnimatedGraphics) {
+				((AnimatedGraphics) graphics).setAnimating(false);
 			}
 		}
 		attack(e);

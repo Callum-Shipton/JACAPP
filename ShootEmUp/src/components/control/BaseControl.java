@@ -17,7 +17,4 @@ public abstract class BaseControl extends Component implements ControlComponent 
 	public TypeComponent getType() {
 		return this.type;
 	}
-
-	@Override
-	public abstract void update(Entity e);
 }

@@ -73,6 +73,21 @@ public class GoalBounder {
 		}
 	}
 
+	private void fillMap(Queue<TypeNode> open, Set<TypeNode> closed, BoundingBox[] boxes, Map<Vector2, Entity> walls) {
+		while (!open.isEmpty()) {
+			TypeNode current = open.poll(); // Tile current being
+											// checked
+			int currentType = current.getType();
+
+			boxes[currentType].addPoint(current.getPosition());
+
+			TypeNode[] childNodes = generateChildNodes(current, currentType);
+
+			addNodesToQueue(childNodes, walls, open, closed);
+		}
+
+	}
+
 	private void createGoalBoundingBoxes(Map<Vector2, Entity> walls) {
 		for (int x = 2; x < (aiTiles.length - 2); x++) {
 			for (int y = 2; y < (aiTiles[0].length - 2); y++) {
@@ -92,17 +107,7 @@ public class GoalBounder {
 
 					BoundingBox[] boxes = initBoundingBoxes(startingNodes);
 
-					while (!open.isEmpty()) {
-						TypeNode current = open.poll(); // Tile current being
-														// checked
-						int currentType = current.getType();
-
-						boxes[currentType].addPoint(current.getPosition());
-
-						TypeNode[] childNodes = generateChildNodes(current, currentType);
-
-						addNodesToQueue(childNodes, walls, open, closed);
-					}
+					fillMap(open, closed, boxes, walls);
 
 					aiTiles[x][y] = new GoalboundingTile(boxes);
 

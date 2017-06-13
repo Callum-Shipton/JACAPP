@@ -11,77 +11,76 @@ import object.Entity;
 
 public class HomingControl extends BaseControl {
 
-	private BaseMovement BM;
-	private AnimatedGraphics AG;
+	private BaseMovement movement;
+	private AnimatedGraphics graphics;
 
 	private int counter = 0;
-	private Entity target;
 
-	// private Vector2 target;
-
-	public HomingControl(AnimatedGraphics AG, BaseMovement BM) {
-		this.AG = AG;
-		this.BM = BM;
+	public HomingControl(AnimatedGraphics graphics, BaseMovement movement) {
+		this.graphics = graphics;
+		this.movement = movement;
 	}
 
 	@Override
 	public void receive(Message m, Entity e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void update(Entity e) {
-		this.target = ShootEmUp.getPlayer();
-		BaseGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		float y = BG.getY();
-		float x = BG.getX();
+		Entity target = ShootEmUp.getPlayer();
+		BaseGraphics playerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
 
-		if (this.target != null) {
-			Vector2 movement = new Vector2(0.0f, 0.0f);
-			if (y < this.AG.getY()) {
-				if ((y - this.AG.getY()) > -this.BM.getSpeed()) {
-					movement.add(0.0f, ((1.0f / this.BM.getSpeed()) * (y - this.AG.getY())));
+		float targetY = playerGraphics.getY();
+		float targetX = playerGraphics.getX();
+		float y = graphics.getY();
+		float x = graphics.getX();
+		int speed = movement.getSpeed();
+
+		if (target != null) {
+			Vector2 movementVector = new Vector2(0.0f, 0.0f);
+			if (targetY < y) {
+				if ((targetY - y) > -speed) {
+					movementVector.add(0.0f, (1.0f / speed) * (targetY - y));
 				} else {
-					movement.add(0.0f, -1.0f);
+					movementVector.add(0.0f, -1.0f);
 				}
 			}
-			if (x < this.AG.getX()) {
-				if ((x - this.AG.getX()) > -this.BM.getSpeed()) {
-					movement.add(((1.0f / this.BM.getSpeed()) * (x - this.AG.getX())), 0.0f);
+			if (targetX < x) {
+				if ((targetX - x) > -speed) {
+					movementVector.add((1.0f / speed) * (targetX - x), 0.0f);
 				} else {
-					movement.add(-1.0f, 0.0f);
+					movementVector.add(-1.0f, 0.0f);
 				}
 			}
-			if (y > this.AG.getY()) {
-				if ((y - this.AG.getY()) < this.BM.getSpeed()) {
-					movement.add(0.0f, ((1.0f / this.BM.getSpeed()) * (y - this.AG.getY())));
+			if (targetY > y) {
+				if ((targetY - y) < speed) {
+					movementVector.add(0.0f, (1.0f / speed) * (targetY - y));
 				} else {
-					movement.add(0.0f, 1.0f);
+					movementVector.add(0.0f, 1.0f);
 				}
 			}
-			if (x > this.AG.getX()) {
-				if ((x - this.AG.getX()) < this.BM.getSpeed()) {
-					movement.add(((1.0f / this.BM.getSpeed()) * (x - this.AG.getX())), 0.0f);
+			if (targetX > x) {
+				if ((targetX - x) < speed) {
+					movementVector.add((1.0f / speed) * (targetX - x), 0.0f);
 				} else {
-					movement.add(1.0f, 0.0f);
+					movementVector.add(1.0f, 0.0f);
 				}
 			}
-			if (movement.length() > 0) {
-				if (movement.length() > 1) {
-					movement.normalize();
+			if (movementVector.length() > 0) {
+				if (movementVector.length() > 1) {
+					movementVector.normalize();
 				}
-				this.AG.setAnimating(true);
-				this.BM.move(e, movement);
-				this.AG.setDirection((int) (Math.round(movement.Angle()) / 45));
+				graphics.setAnimating(true);
+				movement.move(e, movementVector);
+				graphics.setDirection((int) (Math.round(movementVector.Angle()) / 45));
 			} else {
-				this.AG.setAnimating(false);
+				graphics.setAnimating(false);
 			}
 		}
-		this.counter++;
-		if (this.counter == 30) {
+		counter++;
+		if (counter == 30) {
 			// weapon.attack(AG.getX(), AG.getY(), getDirection(), getTeam());
-			this.counter = 0;
+			counter = 0;
 		}
 	}
 }
