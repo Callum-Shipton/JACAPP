@@ -68,10 +68,10 @@ public class AStarSearch {
 	}
 
 	private void addNode(BoundingBox box, Node node) {
-		// if (box.boxContains(goalNode.getPosition())) {
-		openNodes.add(node);
-		closedNodes.add(node);
-		// }
+		 if (box.boxContains(goalNode.getPosition())) {
+			 openNodes.add(node);
+			 closedNodes.add(node);
+		 }
 	}
 
 	private void addUnobstructedChildNodes(GoalboundingTile goalboundingTile) {
