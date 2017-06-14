@@ -33,10 +33,10 @@ public class AStarSearch {
 		}
 	}
 
-	private void initData(Node goalNode, Node startNode) {
+	private void initData(Vector2 goal, Vector2 start) {
 
-		this.startNode = startNode;
-		this.goalNode = goalNode;
+		startNode = new Node(start, null);
+		goalNode = new Node(goal, null);
 		openNodes = new PriorityQueue<>(); // queue for nodes to be searched
 		closedNodes = new HashSet<>(); // list of nodes already searched or
 										// being
@@ -144,8 +144,8 @@ public class AStarSearch {
 		}
 	}
 
-	public Vector2 findPath(Node goalNode, Node startNode) {
-		initData(goalNode, startNode);
+	public Vector2 findPath(Vector2 goal, Vector2 start) {
+		initData(goal, start);
 
 		int searchedNodes = 0;
 		while (!openNodes.isEmpty()) {

@@ -15,7 +15,6 @@ import object.Entity;
 public class AIControl extends BaseControl {
 
 	private BaseMovement movement;
-	private BaseGraphics graphics;
 	private BaseAttack attack;
 	private int counter = 0;
 	private int aggression = 30;
@@ -43,10 +42,10 @@ public class AIControl extends BaseControl {
 	public void update(Entity e) {
 
 		BaseGraphics playerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		Node goalNode = new Node(Node.getGridPosition(playerGraphics.getX(), playerGraphics.getY()), null);
-		Node startNode = new Node(Node.getGridPosition(graphics.getX(), graphics.getY()), null);
+		Vector2 goalVector = Node.getGridPosition(playerGraphics.getX(), playerGraphics.getY());
+		Vector2 startVector = Node.getGridPosition(graphics.getX(), graphics.getY());
 		AStarSearch search = new AStarSearch();
-		Vector2 target = search.findPath(goalNode, startNode);
+		Vector2 target = search.findPath(goalVector, startVector);
 
 		if (target != null) {
 			Vector2 movementVector = calculateMovementVector(target, graphics.getX(), graphics.getY(),

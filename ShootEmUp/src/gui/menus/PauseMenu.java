@@ -8,8 +8,8 @@ import gui.VerticalLayout;
 
 public abstract class PauseMenu extends GuiMenu {
 
-	public PauseMenu(Image MenuImage) {
-		super(MenuImage);
+	public PauseMenu(Image menuImage) {
+		super(menuImage);
 
 		VerticalLayout tabs = new VerticalLayout(922, 0, Art.getImage("SkillButton").getHeight() / 2, 0);
 		tabs.addMenuItem(new MenuButton(TypeButton.INVENTORY, Art.getImage("InvButton"), 0, 0));

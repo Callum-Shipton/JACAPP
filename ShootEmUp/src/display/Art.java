@@ -38,7 +38,7 @@ public class Art {
 	private static HashMap<String, Image> artFiles = new HashMap<String, Image>();
 
 	// Level map file locations
-	public static String levels = "/Levels/Level";
+	public static final String LEVEL_FILE_LOCATION = "/Levels/Level";
 
 	// Texture.....stuff
 	public static int ShaderBase;
@@ -64,10 +64,10 @@ public class Art {
 
 		glUseProgram(ShaderBase);
 
-		int Error = glGetError();
+		int error = glGetError();
 
-		if (Error != GL_NO_ERROR) {
-			Logger.error("OpenGL Error: " + Error);
+		if (error != GL_NO_ERROR) {
+			Logger.error("OpenGL Error: " + error);
 		}
 		int projectionMatrixLocation = glGetUniformLocation(ShaderBase, "projectionMatrix");
 		glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
@@ -268,7 +268,7 @@ public class Art {
 
 	}
 
-	private void initRenderers() {
+	private static void initRenderers() {
 		base = new DPDTRenderer(ShaderBase);
 		stat = new DPDTRenderer(ShaderStat);
 	}
@@ -331,7 +331,7 @@ public class Art {
 
 	public int loadShader(String filename, int type) {
 		StringBuilder shaderSource = new StringBuilder();
-		int shaderID = 0;
+		int shaderID;
 
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(filename)));

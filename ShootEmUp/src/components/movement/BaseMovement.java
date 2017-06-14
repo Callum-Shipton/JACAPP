@@ -4,11 +4,9 @@ import components.Component;
 import components.Message;
 import components.TypeComponent;
 import components.collision.BaseCollision;
-import components.graphical.BaseGraphics;
 import main.ShootEmUp;
 import math.Seconds;
 import math.Vector2;
-import math.Vector4;
 import object.Entity;
 import object.EntityMap;
 
@@ -26,15 +24,9 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	private int frostTime = 5;
 
 	@Override
-	public abstract Vector4 collideFunction(BaseGraphics BG, float x, float y);
-
-	@Override
 	public void destroy(Entity e) {
 
 	}
-
-	@Override
-	public abstract Vector4 doesCollide(Entity moving, Entity checked);
 
 	public boolean getFlat() {
 		return this.flat;

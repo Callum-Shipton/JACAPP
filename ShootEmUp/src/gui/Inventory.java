@@ -13,9 +13,6 @@ import object.InventoryItem;
 
 public class Inventory extends GuiComponent {
 
-	private int row = 0;
-	private int column = 0;
-
 	private List<InventoryItem<?>> i;
 	private List<MenuButton> buttons = new ArrayList<>();
 
@@ -31,55 +28,55 @@ public class Inventory extends GuiComponent {
 	}
 
 	private void addButtons() {
-		this.row = 0;
-		this.column = 0;
+		int row = 0;
+		int column = 0;
 
-		Iterator<InventoryItem<?>> items = this.i.iterator();
+		Iterator<InventoryItem<?>> items = i.iterator();
 
 		while (items.hasNext()) {
 			InventoryItem<?> item = items.next();
 			addButton(new MenuButton(TypeButton.OTHER, item.getInventoryImage(),
-					this.x + ((item.getInventoryImage().getWidth() * this.row)),
-					this.y + (((item.getInventoryImage().getHeight() / 2) * this.column))));
-			this.row++;
-			if (this.row > 10) {
-				this.row = 0;
-				this.column++;
+					x + (item.getInventoryImage().getWidth() * row),
+					y + ((item.getInventoryImage().getHeight() / 2) * column)));
+			row++;
+			if (row > 10) {
+				row = 0;
+				column++;
 			}
 		}
 	}
 
 	@Override
 	public void render(DPDTRenderer d) {
-		for (MenuButton button : this.buttons) {
+		for (MenuButton button : buttons) {
 			button.render(Art.stat);
 		}
 	}
 
 	@Override
 	public void update() {
-		for (MenuButton button : this.buttons) {
+		for (MenuButton button : buttons) {
 			button.update();
 		}
-		Iterator<MenuButton> Buttons = this.buttons.iterator();
+		Iterator<MenuButton> buttonsIterator = buttons.iterator();
 		MenuButton itemButton;
 		boolean change = false;
 		int position = 0;
 		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
-		while (Buttons.hasNext()) {
-			itemButton = Buttons.next();
+		while (buttonsIterator.hasNext()) {
+			itemButton = buttonsIterator.next();
 			if (itemButton.hasClicked()) {
 				BI.equipItem(position);
 				itemButton.postAction();
-				Buttons.remove();
+				buttonsIterator.remove();
 				change = true;
 			}
 
 			position++;
 		}
 
-		if (change == true) {
-			this.buttons.clear();
+		if (change) {
+			buttons.clear();
 			addButtons();
 		}
 

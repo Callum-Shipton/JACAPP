@@ -32,8 +32,7 @@ public class PlayerControl extends BaseControl {
 
 	}
 
-	@Override
-	public void update(Entity e) {
+	private void checkMovement(Entity e) {
 		Vector2 movement = new Vector2(0.0f, 0.0f);
 		if ((Keyboard.getKey(ShootEmUp.getKeys().moveUp) == 1) || (Keyboard.getKey(ShootEmUp.getKeys().moveUp) == 2)) {
 			movement.add(0.0f, -1.0f);
@@ -62,6 +61,9 @@ public class PlayerControl extends BaseControl {
 		} else {
 			this.PG.setAnimating(false);
 		}
+	}
+
+	private void checkDirection() {
 		Vector2 dir = new Vector2(0.0f, 0.0f);
 		if ((Keyboard.getKey(ShootEmUp.getKeys().lookUp) == 1) || (Keyboard.getKey(ShootEmUp.getKeys().lookUp) == 2)) {
 			dir.add(0.0f, -1.0f);
@@ -84,11 +86,15 @@ public class PlayerControl extends BaseControl {
 			}
 			this.PG.setDirection((int) (Math.round(dir.Angle()) / 45));
 		}
+	}
 
+	private void checkAttack(Entity e) {
 		if ((Keyboard.getKey(ShootEmUp.getKeys().shoot) == 1) || (Keyboard.getKey(ShootEmUp.getKeys().shoot) == 2)) {
 			this.BA.attack(e, this.PG.getDirection());
 		}
+	}
 
+	private void checkPotions() {
 		if ((Keyboard.getKey(ShootEmUp.getKeys().potion1) == 1)
 				|| (Keyboard.getKey(ShootEmUp.getKeys().potion1) == 2)) {
 			this.PI.usePotion(TypePotion.HEALTH);
@@ -112,5 +118,16 @@ public class PlayerControl extends BaseControl {
 			this.PI.usePotion(TypePotion.KNOCKBACK);
 			Keyboard.setKey(ShootEmUp.getKeys().potion4);
 		}
+	}
+
+	@Override
+	public void update(Entity e) {
+		checkMovement(e);
+
+		checkDirection();
+
+		checkAttack(e);
+
+		checkPotions();
 	}
 }

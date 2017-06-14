@@ -13,8 +13,6 @@ public class HomingControl extends BaseControl {
 
 	private BaseMovement movement;
 
-	private int counter = 0;
-
 	public HomingControl(AnimatedGraphics graphics, BaseMovement movement) {
 		this.graphics = graphics;
 		this.movement = movement;
@@ -49,11 +47,6 @@ public class HomingControl extends BaseControl {
 			} else if (graphics instanceof AnimatedGraphics) {
 				((AnimatedGraphics) graphics).setAnimating(false);
 			}
-		}
-		counter++;
-		if (counter == 30) {
-			// weapon.attack(AG.getX(), AG.getY(), getDirection(), getTeam());
-			counter = 0;
 		}
 	}
 }

@@ -85,7 +85,7 @@ public abstract class ButtonHandler {
 	}
 
 	private static void level(int level) {
-		ShootEmUp.setCurrentLevel(new Level(Art.levels, level));
+		ShootEmUp.setCurrentLevel(new Level(Art.LEVEL_FILE_LOCATION, level));
 		ShootEmUp.getCurrentLevel().init();
 		ShootEmUp.startGame();
 	}

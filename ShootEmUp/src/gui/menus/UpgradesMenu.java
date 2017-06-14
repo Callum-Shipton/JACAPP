@@ -22,8 +22,8 @@ public class UpgradesMenu extends PauseMenu {
 		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.POTIONS_UPGRADE, Art.getImage("PotionsButton"),
 				Art.getImage("Coin"), 5, 1f));
 		this.menuItems.add(buttonList);
-		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
-		this.coins = new Counter(30.0f, 103.0f, Art.getImage("Coin"), true, BI.getCoins(), 1.0f);
+		BaseInventory baseInventory = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
+		this.coins = new Counter(30.0f, 103.0f, Art.getImage("Coin"), true, baseInventory.getCoins(), 1.0f);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class UpgradesMenu extends PauseMenu {
 	@Override
 	public void update() {
 		super.update();
-		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
-		this.coins.update(BI.getCoins());
+		BaseInventory baseInventory = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
+		this.coins.update(baseInventory.getCoins());
 	}
 }

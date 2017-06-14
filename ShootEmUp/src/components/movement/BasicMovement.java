@@ -16,9 +16,9 @@ public class BasicMovement extends BaseMovement {
 
 	protected BaseGraphics baseGraphics;
 
-	public BasicMovement(BaseCollision BC, BaseGraphics BG, int speed) {
-		this.baseGraphics = BG;
-		this.BC = BC;
+	public BasicMovement(BaseCollision baseCollision, BaseGraphics baseGraphics, int speed) {
+		this.baseGraphics = baseGraphics;
+		this.BC = baseCollision;
 		this.speed = speed;
 		this.realSpeed = speed;
 	}
@@ -28,8 +28,8 @@ public class BasicMovement extends BaseMovement {
 		boolean collide = false;
 		Set<Vector2> newGrid = eMap.getGridPos(e);
 		Set<Entity> entities = eMap.getEntites(newGrid);
-		Vector4 collVec = null;
-		Entity hit = null;
+		Vector4 collVec;
+		Entity hit;
 		for (Entity character : entities) {
 			if (character != e) {
 				collVec = doesCollide(e, character);
@@ -65,8 +65,8 @@ public class BasicMovement extends BaseMovement {
 		boolean collide = false;
 		Set<Vector2> newGrid = eMap.getGridPos(e);
 		Set<Entity> entities = eMap.getEntites(newGrid);
-		Vector4 collVec = null;
-		Entity hit = null;
+		Vector4 collVec;
+		Entity hit;
 		for (Entity character : entities) {
 			if (character != e) {
 				collVec = doesCollide(e, character);
