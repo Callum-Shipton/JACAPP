@@ -21,7 +21,7 @@ public abstract class PauseMenu extends GuiMenu {
 
 		VerticalLayout nativeButtons = new VerticalLayout(30, this.display.getHeight() - 94,
 				Art.getImage("ExitButton").getHeight() / 2, 20);
-		nativeButtons.addMenuItem(new MenuButton(TypeButton.BACK, Art.getImage("BackButton"), 0, 0));
+		nativeButtons.addMenuItem(new MenuButton(TypeButton.RESUME, Art.getImage("ResumeButton"), 0, 0));
 		nativeButtons.addMenuItem(new MenuButton(TypeButton.MAIN_MENU, Art.getImage("ExitButton"), 0, 0));
 		this.menuItems.add(nativeButtons);
 	}
