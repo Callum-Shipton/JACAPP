@@ -14,10 +14,10 @@ import object.EntityMap;
 
 public class BasicMovement extends BaseMovement {
 
-	protected BaseGraphics BG;
+	protected BaseGraphics baseGraphics;
 
 	public BasicMovement(BaseCollision BC, BaseGraphics BG, int speed) {
-		this.BG = BG;
+		this.baseGraphics = BG;
 		this.BC = BC;
 		this.speed = speed;
 		this.realSpeed = speed;
@@ -110,10 +110,10 @@ public class BasicMovement extends BaseMovement {
 	@Override
 	public Vector4 doesCollide(Entity moving, Entity checked) {
 		BaseGraphics CG = checked.getComponent(TypeComponent.GRAPHICS);
-		float x = this.BG.getX();
-		float y = this.BG.getY();
-		float w = this.BG.getWidth();
-		float h = this.BG.getHeight();
+		float x = this.baseGraphics.getX();
+		float y = this.baseGraphics.getY();
+		float w = this.baseGraphics.getWidth();
+		float h = this.baseGraphics.getHeight();
 
 		float cx = CG.getX();
 		float cy = CG.getY();
@@ -131,28 +131,28 @@ public class BasicMovement extends BaseMovement {
 	public void move(Entity e, Vector2 moveVec) {
 		super.move(e, moveVec);
 		if (Math.abs(moveVec.x()) > 0) {
-			this.BG.setX((this.BG.getX() + Math.round(moveVec.x() * this.speed)));
+			this.baseGraphics.setX(this.baseGraphics.getX() + Math.round(moveVec.x() * this.speed));
 			checkCollisionX(e);
 		}
 		if (Math.abs(moveVec.y()) > 0) {
-			this.BG.setY(this.BG.getY() + Math.round(moveVec.y() * this.speed));
+			this.baseGraphics.setY(this.baseGraphics.getY() + Math.round(moveVec.y() * this.speed));
 			checkCollisionY(e);
 		}
 	}
 
 	public void moveBackX(Vector4 collVec) {
 		if (Math.abs(collVec.x()) <= this.speed) {
-			this.BG.setX(this.BG.getX() - collVec.x());
+			this.baseGraphics.setX(this.baseGraphics.getX() - collVec.x());
 		} else if (Math.abs(collVec.z()) <= this.speed) {
-			this.BG.setX(this.BG.getX() - collVec.z());
+			this.baseGraphics.setX(this.baseGraphics.getX() - collVec.z());
 		}
 	}
 
 	public void moveBackY(Vector4 collVec) {
 		if (Math.abs(collVec.y()) <= this.speed) {
-			this.BG.setY(this.BG.getY() - collVec.y());
+			this.baseGraphics.setY(this.baseGraphics.getY() - collVec.y());
 		} else if (Math.abs(collVec.w()) <= this.speed) {
-			this.BG.setY(this.BG.getY() - collVec.w());
+			this.baseGraphics.setY(this.baseGraphics.getY() - collVec.w());
 		}
 	}
 

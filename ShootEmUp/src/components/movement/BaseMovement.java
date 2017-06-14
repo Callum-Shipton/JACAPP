@@ -59,13 +59,13 @@ public abstract class BaseMovement extends Component implements MovementComponen
 
 	@Override
 	public void move(Entity e, Vector2 moveVec) {
-		if (this.frost == true) {
-			this.speed = this.speed / 2;
-			this.frostCounter++;
-			if (this.frostCounter > Seconds.ticks(this.frostTime)) {
-				this.frost = false;
-				this.speed = this.realSpeed;
-				this.frostCounter = 0;
+		if (frost) {
+			speed = speed / 2;
+			frostCounter++;
+			if (frostCounter > Seconds.ticks(frostTime)) {
+				frost = false;
+				speed = realSpeed;
+				frostCounter = 0;
 			}
 		}
 	}

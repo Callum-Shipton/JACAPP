@@ -8,7 +8,6 @@ import components.attack.BaseAttack;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.movement.BaseMovement;
-import level.LevelMap;
 import main.ShootEmUp;
 import math.Vector2;
 import object.Entity;
@@ -32,49 +31,6 @@ public class AIControl extends BaseControl {
 
 	}
 
-	private Vector2 calculateMovementVector(Vector2 target) {
-		Vector2 movementVector = new Vector2(0.0f, 0.0f);
-		float targetY = target.y() * LevelMap.getTileHeight();
-		float targetX = target.x() * LevelMap.getTileWidth();
-
-		float x = graphics.getX();
-		float y = graphics.getY();
-		int speed = movement.getSpeed();
-
-		if (targetY < y) {
-			if ((targetY - y) > -speed) {
-				movementVector.add(0.0f, getDifference(speed, targetY, y));
-			} else {
-				movementVector.add(0.0f, -1.0f);
-			}
-		} else if (targetY > y) {
-			if ((targetY - y) < speed) {
-				movementVector.add(0.0f, getDifference(speed, targetY, y));
-			} else {
-				movementVector.add(0.0f, 1.0f);
-			}
-		}
-		if (targetX < x) {
-			if ((targetX - x) > -speed) {
-				movementVector.add(getDifference(speed, targetX, x), 0.0f);
-			} else {
-				movementVector.add(-1.0f, 0.0f);
-			}
-		} else if (targetX > x) {
-			if ((targetX - x) < speed) {
-				movementVector.add(getDifference(speed, targetX, x), 0.0f);
-			} else {
-				movementVector.add(1.0f, 0.0f);
-			}
-		}
-
-		return movementVector;
-	}
-
-	private float getDifference(float speed, float pos1, float pos2) {
-		return (1.0f / speed) * (pos1 - pos2);
-	}
-
 	private void attack(Entity e) {
 		counter++;
 		if (counter == aggression) {
@@ -93,12 +49,10 @@ public class AIControl extends BaseControl {
 		Vector2 target = search.findPath(goalNode, startNode);
 
 		if (target != null) {
-			Vector2 movementVector = calculateMovementVector(target);
+			Vector2 movementVector = calculateMovementVector(target, graphics.getX(), graphics.getY(),
+					movement.getSpeed());
 
 			if (movementVector.length() > 0) {
-				if (movementVector.length() > 1) {
-					movementVector.normalize();
-				}
 				if (graphics instanceof AnimatedGraphics) {
 					((AnimatedGraphics) graphics).setAnimating(true);
 				}

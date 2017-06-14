@@ -17,9 +17,9 @@ public class UpgradesMenu extends PauseMenu {
 	public UpgradesMenu(Image menuImage) {
 		super(menuImage);
 		VerticalLayout buttonList = new VerticalLayout(30, 30, Art.getImage("InventoryButton").getHeight() / 2, 20);
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.INVENTORY_UPGRADE,
-				Art.getImage("InventoryUpgradeButton"), Art.getImage("Coin"), 5, 1f));
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.POTIONS_UPGRADE, Art.getImage("PotionsUpgradeButton"),
+		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.INVENTORY_UPGRADE, Art.getImage("InventoryButton"),
+				Art.getImage("Coin"), 5, 1f));
+		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.POTIONS_UPGRADE, Art.getImage("PotionsButton"),
 				Art.getImage("Coin"), 5, 1f));
 		this.menuItems.add(buttonList);
 		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
