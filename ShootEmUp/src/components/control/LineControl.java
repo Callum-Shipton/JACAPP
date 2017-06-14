@@ -8,12 +8,11 @@ import object.Entity;
 
 public class LineControl extends BaseControl {
 
-	private BaseMovement BM;
-	private AnimatedGraphics AG;
+	private BaseMovement movement;
 
-	public LineControl(AnimatedGraphics AG, BaseMovement BM) {
-		this.AG = AG;
-		this.BM = BM;
+	public LineControl(AnimatedGraphics graphics, BaseMovement BM) {
+		this.graphics = graphics;
+		this.movement = BM;
 	}
 
 	@Override
@@ -24,22 +23,27 @@ public class LineControl extends BaseControl {
 
 	@Override
 	public void update(Entity e) {
-		int direction = this.AG.getDirection();
-		Vector2 movement = new Vector2(0.0f, 0.0f);
+		int direction;
+		if(graphics instanceof AnimatedGraphics){
+			direction = ((AnimatedGraphics) graphics).getDirection();
+		} else{
+			direction = 0;
+		}
+		Vector2 movementVector = new Vector2(0.0f, 0.0f);
 		if ((direction >= 1) && (direction <= 3)) {
-			movement.add(1.0f, 0.0f);
+			movementVector.add(1.0f, 0.0f);
 		}
 		if (direction >= 5) {
-			movement.add(-1.0f, 0.0f);
+			movementVector.add(-1.0f, 0.0f);
 		}
 		if ((direction <= 1) || (direction >= 7)) {
-			movement.add(0.0f, -1.0f);
+			movementVector.add(0.0f, -1.0f);
 		}
 		if ((direction >= 3) && (direction <= 5)) {
-			movement.add(0.0f, 1.0f);
+			movementVector.add(0.0f, 1.0f);
 		}
-		movement.normalize();
-		this.BM.move(e, movement);
+		movementVector.normalize();
+		this.movement.move(e, movementVector);
 	}
 
 }

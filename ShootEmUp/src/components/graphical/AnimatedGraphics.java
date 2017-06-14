@@ -17,7 +17,7 @@ public class AnimatedGraphics extends BaseGraphics {
 	public AnimatedGraphics(Image image, Renderer r, boolean animating, float scale) {
 		this.image = image;
 		this.width = (image.getWidth() / image.getFWidth()) * scale;
-		this.height = ((image.getHeight() / image.getFHeight()) * scale);
+		this.height = (image.getHeight() / image.getFHeight()) * scale;
 		this.r = r;
 		this.animating = animating;
 	}
