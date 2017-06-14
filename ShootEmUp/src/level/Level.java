@@ -97,13 +97,15 @@ public class Level {
 	public void update() {
 		this.spawner.update();
 
-		addEntities();
+		
 
 		Iterator<Entity> EntityIter = this.entities.iterator();
 		while (EntityIter.hasNext()) {
 			Entity c = EntityIter.next();
 			c.update();
 		}
+		
+		addEntities();
 
 		removeEntities();
 	}
