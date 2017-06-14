@@ -36,12 +36,12 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 	protected TypeComponent type = TypeComponent.INVENTORY;
 
-	protected final String BOW = "BOW";
-	protected final String DAGGER = "DAGGER";
-	protected final String ONE_HANDED = "ONE_HANDED";
-	protected final String TWO_HANDED = "TWO_HANDED";
-	protected final String STAFF = "STAFF";
-	protected final String CROSSBOW = "CROSSBOW";
+	protected final String BOW = "Bow";
+	protected final String DAGGER = "Dagger";
+	protected final String ONE_HANDED = "OneHanded";
+	protected final String TWO_HANDED = "TwoHanded";
+	protected final String STAFF = "Staff";
+	protected final String CROSSBOW = "Crossbow";
 
 	protected int coins;
 
@@ -204,19 +204,19 @@ public class BaseInventory extends Component implements InventoryComponent {
 		this.inventory.remove(itemNo);
 		if (item instanceof Armour) {
 			switch (((Armour) item).getType()) {
-			case "BOOTS":
+			case "Boots":
 				equipped = this.BA.getBoots();
 				this.BA.setBoots((Armour) item);
 				break;
-			case "LEGS":
+			case "Legs":
 				equipped = this.BA.getLegs();
 				this.BA.setLegs((Armour) item);
 				break;
-			case "CHEST":
+			case "Chest":
 				equipped = this.BA.getChest();
 				this.BA.setChest((Armour) item);
 				break;
-			case "HELMET":
+			case "Helmet":
 				equipped = this.BA.getHelmet();
 				this.BA.setHelmet((Armour) item);
 				break;
@@ -224,8 +224,8 @@ public class BaseInventory extends Component implements InventoryComponent {
 			}
 		} else {
 			equipped = this.BA.getWeapon();
-			if ((((Weapon) item).getType() == this.weaponTypes[0])
-					|| (((Weapon) item).getType() == this.weaponTypes[1])) {
+			if (((Weapon) item).getType().compareTo(this.weaponTypes[0]) == 0
+					|| (((Weapon) item).getType().compareTo(this.weaponTypes[1]) == 0)) {
 				this.BA.setWeapon((Weapon) item);
 			} else {
 				this.inventory.add(item);

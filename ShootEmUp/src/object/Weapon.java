@@ -37,25 +37,32 @@ public final class Weapon extends InventoryItem<Weapon> {
 	private String particleImage;
 	private Element element;
 
-	public Weapon(String type, int team) {
+	public Weapon(String typeName, int team) {
 		if (weaponSystem.isEmpty()) {
 			initSystem();
 		}
-		Weapon w;
-		if (weaponSystem.containsKey(type)) {
-			int temp = rand.nextInt(weaponSystem.get(type).size());
-			Weapon[] typedWeapons = new Weapon[weaponSystem.get(type).size()];
-			typedWeapons = weaponSystem.get(type).values().toArray(typedWeapons);
+		Weapon w = null;
+		if (weaponSystem.containsKey(typeName)) {
+			int temp = rand.nextInt(weaponSystem.get(typeName).size());
+			Weapon[] typedWeapons = new Weapon[weaponSystem.get(typeName).size()];
+			typedWeapons = weaponSystem.get(typeName).values().toArray(typedWeapons);
 			w = typedWeapons[temp];
+			this.type = typeName;
+			
 		} else {
-			Map<String, Weapon> tempWeapons = new HashMap<>();
-			for (Map<String, Weapon> typedWeapons : weaponSystem.values()) {
-				tempWeapons.putAll(typedWeapons);
+			for (Entry<String, Map<String, Weapon>> typedWeapons : weaponSystem.entrySet()) {
+				if (typedWeapons.getValue().containsKey(typeName)){
+					w = typedWeapons.getValue().get(typeName);
+					this.type = typedWeapons.getKey();
+				}
 			}
-			w = tempWeapons.get(type);
 		}
 
-		this.type = type;
+		if(w == null){
+			// Pick a random weapon
+			Logger.warn("A weapon was created with unknown name/type: " + typeName);
+		}
+		
 		this.name = w.name;
 		this.damage = w.damage;
 		this.range = w.range;

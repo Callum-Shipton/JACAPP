@@ -2,8 +2,10 @@ package object;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import components.inventory.TypePickup;
+import main.Logger;
 
 public final class Armour extends InventoryItem<Armour> {
 
@@ -15,24 +17,29 @@ public final class Armour extends InventoryItem<Armour> {
 
 	private int defence;
 
-	public Armour(String type) {
+	public Armour(String typeName) {
 		if (armourSystem.isEmpty()) {
 			initSystem(Armour.class);
 		}
-		Armour a;
-		if (armourSystem.containsKey(type)) {
-			int temp = rand.nextInt(armourSystem.get(type).size());
-			Armour[] typedArmours = new Armour[armourSystem.get(type).size()];
-			typedArmours = armourSystem.get(type).values().toArray(typedArmours);
+		Armour a = null;
+		if (armourSystem.containsKey(typeName)) {
+			int temp = rand.nextInt(armourSystem.get(typeName).size());
+			Armour[] typedArmours = new Armour[armourSystem.get(typeName).size()];
+			typedArmours = armourSystem.get(typeName).values().toArray(typedArmours);
 			a = typedArmours[temp];
 		} else {
-			Map<String, Armour> tempArmours = new HashMap<>();
-			for (Map<String, Armour> typedArmours : armourSystem.values()) {
-				tempArmours.putAll(typedArmours);
+			for (Entry<String, Map<String, Armour>> typedWeapons : armourSystem.entrySet()) {
+				if (typedWeapons.getValue().containsKey(typeName)){
+					a = typedWeapons.getValue().get(typeName);
+					this.type = typedWeapons.getKey();
+				}
 			}
-			a = tempArmours.get(type);
 		}
-		this.type = type;
+
+		if(a == null){
+			// Pick a random armour
+			Logger.warn("An armour was created with unknown name/type: " + typeName);
+		}
 		this.name = a.name;
 		this.defence = a.defence;
 		this.typePickup = TypePickup.ARMOUR;
