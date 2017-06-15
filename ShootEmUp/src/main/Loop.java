@@ -23,14 +23,14 @@ public final class Loop {
 
 	// Handle for monitor/window funcs
 	private static Display display;
-	private boolean paused = true;
-	private double fps;
+	private static boolean paused = true;
+	private static double fps;
 	private static Keys keys;
 	private Game game;
 	
 	public Loop(Game game, double fps){
 		this.game = game;
-		this.fps = fps;
+		Loop.fps = fps;
 	}
 
 	public void start() {
@@ -123,11 +123,15 @@ public final class Loop {
 		display.update();
 	}
 
+	public static int ticks(int seconds) {
+		return (int) (seconds * getFPS());
+	}
+
 	public static Display getDisplay() {
 		return display;
 	}
 
-	public double getFPS() {
+	public static double getFPS() {
 		return fps;
 	}
 
@@ -135,11 +139,11 @@ public final class Loop {
 		return keys;
 	}
 
-	public boolean isPaused() {
+	public static boolean isPaused() {
 		return paused;
 	}
 
-	public void setPaused(boolean p) {
+	public static void setPaused(boolean p) {
 		paused = p;
 	}
 

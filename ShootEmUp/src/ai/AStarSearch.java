@@ -9,7 +9,6 @@ import java.util.Set;
 
 import level.LevelMap;
 import main.Logger;
-import main.Loop;
 import math.Vector2;
 import object.Entity;
 

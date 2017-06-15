@@ -6,7 +6,6 @@ import components.control.PlayerControl;
 import components.inventory.BaseInventory;
 import components.inventory.TypePickup;
 import main.Loop;
-import math.Seconds;
 import object.Entity;
 import object.EntityMap;
 
@@ -47,7 +46,7 @@ public class PickupCollision extends BaseCollision {
 
 	@Override
 	public void update(Entity e) {
-		if (this.timer >= Seconds.ticks(this.DESPAWN_TIME)) {
+		if (this.timer >= Loop.ticks(this.DESPAWN_TIME)) {
 			e.destroy();
 		}
 		this.timer++;

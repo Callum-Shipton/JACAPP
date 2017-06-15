@@ -5,7 +5,6 @@ import components.Message;
 import components.TypeComponent;
 import components.collision.BaseCollision;
 import main.Loop;
-import math.Seconds;
 import math.Vector2;
 import object.Entity;
 import object.EntityMap;
@@ -54,7 +53,7 @@ public abstract class BaseMovement extends Component implements MovementComponen
 		if (frost) {
 			speed = speed / 2;
 			frostCounter++;
-			if (frostCounter > Seconds.ticks(frostTime)) {
+			if (frostCounter > Loop.ticks(frostTime)) {
 				frost = false;
 				speed = realSpeed;
 				frostCounter = 0;

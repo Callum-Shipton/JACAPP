@@ -3,7 +3,7 @@ package components.attack;
 import components.Component;
 import components.Message;
 import components.TypeComponent;
-import math.Seconds;
+import main.Loop;
 import object.Armour;
 import object.Entity;
 import object.Weapon;
@@ -152,7 +152,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 		if (this.fire == true) {
 			this.fireCounter++;
-			if (this.fireCounter >= Seconds.ticks(this.FIRE_TIME)) {
+			if (this.fireCounter >= Loop.ticks(this.FIRE_TIME)) {
 				damage(1, e);
 				this.fireCounter = 0;
 				this.fireStop++;
@@ -164,7 +164,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		}
 		if (this.poison == true) {
 			this.poisonCounter++;
-			if (this.poisonCounter > Seconds.ticks(this.POISON_TIME)) {
+			if (this.poisonCounter > Loop.ticks(this.POISON_TIME)) {
 				damage(2, e);
 				this.poisonCounter = 0;
 			}

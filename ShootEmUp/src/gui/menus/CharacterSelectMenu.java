@@ -1,43 +1,23 @@
 package gui.menus;
 
-import components.attack.TypeAttack;
 import display.Art;
 import display.Image;
 import gui.CounterButton;
 import gui.MenuButton;
 import gui.TypeButton;
 import gui.VerticalLayout;
-import main.Loop;
 
 public class CharacterSelectMenu extends GuiMenu {
 
 	public CharacterSelectMenu(Image menuImage) {
+		
+		this(menuImage, 0, 0, 0, 0, 0);
+		
+	}
+	
+	public CharacterSelectMenu(Image menuImage, int warriorLevel, int archerLevel, int mageLevel, int battleMageLevel, int rogueLevel) {
 		super(menuImage);
-
-		int warriorLevel = 0;
-		int archerLevel = 0;
-		int mageLevel = 0;
-		int battleMageLevel = 0;
-		int rogueLevel = 0;
-
-		if (Loop.getSave() != null) {
-			if (Loop.getSave().getCharacter(TypeAttack.WARRIOR) != null) {
-				warriorLevel = Loop.getSave().getCharacter(TypeAttack.WARRIOR).getPlayerLevel();
-			}
-			if (Loop.getSave().getCharacter(TypeAttack.ARCHER) != null) {
-				archerLevel = Loop.getSave().getCharacter(TypeAttack.ARCHER).getPlayerLevel();
-			}
-			if (Loop.getSave().getCharacter(TypeAttack.MAGE) != null) {
-				mageLevel = Loop.getSave().getCharacter(TypeAttack.MAGE).getPlayerLevel();
-			}
-			if (Loop.getSave().getCharacter(TypeAttack.BATTLE_MAGE) != null) {
-				battleMageLevel = Loop.getSave().getCharacter(TypeAttack.BATTLE_MAGE).getPlayerLevel();
-			}
-			if (Loop.getSave().getCharacter(TypeAttack.ROGUE) != null) {
-				rogueLevel = Loop.getSave().getCharacter(TypeAttack.ROGUE).getPlayerLevel();
-			}
-		}
-
+		
 		VerticalLayout buttonList = new VerticalLayout(
 				(this.display.getWidth() / 2) - (Art.getImage("WarriorButton").getWidth() / 2), 150,
 				Art.getImage("WarriorButton").getHeight() / 2, 20);

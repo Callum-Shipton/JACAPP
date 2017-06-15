@@ -54,126 +54,127 @@ public class CharacterSave implements Serializable {
 		getData();
 	}
 
-	public Armour getBoots() {
-		return this.boots;
-	}
-
-	public Armour getChest() {
-		return this.chest;
-	}
-
-	public int getCoins() {
-		return this.coins;
-	}
-
 	private void getData() {
 
 		PlayerAttack tempAttack = Loop.getPlayer().getComponent(TypeComponent.ATTACK);
 
-		this.player = tempAttack.getAttackType();
+		player = tempAttack.getAttackType();
 
-		this.lives = tempAttack.getLives();
+		lives = tempAttack.getLives();
 
-		this.health = tempAttack.getHealth();
-		this.maxHealth = tempAttack.getMaxHealth();
-		this.healthRegen = tempAttack.getHealthRegen();
-		this.maxHealthRegen = tempAttack.getMaxHealthRegen();
+		health = tempAttack.getHealth();
+		maxHealth = tempAttack.getMaxHealth();
+		healthRegen = tempAttack.getHealthRegen();
+		maxHealthRegen = tempAttack.getMaxHealthRegen();
 
-		this.mana = tempAttack.getMana();
-		this.maxMana = tempAttack.getMaxMana();
-		this.manaRegen = tempAttack.getManaRegen();
-		this.maxManaRegen = tempAttack.getMaxManaRegen();
+		mana = tempAttack.getMana();
+		maxMana = tempAttack.getMaxMana();
+		manaRegen = tempAttack.getManaRegen();
+		maxManaRegen = tempAttack.getMaxManaRegen();
 
-		this.weapon = tempAttack.getWeapon();
-		this.boots = tempAttack.getBoots();
-		this.legs = tempAttack.getLegs();
-		this.chest = tempAttack.getChest();
-		this.helmet = tempAttack.getHelmet();
+		weapon = tempAttack.getWeapon();
+		boots = tempAttack.getBoots();
+		legs = tempAttack.getLegs();
+		chest = tempAttack.getChest();
+		helmet = tempAttack.getHelmet();
 
 		BaseInventory tempInventory = Loop.getPlayer().getComponent(TypeComponent.INVENTORY);
 
-		this.coins = tempInventory.getCoins();
-		this.exp = tempInventory.getExp();
-		this.playerLevel = tempInventory.getLevel();
-		this.inventory = tempInventory.getInventory();
-		this.inventorySize = tempInventory.getInventorySize();
-		this.potions = tempInventory.getPotions();
-		this.maxPotions = tempInventory.getMaxPotions();
+		coins = tempInventory.getCoins();
+		exp = tempInventory.getExp();
+		playerLevel = tempInventory.getLevel();
+		inventory = tempInventory.getInventory();
+		inventorySize = tempInventory.getInventorySize();
+		potions = tempInventory.getPotions();
+		maxPotions = tempInventory.getMaxPotions();
 	}
 
 	public int getExp() {
-		return this.exp;
+		return exp;
 	}
 
 	public int getHealth() {
-		return this.health;
+		return health;
 	}
 
 	public int getHealthRegen() {
-		return this.healthRegen;
+		return healthRegen;
 	}
 
 	public Armour getHelmet() {
-		return this.helmet;
+		return helmet;
 	}
 
 	public List<InventoryItem<?>> getInventory() {
-		return this.inventory;
+		return inventory;
 	}
 
 	public int getInventorySize() {
-		return this.inventorySize;
+		return inventorySize;
 	}
 
 	public Armour getLegs() {
-		return this.legs;
+		return legs;
 	}
 
 	public int getLives() {
-		return this.lives;
+		return lives;
 	}
 
 	public int getMana() {
-		return this.mana;
+		return mana;
 	}
 
 	public int getManaRegen() {
-		return this.manaRegen;
+		return manaRegen;
 	}
 
 	public int getMaxHealth() {
-		return this.maxHealth;
+		return maxHealth;
 	}
 
 	public int getMaxHealthRegen() {
-		return this.maxHealthRegen;
+		return maxHealthRegen;
 	}
 
 	public int getMaxMana() {
-		return this.maxMana;
+		return maxMana;
 	}
 
 	public int getMaxManaRegen() {
-		return this.maxManaRegen;
+		return maxManaRegen;
 	}
 
 	public int getMaxPotions() {
-		return this.maxPotions;
+		return maxPotions;
 	}
 
 	public TypeAttack getPlayer() {
-		return this.player;
+		return player;
 	}
 
 	public int getPlayerLevel() {
-		return this.playerLevel;
+		return playerLevel;
 	}
 
 	public Map<TypePotion, Potion> getPotions() {
-		return this.potions;
+		return potions;
 	}
 
 	public Weapon getWeapon() {
-		return this.weapon;
+		return weapon;
+	}
+	
+
+	public Armour getBoots() {
+		return boots;
+	}
+
+	public Armour getChest() {
+		return chest;
+	}
+
+	public int getCoins() {
+		return coins;
 	}
 }

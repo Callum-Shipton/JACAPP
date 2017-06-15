@@ -11,7 +11,6 @@ import components.movement.BasicMovement;
 import display.Art;
 import main.Logger;
 import main.Loop;
-import math.Seconds;
 import object.Entity;
 import save.Save;
 
@@ -73,7 +72,7 @@ public class Spawner {
 	public void update() {
 		if (this.newWave) {
 			this.counter++;
-			if (this.counter == Seconds.ticks(this.enemySpawnRate)) {
+			if (this.counter == Loop.ticks(this.enemySpawnRate)) {
 				// creating new Enemy
 
 				if ((this.totalEnemies == 0) && (this.wave == this.maxWave)) {

@@ -24,29 +24,32 @@ import level.Level;
 import level.PlayerBuilder;
 import main.Logger;
 import main.Loop;
+import main.ShootEmUp;
 import save.Save;
 
 public abstract class ButtonHandler {
 
 	private static void back() {
-		Loop.getMenuSystem().popMenu();
+		ShootEmUp.getMenuSystem().popMenu();
 	}
 
 	private static void character(TypeAttack type) {
-		if (Loop.getSave() == null) {
+		Save save = Loop.getSave();
+		if (save == null) {
 			PlayerBuilder.buildPlayer(type);
+			ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(Art.getImage("MainMenuScreen"), 1));
 		} else {
-			if (Loop.getSave().getCharacter(type) != null) {
+			if (save.getCharacter(type) != null) {
 				PlayerBuilder.buildPlayer(type, Loop.getSave().getCharacter(type));
 			} else {
 				PlayerBuilder.buildPlayer(type);
 			}
+			ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(Art.getImage("MainMenuScreen"), save.getLevel()));
 		}
-		Loop.getMenuSystem().addMenu(new LevelSelectMenu(Art.getImage("MainMenuScreen")));
 	}
 
 	private static void controls() {
-		Loop.getMenuSystem().addMenu(new ControlsMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new ControlsMenu(Art.getImage("MainMenuScreen")));
 	}
 
 	private static void exit() {
@@ -73,7 +76,7 @@ public abstract class ButtonHandler {
 	}
 
 	private static void inventory() {
-		Loop.getMenuSystem().addMenu(new InventoryMenu(Art.getImage("InventoryScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new InventoryMenu(Art.getImage("InventoryScreen")));
 	}
 
 	private static void inventoryUpgrade() {
@@ -91,21 +94,49 @@ public abstract class ButtonHandler {
 	}
 
 	private static void loadGame() throws Exception {
-		if (Loop.getSave() == null) {
+		Save save = Loop.getSave();
+
+		if (save == null) {
 			Loop.setSave(new Save());
 		}
-		Loop.getSave().load(1);
-		Loop.getMenuSystem().addMenu(new LevelSelectMenu(Art.getImage("MainMenuScreen")));
+		save.load(1);
+
+		int warriorLevel = 0;
+		int archerLevel = 0;
+		int mageLevel = 0;
+		int battleMageLevel = 0;
+		int rogueLevel = 0;
+
+		if (save != null) {
+			if (save.getCharacter(TypeAttack.WARRIOR) != null) {
+				warriorLevel = save.getCharacter(TypeAttack.WARRIOR).getPlayerLevel();
+			}
+			if (save.getCharacter(TypeAttack.ARCHER) != null) {
+				archerLevel = save.getCharacter(TypeAttack.ARCHER).getPlayerLevel();
+			}
+			if (save.getCharacter(TypeAttack.MAGE) != null) {
+				mageLevel = save.getCharacter(TypeAttack.MAGE).getPlayerLevel();
+			}
+			if (save.getCharacter(TypeAttack.BATTLE_MAGE) != null) {
+				battleMageLevel = save.getCharacter(TypeAttack.BATTLE_MAGE).getPlayerLevel();
+			}
+			if (save.getCharacter(TypeAttack.ROGUE) != null) {
+				rogueLevel = save.getCharacter(TypeAttack.ROGUE).getPlayerLevel();
+			}
+		}
+
+		ShootEmUp.getMenuSystem().addMenu(new CharacterSelectMenu(Art.getImage("MainMenuScreen"), warriorLevel,
+				archerLevel, mageLevel, battleMageLevel, rogueLevel));
 	}
 
 	private static void magic() {
-		Loop.getMenuSystem().addMenu(new UpgradesMenu(Art.getImage("UpgradesScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new UpgradesMenu(Art.getImage("UpgradesScreen")));
 	}
 
 	private static void mainMenu() {
-		Loop.getMenuSystem().setMainMenu(true);
-		Loop.getMenuSystem().clearMenus();
-		Loop.getMenuSystem().addMenu(new MainMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().setMainMenu(true);
+		ShootEmUp.getMenuSystem().clearMenus();
+		ShootEmUp.getMenuSystem().addMenu(new MainMenu(Art.getImage("MainMenuScreen")));
 	}
 
 	private static void mana() {
@@ -128,7 +159,7 @@ public abstract class ButtonHandler {
 	}
 
 	private static void map() {
-		Loop.getMenuSystem().addMenu(new MapMenu(Art.getImage("MapScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new MapMenu(Art.getImage("MapScreen")));
 	}
 
 	private static void mute() {
@@ -136,11 +167,11 @@ public abstract class ButtonHandler {
 	}
 
 	private static void newGame() {
-		Loop.getMenuSystem().addMenu(new CharacterSelectMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new CharacterSelectMenu(Art.getImage("MainMenuScreen")));
 	}
 
 	private static void options() {
-		Loop.getMenuSystem().addMenu(new OptionsMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new OptionsMenu(Art.getImage("MainMenuScreen")));
 	}
 
 	private static void potionsUpgrade() {
@@ -152,12 +183,12 @@ public abstract class ButtonHandler {
 	}
 
 	private static void resume() {
-		Loop.getMenuSystem().clearMenus();
+		ShootEmUp.getMenuSystem().clearMenus();
 		Loop.setPaused(false);
 	}
 
 	private static void save() {
-		Loop.getMenuSystem().addMenu(new SaveMenu(Art.getImage("SaveScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new SaveMenu(Art.getImage("SaveScreen")));
 	}
 
 	private static void saveGame() {
@@ -270,10 +301,10 @@ public abstract class ButtonHandler {
 	}
 
 	private static void skills() {
-		Loop.getMenuSystem().addMenu(new SkillMenu(Art.getImage("SkillScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new SkillMenu(Art.getImage("SkillScreen")));
 	}
 
 	private static void sound() {
-		Loop.getMenuSystem().addMenu(new SoundMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new SoundMenu(Art.getImage("MainMenuScreen")));
 	}
 }

@@ -28,8 +28,8 @@ public class Save implements Serializable {
 
 	private static final long serialVersionUID = 7179389236763035983L;
 
-	private final static byte[] KEY = "funbrella0000000".getBytes();
-	private final static String TRANSFORMATION = "AES";
+	private static final  byte[] KEY = "funbrella0000000".getBytes();
+	private static final  String TRANSFORMATION = "AES";
 
 	private CharacterSave warrior;
 	private CharacterSave archer;
@@ -101,19 +101,19 @@ public class Save implements Serializable {
 
 		switch (tempAttack) {
 		case WARRIOR:
-			this.warrior = new CharacterSave();
+			warrior = new CharacterSave();
 			break;
 		case ARCHER:
-			this.archer = new CharacterSave();
+			archer = new CharacterSave();
 			break;
 		case MAGE:
-			this.mage = new CharacterSave();
+			mage = new CharacterSave();
 			break;
 		case BATTLE_MAGE:
-			this.battleMage = new CharacterSave();
+			battleMage = new CharacterSave();
 			break;
 		case ROGUE:
-			this.rogue = new CharacterSave();
+			rogue = new CharacterSave();
 			break;
 		}
 	}

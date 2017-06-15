@@ -14,48 +14,50 @@ public class PlayerAttack extends BaseAttack {
 
 	public PlayerAttack(TypeAttack type, CharacterSave save) {
 		super(type);
-		this.lives = save.getLives();
+		
+		lives = save.getLives();
 
-		this.health = save.getHealth();
-		this.mana = save.getMana();
-		this.weapon = save.getWeapon();
-		this.boots = save.getBoots();
-		this.legs = save.getLegs();
-		this.chest = save.getChest();
-		this.helmet = save.getHelmet();
+		health = save.getHealth();
+		mana = save.getMana();
+		weapon = save.getWeapon();
+		boots = save.getBoots();
+		legs = save.getLegs();
+		chest = save.getChest();
+		helmet = save.getHelmet();
 		setArmourValue();
 
-		this.maxHealth = save.getMaxHealth();
-		this.maxHealthRegen = save.getMaxHealthRegen();
-		this.maxMana = save.getMaxMana();
-		this.maxManaRegen = save.getMaxManaRegen();
+		maxHealth = save.getMaxHealth();
+		maxHealthRegen = save.getMaxHealthRegen();
+		maxMana = save.getMaxMana();
+		maxManaRegen = save.getMaxManaRegen();
 	}
 
 	public PlayerAttack(TypeAttack type, int health, int mana, Weapon weapon) {
 		super(type, health, mana, weapon);
-		this.lives = 3;
+		lives = 3;
 	}
 
 	@Override
 	public void die(Entity e) {
-		this.health = this.maxHealth;
-		this.mana = this.maxMana;
 		removeLife();
 		e.send(Message.ENTITY_DIED);
 	}
 
-	public int getLives() {
-		return this.lives;
-	}
-
 	public void removeLife() {
-		if (this.lives == 1) {
+		if (lives == 1) {
 			Loop.setPaused(true);
 			Loop.getMenuSystem().addMenu(new GameOverMenu(Art.getImage("GameOverScreen")));
 		} else {
-			this.lives--;
+			lives--;
+			health = maxHealth;
+			mana = maxMana;
 		}
 	}
+	
+	public int getLives() {
+		return lives;
+	}
+
 
 	public void setLives(int lives) {
 		this.lives = lives;
