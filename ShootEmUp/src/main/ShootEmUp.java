@@ -132,7 +132,7 @@ public final class ShootEmUp {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		if (!paused) {
-			getCurrentLevel().render();
+			currentLevel.render();
 			BaseGraphics baseGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
 			baseGraphics.render(ShootEmUp.getPlayer());
 			hud.render(Art.stat);
@@ -154,7 +154,7 @@ public final class ShootEmUp {
 			menuSystem.pause();
 		}
 		if (!paused) {
-			getCurrentLevel().update();
+			currentLevel.update();
 			hud.update();
 		} else {
 			menuSystem.update();

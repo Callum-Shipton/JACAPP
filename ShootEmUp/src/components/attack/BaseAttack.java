@@ -106,22 +106,22 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	public abstract void die(Entity e);
 
 	public void healthRegen() {
-		if (this.health < this.maxHealth) {
-			if (this.healthRegen <= 0) {
-				this.healthRegen = this.maxHealthRegen;
-				this.health++;
+		if (health < maxHealth) {
+			if (healthRegen <= 0) {
+				healthRegen = maxHealthRegen;
+				health++;
 			}
-			this.healthRegen--;
+			healthRegen--;
 		}
 	}
 
 	public void manaRegen() {
-		if (this.mana < this.maxMana) {
-			if (this.manaRegen <= 0) {
-				this.manaRegen = this.maxManaRegen;
-				this.mana++;
+		if (mana < maxMana) {
+			if (manaRegen <= 0) {
+				manaRegen = maxManaRegen;
+				mana++;
 			}
-			this.manaRegen--;
+			manaRegen--;
 		}
 	}
 
@@ -132,15 +132,15 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	}
 
 	protected void setArmourValue() {
-		this.armourValue = 0;
-		if (this.boots != null) {
-			this.armourValue += this.boots.getDefence();
-		} else if (this.legs != null) {
-			this.armourValue += this.legs.getDefence();
-		} else if (this.chest != null) {
-			this.armourValue += this.chest.getDefence();
-		} else if (this.helmet != null) {
-			this.armourValue += this.helmet.getDefence();
+		armourValue = 0;
+		if (boots != null) {
+			armourValue += boots.getDefence();
+		} else if (legs != null) {
+			armourValue += legs.getDefence();
+		} else if (chest != null) {
+			armourValue += chest.getDefence();
+		} else if (helmet != null) {
+			armourValue += helmet.getDefence();
 		}
 	}
 
@@ -237,71 +237,71 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	}
 	
 	public boolean isFire() {
-		return this.fire;
+		return fire;
 	}
 
 	public boolean isPoison() {
-		return this.poison;
+		return poison;
 	}
 	
 	public TypeAttack getAttackType() {
-		return this.type;
+		return type;
 	}
 
 	public Armour getBoots() {
-		return this.boots;
+		return boots;
 	}
 
 	public Armour getChest() {
-		return this.chest;
+		return chest;
 	}
 
 	public int getHealth() {
-		return this.health;
+		return health;
 	}
 
 	public int getHealthRegen() {
-		return this.healthRegen;
+		return healthRegen;
 	}
 
 	public Armour getHelmet() {
-		return this.helmet;
+		return helmet;
 	}
 
 	public Armour getLegs() {
-		return this.legs;
+		return legs;
 	}
 
 	public int getMana() {
-		return this.mana;
+		return mana;
 	}
 
 	public int getManaRegen() {
-		return this.manaRegen;
+		return manaRegen;
 	}
 
 	public int getMaxHealth() {
-		return this.maxHealth;
+		return maxHealth;
 	}
 
 	public int getMaxHealthRegen() {
-		return this.maxHealthRegen;
+		return maxHealthRegen;
 	}
 
 	public int getMaxMana() {
-		return this.maxMana;
+		return maxMana;
 	}
 
 	public int getMaxManaRegen() {
-		return this.maxManaRegen;
+		return maxManaRegen;
 	}
 
 	@Override
 	public TypeComponent getType() {
-		return this.componentType;
+		return componentType;
 	}
 
 	public Weapon getWeapon() {
-		return this.weapon;
+		return weapon;
 	}
 }
