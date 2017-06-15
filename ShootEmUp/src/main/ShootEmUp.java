@@ -8,6 +8,7 @@ import display.Art;
 import gui.Hud;
 import gui.MenuSystem;
 import gui.menus.MainMenu;
+import input.Keyboard;
 import level.Level;
 import object.Entity;
 import save.Save;
@@ -60,9 +61,9 @@ public class ShootEmUp implements Game {
 	@Override
 	public void update() {
 
-		if (!menuSystem.isMainMenu() && Keyboard.getKey(keys.pause) == 1) {
+		if (!menuSystem.isMainMenu() && Keyboard.getKey(Loop.getKeys().pause) == 1) {
 			Loop.setPaused(!Loop.isPaused());
-			Keyboard.setKey(keys.pause);
+			Keyboard.setKey(Loop.getKeys().pause);
 			menuSystem.pause();
 		}
 
