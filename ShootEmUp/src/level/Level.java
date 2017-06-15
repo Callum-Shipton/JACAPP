@@ -16,7 +16,7 @@ import object.EntityMap;
 
 public class Level {
 
-	private int level;
+	private int levelNumber;
 
 	private EntityMap eMap;
 
@@ -28,7 +28,7 @@ public class Level {
 	private LevelMap map;
 
 	public Level(String file, int level) {
-		this.level = level;
+		this.levelNumber = level;
 		map = new LevelMap(file + level + ".png");
 		eMap = new EntityMap(map.getWidth(), map.getHeight());
 		spawner = new Spawner(1, 10, 3, 250.0f, 25.0f);
@@ -39,7 +39,7 @@ public class Level {
 
 	public void init() {
 		addEntity(Loop.getPlayer());
-		Loop.setHud(new Hud(Loop.getPlayer(), 0, 0));
+		Loop.setHud(new Hud(Loop.getPlayer(), 0, 0, spawner.getWave()));
 		map.init();
 	}
 
@@ -102,7 +102,7 @@ public class Level {
 			Entity c = EntityIter.next();
 			c.update();
 		}
-		
+
 		addEntities();
 
 		removeEntities();
@@ -117,7 +117,7 @@ public class Level {
 	}
 
 	public int getLevel() {
-		return this.level;
+		return this.levelNumber;
 	}
 
 	public LevelMap getMap() {

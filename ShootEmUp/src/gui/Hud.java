@@ -37,7 +37,7 @@ public class Hud extends GuiComponent {
 	private PlayerAttack PA;
 	private BasicMovement PM;
 
-	public Hud(Entity player, float x, float y) {
+	public Hud(Entity player, float x, float y, int waveNumber) {
 		super(x, y);
 
 		this.PI = player.getComponent(TypeComponent.INVENTORY);
@@ -57,8 +57,7 @@ public class Hud extends GuiComponent {
 		this.hudElems.add(this.moneyCounter);
 		this.levelCounter = new Counter(90.0f, 82.0f, Art.getImage("LevelIcon"), false, this.PI.getLevel(), 0.5f);
 		this.hudElems.add(this.levelCounter);
-		this.waveCounter = new Counter(170.0f, 82.0f, Art.getImage("WaveIcon"), false,
-				Loop.getCurrentLevel().getSpawner().getWave(), 0.5f);
+		this.waveCounter = new Counter(170.0f, 82.0f, Art.getImage("WaveIcon"), false, waveNumber, 0.5f);
 		this.hudElems.add(this.waveCounter);
 		this.livesCounter = new Counter(250.0f, 82.0f, Art.getImage("LivesIcon"), false, this.PA.getLives(), 0.5f);
 		this.hudElems.add(this.livesCounter);
@@ -67,8 +66,7 @@ public class Hud extends GuiComponent {
 		this.frost = new Icon(0.0f, 140.0f, Art.getImage("Frost"), false, 1f);
 
 		// Potions bar
-		this.infoBoxBottom = new Icon(0.0f,
-				Loop.getDisplay().getHeight() - Art.getImage("BarInfoBottom").getHeight(),
+		this.infoBoxBottom = new Icon(0.0f, Loop.getDisplay().getHeight() - Art.getImage("BarInfoBottom").getHeight(),
 				Art.getImage("BarInfoBottom"), false, 1f);
 		this.hudElems.add(this.infoBoxBottom);
 	}

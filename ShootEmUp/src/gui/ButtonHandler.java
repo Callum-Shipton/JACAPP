@@ -33,14 +33,14 @@ public abstract class ButtonHandler {
 		ShootEmUp.getMenuSystem().popMenu();
 	}
 
-	private static void character(TypeAttack type) {
-		Save save = Loop.getSave();
+	private static void selectCharacter(TypeAttack type) {
+		Save save = ShootEmUp.getSave();
 		if (save == null) {
-			PlayerBuilder.buildPlayer(type);
+			Loop.setPlayer(PlayerBuilder.buildPlayer(type));
 			ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(Art.getImage("MainMenuScreen"), 1));
 		} else {
 			if (save.getCharacter(type) != null) {
-				PlayerBuilder.buildPlayer(type, Loop.getSave().getCharacter(type));
+				PlayerBuilder.buildPlayer(type, save.getCharacter(type));
 			} else {
 				PlayerBuilder.buildPlayer(type);
 			}
@@ -94,10 +94,10 @@ public abstract class ButtonHandler {
 	}
 
 	private static void loadGame() throws Exception {
-		Save save = Loop.getSave();
+		Save save = ShootEmUp.getSave();
 
 		if (save == null) {
-			Loop.setSave(new Save());
+			ShootEmUp.setSave(new Save());
 		}
 		save.load(1);
 
@@ -192,12 +192,12 @@ public abstract class ButtonHandler {
 	}
 
 	private static void saveGame() {
-		if (Loop.getSave() == null) {
-			Loop.setSave(new Save());
+		if (ShootEmUp.getSave() == null) {
+			ShootEmUp.setSave(new Save());
 		}
-		Loop.getSave().saveCharacter();
-		Loop.getSave().saveToSystem(1);
-		Loop.setSave(null);
+		ShootEmUp.getSave().saveCharacter();
+		ShootEmUp.getSave().saveToSystem(1);
+		ShootEmUp.setSave(null);
 	}
 
 	public static void selectButton(TypeButton type) {
@@ -228,19 +228,19 @@ public abstract class ButtonHandler {
 			level(3);
 			break;
 		case WARRIOR:
-			character(TypeAttack.WARRIOR);
+			selectCharacter(TypeAttack.WARRIOR);
 			break;
 		case ARCHER:
-			character(TypeAttack.ARCHER);
+			selectCharacter(TypeAttack.ARCHER);
 			break;
 		case MAGE:
-			character(TypeAttack.MAGE);
+			selectCharacter(TypeAttack.MAGE);
 			break;
 		case BATTLE_MAGE:
-			character(TypeAttack.BATTLE_MAGE);
+			selectCharacter(TypeAttack.BATTLE_MAGE);
 			break;
 		case ROGUE:
-			character(TypeAttack.ROGUE);
+			selectCharacter(TypeAttack.ROGUE);
 			break;
 		case BACK:
 			back();

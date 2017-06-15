@@ -23,12 +23,11 @@ public final class Loop {
 
 	// Handle for monitor/window funcs
 	private static Display display;
-	private static boolean paused = true;
 	private static double fps;
 	private static Keys keys;
 	private Game game;
-	
-	public Loop(Game game, double fps){
+
+	public Loop(Game game, double fps) {
 		this.game = game;
 		Loop.fps = fps;
 	}
@@ -59,8 +58,6 @@ public final class Loop {
 		display.initGLFW();
 		keys = new Keys();
 		Controllers.create();
-
-		paused = true;
 		game.init();
 	}
 
@@ -117,9 +114,9 @@ public final class Loop {
 		// invoked during this call.
 		glfwPollEvents();
 		Controllers.poll();
-		
+
 		game.update();
-		
+
 		display.update();
 	}
 
@@ -138,14 +135,4 @@ public final class Loop {
 	public static Keys getKeys() {
 		return keys;
 	}
-
-	public static boolean isPaused() {
-		return paused;
-	}
-
-	public static void setPaused(boolean p) {
-		paused = p;
-	}
-
-
 }

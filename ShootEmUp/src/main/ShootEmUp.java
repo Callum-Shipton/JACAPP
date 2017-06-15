@@ -18,16 +18,17 @@ public class ShootEmUp implements Game {
 	private MusicPlayer musicPlayer;
 	private Level currentLevel;
 	private Entity player;
-	private static MenuSystem menuSystem;
-	private Save save;
+	private static MenuSystem menuSystem = new MenuSystem();
+	private static Save save;
+
+	private static boolean paused = true;
 	private Hud hud;
-	private static Loop loop;
 
 	public ShootEmUp() {
 	}
 
 	public static void main(String[] args) {
-		loop = new Loop(new ShootEmUp(), 60.0f);
+		Loop loop = new Loop(new ShootEmUp(), 60.0f);
 		loop.start();
 	}
 
@@ -40,16 +41,15 @@ public class ShootEmUp implements Game {
 	@Override
 	public void init() {
 		musicPlayer = new MusicPlayer();
-		menuSystem = new MenuSystem();
 
-		Loop.setPaused(true);
+		paused = true;
 		menuSystem.addMenu(new MainMenu(Art.getImage("MainMenuScreen")));
 		musicPlayer.play();
 	}
 
 	@Override
 	public void render() {
-		if (!Loop.isPaused()) {
+		if (!paused) {
 			currentLevel.render();
 			BaseGraphics baseGraphics = player.getComponent(TypeComponent.GRAPHICS);
 			baseGraphics.render(player);
@@ -62,12 +62,12 @@ public class ShootEmUp implements Game {
 	public void update() {
 
 		if (!menuSystem.isMainMenu() && Keyboard.getKey(Loop.getKeys().pause) == 1) {
-			Loop.setPaused(!Loop.isPaused());
+			paused = !paused;
 			Keyboard.setKey(Loop.getKeys().pause);
 			menuSystem.pause();
 		}
 
-		if (!Loop.isPaused()) {
+		if (!paused) {
 			currentLevel.update();
 			hud.update();
 		} else {
@@ -98,7 +98,7 @@ public class ShootEmUp implements Game {
 		return player;
 	}
 
-	public Save getSave() {
+	public static Save getSave() {
 		return save;
 	}
 
@@ -114,7 +114,15 @@ public class ShootEmUp implements Game {
 		this.player = player;
 	}
 
-	public void setSave(Save save) {
-		this.save = save;
+	public static void setSave(Save save) {
+		ShootEmUp.save = save;
+	}
+
+	public static boolean isPaused() {
+		return paused;
+	}
+
+	public static void setPaused(boolean p) {
+		paused = p;
 	}
 }

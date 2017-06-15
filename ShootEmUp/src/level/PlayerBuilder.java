@@ -9,7 +9,6 @@ import components.inventory.BaseInventory;
 import components.movement.BasicMovement;
 import components.spawn.PointSpawn;
 import display.Art;
-import main.Loop;
 import math.Vector2;
 import object.Entity;
 import object.Weapon;
@@ -33,11 +32,9 @@ public abstract class PlayerBuilder {
 		player.addComponent(m);
 		player.addComponent(i);
 		player.addComponent(new PlayerControl(g, a, m, i));
-
-		Loop.setPlayer(player);
 	}
 
-	public static void buildPlayer(TypeAttack type) {
+	public static Entity buildPlayer(TypeAttack type) {
 		chooseType(type);
 
 		c = new RigidCollision();
@@ -45,9 +42,10 @@ public abstract class PlayerBuilder {
 		i = new BaseInventory(g, a, 0);
 
 		addComponents();
+		return player;
 	}
 
-	public static void buildPlayer(TypeAttack type, CharacterSave save) {
+	public static Entity buildPlayer(TypeAttack type, CharacterSave save) {
 		chooseType(type);
 
 		a = new PlayerAttack(type, save);
@@ -56,6 +54,7 @@ public abstract class PlayerBuilder {
 		i = new BaseInventory(g, a, save);
 
 		addComponents();
+		return player;
 	}
 
 	private static void chooseType(TypeAttack type) {
