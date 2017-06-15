@@ -5,7 +5,7 @@ import java.util.Set;
 import components.Component;
 import components.Message;
 import components.TypeComponent;
-import main.ShootEmUp;
+import main.Loop;
 import math.Vector2;
 import object.Entity;
 
@@ -21,7 +21,7 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 
 	@Override
 	public void destroy(Entity e) {
-		ShootEmUp.getCurrentLevel().removeEntity(this.gridPos, e);
+		Loop.getCurrentLevel().removeEntity(this.gridPos, e);
 	}
 
 	public Set<Vector2> getGridPos() {

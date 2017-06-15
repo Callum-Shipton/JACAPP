@@ -10,7 +10,7 @@ import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
 import components.inventory.BaseInventory;
 import components.inventory.TypePotion;
-import main.ShootEmUp;
+import main.Loop;
 import object.Armour;
 import object.InventoryItem;
 import object.Potion;
@@ -68,7 +68,7 @@ public class CharacterSave implements Serializable {
 
 	private void getData() {
 
-		PlayerAttack tempAttack = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
+		PlayerAttack tempAttack = Loop.getPlayer().getComponent(TypeComponent.ATTACK);
 
 		this.player = tempAttack.getAttackType();
 
@@ -90,7 +90,7 @@ public class CharacterSave implements Serializable {
 		this.chest = tempAttack.getChest();
 		this.helmet = tempAttack.getHelmet();
 
-		BaseInventory tempInventory = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory tempInventory = Loop.getPlayer().getComponent(TypeComponent.INVENTORY);
 
 		this.coins = tempInventory.getCoins();
 		this.exp = tempInventory.getExp();

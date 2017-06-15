@@ -2,7 +2,7 @@ package audio;
 
 import audio.music.BackgroundMusic;
 import input.Keyboard;
-import main.ShootEmUp;
+import main.Loop;
 
 public class MusicPlayer {
 
@@ -45,8 +45,8 @@ public class MusicPlayer {
 	}
 
 	public void update() {
-		if (Keyboard.getKey(ShootEmUp.getKeys().mute) == 1) {
-			Keyboard.setKey(ShootEmUp.getKeys().mute);
+		if (Keyboard.getKey(Loop.getKeys().mute) == 1) {
+			Keyboard.setKey(Loop.getKeys().mute);
 			pause();
 		}
 	}

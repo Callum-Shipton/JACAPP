@@ -17,7 +17,7 @@ import components.spawn.PointSpawn;
 import display.Art;
 import display.Image;
 import main.Logger;
-import main.ShootEmUp;
+import main.Loop;
 import math.Vector2;
 
 public final class Weapon extends InventoryItem<Weapon> {
@@ -134,7 +134,7 @@ public final class Weapon extends InventoryItem<Weapon> {
 		particle.addComponent(m);
 		particle.addComponent(new RangeControl(g, m, this.range));
 
-		ShootEmUp.getCurrentLevel().addEntity(particle);
+		Loop.getCurrentLevel().addEntity(particle);
 		// ShootEmUp.getCurrentLevel().getSpawner().checkSpawn(particle);
 	}
 

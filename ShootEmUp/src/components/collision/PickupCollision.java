@@ -5,7 +5,7 @@ import components.TypeComponent;
 import components.control.PlayerControl;
 import components.inventory.BaseInventory;
 import components.inventory.TypePickup;
-import main.ShootEmUp;
+import main.Loop;
 import math.Seconds;
 import object.Entity;
 import object.EntityMap;
@@ -23,17 +23,17 @@ public class PickupCollision extends BaseCollision {
 
 		this.moveBack = false;
 
-		EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
+		EntityMap eMap = Loop.getCurrentLevel().geteMap();
 		setGridPos(eMap.getGridPos(e));
 		eMap.addEntity(getGridPos(), e);
 	}
 
 	@Override
 	public void collision(Entity e, Entity hit) {
-		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory BI = Loop.getPlayer().getComponent(TypeComponent.INVENTORY);
 		if (hit.getComponent(TypeComponent.CONTROL) instanceof PlayerControl) {
 			if ((BI).giveItem(this.typePickup, this.name)) {
-				ShootEmUp.getCurrentLevel().removeEntity(this.gridPos, e);
+				Loop.getCurrentLevel().removeEntity(this.gridPos, e);
 				e.destroy();
 			}
 		}

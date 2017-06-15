@@ -9,7 +9,7 @@ import components.inventory.TypePotion;
 import components.movement.BasicMovement;
 import display.Art;
 import display.DPDTRenderer;
-import main.ShootEmUp;
+import main.Loop;
 import math.Vector2;
 import object.Entity;
 
@@ -58,7 +58,7 @@ public class Hud extends GuiComponent {
 		this.levelCounter = new Counter(90.0f, 82.0f, Art.getImage("LevelIcon"), false, this.PI.getLevel(), 0.5f);
 		this.hudElems.add(this.levelCounter);
 		this.waveCounter = new Counter(170.0f, 82.0f, Art.getImage("WaveIcon"), false,
-				ShootEmUp.getCurrentLevel().getSpawner().getWave(), 0.5f);
+				Loop.getCurrentLevel().getSpawner().getWave(), 0.5f);
 		this.hudElems.add(this.waveCounter);
 		this.livesCounter = new Counter(250.0f, 82.0f, Art.getImage("LivesIcon"), false, this.PA.getLives(), 0.5f);
 		this.hudElems.add(this.livesCounter);
@@ -68,7 +68,7 @@ public class Hud extends GuiComponent {
 
 		// Potions bar
 		this.infoBoxBottom = new Icon(0.0f,
-				ShootEmUp.getDisplay().getHeight() - Art.getImage("BarInfoBottom").getHeight(),
+				Loop.getDisplay().getHeight() - Art.getImage("BarInfoBottom").getHeight(),
 				Art.getImage("BarInfoBottom"), false, 1f);
 		this.hudElems.add(this.infoBoxBottom);
 	}
@@ -98,13 +98,13 @@ public class Hud extends GuiComponent {
 		int sPot = this.PI.getNumPotion(TypePotion.SPEED);
 		int kPot = this.PI.getNumPotion(TypePotion.KNOCKBACK);
 
-		r.draw(Art.getImage("Numbers"), new Vector2(26, ShootEmUp.getDisplay().getHeight() - 55), size, 0.0f,
+		r.draw(Art.getImage("Numbers"), new Vector2(26, Loop.getDisplay().getHeight() - 55), size, 0.0f,
 				new Vector2(hPot, 1), maxTex);
-		r.draw(Art.getImage("Numbers"), new Vector2(70, ShootEmUp.getDisplay().getHeight() - 55), size, 0.0f,
+		r.draw(Art.getImage("Numbers"), new Vector2(70, Loop.getDisplay().getHeight() - 55), size, 0.0f,
 				new Vector2(mPot, 1), maxTex);
-		r.draw(Art.getImage("Numbers"), new Vector2(114, ShootEmUp.getDisplay().getHeight() - 55), size, 0.0f,
+		r.draw(Art.getImage("Numbers"), new Vector2(114, Loop.getDisplay().getHeight() - 55), size, 0.0f,
 				new Vector2(sPot, 1), maxTex);
-		r.draw(Art.getImage("Numbers"), new Vector2(159, ShootEmUp.getDisplay().getHeight() - 55), size, 0.0f,
+		r.draw(Art.getImage("Numbers"), new Vector2(159, Loop.getDisplay().getHeight() - 55), size, 0.0f,
 				new Vector2(kPot, 1), maxTex);
 	}
 
@@ -119,7 +119,7 @@ public class Hud extends GuiComponent {
 		this.frost.update();
 		this.moneyCounter.update(this.PI.getCoins());
 		this.levelCounter.update(this.PI.getLevel());
-		this.waveCounter.update(ShootEmUp.getCurrentLevel().getSpawner().getWave());
+		this.waveCounter.update(Loop.getCurrentLevel().getSpawner().getWave());
 		this.livesCounter.update(this.PA.getLives());
 
 		int maxHealth = this.PA.getMaxHealth();

@@ -2,7 +2,7 @@ package components.attack;
 
 import display.Art;
 import gui.HudBar;
-import main.ShootEmUp;
+import main.Loop;
 import object.Armour;
 import object.Entity;
 import object.Weapon;
@@ -26,7 +26,7 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 	@Override
 	public void die(Entity e) {
 		e.destroy();
-		ShootEmUp.getCurrentLevel().getSpawner().removeEnemy();
+		Loop.getCurrentLevel().getSpawner().removeEnemy();
 	}
 
 	@Override

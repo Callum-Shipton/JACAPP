@@ -2,7 +2,7 @@ package ai;
 
 import math.Vector2;
 
-public class TypeNode extends Node implements Comparable<Node> {
+public class TypeNode extends AStarNode implements Comparable<AStarNode> {
 
 	private int type;
 

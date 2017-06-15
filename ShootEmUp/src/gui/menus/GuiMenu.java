@@ -8,7 +8,7 @@ import display.Display;
 import display.Image;
 import gui.GuiComponent;
 import gui.MenuButton;
-import main.ShootEmUp;
+import main.Loop;
 import math.Vector2;
 
 public abstract class GuiMenu {
@@ -28,7 +28,7 @@ public abstract class GuiMenu {
 		this.y = 0;
 		this.w = menuImage.getWidth();
 		this.h = menuImage.getHeight();
-		this.display = ShootEmUp.getDisplay();
+		this.display = Loop.getDisplay();
 	}
 
 	public void buttonPressed(MenuButton button) {

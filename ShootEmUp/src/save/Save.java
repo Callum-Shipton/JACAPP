@@ -22,7 +22,7 @@ import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.attack.TypeAttack;
 import main.Logger;
-import main.ShootEmUp;
+import main.Loop;
 
 public class Save implements Serializable {
 
@@ -93,10 +93,10 @@ public class Save implements Serializable {
 	}
 
 	public void saveCharacter() {
-		if (ShootEmUp.getCurrentLevel().getLevel() > this.level) {
-			this.level = ShootEmUp.getCurrentLevel().getLevel();
+		if (Loop.getCurrentLevel().getLevel() > this.level) {
+			this.level = Loop.getCurrentLevel().getLevel();
 		}
-		BaseAttack BA = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
+		BaseAttack BA = Loop.getPlayer().getComponent(TypeComponent.ATTACK);
 		TypeAttack tempAttack = BA.getAttackType();
 
 		switch (tempAttack) {

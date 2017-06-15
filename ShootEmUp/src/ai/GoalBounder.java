@@ -22,11 +22,11 @@ public class GoalBounder {
 		return aiTiles[(int) x][(int) y];
 	}
 
-	private TypeNode[] generateChildNodes(Node startNode) {
+	private TypeNode[] generateChildNodes(AStarNode startNode) {
 		return generateChildNodes(startNode, null);
 	}
 
-	private TypeNode[] generateChildNodes(Node startNode, Integer type) {
+	private TypeNode[] generateChildNodes(AStarNode startNode, Integer type) {
 		TypeNode[] childNodes = new TypeNode[8];
 
 		float startX = startNode.getPosition().x();
@@ -100,7 +100,7 @@ public class GoalBounder {
 					// list of already viewed tiles
 					Set<TypeNode> closed = new HashSet<>();
 
-					Node start = new Node(new Vector2(x, y));
+					AStarNode start = new AStarNode(new Vector2(x, y));
 
 					TypeNode[] startingNodes = generateChildNodes(start);
 					addNodesToQueues(startingNodes, open, closed);

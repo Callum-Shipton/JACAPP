@@ -5,7 +5,7 @@ import components.TypeComponent;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.movement.BaseMovement;
-import main.ShootEmUp;
+import main.Loop;
 import math.Vector2;
 import object.Entity;
 
@@ -24,8 +24,8 @@ public class HomingControl extends BaseControl {
 
 	@Override
 	public void update(Entity e) {
-		Entity target = ShootEmUp.getPlayer();
-		BaseGraphics playerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
+		Entity target = Loop.getPlayer();
+		BaseGraphics playerGraphics = Loop.getPlayer().getComponent(TypeComponent.GRAPHICS);
 
 		Vector2 targetVector = new Vector2(playerGraphics.getX(), playerGraphics.getY());
 

@@ -10,7 +10,7 @@ import components.attack.TypeAttack;
 import components.movement.BasicMovement;
 import display.Art;
 import main.Logger;
-import main.ShootEmUp;
+import main.Loop;
 import math.Seconds;
 import object.Entity;
 import save.Save;
@@ -57,7 +57,7 @@ public class Spawner {
 
 	public void checkSpawn(Entity e) {
 		BasicMovement BM = e.getComponent(TypeComponent.MOVEMENT);
-		ShootEmUp.getCurrentLevel().addEntity(e);
+		Loop.getCurrentLevel().addEntity(e);
 		BM.checkCollisionY(e);
 		BM.checkCollisionX(e);
 	}
@@ -104,22 +104,22 @@ public class Spawner {
 			if (this.wave < this.maxWave) {
 				this.wave++;
 				changeRadius((this.wave - 1) * this.radiusIncreasePerLevel);
-			} else if (ShootEmUp.getCurrentLevel().getLevel() < this.maxLevel) {
-				if (ShootEmUp.getSave() == null) {
-					ShootEmUp.setSave(new Save());
+			} else if (Loop.getCurrentLevel().getLevel() < this.maxLevel) {
+				if (Loop.getSave() == null) {
+					Loop.setSave(new Save());
 				} else {
-					ShootEmUp.getSave().saveCharacter();
+					Loop.getSave().saveCharacter();
 				}
-				ShootEmUp.getSave().saveToSystem(1);
-				BaseAttack BA = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
+				Loop.getSave().saveToSystem(1);
+				BaseAttack BA = Loop.getPlayer().getComponent(TypeComponent.ATTACK);
 				TypeAttack temp = BA.getAttackType();
-				ShootEmUp.setCurrentLevel(new Level(Art.LEVEL_FILE_LOCATION, ShootEmUp.getCurrentLevel().getLevel() + 1));
+				Loop.setCurrentLevel(new Level(Art.LEVEL_FILE_LOCATION, Loop.getCurrentLevel().getLevel() + 1));
 				try {
-					ShootEmUp.getSave().load(1);
+					Loop.getSave().load(1);
 				} catch (Exception e) {
 					Logger.error(e);
 				}
-				PlayerBuilder.buildPlayer(temp, ShootEmUp.getSave().getCharacter(temp));
+				PlayerBuilder.buildPlayer(temp, Loop.getSave().getCharacter(temp));
 			}
 			this.newWave = true;
 		}

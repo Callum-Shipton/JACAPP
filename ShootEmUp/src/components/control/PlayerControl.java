@@ -7,7 +7,7 @@ import components.inventory.BaseInventory;
 import components.inventory.TypePotion;
 import components.movement.BaseMovement;
 import input.Keyboard;
-import main.ShootEmUp;
+import main.Loop;
 import math.Vector2;
 import object.Entity;
 
@@ -34,19 +34,19 @@ public class PlayerControl extends BaseControl {
 
 	private void checkMovement(Entity e) {
 		Vector2 movement = new Vector2(0.0f, 0.0f);
-		if ((Keyboard.getKey(ShootEmUp.getKeys().moveUp) == 1) || (Keyboard.getKey(ShootEmUp.getKeys().moveUp) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().moveUp) == 1) || (Keyboard.getKey(Loop.getKeys().moveUp) == 2)) {
 			movement.add(0.0f, -1.0f);
 		}
-		if ((Keyboard.getKey(ShootEmUp.getKeys().moveLeft) == 1)
-				|| (Keyboard.getKey(ShootEmUp.getKeys().moveLeft) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().moveLeft) == 1)
+				|| (Keyboard.getKey(Loop.getKeys().moveLeft) == 2)) {
 			movement.add(-1.0f, 0.0f);
 		}
-		if ((Keyboard.getKey(ShootEmUp.getKeys().moveDown) == 1)
-				|| (Keyboard.getKey(ShootEmUp.getKeys().moveDown) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().moveDown) == 1)
+				|| (Keyboard.getKey(Loop.getKeys().moveDown) == 2)) {
 			movement.add(0.0f, 1.0f);
 		}
-		if ((Keyboard.getKey(ShootEmUp.getKeys().moveRight) == 1)
-				|| (Keyboard.getKey(ShootEmUp.getKeys().moveRight) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().moveRight) == 1)
+				|| (Keyboard.getKey(Loop.getKeys().moveRight) == 2)) {
 			movement.add(1.0f, 0.0f);
 		}
 
@@ -65,19 +65,19 @@ public class PlayerControl extends BaseControl {
 
 	private void checkDirection() {
 		Vector2 dir = new Vector2(0.0f, 0.0f);
-		if ((Keyboard.getKey(ShootEmUp.getKeys().lookUp) == 1) || (Keyboard.getKey(ShootEmUp.getKeys().lookUp) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().lookUp) == 1) || (Keyboard.getKey(Loop.getKeys().lookUp) == 2)) {
 			dir.add(0.0f, -1.0f);
 		}
-		if ((Keyboard.getKey(ShootEmUp.getKeys().lookLeft) == 1)
-				|| (Keyboard.getKey(ShootEmUp.getKeys().lookLeft) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().lookLeft) == 1)
+				|| (Keyboard.getKey(Loop.getKeys().lookLeft) == 2)) {
 			dir.add(-1.0f, 0.0f);
 		}
-		if ((Keyboard.getKey(ShootEmUp.getKeys().lookDown) == 1)
-				|| (Keyboard.getKey(ShootEmUp.getKeys().lookDown) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().lookDown) == 1)
+				|| (Keyboard.getKey(Loop.getKeys().lookDown) == 2)) {
 			dir.add(0.0f, 1.0f);
 		}
-		if ((Keyboard.getKey(ShootEmUp.getKeys().lookRight) == 1)
-				|| (Keyboard.getKey(ShootEmUp.getKeys().lookRight) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().lookRight) == 1)
+				|| (Keyboard.getKey(Loop.getKeys().lookRight) == 2)) {
 			dir.add(1.0f, 0.0f);
 		}
 		if (dir.length() > 0) {
@@ -89,34 +89,34 @@ public class PlayerControl extends BaseControl {
 	}
 
 	private void checkAttack(Entity e) {
-		if ((Keyboard.getKey(ShootEmUp.getKeys().shoot) == 1) || (Keyboard.getKey(ShootEmUp.getKeys().shoot) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().shoot) == 1) || (Keyboard.getKey(Loop.getKeys().shoot) == 2)) {
 			this.BA.attack(e, this.PG.getDirection());
 		}
 	}
 
 	private void checkPotions() {
-		if ((Keyboard.getKey(ShootEmUp.getKeys().potion1) == 1)
-				|| (Keyboard.getKey(ShootEmUp.getKeys().potion1) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().potion1) == 1)
+				|| (Keyboard.getKey(Loop.getKeys().potion1) == 2)) {
 			this.PI.usePotion(TypePotion.HEALTH);
-			Keyboard.setKey(ShootEmUp.getKeys().potion1);
+			Keyboard.setKey(Loop.getKeys().potion1);
 		}
 
-		if ((Keyboard.getKey(ShootEmUp.getKeys().potion2) == 1)
-				|| (Keyboard.getKey(ShootEmUp.getKeys().potion2) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().potion2) == 1)
+				|| (Keyboard.getKey(Loop.getKeys().potion2) == 2)) {
 			this.PI.usePotion(TypePotion.MANA);
-			Keyboard.setKey(ShootEmUp.getKeys().potion2);
+			Keyboard.setKey(Loop.getKeys().potion2);
 		}
 
-		if ((Keyboard.getKey(ShootEmUp.getKeys().potion3) == 1)
-				|| (Keyboard.getKey(ShootEmUp.getKeys().potion3) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().potion3) == 1)
+				|| (Keyboard.getKey(Loop.getKeys().potion3) == 2)) {
 			this.PI.usePotion(TypePotion.SPEED);
-			Keyboard.setKey(ShootEmUp.getKeys().potion3);
+			Keyboard.setKey(Loop.getKeys().potion3);
 		}
 
-		if ((Keyboard.getKey(ShootEmUp.getKeys().potion4) == 1)
-				|| (Keyboard.getKey(ShootEmUp.getKeys().potion4) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().potion4) == 1)
+				|| (Keyboard.getKey(Loop.getKeys().potion4) == 2)) {
 			this.PI.usePotion(TypePotion.KNOCKBACK);
-			Keyboard.setKey(ShootEmUp.getKeys().potion4);
+			Keyboard.setKey(Loop.getKeys().potion4);
 		}
 	}
 

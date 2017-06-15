@@ -37,14 +37,14 @@ import org.lwjgl.opengl.GLContext;
 import components.TypeComponent;
 import components.graphical.PlayerGraphics;
 import input.Keyboard;
-import main.ShootEmUp;
+import main.Loop;
 
 public class Display {
 
 	// Screen Width & Height
-	private static final int INITIAL_SCREEN_WIDTH = 1024;
+	public static final int INITIAL_SCREEN_WIDTH = 1024;
 
-	private static final int INITIAL_SCREEN_HEIGHT = 512;
+	public static final int INITIAL_SCREEN_HEIGHT = 512;
 
 	private GLFWErrorCallback errorCallback;
 	// The window handle
@@ -191,26 +191,26 @@ public class Display {
 		Keyboard.keyCheck(this.window);
 		Art.initShaderUniforms();
 		Art.refreshRenderers();
-		PlayerGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		if (ShootEmUp.getCurrentLevel() != null) {
+		PlayerGraphics BG = Loop.getPlayer().getComponent(TypeComponent.GRAPHICS);
+		if (Loop.getCurrentLevel() != null) {
 			BG.scrollScreen();
 		}
 		this.fullscreen = !this.fullscreen;
 	}
 
 	public void update() {
-		if (Keyboard.getKey(ShootEmUp.getKeys().quit) == 1) {
+		if (Keyboard.getKey(Loop.getKeys().quit) == 1) {
 			if (this.fullscreen) {
 				toggleFullscreen();
 			}
 			glfwSetWindowShouldClose(this.window, GL_TRUE);
-			Keyboard.setKey(ShootEmUp.getKeys().quit);
+			Keyboard.setKey(Loop.getKeys().quit);
 		}
-		if (Keyboard.getKey(ShootEmUp.getKeys().fullscreen) == 1) {
+		if (Keyboard.getKey(Loop.getKeys().fullscreen) == 1) {
 			toggleFullscreen();
 			// We will detect this in
 			// our update loop
-			Keyboard.setKey(ShootEmUp.getKeys().fullscreen);
+			Keyboard.setKey(Loop.getKeys().fullscreen);
 		}
 	}
 }

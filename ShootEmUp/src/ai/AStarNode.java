@@ -1,24 +1,23 @@
 package ai;
 
-import components.TypeComponent;
-import components.graphical.BaseGraphics;
 import level.LevelMap;
-import main.ShootEmUp;
 import math.Vector2;
 
-public class Node implements Comparable<Node> {
+public class AStarNode implements Comparable<AStarNode> {
 
 	protected Vector2 position;
-	private Node parent;
-	private Node child;
+	private AStarNode parent;
+	private AStarNode child;
+	private Vector2 goal;
 
-	public Node(Vector2 position) {
+	public AStarNode(Vector2 position) {
 		this.position = position;
 	}
 
-	public Node(Vector2 position, Node parent) {
+	public AStarNode(Vector2 position, AStarNode parent, Vector2 goal) {
 		this(position);
 		this.parent = parent;
+		this.goal = goal;
 	}
 
 	public static Vector2 getGridPosition(float x, float y) {
@@ -27,20 +26,18 @@ public class Node implements Comparable<Node> {
 	}
 
 	@Override
-	public int compareTo(Node n) {
-		BaseGraphics baseGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		Vector2 playerPosition = Node.getGridPosition(baseGraphics.getX(), baseGraphics.getY());
+	public int compareTo(AStarNode n) {
 
-		float distance1 = playerPosition.dist(n.getPosition());
-		float distance2 = playerPosition.dist(getPosition());
+		float distance1 = goal.dist(n.getPosition());
+		float distance2 = goal.dist(getPosition());
 
 		return Float.compare(distance2, distance1);
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		if (o instanceof Node) {
-			return ((Node) o).getPosition().equals(this.position);
+		if (o instanceof AStarNode) {
+			return ((AStarNode) o).getPosition().equals(this.position);
 		}
 		return false;
 	}
@@ -53,11 +50,11 @@ public class Node implements Comparable<Node> {
 		return hash;
 	}
 
-	public Node getChild() {
+	public AStarNode getChild() {
 		return this.child;
 	}
 
-	public Node getParent() {
+	public AStarNode getParent() {
 		return this.parent;
 	}
 
@@ -65,7 +62,7 @@ public class Node implements Comparable<Node> {
 		return this.position;
 	}
 
-	public void setChild(Node child) {
+	public void setChild(AStarNode child) {
 		this.child = child;
 	}
 }

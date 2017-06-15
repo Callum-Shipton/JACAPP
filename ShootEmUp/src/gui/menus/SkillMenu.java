@@ -8,7 +8,7 @@ import gui.Counter;
 import gui.CounterButton;
 import gui.TypeButton;
 import gui.VerticalLayout;
-import main.ShootEmUp;
+import main.Loop;
 
 public class SkillMenu extends PauseMenu {
 
@@ -27,7 +27,7 @@ public class SkillMenu extends PauseMenu {
 		buttonList.addMenuItem(
 				new CounterButton(0, 0, TypeButton.MANA, Art.getImage("ManaButton"), Art.getImage("Coin"), 1, 1f));
 		this.menuItems.add(buttonList);
-		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory BI = Loop.getPlayer().getComponent(TypeComponent.INVENTORY);
 		this.skillPoints = new Counter(30.0f, 191.0f, Art.getImage("Coin"), false, BI.getLevelPoints(), 1f);
 	}
 
@@ -40,7 +40,7 @@ public class SkillMenu extends PauseMenu {
 	@Override
 	public void update() {
 		super.update();
-		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory BI = Loop.getPlayer().getComponent(TypeComponent.INVENTORY);
 		this.skillPoints.update(BI.getLevelPoints());
 	}
 }

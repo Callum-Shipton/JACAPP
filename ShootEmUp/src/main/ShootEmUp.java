@@ -10,150 +10,73 @@ import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.opengl.GL11.glGetError;
 
-import java.io.File;
-
-import org.lwjgl.glfw.GLFW;
-
 import audio.MusicPlayer;
 import audio.music.BackgroundMusic;
 import components.TypeComponent;
 import components.graphical.BaseGraphics;
 import display.Art;
-import display.Display;
 import gui.Hud;
 import gui.MenuSystem;
 import gui.menus.MainMenu;
-import input.Controllers;
 import input.Keyboard;
-import input.Keys;
 import level.Level;
 import object.Entity;
 import save.Save;
 
-public final class ShootEmUp {
+public class ShootEmUp implements Game{
 
-	private ShootEmUp() {
-	}
+	private MusicPlayer musicPlayer;
+	private Level currentLevel;
+	private Entity player;
+	private MenuSystem menuSystem;
+	private Save save;
+	private Hud hud;
+	private static Loop loop;
 
-	// Handle for monitor/window funcs
-	private static Display display;
-	private static MusicPlayer musicPlayer;
-	private static Level currentLevel;
-	private static Entity player;
-	private static boolean paused;
-	private static MenuSystem menuSystem;
-	private static Save save;
-	private static double fps = 60.0;
-	private static Keys keys;
-	private static Hud hud;
-
+	public ShootEmUp(){}
+	
 	public static void main(String[] args) {
-		System.setProperty("org.lwjgl.librarypath", new File("natives").getAbsolutePath());
-		System.setProperty("net.java.games.input.librarypath", new File("natives/JInput").getAbsolutePath());
-		ShootEmUp.run();
+		loop = new Loop(new ShootEmUp(), 60.0f);
+		loop.start();
 	}
 
-	public static void run() {
-		try {
-			init();
-			loop();
-		} catch (Exception e) {
-			Logger.error(e);
-		} finally {
-			// Release window and window callbacks Terminate GLFW and release
-			// the GLFWerrorfun
-			Keyboard.destroy();
-			display.destroyGLFW();
-			musicPlayer.destroy();
-
-		}
-	}
-
-	public static void startGame() {
-		paused = false;
+	public void startGame() {
 		menuSystem.setMainMenu(false);
 		menuSystem.clearMenus();
 		musicPlayer.changeCurrentMusic(BackgroundMusic.MAIN);
 	}
 
-	private static void init() {
-		display = new Display();
-		display.initGLFW();
+	@Override
+	public void init(){
 		musicPlayer = new MusicPlayer();
 		menuSystem = new MenuSystem();
-		keys = new Keys();
-		Controllers.create();
 
-		paused = true;
+		loop.setPaused(true);
 		menuSystem.addMenu(new MainMenu(Art.getImage("MainMenuScreen")));
 		musicPlayer.play();
 	}
 
-	private static void loop() {
-		// Run the rendering loop until the user has attempted to close
-		// the window or has pressed the ESCAPE key.
-
-		double oldTime = GLFW.glfwGetTime();
-		double newTime = GLFW.glfwGetTime();
-		double delta;
-		double sleepTime;
-		int error;
-
-		while (glfwWindowShouldClose(display.getWindow()) == GL_FALSE) {
-
-			error = glGetError();
-
-			if (error != GL_NO_ERROR) {
-				Logger.error("OpenGL Error: " + error);
-			}
-
-			delta = newTime - oldTime;
-			oldTime = newTime;
-			sleepTime = (1.0 / fps) - delta;
-			Logger.debug(1.0 / delta, Logger.Category.ENGINE_STATS);
-			if (sleepTime > 0.01) {
-				try {
-					Thread.sleep((long) (sleepTime * 1000));
-					Logger.debug("I slept for " + sleepTime + "seconds.", Logger.Category.ENGINE_STATS);
-				} catch (InterruptedException e) {
-					Logger.error(e);
-				}
-			}
-			update();
-			render();
-
-			newTime = GLFW.glfwGetTime();
-
-		}
-	}
-
-	private static void render() {
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		if (!paused) {
+	@Override
+	public void render() {
+		if(!loop.isPaused()){
 			currentLevel.render();
-			BaseGraphics baseGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-			baseGraphics.render(ShootEmUp.getPlayer());
+			BaseGraphics baseGraphics = player.getComponent(TypeComponent.GRAPHICS);
+			baseGraphics.render(player);
 			hud.render(Art.stat);
 		}
 		menuSystem.render();
-
-		glfwSwapBuffers(display.getWindow()); // Swaps front and back buffers to
-		// render changes
 	}
-
-	private static void update() {
-		// Poll for window events. The key callback above will only be
-		// invoked during this call.
-		glfwPollEvents();
-		Controllers.poll();
+	
+	@Override
+	public void update() {
+		/*
 		if (!menuSystem.isMainMenu() && Keyboard.getKey(keys.pause) == 1) {
-			ShootEmUp.setPaused(!ShootEmUp.isPaused());
+			loop.setPaused(!loop.isPaused());
 			Keyboard.setKey(keys.pause);
 			menuSystem.pause();
 		}
-		if (!paused) {
+		*/
+		if (!loop.isPaused()) {
 			currentLevel.update();
 			hud.update();
 		} else {
@@ -161,65 +84,46 @@ public final class ShootEmUp {
 		}
 		// dealing with pausing music
 		musicPlayer.update();
-
-		display.update();
-
 	}
 
-	public static Level getCurrentLevel() {
+	@Override
+	public void destroy() {
+		musicPlayer.destroy();
+	}
+
+	public Level getCurrentLevel() {
 		return currentLevel;
 	}
 
-	public static Display getDisplay() {
-		return display;
-	}
-
-	public static double getFPS() {
-		return fps;
-	}
-
-	public static Keys getKeys() {
-		return keys;
-	}
-
-	public static MenuSystem getMenuSystem() {
+	public MenuSystem getMenuSystem() {
 		return menuSystem;
 	}
 
-	public static MusicPlayer getMusicPlayer() {
+	public MusicPlayer getMusicPlayer() {
 		return musicPlayer;
 	}
 
-	public static Entity getPlayer() {
+	public Entity getPlayer() {
 		return player;
 	}
 
-	public static Save getSave() {
+	public Save getSave() {
 		return save;
 	}
 
-	public static boolean isPaused() {
-		return paused;
+	public void setCurrentLevel(Level currentLevel) {
+		this.currentLevel = currentLevel;
 	}
 
-	public static void setCurrentLevel(Level currentLevel) {
-		ShootEmUp.currentLevel = currentLevel;
+	public void setHud(Hud hud) {
+		this.hud = hud;
 	}
 
-	public static void setHud(Hud hud) {
-		ShootEmUp.hud = hud;
+	public void setPlayer(Entity player) {
+		this.player = player;
 	}
 
-	public static void setPaused(boolean p) {
-		paused = p;
+	public void setSave(Save save) {
+		this.save = save;
 	}
-
-	public static void setPlayer(Entity p) {
-		player = p;
-	}
-
-	public static void setSave(Save save) {
-		ShootEmUp.save = save;
-	}
-
 }

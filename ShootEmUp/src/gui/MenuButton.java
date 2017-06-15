@@ -12,7 +12,7 @@ import org.lwjgl.BufferUtils;
 
 import display.DPDTRenderer;
 import display.Image;
-import main.ShootEmUp;
+import main.Loop;
 import math.Vector2;
 
 public class MenuButton extends GuiComponent {
@@ -39,7 +39,7 @@ public class MenuButton extends GuiComponent {
 		this.id = id;
 		this.w = id.getWidth();
 		this.h = id.getHeight() / 2;
-		this.window = ShootEmUp.getDisplay().getWindow();
+		this.window = Loop.getDisplay().getWindow();
 	}
 
 	public Image getId() {
@@ -80,7 +80,7 @@ public class MenuButton extends GuiComponent {
 
 	@Override
 	public void update() {
-		this.window = ShootEmUp.getDisplay().getWindow();
+		this.window = Loop.getDisplay().getWindow();
 		this.Bx.clear();
 		this.By.clear();
 

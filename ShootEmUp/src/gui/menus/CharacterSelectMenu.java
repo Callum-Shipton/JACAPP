@@ -7,7 +7,7 @@ import gui.CounterButton;
 import gui.MenuButton;
 import gui.TypeButton;
 import gui.VerticalLayout;
-import main.ShootEmUp;
+import main.Loop;
 
 public class CharacterSelectMenu extends GuiMenu {
 
@@ -20,21 +20,21 @@ public class CharacterSelectMenu extends GuiMenu {
 		int battleMageLevel = 0;
 		int rogueLevel = 0;
 
-		if (ShootEmUp.getSave() != null) {
-			if (ShootEmUp.getSave().getCharacter(TypeAttack.WARRIOR) != null) {
-				warriorLevel = ShootEmUp.getSave().getCharacter(TypeAttack.WARRIOR).getPlayerLevel();
+		if (Loop.getSave() != null) {
+			if (Loop.getSave().getCharacter(TypeAttack.WARRIOR) != null) {
+				warriorLevel = Loop.getSave().getCharacter(TypeAttack.WARRIOR).getPlayerLevel();
 			}
-			if (ShootEmUp.getSave().getCharacter(TypeAttack.ARCHER) != null) {
-				archerLevel = ShootEmUp.getSave().getCharacter(TypeAttack.ARCHER).getPlayerLevel();
+			if (Loop.getSave().getCharacter(TypeAttack.ARCHER) != null) {
+				archerLevel = Loop.getSave().getCharacter(TypeAttack.ARCHER).getPlayerLevel();
 			}
-			if (ShootEmUp.getSave().getCharacter(TypeAttack.MAGE) != null) {
-				mageLevel = ShootEmUp.getSave().getCharacter(TypeAttack.MAGE).getPlayerLevel();
+			if (Loop.getSave().getCharacter(TypeAttack.MAGE) != null) {
+				mageLevel = Loop.getSave().getCharacter(TypeAttack.MAGE).getPlayerLevel();
 			}
-			if (ShootEmUp.getSave().getCharacter(TypeAttack.BATTLE_MAGE) != null) {
-				battleMageLevel = ShootEmUp.getSave().getCharacter(TypeAttack.BATTLE_MAGE).getPlayerLevel();
+			if (Loop.getSave().getCharacter(TypeAttack.BATTLE_MAGE) != null) {
+				battleMageLevel = Loop.getSave().getCharacter(TypeAttack.BATTLE_MAGE).getPlayerLevel();
 			}
-			if (ShootEmUp.getSave().getCharacter(TypeAttack.ROGUE) != null) {
-				rogueLevel = ShootEmUp.getSave().getCharacter(TypeAttack.ROGUE).getPlayerLevel();
+			if (Loop.getSave().getCharacter(TypeAttack.ROGUE) != null) {
+				rogueLevel = Loop.getSave().getCharacter(TypeAttack.ROGUE).getPlayerLevel();
 			}
 		}
 

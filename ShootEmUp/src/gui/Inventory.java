@@ -8,7 +8,7 @@ import components.TypeComponent;
 import components.inventory.BaseInventory;
 import display.Art;
 import display.DPDTRenderer;
-import main.ShootEmUp;
+import main.Loop;
 import object.InventoryItem;
 
 public class Inventory extends GuiComponent {
@@ -62,7 +62,7 @@ public class Inventory extends GuiComponent {
 		MenuButton itemButton;
 		boolean change = false;
 		int position = 0;
-		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory BI = Loop.getPlayer().getComponent(TypeComponent.INVENTORY);
 		while (buttonsIterator.hasNext()) {
 			itemButton = buttonsIterator.next();
 			if (itemButton.hasClicked()) {

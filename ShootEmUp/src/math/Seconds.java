@@ -1,10 +1,10 @@
 package math;
 
-import main.ShootEmUp;
+import main.Loop;
 
 public abstract class Seconds {
 
 	public static int ticks(int seconds) {
-		return (int) (seconds * ShootEmUp.getFPS());
+		return (int) (seconds * Loop.getFPS());
 	}
 }

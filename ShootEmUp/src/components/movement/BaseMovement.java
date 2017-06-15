@@ -4,7 +4,7 @@ import components.Component;
 import components.Message;
 import components.TypeComponent;
 import components.collision.BaseCollision;
-import main.ShootEmUp;
+import main.Loop;
 import math.Seconds;
 import math.Vector2;
 import object.Entity;
@@ -65,7 +65,7 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	@Override
 	public void receive(Message m, Entity e) {
 		if (m == Message.ENTITY_MOVED) {
-			EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
+			EntityMap eMap = Loop.getCurrentLevel().geteMap();
 			eMap.removeEntity(this.BC.getGridPos(), e);
 			this.BC.setGridPos(eMap.getGridPos(e));
 			eMap.addEntity(this.BC.getGridPos(), e);

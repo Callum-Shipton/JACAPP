@@ -9,7 +9,7 @@ import components.inventory.BaseInventory;
 import components.movement.BasicMovement;
 import components.spawn.PointSpawn;
 import display.Art;
-import main.ShootEmUp;
+import main.Loop;
 import math.Vector2;
 import object.Entity;
 import object.Weapon;
@@ -34,7 +34,7 @@ public abstract class PlayerBuilder {
 		player.addComponent(i);
 		player.addComponent(new PlayerControl(g, a, m, i));
 
-		ShootEmUp.setPlayer(player);
+		Loop.setPlayer(player);
 	}
 
 	public static void buildPlayer(TypeAttack type) {

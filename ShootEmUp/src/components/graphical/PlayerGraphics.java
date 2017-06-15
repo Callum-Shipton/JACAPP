@@ -9,7 +9,7 @@ import components.Message;
 import display.Art;
 import display.Image;
 import display.Renderer;
-import main.ShootEmUp;
+import main.Loop;
 import math.Matrix4;
 import object.Entity;
 
@@ -48,8 +48,8 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 	public void scrollScreen() {
 
 		this.viewMatrix.clearToIdentity();
-		this.viewMatrix.translate(-getX() + ((ShootEmUp.getDisplay().getWidth() - getWidth()) / 2),
-				-getY() + ((ShootEmUp.getDisplay().getHeight() - getHeight()) / 2), 0);
+		this.viewMatrix.translate(-getX() + ((Loop.getDisplay().getWidth() - getWidth()) / 2),
+				-getY() + ((Loop.getDisplay().getHeight() - getHeight()) / 2), 0);
 		this.matrix44Buffer.clear();
 		this.matrix44Buffer = this.viewMatrix.toBuffer();
 
