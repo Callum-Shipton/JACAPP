@@ -248,14 +248,11 @@ public class Art {
 	public static void refreshRenderers() {
 		base.initRenderData();
 		stat.initRenderData();
-		LevelMap map = ShootEmUp.getCurrentLevel().getMap();
+		
 		if (ShootEmUp.getCurrentLevel() != null) {
-			irWall.initRenderData(map.getWalls(),
-					new Vector2(artFiles.get("Walls").getFWidth(), artFiles.get("Walls").getFHeight()));
-			irBack.initRenderData(map.getBackgroundTiles(),
-					new Vector2(artFiles.get("Floor").getFWidth(), artFiles.get("Floor").getFHeight()));
-			irFore.initRenderData(map.getForegroundTiles(),
-					new Vector2(artFiles.get("Walls").getFWidth(), artFiles.get("Walls").getFHeight()));
+			irWall.bindRenderData();
+			irBack.bindRenderData();
+			irFore.bindRenderData();
 		}
 	}
 
