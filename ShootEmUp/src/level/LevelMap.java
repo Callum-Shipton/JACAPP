@@ -4,7 +4,9 @@ import java.util.Map;
 
 import ai.GoalBounder;
 import display.Art;
+import display.FloorRenderer;
 import display.IRenderer;
+import display.WallsRenderer;
 import entity.Entity;
 import logging.Logger;
 import math.Vector2;
@@ -46,15 +48,19 @@ public class LevelMap {
 		foregroundTiles = generator.getForegroundTiles();
 		walls = generator.getWalls();
 
-		Art.irBack = new IRenderer(backgroundTiles,
+		Art.irBack = new FloorRenderer(backgroundTiles,
 				new Vector2(Art.getImage("Floor").getFWidth(), Art.getImage("Floor").getFHeight()),
 				LevelMap.getTileWidth(), LevelMap.getTileHeight());
-		Art.irWall = new IRenderer(walls,
+		Art.irWall = new WallsRenderer(walls,
 				new Vector2(Art.getImage("Walls").getFWidth(), Art.getImage("Walls").getFHeight()),
 				LevelMap.getTileWidth(), LevelMap.getTileHeight());
-		Art.irFore = new IRenderer(foregroundTiles,
+		Art.irFore = new FloorRenderer(foregroundTiles,
 				new Vector2(Art.getImage("Walls").getFWidth(), Art.getImage("Walls").getFHeight()),
 				LevelMap.getTileWidth(), LevelMap.getTileHeight());
+		
+		Art.irBack.init();
+		Art.irWall.init();
+		Art.irFore.init();
 
 		setGoalBounder(new GoalBounder(width, height, walls.keySet()));
 

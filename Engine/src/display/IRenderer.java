@@ -18,38 +18,29 @@ import static org.lwjgl.opengl.GL33.glVertexAttribDivisor;
 
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 
-import components.TypeComponent;
-import components.graphical.MapGraphics;
-import entity.Entity;
 import math.Vector2;
 
-public class IRenderer extends Renderer {
+public abstract class IRenderer extends Renderer {
 
-	private float width;
-	private float height;
-	private int amount;
-	FloatBuffer verticesFloatBuffer;
-	ByteBuffer indicesBuffer;
-	FloatBuffer instanceFloatBuffer;
-
-	public IRenderer(Map<Vector2, Entity> textures, Vector2 texMax, float width, float height) {
+	protected float width;
+	protected float height;
+	protected int amount;
+	
+	protected Vector2 texMax;
+	
+	protected FloatBuffer verticesFloatBuffer;
+	protected ByteBuffer indicesBuffer;
+	protected FloatBuffer instanceFloatBuffer;
+	
+	public IRenderer(Vector2 texMax, float width, float height){
 		this.width = width;
 		this.height = height;
-		initRenderData(textures, texMax);
-	}
-
-	public IRenderer(Vector2[][] textures, Vector2 texMax, float width, float height) {
-		this.width = width;
-		this.height = height;
-		initRenderData(textures, texMax);
+		this.texMax = texMax;
 	}
 
 	public void draw(int texid) {
@@ -60,63 +51,12 @@ public class IRenderer extends Renderer {
 		glBindVertexArray(0);
 		glUseProgram(0);
 	}
+	
+	public abstract void initRenderData();
 
-	public void initRenderData(Map<Vector2, Entity> textures, Vector2 texMax) {
-
-		this.amount = textures.size();
-		instanceFloatBuffer = BufferUtils.createByteBuffer(this.amount * 4 * 4).asFloatBuffer();
-
-		float[] texture = new float[2];
-		float[] translation = new float[2];
-		Iterator<Entry<Vector2, Entity>> iterator = textures.entrySet().iterator();
-		while (iterator.hasNext()) {
-			Entity wall = iterator.next().getValue();
-			MapGraphics MG = wall.getComponent(TypeComponent.GRAPHICS);
-			Vector2 textured = MG.getMapPos();
-			Vector2 pos = new Vector2(MG.getX(), MG.getY());
-			texture[0] = textured.x() / texMax.x();
-			texture[1] = textured.y() / texMax.y();
-			translation[0] = pos.x();
-			translation[1] = pos.y();
-			instanceFloatBuffer.put(translation);
-			instanceFloatBuffer.put(texture);
-		}
-
-		instanceFloatBuffer.flip();
+	public void init() {
 		
-		createBufferData(texMax);
-		
-		bindRenderData();
-
-		// GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
-		// GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
-	}
-
-	public void initRenderData(Vector2[][] textures, Vector2 texMax) {
-
-		this.amount = textures.length * textures[0].length;
-		instanceFloatBuffer = BufferUtils.createByteBuffer(this.amount * 4 * 4).asFloatBuffer();
-		
-		float[] texture = new float[2];
-		float[] translation = new float[2];
-		for (int i = 0; i < textures.length; i++) {
-			for (int j = 0; j < textures[0].length; j++) {
-				if (textures[i][j] != null) {
-					texture[0] = textures[i][j].x() / texMax.x();
-					texture[1] = textures[i][j].y() / texMax.y();
-					translation[0] = i * this.width;
-					translation[1] = j * this.height;
-				} else {
-					texture[0] = texMax.x() - (1.0f / texMax.x());
-					texture[1] = texMax.y() - (1.0f / texMax.y());
-					translation[0] = 1000 * this.width;
-					translation[1] = 1000 * this.width;
-				}
-				instanceFloatBuffer.put(translation);
-				instanceFloatBuffer.put(texture);
-			}
-		}
-		instanceFloatBuffer.flip();
+		initRenderData();
 		
 		createBufferData(texMax);
 		

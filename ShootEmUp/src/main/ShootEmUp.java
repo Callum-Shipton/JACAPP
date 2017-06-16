@@ -38,6 +38,7 @@ public class ShootEmUp implements Game {
 		menuSystem.setMainMenu(false);
 		menuSystem.clearMenus();
 		musicPlayer.changeCurrentMusic(BackgroundMusic.MAIN);
+		paused = false;
 	}
 
 	@Override
