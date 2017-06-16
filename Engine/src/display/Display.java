@@ -34,11 +34,8 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWvidmode;
 import org.lwjgl.opengl.GLContext;
 
-import components.TypeComponent;
-import components.graphical.PlayerGraphics;
 import input.Keyboard;
 import loop.Loop;
-import main.ShootEmUp;
 
 public class Display {
 
