@@ -1,4 +1,4 @@
-package gui.menus;
+package gui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,6 @@ import java.util.List;
 import display.Art;
 import display.Display;
 import display.Image;
-import gui.GuiComponent;
-import gui.MenuButton;
 import loop.Loop;
 import math.Vector2;
 
@@ -36,9 +34,9 @@ public abstract class GuiMenu {
 	}
 
 	public void render() {
-		Art.stat.draw(this.menuImage, new Vector2(this.x, this.y),
-				new Vector2(this.display.getWidth(), this.display.getHeight()), 0, new Vector2(0, 0));
-		for (GuiComponent menuItem : this.menuItems) {
+		Art.stat.draw(menuImage, new Vector2(x, y),
+				new Vector2(this.display.getWidth(), display.getHeight()), 0, new Vector2(0, 0));
+		for (GuiComponent menuItem : menuItems) {
 			menuItem.render(Art.stat);
 		}
 	}

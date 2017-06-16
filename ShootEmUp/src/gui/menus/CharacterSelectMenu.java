@@ -3,6 +3,7 @@ package gui.menus;
 import display.Art;
 import display.Image;
 import gui.CounterButton;
+import gui.GuiMenu;
 import gui.MenuButton;
 import gui.TypeButton;
 import gui.VerticalLayout;

@@ -4,7 +4,6 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 import display.Art;
-import gui.menus.GuiMenu;
 import gui.menus.InventoryMenu;
 
 public class MenuSystem {

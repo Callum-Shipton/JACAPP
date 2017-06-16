@@ -5,9 +5,9 @@ import java.util.Set;
 import components.Component;
 import components.Message;
 import components.TypeComponent;
+import entity.Entity;
 import main.ShootEmUp;
 import math.Vector2;
-import object.Entity;
 
 public abstract class BaseCollision extends Component implements CollisionComponent {
 

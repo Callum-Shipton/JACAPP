@@ -2,8 +2,8 @@ package components.graphical;
 
 import components.Message;
 import display.Image;
+import entity.Entity;
 import math.Vector2;
-import object.Entity;
 
 public class MapGraphics extends BaseGraphics {
 

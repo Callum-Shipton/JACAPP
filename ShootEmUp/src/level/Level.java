@@ -7,11 +7,11 @@ import java.util.Set;
 import components.TypeComponent;
 import components.collision.BaseCollision;
 import components.graphical.BaseGraphics;
+import entity.Entity;
 import gui.Hud;
 import logging.Logger;
 import main.ShootEmUp;
 import math.Vector2;
-import object.Entity;
 import object.EntityMap;
 
 public class Level {

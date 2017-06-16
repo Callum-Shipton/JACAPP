@@ -2,7 +2,7 @@ package components.spawn;
 
 import components.Component;
 import components.TypeComponent;
-import object.Entity;
+import entity.Entity;
 
 public abstract class BaseSpawn extends Component implements SpawnComponent {
 

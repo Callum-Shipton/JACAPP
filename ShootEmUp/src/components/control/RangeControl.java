@@ -3,8 +3,8 @@ package components.control;
 import components.Message;
 import components.graphical.AnimatedGraphics;
 import components.movement.BaseMovement;
+import entity.Entity;
 import level.LevelMap;
-import object.Entity;
 
 public class RangeControl extends LineControl {
 

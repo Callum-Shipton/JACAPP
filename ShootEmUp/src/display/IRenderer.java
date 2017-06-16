@@ -28,8 +28,8 @@ import org.lwjgl.opengl.GL15;
 
 import components.TypeComponent;
 import components.graphical.MapGraphics;
+import entity.Entity;
 import math.Vector2;
-import object.Entity;
 
 public class IRenderer extends Renderer {
 

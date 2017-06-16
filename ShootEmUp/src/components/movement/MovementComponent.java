@@ -1,9 +1,9 @@
 package components.movement;
 
 import components.graphical.BaseGraphics;
+import entity.Entity;
 import math.Vector2;
 import math.Vector4;
-import object.Entity;
 
 public interface MovementComponent {
 

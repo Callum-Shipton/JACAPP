@@ -9,6 +9,7 @@ import components.graphical.BaseGraphics;
 import components.inventory.TypePickup;
 import components.spawn.PointSpawn;
 import display.Art;
+import entity.Entity;
 import main.ShootEmUp;
 import math.Vector2;
 

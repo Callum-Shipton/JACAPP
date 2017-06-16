@@ -4,10 +4,10 @@ import components.Component;
 import components.Message;
 import components.TypeComponent;
 import components.collision.BaseCollision;
+import entity.Entity;
 import loop.Loop;
 import main.ShootEmUp;
 import math.Vector2;
-import object.Entity;
 import object.EntityMap;
 
 public abstract class BaseMovement extends Component implements MovementComponent {

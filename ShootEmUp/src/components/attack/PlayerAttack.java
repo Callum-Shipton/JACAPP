@@ -2,9 +2,9 @@ package components.attack;
 
 import components.Message;
 import display.Art;
+import entity.Entity;
 import gui.menus.GameOverMenu;
 import main.ShootEmUp;
-import object.Entity;
 import object.Weapon;
 import save.CharacterSave;
 

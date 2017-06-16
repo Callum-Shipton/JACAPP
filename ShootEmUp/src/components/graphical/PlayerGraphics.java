@@ -9,9 +9,9 @@ import components.Message;
 import display.Art;
 import display.Image;
 import display.Renderer;
+import entity.Entity;
 import loop.Loop;
 import math.Matrix4;
-import object.Entity;
 
 public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponent {
 

@@ -5,6 +5,7 @@ import audio.music.BackgroundMusic;
 import components.TypeComponent;
 import components.graphical.BaseGraphics;
 import display.Art;
+import entity.Entity;
 import game.Game;
 import gui.Hud;
 import gui.MenuSystem;
@@ -12,7 +13,6 @@ import gui.menus.MainMenu;
 import input.Keyboard;
 import level.Level;
 import loop.Loop;
-import object.Entity;
 import save.Save;
 
 public class ShootEmUp implements Game {

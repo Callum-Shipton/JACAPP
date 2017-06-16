@@ -1,10 +1,10 @@
 package components.attack;
 
 import display.Art;
+import entity.Entity;
 import gui.HudBar;
 import main.ShootEmUp;
 import object.Armour;
-import object.Entity;
 import object.Weapon;
 
 public class EnemyAttack extends BaseAttack implements AttackComponent {

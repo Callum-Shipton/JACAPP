@@ -4,8 +4,8 @@ import components.Message;
 import display.DPDTRenderer;
 import display.Image;
 import display.Renderer;
+import entity.Entity;
 import math.Vector2;
-import object.Entity;
 
 public class AnimatedGraphics extends BaseGraphics {
 

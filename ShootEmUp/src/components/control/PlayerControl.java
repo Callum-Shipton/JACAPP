@@ -6,10 +6,10 @@ import components.graphical.PlayerGraphics;
 import components.inventory.BaseInventory;
 import components.inventory.TypePotion;
 import components.movement.BaseMovement;
+import entity.Entity;
 import input.Keyboard;
 import loop.Loop;
 import math.Vector2;
-import object.Entity;
 
 public class PlayerControl extends BaseControl {
 

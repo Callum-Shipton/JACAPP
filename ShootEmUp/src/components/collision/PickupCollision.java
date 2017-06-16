@@ -5,9 +5,9 @@ import components.TypeComponent;
 import components.control.PlayerControl;
 import components.inventory.BaseInventory;
 import components.inventory.TypePickup;
+import entity.Entity;
 import loop.Loop;
 import main.ShootEmUp;
-import object.Entity;
 import object.EntityMap;
 
 public class PickupCollision extends BaseCollision {

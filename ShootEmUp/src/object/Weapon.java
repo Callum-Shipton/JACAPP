@@ -16,6 +16,7 @@ import components.movement.FlyingMovement;
 import components.spawn.PointSpawn;
 import display.Art;
 import display.Image;
+import entity.Entity;
 import logging.Logger;
 import main.ShootEmUp;
 import math.Vector2;

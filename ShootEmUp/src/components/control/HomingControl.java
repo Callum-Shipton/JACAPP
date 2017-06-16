@@ -5,9 +5,9 @@ import components.TypeComponent;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.movement.BaseMovement;
+import entity.Entity;
 import main.ShootEmUp;
 import math.Vector2;
-import object.Entity;
 
 public class HomingControl extends BaseControl {
 

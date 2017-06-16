@@ -9,8 +9,8 @@ import components.inventory.BaseInventory;
 import components.movement.BasicMovement;
 import components.spawn.PointSpawn;
 import display.Art;
+import entity.Entity;
 import math.Vector2;
-import object.Entity;
 import object.Weapon;
 import save.CharacterSave;
 

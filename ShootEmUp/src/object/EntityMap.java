@@ -7,6 +7,7 @@ import java.util.Set;
 import components.TypeComponent;
 import components.collision.RigidCollision;
 import components.graphical.BaseGraphics;
+import entity.Entity;
 import level.LevelMap;
 import math.Vector2;
 

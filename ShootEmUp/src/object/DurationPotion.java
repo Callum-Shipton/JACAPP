@@ -3,6 +3,7 @@ package object;
 import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.movement.BaseMovement;
+import entity.Entity;
 import logging.Logger;
 import loop.Loop;
 

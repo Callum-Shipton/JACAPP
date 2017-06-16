@@ -9,10 +9,10 @@ import components.attack.BaseAttack;
 import components.attack.TypeAttack;
 import components.movement.BasicMovement;
 import display.Art;
+import entity.Entity;
 import logging.Logger;
 import loop.Loop;
 import main.ShootEmUp;
-import object.Entity;
 import save.Save;
 
 public class Spawner {

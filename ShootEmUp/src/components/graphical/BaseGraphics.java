@@ -4,7 +4,7 @@ import components.Component;
 import components.TypeComponent;
 import display.Image;
 import display.Renderer;
-import object.Entity;
+import entity.Entity;
 
 public abstract class BaseGraphics extends Component implements GraphicsComponent {
 

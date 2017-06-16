@@ -3,9 +3,9 @@ package components.control;
 import components.Component;
 import components.TypeComponent;
 import components.graphical.BaseGraphics;
+import entity.Entity;
 import level.LevelMap;
 import math.Vector2;
-import object.Entity;
 
 public abstract class BaseControl extends Component implements ControlComponent {
 

@@ -10,10 +10,10 @@ import javax.imageio.ImageIO;
 import components.collision.RigidCollision;
 import components.graphical.MapGraphics;
 import display.Art;
+import entity.Entity;
 import logging.Logger;
 import main.ShootEmUp;
 import math.Vector2;
-import object.Entity;
 
 public class MapGenerator {
 

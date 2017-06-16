@@ -6,10 +6,10 @@ import components.TypeComponent;
 import components.collision.BaseCollision;
 import components.collision.HitCollision;
 import components.graphical.BaseGraphics;
+import entity.Entity;
 import main.ShootEmUp;
 import math.Vector2;
 import math.Vector4;
-import object.Entity;
 import object.EntityMap;
 
 public class BasicMovement extends BaseMovement {
