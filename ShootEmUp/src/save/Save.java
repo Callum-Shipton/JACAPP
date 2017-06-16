@@ -22,14 +22,14 @@ import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.attack.TypeAttack;
 import main.Logger;
-import main.Loop;
+import main.ShootEmUp;
 
 public class Save implements Serializable {
 
 	private static final long serialVersionUID = 7179389236763035983L;
 
-	private static final  byte[] KEY = "funbrella0000000".getBytes();
-	private static final  String TRANSFORMATION = "AES";
+	private static final byte[] KEY = "funbrella0000000".getBytes();
+	private static final String TRANSFORMATION = "AES";
 
 	private CharacterSave warrior;
 	private CharacterSave archer;
@@ -93,10 +93,10 @@ public class Save implements Serializable {
 	}
 
 	public void saveCharacter() {
-		if (Loop.getCurrentLevel().getLevel() > this.level) {
-			this.level = Loop.getCurrentLevel().getLevel();
+		if (ShootEmUp.getCurrentLevel().getLevel() > this.level) {
+			this.level = ShootEmUp.getCurrentLevel().getLevel();
 		}
-		BaseAttack BA = Loop.getPlayer().getComponent(TypeComponent.ATTACK);
+		BaseAttack BA = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
 		TypeAttack tempAttack = BA.getAttackType();
 
 		switch (tempAttack) {

@@ -10,6 +10,7 @@ import components.movement.BasicMovement;
 import display.Art;
 import display.DPDTRenderer;
 import main.Loop;
+import main.ShootEmUp;
 import math.Vector2;
 import object.Entity;
 
@@ -117,7 +118,7 @@ public class Hud extends GuiComponent {
 		this.frost.update();
 		this.moneyCounter.update(this.PI.getCoins());
 		this.levelCounter.update(this.PI.getLevel());
-		this.waveCounter.update(Loop.getCurrentLevel().getSpawner().getWave());
+		this.waveCounter.update(ShootEmUp.getCurrentLevel().getSpawner().getWave());
 		this.livesCounter.update(this.PA.getLives());
 
 		int maxHealth = this.PA.getMaxHealth();

@@ -15,14 +15,14 @@ import save.Save;
 
 public class ShootEmUp implements Game {
 
-	private MusicPlayer musicPlayer;
-	private Level currentLevel;
-	private Entity player;
+	private static MusicPlayer musicPlayer;
+	private static Level currentLevel;
+	private static Entity player;
 	private static MenuSystem menuSystem = new MenuSystem();
 	private static Save save;
 
 	private static boolean paused = true;
-	private Hud hud;
+	private static Hud hud;
 
 	public ShootEmUp() {
 	}
@@ -32,7 +32,7 @@ public class ShootEmUp implements Game {
 		loop.start();
 	}
 
-	public void startGame() {
+	public static void startGame() {
 		menuSystem.setMainMenu(false);
 		menuSystem.clearMenus();
 		musicPlayer.changeCurrentMusic(BackgroundMusic.MAIN);
@@ -82,7 +82,7 @@ public class ShootEmUp implements Game {
 		musicPlayer.destroy();
 	}
 
-	public Level getCurrentLevel() {
+	public static Level getCurrentLevel() {
 		return currentLevel;
 	}
 
@@ -90,11 +90,11 @@ public class ShootEmUp implements Game {
 		return menuSystem;
 	}
 
-	public MusicPlayer getMusicPlayer() {
+	public static MusicPlayer getMusicPlayer() {
 		return musicPlayer;
 	}
 
-	public Entity getPlayer() {
+	public static Entity getPlayer() {
 		return player;
 	}
 
@@ -102,16 +102,16 @@ public class ShootEmUp implements Game {
 		return save;
 	}
 
-	public void setCurrentLevel(Level currentLevel) {
-		this.currentLevel = currentLevel;
+	public static void setCurrentLevel(Level currentLevel) {
+		ShootEmUp.currentLevel = currentLevel;
 	}
 
-	public void setHud(Hud hud) {
-		this.hud = hud;
+	public static void setHud(Hud hud) {
+		ShootEmUp.hud = hud;
 	}
 
-	public void setPlayer(Entity player) {
-		this.player = player;
+	public static void setPlayer(Entity player) {
+		ShootEmUp.player = player;
 	}
 
 	public static void setSave(Save save) {

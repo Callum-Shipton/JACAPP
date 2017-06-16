@@ -21,7 +21,7 @@ import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.spawn.PointSpawn;
 import display.Art;
-import main.Loop;
+import main.ShootEmUp;
 import math.Vector2;
 import object.Armour;
 import object.DurationPotion;
@@ -121,7 +121,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 	private void drop(Entity e) {
 
 		// give player exp
-		BaseInventory BI = Loop.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
 		BI.giveExp(1);
 
 		dropCoin();
@@ -189,13 +189,12 @@ public class BaseInventory extends Component implements InventoryComponent {
 		CoinG = new AnimatedGraphics(Art.getImage("Coin"), Art.base, true, this.BG.getX() - this.BG.getWidth(),
 				this.BG.getY() - this.BG.getHeight());
 
-		CoinS = new PointSpawn(CoinG,
-				new Vector2(this.BG.getX(), this.BG.getY()), item);
+		CoinS = new PointSpawn(CoinG, new Vector2(this.BG.getX(), this.BG.getY()), item);
 		item.addComponent(CoinG);
 		CoinC = new PickupCollision(item, TypePickup.COIN, "Coin");
 		item.addComponent(CoinS);
 		item.addComponent(CoinC);
-		Loop.getCurrentLevel().addEntity(item);
+		ShootEmUp.getCurrentLevel().addEntity(item);
 	}
 
 	public void equipItem(int itemNo) {

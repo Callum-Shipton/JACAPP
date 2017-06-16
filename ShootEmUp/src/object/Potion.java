@@ -9,7 +9,7 @@ import components.graphical.BaseGraphics;
 import components.inventory.TypePickup;
 import components.spawn.PointSpawn;
 import display.Art;
-import main.Loop;
+import main.ShootEmUp;
 import math.Vector2;
 
 public abstract class Potion implements Serializable {
@@ -44,7 +44,7 @@ public abstract class Potion implements Serializable {
 		BC = new PickupCollision(item, TypePickup.POTION, this.type);
 		item.addComponent(BS);
 		item.addComponent(BC);
-		Loop.getCurrentLevel().addEntity(item);
+		ShootEmUp.getCurrentLevel().addEntity(item);
 	}
 
 	public int getQuantity() {

@@ -9,7 +9,7 @@ import components.collision.BaseCollision;
 import components.graphical.BaseGraphics;
 import gui.Hud;
 import main.Logger;
-import main.Loop;
+import main.ShootEmUp;
 import math.Vector2;
 import object.Entity;
 import object.EntityMap;
@@ -38,8 +38,8 @@ public class Level {
 	}
 
 	public void init() {
-		addEntity(Loop.getPlayer());
-		Loop.setHud(new Hud(Loop.getPlayer(), 0, 0, spawner.getWave()));
+		addEntity(ShootEmUp.getPlayer());
+		ShootEmUp.setHud(new Hud(ShootEmUp.getPlayer(), 0, 0, spawner.getWave()));
 		map.init();
 	}
 
@@ -60,7 +60,7 @@ public class Level {
 		BaseCollision BC = e.getComponent(TypeComponent.COLLISION);
 		if (BC != null) {
 			BC.setGridPos(eMap.getGridPos(e));
-			Loop.getCurrentLevel().eMap.addEntity(eMap.getGridPos(e), e);
+			ShootEmUp.getCurrentLevel().eMap.addEntity(eMap.getGridPos(e), e);
 		}
 	}
 
@@ -69,7 +69,7 @@ public class Level {
 		while (oldEntitiesIter.hasNext()) {
 			Entity n = oldEntitiesIter.next();
 			BaseCollision BC = n.getComponent(TypeComponent.COLLISION);
-			Loop.getCurrentLevel().eMap.removeEntity(BC.getGridPos(), n);
+			ShootEmUp.getCurrentLevel().eMap.removeEntity(BC.getGridPos(), n);
 			boolean res = this.entities.remove(n);
 			if (!res) {
 				Logger.warn("Old entity not removed. Name: " + n.toString() + ", HC: " + n.hashCode());
@@ -79,7 +79,7 @@ public class Level {
 	}
 
 	public void removeEntity(Set<Vector2> gridPos, Entity e) {
-		Loop.getCurrentLevel().eMap.removeEntity(gridPos, e);
+		ShootEmUp.getCurrentLevel().eMap.removeEntity(gridPos, e);
 		this.oldEntities.add(e);
 	}
 

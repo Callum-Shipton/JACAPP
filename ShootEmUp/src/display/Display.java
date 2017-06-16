@@ -38,6 +38,7 @@ import components.TypeComponent;
 import components.graphical.PlayerGraphics;
 import input.Keyboard;
 import main.Loop;
+import main.ShootEmUp;
 
 public class Display {
 
@@ -191,8 +192,8 @@ public class Display {
 		Keyboard.keyCheck(this.window);
 		Art.initShaderUniforms();
 		Art.refreshRenderers();
-		PlayerGraphics BG = Loop.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		if (Loop.getCurrentLevel() != null) {
+		PlayerGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
+		if (ShootEmUp.getCurrentLevel() != null) {
 			BG.scrollScreen();
 		}
 		this.fullscreen = !this.fullscreen;

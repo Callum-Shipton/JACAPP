@@ -17,6 +17,7 @@ import components.movement.BaseMovement;
 import components.movement.BasicMovement;
 import display.Art;
 import main.Loop;
+import main.ShootEmUp;
 import object.Armour;
 import object.Entity;
 import object.Weapon;
@@ -72,7 +73,7 @@ public final class EnemyBuilder {
 		newEnemy.addComponent(enemyMovement);
 		newEnemy.addComponent(enemyInventory);
 
-		Loop.getCurrentLevel().addEntity(newEnemy);
+		ShootEmUp.getCurrentLevel().addEntity(newEnemy);
 	}
 
 	private static void addComponents(String art, int speed) {
@@ -92,19 +93,20 @@ public final class EnemyBuilder {
 		BaseCollision baseCollision = new RigidCollision();
 		test.addComponent(baseCollision);
 		test.addComponent(new BasicMovement(baseCollision, testGraphics, 5));
-		BaseGraphics playerGraphics = Loop.getPlayer().getComponent(TypeComponent.GRAPHICS);
+		BaseGraphics playerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
 		float px = playerGraphics.getX();
 		float py = playerGraphics.getY();
 		float pw = playerGraphics.getWidth();
 		float ph = playerGraphics.getHeight();
 
-		Level level = Loop.getCurrentLevel();
+		Level level = ShootEmUp.getCurrentLevel();
 
 		do {
 			collide = false;
 
 			testGraphics.setX(rand.nextInt((level.getMap().getBackgroundTiles().length - 1) * LevelMap.getTileWidth()));
-			testGraphics.setY(rand.nextInt((level.getMap().getBackgroundTiles()[0].length - 1) * LevelMap.getTileWidth()));
+			testGraphics
+					.setY(rand.nextInt((level.getMap().getBackgroundTiles()[0].length - 1) * LevelMap.getTileWidth()));
 
 			if ((Math.abs((testGraphics.getX() + (testGraphics.getWidth() / 2))
 					- (px + (pw / 2))) <= (Loop.getDisplay().getWidth() + testGraphics.getWidth()))

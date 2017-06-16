@@ -30,6 +30,7 @@ import java.util.HashMap;
 import level.LevelMap;
 import main.Logger;
 import main.Loop;
+import main.ShootEmUp;
 import math.Matrix4;
 import math.Vector2;
 
@@ -58,8 +59,7 @@ public class Art {
 	public static void initShaderUniforms() {
 
 		Matrix4 projectionMatrix = new Matrix4();
-		projectionMatrix.clearToOrtho(0, Loop.getDisplay().getWidth(), Loop.getDisplay().getHeight(), 0,
-				-1.0f, 1.0f);
+		projectionMatrix.clearToOrtho(0, Loop.getDisplay().getWidth(), Loop.getDisplay().getHeight(), 0, -1.0f, 1.0f);
 		FloatBuffer matrix44Buffer = projectionMatrix.toBuffer();
 
 		glUseProgram(ShaderBase);
@@ -248,8 +248,8 @@ public class Art {
 	public static void refreshRenderers() {
 		base.initRenderData();
 		stat.initRenderData();
-		LevelMap map = Loop.getCurrentLevel().getMap();
-		if (Loop.getCurrentLevel() != null) {
+		LevelMap map = ShootEmUp.getCurrentLevel().getMap();
+		if (ShootEmUp.getCurrentLevel() != null) {
 			irWall.initRenderData(map.getWalls(),
 					new Vector2(artFiles.get("Walls").getFWidth(), artFiles.get("Walls").getFHeight()));
 			irBack.initRenderData(map.getBackgroundTiles(),

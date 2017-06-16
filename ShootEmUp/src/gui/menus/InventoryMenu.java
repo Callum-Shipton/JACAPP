@@ -7,7 +7,7 @@ import display.Art;
 import display.Image;
 import gui.Inventory;
 import gui.ItemSlot;
-import main.Loop;
+import main.ShootEmUp;
 
 public class InventoryMenu extends PauseMenu {
 
@@ -24,7 +24,7 @@ public class InventoryMenu extends PauseMenu {
 	public InventoryMenu(Image menuImage) {
 		super(menuImage);
 
-		this.playerAttack = Loop.getPlayer().getComponent(TypeComponent.ATTACK);
+		this.playerAttack = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
 
 		buildHelmet();
 		buildChest();
@@ -32,7 +32,7 @@ public class InventoryMenu extends PauseMenu {
 		buildBoots();
 		buildWeapon();
 
-		BaseInventory BI = Loop.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
 		this.inventory = new Inventory(30, 30, BI.getInventory());
 	}
 

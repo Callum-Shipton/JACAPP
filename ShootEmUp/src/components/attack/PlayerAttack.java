@@ -3,7 +3,7 @@ package components.attack;
 import components.Message;
 import display.Art;
 import gui.menus.GameOverMenu;
-import main.Loop;
+import main.ShootEmUp;
 import object.Entity;
 import object.Weapon;
 import save.CharacterSave;
@@ -14,7 +14,7 @@ public class PlayerAttack extends BaseAttack {
 
 	public PlayerAttack(TypeAttack type, CharacterSave save) {
 		super(type);
-		
+
 		lives = save.getLives();
 
 		health = save.getHealth();
@@ -45,19 +45,18 @@ public class PlayerAttack extends BaseAttack {
 
 	public void removeLife() {
 		if (lives == 1) {
-			Loop.setPaused(true);
-			Loop.getMenuSystem().addMenu(new GameOverMenu(Art.getImage("GameOverScreen")));
+			ShootEmUp.setPaused(true);
+			ShootEmUp.getMenuSystem().addMenu(new GameOverMenu(Art.getImage("GameOverScreen")));
 		} else {
 			lives--;
 			health = maxHealth;
 			mana = maxMana;
 		}
 	}
-	
+
 	public int getLives() {
 		return lives;
 	}
-
 
 	public void setLives(int lives) {
 		this.lives = lives;

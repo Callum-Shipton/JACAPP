@@ -17,7 +17,7 @@ import components.spawn.PointSpawn;
 import display.Art;
 import display.Image;
 import main.Logger;
-import main.Loop;
+import main.ShootEmUp;
 import math.Vector2;
 
 public final class Weapon extends InventoryItem<Weapon> {
@@ -48,21 +48,21 @@ public final class Weapon extends InventoryItem<Weapon> {
 			typedWeapons = weaponSystem.get(typeName).values().toArray(typedWeapons);
 			w = typedWeapons[temp];
 			this.type = typeName;
-			
+
 		} else {
 			for (Entry<String, Map<String, Weapon>> typedWeapons : weaponSystem.entrySet()) {
-				if (typedWeapons.getValue().containsKey(typeName)){
+				if (typedWeapons.getValue().containsKey(typeName)) {
 					w = typedWeapons.getValue().get(typeName);
 					this.type = typedWeapons.getKey();
 				}
 			}
 		}
 
-		if(w == null){
+		if (w == null) {
 			// Pick a random weapon
 			Logger.warn("A weapon was created with unknown name/type: " + typeName);
 		}
-		
+
 		this.name = w.name;
 		this.damage = w.damage;
 		this.range = w.range;
@@ -134,7 +134,7 @@ public final class Weapon extends InventoryItem<Weapon> {
 		particle.addComponent(m);
 		particle.addComponent(new RangeControl(g, m, this.range));
 
-		Loop.getCurrentLevel().addEntity(particle);
+		ShootEmUp.getCurrentLevel().addEntity(particle);
 		// ShootEmUp.getCurrentLevel().getSpawner().checkSpawn(particle);
 	}
 

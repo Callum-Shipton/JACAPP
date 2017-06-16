@@ -6,7 +6,7 @@ import components.TypeComponent;
 import components.collision.BaseCollision;
 import components.collision.HitCollision;
 import components.graphical.BaseGraphics;
-import main.Loop;
+import main.ShootEmUp;
 import math.Vector2;
 import math.Vector4;
 import object.Entity;
@@ -24,7 +24,7 @@ public class BasicMovement extends BaseMovement {
 	}
 
 	public boolean checkCollisionX(Entity e) {
-		EntityMap eMap = Loop.getCurrentLevel().geteMap();
+		EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
 		boolean collide = false;
 		Set<Vector2> newGrid = eMap.getGridPos(e);
 		Set<Entity> entities = eMap.getEntites(newGrid);
@@ -61,7 +61,7 @@ public class BasicMovement extends BaseMovement {
 	}
 
 	public boolean checkCollisionY(Entity e) {
-		EntityMap eMap = Loop.getCurrentLevel().geteMap();
+		EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
 		boolean collide = false;
 		Set<Vector2> newGrid = eMap.getGridPos(e);
 		Set<Entity> entities = eMap.getEntites(newGrid);

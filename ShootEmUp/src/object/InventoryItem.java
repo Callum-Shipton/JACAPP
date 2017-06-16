@@ -23,7 +23,7 @@ import components.spawn.PointSpawn;
 import display.Art;
 import display.Image;
 import main.Logger;
-import main.Loop;
+import main.ShootEmUp;
 import math.Vector2;
 
 public abstract class InventoryItem<I extends InventoryItem<?>> implements DatableObject, Serializable {
@@ -50,7 +50,7 @@ public abstract class InventoryItem<I extends InventoryItem<?>> implements Datab
 		BC = new PickupCollision(item, this.typePickup, this.name);
 		item.addComponent(BS);
 		item.addComponent(BC);
-		Loop.getCurrentLevel().addEntity(item);
+		ShootEmUp.getCurrentLevel().addEntity(item);
 	}
 
 	public Image getInventoryImage() {

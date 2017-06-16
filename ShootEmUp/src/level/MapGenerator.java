@@ -11,7 +11,7 @@ import components.collision.RigidCollision;
 import components.graphical.MapGraphics;
 import display.Art;
 import main.Logger;
-import main.Loop;
+import main.ShootEmUp;
 import math.Vector2;
 import object.Entity;
 
@@ -353,7 +353,7 @@ public class MapGenerator {
 		wall.addComponent(wallG);
 		RigidCollision rigidCollision = new RigidCollision();
 		wall.addComponent(rigidCollision);
-		Loop.getCurrentLevel().addEntity(wall);
+		ShootEmUp.getCurrentLevel().addEntity(wall);
 		walls.put(new Vector2(x, y), wall);
 	}
 
