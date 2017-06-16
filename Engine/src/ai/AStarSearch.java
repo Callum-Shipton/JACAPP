@@ -19,10 +19,10 @@ public class AStarSearch {
 	private AStarNode startNode;
 	private Map<String, AStarNode> childNodes;
 	private AStarNode goalNode;
-	private int nodeWidth;
-	private int nodeHeight;
+	private float nodeWidth;
+	private float nodeHeight;
 
-	public AStarSearch(Set<Vector2> walls, GoalBounder goalBounder, int nodeWidth, int nodeHeight) {
+	public AStarSearch(Set<Vector2> walls, GoalBounder goalBounder, float nodeWidth, float nodeHeight) {
 		if (AStarSearch.walls == null) {
 			AStarSearch.walls = walls;
 		}

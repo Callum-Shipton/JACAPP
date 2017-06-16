@@ -29,7 +29,6 @@ import java.util.HashMap;
 
 import logging.Logger;
 import loop.Loop;
-import main.ShootEmUp;
 import math.Matrix4;
 
 public class Art {
@@ -242,7 +241,8 @@ public class Art {
 
 		artFiles.put("BarInfoBottom", new Image("/Images/HUD/BarInfoBottom.png", 1, 1));
 	}
-
+	
+	/*
 	public static void refreshRenderers() {
 		base.initRenderData();
 		stat.initRenderData();
@@ -253,6 +253,7 @@ public class Art {
 			irFore.bindRenderData();
 		}
 	}
+	*/
 
 	public void init() {
 

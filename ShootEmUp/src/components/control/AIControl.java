@@ -42,8 +42,8 @@ public class AIControl extends BaseControl {
 
 		BaseGraphics playerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
 		AStarSearch search = new AStarSearch(ShootEmUp.getCurrentLevel().getMap().getWalls().keySet(),
-				ShootEmUp.getCurrentLevel().getMap().getGoalBounder(), (int) playerGraphics.getWidth(),
-				(int) playerGraphics.getHeight());
+				ShootEmUp.getCurrentLevel().getMap().getGoalBounder(), playerGraphics.getWidth() / 2,
+				playerGraphics.getHeight() / 2);
 		Vector2 goalVector = search.getGridPosition(playerGraphics.getX(), playerGraphics.getY());
 		Vector2 startVector = search.getGridPosition(graphics.getX(), graphics.getY());
 		Vector2 target = search.findPath(goalVector, startVector);
