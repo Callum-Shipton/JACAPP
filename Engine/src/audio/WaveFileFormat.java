@@ -23,7 +23,7 @@
  * have any questions.
  */
 
-package audio.libraries;
+package audio;
 
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;

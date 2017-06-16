@@ -23,7 +23,7 @@
  * have any questions.
  */
 
-package audio.libraries;
+package audio;
 
 import java.io.DataInputStream;
 import java.io.File;
