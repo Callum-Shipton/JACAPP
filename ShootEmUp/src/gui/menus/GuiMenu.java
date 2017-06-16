@@ -8,7 +8,7 @@ import display.Display;
 import display.Image;
 import gui.GuiComponent;
 import gui.MenuButton;
-import main.Loop;
+import loop.Loop;
 import math.Vector2;
 
 public abstract class GuiMenu {

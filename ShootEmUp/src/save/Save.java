@@ -21,7 +21,7 @@ import javax.crypto.spec.SecretKeySpec;
 import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.attack.TypeAttack;
-import main.Logger;
+import logging.Logger;
 import main.ShootEmUp;
 
 public class Save implements Serializable {

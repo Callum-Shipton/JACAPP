@@ -16,7 +16,7 @@ import com.google.gson.stream.JsonReader;
 import components.Component;
 import components.Message;
 import components.TypeComponent;
-import main.Logger;
+import logging.Logger;
 
 public class Entity implements DatableObject<Entity> {
 

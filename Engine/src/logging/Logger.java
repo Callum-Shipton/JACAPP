@@ -1,4 +1,4 @@
-package main;
+package logging;
 
 import java.sql.Timestamp;
 import java.util.Arrays;

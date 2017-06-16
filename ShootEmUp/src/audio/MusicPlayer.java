@@ -2,7 +2,7 @@ package audio;
 
 import audio.music.BackgroundMusic;
 import input.Keyboard;
-import main.Loop;
+import loop.Loop;
 
 public class MusicPlayer {
 

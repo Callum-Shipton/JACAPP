@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import components.inventory.TypePickup;
-import main.Logger;
+import logging.Logger;
 
 public final class Armour extends InventoryItem<Armour> {
 

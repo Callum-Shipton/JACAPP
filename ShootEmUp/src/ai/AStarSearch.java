@@ -8,7 +8,7 @@ import java.util.Queue;
 import java.util.Set;
 
 import level.LevelMap;
-import main.Logger;
+import logging.Logger;
 import math.Vector2;
 import object.Entity;
 

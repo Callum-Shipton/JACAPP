@@ -4,7 +4,7 @@ import components.Component;
 import components.Message;
 import components.TypeComponent;
 import components.collision.BaseCollision;
-import main.Loop;
+import loop.Loop;
 import main.ShootEmUp;
 import math.Vector2;
 import object.Entity;

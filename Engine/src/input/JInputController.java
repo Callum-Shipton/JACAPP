@@ -35,7 +35,7 @@ import java.util.ArrayList;
 
 import org.lwjgl.glfw.GLFW;
 
-import main.Logger;
+import logging.Logger;
 import net.java.games.input.Component;
 import net.java.games.input.Component.Identifier;
 import net.java.games.input.Component.Identifier.Axis;

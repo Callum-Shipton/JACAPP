@@ -1,4 +1,4 @@
-package main;
+package loop;
 
 import static org.lwjgl.glfw.GLFW.glfwPollEvents;
 import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
@@ -18,6 +18,8 @@ import display.Display;
 import input.Controllers;
 import input.Keyboard;
 import input.Keys;
+import logging.Logger;
+import game.Game;
 
 public final class Loop {
 

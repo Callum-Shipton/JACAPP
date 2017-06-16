@@ -3,7 +3,7 @@ package components.attack;
 import components.Component;
 import components.Message;
 import components.TypeComponent;
-import main.Loop;
+import loop.Loop;
 import object.Armour;
 import object.Entity;
 import object.Weapon;

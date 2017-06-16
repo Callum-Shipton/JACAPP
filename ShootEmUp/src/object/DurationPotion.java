@@ -3,8 +3,8 @@ package object;
 import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.movement.BaseMovement;
-import main.Logger;
-import main.Loop;
+import logging.Logger;
+import loop.Loop;
 
 public class DurationPotion extends Potion {
 

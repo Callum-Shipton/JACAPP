@@ -21,7 +21,7 @@ import java.nio.ByteBuffer;
 
 import de.matthiasmann.twl.utils.PNGDecoder;
 import de.matthiasmann.twl.utils.PNGDecoder.Format;
-import main.Logger;
+import logging.Logger;
 
 public class Image {
 

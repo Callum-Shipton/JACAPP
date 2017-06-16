@@ -2,7 +2,7 @@ package object;
 
 import components.TypeComponent;
 import components.attack.BaseAttack;
-import main.Logger;
+import logging.Logger;
 
 public class OneTimePotion extends Potion {
 

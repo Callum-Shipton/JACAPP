@@ -8,7 +8,7 @@ import components.TypeComponent;
 import components.collision.BaseCollision;
 import components.graphical.BaseGraphics;
 import gui.Hud;
-import main.Logger;
+import logging.Logger;
 import main.ShootEmUp;
 import math.Vector2;
 import object.Entity;

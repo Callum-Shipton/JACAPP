@@ -5,7 +5,7 @@ import java.util.Map;
 import ai.GoalBounder;
 import display.Art;
 import display.IRenderer;
-import main.Logger;
+import logging.Logger;
 import math.Vector2;
 import object.Entity;
 

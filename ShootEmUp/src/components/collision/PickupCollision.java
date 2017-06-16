@@ -5,7 +5,7 @@ import components.TypeComponent;
 import components.control.PlayerControl;
 import components.inventory.BaseInventory;
 import components.inventory.TypePickup;
-import main.Loop;
+import loop.Loop;
 import main.ShootEmUp;
 import object.Entity;
 import object.EntityMap;

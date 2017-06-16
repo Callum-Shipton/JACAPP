@@ -16,7 +16,7 @@ import components.inventory.BaseInventory;
 import components.movement.BaseMovement;
 import components.movement.BasicMovement;
 import display.Art;
-import main.Loop;
+import loop.Loop;
 import main.ShootEmUp;
 import object.Armour;
 import object.Entity;

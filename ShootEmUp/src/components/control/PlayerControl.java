@@ -7,7 +7,7 @@ import components.inventory.BaseInventory;
 import components.inventory.TypePotion;
 import components.movement.BaseMovement;
 import input.Keyboard;
-import main.Loop;
+import loop.Loop;
 import math.Vector2;
 import object.Entity;
 

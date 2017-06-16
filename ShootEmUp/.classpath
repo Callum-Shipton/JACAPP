@@ -30,5 +30,6 @@
 			<attribute name="javadoc_location" value="https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/Engine"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

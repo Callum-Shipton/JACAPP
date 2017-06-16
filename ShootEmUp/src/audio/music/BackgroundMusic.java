@@ -33,7 +33,7 @@ import org.lwjgl.openal.ALContext;
 import org.lwjgl.openal.ALDevice;
 
 import audio.libraries.WaveData;
-import main.Logger;
+import logging.Logger;
 
 /**
  * $Id$

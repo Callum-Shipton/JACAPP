@@ -9,7 +9,7 @@ import components.Message;
 import display.Art;
 import display.Image;
 import display.Renderer;
-import main.Loop;
+import loop.Loop;
 import math.Matrix4;
 import object.Entity;
 

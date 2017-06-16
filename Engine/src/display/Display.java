@@ -37,7 +37,7 @@ import org.lwjgl.opengl.GLContext;
 import components.TypeComponent;
 import components.graphical.PlayerGraphics;
 import input.Keyboard;
-import main.Loop;
+import loop.Loop;
 import main.ShootEmUp;
 
 public class Display {
@@ -159,6 +159,7 @@ public class Display {
 		this.width = width;
 	}
 
+	/*
 	public void toggleFullscreen() {
 		long newWindow;
 		if (this.fullscreen) {
@@ -198,17 +199,19 @@ public class Display {
 		}
 		this.fullscreen = !this.fullscreen;
 	}
+	*/
 
 	public void update() {
 		if (Keyboard.getKey(Loop.getKeys().quit) == 1) {
-			if (this.fullscreen) {
-				toggleFullscreen();
+			if (fullscreen) {
+				// toggleFullscreen();
 			}
 			glfwSetWindowShouldClose(this.window, GL_TRUE);
 			Keyboard.setKey(Loop.getKeys().quit);
 		}
 		if (Keyboard.getKey(Loop.getKeys().fullscreen) == 1) {
-			toggleFullscreen();
+			//toggleFullscreen();
+			
 			// We will detect this in
 			// our update loop
 			Keyboard.setKey(Loop.getKeys().fullscreen);

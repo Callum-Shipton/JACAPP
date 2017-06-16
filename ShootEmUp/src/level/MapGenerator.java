@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import components.collision.RigidCollision;
 import components.graphical.MapGraphics;
 import display.Art;
-import main.Logger;
+import logging.Logger;
 import main.ShootEmUp;
 import math.Vector2;
 import object.Entity;

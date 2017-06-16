@@ -12,7 +12,7 @@ import org.lwjgl.BufferUtils;
 
 import display.DPDTRenderer;
 import display.Image;
-import main.Loop;
+import loop.Loop;
 import math.Vector2;
 
 public class MenuButton extends GuiComponent {

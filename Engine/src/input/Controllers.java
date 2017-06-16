@@ -33,7 +33,7 @@ package input;
 
 import java.util.ArrayList;
 
-import main.Logger;
+import logging.Logger;
 import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
 

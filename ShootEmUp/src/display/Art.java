@@ -28,8 +28,8 @@ import java.nio.FloatBuffer;
 import java.util.HashMap;
 
 import level.LevelMap;
-import main.Logger;
-import main.Loop;
+import logging.Logger;
+import loop.Loop;
 import main.ShootEmUp;
 import math.Matrix4;
 import math.Vector2;

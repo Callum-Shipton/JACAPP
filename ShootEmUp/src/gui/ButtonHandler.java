@@ -22,8 +22,8 @@ import gui.menus.SoundMenu;
 import gui.menus.UpgradesMenu;
 import level.Level;
 import level.PlayerBuilder;
-import main.Logger;
-import main.Loop;
+import logging.Logger;
+import loop.Loop;
 import main.ShootEmUp;
 import save.Save;
 

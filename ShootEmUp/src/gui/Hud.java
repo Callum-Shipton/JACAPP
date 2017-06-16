@@ -9,7 +9,7 @@ import components.inventory.TypePotion;
 import components.movement.BasicMovement;
 import display.Art;
 import display.DPDTRenderer;
-import main.Loop;
+import loop.Loop;
 import main.ShootEmUp;
 import math.Vector2;
 import object.Entity;

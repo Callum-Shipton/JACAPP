@@ -22,7 +22,7 @@ import components.inventory.TypePickup;
 import components.spawn.PointSpawn;
 import display.Art;
 import display.Image;
-import main.Logger;
+import logging.Logger;
 import main.ShootEmUp;
 import math.Vector2;
 
