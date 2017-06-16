@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import components.inventory.TypePickup;
-import display.Art;
+import display.ImageProcessor;
 import display.DPDTRenderer;
 import display.Image;
 import object.Armour;
@@ -23,19 +23,19 @@ public class ItemSlot extends GuiComponent {
 		icon = new Icon(x, y, item.getInventoryImage(), false, 1.0f);
 		gap += icon.getSize().x() + buffer;
 		if (item.getTypePickup() == TypePickup.ARMOUR) {
-			stats.add(new Counter(x + gap, y + (icon.getSize().y() / 4), Art.getImage("ArmourIcon"), false,
+			stats.add(new Counter(x + gap, y + (icon.getSize().y() / 4), ImageProcessor.getImage("ArmourIcon"), false,
 					((Armour) item).getDefence(), 0.5f));
 		} else if (item.getTypePickup() == TypePickup.WEAPON) {
-			stats.add(new Counter(x + gap, y + (icon.getSize().y() / 4), Art.getImage("DamageIcon"), false,
+			stats.add(new Counter(x + gap, y + (icon.getSize().y() / 4), ImageProcessor.getImage("DamageIcon"), false,
 					((Weapon) item).getDamage(), 0.5f));
 			gap += stats.get(0).getFullSize().x() + buffer;
-			stats.add(new Counter(x + gap, y + (icon.getSize().y() / 4), Art.getImage("RangeIcon"), false,
+			stats.add(new Counter(x + gap, y + (icon.getSize().y() / 4), ImageProcessor.getImage("RangeIcon"), false,
 					((Weapon) item).getRange(), 0.5f));
 			gap += stats.get(1).getFullSize().x() + buffer;
-			stats.add(new Counter(x + gap, y + (icon.getSize().y() / 4), Art.getImage("FireRateIcon"), false,
+			stats.add(new Counter(x + gap, y + (icon.getSize().y() / 4), ImageProcessor.getImage("FireRateIcon"), false,
 					((Weapon) item).getFireRate(), 0.5f));
 			gap += stats.get(2).getFullSize().x() + buffer;
-			stats.add(new Counter(x + gap, y + (icon.getSize().y() / 4), Art.getImage("ManaCostIcon"), false,
+			stats.add(new Counter(x + gap, y + (icon.getSize().y() / 4), ImageProcessor.getImage("ManaCostIcon"), false,
 					((Weapon) item).getManaCost(), 0.5f));
 		}
 	}

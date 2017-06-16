@@ -7,7 +7,7 @@ import components.attack.PlayerAttack;
 import components.inventory.BaseInventory;
 import components.inventory.TypePotion;
 import components.movement.BasicMovement;
-import display.Art;
+import display.ImageProcessor;
 import display.DPDTRenderer;
 import entity.Entity;
 import loop.Loop;
@@ -46,29 +46,29 @@ public class Hud extends GuiComponent {
 		PM = player.getComponent(TypeComponent.MOVEMENT);
 
 		hudElems = new CopyOnWriteArrayList<Icon>();
-		infoBoxTop = new Icon(0.0f, 0.0f, Art.getImage("BarInfoTop"), false, 1f);
+		infoBoxTop = new Icon(0.0f, 0.0f, ImageProcessor.getImage("BarInfoTop"), false, 1f);
 		hudElems.add(infoBoxTop);
-		healthBar = new HudBar(10.0f, 10.0f, Art.getImage("BarHealth"), 1f);
+		healthBar = new HudBar(10.0f, 10.0f, ImageProcessor.getImage("BarHealth"), 1f);
 		hudElems.add(healthBar);
-		manaBar = new HudBar(10.0f, 35.0f, Art.getImage("BarMana"), 1f);
+		manaBar = new HudBar(10.0f, 35.0f, ImageProcessor.getImage("BarMana"), 1f);
 		hudElems.add(manaBar);
-		xpBar = new HudBar(10.0f, 60.0f, Art.getImage("BarXP"), 1f);
+		xpBar = new HudBar(10.0f, 60.0f, ImageProcessor.getImage("BarXP"), 1f);
 		hudElems.add(xpBar);
-		moneyCounter = new Counter(10.0f, 82.0f, Art.getImage("CoinIcon"), false, PI.getCoins(), 0.5f);
+		moneyCounter = new Counter(10.0f, 82.0f, ImageProcessor.getImage("CoinIcon"), false, PI.getCoins(), 0.5f);
 		hudElems.add(moneyCounter);
-		levelCounter = new Counter(90.0f, 82.0f, Art.getImage("LevelIcon"), false, PI.getLevel(), 0.5f);
+		levelCounter = new Counter(90.0f, 82.0f, ImageProcessor.getImage("LevelIcon"), false, PI.getLevel(), 0.5f);
 		hudElems.add(levelCounter);
-		waveCounter = new Counter(170.0f, 82.0f, Art.getImage("WaveIcon"), false, waveNumber, 0.5f);
+		waveCounter = new Counter(170.0f, 82.0f, ImageProcessor.getImage("WaveIcon"), false, waveNumber, 0.5f);
 		hudElems.add(waveCounter);
-		livesCounter = new Counter(250.0f, 82.0f, Art.getImage("LivesIcon"), false, PA.getLives(), 0.5f);
+		livesCounter = new Counter(250.0f, 82.0f, ImageProcessor.getImage("LivesIcon"), false, PA.getLives(), 0.5f);
 		hudElems.add(livesCounter);
-		fire = new Icon(0.0f, 100.0f, Art.getImage("Fire"), false, 1f);
-		poison = new Icon(0.0f, 120.0f, Art.getImage("Poison"), false, 1f);
-		frost = new Icon(0.0f, 140.0f, Art.getImage("Frost"), false, 1f);
+		fire = new Icon(0.0f, 100.0f, ImageProcessor.getImage("Fire"), false, 1f);
+		poison = new Icon(0.0f, 120.0f, ImageProcessor.getImage("Poison"), false, 1f);
+		frost = new Icon(0.0f, 140.0f, ImageProcessor.getImage("Frost"), false, 1f);
 
 		// Potions bar
-		infoBoxBottom = new Icon(0.0f, Loop.getDisplay().getHeight() - Art.getImage("BarInfoBottom").getHeight(),
-				Art.getImage("BarInfoBottom"), false, 1f);
+		infoBoxBottom = new Icon(0.0f, Loop.getDisplay().getHeight() - ImageProcessor.getImage("BarInfoBottom").getHeight(),
+				ImageProcessor.getImage("BarInfoBottom"), false, 1f);
 		hudElems.add(infoBoxBottom);
 	}
 
@@ -97,13 +97,13 @@ public class Hud extends GuiComponent {
 		int sPot = PI.getNumPotion(TypePotion.SPEED);
 		int kPot = PI.getNumPotion(TypePotion.KNOCKBACK);
 
-		r.draw(Art.getImage("Numbers"), new Vector2(26, Loop.getDisplay().getHeight() - 55), size, 0.0f,
+		r.draw(ImageProcessor.getImage("Numbers"), new Vector2(26, Loop.getDisplay().getHeight() - 55), size, 0.0f,
 				new Vector2(hPot, 1), maxTex);
-		r.draw(Art.getImage("Numbers"), new Vector2(70, Loop.getDisplay().getHeight() - 55), size, 0.0f,
+		r.draw(ImageProcessor.getImage("Numbers"), new Vector2(70, Loop.getDisplay().getHeight() - 55), size, 0.0f,
 				new Vector2(mPot, 1), maxTex);
-		r.draw(Art.getImage("Numbers"), new Vector2(114, Loop.getDisplay().getHeight() - 55), size, 0.0f,
+		r.draw(ImageProcessor.getImage("Numbers"), new Vector2(114, Loop.getDisplay().getHeight() - 55), size, 0.0f,
 				new Vector2(sPot, 1), maxTex);
-		r.draw(Art.getImage("Numbers"), new Vector2(159, Loop.getDisplay().getHeight() - 55), size, 0.0f,
+		r.draw(ImageProcessor.getImage("Numbers"), new Vector2(159, Loop.getDisplay().getHeight() - 55), size, 0.0f,
 				new Vector2(kPot, 1), maxTex);
 	}
 
@@ -129,8 +129,8 @@ public class Hud extends GuiComponent {
 		int exp = PI.getExp();
 
 		if (Math.max(maxHealth, maxMana) > 18.0f) {
-			hudW = ((Math.max(maxHealth, maxMana) - 18.0f) * 10.0f) + Art.getImage("BarInfoTop").getWidth();
-			infoBoxTop.setSize(hudW, Art.getImage("BarInfoTop").getHeight());
+			hudW = ((Math.max(maxHealth, maxMana) - 18.0f) * 10.0f) + ImageProcessor.getImage("BarInfoTop").getWidth();
+			infoBoxTop.setSize(hudW, ImageProcessor.getImage("BarInfoTop").getHeight());
 		}
 
 		healthBar.setValue(health);

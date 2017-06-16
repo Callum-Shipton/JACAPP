@@ -5,6 +5,7 @@ import audio.music.BackgroundMusic;
 import components.TypeComponent;
 import components.graphical.BaseGraphics;
 import display.Art;
+import display.ImageProcessor;
 import entity.Entity;
 import game.Game;
 import gui.Hud;
@@ -30,7 +31,7 @@ public class ShootEmUp implements Game {
 	}
 
 	public static void main(String[] args) {
-		Loop loop = new Loop(new ShootEmUp(), 60.0f);
+		Loop loop = new Loop(new ShootEmUp(), 60.0f, new Art());
 		loop.start();
 	}
 
@@ -46,7 +47,7 @@ public class ShootEmUp implements Game {
 		musicPlayer = new MusicPlayer();
 
 		paused = true;
-		menuSystem.addMenu(new MainMenu(Art.getImage("MainMenuScreen")));
+		menuSystem.addMenu(new MainMenu(ImageProcessor.getImage("MainMenuScreen")));
 		musicPlayer.play();
 	}
 
@@ -56,7 +57,7 @@ public class ShootEmUp implements Game {
 			currentLevel.render();
 			BaseGraphics baseGraphics = player.getComponent(TypeComponent.GRAPHICS);
 			baseGraphics.render(player);
-			hud.render(Art.stat);
+			hud.render(ImageProcessor.stat);
 		}
 		menuSystem.render();
 	}

@@ -15,7 +15,7 @@ import components.graphical.BaseGraphics;
 import components.inventory.BaseInventory;
 import components.movement.BaseMovement;
 import components.movement.BasicMovement;
-import display.Art;
+import display.ImageProcessor;
 import entity.Entity;
 import loop.Loop;
 import main.ShootEmUp;
@@ -77,7 +77,7 @@ public final class EnemyBuilder {
 	}
 
 	private static void addComponents(String art, int speed) {
-		enemyGraphics = new AnimatedGraphics(Art.getImage(art), Art.base, false, testGraphics.getX(),
+		enemyGraphics = new AnimatedGraphics(ImageProcessor.getImage(art), ImageProcessor.base, false, testGraphics.getX(),
 				testGraphics.getX());
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision();
@@ -88,7 +88,7 @@ public final class EnemyBuilder {
 
 		boolean collide;
 		Entity test = new Entity();
-		testGraphics = new AnimatedGraphics(Art.getImage("Enemy"), Art.base, false, 1f);
+		testGraphics = new AnimatedGraphics(ImageProcessor.getImage("Enemy"), ImageProcessor.base, false, 1f);
 		test.addComponent(testGraphics);
 		BaseCollision baseCollision = new RigidCollision();
 		test.addComponent(baseCollision);

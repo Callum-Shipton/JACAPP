@@ -20,7 +20,7 @@ import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.inventory.TypePickup;
 import components.spawn.PointSpawn;
-import display.Art;
+import display.ImageProcessor;
 import display.Image;
 import entity.DatableObject;
 import entity.Entity;
@@ -46,7 +46,7 @@ public abstract class InventoryItem<I extends InventoryItem<?>> implements Datab
 
 		BaseGraphics entityG = e.getComponent(TypeComponent.GRAPHICS);
 
-		BG = new AnimatedGraphics(Art.getImage(this.name), Art.base, true, 1f);
+		BG = new AnimatedGraphics(ImageProcessor.getImage(this.name), ImageProcessor.base, true, 1f);
 		BS = new PointSpawn(BG, new Vector2(entityG.getX() + BG.getWidth(), entityG.getY() + BG.getHeight()), item);
 		item.addComponent(BG);
 		BC = new PickupCollision(item, this.typePickup, this.name);
@@ -56,7 +56,7 @@ public abstract class InventoryItem<I extends InventoryItem<?>> implements Datab
 	}
 
 	public Image getInventoryImage() {
-		return Art.getImage(this.name + "Button");
+		return ImageProcessor.getImage(this.name + "Button");
 	}
 
 	public String getName() {

@@ -8,7 +8,7 @@ import components.graphical.PlayerGraphics;
 import components.inventory.BaseInventory;
 import components.movement.BasicMovement;
 import components.spawn.PointSpawn;
-import display.Art;
+import display.ImageProcessor;
 import entity.Entity;
 import math.Vector2;
 import object.Weapon;
@@ -60,27 +60,27 @@ public abstract class PlayerBuilder {
 	private static void chooseType(TypeAttack type) {
 		switch (type) {
 		case ARCHER:
-			g = new PlayerGraphics(Art.getImage("Archer"), Art.base, 1f);
+			g = new PlayerGraphics(ImageProcessor.getImage("Archer"), ImageProcessor.base, 1f);
 			a = new PlayerAttack(type, 4, 5, new Weapon("Longbow", 0));
 			break;
 		case BATTLE_MAGE:
-			g = new PlayerGraphics(Art.getImage("BattleMage"), Art.base, 1f);
+			g = new PlayerGraphics(ImageProcessor.getImage("BattleMage"), ImageProcessor.base, 1f);
 			a = new PlayerAttack(type, 3, 5, new Weapon("FireStaff", 0));
 			break;
 		case MAGE:
-			g = new PlayerGraphics(Art.getImage("Mage"), Art.base, 1f);
+			g = new PlayerGraphics(ImageProcessor.getImage("Mage"), ImageProcessor.base, 1f);
 			a = new PlayerAttack(type, 3, 5, new Weapon("FireStaff", 0));
 			break;
 		case ROGUE:
-			g = new PlayerGraphics(Art.getImage("Rogue"), Art.base, 1f);
+			g = new PlayerGraphics(ImageProcessor.getImage("Rogue"), ImageProcessor.base, 1f);
 			a = new PlayerAttack(type, 3, 5, new Weapon("IronDagger", 0));
 			break;
 		case WARRIOR:
-			g = new PlayerGraphics(Art.getImage("Warrior"), Art.base, 1f);
+			g = new PlayerGraphics(ImageProcessor.getImage("Warrior"), ImageProcessor.base, 1f);
 			a = new PlayerAttack(type, 5, 3, new Weapon("Greatsword", 0));
 			break;
 		default:
-			g = new PlayerGraphics(Art.getImage("Warrior"), Art.base, 1f);
+			g = new PlayerGraphics(ImageProcessor.getImage("Warrior"), ImageProcessor.base, 1f);
 		}
 		s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
 	}

@@ -56,8 +56,12 @@ public class Display {
 	private int height;
 
 	boolean fullscreen = false;
+	
+	private ArtLoader artLoader;
 
-	public Display() {
+	public Display(ArtLoader artLoader) {
+		this.artLoader = artLoader;
+		
 		this.width = INITIAL_SCREEN_WIDTH;
 		this.height = INITIAL_SCREEN_HEIGHT;
 	}
@@ -142,7 +146,7 @@ public class Display {
 		GLContext.createFromCurrent();
 
 		initGL();
-		new Art().init();
+		new ImageProcessor().init(artLoader);
 
 		// Initialise key handling
 		Keyboard.keyCheck(this.window);

@@ -3,7 +3,7 @@ package gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import display.Art;
+import display.ImageProcessor;
 import display.Display;
 import display.Image;
 import loop.Loop;
@@ -34,10 +34,10 @@ public abstract class GuiMenu {
 	}
 
 	public void render() {
-		Art.stat.draw(menuImage, new Vector2(x, y),
+		ImageProcessor.stat.draw(menuImage, new Vector2(x, y),
 				new Vector2(this.display.getWidth(), display.getHeight()), 0, new Vector2(0, 0));
 		for (GuiComponent menuItem : menuItems) {
-			menuItem.render(Art.stat);
+			menuItem.render(ImageProcessor.stat);
 		}
 	}
 

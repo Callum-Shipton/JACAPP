@@ -1,6 +1,6 @@
 package components.attack;
 
-import display.Art;
+import display.ImageProcessor;
 import entity.Entity;
 import gui.HudBar;
 import main.ShootEmUp;
@@ -20,7 +20,7 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 		this.legs = legs;
 		this.boots = boots;
 
-		this.healthBar = new HudBar(10.0f, 10.0f, Art.getImage("BarHealth"), 0.25f);
+		this.healthBar = new HudBar(10.0f, 10.0f, ImageProcessor.getImage("BarHealth"), 0.25f);
 	}
 
 	@Override

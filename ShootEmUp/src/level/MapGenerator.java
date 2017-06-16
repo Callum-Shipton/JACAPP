@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 
 import components.collision.RigidCollision;
 import components.graphical.MapGraphics;
-import display.Art;
+import display.ImageProcessor;
 import entity.Entity;
 import logging.Logger;
 import main.ShootEmUp;
@@ -315,12 +315,12 @@ public class MapGenerator {
 		MapGraphics wallG;
 		switch (map.getRGB(x, y)) {
 		case GREYWALL:
-			wallG = new MapGraphics(Art.getImage(TEXTURE_FILE), new Vector2(tileMapX + 3.0f, tileMapY),
+			wallG = new MapGraphics(ImageProcessor.getImage(TEXTURE_FILE), new Vector2(tileMapX + 3.0f, tileMapY),
 					x * LevelMap.getTileWidth(), y * LevelMap.getTileHeight());
 			break;
 		case BROWNWALL:
 		default:
-			wallG = new MapGraphics(Art.getImage(TEXTURE_FILE), new Vector2(tileMapX, tileMapY),
+			wallG = new MapGraphics(ImageProcessor.getImage(TEXTURE_FILE), new Vector2(tileMapX, tileMapY),
 					x * LevelMap.getTileWidth(), y * LevelMap.getTileHeight());
 			break;
 		}
@@ -333,15 +333,15 @@ public class MapGenerator {
 		MapGraphics wallG;
 		switch (this.map.getRGB(x, y)) {
 		case LIGHTWATER:
-			wallG = new MapGraphics(Art.getImage(TEXTURE_FILE), new Vector2(tileMapX, tileMapY + 4.0f),
+			wallG = new MapGraphics(ImageProcessor.getImage(TEXTURE_FILE), new Vector2(tileMapX, tileMapY + 4.0f),
 					x * LevelMap.getTileWidth(), y * LevelMap.getTileHeight());
 			break;
 		case DARKWATER:
-			wallG = new MapGraphics(Art.getImage(TEXTURE_FILE), new Vector2(tileMapX + 3.0f, tileMapY + 4.0f),
+			wallG = new MapGraphics(ImageProcessor.getImage(TEXTURE_FILE), new Vector2(tileMapX + 3.0f, tileMapY + 4.0f),
 					x * LevelMap.getTileWidth(), y * LevelMap.getTileHeight());
 			break;
 		default:
-			wallG = new MapGraphics(Art.getImage(TEXTURE_FILE), new Vector2(tileMapX, tileMapY + 4.0f),
+			wallG = new MapGraphics(ImageProcessor.getImage(TEXTURE_FILE), new Vector2(tileMapX, tileMapY + 4.0f),
 					x * LevelMap.getTileWidth(), y * LevelMap.getTileHeight());
 		}
 

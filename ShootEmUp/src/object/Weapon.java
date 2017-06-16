@@ -14,7 +14,7 @@ import components.graphical.BaseGraphics;
 import components.inventory.TypePickup;
 import components.movement.FlyingMovement;
 import components.spawn.PointSpawn;
-import display.Art;
+import display.ImageProcessor;
 import display.Image;
 import entity.Entity;
 import logging.Logger;
@@ -85,7 +85,7 @@ public final class Weapon extends InventoryItem<Weapon> {
 
 		// create particle
 		Entity particle = new Entity();
-		AnimatedGraphics g = new AnimatedGraphics(getParticleImage(), Art.base, false, 1f);
+		AnimatedGraphics g = new AnimatedGraphics(getParticleImage(), ImageProcessor.base, false, 1f);
 		g.setDirection(direction);
 		particle.addComponent(g);
 
@@ -167,7 +167,7 @@ public final class Weapon extends InventoryItem<Weapon> {
 	}
 
 	public Image getParticleImage() {
-		return Art.getImage(this.particleImage);
+		return ImageProcessor.getImage(this.particleImage);
 	}
 
 	public int getRange() {

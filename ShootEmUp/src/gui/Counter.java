@@ -1,6 +1,6 @@
 package gui;
 
-import display.Art;
+import display.ImageProcessor;
 import display.DPDTRenderer;
 import display.Image;
 import math.Vector2;
@@ -36,14 +36,14 @@ public class Counter extends Icon {
 		Vector2 maxTex = new Vector2(10, 1);
 
 		if (count < 10) {
-			Art.stat.draw(Art.getImage("Numbers"),
+			ImageProcessor.stat.draw(ImageProcessor.getImage("Numbers"),
 					new Vector2(x + width + (FIRST_GAP * scale), y), numberSize, 0.0f,
 					new Vector2(count, 1), maxTex);
 		} else {
-			Art.stat.draw(Art.getImage("Numbers"),
+			ImageProcessor.stat.draw(ImageProcessor.getImage("Numbers"),
 					new Vector2(x + width + (FIRST_GAP * scale), y), numberSize, 0.0f,
 					new Vector2(count / 10, 1), maxTex);
-			Art.stat.draw(Art.getImage("Numbers"),
+			ImageProcessor.stat.draw(ImageProcessor.getImage("Numbers"),
 					new Vector2(x + width + (NUMBER_GAP * scale), y), numberSize, 0.0f,
 					new Vector2(count % 10, 1), maxTex);
 		}

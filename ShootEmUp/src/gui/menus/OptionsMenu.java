@@ -1,6 +1,6 @@
 package gui.menus;
 
-import display.Art;
+import display.ImageProcessor;
 import display.Image;
 import gui.GuiMenu;
 import gui.MenuButton;
@@ -13,12 +13,12 @@ public class OptionsMenu extends GuiMenu {
 		super(menuImage);
 
 		VerticalLayout buttonList = new VerticalLayout(
-				(this.display.getWidth() / 2) - (Art.getImage("ControlsButton").getWidth() / 2), 150,
-				Art.getImage("ControlsButton").getHeight() / 2, 20);
+				(this.display.getWidth() / 2) - (ImageProcessor.getImage("ControlsButton").getWidth() / 2), 150,
+				ImageProcessor.getImage("ControlsButton").getHeight() / 2, 20);
 
-		buttonList.addMenuItem(new MenuButton(TypeButton.CONTROLS, Art.getImage("ControlsButton"), 0, 0));
-		buttonList.addMenuItem(new MenuButton(TypeButton.SOUND, Art.getImage("SoundButton"), 0, 0));
-		buttonList.addMenuItem(new MenuButton(TypeButton.BACK, Art.getImage("BackButton"), 0, 0));
+		buttonList.addMenuItem(new MenuButton(TypeButton.CONTROLS, ImageProcessor.getImage("ControlsButton"), 0, 0));
+		buttonList.addMenuItem(new MenuButton(TypeButton.SOUND, ImageProcessor.getImage("SoundButton"), 0, 0));
+		buttonList.addMenuItem(new MenuButton(TypeButton.BACK, ImageProcessor.getImage("BackButton"), 0, 0));
 
 		this.menuItems.add(buttonList);
 	}

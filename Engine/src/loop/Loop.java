@@ -14,6 +14,7 @@ import java.io.File;
 
 import org.lwjgl.glfw.GLFW;
 
+import display.ArtLoader;
 import display.Display;
 import input.Controllers;
 import input.Keyboard;
@@ -29,9 +30,10 @@ public final class Loop {
 	private static Keys keys;
 	private Game game;
 
-	public Loop(Game game, double fps) {
+	public Loop(Game game, double fps, ArtLoader artLoader) {
 		this.game = game;
 		Loop.fps = fps;
+		display = new Display(artLoader);
 	}
 
 	public void start() {
@@ -56,7 +58,6 @@ public final class Loop {
 	}
 
 	private void init() {
-		display = new Display();
 		display.initGLFW();
 		keys = new Keys();
 		Controllers.create();

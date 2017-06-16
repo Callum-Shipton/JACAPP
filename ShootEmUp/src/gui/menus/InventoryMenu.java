@@ -3,7 +3,7 @@ package gui.menus;
 import components.TypeComponent;
 import components.attack.PlayerAttack;
 import components.inventory.BaseInventory;
-import display.Art;
+import display.ImageProcessor;
 import display.Image;
 import gui.Inventory;
 import gui.ItemSlot;
@@ -70,22 +70,22 @@ public class InventoryMenu extends PauseMenu {
 	public void render() {
 		super.render();
 		if (boots != null) {
-			boots.render(Art.stat);
+			boots.render(ImageProcessor.stat);
 		}
 		if (legs != null) {
-			legs.render(Art.stat);
+			legs.render(ImageProcessor.stat);
 		}
 		if (chest != null) {
-			chest.render(Art.stat);
+			chest.render(ImageProcessor.stat);
 		}
 		if (helmet != null) {
-			helmet.render(Art.stat);
+			helmet.render(ImageProcessor.stat);
 		}
 		if (weapon != null) {
-			weapon.render(Art.stat);
+			weapon.render(ImageProcessor.stat);
 		}
 
-		inventory.render(Art.stat);
+		inventory.render(ImageProcessor.stat);
 	}
 
 	@Override

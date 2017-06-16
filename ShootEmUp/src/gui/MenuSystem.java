@@ -3,7 +3,7 @@ package gui;
 import java.util.Deque;
 import java.util.LinkedList;
 
-import display.Art;
+import display.ImageProcessor;
 import gui.menus.InventoryMenu;
 
 public class MenuSystem {
@@ -30,7 +30,7 @@ public class MenuSystem {
 
 	public void pause() {
 		if (this.menuStack.isEmpty()) {
-			addMenu(new InventoryMenu(Art.getImage("InventoryScreen")));
+			addMenu(new InventoryMenu(ImageProcessor.getImage("InventoryScreen")));
 		} else {
 			clearMenus();
 		}

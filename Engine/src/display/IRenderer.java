@@ -44,7 +44,7 @@ public abstract class IRenderer extends Renderer {
 	}
 
 	public void draw(int texid) {
-		glUseProgram(Art.ShaderInst);
+		glUseProgram(ImageProcessor.ShaderInst);
 		glBindTexture(GL11.GL_TEXTURE_2D, texid);
 		glBindVertexArray(this.VAO);
 		glDrawElementsInstanced(GL11.GL_TRIANGLES, 6, GL11.GL_UNSIGNED_BYTE, 0, this.amount);

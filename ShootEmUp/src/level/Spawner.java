@@ -8,7 +8,7 @@ import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.attack.TypeAttack;
 import components.movement.BasicMovement;
-import display.Art;
+import display.ImageProcessor;
 import entity.Entity;
 import logging.Logger;
 import loop.Loop;
@@ -41,16 +41,16 @@ public class Spawner {
 		this.radiusIncreasePerLevel = radLevel;
 
 		this.rand = new Random();
-		this.radiusLocation = GL20.glGetUniformLocation(Art.ShaderBase, "radius");
-		this.radiusLocationInst = GL20.glGetUniformLocation(Art.ShaderInst, "radius");
+		this.radiusLocation = GL20.glGetUniformLocation(ImageProcessor.ShaderBase, "radius");
+		this.radiusLocationInst = GL20.glGetUniformLocation(ImageProcessor.ShaderInst, "radius");
 		changeRadius(0);
 	}
 
 	public void changeRadius(float f) {
-		GL20.glUseProgram(Art.ShaderBase);
+		GL20.glUseProgram(ImageProcessor.ShaderBase);
 		GL20.glUniform1f(this.radiusLocation, f + this.radius);
 		GL20.glUseProgram(0);
-		GL20.glUseProgram(Art.ShaderInst);
+		GL20.glUseProgram(ImageProcessor.ShaderInst);
 		GL20.glUniform1f(this.radiusLocationInst, f + this.radius);
 		GL20.glUseProgram(0);
 	}
@@ -114,7 +114,7 @@ public class Spawner {
 				BaseAttack BA = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
 				TypeAttack temp = BA.getAttackType();
 				ShootEmUp.setCurrentLevel(
-						new Level(Art.LEVEL_FILE_LOCATION, ShootEmUp.getCurrentLevel().getLevel() + 1));
+						new Level(ImageProcessor.LEVEL_FILE_LOCATION, ShootEmUp.getCurrentLevel().getLevel() + 1));
 				try {
 					ShootEmUp.getSave().load(1);
 				} catch (Exception e) {

@@ -20,7 +20,7 @@ import components.collision.PickupCollision;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.spawn.PointSpawn;
-import display.Art;
+import display.ImageProcessor;
 import entity.Entity;
 import main.ShootEmUp;
 import math.Vector2;
@@ -186,7 +186,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 		PointSpawn CoinS;
 		PickupCollision CoinC;
 
-		CoinG = new AnimatedGraphics(Art.getImage("Coin"), Art.base, true, this.BG.getX() - this.BG.getWidth(),
+		CoinG = new AnimatedGraphics(ImageProcessor.getImage("Coin"), ImageProcessor.base, true, this.BG.getX() - this.BG.getWidth(),
 				this.BG.getY() - this.BG.getHeight());
 
 		CoinS = new PointSpawn(CoinG, new Vector2(this.BG.getX(), this.BG.getY()), item);

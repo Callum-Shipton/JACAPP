@@ -6,7 +6,7 @@ import java.util.List;
 
 import components.TypeComponent;
 import components.inventory.BaseInventory;
-import display.Art;
+import display.ImageProcessor;
 import display.DPDTRenderer;
 import main.ShootEmUp;
 import object.InventoryItem;
@@ -49,7 +49,7 @@ public class Inventory extends GuiComponent {
 	@Override
 	public void render(DPDTRenderer d) {
 		for (MenuButton button : buttons) {
-			button.render(Art.stat);
+			button.render(ImageProcessor.stat);
 		}
 	}
 

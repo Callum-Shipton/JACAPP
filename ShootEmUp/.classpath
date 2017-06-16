@@ -6,30 +6,9 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="ShootEmUp/natives"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="lib/lwjgl.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://javadoc.lwjgl.org/"/>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="ShootEmUp/natives"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="lib/TWL.jar"/>
 	<classpathentry exported="true" kind="lib" path="res"/>
-	<classpathentry kind="lib" path="lib/jinput.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/D:/Downloads/apidocs.zip!/apidocs"/>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="ShootEmUp/natives/JInput"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/jinput-test.jar">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="ShootEmUp/native"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/gson-2.6.2.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/Engine"/>
+	<classpathentry kind="lib" path="lib/gson-2.6.2.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

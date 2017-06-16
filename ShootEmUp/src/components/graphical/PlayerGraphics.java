@@ -6,7 +6,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL20;
 
 import components.Message;
-import display.Art;
+import display.ImageProcessor;
 import display.Image;
 import display.Renderer;
 import entity.Entity;
@@ -26,10 +26,10 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 		super(image, r, false, scale);
 		this.viewMatrix = new Matrix4();
 		this.matrix44Buffer = BufferUtils.createFloatBuffer(16);
-		this.viewMatrixLocation = GL20.glGetUniformLocation(Art.ShaderBase, "viewMatrix");
-		this.viewMatrixLocationInst = GL20.glGetUniformLocation(Art.ShaderInst, "viewMatrix");
-		this.posLocation = GL20.glGetUniformLocation(Art.ShaderBase, "playerPos");
-		this.posLocationInst = GL20.glGetUniformLocation(Art.ShaderInst, "playerPos");
+		this.viewMatrixLocation = GL20.glGetUniformLocation(ImageProcessor.ShaderBase, "viewMatrix");
+		this.viewMatrixLocationInst = GL20.glGetUniformLocation(ImageProcessor.ShaderInst, "viewMatrix");
+		this.posLocation = GL20.glGetUniformLocation(ImageProcessor.ShaderBase, "playerPos");
+		this.posLocationInst = GL20.glGetUniformLocation(ImageProcessor.ShaderInst, "playerPos");
 	}
 
 	@Override
@@ -53,11 +53,11 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 		this.matrix44Buffer.clear();
 		this.matrix44Buffer = this.viewMatrix.toBuffer();
 
-		GL20.glUseProgram(Art.ShaderBase);
+		GL20.glUseProgram(ImageProcessor.ShaderBase);
 		GL20.glUniformMatrix4(this.viewMatrixLocation, false, this.matrix44Buffer);
 		GL20.glUniform2f(this.posLocation, this.x + (this.width / 2), this.y + (this.height / 2));
 		GL20.glUseProgram(0);
-		GL20.glUseProgram(Art.ShaderInst);
+		GL20.glUseProgram(ImageProcessor.ShaderInst);
 		GL20.glUniformMatrix4(this.viewMatrixLocationInst, false, this.matrix44Buffer);
 		GL20.glUniform2f(this.posLocationInst, this.x + (this.width / 2), this.y + (this.height / 2));
 		GL20.glUseProgram(0);

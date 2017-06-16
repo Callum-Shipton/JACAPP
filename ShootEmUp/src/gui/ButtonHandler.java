@@ -8,7 +8,7 @@ import components.attack.BaseAttack;
 import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
 import components.inventory.BaseInventory;
-import display.Art;
+import display.ImageProcessor;
 import gui.menus.CharacterSelectMenu;
 import gui.menus.ControlsMenu;
 import gui.menus.InventoryMenu;
@@ -37,19 +37,19 @@ public abstract class ButtonHandler {
 		Save save = ShootEmUp.getSave();
 		if (save == null) {
 			ShootEmUp.setPlayer(PlayerBuilder.buildPlayer(type));
-			ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(Art.getImage("MainMenuScreen"), 1));
+			ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(ImageProcessor.getImage("MainMenuScreen"), 1));
 		} else {
 			if (save.getCharacter(type) != null) {
 				PlayerBuilder.buildPlayer(type, save.getCharacter(type));
 			} else {
 				PlayerBuilder.buildPlayer(type);
 			}
-			ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(Art.getImage("MainMenuScreen"), save.getLevel()));
+			ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(ImageProcessor.getImage("MainMenuScreen"), save.getLevel()));
 		}
 	}
 
 	private static void controls() {
-		ShootEmUp.getMenuSystem().addMenu(new ControlsMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new ControlsMenu(ImageProcessor.getImage("MainMenuScreen")));
 	}
 
 	private static void exit() {
@@ -76,7 +76,7 @@ public abstract class ButtonHandler {
 	}
 
 	private static void inventory() {
-		ShootEmUp.getMenuSystem().addMenu(new InventoryMenu(Art.getImage("InventoryScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new InventoryMenu(ImageProcessor.getImage("InventoryScreen")));
 	}
 
 	private static void inventoryUpgrade() {
@@ -88,7 +88,7 @@ public abstract class ButtonHandler {
 	}
 
 	private static void level(int level) {
-		ShootEmUp.setCurrentLevel(new Level(Art.LEVEL_FILE_LOCATION, level));
+		ShootEmUp.setCurrentLevel(new Level(ImageProcessor.LEVEL_FILE_LOCATION, level));
 		ShootEmUp.getCurrentLevel().init();
 		ShootEmUp.startGame();
 	}
@@ -125,18 +125,18 @@ public abstract class ButtonHandler {
 			}
 		}
 
-		ShootEmUp.getMenuSystem().addMenu(new CharacterSelectMenu(Art.getImage("MainMenuScreen"), warriorLevel,
+		ShootEmUp.getMenuSystem().addMenu(new CharacterSelectMenu(ImageProcessor.getImage("MainMenuScreen"), warriorLevel,
 				archerLevel, mageLevel, battleMageLevel, rogueLevel));
 	}
 
 	private static void magic() {
-		ShootEmUp.getMenuSystem().addMenu(new UpgradesMenu(Art.getImage("UpgradesScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new UpgradesMenu(ImageProcessor.getImage("UpgradesScreen")));
 	}
 
 	private static void mainMenu() {
 		ShootEmUp.getMenuSystem().setMainMenu(true);
 		ShootEmUp.getMenuSystem().clearMenus();
-		ShootEmUp.getMenuSystem().addMenu(new MainMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new MainMenu(ImageProcessor.getImage("MainMenuScreen")));
 	}
 
 	private static void mana() {
@@ -159,7 +159,7 @@ public abstract class ButtonHandler {
 	}
 
 	private static void map() {
-		ShootEmUp.getMenuSystem().addMenu(new MapMenu(Art.getImage("MapScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new MapMenu(ImageProcessor.getImage("MapScreen")));
 	}
 
 	private static void mute() {
@@ -167,11 +167,11 @@ public abstract class ButtonHandler {
 	}
 
 	private static void newGame() {
-		ShootEmUp.getMenuSystem().addMenu(new CharacterSelectMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new CharacterSelectMenu(ImageProcessor.getImage("MainMenuScreen")));
 	}
 
 	private static void options() {
-		ShootEmUp.getMenuSystem().addMenu(new OptionsMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new OptionsMenu(ImageProcessor.getImage("MainMenuScreen")));
 	}
 
 	private static void potionsUpgrade() {
@@ -188,7 +188,7 @@ public abstract class ButtonHandler {
 	}
 
 	private static void save() {
-		ShootEmUp.getMenuSystem().addMenu(new SaveMenu(Art.getImage("SaveScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new SaveMenu(ImageProcessor.getImage("SaveScreen")));
 	}
 
 	private static void saveGame() {
@@ -301,10 +301,10 @@ public abstract class ButtonHandler {
 	}
 
 	private static void skills() {
-		ShootEmUp.getMenuSystem().addMenu(new SkillMenu(Art.getImage("SkillScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new SkillMenu(ImageProcessor.getImage("SkillScreen")));
 	}
 
 	private static void sound() {
-		ShootEmUp.getMenuSystem().addMenu(new SoundMenu(Art.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new SoundMenu(ImageProcessor.getImage("MainMenuScreen")));
 	}
 }

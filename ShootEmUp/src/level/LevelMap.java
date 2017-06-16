@@ -3,7 +3,7 @@ package level;
 import java.util.Map;
 
 import ai.GoalBounder;
-import display.Art;
+import display.ImageProcessor;
 import display.FloorRenderer;
 import display.IRenderer;
 import display.WallsRenderer;
@@ -48,19 +48,19 @@ public class LevelMap {
 		foregroundTiles = generator.getForegroundTiles();
 		walls = generator.getWalls();
 
-		Art.irBack = new FloorRenderer(backgroundTiles,
-				new Vector2(Art.getImage("Floor").getFWidth(), Art.getImage("Floor").getFHeight()),
+		ImageProcessor.irBack = new FloorRenderer(backgroundTiles,
+				new Vector2(ImageProcessor.getImage("Floor").getFWidth(), ImageProcessor.getImage("Floor").getFHeight()),
 				LevelMap.getTileWidth(), LevelMap.getTileHeight());
-		Art.irWall = new WallsRenderer(walls,
-				new Vector2(Art.getImage("Walls").getFWidth(), Art.getImage("Walls").getFHeight()),
+		ImageProcessor.irWall = new WallsRenderer(walls,
+				new Vector2(ImageProcessor.getImage("Walls").getFWidth(), ImageProcessor.getImage("Walls").getFHeight()),
 				LevelMap.getTileWidth(), LevelMap.getTileHeight());
-		Art.irFore = new FloorRenderer(foregroundTiles,
-				new Vector2(Art.getImage("Walls").getFWidth(), Art.getImage("Walls").getFHeight()),
+		ImageProcessor.irFore = new FloorRenderer(foregroundTiles,
+				new Vector2(ImageProcessor.getImage("Walls").getFWidth(), ImageProcessor.getImage("Walls").getFHeight()),
 				LevelMap.getTileWidth(), LevelMap.getTileHeight());
 		
-		Art.irBack.init();
-		Art.irWall.init();
-		Art.irFore.init();
+		ImageProcessor.irBack.init();
+		ImageProcessor.irWall.init();
+		ImageProcessor.irFore.init();
 
 		setGoalBounder(new GoalBounder(width, height, walls.keySet()));
 
@@ -68,12 +68,12 @@ public class LevelMap {
 	}
 
 	public void renderHighTiles() {
-		Art.irFore.draw(Art.getImage("Walls").getID());
+		ImageProcessor.irFore.draw(ImageProcessor.getImage("Walls").getID());
 	}
 
 	public void renderLowTiles() {
-		Art.irBack.draw(Art.getImage("Floor").getID());
-		Art.irWall.draw(Art.getImage("Walls").getID());
+		ImageProcessor.irBack.draw(ImageProcessor.getImage("Floor").getID());
+		ImageProcessor.irWall.draw(ImageProcessor.getImage("Walls").getID());
 	}
 
 	public void setGoalBounder(GoalBounder goalBounder) {

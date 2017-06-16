@@ -2,7 +2,7 @@ package gui.menus;
 
 import components.TypeComponent;
 import components.inventory.BaseInventory;
-import display.Art;
+import display.ImageProcessor;
 import display.Image;
 import gui.Counter;
 import gui.CounterButton;
@@ -17,24 +17,24 @@ public class SkillMenu extends PauseMenu {
 	public SkillMenu(Image menuImage) {
 		super(menuImage);
 
-		VerticalLayout buttonList = new VerticalLayout(30, 30, Art.getImage("HealthButton").getHeight() / 2, 20);
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.HEALTH_REGEN, Art.getImage("HealthRegenButton"),
-				Art.getImage("Coin"), 1, 1f));
+		VerticalLayout buttonList = new VerticalLayout(30, 30, ImageProcessor.getImage("HealthButton").getHeight() / 2, 20);
+		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.HEALTH_REGEN, ImageProcessor.getImage("HealthRegenButton"),
+				ImageProcessor.getImage("Coin"), 1, 1f));
 		buttonList.addMenuItem(
-				new CounterButton(0, 0, TypeButton.HEALTH, Art.getImage("HealthButton"), Art.getImage("Coin"), 1, 1f));
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.MANA_REGEN, Art.getImage("ManaRegenButton"),
-				Art.getImage("Coin"), 1, 1f));
+				new CounterButton(0, 0, TypeButton.HEALTH, ImageProcessor.getImage("HealthButton"), ImageProcessor.getImage("Coin"), 1, 1f));
+		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.MANA_REGEN, ImageProcessor.getImage("ManaRegenButton"),
+				ImageProcessor.getImage("Coin"), 1, 1f));
 		buttonList.addMenuItem(
-				new CounterButton(0, 0, TypeButton.MANA, Art.getImage("ManaButton"), Art.getImage("Coin"), 1, 1f));
+				new CounterButton(0, 0, TypeButton.MANA, ImageProcessor.getImage("ManaButton"), ImageProcessor.getImage("Coin"), 1, 1f));
 		this.menuItems.add(buttonList);
 		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
-		this.skillPoints = new Counter(30.0f, 191.0f, Art.getImage("Coin"), false, BI.getLevelPoints(), 1f);
+		this.skillPoints = new Counter(30.0f, 191.0f, ImageProcessor.getImage("Coin"), false, BI.getLevelPoints(), 1f);
 	}
 
 	@Override
 	public void render() {
 		super.render();
-		this.skillPoints.render(Art.stat);
+		this.skillPoints.render(ImageProcessor.stat);
 	}
 
 	@Override

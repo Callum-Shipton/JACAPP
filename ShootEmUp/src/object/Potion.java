@@ -8,7 +8,7 @@ import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.inventory.TypePickup;
 import components.spawn.PointSpawn;
-import display.Art;
+import display.ImageProcessor;
 import entity.Entity;
 import main.ShootEmUp;
 import math.Vector2;
@@ -39,7 +39,7 @@ public abstract class Potion implements Serializable {
 
 		BaseGraphics EntityG = e.getComponent(TypeComponent.GRAPHICS);
 
-		BG = new AnimatedGraphics(Art.getImage(this.type), Art.base, true, 1f);
+		BG = new AnimatedGraphics(ImageProcessor.getImage(this.type), ImageProcessor.base, true, 1f);
 		BS = new PointSpawn(BG, new Vector2(EntityG.getX() + BG.getWidth(), EntityG.getY()), item);
 		item.addComponent(BG);
 		BC = new PickupCollision(item, TypePickup.POTION, this.type);
