@@ -1,6 +1,5 @@
 package components.control;
 
-import ai.AStarNode;
 import ai.AStarSearch;
 import components.Message;
 import components.TypeComponent;
@@ -42,9 +41,11 @@ public class AIControl extends BaseControl {
 	public void update(Entity e) {
 
 		BaseGraphics playerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		Vector2 goalVector = AStarNode.getGridPosition(playerGraphics.getX(), playerGraphics.getY());
-		Vector2 startVector = AStarNode.getGridPosition(graphics.getX(), graphics.getY());
-		AStarSearch search = new AStarSearch(ShootEmUp.getCurrentLevel().getMap());
+		AStarSearch search = new AStarSearch(ShootEmUp.getCurrentLevel().getMap().getWalls().keySet(),
+				ShootEmUp.getCurrentLevel().getMap().getGoalBounder(), (int) playerGraphics.getWidth(),
+				(int) playerGraphics.getHeight());
+		Vector2 goalVector = search.getGridPosition(playerGraphics.getX(), playerGraphics.getY());
+		Vector2 startVector = search.getGridPosition(graphics.getX(), graphics.getY());
 		Vector2 target = search.findPath(goalVector, startVector);
 
 		if (target != null) {

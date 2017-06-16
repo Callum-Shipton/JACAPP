@@ -1,6 +1,5 @@
 package ai;
 
-import level.LevelMap;
 import math.Vector2;
 
 public class AStarNode implements Comparable<AStarNode> {
@@ -18,11 +17,6 @@ public class AStarNode implements Comparable<AStarNode> {
 		this(position);
 		this.parent = parent;
 		this.goal = goal;
-	}
-
-	public static Vector2 getGridPosition(float x, float y) {
-		return new Vector2((float) Math.floor(x / LevelMap.getTileWidth()),
-				(float) Math.floor(y / LevelMap.getTileHeight()));
 	}
 
 	@Override

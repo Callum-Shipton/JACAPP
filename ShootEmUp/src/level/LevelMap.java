@@ -60,7 +60,7 @@ public class LevelMap {
 				new Vector2(Art.getImage("Walls").getFWidth(), Art.getImage("Walls").getFHeight()),
 				LevelMap.getTileWidth(), LevelMap.getTileHeight());
 
-		setGoalBounder(new GoalBounder(width, height, walls));
+		setGoalBounder(new GoalBounder(width, height, walls.keySet()));
 
 		Logger.info("Map Loaded");
 	}

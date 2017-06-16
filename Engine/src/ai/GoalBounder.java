@@ -2,18 +2,16 @@ package ai;
 
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
 import math.Vector2;
 import math.Vector4;
-import object.Entity;
 
 public class GoalBounder {
 	private GoalboundingTile[][] aiTiles;
 
-	public GoalBounder(int width, int height, Map<Vector2, Entity> walls) {
+	public GoalBounder(int width, int height, Set<Vector2> walls) {
 		this.aiTiles = new GoalboundingTile[width][height];
 		createGoalBoundingBoxes(walls);
 	}
@@ -61,11 +59,11 @@ public class GoalBounder {
 		}
 	}
 
-	private void addNodesToQueue(TypeNode[] nodes, Map<Vector2, Entity> walls, Queue<TypeNode> open,
+	private void addNodesToQueue(TypeNode[] nodes, Set<Vector2> walls, Queue<TypeNode> open,
 			Set<TypeNode> closed) {
 		for (int i = 0; i < nodes.length; i++) {
 			if (!closed.contains(nodes[i])) {
-				if (!walls.containsKey(nodes[i].position)) {
+				if (!walls.contains(nodes[i].position)) {
 					open.add(nodes[i]);
 				}
 				closed.add(nodes[i]);
@@ -73,7 +71,7 @@ public class GoalBounder {
 		}
 	}
 
-	private void fillMap(Queue<TypeNode> open, Set<TypeNode> closed, BoundingBox[] boxes, Map<Vector2, Entity> walls) {
+	private void fillMap(Queue<TypeNode> open, Set<TypeNode> closed, BoundingBox[] boxes, Set<Vector2> walls) {
 		while (!open.isEmpty()) {
 			TypeNode current = open.poll(); // Tile current being
 											// checked
@@ -88,11 +86,11 @@ public class GoalBounder {
 
 	}
 
-	private void createGoalBoundingBoxes(Map<Vector2, Entity> walls) {
+	private void createGoalBoundingBoxes(Set<Vector2> walls) {
 		for (int x = 2; x < (aiTiles.length - 2); x++) {
 			for (int y = 2; y < (aiTiles[0].length - 2); y++) {
 
-				if (!walls.containsKey(new Vector2(x, y))) {
+				if (!walls.contains(new Vector2(x, y))) {
 
 					// queue for tiles to be looked at
 					Queue<TypeNode> open = new LinkedList<>();

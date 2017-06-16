@@ -7,28 +7,30 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
-import level.LevelMap;
 import logging.Logger;
 import math.Vector2;
-import object.Entity;
 
 public class AStarSearch {
 
-	private static Map<Vector2, Entity> walls;
+	private static Set<Vector2> walls;
 	private static GoalBounder goalBounder;
 	private Queue<AStarNode> openNodes;
 	private Set<AStarNode> closedNodes;
 	private AStarNode startNode;
 	private Map<String, AStarNode> childNodes;
 	private AStarNode goalNode;
+	private int nodeWidth;
+	private int nodeHeight;
 
-	public AStarSearch(LevelMap map) {
-		if (walls == null) {
-			walls = map.getWalls();
+	public AStarSearch(Set<Vector2> walls, GoalBounder goalBounder, int nodeWidth, int nodeHeight) {
+		if (AStarSearch.walls == null) {
+			AStarSearch.walls = walls;
 		}
-		if (goalBounder == null) {
-			goalBounder = map.getGoalBounder();
+		if (AStarSearch.goalBounder == null) {
+			AStarSearch.goalBounder = goalBounder;
 		}
+		this.nodeWidth = nodeWidth;
+		this.nodeHeight = nodeHeight;
 	}
 
 	private void initData(Vector2 goal, Vector2 start) {
@@ -166,6 +168,11 @@ public class AStarSearch {
 	}
 
 	private boolean isNodeNotWall(AStarNode node) {
-		return !walls.containsKey(node.getPosition());
+		return !walls.contains(node.getPosition());
+	}
+
+	public Vector2 getGridPosition(float x, float y) {
+		return new Vector2((float) Math.floor(x / nodeWidth),
+				(float) Math.floor(y / nodeHeight));
 	}
 }
