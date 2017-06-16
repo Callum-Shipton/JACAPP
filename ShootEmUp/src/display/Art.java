@@ -27,12 +27,10 @@ import java.io.InputStreamReader;
 import java.nio.FloatBuffer;
 import java.util.HashMap;
 
-import level.LevelMap;
 import logging.Logger;
 import loop.Loop;
 import main.ShootEmUp;
 import math.Matrix4;
-import math.Vector2;
 
 public class Art {
 
@@ -248,7 +246,7 @@ public class Art {
 	public static void refreshRenderers() {
 		base.initRenderData();
 		stat.initRenderData();
-		
+
 		if (ShootEmUp.getCurrentLevel() != null) {
 			irWall.bindRenderData();
 			irBack.bindRenderData();

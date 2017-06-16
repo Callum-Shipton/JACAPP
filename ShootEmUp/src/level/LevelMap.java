@@ -18,8 +18,6 @@ public class LevelMap {
 	private int width;
 	private int height;
 
-	private String file;
-
 	// texture map position arrays
 	private Vector2[][] backgroundTiles; // Replace with Irenderer changes
 	private Vector2[][] wallTiles; // ^^
@@ -33,8 +31,6 @@ public class LevelMap {
 	private MapGenerator generator;
 
 	public LevelMap(String file) {
-		this.file = file;
-
 		generator = new MapGenerator(file);
 
 		width = generator.getWidth();
