@@ -17,11 +17,18 @@ public class AIControl extends BaseControl {
 	private BaseAttack attack;
 	private int counter = 0;
 	private int aggression = 30;
+	private AStarSearch search;
+	private BaseGraphics playerGraphics;
 
 	public AIControl(BaseGraphics graphics, BaseAttack attack, BaseMovement movement) {
 		this.graphics = graphics;
 		this.attack = attack;
 		this.movement = movement;
+
+		playerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
+		search = new AStarSearch(ShootEmUp.getCurrentLevel().getMap().getWalls().keySet(),
+				ShootEmUp.getCurrentLevel().getMap().getGoalBounder(), graphics.getWidth() / 2,
+				graphics.getHeight() / 2);
 	}
 
 	@Override
@@ -40,10 +47,6 @@ public class AIControl extends BaseControl {
 	@Override
 	public void update(Entity e) {
 
-		BaseGraphics playerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		AStarSearch search = new AStarSearch(ShootEmUp.getCurrentLevel().getMap().getWalls().keySet(),
-				ShootEmUp.getCurrentLevel().getMap().getGoalBounder(), playerGraphics.getWidth() / 2,
-				playerGraphics.getHeight() / 2);
 		Vector2 goalVector = search.getGridPosition(playerGraphics.getX(), playerGraphics.getY());
 		Vector2 startVector = search.getGridPosition(graphics.getX(), graphics.getY());
 		Vector2 target = search.findPath(goalVector, startVector);
