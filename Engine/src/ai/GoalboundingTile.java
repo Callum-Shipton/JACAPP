@@ -1,56 +1,26 @@
 package ai;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class GoalboundingTile {
-	private BoundingBox north;
-	private BoundingBox northWest;
-	private BoundingBox west;
-	private BoundingBox southWest;
-	private BoundingBox south;
-	private BoundingBox southEast;
-	private BoundingBox east;
-	private BoundingBox northEast;
+	
+	private Map<String, BoundingBox> boxes;
 
 	public GoalboundingTile(BoundingBox[] boxes) {
-		north = boxes[0];
-		northWest = boxes[1];
-		west = boxes[2];
-		southWest = boxes[3];
-		south = boxes[4];
-		southEast = boxes[5];
-		east = boxes[6];
-		northEast = boxes[7];
+		this.boxes = new HashMap<>();
+		
+		this.boxes.put("N", boxes[0]);
+		this.boxes.put("NW", boxes[1]);
+		this.boxes.put("W", boxes[2]);
+		this.boxes.put("SW", boxes[3]);
+		this.boxes.put("S", boxes[4]);
+		this.boxes.put("SE", boxes[5]);
+		this.boxes.put("E", boxes[6]);
+		this.boxes.put("NE", boxes[7]);
 	}
 
-	public BoundingBox getEast() {
-		return east;
+	public BoundingBox getBox(String key) {
+		return boxes.get(key);
 	}
-
-	public BoundingBox getNorth() {
-		return north;
-	}
-
-	public BoundingBox getNorthEast() {
-		return northEast;
-	}
-
-	public BoundingBox getNorthWest() {
-		return northWest;
-	}
-
-	public BoundingBox getSouth() {
-		return south;
-	}
-
-	public BoundingBox getSouthEast() {
-		return southEast;
-	}
-
-	public BoundingBox getSouthWest() {
-		return southWest;
-	}
-
-	public BoundingBox getWest() {
-		return west;
-	}
-
 }

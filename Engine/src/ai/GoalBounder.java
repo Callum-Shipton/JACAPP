@@ -12,7 +12,7 @@ public class GoalBounder {
 	private GoalboundingTile[][] aiTiles;
 
 	public GoalBounder(int width, int height, Set<Vector2> walls) {
-		this.aiTiles = new GoalboundingTile[width][height];
+		aiTiles = new GoalboundingTile[width][height];
 		createGoalBoundingBoxes(walls);
 	}
 

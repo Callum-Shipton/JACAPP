@@ -1,9 +1,7 @@
 package ai;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -63,46 +61,25 @@ public class AStarSearch {
 		childNodes.put("NE", new AStarNode(new Vector2(currentX + 1, currentY - 1), width, currentNode, goalPosition));
 	}
 
-	private void addNode(BoundingBox box, AStarNode node) {
-		if (box.boxContains(goalNode.getPosition())) {
-			openNodes.add(node);
-			closedNodes.add(node);
+	private void addNode(String key, GoalboundingTile goalboundingTile) {
+		AStarNode north = childNodes.get(key);
+		if (!closedNodes.contains(north) && !containsWall(north) && goalboundingTile.getBox(key).boxContains(goalNode.getPosition())) {
+			openNodes.add(north);
+			closedNodes.add(north);
 		}
 	}
 
-	private void addUnobstructedChildNodes(GoalboundingTile goalboundingTile) {
-		AStarNode north = childNodes.get("N");
-		if (!closedNodes.contains(north) && !containsWall(north)) {
-				addNode(goalboundingTile.getNorth(), north);
-		}
-		AStarNode northWest = childNodes.get("NW");
-		if (!closedNodes.contains(northWest) && !containsWall(northWest)) {
-				addNode(goalboundingTile.getNorthWest(), northWest);
-		}
-		AStarNode west = childNodes.get("W");
-		if (!closedNodes.contains(west) && !containsWall(west)) {
-				addNode(goalboundingTile.getWest(), west);
-		}
-		AStarNode southWest = childNodes.get("SW");
-		if (!closedNodes.contains(southWest) && !containsWall(southWest)) {
-				addNode(goalboundingTile.getSouthWest(), southWest);
-		}
-		AStarNode south = childNodes.get("S");
-		if (!closedNodes.contains(south) && !containsWall(south)) {
-				addNode(goalboundingTile.getSouth(), south);
-		}
-		AStarNode southEast = childNodes.get("SE");
-		if (!closedNodes.contains(southEast) && !containsWall(southEast)) {
-				addNode(goalboundingTile.getSouthEast(), southEast);
-		}
-		AStarNode east = childNodes.get("E");
-		if (!closedNodes.contains(east) && !containsWall(east)) {
-				addNode(goalboundingTile.getEast(), east);
-		}
-		AStarNode northEast = childNodes.get("NE");
-		if (!closedNodes.contains(northEast) && !containsWall(northEast)) {
-				addNode(goalboundingTile.getNorthEast(), northEast);
-		}
+	private void addUnobstructedChildNodes(AStarNode node) {
+		GoalboundingTile goalboundingTile = goalBounder.getTile(node.getPosition().x(), node.getPosition().y());
+		
+		addNode("N", goalboundingTile);
+		addNode("NW", goalboundingTile);
+		addNode("W", goalboundingTile);
+		addNode("SW", goalboundingTile);
+		addNode("S", goalboundingTile);
+		addNode("SE", goalboundingTile);
+		addNode("E", goalboundingTile);
+		addNode("NE", goalboundingTile);
 	}
 
 	private Vector2 findPathStart(AStarNode currentNode) {
@@ -133,9 +110,8 @@ public class AStarSearch {
 			}
 
 			generateChildNodes(currentNode);
-			GoalboundingTile goalboundingTile = goalBounder.getTile(currentNode.getPosition().x(),
-					currentNode.getPosition().y());
-			addUnobstructedChildNodes(goalboundingTile);
+			
+			addUnobstructedChildNodes(currentNode);
 		}
 
 		Logger.warn("cannot find player");
@@ -156,7 +132,7 @@ public class AStarSearch {
 		return false;
 	}
 	
-private boolean containsGoal(AStarNode node, AStarNode goal) {
+	private boolean containsGoal(AStarNode node, AStarNode goal) {
 		
 		Vector2 origin = node.getPosition();
 		for(int i = (int) origin.x(); i < origin.x() + node.getWidth(); i++){
