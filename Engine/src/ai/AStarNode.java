@@ -5,16 +5,18 @@ import math.Vector2;
 public class AStarNode implements Comparable<AStarNode> {
 
 	protected Vector2 position;
+	protected int width;
 	private AStarNode parent;
 	private AStarNode child;
 	private Vector2 goal;
 
-	public AStarNode(Vector2 position) {
+	public AStarNode(Vector2 position, int width) {
 		this.position = position;
+		this.width = width;
 	}
 
-	public AStarNode(Vector2 position, AStarNode parent, Vector2 goal) {
-		this(position);
+	public AStarNode(Vector2 position, int width, AStarNode parent, Vector2 goal) {
+		this(position, width);
 		this.parent = parent;
 		this.goal = goal;
 	}
@@ -58,5 +60,9 @@ public class AStarNode implements Comparable<AStarNode> {
 
 	public void setChild(AStarNode child) {
 		this.child = child;
+	}
+	
+	public int getWidth(){
+		return width;
 	}
 }

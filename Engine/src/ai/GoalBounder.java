@@ -98,7 +98,7 @@ public class GoalBounder {
 					// list of already viewed tiles
 					Set<TypeNode> closed = new HashSet<>();
 
-					AStarNode start = new AStarNode(new Vector2(x, y));
+					AStarNode start = new AStarNode(new Vector2(x, y), 1);
 
 					TypeNode[] startingNodes = generateChildNodes(start);
 					addNodesToQueues(startingNodes, open, closed);

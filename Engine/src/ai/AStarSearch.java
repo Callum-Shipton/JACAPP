@@ -1,7 +1,9 @@
 package ai;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -20,9 +22,9 @@ public class AStarSearch {
 	private Map<String, AStarNode> childNodes;
 	private AStarNode goalNode;
 	private float nodeWidth;
-	private float nodeHeight;
+	private int width;
 
-	public AStarSearch(Set<Vector2> walls, GoalBounder goalBounder, float nodeWidth, float nodeHeight) {
+	public AStarSearch(Set<Vector2> walls, GoalBounder goalBounder, float nodeWidth, int width) {
 		if (AStarSearch.walls == null) {
 			AStarSearch.walls = walls;
 		}
@@ -30,13 +32,13 @@ public class AStarSearch {
 			AStarSearch.goalBounder = goalBounder;
 		}
 		this.nodeWidth = nodeWidth;
-		this.nodeHeight = nodeHeight;
+		this.width = width;
 	}
 
 	private void initData(Vector2 goal, Vector2 start) {
 
-		startNode = new AStarNode(start);
-		goalNode = new AStarNode(goal);
+		startNode = new AStarNode(start, width);
+		goalNode = new AStarNode(goal, width);
 		openNodes = new PriorityQueue<>(); // queue for nodes to be searched
 		closedNodes = new HashSet<>(); // list of nodes already searched or
 										// being
@@ -49,22 +51,16 @@ public class AStarSearch {
 	private void generateChildNodes(AStarNode currentNode) {
 		float currentX = currentNode.getPosition().x();
 		float currentY = currentNode.getPosition().y();
+		Vector2 goalPosition = goalNode.getPosition();
 
-		childNodes.put("N", new AStarNode(new Vector2(currentX, currentY - 1), currentNode, goalNode.getPosition()));
-		childNodes.put("NW", new AStarNode(new Vector2(currentX - 1, currentY - 1), currentNode, goalNode.getPosition()));
-		childNodes.put("W", new AStarNode(new Vector2(currentX - 1, currentY), currentNode, goalNode.getPosition()));
-		childNodes.put("SW", new AStarNode(new Vector2(currentX - 1, currentY + 1), currentNode, goalNode.getPosition()));
-		childNodes.put("SSW", new AStarNode(new Vector2(currentX - 1, currentY + 2), currentNode, goalNode.getPosition()));
-		childNodes.put("S", new AStarNode(new Vector2(currentX, currentY + 1), currentNode, goalNode.getPosition()));
-		childNodes.put("SS", new AStarNode(new Vector2(currentX, currentY + 2), currentNode, goalNode.getPosition()));
-		childNodes.put("SSE", new AStarNode(new Vector2(currentX + 1, currentY + 2), currentNode, goalNode.getPosition()));
-		childNodes.put("SSEE", new AStarNode(new Vector2(currentX + 2, currentY + 2), currentNode, goalNode.getPosition()));
-		childNodes.put("SE", new AStarNode(new Vector2(currentX + 1, currentY + 1), currentNode, goalNode.getPosition()));
-		childNodes.put("SEE", new AStarNode(new Vector2(currentX + 2, currentY + 1), currentNode, goalNode.getPosition()));
-		childNodes.put("EE", new AStarNode(new Vector2(currentX + 2, currentY), currentNode, goalNode.getPosition()));
-		childNodes.put("NEE", new AStarNode(new Vector2(currentX + 2, currentY - 1), currentNode, goalNode.getPosition()));
-		childNodes.put("E", new AStarNode(new Vector2(currentX + 1, currentY), currentNode, goalNode.getPosition()));
-		childNodes.put("NE", new AStarNode(new Vector2(currentX + 1, currentY - 1), currentNode, goalNode.getPosition()));
+		childNodes.put("N", new AStarNode(new Vector2(currentX, currentY - 1), width, currentNode, goalPosition));
+		childNodes.put("NW", new AStarNode(new Vector2(currentX - 1, currentY - 1), width, currentNode, goalPosition));
+		childNodes.put("W", new AStarNode(new Vector2(currentX - 1, currentY), width, currentNode, goalPosition));
+		childNodes.put("SW", new AStarNode(new Vector2(currentX - 1, currentY + 1), width, currentNode, goalPosition));
+		childNodes.put("S", new AStarNode(new Vector2(currentX, currentY + 1), width, currentNode, goalPosition));
+		childNodes.put("SE", new AStarNode(new Vector2(currentX + 1, currentY + 1), width, currentNode, goalPosition));
+		childNodes.put("E", new AStarNode(new Vector2(currentX + 1, currentY), width, currentNode, goalPosition));
+		childNodes.put("NE", new AStarNode(new Vector2(currentX + 1, currentY - 1), width, currentNode, goalPosition));
 	}
 
 	private void addNode(BoundingBox box, AStarNode node) {
@@ -75,57 +71,37 @@ public class AStarSearch {
 	}
 
 	private void addUnobstructedChildNodes(GoalboundingTile goalboundingTile) {
-		if (!closedNodes.contains(childNodes.get("N"))) {
-			if (isNodeNotWall(childNodes.get("N")) && isNodeNotWall(childNodes.get("NE"))) {
-				addNode(goalboundingTile.getNorth(), childNodes.get("N"));
-			}
+		AStarNode north = childNodes.get("N");
+		if (!closedNodes.contains(north) && !containsWall(north)) {
+				addNode(goalboundingTile.getNorth(), north);
 		}
-		if (!closedNodes.contains(childNodes.get("SSW"))) {
-			if (isNodeNotWall(childNodes.get("SSW")) && isNodeNotWall(childNodes.get("N"))
-					&& isNodeNotWall(childNodes.get("W"))
-					&& ((isNodeNotWall(childNodes.get("SW")) || isNodeNotWall(childNodes.get("NE"))))) {
-				if (goalboundingTile.getNorthWest().boxContains(goalNode.getPosition())) {
-					addNode(goalboundingTile.getNorthWest(), childNodes.get("SSW"));
-				}
-			}
+		AStarNode northWest = childNodes.get("NW");
+		if (!closedNodes.contains(northWest) && !containsWall(northWest)) {
+				addNode(goalboundingTile.getNorthWest(), northWest);
 		}
-		if (!closedNodes.contains(childNodes.get("W"))) {
-			if (isNodeNotWall(childNodes.get("W")) && isNodeNotWall(childNodes.get("SW"))) {
-				if (goalboundingTile.getWest().boxContains(goalNode.getPosition())) {
-					addNode(goalboundingTile.getWest(), childNodes.get("W"));
-				}
-			}
+		AStarNode west = childNodes.get("W");
+		if (!closedNodes.contains(west) && !containsWall(west)) {
+				addNode(goalboundingTile.getWest(), west);
 		}
-		if (!closedNodes.contains(childNodes.get("SW"))) {
-			if (isNodeNotWall(childNodes.get("SW")) && isNodeNotWall(childNodes.get("SSW"))
-					&& isNodeNotWall(childNodes.get("SS"))
-					&& (isNodeNotWall(childNodes.get("W")) || isNodeNotWall(childNodes.get("SSE")))) {
-				addNode(goalboundingTile.getSouthWest(), childNodes.get("SW"));
-			}
+		AStarNode southWest = childNodes.get("SW");
+		if (!closedNodes.contains(southWest) && !containsWall(southWest)) {
+				addNode(goalboundingTile.getSouthWest(), southWest);
 		}
-		if (!closedNodes.contains(childNodes.get("S"))) {
-			if (isNodeNotWall(childNodes.get("SS")) && isNodeNotWall(childNodes.get("SSE"))) {
-				addNode(goalboundingTile.getSouth(), childNodes.get("S"));
-			}
+		AStarNode south = childNodes.get("S");
+		if (!closedNodes.contains(south) && !containsWall(south)) {
+				addNode(goalboundingTile.getSouth(), south);
 		}
-		if (!closedNodes.contains(childNodes.get("SE"))) {
-			if (isNodeNotWall(childNodes.get("SSE")) && isNodeNotWall(childNodes.get("SSEE"))
-					&& isNodeNotWall(childNodes.get("SEE"))
-					&& (isNodeNotWall(childNodes.get("EE")) || isNodeNotWall(childNodes.get("SS")))) {
-				addNode(goalboundingTile.getSouthEast(), childNodes.get("SE"));
-			}
+		AStarNode southEast = childNodes.get("SE");
+		if (!closedNodes.contains(southEast) && !containsWall(southEast)) {
+				addNode(goalboundingTile.getSouthEast(), southEast);
 		}
-		if (!closedNodes.contains(childNodes.get("E"))) {
-			if (isNodeNotWall(childNodes.get("EE")) && isNodeNotWall(childNodes.get("SEE"))) {
-				addNode(goalboundingTile.getEast(), childNodes.get("E"));
-			}
+		AStarNode east = childNodes.get("E");
+		if (!closedNodes.contains(east) && !containsWall(east)) {
+				addNode(goalboundingTile.getEast(), east);
 		}
-		if (!closedNodes.contains(childNodes.get("NE"))) {
-			if (isNodeNotWall(childNodes.get("NE")) && isNodeNotWall(childNodes.get("NEE"))
-					&& isNodeNotWall(childNodes.get("EE"))
-					&& (isNodeNotWall(childNodes.get("SEE")) || isNodeNotWall(childNodes.get("N")))) {
-				addNode(goalboundingTile.getNorthEast(), childNodes.get("NE"));
-			}
+		AStarNode northEast = childNodes.get("NE");
+		if (!closedNodes.contains(northEast) && !containsWall(northEast)) {
+				addNode(goalboundingTile.getNorthEast(), northEast);
 		}
 	}
 
@@ -152,7 +128,7 @@ public class AStarSearch {
 			searchedNodes++;
 			AStarNode currentNode = openNodes.poll(); // Tile current being checked
 
-			if (currentNode.equals(goalNode)) { // if goal is reached
+			if (containsGoal(currentNode, goalNode)) { // if goal is reached
 				return findPathStart(currentNode);
 			}
 
@@ -167,12 +143,35 @@ public class AStarSearch {
 		return new Vector2(0, 0);
 	}
 
-	private boolean isNodeNotWall(AStarNode node) {
-		return !walls.contains(node.getPosition());
+	private boolean containsWall(AStarNode node) {
+		
+		Vector2 origin = node.getPosition();
+		for(int i = (int) origin.x(); i < origin.x() + node.getWidth(); i++){
+			for(int j = (int) origin.y(); j < origin.y() + node.getWidth(); j++){
+				if(walls.contains(new Vector2(i,j))){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
+	
+private boolean containsGoal(AStarNode node, AStarNode goal) {
+		
+		Vector2 origin = node.getPosition();
+		for(int i = (int) origin.x(); i < origin.x() + node.getWidth(); i++){
+			for(int j = (int) origin.y(); j < origin.y() + node.getWidth(); j++){
+				if(goal.getPosition().equals(new Vector2(i,j))){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 
 	public Vector2 getGridPosition(float x, float y) {
 		return new Vector2((float) Math.floor(x / nodeWidth),
-				(float) Math.floor(y / nodeHeight));
+				(float) Math.floor(y / nodeWidth));
 	}
 }
