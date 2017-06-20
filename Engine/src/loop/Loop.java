@@ -34,6 +34,7 @@ public final class Loop {
 		this.game = game;
 		Loop.fps = fps;
 		display = new Display(artLoader);
+		keys = new Keys();
 	}
 
 	public void start() {
@@ -59,7 +60,6 @@ public final class Loop {
 
 	private void init() {
 		display.initGLFW();
-		keys = new Keys();
 		Controllers.create();
 		game.init();
 	}
