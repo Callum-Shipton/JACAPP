@@ -8,6 +8,7 @@ import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.movement.BaseMovement;
 import entity.Entity;
+import level.LevelMap;
 import main.ShootEmUp;
 import math.Vector2;
 
@@ -24,10 +25,9 @@ public class AIControl extends BaseControl {
 		this.graphics = graphics;
 		this.attack = attack;
 		this.movement = movement;
-
+		LevelMap map = ShootEmUp.getCurrentLevel().getMap();
 		playerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		search = new AStarSearch(ShootEmUp.getCurrentLevel().getMap().getWalls().keySet(),
-				ShootEmUp.getCurrentLevel().getMap().getGoalBounder(), graphics.getWidth() / 2, 2);
+		search = new AStarSearch(map.getWalls().keySet(), map.getGoalBounder(), graphics.getWidth() / 2, 2);
 	}
 
 	@Override

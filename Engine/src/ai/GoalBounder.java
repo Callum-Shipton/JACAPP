@@ -1,7 +1,9 @@
 package ai;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
@@ -9,15 +11,19 @@ import math.Vector2;
 import math.Vector4;
 
 public class GoalBounder {
-	private GoalboundingTile[][] aiTiles;
+	private Map<Integer, GoalboundingTile[][]> goalboundingMaps;
+	private static int maximumSize = 2;
 
 	public GoalBounder(int width, int height, Set<Vector2> walls) {
-		aiTiles = new GoalboundingTile[width][height];
-		createGoalBoundingBoxes(walls);
+		goalboundingMaps = new HashMap<>();
+		for (int i = 1; i <= maximumSize; i++) {
+			goalboundingMaps.put(i, new GoalboundingTile[width][height]);
+		}
+		createGoalBoundingBoxes(walls, width, height);
 	}
 
-	public GoalboundingTile getTile(float x, float y) {
-		return aiTiles[(int) x][(int) y];
+	public GoalboundingTile getTile(float x, float y, float size) {
+		return goalboundingMaps.get((int) size)[(int) x][(int) y];
 	}
 
 	private TypeNode[] generateChildNodes(AStarNode startNode) {
@@ -59,11 +65,11 @@ public class GoalBounder {
 		}
 	}
 
-	private void addNodesToQueue(TypeNode[] nodes, Set<Vector2> walls, Queue<TypeNode> open,
+	private void addNodesToQueue(TypeNode[] nodes, Set<Vector2> walls, int size, Queue<TypeNode> open,
 			Set<TypeNode> closed) {
 		for (int i = 0; i < nodes.length; i++) {
 			if (!closed.contains(nodes[i])) {
-				if (!walls.contains(nodes[i].position)) {
+				if (!containsWall(nodes[i].position, size, walls)) {
 					open.add(nodes[i]);
 				}
 				closed.add(nodes[i]);
@@ -71,7 +77,8 @@ public class GoalBounder {
 		}
 	}
 
-	private void fillMap(Queue<TypeNode> open, Set<TypeNode> closed, BoundingBox[] boxes, Set<Vector2> walls) {
+	private void fillMap(Queue<TypeNode> open, Set<TypeNode> closed, BoundingBox[] boxes, Set<Vector2> walls,
+			int size) {
 		while (!open.isEmpty()) {
 			TypeNode current = open.poll(); // Tile current being
 											// checked
@@ -81,36 +88,52 @@ public class GoalBounder {
 
 			TypeNode[] childNodes = generateChildNodes(current, currentType);
 
-			addNodesToQueue(childNodes, walls, open, closed);
+			addNodesToQueue(childNodes, walls, size, open, closed);
 		}
 
 	}
 
-	private void createGoalBoundingBoxes(Set<Vector2> walls) {
-		for (int x = 2; x < (aiTiles.length - 2); x++) {
-			for (int y = 2; y < (aiTiles[0].length - 2); y++) {
+	private void createGoalBoundingBoxes(Set<Vector2> walls, int width, int height) {
+		for (int size = 1; size <= maximumSize; size++) {
 
-				if (!walls.contains(new Vector2(x, y))) {
+			for (int x = 0; x < width; x++) {
+				for (int y = 0; y < height; y++) {
 
-					// queue for tiles to be looked at
-					Queue<TypeNode> open = new LinkedList<>();
+					if (!containsWall(new Vector2(x, y), size, walls)) {
 
-					// list of already viewed tiles
-					Set<TypeNode> closed = new HashSet<>();
+						// queue for tiles to be looked at
+						Queue<TypeNode> open = new LinkedList<>();
 
-					AStarNode start = new AStarNode(new Vector2(x, y), 1);
+						// list of already viewed tiles
+						Set<TypeNode> closed = new HashSet<>();
 
-					TypeNode[] startingNodes = generateChildNodes(start);
-					addNodesToQueues(startingNodes, open, closed);
+						AStarNode start = new AStarNode(new Vector2(x, y), 1);
 
-					BoundingBox[] boxes = initBoundingBoxes(startingNodes);
+						TypeNode[] startingNodes = generateChildNodes(start);
+						addNodesToQueues(startingNodes, open, closed);
 
-					fillMap(open, closed, boxes, walls);
+						BoundingBox[] boxes = initBoundingBoxes(startingNodes);
 
-					aiTiles[x][y] = new GoalboundingTile(boxes);
+						fillMap(open, closed, boxes, walls, size);
 
+						goalboundingMaps.get(size)[x][y] = new GoalboundingTile(boxes);
+
+					}
 				}
 			}
 		}
+	}
+
+	// TODO Take this and the contains Wall method in AStarSearch and combine
+	// them
+	private boolean containsWall(Vector2 position, int size, Set<Vector2> walls) {
+		for (int i = (int) position.x(); i < position.x() + size; i++) {
+			for (int j = (int) position.y(); j < position.y() + size; j++) {
+				if (walls.contains(new Vector2(i, j))) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
