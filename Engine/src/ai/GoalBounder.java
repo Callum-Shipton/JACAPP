@@ -7,12 +7,14 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
+import logging.Logger;
+import logging.Logger.Category;
 import math.Vector2;
 import math.Vector4;
 
 public class GoalBounder {
 	private Map<Integer, GoalboundingTile[][]> goalboundingMaps;
-	private static int maximumSize = 2;
+	private static int maximumSize = 4;
 
 	public GoalBounder(int width, int height, Set<Vector2> walls) {
 		goalboundingMaps = new HashMap<>();
@@ -23,6 +25,7 @@ public class GoalBounder {
 	}
 
 	public GoalboundingTile getTile(float x, float y, float size) {
+		Logger.debug("X:" + x + " Y:" + y + " Size:" + size, Category.AI);
 		return goalboundingMaps.get((int) size)[(int) x][(int) y];
 	}
 
