@@ -63,15 +63,15 @@ public class AStarSearch {
 
 	private void addNode(String key, GoalboundingTile goalboundingTile) {
 		AStarNode north = childNodes.get(key);
-		if (!closedNodes.contains(north) && !containsWall(north)
+		if (!closedNodes.contains(north) && !GoalBounder.containsWall(north.getPosition(), north.getWidth(), walls)
 				&& goalboundingTile.getBox(key).boxContains(goalNode.getPosition())) {
 			openNodes.add(north);
 			closedNodes.add(north);
 		}
 	}
 
-	private void addUnobstructedChildNodes(AStarNode node) {
-		GoalboundingTile goalboundingTile = goalBounder.getTile(node.getPosition().x(), node.getPosition().y(), width);
+	private void addUnobstructedChildNodes(Vector2 position) {
+		GoalboundingTile goalboundingTile = goalBounder.getTile(position.x(), position.y(), width);
 
 		addNode("N", goalboundingTile);
 		addNode("NW", goalboundingTile);
@@ -104,34 +104,20 @@ public class AStarSearch {
 		int searchedNodes = 0;
 		while (!openNodes.isEmpty()) {
 			searchedNodes++;
-			AStarNode currentNode = openNodes.poll(); // Tile current being
-														// checked
+			AStarNode currentNode = openNodes.poll();
 
-			if (containsGoal(currentNode, goalNode)) { // if goal is reached
+			if (containsGoal(currentNode, goalNode)) {
 				return findPathStart(currentNode);
 			}
 
 			generateChildNodes(currentNode);
 
-			addUnobstructedChildNodes(currentNode);
+			addUnobstructedChildNodes(currentNode.getPosition());
 		}
 
 		Logger.warn("cannot find player");
 		Logger.debug(searchedNodes, Logger.Category.AI);
 		return new Vector2(0, 0);
-	}
-
-	private boolean containsWall(AStarNode node) {
-
-		Vector2 origin = node.getPosition();
-		for (int i = (int) origin.x(); i < origin.x() + node.getWidth(); i++) {
-			for (int j = (int) origin.y(); j < origin.y() + node.getWidth(); j++) {
-				if (walls.contains(new Vector2(i, j))) {
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 
 	private boolean containsGoal(AStarNode node, AStarNode goal) {

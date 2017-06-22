@@ -35,7 +35,7 @@ public final class EnemyBuilder {
 
 	private static Random rand = new Random();
 
-	public static void buildEnemy(TypeEnemy type) {
+	public static Entity buildEnemy(TypeEnemy type) {
 
 		testEnemy();
 
@@ -73,12 +73,12 @@ public final class EnemyBuilder {
 		newEnemy.addComponent(enemyMovement);
 		newEnemy.addComponent(enemyInventory);
 
-		ShootEmUp.getCurrentLevel().addEntity(newEnemy);
+		return newEnemy;
 	}
 
 	private static void addComponents(String art, int speed) {
-		enemyGraphics = new AnimatedGraphics(ImageProcessor.getImage(art), ImageProcessor.base, false, testGraphics.getX(),
-				testGraphics.getX());
+		enemyGraphics = new AnimatedGraphics(ImageProcessor.getImage(art), ImageProcessor.base, false,
+				testGraphics.getX(), testGraphics.getX());
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision();
 		enemyMovement = new BasicMovement(enemyCollision, enemyGraphics, speed);
@@ -88,11 +88,16 @@ public final class EnemyBuilder {
 
 		boolean collide;
 		Entity test = new Entity();
+
 		testGraphics = new AnimatedGraphics(ImageProcessor.getImage("Enemy"), ImageProcessor.base, false, 1f);
 		test.addComponent(testGraphics);
+
 		BaseCollision baseCollision = new RigidCollision();
 		test.addComponent(baseCollision);
-		test.addComponent(new BasicMovement(baseCollision, testGraphics, 5));
+
+		BaseMovement baseMovement = new BasicMovement(baseCollision, testGraphics, 5);
+		test.addComponent(baseMovement);
+
 		BaseGraphics playerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
 		float px = playerGraphics.getX();
 		float py = playerGraphics.getY();
@@ -101,24 +106,28 @@ public final class EnemyBuilder {
 
 		Level level = ShootEmUp.getCurrentLevel();
 
+		int spawnX;
+		int spawnY;
+
 		do {
 			collide = false;
 
-			testGraphics.setX(rand.nextInt((level.getMap().getBackgroundTiles().length - 1) * LevelMap.getTileWidth()));
-			testGraphics
-					.setY(rand.nextInt((level.getMap().getBackgroundTiles()[0].length - 1) * LevelMap.getTileWidth()));
+			spawnX = rand.nextInt((level.getMap().getBackgroundTiles().length - 1) * LevelMap.getTileWidth());
+			spawnY = rand.nextInt((level.getMap().getBackgroundTiles()[0].length - 1) * LevelMap.getTileWidth());
 
-			if ((Math.abs((testGraphics.getX() + (testGraphics.getWidth() / 2))
-					- (px + (pw / 2))) <= (Loop.getDisplay().getWidth() + testGraphics.getWidth()))
-					&& (Math.abs((testGraphics.getY() + (testGraphics.getHeight() / 2))
+			testGraphics.setX(spawnX);
+			testGraphics.setY(spawnY);
+
+			// Checks if the enemy will spawn on screen
+			if ((Math.abs((spawnX + (testGraphics.getWidth() / 2)) - (px + (pw / 2))) <= (Loop.getDisplay().getWidth()
+					+ testGraphics.getWidth()))
+					&& (Math.abs((spawnY + (testGraphics.getHeight() / 2))
 							- (py + (ph / 2))) <= (Loop.getDisplay().getHeight() + testGraphics.getHeight()))) {
 				continue;
 			}
 
-			// changed to grid position
-
+			// Checks if the enemy will spawn on top of an entity
 			for (Entity character : level.getEntities()) {
-				BaseMovement baseMovement = test.getComponent(TypeComponent.MOVEMENT);
 				if (baseMovement.doesCollide(test, character) != null) {
 					collide = true;
 					break;

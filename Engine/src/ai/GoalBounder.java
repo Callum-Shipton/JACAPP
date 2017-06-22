@@ -61,13 +61,6 @@ public class GoalBounder {
 		return boxes;
 	}
 
-	private void addNodesToQueues(TypeNode[] childNodes, Queue<TypeNode> open, Set<TypeNode> closed) {
-		for (TypeNode node : childNodes) {
-			open.add(node);
-			closed.add(node);
-		}
-	}
-
 	private void addNodesToQueue(TypeNode[] nodes, Set<Vector2> walls, int size, Queue<TypeNode> open,
 			Set<TypeNode> closed) {
 		for (int i = 0; i < nodes.length; i++) {
@@ -83,8 +76,8 @@ public class GoalBounder {
 	private void fillMap(Queue<TypeNode> open, Set<TypeNode> closed, BoundingBox[] boxes, Set<Vector2> walls,
 			int size) {
 		while (!open.isEmpty()) {
-			TypeNode current = open.poll(); // Tile current being
-											// checked
+			TypeNode current = open.poll();
+
 			int currentType = current.getType();
 
 			boxes[currentType].addPoint(current.getPosition());
@@ -96,11 +89,11 @@ public class GoalBounder {
 
 	}
 
-	private void createGoalBoundingBoxes(Set<Vector2> walls, int width, int height) {
+	private void createGoalBoundingBoxes(Set<Vector2> walls, int mapWidth, int mapHeight) {
 		for (int size = 1; size <= maximumSize; size++) {
 
-			for (int x = 0; x < width; x++) {
-				for (int y = 0; y < height; y++) {
+			for (int x = 0; x < mapWidth; x++) {
+				for (int y = 0; y < mapHeight; y++) {
 
 					if (!containsWall(new Vector2(x, y), size, walls)) {
 
@@ -113,7 +106,11 @@ public class GoalBounder {
 						AStarNode start = new AStarNode(new Vector2(x, y), 1);
 
 						TypeNode[] startingNodes = generateChildNodes(start);
-						addNodesToQueues(startingNodes, open, closed);
+
+						for (TypeNode node : startingNodes) {
+							open.add(node);
+							closed.add(node);
+						}
 
 						BoundingBox[] boxes = initBoundingBoxes(startingNodes);
 
@@ -127,9 +124,7 @@ public class GoalBounder {
 		}
 	}
 
-	// TODO Take this and the contains Wall method in AStarSearch and combine
-	// them
-	private boolean containsWall(Vector2 position, int size, Set<Vector2> walls) {
+	public static boolean containsWall(Vector2 position, int size, Set<Vector2> walls) {
 		for (int i = (int) position.x(); i < position.x() + size; i++) {
 			for (int j = (int) position.y(); j < position.y() + size; j++) {
 				if (walls.contains(new Vector2(i, j))) {

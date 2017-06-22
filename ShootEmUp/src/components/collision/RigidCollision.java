@@ -5,7 +5,7 @@ import entity.Entity;
 public class RigidCollision extends BaseCollision {
 
 	public RigidCollision() {
-		this.moveBack = true;
+		moveBack = true;
 	}
 
 	@Override

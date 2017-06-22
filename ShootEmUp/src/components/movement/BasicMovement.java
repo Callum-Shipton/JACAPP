@@ -23,77 +23,53 @@ public class BasicMovement extends BaseMovement {
 		this.realSpeed = speed;
 	}
 
-	public boolean checkCollisionX(Entity e) {
-		EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
-		boolean collide = false;
-		Set<Vector2> newGrid = eMap.getGridPos(e);
-		Set<Entity> entities = eMap.getEntites(newGrid);
-		Vector4 collVec;
-		Entity hit;
-		for (Entity character : entities) {
-			if (character != e) {
-				collVec = doesCollide(e, character);
-				if (collVec != null) {
-					collide = true;
-					hit = character;
-					BaseCollision HC = hit.getComponent(TypeComponent.COLLISION);
-					if ((HC.getMoveBack()) && !(this.BC instanceof HitCollision)) {
-						moveBackX(collVec);
-						newGrid = eMap.getGridPos(e);
-					}
-					if ((e.getComponent(TypeComponent.COLLISION) != null)) {
-						this.BC.collision(e, hit);
-					}
-					BaseCollision EC = hit.getComponent(TypeComponent.COLLISION);
-					if (EC != null) {
-						EC.collision(hit, e);
-					}
-				}
+	private Set<Vector2> reactToCollision(Vector4 collVec, Entity hitEntity, Entity currentEntity, Axis axis,
+			EntityMap eMap) {
+		Set<Vector2> newGrid = eMap.getGridPos(currentEntity);
+		BaseCollision HC = hitEntity.getComponent(TypeComponent.COLLISION);
+		if ((HC.getMoveBack()) && !(this.BC instanceof HitCollision)) {
+			switch (axis) {
+			case X:
+				moveBackX(collVec);
+				break;
+			case Y:
+				moveBackY(collVec);
 			}
+			newGrid = eMap.getGridPos(currentEntity);
+		}
+		if ((currentEntity.getComponent(TypeComponent.COLLISION) != null)) {
+			this.BC.collision(currentEntity, hitEntity);
+		}
+		BaseCollision EC = hitEntity.getComponent(TypeComponent.COLLISION);
+		if (EC != null) {
+			EC.collision(hitEntity, currentEntity);
 		}
 
-		eMap.removeEntity(this.BC.getGridPos(), e);
-		if (!e.isDestroy()) {
-			eMap.addEntity(newGrid, e);
-		}
-		this.BC.setGridPos(newGrid);
-		return collide;
+		return newGrid;
 	}
 
-	public boolean checkCollisionY(Entity e) {
+	public boolean checkCollision(Entity currentEntity, Axis axis) {
 		EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
 		boolean collide = false;
-		Set<Vector2> newGrid = eMap.getGridPos(e);
+		Set<Vector2> newGrid = eMap.getGridPos(currentEntity);
 		Set<Entity> entities = eMap.getEntites(newGrid);
 		Vector4 collVec;
-		Entity hit;
-		for (Entity character : entities) {
-			if (character != e) {
-				collVec = doesCollide(e, character);
+
+		for (Entity entity : entities) {
+			if (entity != currentEntity) {
+				collVec = doesCollide(currentEntity, entity);
 				if (collVec != null) {
 					collide = true;
-					hit = character;
-					BaseCollision HC = hit.getComponent(TypeComponent.COLLISION);
-					if ((HC.getMoveBack()) && !(this.BC instanceof HitCollision)) {
-						moveBackY(collVec);
-						newGrid = eMap.getGridPos(e);
-					}
-					if ((e.getComponent(TypeComponent.COLLISION) != null)) {
-						this.BC.collision(e, hit);
-					}
-					BaseCollision EC = hit.getComponent(TypeComponent.COLLISION);
-					if (EC != null) {
-						EC.collision(hit, e);
-					}
+					newGrid = reactToCollision(collVec, entity, currentEntity, axis, eMap);
 				}
 			}
 		}
 
-		eMap.removeEntity(this.BC.getGridPos(), e);
-		if (!e.isDestroy()) {
-			eMap.addEntity(newGrid, e);
+		eMap.removeEntity(BC.getGridPos(), currentEntity);
+		if (!currentEntity.isDestroy()) {
+			eMap.addEntity(newGrid, currentEntity);
 		}
-		this.BC.setGridPos(newGrid);
+		BC.setGridPos(newGrid);
 		return collide;
 	}
 
@@ -120,7 +96,7 @@ public class BasicMovement extends BaseMovement {
 		float cw = CG.getWidth();
 		float ch = CG.getHeight();
 
-		if (((x < (cx + cw)) && ((x + w) > cx) && (y < (cy + ch)) && ((y + h) > cy))) {
+		if ((x < (cx + cw)) && ((x + w) > cx) && (y < (cy + ch)) && ((y + h) > cy)) {
 			return new Vector4(x - (cx + cw), y - (cy + ch), (x + w) - cx, (y + h) - cy);
 		}
 		return null;
@@ -131,28 +107,28 @@ public class BasicMovement extends BaseMovement {
 	public void move(Entity e, Vector2 moveVec) {
 		super.move(e, moveVec);
 		if (Math.abs(moveVec.x()) > 0) {
-			this.baseGraphics.setX(this.baseGraphics.getX() + Math.round(moveVec.x() * this.speed));
-			checkCollisionX(e);
+			baseGraphics.setX(baseGraphics.getX() + Math.round(moveVec.x() * speed));
+			checkCollision(e, Axis.X);
 		}
 		if (Math.abs(moveVec.y()) > 0) {
-			this.baseGraphics.setY(this.baseGraphics.getY() + Math.round(moveVec.y() * this.speed));
-			checkCollisionY(e);
+			baseGraphics.setY(baseGraphics.getY() + Math.round(moveVec.y() * speed));
+			checkCollision(e, Axis.Y);
 		}
 	}
 
 	public void moveBackX(Vector4 collVec) {
-		if (Math.abs(collVec.x()) <= this.speed) {
-			this.baseGraphics.setX(this.baseGraphics.getX() - collVec.x());
-		} else if (Math.abs(collVec.z()) <= this.speed) {
-			this.baseGraphics.setX(this.baseGraphics.getX() - collVec.z());
+		if (Math.abs(collVec.x()) <= speed) {
+			baseGraphics.setX(baseGraphics.getX() - collVec.x());
+		} else if (Math.abs(collVec.z()) <= speed) {
+			baseGraphics.setX(baseGraphics.getX() - collVec.z());
 		}
 	}
 
 	public void moveBackY(Vector4 collVec) {
-		if (Math.abs(collVec.y()) <= this.speed) {
-			this.baseGraphics.setY(this.baseGraphics.getY() - collVec.y());
-		} else if (Math.abs(collVec.w()) <= this.speed) {
-			this.baseGraphics.setY(this.baseGraphics.getY() - collVec.w());
+		if (Math.abs(collVec.y()) <= speed) {
+			baseGraphics.setY(baseGraphics.getY() - collVec.y());
+		} else if (Math.abs(collVec.w()) <= speed) {
+			baseGraphics.setY(baseGraphics.getY() - collVec.w());
 		}
 	}
 
@@ -160,5 +136,9 @@ public class BasicMovement extends BaseMovement {
 	public void update(Entity e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public enum Axis {
+		X, Y
 	}
 }

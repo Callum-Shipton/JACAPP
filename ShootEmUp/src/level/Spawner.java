@@ -7,7 +7,6 @@ import org.lwjgl.opengl.GL20;
 import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.attack.TypeAttack;
-import components.movement.BasicMovement;
 import display.ImageProcessor;
 import entity.Entity;
 import logging.Logger;
@@ -24,7 +23,7 @@ public class Spawner {
 	private int enemies = 0;
 	private int totalEnemies = 0;
 	private int wave = 1;
-	private boolean newWave = true;
+	private boolean waveActive = true;
 	private int radiusLocation;
 	private int radiusLocationInst;
 
@@ -40,89 +39,99 @@ public class Spawner {
 		this.radius = radius;
 		this.radiusIncreasePerLevel = radLevel;
 
-		this.rand = new Random();
-		this.radiusLocation = GL20.glGetUniformLocation(ImageProcessor.ShaderBase, "radius");
-		this.radiusLocationInst = GL20.glGetUniformLocation(ImageProcessor.ShaderInst, "radius");
+		rand = new Random();
+		radiusLocation = GL20.glGetUniformLocation(ImageProcessor.ShaderBase, "radius");
+		radiusLocationInst = GL20.glGetUniformLocation(ImageProcessor.ShaderInst, "radius");
 		changeRadius(0);
 	}
 
 	public void changeRadius(float f) {
 		GL20.glUseProgram(ImageProcessor.ShaderBase);
-		GL20.glUniform1f(this.radiusLocation, f + this.radius);
+		GL20.glUniform1f(radiusLocation, f + radius);
 		GL20.glUseProgram(0);
 		GL20.glUseProgram(ImageProcessor.ShaderInst);
-		GL20.glUniform1f(this.radiusLocationInst, f + this.radius);
+		GL20.glUniform1f(radiusLocationInst, f + radius);
 		GL20.glUseProgram(0);
-	}
-
-	public void checkSpawn(Entity e) {
-		BasicMovement BM = e.getComponent(TypeComponent.MOVEMENT);
-		ShootEmUp.getCurrentLevel().addEntity(e);
-		BM.checkCollisionY(e);
-		BM.checkCollisionX(e);
 	}
 
 	public int getWave() {
-		return this.wave;
+		return wave;
 	}
 
 	public void removeEnemy() {
-		this.enemies--;
+		enemies--;
+	}
+
+	private void spawnEnemies() {
+		counter++;
+		if (counter == Loop.ticks(enemySpawnRate)) {
+			// creating new Enemy
+
+			Entity newEnemy;
+
+			if ((totalEnemies == 0) && (wave == maxWave)) {
+				newEnemy = EnemyBuilder.buildEnemy(TypeEnemy.BOSS);
+			} else {
+				// randomly chooses an enemy
+				int prob = this.rand.nextInt(3);
+				switch (prob) {
+				case 0:
+					newEnemy = EnemyBuilder.buildEnemy(TypeEnemy.SMALL);
+					break;
+				case 1:
+					newEnemy = EnemyBuilder.buildEnemy(TypeEnemy.FLYING);
+					break;
+				default:
+					newEnemy = EnemyBuilder.buildEnemy(TypeEnemy.NORMAL);
+				}
+			}
+
+			ShootEmUp.getCurrentLevel().addEntity(newEnemy);
+			// creates the enemy and adds it to the level
+			totalEnemies++;
+			enemies++;
+			if (totalEnemies == wave) {
+				waveActive = false;
+			}
+			counter = 0;
+		}
+	}
+
+	private void nextLevel() {
+		if (ShootEmUp.getSave() == null) {
+			ShootEmUp.setSave(new Save());
+		} else {
+			ShootEmUp.getSave().saveCharacter();
+		}
+		ShootEmUp.getSave().saveToSystem(1);
+		BaseAttack BA = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
+		TypeAttack temp = BA.getAttackType();
+		ShootEmUp.setCurrentLevel(
+				new Level(ImageProcessor.LEVEL_FILE_LOCATION, ShootEmUp.getCurrentLevel().getLevel() + 1));
+		try {
+			ShootEmUp.getSave().load(1);
+		} catch (Exception e) {
+			Logger.error(e);
+		}
+		PlayerBuilder.buildPlayer(temp, ShootEmUp.getSave().getCharacter(temp));
+	}
+
+	private void nextWave() {
+		totalEnemies = 0;
+		if (wave < maxWave) {
+			wave++;
+			changeRadius((wave - 1) * radiusIncreasePerLevel);
+		} else if (ShootEmUp.getCurrentLevel().getLevel() < maxLevel) {
+			nextLevel();
+		}
+		this.waveActive = true;
 	}
 
 	public void update() {
-		if (this.newWave) {
-			this.counter++;
-			if (this.counter == Loop.ticks(this.enemySpawnRate)) {
-				// creating new Enemy
-
-				if ((this.totalEnemies == 0) && (this.wave == this.maxWave)) {
-					EnemyBuilder.buildEnemy(TypeEnemy.BOSS);
-				} else {
-
-					// randomly chooses an enemy
-					int prob = this.rand.nextInt(3);
-					if (prob == 0) {
-						EnemyBuilder.buildEnemy(TypeEnemy.SMALL);
-					} else if (prob == 1) {
-						EnemyBuilder.buildEnemy(TypeEnemy.NORMAL);
-					} else {
-						EnemyBuilder.buildEnemy(TypeEnemy.FLYING);
-					}
-
-				}
-				// creates the enemy and adds it to the level
-				this.totalEnemies++;
-				this.enemies++;
-				if (this.totalEnemies == this.wave) {
-					this.newWave = false;
-				}
-				this.counter = 0;
-			}
-		} else if (this.enemies == 0) {
-			this.totalEnemies = 0;
-			if (this.wave < this.maxWave) {
-				this.wave++;
-				changeRadius((this.wave - 1) * this.radiusIncreasePerLevel);
-			} else if (ShootEmUp.getCurrentLevel().getLevel() < this.maxLevel) {
-				if (ShootEmUp.getSave() == null) {
-					ShootEmUp.setSave(new Save());
-				} else {
-					ShootEmUp.getSave().saveCharacter();
-				}
-				ShootEmUp.getSave().saveToSystem(1);
-				BaseAttack BA = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
-				TypeAttack temp = BA.getAttackType();
-				ShootEmUp.setCurrentLevel(
-						new Level(ImageProcessor.LEVEL_FILE_LOCATION, ShootEmUp.getCurrentLevel().getLevel() + 1));
-				try {
-					ShootEmUp.getSave().load(1);
-				} catch (Exception e) {
-					Logger.error(e);
-				}
-				PlayerBuilder.buildPlayer(temp, ShootEmUp.getSave().getCharacter(temp));
-			}
-			this.newWave = true;
+		if (waveActive) {
+			spawnEnemies();
+		} else if (enemies == 0) {
+			nextWave();
 		}
 	}
 }
