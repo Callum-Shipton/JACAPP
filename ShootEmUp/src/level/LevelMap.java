@@ -3,9 +3,8 @@ package level;
 import java.util.Map;
 
 import ai.GoalBounder;
-import display.ImageProcessor;
 import display.FloorRenderer;
-import display.IRenderer;
+import display.ImageProcessor;
 import display.WallsRenderer;
 import entity.Entity;
 import logging.Logger;
@@ -49,15 +48,18 @@ public class LevelMap {
 		walls = generator.getWalls();
 
 		ImageProcessor.irBack = new FloorRenderer(backgroundTiles,
-				new Vector2(ImageProcessor.getImage("Floor").getFWidth(), ImageProcessor.getImage("Floor").getFHeight()),
+				new Vector2(ImageProcessor.getImage("Floor").getFWidth(),
+						ImageProcessor.getImage("Floor").getFHeight()),
 				LevelMap.getTileWidth(), LevelMap.getTileHeight());
 		ImageProcessor.irWall = new WallsRenderer(walls,
-				new Vector2(ImageProcessor.getImage("Walls").getFWidth(), ImageProcessor.getImage("Walls").getFHeight()),
+				new Vector2(ImageProcessor.getImage("Walls").getFWidth(),
+						ImageProcessor.getImage("Walls").getFHeight()),
 				LevelMap.getTileWidth(), LevelMap.getTileHeight());
 		ImageProcessor.irFore = new FloorRenderer(foregroundTiles,
-				new Vector2(ImageProcessor.getImage("Walls").getFWidth(), ImageProcessor.getImage("Walls").getFHeight()),
+				new Vector2(ImageProcessor.getImage("Walls").getFWidth(),
+						ImageProcessor.getImage("Walls").getFHeight()),
 				LevelMap.getTileWidth(), LevelMap.getTileHeight());
-		
+
 		ImageProcessor.irBack.init();
 		ImageProcessor.irWall.init();
 		ImageProcessor.irFore.init();
@@ -89,33 +91,33 @@ public class LevelMap {
 	}
 
 	public Vector2[][] getBackgroundTiles() {
-		return this.backgroundTiles;
+		return backgroundTiles;
 	}
 
 	public Vector2[][] getForegroundTiles() {
-		return this.foregroundTiles;
+		return foregroundTiles;
 	}
 
 	public GoalBounder getGoalBounder() {
-		return this.goalBounder;
+		return goalBounder;
 	}
 
 	public int getHeight() {
-		return this.height;
+		return height;
 	}
 
 	public Map<Vector2, Entity> getWalls() {
-		return this.walls;
+		return walls;
 	}
 
 	// Getters
 
 	public Vector2[][] getWallTiles() {
-		return this.wallTiles;
+		return wallTiles;
 	}
 
 	public int getWidth() {
-		return this.width;
+		return width;
 	}
 
 }

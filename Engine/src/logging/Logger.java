@@ -10,7 +10,7 @@ public final class Logger {
 	private static boolean info = true;
 	private static boolean debug = true;
 
-	private static Set<Category> categories = new HashSet<>(Arrays.asList(Category.AI));
+	private static Set<Category> categories = new HashSet<>(Arrays.asList(Category.AI, Category.ENTITIES));
 
 	private Logger() {
 	}
@@ -44,7 +44,7 @@ public final class Logger {
 	}
 
 	public enum Category {
-		ALL, ENGINE_STATS, CONTROLLER, AI
+		ALL, ENGINE_STATS, CONTROLLER, AI, AI_GOALBOUNDING, ENTITIES
 	}
 
 }

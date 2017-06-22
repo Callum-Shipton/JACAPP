@@ -17,6 +17,7 @@ import components.movement.BaseMovement;
 import components.movement.BasicMovement;
 import display.ImageProcessor;
 import entity.Entity;
+import logging.Logger;
 import loop.Loop;
 import main.ShootEmUp;
 import object.Armour;
@@ -43,21 +44,25 @@ public final class EnemyBuilder {
 
 		switch (type) {
 		case SMALL:
+			Logger.debug("Small Enemy Spawn", Logger.Category.ENTITIES);
 			addComponents("SmallEnemy", 7);
 			enemyAttack = new EnemyAttack(TypeAttack.WARRIOR, 1, 5, new Weapon("OneHanded", 1), new Armour("Helmet"),
 					null, null, null);
 			break;
 		case NORMAL:
+			Logger.debug("Enemy Spawn", Logger.Category.ENTITIES);
 			addComponents("Enemy", 4);
 			enemyAttack = new EnemyAttack(TypeAttack.ARCHER, 3, 5, new Weapon("Bow", 1), null, new Armour("Chest"),
 					null, null);
 			break;
 		case FLYING:
+			Logger.debug("Flying Enemy Spawn", Logger.Category.ENTITIES);
 			addComponents("FlyingEnemy", 5);
 			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 2, 5, new Weapon("Staff", 1), null, null, new Armour("Legs"),
 					null);
 			break;
 		case BOSS:
+			Logger.debug("Boss Enemy Spawn", Logger.Category.ENTITIES);
 			addComponents("BossEnemy", 5);
 			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 100, 5, new Weapon("TwoHanded", 1), null, null, null,
 					new Armour("Boots"));
@@ -112,8 +117,8 @@ public final class EnemyBuilder {
 		do {
 			collide = false;
 
-			spawnX = rand.nextInt((level.getMap().getBackgroundTiles().length - 1) * LevelMap.getTileWidth());
-			spawnY = rand.nextInt((level.getMap().getBackgroundTiles()[0].length - 1) * LevelMap.getTileWidth());
+			spawnX = rand.nextInt(level.getMap().getBackgroundTiles().length - 1) * LevelMap.getTileWidth();
+			spawnY = rand.nextInt(level.getMap().getBackgroundTiles()[0].length - 1) * LevelMap.getTileWidth();
 
 			testGraphics.setX(spawnX);
 			testGraphics.setY(spawnY);
@@ -134,5 +139,8 @@ public final class EnemyBuilder {
 				}
 			}
 		} while (collide);
+
+		Logger.debug("Spawn Location: " + spawnX / LevelMap.getTileWidth() + ", " + spawnY / LevelMap.getTileWidth(),
+				Logger.Category.ENTITIES);
 	}
 }

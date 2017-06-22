@@ -9,6 +9,8 @@ import components.graphical.BaseGraphics;
 import components.movement.BaseMovement;
 import entity.Entity;
 import level.LevelMap;
+import logging.Logger;
+import logging.Logger.Category;
 import main.ShootEmUp;
 import math.Vector2;
 
@@ -27,7 +29,7 @@ public class AIControl extends BaseControl {
 		this.movement = movement;
 		LevelMap map = ShootEmUp.getCurrentLevel().getMap();
 		playerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		search = new AStarSearch(map.getWalls().keySet(), map.getGoalBounder(), graphics.getWidth() / 2,
+		search = new AStarSearch(map.getWalls().keySet(), map.getGoalBounder(), LevelMap.getTileWidth(),
 				(int) (graphics.getWidth() / LevelMap.getTileWidth()));
 	}
 
@@ -49,6 +51,8 @@ public class AIControl extends BaseControl {
 
 		Vector2 goalVector = search.getGridPosition(playerGraphics.getX(), playerGraphics.getY());
 		Vector2 startVector = search.getGridPosition(graphics.getX(), graphics.getY());
+		Logger.debug("Current Tile: " + startVector.x() + ", " + startVector.y(), Category.AI);
+
 		Vector2 target = search.findPath(goalVector, startVector);
 
 		if (target != null) {

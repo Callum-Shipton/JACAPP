@@ -62,16 +62,20 @@ public class AStarSearch {
 	}
 
 	private void addNode(String key, GoalboundingTile goalboundingTile) {
-		AStarNode north = childNodes.get(key);
-		if (!closedNodes.contains(north) && !GoalBounder.containsWall(north.getPosition(), north.getWidth(), walls)
+		AStarNode node = childNodes.get(key);
+		if (!closedNodes.contains(node) && !GoalBounder.containsWall(node.getPosition(), node.getWidth(), walls)
 				&& goalboundingTile.getBox(key).boxContains(goalNode.getPosition())) {
-			openNodes.add(north);
-			closedNodes.add(north);
+			openNodes.add(node);
+			closedNodes.add(node);
 		}
 	}
 
 	private void addUnobstructedChildNodes(Vector2 position) {
 		GoalboundingTile goalboundingTile = goalBounder.getTile(position.x(), position.y(), width);
+		if (goalboundingTile == null) {
+			Logger.debug("no goalboundingTile at:" + position.x() + ", " + position.y(),
+					Logger.Category.AI_GOALBOUNDING);
+		}
 
 		addNode("N", goalboundingTile);
 		addNode("NW", goalboundingTile);
