@@ -21,8 +21,6 @@ public class LevelMap {
 
 	// texture map position arrays
 	private Vector2[][] backgroundTiles; // Replace with Irenderer changes
-	private Vector2[][] wallTiles; // ^^
-	private Vector2[][] foregroundTiles; // ^^
 
 	// collidable wall entities
 	private Map<Vector2, Entity> walls;
@@ -43,8 +41,7 @@ public class LevelMap {
 		generator.generateMap();
 
 		backgroundTiles = generator.getBackgroundTiles();
-		wallTiles = generator.getWallTiles();
-		foregroundTiles = generator.getForegroundTiles();
+		Vector2[][] foregroundTiles = generator.getForegroundTiles();
 		walls = generator.getWalls();
 
 		ImageProcessor.irBack = new FloorRenderer(backgroundTiles,
@@ -82,6 +79,12 @@ public class LevelMap {
 		this.goalBounder = goalBounder;
 	}
 
+	// Getters
+
+	public int getWidth() {
+		return width;
+	}
+
 	public static int getTileHeight() {
 		return TILE_HEIGHT;
 	}
@@ -92,10 +95,6 @@ public class LevelMap {
 
 	public Vector2[][] getBackgroundTiles() {
 		return backgroundTiles;
-	}
-
-	public Vector2[][] getForegroundTiles() {
-		return foregroundTiles;
 	}
 
 	public GoalBounder getGoalBounder() {
@@ -109,15 +108,4 @@ public class LevelMap {
 	public Map<Vector2, Entity> getWalls() {
 		return walls;
 	}
-
-	// Getters
-
-	public Vector2[][] getWallTiles() {
-		return wallTiles;
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
 }
