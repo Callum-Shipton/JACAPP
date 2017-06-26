@@ -1,6 +1,5 @@
 package map;
 
-import display.ImageProcessor;
 import math.Vector2;
 
 public class TileMap {
@@ -12,7 +11,6 @@ public class TileMap {
 
 	private Vector2[][] backgroundTiles;
 	private Vector2[][] walls;
-	private Vector2[][] foregroundTiles;
 
 	TileGenerator generator;
 
@@ -28,13 +26,8 @@ public class TileMap {
 		walls = generator.getWalls();
 	}
 
-	public void renderHighTiles() {
-		ImageProcessor.irFore.draw(ImageProcessor.getImage("Walls").getID());
-	}
-
-	public void renderLowTiles() {
-		ImageProcessor.irBack.draw(ImageProcessor.getImage("Floor").getID());
-		ImageProcessor.irWall.draw(ImageProcessor.getImage("Walls").getID());
+	public void init() {
+		generator.generateTiles();
 	}
 
 	public int getHeight() {
@@ -43,5 +36,13 @@ public class TileMap {
 
 	public int getWidth() {
 		return width * tileWidth;
+	}
+
+	public Vector2[][] getWalls() {
+		return walls;
+	}
+
+	public Vector2[][] getBackgroundTiles() {
+		return backgroundTiles;
 	}
 }

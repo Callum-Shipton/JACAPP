@@ -18,7 +18,7 @@ public abstract class BaseControl extends Component implements ControlComponent 
 
 	protected Vector2 calculateMovementVector(Vector2 target, float x, float y, int speed) {
 		Vector2 movementVector = new Vector2(0.0f, 0.0f);
-		float targetY = target.y() * LevelMap.getTileHeight();
+		float targetY = target.y() * LevelMap.getTileWidth();
 		float targetX = target.x() * LevelMap.getTileWidth();
 
 		if (targetY < y) {
