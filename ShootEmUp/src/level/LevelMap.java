@@ -79,9 +79,9 @@ public class LevelMap {
 
 				Vector2 wall = walls[x][y];
 				if (wall != null) {
-					if (wall.equals(new Vector2(2.0f, 1.0f))) {
+					if (wall.equals(new Vector2(0.0f, 2.0f))) {
 						insertWall(x, y, wall.x(), wall.y());
-					} else if (wall.equals(new Vector2(1.0f, 1.0f))) {
+					} else if (wall.equals(new Vector2(0.0f, 0.0f))) {
 						insertWater(x, y, wall.x(), wall.y());
 					}
 				}
@@ -92,7 +92,7 @@ public class LevelMap {
 	// create wall
 	private void insertWall(int x, int y, float tileMapX, float tileMapY) {
 		MapGraphics wallG;
-		wallG = new MapGraphics(ImageProcessor.getImage(WALLS_TEXTURE_FILE), new Vector2(tileMapX, tileMapY),
+		wallG = new MapGraphics(ImageProcessor.getImage(WALLS_TEXTURE_FILE), new Vector2(tileMapX + 3.0f, tileMapY),
 				x * TILE_WIDTH, y * TILE_WIDTH);
 
 		createEntity(wallG, x, y);
