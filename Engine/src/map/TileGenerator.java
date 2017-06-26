@@ -10,7 +10,7 @@ import math.Vector2;
 
 public class TileGenerator {
 
-	private BufferedImage mapImage = null;
+	private BufferedImage mapImage;
 
 	private Vector2[][] backgroundTiles;
 	private Vector2[][] walls;
