@@ -21,7 +21,8 @@ public class LevelMap {
 
 	private TileMap tileMap;
 	private GoalBounder goalBounder;
-	private static final String TEXTURE_FILE = "Walls";
+	private static final String WALLS_TEXTURE_FILE = "Walls";
+	private static final String FLOOR_TEXTURE_FILE = "Floor";
 
 	// collidable wall entities
 	private Map<Vector2, Entity> walls;
@@ -34,16 +35,17 @@ public class LevelMap {
 	public void init() {
 
 		tileMap.init();
-		createWalls(tileMap.getWalls());
 
 		ImageProcessor.irBack = new FloorRenderer(tileMap.getBackgroundTiles(),
-				new Vector2(ImageProcessor.getImage("Floor").getFWidth(),
-						ImageProcessor.getImage("Floor").getFHeight()),
+				new Vector2(ImageProcessor.getImage(FLOOR_TEXTURE_FILE).getFWidth(),
+						ImageProcessor.getImage(FLOOR_TEXTURE_FILE).getFHeight()),
 				LevelMap.TILE_WIDTH, TILE_WIDTH);
 
 		createWalls(tileMap.getWalls());
-		ImageProcessor.irWall = new WallsRenderer(walls, new Vector2(ImageProcessor.getImage("Walls").getFWidth(),
-				ImageProcessor.getImage("Walls").getFHeight()), LevelMap.TILE_WIDTH, TILE_WIDTH);
+		ImageProcessor.irWall = new WallsRenderer(walls,
+				new Vector2(ImageProcessor.getImage(WALLS_TEXTURE_FILE).getFWidth(),
+						ImageProcessor.getImage(WALLS_TEXTURE_FILE).getFHeight()),
+				LevelMap.TILE_WIDTH, TILE_WIDTH);
 
 		/*
 		 * ImageProcessor.irFore = new
@@ -67,8 +69,8 @@ public class LevelMap {
 	}
 
 	public void renderLowTiles() {
-		ImageProcessor.irBack.draw(ImageProcessor.getImage("Floor").getID());
-		ImageProcessor.irWall.draw(ImageProcessor.getImage("Walls").getID());
+		ImageProcessor.irBack.draw(ImageProcessor.getImage(FLOOR_TEXTURE_FILE).getID());
+		ImageProcessor.irWall.draw(ImageProcessor.getImage(WALLS_TEXTURE_FILE).getID());
 	}
 
 	private void createWalls(Vector2[][] walls) {
@@ -90,7 +92,7 @@ public class LevelMap {
 	// create wall
 	private void insertWall(int x, int y, float tileMapX, float tileMapY) {
 		MapGraphics wallG;
-		wallG = new MapGraphics(ImageProcessor.getImage(TEXTURE_FILE), new Vector2(tileMapX + 3.0f, tileMapY),
+		wallG = new MapGraphics(ImageProcessor.getImage(WALLS_TEXTURE_FILE), new Vector2(tileMapX + 3.0f, tileMapY),
 				x * TILE_WIDTH, y * TILE_WIDTH);
 
 		createEntity(wallG, x, y);
@@ -99,7 +101,7 @@ public class LevelMap {
 	// create water
 	private void insertWater(int x, int y, float tileMapX, float tileMapY) {
 		MapGraphics wallG;
-		wallG = new MapGraphics(ImageProcessor.getImage(TEXTURE_FILE), new Vector2(tileMapX, tileMapY + 4.0f),
+		wallG = new MapGraphics(ImageProcessor.getImage(WALLS_TEXTURE_FILE), new Vector2(tileMapX, tileMapY + 4.0f),
 				x * TILE_WIDTH, y * TILE_WIDTH);
 		createEntity(wallG, x, y);
 	}
