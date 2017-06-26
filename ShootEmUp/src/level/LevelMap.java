@@ -77,9 +77,9 @@ public class LevelMap {
 
 				Vector2 wall = walls[x][y];
 				if (wall != null) {
-					if (wall.equals(new Vector2(0.0f, 0.0f))) {
+					if (wall.equals(new Vector2(0.0f, 2.0f))) {
 						insertWall(x, y, wall.x(), wall.y());
-					} else if (wall.equals(new Vector2(0.0f, 2.0f))) {
+					} else if (wall.equals(new Vector2(0.0f, 0.0f))) {
 						insertWater(x, y, wall.x(), wall.y());
 					}
 				}
