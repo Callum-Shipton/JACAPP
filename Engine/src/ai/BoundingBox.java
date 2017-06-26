@@ -1,9 +1,13 @@
 package ai;
 
+import java.io.Serializable;
+
 import math.Vector2;
 import math.Vector4;
 
-public class BoundingBox {
+public class BoundingBox implements Serializable {
+
+	private static final long serialVersionUID = 5905973252465625721L;
 
 	private Vector4 box;
 

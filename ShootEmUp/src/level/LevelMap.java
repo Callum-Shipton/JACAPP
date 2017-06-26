@@ -30,6 +30,7 @@ public class LevelMap {
 	public LevelMap(String file) {
 		tileMap = new TileMap(file, TILE_WIDTH);
 		walls = new HashMap<>();
+		goalBounder = GoalBounder.readGoablounder("/res/goalbounding/goalbound.ser");
 	}
 
 	public void init() {
@@ -58,8 +59,6 @@ public class LevelMap {
 		ImageProcessor.irBack.init();
 		ImageProcessor.irWall.init();
 		// ImageProcessor.irFore.init();
-
-		setGoalBounder(new GoalBounder(tileMap.getWidth(), tileMap.getHeight(), walls.keySet()));
 
 		Logger.info("Map Loaded");
 	}
@@ -113,10 +112,6 @@ public class LevelMap {
 		wall.addComponent(rigidCollision);
 		ShootEmUp.getCurrentLevel().addEntity(wall);
 		walls.put(new Vector2(x, y), wall);
-	}
-
-	public void setGoalBounder(GoalBounder goalBounder) {
-		this.goalBounder = goalBounder;
 	}
 
 	// Getters

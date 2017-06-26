@@ -1,12 +1,15 @@
 package math;
 
+import java.io.Serializable;
 import java.nio.FloatBuffer;
 
 import org.lwjgl.BufferUtils;
 
-public class Vector4 implements Vector<Vector4> {
+public class Vector4 implements Vector<Vector4>, Serializable {
 
-	private final static FloatBuffer direct = BufferUtils.createFloatBuffer(4);
+	private static final long serialVersionUID = -5855797334341847882L;
+
+	private static final FloatBuffer direct = BufferUtils.createFloatBuffer(4);
 
 	private float x, y, z, w;
 

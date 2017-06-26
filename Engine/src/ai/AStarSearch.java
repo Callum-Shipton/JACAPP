@@ -63,7 +63,7 @@ public class AStarSearch {
 
 	private void addNode(String key, GoalboundingTile goalboundingTile) {
 		AStarNode node = childNodes.get(key);
-		if (!closedNodes.contains(node) && !GoalBounder.containsWall(node.getPosition(), node.getWidth(), walls)
+		if (!closedNodes.contains(node) && !containsWall(node.getPosition(), node.getWidth(), walls)
 				&& goalboundingTile.getBox(key).boxContains(goalNode.getPosition())) {
 			openNodes.add(node);
 			closedNodes.add(node);
@@ -139,5 +139,16 @@ public class AStarSearch {
 
 	public Vector2 getGridPosition(float x, float y) {
 		return new Vector2((float) Math.floor(x / nodeWidth), (float) Math.floor(y / nodeWidth));
+	}
+
+	public static boolean containsWall(Vector2 position, int size, Set<Vector2> walls) {
+		for (int i = (int) position.x(); i < position.x() + size; i++) {
+			for (int j = (int) position.y(); j < position.y() + size; j++) {
+				if (walls.contains(new Vector2(i, j))) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

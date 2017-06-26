@@ -1,15 +1,18 @@
 package ai;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GoalboundingTile {
-	
+public class GoalboundingTile implements Serializable {
+
+	private static final long serialVersionUID = -4680802946409586772L;
+
 	private Map<String, BoundingBox> boxes;
 
 	public GoalboundingTile(BoundingBox[] boxes) {
 		this.boxes = new HashMap<>();
-		
+
 		this.boxes.put("N", boxes[0]);
 		this.boxes.put("NW", boxes[1]);
 		this.boxes.put("W", boxes[2]);
