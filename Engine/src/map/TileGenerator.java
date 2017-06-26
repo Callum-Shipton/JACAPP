@@ -106,10 +106,10 @@ public class TileGenerator {
 			for (int x = 0; x < width; x++) {
 				switch (wallTypes[x][y]) {
 				case WALL:
-					walls[x][y] = new Vector2(0.0f, 2.0f);
+					walls[x][y] = new Vector2(1.0f, 2.0f);
 					break;
 				case WATER:
-					walls[x][y] = new Vector2(0.0f, 0.0f);
+					walls[x][y] = new Vector2(1.0f, 1.0f);
 				}
 			}
 		}
