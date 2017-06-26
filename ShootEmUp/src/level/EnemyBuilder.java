@@ -117,8 +117,8 @@ public final class EnemyBuilder {
 		do {
 			collide = false;
 
-			spawnX = rand.nextInt(level.getMap().getBackgroundTiles().length - 1) * LevelMap.getTileWidth();
-			spawnY = rand.nextInt(level.getMap().getBackgroundTiles()[0].length - 1) * LevelMap.getTileWidth();
+			spawnX = rand.nextInt(level.getMap().getWidth() - 1) * LevelMap.getTileWidth();
+			spawnY = rand.nextInt(level.getMap().getHeight() - 1) * LevelMap.getTileWidth();
 
 			testGraphics.setX(spawnX);
 			testGraphics.setY(spawnY);

@@ -7,23 +7,25 @@ public class TileMap {
 
 	private int tileWidth;
 
-	private int widthInTiles;
-	private int heightInTiles;
+	private int width;
+	private int height;
 
 	private Vector2[][] backgroundTiles;
 	private Vector2[][] walls;
 	private Vector2[][] foregroundTiles;
 
+	TileGenerator generator;
+
 	public TileMap(String levelLocation, int tileWidth) {
 		this.tileWidth = tileWidth;
 
-		TileGenerator generator = new TileGenerator(levelLocation);
-		generator.generateTiles();
-		widthInTiles = generator.getWidthInTiles();
-		heightInTiles = generator.getHeightInTiles();
+		generator = new TileGenerator(levelLocation);
+
+		width = generator.getWidth();
+		height = generator.getHeight();
+
 		backgroundTiles = generator.getBackgroundTiles();
 		walls = generator.getWalls();
-		foregroundTiles = generator.getForegroundTiles();
 	}
 
 	public void renderHighTiles() {
@@ -36,10 +38,10 @@ public class TileMap {
 	}
 
 	public int getHeight() {
-		return heightInTiles * tileWidth;
+		return height * tileWidth;
 	}
 
 	public int getWidth() {
-		return widthInTiles * tileWidth;
+		return width * tileWidth;
 	}
 }

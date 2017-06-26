@@ -3,11 +3,15 @@ package level;
 import java.util.Map;
 
 import ai.GoalBounder;
+import components.collision.RigidCollision;
+import components.graphical.MapGraphics;
 import display.FloorRenderer;
 import display.ImageProcessor;
 import display.WallsRenderer;
 import entity.Entity;
 import logging.Logger;
+import main.ShootEmUp;
+import map.TileGenerator;
 import math.Vector2;
 
 public class LevelMap {
@@ -15,22 +19,21 @@ public class LevelMap {
 	private static final int TILE_WIDTH = 32;
 	private static final int TILE_HEIGHT = 32;
 
+	private static final String TEXTURE_FILE = "Walls";
+
 	// size of map
 	private int width;
 	private int height;
-
-	// texture map position arrays
-	private Vector2[][] backgroundTiles; // Replace with Irenderer changes
 
 	// collidable wall entities
 	private Map<Vector2, Entity> walls;
 
 	private GoalBounder goalBounder;
 
-	private MapGenerator generator;
+	private TileGenerator generator;
 
 	public LevelMap(String file) {
-		generator = new MapGenerator(file);
+		generator = new TileGenerator(file);
 
 		width = generator.getWidth();
 		height = generator.getHeight();
@@ -38,24 +41,26 @@ public class LevelMap {
 
 	public void init() {
 
-		generator.generateMap();
+		generator.generateTiles();
 
-		backgroundTiles = generator.getBackgroundTiles();
-		Vector2[][] foregroundTiles = generator.getForegroundTiles();
-		walls = generator.getWalls();
-
-		ImageProcessor.irBack = new FloorRenderer(backgroundTiles,
+		ImageProcessor.irBack = new FloorRenderer(generator.getBackgroundTiles(),
 				new Vector2(ImageProcessor.getImage("Floor").getFWidth(),
 						ImageProcessor.getImage("Floor").getFHeight()),
 				LevelMap.getTileWidth(), LevelMap.getTileHeight());
+
+		createWalls(generator.getWalls());
 		ImageProcessor.irWall = new WallsRenderer(walls,
 				new Vector2(ImageProcessor.getImage("Walls").getFWidth(),
 						ImageProcessor.getImage("Walls").getFHeight()),
 				LevelMap.getTileWidth(), LevelMap.getTileHeight());
-		ImageProcessor.irFore = new FloorRenderer(foregroundTiles,
-				new Vector2(ImageProcessor.getImage("Walls").getFWidth(),
-						ImageProcessor.getImage("Walls").getFHeight()),
-				LevelMap.getTileWidth(), LevelMap.getTileHeight());
+
+		/*
+		 * ImageProcessor.irFore = new
+		 * FloorRenderer(generator.getForegroundTiles(), new
+		 * Vector2(ImageProcessor.getImage("Walls").getFWidth(),
+		 * ImageProcessor.getImage("Walls").getFHeight()),
+		 * LevelMap.getTileWidth(), LevelMap.getTileHeight());
+		 */
 
 		ImageProcessor.irBack.init();
 		ImageProcessor.irWall.init();
@@ -75,6 +80,48 @@ public class LevelMap {
 		ImageProcessor.irWall.draw(ImageProcessor.getImage("Walls").getID());
 	}
 
+	private void createWalls(Vector2[][] walls) {
+		for (int y = 0; y < walls.length; y++) {
+			for (int x = 0; x < walls[0].length; x++) {
+
+				Vector2 wall = walls[x][y];
+				if (wall != null) {
+					if (wall.equals(new Vector2(0.0f, 0.0f))) {
+						insertWall(x, y, wall.x(), wall.y());
+					} else if (wall.equals(new Vector2(0.0f, 2.0f))) {
+						insertWater(x, y, wall.x(), wall.y());
+					}
+				}
+			}
+		}
+	}
+
+	// create wall
+	private void insertWall(int x, int y, float tileMapX, float tileMapY) {
+		MapGraphics wallG;
+		wallG = new MapGraphics(ImageProcessor.getImage(TEXTURE_FILE), new Vector2(tileMapX + 3.0f, tileMapY),
+				x * LevelMap.getTileWidth(), y * LevelMap.getTileHeight());
+
+		createEntity(wallG, x, y);
+	}
+
+	// create water
+	private void insertWater(int x, int y, float tileMapX, float tileMapY) {
+		MapGraphics wallG;
+		wallG = new MapGraphics(ImageProcessor.getImage(TEXTURE_FILE), new Vector2(tileMapX, tileMapY + 4.0f),
+				x * LevelMap.getTileWidth(), y * LevelMap.getTileHeight());
+		createEntity(wallG, x, y);
+	}
+
+	private void createEntity(MapGraphics wallG, int x, int y) {
+		Entity wall = new Entity();
+		wall.addComponent(wallG);
+		RigidCollision rigidCollision = new RigidCollision();
+		wall.addComponent(rigidCollision);
+		ShootEmUp.getCurrentLevel().addEntity(wall);
+		walls.put(new Vector2(x, y), wall);
+	}
+
 	public void setGoalBounder(GoalBounder goalBounder) {
 		this.goalBounder = goalBounder;
 	}
@@ -91,10 +138,6 @@ public class LevelMap {
 
 	public static int getTileWidth() {
 		return TILE_WIDTH;
-	}
-
-	public Vector2[][] getBackgroundTiles() {
-		return backgroundTiles;
 	}
 
 	public GoalBounder getGoalBounder() {
