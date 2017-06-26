@@ -21,13 +21,12 @@ public class TileMap {
 
 		width = generator.getWidth();
 		height = generator.getHeight();
-
-		backgroundTiles = generator.getBackgroundTiles();
-		walls = generator.getWalls();
 	}
 
 	public void init() {
 		generator.generateTiles();
+		backgroundTiles = generator.getBackgroundTiles();
+		walls = generator.getWalls();
 	}
 
 	public int getHeight() {
