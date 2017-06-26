@@ -24,7 +24,7 @@ public class GoalBounder implements Serializable {
 		return goalboundingMaps.get((int) size)[(int) x][(int) y];
 	}
 
-	public static GoalBounder readGoablounder(String location) {
+	public static GoalBounder readGoalbounder(String location) {
 		GoalBounder goalBounder = null;
 		try (FileInputStream fileIn = new FileInputStream(location)) {
 			ObjectInputStream in = new ObjectInputStream(fileIn);
