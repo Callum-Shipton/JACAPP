@@ -24,7 +24,8 @@ public class GoalboundGenerator {
 	private Set<Vector2> walls;
 	
 	private static final int MAXIMUM_SIZE = 4;
-	private static final String MAP_FILE = "/Levels/Level1.png";
+	private static final String IN_MAP_FILE = "/Levels/Level1.png";
+	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level1.bound";
 	
 	private static final int BROWNWALL_COLOR = -7864299;
 	private static final int GREYWALL_COLOR = -8421505;
@@ -32,7 +33,7 @@ public class GoalboundGenerator {
 	private static final int DARKWATER_COLOR = -12629812;
 	
 	public GoalboundGenerator(){
-		loadMap(MAP_FILE);
+		loadMap(IN_MAP_FILE);
 		goalboundingMaps = new HashMap<>();
 		for (int i = 1; i <= MAXIMUM_SIZE; i++) {
 			goalboundingMaps.put(i, new GoalboundingTile[mapImage.getWidth()][mapImage.getHeight()]);
@@ -54,12 +55,12 @@ public class GoalboundGenerator {
 	private void saveGoalbounder(){
 		GoalBounder goalbounder = new GoalBounder(goalboundingMaps);
 		
-		 try (FileOutputStream fileOut = new FileOutputStream("/res/goalbounding/goalbound.ser")){
+		 try (FileOutputStream fileOut = new FileOutputStream(OUT_MAP_FILE)){
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(goalbounder);
 	         out.close();
 	         fileOut.close();
-	         Logger.info("Serialized data is saved in /res/goalbounding/goalbound.ser");
+	         Logger.info("Serialized data is saved in "+OUT_MAP_FILE);
 	      }catch(IOException i) {
 	    	  Logger.error(i);
 	      } 
