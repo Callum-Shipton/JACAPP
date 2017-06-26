@@ -41,28 +41,28 @@ public class AStarNode implements Comparable<AStarNode> {
 	@Override
 	public int hashCode() {
 		int hash = 139;
-		hash = (int) ((467 * hash) + this.position.x());
-		hash = (int) ((467 * hash) + this.position.y());
+		hash = (int) ((467 * hash) + position.x());
+		hash = (int) ((467 * hash) + position.y());
 		return hash;
 	}
 
 	public AStarNode getChild() {
-		return this.child;
+		return child;
 	}
 
 	public AStarNode getParent() {
-		return this.parent;
+		return parent;
 	}
 
 	public Vector2 getPosition() {
-		return this.position;
+		return position;
 	}
 
 	public void setChild(AStarNode child) {
 		this.child = child;
 	}
-	
-	public int getWidth(){
+
+	public int getWidth() {
 		return width;
 	}
 }

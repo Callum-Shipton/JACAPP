@@ -30,11 +30,11 @@ public class TileMap {
 	}
 
 	public int getHeight() {
-		return height * tileWidth;
+		return height;
 	}
 
 	public int getWidth() {
-		return width * tileWidth;
+		return width;
 	}
 
 	public Vector2[][] getWalls() {

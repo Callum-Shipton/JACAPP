@@ -12,6 +12,6 @@ public class TypeNode extends AStarNode implements Comparable<AStarNode> {
 	}
 
 	public int getType() {
-		return this.type;
+		return type;
 	}
 }
