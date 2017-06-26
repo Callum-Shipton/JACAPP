@@ -117,8 +117,8 @@ public final class EnemyBuilder {
 		do {
 			collide = false;
 
-			spawnX = rand.nextInt(level.getMap().getWidth() - 1) * LevelMap.getTileWidth();
-			spawnY = rand.nextInt(level.getMap().getHeight() - 1) * LevelMap.getTileWidth();
+			spawnX = rand.nextInt(level.getMap().getWidth() - 1) * LevelMap.TILE_WIDTH;
+			spawnY = rand.nextInt(level.getMap().getHeight() - 1) * LevelMap.TILE_WIDTH;
 
 			testGraphics.setX(spawnX);
 			testGraphics.setY(spawnY);
@@ -140,7 +140,7 @@ public final class EnemyBuilder {
 			}
 		} while (collide);
 
-		Logger.debug("Spawn Location: " + spawnX / LevelMap.getTileWidth() + ", " + spawnY / LevelMap.getTileWidth(),
+		Logger.debug("Spawn Location: " + spawnX / LevelMap.TILE_WIDTH + ", " + spawnY / LevelMap.TILE_WIDTH,
 				Logger.Category.ENTITIES);
 	}
 }

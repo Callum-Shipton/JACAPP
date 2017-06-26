@@ -51,10 +51,10 @@ public class EntityMap {
 
 	public Set<Vector2> getGridPos(BaseGraphics BG) {
 		Set<Vector2> gridPos = new HashSet<>();
-		for (int i = (int) Math.floor((BG.getX() / LevelMap.getTileWidth()) / 6); i <= Math
-				.floor(((BG.getX() + BG.getWidth()) / LevelMap.getTileWidth()) / 6); i++) {
-			for (int j = (int) Math.floor((BG.getY() / LevelMap.getTileWidth()) / 6); j <= Math
-					.floor(((BG.getY() + BG.getHeight()) / LevelMap.getTileWidth()) / 6); j++) {
+		for (int i = (int) Math.floor((BG.getX() / LevelMap.TILE_WIDTH) / 6); i <= Math
+				.floor(((BG.getX() + BG.getWidth()) / LevelMap.TILE_WIDTH) / 6); i++) {
+			for (int j = (int) Math.floor((BG.getY() / LevelMap.TILE_WIDTH) / 6); j <= Math
+					.floor(((BG.getY() + BG.getHeight()) / LevelMap.TILE_WIDTH) / 6); j++) {
 				gridPos.add(new Vector2(i, j));
 			}
 		}

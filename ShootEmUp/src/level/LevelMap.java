@@ -17,7 +17,7 @@ import math.Vector2;
 
 public class LevelMap {
 
-	private static final int TILE_WIDTH = 32;
+	public static final int TILE_WIDTH = 32;
 
 	private TileMap tileMap;
 	private GoalBounder goalBounder;
@@ -39,11 +39,11 @@ public class LevelMap {
 		ImageProcessor.irBack = new FloorRenderer(tileMap.getBackgroundTiles(),
 				new Vector2(ImageProcessor.getImage("Floor").getFWidth(),
 						ImageProcessor.getImage("Floor").getFHeight()),
-				LevelMap.getTileWidth(), TILE_WIDTH);
+				LevelMap.TILE_WIDTH, TILE_WIDTH);
 
 		createWalls(tileMap.getWalls());
 		ImageProcessor.irWall = new WallsRenderer(walls, new Vector2(ImageProcessor.getImage("Walls").getFWidth(),
-				ImageProcessor.getImage("Walls").getFHeight()), LevelMap.getTileWidth(), TILE_WIDTH);
+				ImageProcessor.getImage("Walls").getFHeight()), LevelMap.TILE_WIDTH, TILE_WIDTH);
 
 		/*
 		 * ImageProcessor.irFore = new
@@ -55,7 +55,7 @@ public class LevelMap {
 
 		ImageProcessor.irBack.init();
 		ImageProcessor.irWall.init();
-		ImageProcessor.irFore.init();
+		// ImageProcessor.irFore.init();
 
 		setGoalBounder(new GoalBounder(tileMap.getWidth(), tileMap.getHeight(), walls.keySet()));
 
@@ -63,7 +63,7 @@ public class LevelMap {
 	}
 
 	public void renderHighTiles() {
-		ImageProcessor.irFore.draw(ImageProcessor.getImage("Walls").getID());
+		// ImageProcessor.irFore.draw(ImageProcessor.getImage("Walls").getID());
 	}
 
 	public void renderLowTiles() {
@@ -121,10 +121,6 @@ public class LevelMap {
 
 	public int getWidth() {
 		return tileMap.getWidth();
-	}
-
-	public static int getTileWidth() {
-		return TILE_WIDTH;
 	}
 
 	public GoalBounder getGoalBounder() {
