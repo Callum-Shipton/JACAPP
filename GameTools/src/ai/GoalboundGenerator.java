@@ -24,7 +24,12 @@ public class GoalboundGenerator {
 	private Set<Vector2> walls;
 	
 	private static final int MAXIMUM_SIZE = 4;
-	private static final String MAP_FILE = "/Levels/Level";
+	private static final String MAP_FILE = "/Levels/Level1.png";
+	
+	private static final int BROWNWALL_COLOR = -7864299;
+	private static final int GREYWALL_COLOR = -8421505;
+	private static final int LIGHTWATER_COLOR = -16735512;
+	private static final int DARKWATER_COLOR = -12629812;
 	
 	public GoalboundGenerator(){
 		loadMap(MAP_FILE);
@@ -62,7 +67,19 @@ public class GoalboundGenerator {
 	
 	private void getWalls(){
 		walls = new HashSet<>();
-		//TODO use map to find walls to give to goalbounder
+		for (int y = 0; y < mapImage.getHeight(); y++) {
+			for (int x = 0; x < mapImage.getWidth(); x++) {
+				switch (mapImage.getRGB(x, y)) {
+				case BROWNWALL_COLOR:
+				case GREYWALL_COLOR:
+				case LIGHTWATER_COLOR:
+				case DARKWATER_COLOR:
+					walls.add(new Vector2(x,y));
+				default:
+					Logger.warn("Unknown tile code: " + mapImage.getRGB(x, y));
+				}
+			}
+		}
 	}
 	
 	private void loadMap(String fileLocation) {

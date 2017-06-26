@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.FloatBuffer;
 import java.util.HashMap;
+import java.util.Map;
 
 import logging.Logger;
 import loop.Loop;
@@ -33,7 +34,7 @@ import math.Matrix4;
 
 public class ImageProcessor {
 
-	private static HashMap<String, Image> artFiles = new HashMap<String, Image>();
+	private static Map<String, Image> artFiles = new HashMap<>();
 
 	// Level map file locations
 	public static final String LEVEL_FILE_LOCATION = "/Levels/Level";
@@ -81,23 +82,18 @@ public class ImageProcessor {
 		glUseProgram(0);
 
 	}
-	
-	public static void addArt(String key, Image image){
+
+	public static void addArt(String key, Image image) {
 		artFiles.put(key, image);
 	}
-	
-	/*
-	public static void refreshRenderers() {
-		base.initRenderData();
-		stat.initRenderData();
 
-		if (ShootEmUp.getCurrentLevel() != null) {
-			irWall.bindRenderData();
-			irBack.bindRenderData();
-			irFore.bindRenderData();
-		}
-	}
-	*/
+	/*
+	 * public static void refreshRenderers() { base.initRenderData();
+	 * stat.initRenderData();
+	 * 
+	 * if (ShootEmUp.getCurrentLevel() != null) { irWall.bindRenderData();
+	 * irBack.bindRenderData(); irFore.bindRenderData(); } }
+	 */
 
 	public void init(ArtLoader artLoader) {
 
