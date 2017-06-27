@@ -86,17 +86,17 @@ public class BasicMovement extends BaseMovement {
 	@Override
 	public Vector4 doesCollide(Entity moving, Entity checked) {
 		BaseGraphics CG = checked.getComponent(TypeComponent.GRAPHICS);
-		float x = this.baseGraphics.getX();
-		float y = this.baseGraphics.getY();
-		float w = this.baseGraphics.getWidth();
-		float h = this.baseGraphics.getHeight();
+		float x = baseGraphics.getX();
+		float y = baseGraphics.getY();
+		float w = baseGraphics.getWidth();
+		float h = baseGraphics.getHeight();
 
 		float cx = CG.getX();
 		float cy = CG.getY();
 		float cw = CG.getWidth();
 		float ch = CG.getHeight();
 
-		if ((x < (cx + cw)) && ((x + w) > cx) && (y < (cy + ch)) && ((y + h) > cy)) {
+		if ((x <= (cx + cw)) && ((x + w) >= cx) && (y <= (cy + ch)) && ((y + h) >= cy)) {
 			return new Vector4(x - (cx + cw), y - (cy + ch), (x + w) - cx, (y + h) - cy);
 		}
 		return null;
