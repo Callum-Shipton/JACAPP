@@ -4,8 +4,6 @@ import math.Vector2;
 
 public class TileMap {
 
-	private int tileWidth;
-
 	private int width;
 	private int height;
 
@@ -14,8 +12,7 @@ public class TileMap {
 
 	TileGenerator generator;
 
-	public TileMap(String levelLocation, int tileWidth) {
-		this.tileWidth = tileWidth;
+	public TileMap(String levelLocation) {
 
 		generator = new TileGenerator(levelLocation);
 

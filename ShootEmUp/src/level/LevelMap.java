@@ -11,6 +11,7 @@ import display.ImageProcessor;
 import display.WallsRenderer;
 import entity.Entity;
 import logging.Logger;
+import logging.Logger.Category;
 import main.ShootEmUp;
 import map.TileMap;
 import math.Vector2;
@@ -28,9 +29,12 @@ public class LevelMap {
 	private Map<Vector2, Entity> walls;
 
 	public LevelMap(String file) {
-		tileMap = new TileMap(file, TILE_WIDTH);
+		tileMap = new TileMap(file);
 		walls = new HashMap<>();
-		goalBounder = GoalBounder.readGoalbounder(file.substring(0, file.length() - 4) + ".bound");
+
+		String goalboundfile = file.substring(0, file.length() - 4) + "bound";
+		Logger.debug(goalboundfile, Category.AI_GOALBOUNDING);
+		goalBounder = GoalBounder.readGoalbounder(goalboundfile);
 	}
 
 	public void init() {
