@@ -144,36 +144,21 @@ public class AStarSearch {
 	public static boolean movesIntoWall(Vector2 position, int size, Set<Vector2> walls, String key) {
 		switch (key) {
 		case "NW":
-			if (!checkEdgesForWalls(position, size, walls, "N") && !checkEdgesForWalls(position, size, walls, "W")) {
-				return walls.contains(new Vector2(position.x(), position.y() + size))
-						&& walls.contains(new Vector2(position.x() + size, position.y()));
-			} else {
-				return true;
-			}
+			return checkEdgesForWalls(position, size + 1, walls, "N")
+					&& checkEdgesForWalls(position, size + 1, walls, "W");
 		case "NE":
-			if (!checkEdgesForWalls(position, size, walls, "N") && !checkEdgesForWalls(position, size, walls, "E")) {
-				return walls.contains(new Vector2(position.x(), position.y() + size))
-						&& walls.contains(new Vector2(position.x() - size, position.y()));
-			} else {
-				return true;
-			}
+			return checkEdgesForWalls(position, size + 1, walls, "N")
+					&& checkEdgesForWalls(position, size + 1, walls, "E");
 		case "SW":
-			if (!checkEdgesForWalls(position, size, walls, "S") && !checkEdgesForWalls(position, size, walls, "W")) {
-				return walls.contains(new Vector2(position.x(), position.y() - size))
-						&& walls.contains(new Vector2(position.x() + size, position.y()));
-			} else {
-				return true;
-			}
+			return checkEdgesForWalls(position, size + 1, walls, "S")
+					&& checkEdgesForWalls(position, size + 1, walls, "W");
 		case "SE":
-			if (!checkEdgesForWalls(position, size, walls, "S") && !checkEdgesForWalls(position, size, walls, "E")) {
-				return walls.contains(new Vector2(position.x(), position.y() - size))
-						&& walls.contains(new Vector2(position.x() - size, position.y()));
-			} else {
-				return true;
-			}
+			return checkEdgesForWalls(position, size + 1, walls, "S")
+					&& checkEdgesForWalls(position, size + 1, walls, "E");
 		default:
 			return checkEdgesForWalls(position, size, walls, key);
 		}
+
 	}
 
 	private static boolean checkEdgesForWalls(Vector2 position, int size, Set<Vector2> walls, String key) {
