@@ -96,7 +96,7 @@ public class BasicMovement extends BaseMovement {
 		float cw = CG.getWidth();
 		float ch = CG.getHeight();
 
-		if ((x <= (cx + cw)) && ((x + w) >= cx) && (y <= (cy + ch)) && ((y + h) >= cy)) {
+		if ((x < (cx + cw)) && ((x + w) > cx) && (y < (cy + ch)) && ((y + h) > cy)) {
 			return new Vector4(x - (cx + cw), y - (cy + ch), (x + w) - cx, (y + h) - cy);
 		}
 		return null;
