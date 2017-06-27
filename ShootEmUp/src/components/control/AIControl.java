@@ -55,6 +55,10 @@ public class AIControl extends BaseControl {
 
 		Vector2 target = search.findPath(goalVector, startVector);
 
+		if (target.equals(startVector)) {
+			target = goalVector;
+		}
+
 		if (target != null) {
 			Vector2 movementVector = calculateMovementVector(target, graphics.getX(), graphics.getY(),
 					movement.getSpeed());
