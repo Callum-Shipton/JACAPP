@@ -4,9 +4,11 @@ import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
@@ -51,7 +53,7 @@ public class GoalboundGenerator {
 	
 	public void generateGoalbounder(){
 		getWalls();
-		createGoalBoundingBoxes(walls, mapImage.getWidth(), mapImage.getHeight());
+		createGoalBoundingBoxes(mapImage.getWidth(), mapImage.getHeight());
 		Logger.info("Saving.....");
 		saveGoalbounder();
 		Logger.info("Finished");
@@ -102,55 +104,50 @@ public class GoalboundGenerator {
 		}
 	}
 
-	private TypeNode[] generateChildNodes(AStarNode startNode) {
-		return generateChildNodes(startNode, null);
+	private List<TypeNode> generateChildNodes(AStarNode startNode, int size) {
+		return generateChildNodes(startNode, null,size);
 	}
 
-	private TypeNode[] generateChildNodes(AStarNode startNode, String type) {
-		TypeNode[] childNodes = new TypeNode[8];
+	private List<TypeNode> generateChildNodes(AStarNode startNode, String type, int size) {
+		List<TypeNode> childNodes = new ArrayList<>();
 
 		float startX = startNode.getPosition().x();
 		float startY = startNode.getPosition().y();
-
-		childNodes[0] = new TypeNode(new Vector2(startX, startY - 1), type != null ? type : "N");
-		childNodes[1] = new TypeNode(new Vector2(startX - 1, startY - 1), type != null ? type : "NW");
-		childNodes[2] = new TypeNode(new Vector2(startX - 1, startY), type != null ? type : "W");
-		childNodes[3] = new TypeNode(new Vector2(startX - 1, startY + 1), type != null ? type : "SW");
-		childNodes[4] = new TypeNode(new Vector2(startX, startY + 1), type != null ? type : "S");
-		childNodes[5] = new TypeNode(new Vector2(startX + 1, startY + 1), type != null ? type : "SE");
-		childNodes[6] = new TypeNode(new Vector2(startX + 1, startY), type != null ? type : "E");
-		childNodes[7] = new TypeNode(new Vector2(startX + 1, startY - 1), type != null ? type : "NE");
+		
+		if (!AStarSearch.movesIntoWall(new Vector2(startX - 1, startY - 1), size, walls, "N")) {
+			childNodes.add(new TypeNode(new Vector2(startX, startY - 1), type != null ? type : "N"));
+		}
+		childNodes.add(new TypeNode(new Vector2(startX - 1, startY - 1), type != null ? type : "NW"));
+		childNodes.add(new TypeNode(new Vector2(startX - 1, startY), type != null ? type : "W"));
+		childNodes.add(new TypeNode(new Vector2(startX - 1, startY + 1), type != null ? type : "SW"));
+		childNodes.add(new TypeNode(new Vector2(startX, startY + 1), type != null ? type : "S"));
+		childNodes.add(new TypeNode(new Vector2(startX + 1, startY + 1), type != null ? type : "SE"));
+		childNodes.add(new TypeNode(new Vector2(startX + 1, startY), type != null ? type : "E"));
+		childNodes.add(new TypeNode(new Vector2(startX + 1, startY - 1), type != null ? type : "NE"));
 
 		return childNodes;
 	}
 
-	private Map<String, BoundingBox> initBoundingBoxes(TypeNode[] childNodes) {
+	private Map<String, BoundingBox> initBoundingBoxes(List<TypeNode> childNodes) {
 		Map<String, BoundingBox> boxes = new HashMap<>();
 		
-		boxes.put("N", new BoundingBox(new Vector4(childNodes[0].getPosition().x(), childNodes[0].getPosition().y(), 0, 0)));
-		boxes.put("NW", new BoundingBox(new Vector4(childNodes[1].getPosition().x(), childNodes[0].getPosition().y(), 0, 0)));
-		boxes.put("W", new BoundingBox(new Vector4(childNodes[2].getPosition().x(), childNodes[0].getPosition().y(), 0, 0)));
-		boxes.put("SW", new BoundingBox(new Vector4(childNodes[3].getPosition().x(), childNodes[0].getPosition().y(), 0, 0)));
-		boxes.put("S", new BoundingBox(new Vector4(childNodes[4].getPosition().x(), childNodes[0].getPosition().y(), 0, 0)));
-		boxes.put("SE", new BoundingBox(new Vector4(childNodes[5].getPosition().x(), childNodes[0].getPosition().y(), 0, 0)));
-		boxes.put("E", new BoundingBox(new Vector4(childNodes[6].getPosition().x(), childNodes[0].getPosition().y(), 0, 0)));
-		boxes.put("NE", new BoundingBox(new Vector4(childNodes[7].getPosition().x(), childNodes[0].getPosition().y(), 0, 0)));
+		for(TypeNode node : childNodes){
+			boxes.put(node.getType(), new BoundingBox(new Vector4(node.getPosition().x(), node.getPosition().y(), 0, 0)));
+		}
 		return boxes;
 	}
 
-	private void addNodesToQueue(TypeNode[] nodes, Set<Vector2> walls, int size, Queue<TypeNode> open,
+	private void addNodesToQueue(List<TypeNode> nodes, Queue<TypeNode> open,
 			Set<TypeNode> closed) {
-		for (int i = 0; i < nodes.length; i++) {
-			if (!closed.contains(nodes[i])) {
-				if (!AStarSearch.movesIntoWall(nodes[i].position, size, walls, nodes[i].getType())) {
-					open.add(nodes[i]);
-				}
-				closed.add(nodes[i]);
+		for (TypeNode node : nodes) {
+			if (!closed.contains(node)) {
+				open.add(node);
+				closed.add(node);
 			}
 		}
 	}
 
-	private void fillMap(Queue<TypeNode> open, Set<TypeNode> closed, Map<String, BoundingBox> boxes, Set<Vector2> walls,
+	private void fillMap(Queue<TypeNode> open, Set<TypeNode> closed, Map<String, BoundingBox> boxes,
 			int size) {
 		while (!open.isEmpty()) {
 			TypeNode current = open.poll();
@@ -159,14 +156,14 @@ public class GoalboundGenerator {
 
 			boxes.get(currentType).addPoint(current.getPosition());
 
-			TypeNode[] childNodes = generateChildNodes(current, currentType);
+			List<TypeNode> childNodes = generateChildNodes(current, currentType, size);
 
-			addNodesToQueue(childNodes, walls, size, open, closed);
+			addNodesToQueue(childNodes, open, closed);
 		}
 
 	}
 
-	private void createGoalBoundingBoxes(Set<Vector2> walls, int mapWidth, int mapHeight) {
+	private void createGoalBoundingBoxes(int mapWidth, int mapHeight) {
 		for (int size = 1; size <= MAXIMUM_SIZE; size++) {
 
 			for (int x = 0; x < mapWidth; x++) {
@@ -182,7 +179,7 @@ public class GoalboundGenerator {
 
 						AStarNode start = new AStarNode(new Vector2(x, y), 1);
 
-						TypeNode[] startingNodes = generateChildNodes(start);
+						List<TypeNode> startingNodes = generateChildNodes(start, size);
 
 						for (TypeNode node : startingNodes) {
 							open.add(node);
@@ -191,7 +188,7 @@ public class GoalboundGenerator {
 
 						Map<String, BoundingBox> boxes = initBoundingBoxes(startingNodes);
 
-						fillMap(open, closed, boxes, walls, size);
+						fillMap(open, closed, boxes, size);
 
 						goalboundingMaps.get(size)[x][y] = new GoalboundingTile(boxes);
 					}
