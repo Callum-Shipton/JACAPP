@@ -32,7 +32,7 @@ public class LevelMap {
 		tileMap = new TileMap(file);
 		walls = new HashMap<>();
 
-		String goalboundfile = file.substring(0, file.length() - 4) + "bound";
+		String goalboundfile = "res" + file.substring(0, file.length() - 3) + "bound";
 		Logger.debug(goalboundfile, Category.AI_GOALBOUNDING);
 		goalBounder = GoalBounder.readGoalbounder(goalboundfile);
 	}
