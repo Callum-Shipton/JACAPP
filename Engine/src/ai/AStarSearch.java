@@ -145,16 +145,16 @@ public class AStarSearch {
 		switch (key) {
 		case "NW":
 			return checkEdgesForWalls(position, size + 1, walls, "N")
-					&& checkEdgesForWalls(position, size + 1, walls, "W");
+					|| checkEdgesForWalls(position, size + 1, walls, "W");
 		case "NE":
 			return checkEdgesForWalls(position, size + 1, walls, "N")
-					&& checkEdgesForWalls(position, size + 1, walls, "E");
+					|| checkEdgesForWalls(position, size + 1, walls, "E");
 		case "SW":
 			return checkEdgesForWalls(position, size + 1, walls, "S")
-					&& checkEdgesForWalls(position, size + 1, walls, "W");
+					|| checkEdgesForWalls(position, size + 1, walls, "W");
 		case "SE":
 			return checkEdgesForWalls(position, size + 1, walls, "S")
-					&& checkEdgesForWalls(position, size + 1, walls, "E");
+					|| checkEdgesForWalls(position, size + 1, walls, "E");
 		default:
 			return checkEdgesForWalls(position, size, walls, key);
 		}
