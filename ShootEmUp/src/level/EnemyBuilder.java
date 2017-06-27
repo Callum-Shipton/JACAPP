@@ -120,14 +120,17 @@ public final class EnemyBuilder {
 			spawnX = rand.nextInt(level.getMap().getWidth() - 1) * LevelMap.TILE_WIDTH;
 			spawnY = rand.nextInt(level.getMap().getHeight() - 1) * LevelMap.TILE_WIDTH;
 
-			testGraphics.setX(spawnX);
-			testGraphics.setY(spawnY);
+			
+			// TODO: Fix garbage patch to enemy spawning
+			testGraphics.setX(spawnX+10);
+			testGraphics.setY(spawnY+10);
 
 			// Checks if the enemy will spawn on screen
 			if ((Math.abs((spawnX + (testGraphics.getWidth() / 2)) - (px + (pw / 2))) <= (Loop.getDisplay().getWidth()
 					+ testGraphics.getWidth()))
 					&& (Math.abs((spawnY + (testGraphics.getHeight() / 2))
 							- (py + (ph / 2))) <= (Loop.getDisplay().getHeight() + testGraphics.getHeight()))) {
+				collide = true;
 				continue;
 			}
 
