@@ -63,7 +63,7 @@ public class AStarSearch {
 
 	private void addNode(String key, GoalboundingTile goalboundingTile) {
 		AStarNode node = childNodes.get(key);
-		if (!closedNodes.contains(node) && !containsWall(node.getPosition(), node.getWidth(), walls)
+		if (!closedNodes.contains(node) && !movesIntoWall(node.getPosition(), node.getWidth(), walls, key)
 				&& goalboundingTile.getBox(key).boxContains(goalNode.getPosition())) {
 			openNodes.add(node);
 			closedNodes.add(node);
@@ -141,13 +141,51 @@ public class AStarSearch {
 		return new Vector2((float) Math.floor(x / nodeWidth), (float) Math.floor(y / nodeWidth));
 	}
 
-	public static boolean containsWall(Vector2 position, int size, Set<Vector2> walls) {
-		for (int i = (int) position.x(); i < position.x() + size; i++) {
-			for (int j = (int) position.y(); j < position.y() + size; j++) {
-				if (walls.contains(new Vector2(i, j))) {
+	public static boolean movesIntoWall(Vector2 position, int size, Set<Vector2> walls, String key) {
+		switch (key) {
+		case "NW":
+			return checkEdgesForWalls(position, size, walls, "N") || checkEdgesForWalls(position, size, walls, "W");
+		case "NE":
+			return checkEdgesForWalls(position, size, walls, "N") || checkEdgesForWalls(position, size, walls, "E");
+		case "SW":
+			return checkEdgesForWalls(position, size, walls, "S") || checkEdgesForWalls(position, size, walls, "W");
+		case "SE":
+			return checkEdgesForWalls(position, size, walls, "S") || checkEdgesForWalls(position, size, walls, "E");
+		default:
+			return checkEdgesForWalls(position, size, walls, key);
+		}
+	}
+
+	private static boolean checkEdgesForWalls(Vector2 position, int size, Set<Vector2> walls, String key) {
+		switch (key) {
+		case "N":
+			for (int i = (int) position.x(); i < position.x() + size; i++) {
+				if (walls.contains(new Vector2(i, position.y()))) {
 					return true;
 				}
 			}
+			break;
+		case "S":
+			for (int i = (int) position.x(); i < position.x() + size; i++) {
+				if (walls.contains(new Vector2(i, position.y() + size - 1))) {
+					return true;
+				}
+			}
+			break;
+		case "W":
+			for (int j = (int) position.y(); j < position.y() + size; j++) {
+				if (walls.contains(new Vector2(position.x(), j))) {
+					return true;
+				}
+			}
+			break;
+		case "E":
+			for (int j = (int) position.y(); j < position.y() + size; j++) {
+				if (walls.contains(new Vector2(position.x() + size - 1, j))) {
+					return true;
+				}
+			}
+			break;
 		}
 		return false;
 	}

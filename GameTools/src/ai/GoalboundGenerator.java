@@ -106,31 +106,35 @@ public class GoalboundGenerator {
 		return generateChildNodes(startNode, null);
 	}
 
-	private TypeNode[] generateChildNodes(AStarNode startNode, Integer type) {
+	private TypeNode[] generateChildNodes(AStarNode startNode, String type) {
 		TypeNode[] childNodes = new TypeNode[8];
 
 		float startX = startNode.getPosition().x();
 		float startY = startNode.getPosition().y();
 
-		childNodes[0] = new TypeNode(new Vector2(startX, startY - 1), type != null ? type : 0);
-		childNodes[1] = new TypeNode(new Vector2(startX - 1, startY - 1), type != null ? type : 1);
-		childNodes[2] = new TypeNode(new Vector2(startX - 1, startY), type != null ? type : 2);
-		childNodes[3] = new TypeNode(new Vector2(startX - 1, startY + 1), type != null ? type : 3);
-		childNodes[4] = new TypeNode(new Vector2(startX, startY + 1), type != null ? type : 4);
-		childNodes[5] = new TypeNode(new Vector2(startX + 1, startY + 1), type != null ? type : 5);
-		childNodes[6] = new TypeNode(new Vector2(startX + 1, startY), type != null ? type : 6);
-		childNodes[7] = new TypeNode(new Vector2(startX + 1, startY - 1), type != null ? type : 7);
+		childNodes[0] = new TypeNode(new Vector2(startX, startY - 1), type != null ? type : "N");
+		childNodes[1] = new TypeNode(new Vector2(startX - 1, startY - 1), type != null ? type : "NW");
+		childNodes[2] = new TypeNode(new Vector2(startX - 1, startY), type != null ? type : "W");
+		childNodes[3] = new TypeNode(new Vector2(startX - 1, startY + 1), type != null ? type : "SW");
+		childNodes[4] = new TypeNode(new Vector2(startX, startY + 1), type != null ? type : "S");
+		childNodes[5] = new TypeNode(new Vector2(startX + 1, startY + 1), type != null ? type : "SE");
+		childNodes[6] = new TypeNode(new Vector2(startX + 1, startY), type != null ? type : "E");
+		childNodes[7] = new TypeNode(new Vector2(startX + 1, startY - 1), type != null ? type : "NE");
 
 		return childNodes;
 	}
 
-	private BoundingBox[] initBoundingBoxes(TypeNode[] childNodes) {
-		BoundingBox[] boxes = new BoundingBox[childNodes.length];
-		int nodeCount = 0;
-		for (TypeNode node : childNodes) {
-			boxes[nodeCount] = new BoundingBox(new Vector4(node.getPosition().x(), node.getPosition().y(), 0, 0));
-			nodeCount++;
-		}
+	private Map<String, BoundingBox> initBoundingBoxes(TypeNode[] childNodes) {
+		Map<String, BoundingBox> boxes = new HashMap<>();
+		
+		boxes.put("N", new BoundingBox(new Vector4(childNodes[0].getPosition().x(), childNodes[0].getPosition().y(), 0, 0)));
+		boxes.put("NW", new BoundingBox(new Vector4(childNodes[1].getPosition().x(), childNodes[0].getPosition().y(), 0, 0)));
+		boxes.put("W", new BoundingBox(new Vector4(childNodes[2].getPosition().x(), childNodes[0].getPosition().y(), 0, 0)));
+		boxes.put("SW", new BoundingBox(new Vector4(childNodes[3].getPosition().x(), childNodes[0].getPosition().y(), 0, 0)));
+		boxes.put("S", new BoundingBox(new Vector4(childNodes[4].getPosition().x(), childNodes[0].getPosition().y(), 0, 0)));
+		boxes.put("SE", new BoundingBox(new Vector4(childNodes[5].getPosition().x(), childNodes[0].getPosition().y(), 0, 0)));
+		boxes.put("E", new BoundingBox(new Vector4(childNodes[6].getPosition().x(), childNodes[0].getPosition().y(), 0, 0)));
+		boxes.put("NE", new BoundingBox(new Vector4(childNodes[7].getPosition().x(), childNodes[0].getPosition().y(), 0, 0)));
 		return boxes;
 	}
 
@@ -138,7 +142,7 @@ public class GoalboundGenerator {
 			Set<TypeNode> closed) {
 		for (int i = 0; i < nodes.length; i++) {
 			if (!closed.contains(nodes[i])) {
-				if (!AStarSearch.containsWall(nodes[i].position, size, walls)) {
+				if (!AStarSearch.movesIntoWall(nodes[i].position, size, walls, nodes[i].getType())) {
 					open.add(nodes[i]);
 				}
 				closed.add(nodes[i]);
@@ -146,14 +150,14 @@ public class GoalboundGenerator {
 		}
 	}
 
-	private void fillMap(Queue<TypeNode> open, Set<TypeNode> closed, BoundingBox[] boxes, Set<Vector2> walls,
+	private void fillMap(Queue<TypeNode> open, Set<TypeNode> closed, Map<String, BoundingBox> boxes, Set<Vector2> walls,
 			int size) {
 		while (!open.isEmpty()) {
 			TypeNode current = open.poll();
 
-			int currentType = current.getType();
+			String currentType = current.getType();
 
-			boxes[currentType].addPoint(current.getPosition());
+			boxes.get(currentType).addPoint(current.getPosition());
 
 			TypeNode[] childNodes = generateChildNodes(current, currentType);
 
@@ -168,7 +172,7 @@ public class GoalboundGenerator {
 			for (int x = 0; x < mapWidth; x++) {
 				for (int y = 0; y < mapHeight; y++) {
 
-					if (!AStarSearch.containsWall(new Vector2(x, y), size, walls)) {
+					if (!containsWall(new Vector2(x, y), size, walls)) {
 
 						// queue for tiles to be looked at
 						Queue<TypeNode> open = new LinkedList<>();
@@ -185,7 +189,7 @@ public class GoalboundGenerator {
 							closed.add(node);
 						}
 
-						BoundingBox[] boxes = initBoundingBoxes(startingNodes);
+						Map<String, BoundingBox> boxes = initBoundingBoxes(startingNodes);
 
 						fillMap(open, closed, boxes, walls, size);
 
@@ -197,5 +201,16 @@ public class GoalboundGenerator {
 			Logger.info("Size " + size + " completed");
 		}
 		Logger.info("All goalbounds Created");
+	}
+	
+	private static boolean containsWall(Vector2 position, int size, Set<Vector2> walls) {
+		for (int i = (int) position.x(); i < position.x() + size; i++) {
+			for (int j = (int) position.y(); j < position.y() + size; j++) {
+				if (walls.contains(new Vector2(i, j))) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
