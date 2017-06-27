@@ -26,11 +26,9 @@ public class GoalBounder implements Serializable {
 
 	public static GoalBounder readGoalbounder(String location) {
 		GoalBounder goalBounder = null;
-		try (FileInputStream fileIn = new FileInputStream(location)) {
-			ObjectInputStream in = new ObjectInputStream(fileIn);
+		try (ObjectInputStream in = new ObjectInputStream(GoalBounder.class.getResourceAsStream(location))) {
 			goalBounder = (GoalBounder) in.readObject();
 			in.close();
-			fileIn.close();
 		} catch (IOException i) {
 			Logger.error(i);
 		} catch (ClassNotFoundException c) {
