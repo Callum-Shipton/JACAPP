@@ -44,7 +44,8 @@ public abstract class ButtonHandler {
 			} else {
 				PlayerBuilder.buildPlayer(type);
 			}
-			ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(ImageProcessor.getImage("MainMenuScreen"), save.getLevel()));
+			ShootEmUp.getMenuSystem()
+					.addMenu(new LevelSelectMenu(ImageProcessor.getImage("MainMenuScreen"), save.getLevel()));
 		}
 	}
 
@@ -125,8 +126,8 @@ public abstract class ButtonHandler {
 			}
 		}
 
-		ShootEmUp.getMenuSystem().addMenu(new CharacterSelectMenu(ImageProcessor.getImage("MainMenuScreen"), warriorLevel,
-				archerLevel, mageLevel, battleMageLevel, rogueLevel));
+		ShootEmUp.getMenuSystem().addMenu(new CharacterSelectMenu(ImageProcessor.getImage("MainMenuScreen"),
+				warriorLevel, archerLevel, mageLevel, battleMageLevel, rogueLevel));
 	}
 
 	private static void magic() {

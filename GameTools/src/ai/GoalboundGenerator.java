@@ -24,13 +24,16 @@ public class GoalboundGenerator {
 	private Set<Vector2> walls;
 	
 	private static final int MAXIMUM_SIZE = 4;
-	private static final String IN_MAP_FILE = "/Levels/Level3.png";
-	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level3.bound";
+	private static final String IN_MAP_FILE = "/Levels/Level1.png";
+	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level1.bound";
 	
 	private static final int BROWNWALL_COLOR = -7864299;
 	private static final int GREYWALL_COLOR = -8421505;
 	private static final int LIGHTWATER_COLOR = -16735512;
 	private static final int DARKWATER_COLOR = -12629812;
+	
+	private static final int GRASS_COLOR = -4856291;
+	private static final int PATH_COLOR = -1055568;
 	
 	public GoalboundGenerator(){
 		loadMap(IN_MAP_FILE);
@@ -79,6 +82,12 @@ public class GoalboundGenerator {
 				case LIGHTWATER_COLOR:
 				case DARKWATER_COLOR:
 					walls.add(new Vector2(x,y));
+					break;
+				case GRASS_COLOR:
+				case PATH_COLOR:
+					break;
+				default:
+					Logger.warn("Tile type not found");
 				}
 			}
 		}
@@ -157,7 +166,6 @@ public class GoalboundGenerator {
 		for (int size = 1; size <= MAXIMUM_SIZE; size++) {
 
 			for (int x = 0; x < mapWidth; x++) {
-				Logger.info("Layer " + (x + 1) + " of " + mapWidth + " completed");
 				for (int y = 0; y < mapHeight; y++) {
 
 					if (!AStarSearch.containsWall(new Vector2(x, y), size, walls)) {
@@ -184,6 +192,7 @@ public class GoalboundGenerator {
 						goalboundingMaps.get(size)[x][y] = new GoalboundingTile(boxes);
 					}
 				}
+				Logger.info("Layer " + (x + 1) + " of " + mapWidth + " completed");
 			}
 			Logger.info("Size " + size + " completed");
 		}

@@ -37,8 +37,8 @@ public class TileGenerator {
 
 	public TileGenerator(String fileLocation) {
 		loadMap(fileLocation);
-		width = mapImage.getHeight();
-		height = mapImage.getWidth();
+		width = mapImage.getWidth();
+		height = mapImage.getHeight();
 
 		backgroundTileTypes = new int[width][height];
 		wallTypes = new int[width][height];
