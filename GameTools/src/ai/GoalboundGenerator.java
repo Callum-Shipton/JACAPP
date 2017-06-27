@@ -24,8 +24,8 @@ public class GoalboundGenerator {
 	private Set<Vector2> walls;
 	
 	private static final int MAXIMUM_SIZE = 4;
-	private static final String IN_MAP_FILE = "/Levels/Level1.png";
-	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level1.bound";
+	private static final String IN_MAP_FILE = "/Levels/Level3.png";
+	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level3.bound";
 	
 	private static final int BROWNWALL_COLOR = -7864299;
 	private static final int GREYWALL_COLOR = -8421505;
@@ -49,7 +49,9 @@ public class GoalboundGenerator {
 	public void generateGoalbounder(){
 		getWalls();
 		createGoalBoundingBoxes(walls, mapImage.getWidth(), mapImage.getHeight());
+		Logger.info("Saving.....");
 		saveGoalbounder();
+		Logger.info("Finished");
 	}
 	
 	private void saveGoalbounder(){
@@ -67,6 +69,7 @@ public class GoalboundGenerator {
 	}
 	
 	private void getWalls(){
+		Logger.info("Generating Walls");
 		walls = new HashSet<>();
 		for (int y = 0; y < mapImage.getHeight(); y++) {
 			for (int x = 0; x < mapImage.getWidth(); x++) {
@@ -76,11 +79,10 @@ public class GoalboundGenerator {
 				case LIGHTWATER_COLOR:
 				case DARKWATER_COLOR:
 					walls.add(new Vector2(x,y));
-				default:
-					Logger.warn("Unknown tile code: " + mapImage.getRGB(x, y));
 				}
 			}
 		}
+		Logger.info("Walls Generated");
 	}
 	
 	private void loadMap(String fileLocation) {
@@ -155,6 +157,7 @@ public class GoalboundGenerator {
 		for (int size = 1; size <= MAXIMUM_SIZE; size++) {
 
 			for (int x = 0; x < mapWidth; x++) {
+				Logger.info("Layer " + (x + 1) + " of " + mapWidth + " completed");
 				for (int y = 0; y < mapHeight; y++) {
 
 					if (!AStarSearch.containsWall(new Vector2(x, y), size, walls)) {
@@ -182,6 +185,8 @@ public class GoalboundGenerator {
 					}
 				}
 			}
+			Logger.info("Size " + size + " completed");
 		}
+		Logger.info("All goalbounds Created");
 	}
 }

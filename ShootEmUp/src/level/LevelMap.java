@@ -30,7 +30,7 @@ public class LevelMap {
 	public LevelMap(String file) {
 		tileMap = new TileMap(file, TILE_WIDTH);
 		walls = new HashMap<>();
-		goalBounder = GoalBounder.readGoalbounder("res/Levels/Level1.bound");
+		goalBounder = GoalBounder.readGoalbounder(file.substring(0, file.length() - 4) + ".bound");
 	}
 
 	public void init() {
