@@ -144,13 +144,33 @@ public class AStarSearch {
 	public static boolean movesIntoWall(Vector2 position, int size, Set<Vector2> walls, String key) {
 		switch (key) {
 		case "NW":
-			return checkEdgesForWalls(position, size, walls, "N") || checkEdgesForWalls(position, size, walls, "W");
+			if (!checkEdgesForWalls(position, size, walls, "N") && !checkEdgesForWalls(position, size, walls, "W")) {
+				return walls.contains(new Vector2(position.x(), position.y() + size))
+						&& walls.contains(new Vector2(position.x() + size, position.y()));
+			} else {
+				return true;
+			}
 		case "NE":
-			return checkEdgesForWalls(position, size, walls, "N") || checkEdgesForWalls(position, size, walls, "E");
+			if (!checkEdgesForWalls(position, size, walls, "N") && !checkEdgesForWalls(position, size, walls, "E")) {
+				return walls.contains(new Vector2(position.x(), position.y() + size))
+						&& walls.contains(new Vector2(position.x() - size, position.y()));
+			} else {
+				return true;
+			}
 		case "SW":
-			return checkEdgesForWalls(position, size, walls, "S") || checkEdgesForWalls(position, size, walls, "W");
+			if (!checkEdgesForWalls(position, size, walls, "S") && !checkEdgesForWalls(position, size, walls, "W")) {
+				return walls.contains(new Vector2(position.x(), position.y() - size))
+						&& walls.contains(new Vector2(position.x() + size, position.y()));
+			} else {
+				return true;
+			}
 		case "SE":
-			return checkEdgesForWalls(position, size, walls, "S") || checkEdgesForWalls(position, size, walls, "E");
+			if (!checkEdgesForWalls(position, size, walls, "S") && !checkEdgesForWalls(position, size, walls, "E")) {
+				return walls.contains(new Vector2(position.x(), position.y() - size))
+						&& walls.contains(new Vector2(position.x() - size, position.y()));
+			} else {
+				return true;
+			}
 		default:
 			return checkEdgesForWalls(position, size, walls, key);
 		}
