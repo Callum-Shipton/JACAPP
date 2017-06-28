@@ -22,6 +22,9 @@ public class AIControl extends BaseControl {
 	private int aggression = 30;
 	private AStarSearch search;
 	private BaseGraphics playerGraphics;
+	private Vector2 goalLocation;
+
+	private Vector2 target;
 
 	public AIControl(BaseGraphics graphics, BaseAttack attack, BaseMovement movement) {
 		this.graphics = graphics;
@@ -53,29 +56,23 @@ public class AIControl extends BaseControl {
 		Vector2 startVector = search.getGridPosition(graphics.getX(), graphics.getY());
 		Logger.debug("Current Tile: " + startVector.x() + ", " + startVector.y(), Category.AI);
 
-		Vector2 target = search.findPath(goalVector, startVector);
+		target = search.findPath(goalVector, startVector);
 
-		if (target.equals(startVector)) {
-			target = goalVector;
-		}
+		Vector2 movementVector = calculateMovementVector(target, graphics.getX(), graphics.getY(), movement.getSpeed());
 
-		if (target != null) {
-			Vector2 movementVector = calculateMovementVector(target, graphics.getX(), graphics.getY(),
-					movement.getSpeed());
-
-			if (movementVector.length() > 0) {
-				if (graphics instanceof AnimatedGraphics) {
-					((AnimatedGraphics) graphics).setAnimating(true);
-				}
-				movement.move(e, movementVector);
-				if (graphics instanceof AnimatedGraphics) {
-					((AnimatedGraphics) graphics).setDirection((int) (Math.round(movementVector.Angle()) / 45));
-				}
-
-			} else if (graphics instanceof AnimatedGraphics) {
-				((AnimatedGraphics) graphics).setAnimating(false);
+		if (movementVector.length() > 0) {
+			if (graphics instanceof AnimatedGraphics) {
+				((AnimatedGraphics) graphics).setAnimating(true);
 			}
+			movement.move(e, movementVector);
+			if (graphics instanceof AnimatedGraphics) {
+				((AnimatedGraphics) graphics).setDirection((int) (Math.round(movementVector.Angle()) / 45));
+			}
+
+		} else if (graphics instanceof AnimatedGraphics) {
+			((AnimatedGraphics) graphics).setAnimating(false);
 		}
+
 		attack(e);
 	}
 }

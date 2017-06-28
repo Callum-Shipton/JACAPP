@@ -1,7 +1,9 @@
 package ai;
 
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -21,6 +23,8 @@ public class AStarSearch {
 	private AStarNode goalNode;
 	private float nodeWidth;
 	private int width;
+	private Deque<Vector2> path;
+	private Vector2 target;
 
 	public AStarSearch(Set<Vector2> walls, GoalBounder goalBounder, float nodeWidth, int width) {
 		if (AStarSearch.walls == null) {
@@ -89,9 +93,12 @@ public class AStarSearch {
 
 	private Vector2 findPathStart(AStarNode currentNode) {
 		AStarNode node = currentNode;
+		path = new LinkedList<>();
+		path.push(node.getPosition());
 		while (true) {
 			if (node.getParent() != null) {
 				if (node.getParent().equals(startNode)) {
+					target = node.getPosition();
 					return node.getPosition();
 				} else {
 					node = node.getParent();
@@ -99,28 +106,40 @@ public class AStarSearch {
 			} else {
 				return new Vector2(0, 0);
 			}
+			path.push(node.getPosition());
 		}
 	}
 
 	public Vector2 findPath(Vector2 goal, Vector2 start) {
-		initData(goal, start);
 
-		int searchedNodes = 0;
-		while (!openNodes.isEmpty()) {
-			searchedNodes++;
-			AStarNode currentNode = openNodes.poll();
+		if (goalNode != null && goal.equals(goalNode.getPosition())) {
+			if (start.equals(target) && !path.isEmpty()) {
+				target = path.pop();
+			}
+		} else {
 
-			if (containsGoal(currentNode, goalNode)) {
-				return findPathStart(currentNode);
+			initData(goal, start);
+
+			int searchedNodes = 0;
+			while (!openNodes.isEmpty()) {
+				searchedNodes++;
+				AStarNode currentNode = openNodes.poll();
+
+				if (containsGoal(currentNode, goalNode)) {
+					return findPathStart(currentNode);
+				}
+
+				generateChildNodes(currentNode);
+
+				addUnobstructedChildNodes(currentNode.getPosition());
 			}
 
-			generateChildNodes(currentNode);
-
-			addUnobstructedChildNodes(currentNode.getPosition());
+			Logger.warn("cannot find player");
+			Logger.debug(searchedNodes, Logger.Category.AI);
 		}
-
-		Logger.warn("cannot find player");
-		Logger.debug(searchedNodes, Logger.Category.AI);
+		if (target != null) {
+			return target;
+		}
 		return new Vector2(0, 0);
 	}
 
@@ -193,5 +212,9 @@ public class AStarSearch {
 			break;
 		}
 		return false;
+	}
+
+	public Vector2 nextNode() {
+		return path.pop();
 	}
 }

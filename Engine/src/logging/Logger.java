@@ -10,8 +10,7 @@ public final class Logger {
 	private static boolean info = true;
 	private static boolean debug = true;
 
-	private static Set<Category> categories = new HashSet<>(
-			Arrays.asList(Category.AI, Category.ENTITIES, Category.AI_GOALBOUNDING));
+	private static Set<Category> categories = new HashSet<>(Arrays.asList(Category.AI, Category.AI_GOALBOUNDING));
 
 	private Logger() {
 	}
