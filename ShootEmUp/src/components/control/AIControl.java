@@ -55,10 +55,6 @@ public class AIControl extends BaseControl {
 
 		Vector2 target = search.findPath(goalVector, startVector);
 
-		if (search.containsGoal(target, (int) graphics.getWidth() / LevelMap.TILE_WIDTH, goalVector)) {
-			target = goalVector;
-		}
-
 		Vector2 movementVector = calculateMovementVector(target, graphics.getX(), graphics.getY(), movement.getSpeed());
 
 		if (movementVector.length() > 0) {
@@ -67,7 +63,7 @@ public class AIControl extends BaseControl {
 			}
 			movement.move(e, movementVector);
 			if (graphics instanceof AnimatedGraphics) {
-				((AnimatedGraphics) graphics).setDirection((int) (Math.round(movementVector.Angle()) / 45));
+				((AnimatedGraphics) graphics).setDirection((int) (Math.round(movementVector.angle()) / 45));
 			}
 
 		} else if (graphics instanceof AnimatedGraphics) {

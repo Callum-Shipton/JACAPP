@@ -6,7 +6,7 @@ import org.lwjgl.BufferUtils;
 
 public class Vector2 implements Vector<Vector2> {
 
-	private final static FloatBuffer direct = BufferUtils.createFloatBuffer(2);
+	private static final FloatBuffer direct = BufferUtils.createFloatBuffer(2);
 
 	private float x, y;
 
@@ -45,7 +45,7 @@ public class Vector2 implements Vector<Vector2> {
 		return add(vec.x, vec.y);
 	}
 
-	public double Angle() {
+	public double angle() {
 		double a = Math.asin(this.x);
 		if (this.y > 0) {
 			a = Math.PI - a;
@@ -88,7 +88,7 @@ public class Vector2 implements Vector<Vector2> {
 	public boolean equals(Object o) {
 		if (o instanceof Vector2) {
 			Vector2 v = (Vector2) o;
-			return (Float.compare(this.x, v.x) == 0 && Float.compare(this.y, v.y) == 0);
+			return Float.compare(x, v.x) == 0 && Float.compare(y, v.y) == 0;
 		}
 
 		return false;

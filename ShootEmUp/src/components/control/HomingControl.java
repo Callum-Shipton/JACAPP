@@ -41,7 +41,7 @@ public class HomingControl extends BaseControl {
 				}
 				movement.move(e, movementVector);
 				if (graphics instanceof AnimatedGraphics) {
-					((AnimatedGraphics) graphics).setDirection((int) (Math.round(movementVector.Angle()) / 45));
+					((AnimatedGraphics) graphics).setDirection((int) (Math.round(movementVector.angle()) / 45));
 				}
 
 			} else if (graphics instanceof AnimatedGraphics) {

@@ -33,7 +33,7 @@ public class AStarNode implements Comparable<AStarNode> {
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof AStarNode) {
-			return ((AStarNode) o).getPosition().equals(this.position);
+			return ((AStarNode) o).getPosition().equals(position);
 		}
 		return false;
 	}

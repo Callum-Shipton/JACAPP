@@ -84,7 +84,7 @@ public class PlayerControl extends BaseControl {
 			if (dir.length() > 1) {
 				dir.normalize();
 			}
-			this.PG.setDirection((int) (Math.round(dir.Angle()) / 45));
+			this.PG.setDirection((int) (Math.round(dir.angle()) / 45));
 		}
 	}
 

@@ -98,7 +98,6 @@ public class AStarSearch {
 		while (true) {
 			if (node.getParent() != null) {
 				if (node.getParent().equals(startNode)) {
-					target = node.getPosition();
 					return node.getPosition();
 				} else {
 					node = node.getParent();
@@ -115,6 +114,8 @@ public class AStarSearch {
 		if (goalNode != null && goal.equals(goalNode.getPosition())) {
 			if (start.equals(target) && !path.isEmpty()) {
 				target = path.pop();
+			} else if (path.isEmpty()) {
+				target = goal;
 			}
 		} else {
 
@@ -126,7 +127,8 @@ public class AStarSearch {
 				AStarNode currentNode = openNodes.poll();
 
 				if (containsGoal(currentNode.getPosition(), currentNode.getWidth(), goalNode.getPosition())) {
-					return findPathStart(currentNode);
+					target = findPathStart(currentNode);
+					return target;
 				}
 
 				generateChildNodes(currentNode);
