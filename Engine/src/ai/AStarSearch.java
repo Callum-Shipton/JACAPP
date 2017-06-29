@@ -17,8 +17,8 @@ public class AStarSearch {
 	private static Set<Vector2> walls;
 	private static GoalBounder goalBounder;
 
-	private Queue<AStarNode> openNodes = new PriorityQueue<>();;
-	private Set<AStarNode> closedNodes = new HashSet<>();;
+	private Queue<AStarNode> openNodes = new PriorityQueue<>();
+	private Set<AStarNode> closedNodes = new HashSet<>();
 	private Map<String, AStarNode> childNodes = new HashMap<>();
 	private Deque<Vector2> path = new LinkedList<>();
 
@@ -176,14 +176,14 @@ public class AStarSearch {
 			return checkEdgesForWalls(position, size + 1, walls, "N")
 					|| checkEdgesForWalls(position, size + 1, walls, "W");
 		case "NE":
-			return checkEdgesForWalls(position, size + 1, walls, "N")
-					|| checkEdgesForWalls(position, size + 1, walls, "E");
+			return checkEdgesForWalls(new Vector2(position.x(), position.y() - 1), size + 1, walls, "N")
+					|| checkEdgesForWalls(new Vector2(position.x(), position.y() - 1), size, walls, "E");
 		case "SW":
-			return checkEdgesForWalls(position, size + 1, walls, "S")
-					|| checkEdgesForWalls(position, size + 1, walls, "W");
+			return checkEdgesForWalls(new Vector2(position.x() - 1, position.y()), size, walls, "S")
+					|| checkEdgesForWalls(new Vector2(position.x() - 1, position.y()), size + 1, walls, "W");
 		case "SE":
-			return checkEdgesForWalls(position, size + 1, walls, "S")
-					|| checkEdgesForWalls(position, size + 1, walls, "E");
+			return checkEdgesForWalls(new Vector2(position.x() - 1, position.y() - 1), size, walls, "S")
+					|| checkEdgesForWalls(new Vector2(position.x() - 1, position.y() - 1), size, walls, "E");
 		default:
 			return checkEdgesForWalls(position, size, walls, key);
 		}
