@@ -176,11 +176,11 @@ public class AStarSearch {
 			return checkEdgesForWalls(position, size + 1, walls, "N")
 					|| checkEdgesForWalls(position, size + 1, walls, "W");
 		case "NE":
-			return checkEdgesForWalls(new Vector2(position.x(), position.y() - 1), size + 1, walls, "N")
-					|| checkEdgesForWalls(new Vector2(position.x(), position.y() - 1), size + 1, walls, "E");
+			return checkEdgesForWalls(new Vector2(position.x() - 1, position.y()), size + 1, walls, "N")
+					|| checkEdgesForWalls(new Vector2(position.x() - 1, position.y()), size + 1, walls, "E");
 		case "SW":
-			return checkEdgesForWalls(new Vector2(position.x() - 1, position.y()), size + 1, walls, "S")
-					|| checkEdgesForWalls(new Vector2(position.x() - 1, position.y()), size + 1, walls, "W");
+			return checkEdgesForWalls(new Vector2(position.x(), position.y() - 1), size + 1, walls, "S")
+					|| checkEdgesForWalls(new Vector2(position.x(), position.y() - 1), size + 1, walls, "W");
 		case "SE":
 			return checkEdgesForWalls(new Vector2(position.x() - 1, position.y() - 1), size + 1, walls, "S")
 					|| checkEdgesForWalls(new Vector2(position.x() - 1, position.y() - 1), size + 1, walls, "E");
