@@ -148,7 +148,7 @@ public class GoalboundGenerator {
 
 		for (TypeNode node : childNodes) {
 			boxes.put(node.getType(),
-					new BoundingBox(new Vector4(node.getPosition().x(), node.getPosition().y(), 0, 0)));
+					new BoundingBox(new Vector4(node.getPosition().x(), node.getPosition().y(), node.getPosition().x(), node.getPosition().y())));
 		}
 		return boxes;
 	}
@@ -191,7 +191,7 @@ public class GoalboundGenerator {
 						// list of already viewed tiles
 						Set<TypeNode> closed = new HashSet<>();
 
-						AStarNode start = new AStarNode(new Vector2(x, y), 1);
+						AStarNode start = new AStarNode(new Vector2(x, y), size);
 
 						List<TypeNode> startingNodes = generateChildNodes(start, size);
 
