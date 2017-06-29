@@ -1,7 +1,6 @@
 package ai;
 
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
@@ -18,8 +17,8 @@ public class AStarSearch {
 	private static GoalBounder goalBounder;
 	private Queue<AStarNode> openNodes;
 	private Set<AStarNode> closedNodes;
-	private AStarNode startNode;
 	private Map<String, AStarNode> childNodes;
+	private AStarNode startNode;
 	private AStarNode goalNode;
 	private float nodeWidth;
 	private int width;
@@ -35,17 +34,21 @@ public class AStarSearch {
 		}
 		this.nodeWidth = nodeWidth;
 		this.width = width;
+
+		openNodes = new PriorityQueue<>(); // queue for nodes to be searched
+		closedNodes = new HashSet<>(); // list of nodes already searched or
+		path = new LinkedList<>(); // being
+		// searched
 	}
 
 	private void initData(Vector2 goal, Vector2 start) {
 
 		startNode = new AStarNode(start, width);
 		goalNode = new AStarNode(goal, width);
-		openNodes = new PriorityQueue<>(); // queue for nodes to be searched
-		closedNodes = new HashSet<>(); // list of nodes already searched or
-		path = new LinkedList<>(); // being
-		// searched
-		childNodes = new HashMap<>();
+		openNodes.clear(); // queue for nodes to be searched
+		closedNodes.clear(); // list of nodes already searched or being searched
+		path.clear();
+		childNodes.clear();
 		openNodes.add(startNode);
 		closedNodes.add(startNode);
 	}
@@ -55,6 +58,7 @@ public class AStarSearch {
 		float currentY = currentNode.getPosition().y();
 		Vector2 goalPosition = goalNode.getPosition();
 
+		childNodes.clear();
 		childNodes.put("N", new AStarNode(new Vector2(currentX, currentY - 1), width, currentNode, goalPosition));
 		childNodes.put("NW", new AStarNode(new Vector2(currentX - 1, currentY - 1), width, currentNode, goalPosition));
 		childNodes.put("W", new AStarNode(new Vector2(currentX - 1, currentY), width, currentNode, goalPosition));
@@ -137,11 +141,10 @@ public class AStarSearch {
 
 			Logger.warn("cannot find player");
 			Logger.debug(searchedNodes, Logger.Category.AI);
+			target = new Vector2(0, 0);
 		}
-		if (target != null) {
-			return target;
-		}
-		return new Vector2(0, 0);
+		return target;
+
 	}
 
 	public boolean containsGoal(Vector2 origin, int size, Vector2 goal) {
