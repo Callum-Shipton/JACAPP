@@ -78,7 +78,7 @@ public class AStarSearch {
 	private void addNode(String key, GoalboundingTile goalboundingTile) {
 		AStarNode node = childNodes.get(key);
 		if (!closedNodes.contains(node) && !movesIntoWall(node.getPosition(), node.getWidth(), walls, key)
-				&& goalboundingTile.getBox(key).boxContains(goalNode.getPosition())) {
+				&& goalboundingTile.getBox(key).boxContains(goalNode.getPosition(), width)) {
 			openNodes.add(node);
 			closedNodes.add(node);
 		}

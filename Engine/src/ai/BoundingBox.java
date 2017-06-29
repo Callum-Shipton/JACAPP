@@ -30,7 +30,8 @@ public class BoundingBox implements Serializable {
 		}
 	}
 
-	public boolean boxContains(Vector2 point) {
-		return ((point.x() >= box.x()) && (point.x() <= box.z())) && ((point.y() >= box.y()) && (point.y() <= box.w()));
+	public boolean boxContains(Vector2 point, int size) {
+		return ((point.x() >= box.x()) && (point.x() <= box.z() + (size - 1)))
+				&& ((point.y() >= box.y()) && (point.y() <= box.w() + (size - 1)));
 	}
 }
