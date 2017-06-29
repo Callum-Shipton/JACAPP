@@ -125,7 +125,7 @@ public class AStarSearch {
 				searchedNodes++;
 				AStarNode currentNode = openNodes.poll();
 
-				if (containsGoal(currentNode, goalNode)) {
+				if (containsGoal(currentNode.getPosition(), currentNode.getWidth(), goalNode.getPosition())) {
 					return findPathStart(currentNode);
 				}
 
@@ -143,12 +143,11 @@ public class AStarSearch {
 		return new Vector2(0, 0);
 	}
 
-	private boolean containsGoal(AStarNode node, AStarNode goal) {
+	public boolean containsGoal(Vector2 origin, int size, Vector2 goal) {
 
-		Vector2 origin = node.getPosition();
-		for (int i = (int) origin.x(); i < origin.x() + node.getWidth(); i++) {
-			for (int j = (int) origin.y(); j < origin.y() + node.getWidth(); j++) {
-				if (goal.getPosition().equals(new Vector2(i, j))) {
+		for (int i = (int) origin.x(); i < origin.x() + size; i++) {
+			for (int j = (int) origin.y(); j < origin.y() + size; j++) {
+				if (goal.equals(new Vector2(i, j))) {
 					return true;
 				}
 			}
