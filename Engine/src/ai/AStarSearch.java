@@ -43,8 +43,8 @@ public class AStarSearch {
 		goalNode = new AStarNode(goal, width);
 		openNodes = new PriorityQueue<>(); // queue for nodes to be searched
 		closedNodes = new HashSet<>(); // list of nodes already searched or
-										// being
-										// searched
+		path = new LinkedList<>(); // being
+		// searched
 		childNodes = new HashMap<>();
 		openNodes.add(startNode);
 		closedNodes.add(startNode);
@@ -93,7 +93,6 @@ public class AStarSearch {
 
 	private Vector2 findPathStart(AStarNode currentNode) {
 		AStarNode node = currentNode;
-		path = new LinkedList<>();
 		path.push(node.getPosition());
 		while (true) {
 			if (node.getParent() != null) {
@@ -215,7 +214,4 @@ public class AStarSearch {
 		return false;
 	}
 
-	public Vector2 nextNode() {
-		return path.pop();
-	}
 }
