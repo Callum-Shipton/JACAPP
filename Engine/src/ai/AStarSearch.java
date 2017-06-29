@@ -1,6 +1,7 @@
 package ai;
 
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
@@ -15,15 +16,20 @@ public class AStarSearch {
 
 	private static Set<Vector2> walls;
 	private static GoalBounder goalBounder;
-	private Queue<AStarNode> openNodes;
-	private Set<AStarNode> closedNodes;
-	private Map<String, AStarNode> childNodes;
+
+	private Queue<AStarNode> openNodes = new PriorityQueue<>();;
+	private Set<AStarNode> closedNodes = new HashSet<>();;
+	private Map<String, AStarNode> childNodes = new HashMap<>();
+	private Deque<Vector2> path = new LinkedList<>();
+
 	private AStarNode startNode;
 	private AStarNode goalNode;
-	private float nodeWidth;
-	private int width;
-	private Deque<Vector2> path;
 	private Vector2 target;
+	private int width;
+
+	private boolean playerOutOfReach = false;
+
+	private float nodeWidth;
 
 	public AStarSearch(Set<Vector2> walls, GoalBounder goalBounder, float nodeWidth, int width) {
 		if (AStarSearch.walls == null) {
@@ -34,10 +40,6 @@ public class AStarSearch {
 		}
 		this.nodeWidth = nodeWidth;
 		this.width = width;
-
-		openNodes = new PriorityQueue<>(); // queue for nodes to be searched
-		closedNodes = new HashSet<>(); // list of nodes already searched or
-		path = new LinkedList<>(); // being
 		// searched
 	}
 
@@ -45,12 +47,16 @@ public class AStarSearch {
 
 		startNode = new AStarNode(start, width);
 		goalNode = new AStarNode(goal, width);
+
 		openNodes.clear(); // queue for nodes to be searched
 		closedNodes.clear(); // list of nodes already searched or being searched
 		path.clear();
 		childNodes.clear();
+
 		openNodes.add(startNode);
 		closedNodes.add(startNode);
+
+		playerOutOfReach = false;
 	}
 
 	private void generateChildNodes(AStarNode currentNode) {
@@ -117,7 +123,7 @@ public class AStarSearch {
 		if (goalNode != null && goal.equals(goalNode.getPosition())) {
 			if (start.equals(target) && !path.isEmpty()) {
 				target = path.pop();
-			} else if (path.isEmpty()) {
+			} else if (path.isEmpty() && !playerOutOfReach) {
 				target = goal;
 			}
 		} else {
@@ -141,6 +147,7 @@ public class AStarSearch {
 
 			Logger.warn("cannot find player");
 			Logger.debug(searchedNodes, Logger.Category.AI);
+			playerOutOfReach = true;
 			target = new Vector2(0, 0);
 		}
 		return target;
