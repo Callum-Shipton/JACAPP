@@ -117,7 +117,7 @@ public class Entity implements DatableObject<Entity> {
 	}
 
 	public void send(Message m) {
-		for (Component c : this.components.values()) {
+		for (Component c : components.values()) {
 			c.receive(m, this);
 		}
 	}

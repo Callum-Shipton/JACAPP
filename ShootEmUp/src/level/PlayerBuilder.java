@@ -22,7 +22,7 @@ public abstract class PlayerBuilder {
 	private static RigidCollision c;
 	private static BasicMovement m;
 	private static BaseInventory i;
-	private static Entity player = new Entity();
+	private static Entity player;
 
 	private static void addComponents() {
 		player.addComponent(g);
@@ -35,6 +35,7 @@ public abstract class PlayerBuilder {
 	}
 
 	public static Entity buildPlayer(TypeAttack type) {
+		player = new Entity();
 		chooseType(type);
 
 		c = new RigidCollision();
