@@ -26,8 +26,8 @@ public class GoalboundGenerator {
 	private Set<Vector2> walls;
 
 	private static final int MAXIMUM_SIZE = 4;
-	private static final String IN_MAP_FILE = "/Levels/Level2.png";
-	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level2.bound";
+	private static final String IN_MAP_FILE = "/Levels/Level1.png";
+	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level1.bound";
 
 	private static final int BROWNWALL_COLOR = -7864299;
 	private static final int GREYWALL_COLOR = -8421505;
@@ -117,23 +117,24 @@ public class GoalboundGenerator {
 		if (!AStarSearch.movesIntoWall(new Vector2(startX, startY - 1), size, walls, "N")) {
 			childNodes.add(new TypeNode(new Vector2(startX, startY - 1), type != null ? type : "N"));
 		}
-		if (!AStarSearch.movesIntoWall(new Vector2(startX - 1, startY - 1), size, walls, "NW")) {
-			childNodes.add(new TypeNode(new Vector2(startX - 1, startY - 1), type != null ? type : "NW"));
-		}
 		if (!AStarSearch.movesIntoWall(new Vector2(startX - 1, startY), size, walls, "W")) {
 			childNodes.add(new TypeNode(new Vector2(startX - 1, startY), type != null ? type : "W"));
-		}
-		if (!AStarSearch.movesIntoWall(new Vector2(startX - 1, startY + 1), size, walls, "SW")) {
-			childNodes.add(new TypeNode(new Vector2(startX - 1, startY + 1), type != null ? type : "SW"));
 		}
 		if (!AStarSearch.movesIntoWall(new Vector2(startX, startY + 1), size, walls, "S")) {
 			childNodes.add(new TypeNode(new Vector2(startX, startY + 1), type != null ? type : "S"));
 		}
-		if (!AStarSearch.movesIntoWall(new Vector2(startX + 1, startY + 1), size, walls, "SE")) {
-			childNodes.add(new TypeNode(new Vector2(startX + 1, startY + 1), type != null ? type : "SE"));
-		}
 		if (!AStarSearch.movesIntoWall(new Vector2(startX + 1, startY), size, walls, "E")) {
 			childNodes.add(new TypeNode(new Vector2(startX + 1, startY), type != null ? type : "E"));
+		}
+
+		if (!AStarSearch.movesIntoWall(new Vector2(startX - 1, startY - 1), size, walls, "NW")) {
+			childNodes.add(new TypeNode(new Vector2(startX - 1, startY - 1), type != null ? type : "NW"));
+		}
+		if (!AStarSearch.movesIntoWall(new Vector2(startX - 1, startY + 1), size, walls, "SW")) {
+			childNodes.add(new TypeNode(new Vector2(startX - 1, startY + 1), type != null ? type : "SW"));
+		}
+		if (!AStarSearch.movesIntoWall(new Vector2(startX + 1, startY + 1), size, walls, "SE")) {
+			childNodes.add(new TypeNode(new Vector2(startX + 1, startY + 1), type != null ? type : "SE"));
 		}
 		if (!AStarSearch.movesIntoWall(new Vector2(startX + 1, startY - 1), size, walls, "NE")) {
 			childNodes.add(new TypeNode(new Vector2(startX + 1, startY - 1), type != null ? type : "NE"));
