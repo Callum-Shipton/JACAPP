@@ -29,6 +29,8 @@ import save.Save;
 
 public abstract class ButtonHandler {
 
+	public static final String MAIN_MENU_BACKGROUND = "MainMenuScreen";
+
 	private static void back() {
 		ShootEmUp.getMenuSystem().popMenu();
 	}
@@ -37,7 +39,7 @@ public abstract class ButtonHandler {
 		Save save = ShootEmUp.getSave();
 		if (save == null) {
 			ShootEmUp.setPlayer(PlayerBuilder.buildPlayer(type));
-			ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(ImageProcessor.getImage("MainMenuScreen"), 1));
+			ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(ImageProcessor.getImage(MAIN_MENU_BACKGROUND), 1));
 		} else {
 			if (save.getCharacter(type) != null) {
 				PlayerBuilder.buildPlayer(type, save.getCharacter(type));
@@ -45,12 +47,12 @@ public abstract class ButtonHandler {
 				PlayerBuilder.buildPlayer(type);
 			}
 			ShootEmUp.getMenuSystem()
-					.addMenu(new LevelSelectMenu(ImageProcessor.getImage("MainMenuScreen"), save.getLevel()));
+					.addMenu(new LevelSelectMenu(ImageProcessor.getImage(MAIN_MENU_BACKGROUND), save.getLevel()));
 		}
 	}
 
 	private static void controls() {
-		ShootEmUp.getMenuSystem().addMenu(new ControlsMenu(ImageProcessor.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new ControlsMenu(ImageProcessor.getImage(MAIN_MENU_BACKGROUND)));
 	}
 
 	private static void exit() {
@@ -126,7 +128,7 @@ public abstract class ButtonHandler {
 			}
 		}
 
-		ShootEmUp.getMenuSystem().addMenu(new CharacterSelectMenu(ImageProcessor.getImage("MainMenuScreen"),
+		ShootEmUp.getMenuSystem().addMenu(new CharacterSelectMenu(ImageProcessor.getImage(MAIN_MENU_BACKGROUND),
 				warriorLevel, archerLevel, mageLevel, battleMageLevel, rogueLevel));
 	}
 
@@ -137,7 +139,7 @@ public abstract class ButtonHandler {
 	private static void mainMenu() {
 		ShootEmUp.getMenuSystem().setMainMenu(true);
 		ShootEmUp.getMenuSystem().clearMenus();
-		ShootEmUp.getMenuSystem().addMenu(new MainMenu(ImageProcessor.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new MainMenu(ImageProcessor.getImage(MAIN_MENU_BACKGROUND)));
 	}
 
 	private static void mana() {
@@ -168,11 +170,11 @@ public abstract class ButtonHandler {
 	}
 
 	private static void newGame() {
-		ShootEmUp.getMenuSystem().addMenu(new CharacterSelectMenu(ImageProcessor.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new CharacterSelectMenu(ImageProcessor.getImage(MAIN_MENU_BACKGROUND)));
 	}
 
 	private static void options() {
-		ShootEmUp.getMenuSystem().addMenu(new OptionsMenu(ImageProcessor.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new OptionsMenu(ImageProcessor.getImage(MAIN_MENU_BACKGROUND)));
 	}
 
 	private static void potionsUpgrade() {
@@ -306,6 +308,6 @@ public abstract class ButtonHandler {
 	}
 
 	private static void sound() {
-		ShootEmUp.getMenuSystem().addMenu(new SoundMenu(ImageProcessor.getImage("MainMenuScreen")));
+		ShootEmUp.getMenuSystem().addMenu(new SoundMenu(ImageProcessor.getImage(MAIN_MENU_BACKGROUND)));
 	}
 }
