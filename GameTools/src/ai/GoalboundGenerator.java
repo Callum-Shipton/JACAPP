@@ -26,8 +26,8 @@ public class GoalboundGenerator {
 	private Set<Vector2> walls;
 
 	private static final int MAXIMUM_SIZE = 4;
-	private static final String IN_MAP_FILE = "/Levels/Level1.png";
-	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level1.bound";
+	private static final String IN_MAP_FILE = "/Levels/Level2.png";
+	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level2.bound";
 
 	private static final int BROWNWALL_COLOR = -7864299;
 	private static final int GREYWALL_COLOR = -8421505;
@@ -147,8 +147,8 @@ public class GoalboundGenerator {
 		Map<String, BoundingBox> boxes = new HashMap<>();
 
 		for (TypeNode node : childNodes) {
-			boxes.put(node.getType(),
-					new BoundingBox(new Vector4(node.getPosition().x(), node.getPosition().y(), node.getPosition().x(), node.getPosition().y())));
+			boxes.put(node.getType(), new BoundingBox(new Vector4(node.getPosition().x(), node.getPosition().y(),
+					node.getPosition().x(), node.getPosition().y())));
 		}
 		return boxes;
 	}
