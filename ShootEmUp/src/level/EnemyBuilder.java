@@ -1,8 +1,5 @@
 package level;
 
-import java.util.Random;
-
-import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.attack.EnemyAttack;
 import components.attack.TypeAttack;
@@ -18,8 +15,6 @@ import components.movement.BasicMovement;
 import display.ImageProcessor;
 import entity.Entity;
 import logging.Logger;
-import loop.Loop;
-import main.ShootEmUp;
 import object.Armour;
 import object.Weapon;
 
@@ -32,13 +27,7 @@ public final class EnemyBuilder {
 	private static BaseCollision enemyCollision;
 	private static BaseMovement enemyMovement;
 
-	private static BaseGraphics testGraphics;
-
-	private static Random rand = new Random();
-
 	public static Entity buildEnemy(TypeEnemy type) {
-
-		testEnemy();
 
 		newEnemy = new Entity();
 
@@ -64,7 +53,7 @@ public final class EnemyBuilder {
 		case BOSS:
 			Logger.debug("Boss Enemy Spawn", Logger.Category.ENTITIES);
 			addComponents("BossEnemy", 5);
-			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 100, 5, new Weapon("TwoHanded", 1), null, null, null,
+			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 1, 5, new Weapon("TwoHanded", 1), null, null, null,
 					new Armour("Boots"));
 			break;
 		}
@@ -82,68 +71,9 @@ public final class EnemyBuilder {
 	}
 
 	private static void addComponents(String art, int speed) {
-		enemyGraphics = new AnimatedGraphics(ImageProcessor.getImage(art), ImageProcessor.base, false,
-				testGraphics.getX(), testGraphics.getY());
+		enemyGraphics = new AnimatedGraphics(ImageProcessor.getImage(art), ImageProcessor.base, false, 0, 0);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision();
 		enemyMovement = new BasicMovement(enemyCollision, enemyGraphics, speed);
-	}
-
-	private static void testEnemy() {
-
-		boolean collide;
-		Entity test = new Entity();
-
-		testGraphics = new AnimatedGraphics(ImageProcessor.getImage("Enemy"), ImageProcessor.base, false, 1f);
-		test.addComponent(testGraphics);
-
-		BaseCollision baseCollision = new RigidCollision();
-		test.addComponent(baseCollision);
-
-		BaseMovement baseMovement = new BasicMovement(baseCollision, testGraphics, 5);
-		test.addComponent(baseMovement);
-
-		BaseGraphics playerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		float px = playerGraphics.getX();
-		float py = playerGraphics.getY();
-		float pw = playerGraphics.getWidth();
-		float ph = playerGraphics.getHeight();
-
-		Level level = ShootEmUp.getCurrentLevel();
-
-		int spawnX;
-		int spawnY;
-
-		do {
-			collide = false;
-
-			spawnX = rand.nextInt(level.getMap().getWidth() - 1) * LevelMap.TILE_WIDTH;
-			spawnY = rand.nextInt(level.getMap().getHeight() - 1) * LevelMap.TILE_WIDTH;
-
-			
-			// TODO: Fix garbage patch to enemy spawning
-			testGraphics.setX(spawnX+10);
-			testGraphics.setY(spawnY+10);
-
-			// Checks if the enemy will spawn on screen
-			if ((Math.abs((spawnX + (testGraphics.getWidth() / 2)) - (px + (pw / 2))) <= (Loop.getDisplay().getWidth()
-					+ testGraphics.getWidth()))
-					&& (Math.abs((spawnY + (testGraphics.getHeight() / 2))
-							- (py + (ph / 2))) <= (Loop.getDisplay().getHeight() + testGraphics.getHeight()))) {
-				collide = true;
-				continue;
-			}
-
-			// Checks if the enemy will spawn on top of an entity
-			for (Entity character : level.getEntities()) {
-				if (baseMovement.doesCollide(test, character) != null) {
-					collide = true;
-					break;
-				}
-			}
-		} while (collide);
-
-		Logger.debug("Spawn Location: " + spawnX / LevelMap.TILE_WIDTH + ", " + spawnY / LevelMap.TILE_WIDTH,
-				Logger.Category.ENTITIES);
 	}
 }

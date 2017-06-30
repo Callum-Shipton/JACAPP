@@ -106,6 +106,10 @@ public class ShootEmUp implements Game {
 		return save;
 	}
 
+	public static Hud getHud() {
+		return hud;
+	}
+
 	public static void setCurrentLevel(Level currentLevel) {
 		ShootEmUp.currentLevel = currentLevel;
 	}

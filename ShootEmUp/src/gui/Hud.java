@@ -7,8 +7,8 @@ import components.attack.PlayerAttack;
 import components.inventory.BaseInventory;
 import components.inventory.TypePotion;
 import components.movement.BasicMovement;
-import display.ImageProcessor;
 import display.DPDTRenderer;
+import display.ImageProcessor;
 import entity.Entity;
 import loop.Loop;
 import main.ShootEmUp;
@@ -67,7 +67,8 @@ public class Hud extends GuiComponent {
 		frost = new Icon(0.0f, 140.0f, ImageProcessor.getImage("Frost"), false, 1f);
 
 		// Potions bar
-		infoBoxBottom = new Icon(0.0f, Loop.getDisplay().getHeight() - ImageProcessor.getImage("BarInfoBottom").getHeight(),
+		infoBoxBottom = new Icon(0.0f,
+				Loop.getDisplay().getHeight() - ImageProcessor.getImage("BarInfoBottom").getHeight(),
 				ImageProcessor.getImage("BarInfoBottom"), false, 1f);
 		hudElems.add(infoBoxBottom);
 	}
@@ -118,7 +119,7 @@ public class Hud extends GuiComponent {
 		frost.update();
 		moneyCounter.update(PI.getCoins());
 		levelCounter.update(PI.getLevel());
-		waveCounter.update(ShootEmUp.getCurrentLevel().getSpawner().getWave());
+		waveCounter.update(ShootEmUp.getCurrentLevel().getWave());
 		livesCounter.update(PA.getLives());
 
 		int maxHealth = PA.getMaxHealth();
