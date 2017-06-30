@@ -27,6 +27,7 @@ public class AIControl extends BaseControl {
 		this.graphics = graphics;
 		this.attack = attack;
 		this.movement = movement;
+
 		LevelMap map = ShootEmUp.getGame().getCurrentLevel().getMap();
 		playerGraphics = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.GRAPHICS);
 		search = new AStarSearch(map.getWalls().keySet(), map.getGoalBounder(), LevelMap.TILE_WIDTH,

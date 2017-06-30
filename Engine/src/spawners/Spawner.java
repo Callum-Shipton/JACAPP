@@ -31,8 +31,8 @@ public abstract class Spawner {
 	protected Entity chooseEntity() {
 		Entity newEntity;
 
-		int prob = this.rand.nextInt(entities.size());
-		newEntity = entities.get(prob);
+		int prob = rand.nextInt(entities.size());
+		newEntity = entities.get(prob).clone();
 
 		return newEntity;
 	}

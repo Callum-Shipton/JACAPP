@@ -56,7 +56,7 @@ public class BasicMovement extends BaseMovement {
 		Vector4 collVec;
 
 		for (Entity entity : entities) {
-			if (entity != currentEntity) {
+			if (!entity.equals(currentEntity)) {
 				collVec = doesCollide(currentEntity, entity);
 				if (collVec != null) {
 					collide = true;

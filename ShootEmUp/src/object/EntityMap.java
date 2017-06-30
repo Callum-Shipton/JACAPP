@@ -64,7 +64,7 @@ public class EntityMap {
 	public Set<Entity> getRigidEntites(Set<Vector2> gridPos) {
 		Set<Entity> result = new HashSet<>();
 		for (Vector2 gridPosi : gridPos) {
-			for (Entity e : this.map.get((int) gridPosi.x()).get((int) gridPosi.y())) {
+			for (Entity e : map.get((int) gridPosi.x()).get((int) gridPosi.y())) {
 				if (e.getComponent(TypeComponent.COLLISION) instanceof RigidCollision) {
 					result.add(e);
 				}
@@ -75,7 +75,7 @@ public class EntityMap {
 
 	public void removeEntity(Set<Vector2> gridPos, Entity e) {
 		for (Vector2 gridPosi : gridPos) {
-			((this.map.get((int) gridPosi.x())).get((int) gridPosi.y())).remove(e);
+			((map.get((int) gridPosi.x())).get((int) gridPosi.y())).remove(e);
 		}
 	}
 }

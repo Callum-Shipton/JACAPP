@@ -17,9 +17,6 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 	protected boolean moveBack;
 
 	@Override
-	public abstract void collision(Entity e, Entity hit);
-
-	@Override
 	public void destroy(Entity e) {
 		ShootEmUp.getGame().getCurrentLevel().removeEntity(gridPos, e);
 	}

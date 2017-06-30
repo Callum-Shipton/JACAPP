@@ -66,11 +66,10 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	public void receive(Message m, Entity e) {
 		if (m == Message.ENTITY_MOVED) {
 			EntityMap eMap = ShootEmUp.getGame().getCurrentLevel().geteMap();
-			eMap.removeEntity(this.BC.getGridPos(), e);
-			this.BC.setGridPos(eMap.getGridPos(e));
-			eMap.addEntity(this.BC.getGridPos(), e);
+			eMap.removeEntity(BC.getGridPos(), e);
+			BC.setGridPos(eMap.getGridPos(e));
+			eMap.addEntity(BC.getGridPos(), e);
 		}
-
 	}
 
 	public void setFlat(boolean flat) {

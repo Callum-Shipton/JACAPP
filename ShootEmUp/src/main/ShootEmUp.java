@@ -16,13 +16,9 @@ public class ShootEmUp implements Game {
 	private static MusicPlayer musicPlayer;
 	private static MenuSystem menuSystem = new MenuSystem();
 	private static Save save;
-	private static GameBase game;
+	private static GameBase game = new GameBase();
 
 	private static boolean paused = true;
-
-	public ShootEmUp() {
-		game = new GameBase();
-	}
 
 	public static void main(String[] args) {
 		Loop loop = new Loop(new ShootEmUp(), 60.0f, new Art());

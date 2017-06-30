@@ -42,7 +42,7 @@ public class AreaSpawner extends Spawner {
 		graphicsComponent.setY(position.y());
 		entity.addComponent(graphicsComponent);
 
-		entities.add(entity);
+		spawnedEntities.add(entity);
 	}
 
 	private Vector2 getPosition() {

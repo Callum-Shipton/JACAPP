@@ -1,6 +1,5 @@
 package level;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -47,15 +46,11 @@ public class Level {
 	private boolean levelFinished = false;
 
 	public Level(String file, int level) {
-		List<Entity> enemyPrototypes = new ArrayList<>();
-		entities.add(EnemyBuilder.buildEnemy(TypeEnemy.SMALL));
-		entities.add(EnemyBuilder.buildEnemy(TypeEnemy.NORMAL));
-		entities.add(EnemyBuilder.buildEnemy(TypeEnemy.FLYING));
-
 		map = new LevelMap(file + level + ".png");
+		map.init();
 		eMap = new EntityMap(map.getWidth(), map.getHeight());
 		spawners = new HashSet<>();
-		spawners.add(new AreaSpawner(1, enemyPrototypes, map.getWidth(), map.getHeight(), 0, 0));
+
 		entities = new HashSet<>();
 		oldEntities = new HashSet<>();
 		newEntities = new HashSet<>();
@@ -64,6 +59,10 @@ public class Level {
 		radiusLocationInst = GL20.glGetUniformLocation(ImageProcessor.ShaderInst, "radius");
 		radiusIncreasePerLevel = 1;
 		changeRadius(0);
+	}
+
+	public void addSpawner(List<Entity> prototypes) {
+		spawners.add(new AreaSpawner(1, prototypes, map.getWidth(), map.getHeight(), 0, 0));
 	}
 
 	public void changeRadius(float f) {
@@ -77,30 +76,32 @@ public class Level {
 
 	public void init() {
 		addEntity(ShootEmUp.getGame().getPlayer());
-		map.init();
+
 		for (Entity wall : map.getWalls().values()) {
 			addEntity(wall);
 		}
 	}
 
 	public void addEntities() {
-		Iterator<Entity> newEntitiesIter = this.newEntities.iterator();
+		Iterator<Entity> newEntitiesIter = newEntities.iterator();
 		while (newEntitiesIter.hasNext()) {
 			Entity n = newEntitiesIter.next();
-			boolean res = this.entities.add(n);
+			boolean res = entities.add(n);
 			if (!res) {
 				Logger.warn("New entity not added. Name: " + n.toString() + ", HC: " + n.hashCode());
 			}
 		}
-		this.newEntities.clear();
+		newEntities.clear();
 	}
 
 	public void addEntity(Entity e) {
-		this.newEntities.add(e);
+		newEntities.add(e);
 		BaseCollision BC = e.getComponent(TypeComponent.COLLISION);
 		if (BC != null) {
 			BC.setGridPos(eMap.getGridPos(e));
 			eMap.addEntity(eMap.getGridPos(e), e);
+		} else {
+			Logger.warn("No Collision");
 		}
 	}
 

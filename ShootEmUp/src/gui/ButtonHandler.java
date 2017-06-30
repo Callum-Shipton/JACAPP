@@ -3,12 +3,16 @@ package gui;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
 import components.inventory.BaseInventory;
 import display.ImageProcessor;
+import entity.Entity;
 import gui.menus.CharacterSelectMenu;
 import gui.menus.ControlsMenu;
 import gui.menus.InventoryMenu;
@@ -20,8 +24,10 @@ import gui.menus.SaveMenu;
 import gui.menus.SkillMenu;
 import gui.menus.SoundMenu;
 import gui.menus.UpgradesMenu;
+import level.EnemyBuilder;
 import level.Level;
 import level.PlayerBuilder;
+import level.TypeEnemy;
 import logging.Logger;
 import loop.Loop;
 import main.ShootEmUp;
@@ -91,9 +97,18 @@ public abstract class ButtonHandler {
 		}
 	}
 
-	private static void level(int level) {
-		ShootEmUp.getGame().setCurrentLevel(new Level(ImageProcessor.LEVEL_FILE_LOCATION, level));
-		ShootEmUp.getGame().getCurrentLevel().init();
+	private static void level(int levelNum) {
+		Level level = new Level(ImageProcessor.LEVEL_FILE_LOCATION, levelNum);
+		level.init();
+
+		ShootEmUp.getGame().setCurrentLevel(level);
+
+		List<Entity> enemyPrototypes = new ArrayList<>();
+		enemyPrototypes.add(EnemyBuilder.buildEnemy(TypeEnemy.SMALL));
+		enemyPrototypes.add(EnemyBuilder.buildEnemy(TypeEnemy.NORMAL));
+		enemyPrototypes.add(EnemyBuilder.buildEnemy(TypeEnemy.FLYING));
+
+		level.addSpawner(enemyPrototypes);
 		ShootEmUp.startGame();
 	}
 

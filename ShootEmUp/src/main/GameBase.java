@@ -1,5 +1,8 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.attack.TypeAttack;
@@ -7,8 +10,10 @@ import components.graphical.BaseGraphics;
 import display.ImageProcessor;
 import entity.Entity;
 import gui.Hud;
+import level.EnemyBuilder;
 import level.Level;
 import level.PlayerBuilder;
+import level.TypeEnemy;
 import logging.Logger;
 import save.Save;
 
@@ -55,6 +60,14 @@ public class GameBase {
 		TypeAttack temp = playerAttack.getAttackType();
 		currentLevel = new Level(ImageProcessor.LEVEL_FILE_LOCATION, levelNumber + 1);
 		currentLevel.init();
+
+		List<Entity> enemyPrototypes = new ArrayList<>();
+		enemyPrototypes.add(EnemyBuilder.buildEnemy(TypeEnemy.SMALL));
+		enemyPrototypes.add(EnemyBuilder.buildEnemy(TypeEnemy.NORMAL));
+		enemyPrototypes.add(EnemyBuilder.buildEnemy(TypeEnemy.FLYING));
+
+		currentLevel.addSpawner(enemyPrototypes);
+
 		try {
 			ShootEmUp.getSave().load(1);
 		} catch (Exception e) {

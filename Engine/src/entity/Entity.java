@@ -58,7 +58,7 @@ public class Entity implements DatableObject<Entity> {
 
 	// add components
 	public void addComponent(Component c) {
-		this.components.put(c.getType(), c);
+		components.put(c.getType(), c);
 	}
 
 	public void destroy() {
@@ -74,7 +74,7 @@ public class Entity implements DatableObject<Entity> {
 	}
 
 	public Map<TypeComponent, Component> getComponents() {
-		return this.components;
+		return components;
 	}
 
 	public void initSystem() {
@@ -154,5 +154,16 @@ public class Entity implements DatableObject<Entity> {
 	@Override
 	public int hashCode() {
 		return id.hashCode();
+	}
+
+	@Override
+	public Entity clone() {
+		Entity entity = new Entity();
+
+		for (Component component : getComponents().values()) {
+			entity.addComponent(component);
+		}
+
+		return entity;
 	}
 }
