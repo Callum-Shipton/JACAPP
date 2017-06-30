@@ -21,6 +21,7 @@ public class ShootEmUp implements Game {
 	private static boolean paused = true;
 
 	public ShootEmUp() {
+		game = new GameBase();
 	}
 
 	public static void main(String[] args) {

@@ -1,5 +1,6 @@
 package spawners;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -13,7 +14,7 @@ public abstract class Spawner {
 	protected final int spawnRate;
 
 	protected List<Entity> entities;
-	protected Set<Entity> spawnedEntities;
+	protected Set<Entity> spawnedEntities = new HashSet<>();
 	protected Random rand;
 
 	public Spawner(int spawnRate, List<Entity> entities) {

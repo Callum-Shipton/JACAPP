@@ -3,6 +3,7 @@ package level;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.lwjgl.opengl.GL20;
@@ -30,7 +31,7 @@ public class Level {
 	private LevelMap map;
 
 	private int currentWave = 1;
-	private final static int maxWave = 10;
+	private static final int MAX_WAVE = 10;
 
 	private int enemies = 0;
 	private int totalEnemies = 1;
@@ -46,10 +47,15 @@ public class Level {
 	private boolean levelFinished = false;
 
 	public Level(String file, int level) {
+		List<Entity> enemyPrototypes = new ArrayList<>();
+		entities.add(EnemyBuilder.buildEnemy(TypeEnemy.SMALL));
+		entities.add(EnemyBuilder.buildEnemy(TypeEnemy.NORMAL));
+		entities.add(EnemyBuilder.buildEnemy(TypeEnemy.FLYING));
+
 		map = new LevelMap(file + level + ".png");
 		eMap = new EntityMap(map.getWidth(), map.getHeight());
 		spawners = new HashSet<>();
-		spawners.add(new AreaSpawner(1, new ArrayList<Entity>(), map.getWidth(), map.getHeight(), 0, 0));
+		spawners.add(new AreaSpawner(1, enemyPrototypes, map.getWidth(), map.getHeight(), 0, 0));
 		entities = new HashSet<>();
 		oldEntities = new HashSet<>();
 		newEntities = new HashSet<>();
@@ -166,7 +172,7 @@ public class Level {
 
 	private void nextWave() {
 		totalEnemies = 0;
-		if (currentWave < maxWave) {
+		if (currentWave < MAX_WAVE) {
 			currentWave++;
 			changeRadius((currentWave - 1) * radiusIncreasePerLevel);
 		} else {

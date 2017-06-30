@@ -22,6 +22,10 @@ public class GameBase {
 	private Entity player;
 	private Hud hud;
 
+	public GameBase() {
+
+	}
+
 	public void update() {
 		if (!currentLevel.getLevelFinished()) {
 			currentLevel.update();
@@ -57,10 +61,7 @@ public class GameBase {
 			Logger.error(e);
 		}
 		player = PlayerBuilder.buildPlayer(temp, ShootEmUp.getSave().getCharacter(temp));
-
-		if (hud == null) {
-			hud = new Hud(player, 0, 0);
-		}
+		hud = new Hud(player, 0, 0);
 	}
 
 	public Entity getPlayer() {

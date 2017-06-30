@@ -49,6 +49,7 @@ public abstract class ButtonHandler {
 			ShootEmUp.getMenuSystem()
 					.addMenu(new LevelSelectMenu(ImageProcessor.getImage(MAIN_MENU_BACKGROUND), save.getLevel()));
 		}
+		ShootEmUp.getGame().setHud(new Hud(ShootEmUp.getGame().getPlayer(), 0, 0));
 	}
 
 	private static void controls() {
