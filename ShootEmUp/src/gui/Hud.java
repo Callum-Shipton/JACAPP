@@ -11,7 +11,6 @@ import display.DPDTRenderer;
 import display.ImageProcessor;
 import entity.Entity;
 import loop.Loop;
-import main.ShootEmUp;
 import math.Vector2;
 
 public class Hud extends GuiComponent {
@@ -38,7 +37,7 @@ public class Hud extends GuiComponent {
 	private PlayerAttack PA;
 	private BasicMovement PM;
 
-	public Hud(Entity player, float x, float y, int waveNumber) {
+	public Hud(Entity player, float x, float y) {
 		super(x, y);
 
 		PI = player.getComponent(TypeComponent.INVENTORY);
@@ -58,7 +57,7 @@ public class Hud extends GuiComponent {
 		hudElems.add(moneyCounter);
 		levelCounter = new Counter(90.0f, 82.0f, ImageProcessor.getImage("LevelIcon"), false, PI.getLevel(), 0.5f);
 		hudElems.add(levelCounter);
-		waveCounter = new Counter(170.0f, 82.0f, ImageProcessor.getImage("WaveIcon"), false, waveNumber, 0.5f);
+		waveCounter = new Counter(170.0f, 82.0f, ImageProcessor.getImage("WaveIcon"), false, 0, 0.5f);
 		hudElems.add(waveCounter);
 		livesCounter = new Counter(250.0f, 82.0f, ImageProcessor.getImage("LivesIcon"), false, PA.getLives(), 0.5f);
 		hudElems.add(livesCounter);
@@ -119,7 +118,6 @@ public class Hud extends GuiComponent {
 		frost.update();
 		moneyCounter.update(PI.getCoins());
 		levelCounter.update(PI.getLevel());
-		waveCounter.update(ShootEmUp.getCurrentLevel().getWave());
 		livesCounter.update(PA.getLives());
 
 		int maxHealth = PA.getMaxHealth();
@@ -140,5 +138,9 @@ public class Hud extends GuiComponent {
 		manaBar.setMaxValue(maxMana);
 		xpBar.setValue(exp);
 		xpBar.setMaxValue(expBound);
+	}
+
+	public void updateWaveCounter(int wave) {
+		waveCounter.update(wave);
 	}
 }

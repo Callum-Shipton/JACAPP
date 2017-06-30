@@ -23,17 +23,17 @@ public class PickupCollision extends BaseCollision {
 
 		this.moveBack = false;
 
-		EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
+		EntityMap eMap = ShootEmUp.getGame().getCurrentLevel().geteMap();
 		setGridPos(eMap.getGridPos(e));
 		eMap.addEntity(getGridPos(), e);
 	}
 
 	@Override
 	public void collision(Entity e, Entity hit) {
-		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
 		if (hit.getComponent(TypeComponent.CONTROL) instanceof PlayerControl) {
 			if ((BI).giveItem(this.typePickup, this.name)) {
-				ShootEmUp.getCurrentLevel().removeEntity(this.gridPos, e);
+				ShootEmUp.getGame().getCurrentLevel().removeEntity(this.gridPos, e);
 				e.destroy();
 			}
 		}

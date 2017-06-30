@@ -24,8 +24,8 @@ public class HomingControl extends BaseControl {
 
 	@Override
 	public void update(Entity e) {
-		Entity target = ShootEmUp.getPlayer();
-		BaseGraphics playerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
+		Entity target = ShootEmUp.getGame().getPlayer();
+		BaseGraphics playerGraphics = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.GRAPHICS);
 
 		Vector2 targetVector = new Vector2(playerGraphics.getX(), playerGraphics.getY());
 

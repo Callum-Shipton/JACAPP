@@ -38,7 +38,7 @@ public abstract class ButtonHandler {
 	private static void selectCharacter(TypeAttack type) {
 		Save save = ShootEmUp.getSave();
 		if (save == null) {
-			ShootEmUp.setPlayer(PlayerBuilder.buildPlayer(type));
+			ShootEmUp.getGame().setPlayer(PlayerBuilder.buildPlayer(type));
 			ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(ImageProcessor.getImage(MAIN_MENU_BACKGROUND), 1));
 		} else {
 			if (save.getCharacter(type) != null) {
@@ -60,9 +60,9 @@ public abstract class ButtonHandler {
 	}
 
 	private static void health() {
-		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
 		if (BI.getLevelPoints() > 0) {
-			BaseAttack BA = (ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK));
+			BaseAttack BA = (ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.ATTACK));
 			BA.setMaxHealth(BA.getMaxHealth() + 1);
 			BA.setHealth(BA.getHealth() + 1);
 			BI.spendLevelPoints(1);
@@ -70,9 +70,9 @@ public abstract class ButtonHandler {
 	}
 
 	private static void healthRegen() {
-		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
 		if (BI.getLevelPoints() > 0) {
-			BaseAttack BA = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
+			BaseAttack BA = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.ATTACK);
 			BA.setMaxHealthRegen((int) Math.ceil(BA.getMaxHealthRegen() / 2.0));
 			BI.spendLevelPoints(1);
 		}
@@ -83,7 +83,7 @@ public abstract class ButtonHandler {
 	}
 
 	private static void inventoryUpgrade() {
-		BaseInventory PI = (ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY));
+		BaseInventory PI = (ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY));
 		if (PI.getCoins() >= 5) {
 			PI.addInventorySize(5);
 			PI.spendCoins(5);
@@ -91,8 +91,8 @@ public abstract class ButtonHandler {
 	}
 
 	private static void level(int level) {
-		ShootEmUp.setCurrentLevel(new Level(ImageProcessor.LEVEL_FILE_LOCATION, level));
-		ShootEmUp.getCurrentLevel().init();
+		ShootEmUp.getGame().setCurrentLevel(new Level(ImageProcessor.LEVEL_FILE_LOCATION, level));
+		ShootEmUp.getGame().getCurrentLevel().init();
 		ShootEmUp.startGame();
 	}
 
@@ -143,9 +143,9 @@ public abstract class ButtonHandler {
 	}
 
 	private static void mana() {
-		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
 		if (BI.getLevelPoints() > 0) {
-			PlayerAttack PA = (ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK));
+			PlayerAttack PA = (ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.ATTACK));
 			PA.setMaxMana(PA.getMaxMana() + 1);
 			PA.setMana(PA.getMana() + 1);
 			BI.spendLevelPoints(1);
@@ -153,9 +153,9 @@ public abstract class ButtonHandler {
 	}
 
 	private static void upgradeManaRegen() {
-		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
 		if (BI.getLevelPoints() > 0) {
-			PlayerAttack PA = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
+			PlayerAttack PA = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.ATTACK);
 			PA.setMaxManaRegen((int) Math.ceil(PA.getMaxManaRegen() / 2.0));
 			BI.spendLevelPoints(1);
 		}
@@ -178,7 +178,7 @@ public abstract class ButtonHandler {
 	}
 
 	private static void potionsUpgrade() {
-		BaseInventory PI = (ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY));
+		BaseInventory PI = (ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY));
 		if (PI.getCoins() >= 5) {
 			PI.addMaxPotions(5);
 			PI.spendCoins(5);

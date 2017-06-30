@@ -3,8 +3,8 @@ package gui.menus;
 import components.TypeComponent;
 import components.attack.PlayerAttack;
 import components.inventory.BaseInventory;
-import display.ImageProcessor;
 import display.Image;
+import display.ImageProcessor;
 import gui.Inventory;
 import gui.ItemSlot;
 import main.ShootEmUp;
@@ -24,7 +24,7 @@ public class InventoryMenu extends PauseMenu {
 	public InventoryMenu(Image menuImage) {
 		super(menuImage);
 
-		this.playerAttack = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
+		this.playerAttack = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.ATTACK);
 
 		buildHelmet();
 		buildChest();
@@ -32,7 +32,7 @@ public class InventoryMenu extends PauseMenu {
 		buildBoots();
 		buildWeapon();
 
-		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
 		this.inventory = new Inventory(30, 30, BI.getInventory());
 	}
 

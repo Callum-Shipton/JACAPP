@@ -2,30 +2,23 @@ package main;
 
 import audio.MusicPlayer;
 import audio.music.BackgroundMusic;
-import components.TypeComponent;
-import components.graphical.BaseGraphics;
 import display.Art;
 import display.ImageProcessor;
-import entity.Entity;
 import game.Game;
-import gui.Hud;
 import gui.MenuSystem;
 import gui.menus.MainMenu;
 import input.Keyboard;
-import level.Level;
 import loop.Loop;
 import save.Save;
 
 public class ShootEmUp implements Game {
 
 	private static MusicPlayer musicPlayer;
-	private static Level currentLevel;
-	private static Entity player;
 	private static MenuSystem menuSystem = new MenuSystem();
 	private static Save save;
+	private static GameBase game;
 
 	private static boolean paused = true;
-	private static Hud hud;
 
 	public ShootEmUp() {
 	}
@@ -54,10 +47,7 @@ public class ShootEmUp implements Game {
 	@Override
 	public void render() {
 		if (!paused) {
-			currentLevel.render();
-			BaseGraphics baseGraphics = player.getComponent(TypeComponent.GRAPHICS);
-			baseGraphics.render(player);
-			hud.render(ImageProcessor.stat);
+			game.render();
 		}
 		menuSystem.render();
 	}
@@ -72,8 +62,8 @@ public class ShootEmUp implements Game {
 		}
 
 		if (!paused) {
-			currentLevel.update();
-			hud.update();
+			game.update();
+
 		} else {
 			menuSystem.update();
 		}
@@ -86,10 +76,6 @@ public class ShootEmUp implements Game {
 		musicPlayer.destroy();
 	}
 
-	public static Level getCurrentLevel() {
-		return currentLevel;
-	}
-
 	public static MenuSystem getMenuSystem() {
 		return menuSystem;
 	}
@@ -98,28 +84,8 @@ public class ShootEmUp implements Game {
 		return musicPlayer;
 	}
 
-	public static Entity getPlayer() {
-		return player;
-	}
-
 	public static Save getSave() {
 		return save;
-	}
-
-	public static Hud getHud() {
-		return hud;
-	}
-
-	public static void setCurrentLevel(Level currentLevel) {
-		ShootEmUp.currentLevel = currentLevel;
-	}
-
-	public static void setHud(Hud hud) {
-		ShootEmUp.hud = hud;
-	}
-
-	public static void setPlayer(Entity player) {
-		ShootEmUp.player = player;
 	}
 
 	public static void setSave(Save save) {
@@ -132,5 +98,9 @@ public class ShootEmUp implements Game {
 
 	public static void setPaused(boolean p) {
 		paused = p;
+	}
+
+	public static GameBase getGame() {
+		return game;
 	}
 }

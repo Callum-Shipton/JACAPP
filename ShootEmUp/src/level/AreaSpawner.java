@@ -60,13 +60,13 @@ public class AreaSpawner extends Spawner {
 		BaseMovement baseMovement = new BasicMovement(baseCollision, testGraphics, 5);
 		test.addComponent(baseMovement);
 
-		BaseGraphics playerGraphics = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
+		BaseGraphics playerGraphics = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.GRAPHICS);
 		float px = playerGraphics.getX();
 		float py = playerGraphics.getY();
 		float pw = playerGraphics.getWidth();
 		float ph = playerGraphics.getHeight();
 
-		Level level = ShootEmUp.getCurrentLevel();
+		Level level = ShootEmUp.getGame().getCurrentLevel();
 
 		int spawnX;
 		int spawnY;

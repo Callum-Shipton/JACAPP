@@ -14,8 +14,8 @@ import components.graphical.BaseGraphics;
 import components.inventory.TypePickup;
 import components.movement.FlyingMovement;
 import components.spawn.PointSpawn;
-import display.ImageProcessor;
 import display.Image;
+import display.ImageProcessor;
 import entity.Entity;
 import logging.Logger;
 import main.ShootEmUp;
@@ -135,7 +135,7 @@ public final class Weapon extends InventoryItem<Weapon> {
 		particle.addComponent(m);
 		particle.addComponent(new RangeControl(g, m, this.range));
 
-		ShootEmUp.getCurrentLevel().addEntity(particle);
+		ShootEmUp.getGame().getCurrentLevel().addEntity(particle);
 		// ShootEmUp.getCurrentLevel().getSpawner().checkSpawn(particle);
 	}
 

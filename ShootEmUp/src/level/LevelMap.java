@@ -114,7 +114,6 @@ public class LevelMap {
 		wall.addComponent(wallG);
 		RigidCollision rigidCollision = new RigidCollision();
 		wall.addComponent(rigidCollision);
-		ShootEmUp.getCurrentLevel().addEntity(wall);
 		walls.put(new Vector2(x, y), wall);
 	}
 

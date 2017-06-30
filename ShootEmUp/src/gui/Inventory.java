@@ -6,8 +6,8 @@ import java.util.List;
 
 import components.TypeComponent;
 import components.inventory.BaseInventory;
-import display.ImageProcessor;
 import display.DPDTRenderer;
+import display.ImageProcessor;
 import main.ShootEmUp;
 import object.InventoryItem;
 
@@ -62,7 +62,7 @@ public class Inventory extends GuiComponent {
 		MenuButton itemButton;
 		boolean change = false;
 		int position = 0;
-		BaseInventory BI = ShootEmUp.getPlayer().getComponent(TypeComponent.INVENTORY);
+		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
 		while (buttonsIterator.hasNext()) {
 			itemButton = buttonsIterator.next();
 			if (itemButton.hasClicked()) {

@@ -93,10 +93,10 @@ public class Save implements Serializable {
 	}
 
 	public void saveCharacter() {
-		if (ShootEmUp.getCurrentLevel().getLevel() > this.level) {
-			this.level = ShootEmUp.getCurrentLevel().getLevel();
+		if (ShootEmUp.getGame().getLevel() > this.level) {
+			level = ShootEmUp.getGame().getLevel();
 		}
-		BaseAttack BA = ShootEmUp.getPlayer().getComponent(TypeComponent.ATTACK);
+		BaseAttack BA = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.ATTACK);
 		TypeAttack tempAttack = BA.getAttackType();
 
 		switch (tempAttack) {

@@ -49,7 +49,7 @@ public class BasicMovement extends BaseMovement {
 	}
 
 	public boolean checkCollision(Entity currentEntity, Axis axis) {
-		EntityMap eMap = ShootEmUp.getCurrentLevel().geteMap();
+		EntityMap eMap = ShootEmUp.getGame().getCurrentLevel().geteMap();
 		boolean collide = false;
 		Set<Vector2> newGrid = eMap.getGridPos(currentEntity);
 		Set<Entity> entities = eMap.getEntites(newGrid);

@@ -20,8 +20,8 @@ import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.inventory.TypePickup;
 import components.spawn.PointSpawn;
-import display.ImageProcessor;
 import display.Image;
+import display.ImageProcessor;
 import entity.DatableObject;
 import entity.Entity;
 import logging.Logger;
@@ -52,7 +52,7 @@ public abstract class InventoryItem<I extends InventoryItem<?>> implements Datab
 		BC = new PickupCollision(item, this.typePickup, this.name);
 		item.addComponent(BS);
 		item.addComponent(BC);
-		ShootEmUp.getCurrentLevel().addEntity(item);
+		ShootEmUp.getGame().getCurrentLevel().addEntity(item);
 	}
 
 	public Image getInventoryImage() {

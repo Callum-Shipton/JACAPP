@@ -26,7 +26,7 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 	@Override
 	public void die(Entity e) {
 		e.destroy();
-		ShootEmUp.getCurrentLevel().removeEnemy();
+		ShootEmUp.getGame().getCurrentLevel().removeEnemy();
 	}
 
 	@Override
