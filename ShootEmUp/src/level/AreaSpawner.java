@@ -1,6 +1,7 @@
 package level;
 
 import java.util.List;
+import java.util.Set;
 
 import components.TypeComponent;
 import components.collision.BaseCollision;
@@ -13,6 +14,7 @@ import display.Image;
 import display.ImageProcessor;
 import entity.Entity;
 import logging.Logger;
+import logging.Logger.Category;
 import loop.Loop;
 import main.ShootEmUp;
 import math.Vector2;
@@ -27,6 +29,8 @@ public class AreaSpawner extends Spawner {
 
 	public AreaSpawner(int spawnRate, List<TypeEnemy> enemies, int width, int height, int x, int y) {
 		super(spawnRate, enemies);
+
+		Logger.debug("Spawner Size: " + width + ", " + height, Category.ENTITIES);
 
 		this.width = width;
 		this.height = height;
@@ -68,7 +72,7 @@ public class AreaSpawner extends Spawner {
 		float pw = playerGraphics.getWidth();
 		float ph = playerGraphics.getHeight();
 
-		Level level = ShootEmUp.getGame().getCurrentLevel();
+		Set<Entity> levelEntities = ShootEmUp.getGame().getCurrentLevel().getEntities();
 
 		int spawnX;
 		int spawnY;
@@ -92,7 +96,7 @@ public class AreaSpawner extends Spawner {
 			}
 
 			// Checks if the enemy will spawn on top of an entity
-			for (Entity entity : level.getEntities()) {
+			for (Entity entity : levelEntities) {
 				if (baseMovement.doesCollide(test, entity) != null) {
 					collide = true;
 					break;

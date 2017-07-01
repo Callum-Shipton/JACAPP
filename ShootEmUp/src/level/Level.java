@@ -31,7 +31,7 @@ public class Level {
 	private static final int MAX_WAVE = 10;
 
 	private int enemies = 0;
-	private int totalEnemies = 1;
+	private int totalEnemies = 0;
 
 	private boolean waveActive = true;
 
@@ -131,7 +131,7 @@ public class Level {
 	}
 
 	public void update() {
-		if (enemies < totalEnemies) {
+		if (totalEnemies < currentWave) {
 
 			for (Spawner spawner : spawners) {
 				spawner.update();
@@ -140,6 +140,7 @@ public class Level {
 					for (Entity entity : spawner.getSpawnedEntites()) {
 						addEntity(entity);
 						enemies++;
+						totalEnemies++;
 					}
 				}
 			}
@@ -162,19 +163,21 @@ public class Level {
 		removeEntities();
 	}
 
-	public void removeEnemy() {
-		enemies--;
-	}
-
 	private void nextWave() {
+		totalEnemies = 0;
 		if (currentWave < MAX_WAVE) {
+			waveActive = true;
 			currentWave++;
 			totalEnemies++;
 			changeRadius((currentWave - 1) * radiusIncreasePerLevel);
 		} else {
 			levelFinished = true;
 		}
-		waveActive = true;
+
+	}
+
+	public void removeEnemy() {
+		enemies--;
 	}
 
 	public EntityMap geteMap() {
