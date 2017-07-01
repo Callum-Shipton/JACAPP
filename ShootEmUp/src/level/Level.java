@@ -39,8 +39,8 @@ public class Level {
 	private int radiusLocation;
 	private int radiusLocationInst;
 
-	private float radius;
-	private final float radiusIncreasePerLevel;
+	private static final float radius = 250.0f;
+	private static final float radiusIncreasePerLevel = 25.0f;
 
 	private boolean levelFinished = false;
 
@@ -56,7 +56,6 @@ public class Level {
 
 		radiusLocation = GL20.glGetUniformLocation(ImageProcessor.ShaderBase, "radius");
 		radiusLocationInst = GL20.glGetUniformLocation(ImageProcessor.ShaderInst, "radius");
-		radiusIncreasePerLevel = 1;
 		changeRadius(0);
 	}
 
@@ -105,22 +104,22 @@ public class Level {
 	}
 
 	public void removeEntities() {
-		Iterator<Entity> oldEntitiesIter = this.oldEntities.iterator();
+		Iterator<Entity> oldEntitiesIter = oldEntities.iterator();
 		while (oldEntitiesIter.hasNext()) {
 			Entity n = oldEntitiesIter.next();
 			BaseCollision BC = n.getComponent(TypeComponent.COLLISION);
 			eMap.removeEntity(BC.getGridPos(), n);
-			boolean res = this.entities.remove(n);
+			boolean res = entities.remove(n);
 			if (!res) {
 				Logger.warn("Old entity not removed. Name: " + n.toString() + ", HC: " + n.hashCode());
 			}
 		}
-		this.oldEntities.clear();
+		oldEntities.clear();
 	}
 
 	public void removeEntity(Set<Vector2> gridPos, Entity e) {
 		eMap.removeEntity(gridPos, e);
-		this.oldEntities.add(e);
+		oldEntities.add(e);
 	}
 
 	public void render() {
