@@ -6,6 +6,7 @@ import java.util.List;
 import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.attack.TypeAttack;
+import components.collision.RigidCollision;
 import components.graphical.BaseGraphics;
 import display.ImageProcessor;
 import entity.Entity;
@@ -57,7 +58,7 @@ public class GameBase {
 		ShootEmUp.getSave().saveToSystem(1);
 		BaseAttack playerAttack = player.getComponent(TypeComponent.ATTACK);
 		TypeAttack temp = playerAttack.getAttackType();
-		currentLevel = new Level(ImageProcessor.LEVEL_FILE_LOCATION, levelNumber + 1);
+		currentLevel = new Level(ImageProcessor.LEVEL_FILE_LOCATION, ++levelNumber);
 		currentLevel.init();
 
 		List<TypeEnemy> enemyPrototypes = new ArrayList<>();
@@ -73,6 +74,8 @@ public class GameBase {
 			Logger.error(e);
 		}
 		player = PlayerBuilder.buildPlayer(temp, ShootEmUp.getSave().getCharacter(temp));
+		RigidCollision bc = player.getComponent(TypeComponent.COLLISION);
+		bc.setGridPos(currentLevel.geteMap().getGridPos(player.getComponent(TypeComponent.GRAPHICS)));
 		hud = new Hud(player, 0, 0);
 	}
 
@@ -104,4 +107,7 @@ public class GameBase {
 		return levelNumber;
 	}
 
+	public void setLevel(int levelNumber) {
+		this.levelNumber = levelNumber;
+	}
 }

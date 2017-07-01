@@ -99,6 +99,7 @@ public abstract class ButtonHandler {
 		Level level = new Level(ImageProcessor.LEVEL_FILE_LOCATION, levelNum);
 		level.init();
 
+		ShootEmUp.getGame().setLevel(levelNum);
 		ShootEmUp.getGame().setCurrentLevel(level);
 
 		List<TypeEnemy> enemyPrototypes = new ArrayList<>();

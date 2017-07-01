@@ -12,7 +12,6 @@ import display.WallsRenderer;
 import entity.Entity;
 import logging.Logger;
 import logging.Logger.Category;
-import main.ShootEmUp;
 import map.TileMap;
 import math.Vector2;
 
