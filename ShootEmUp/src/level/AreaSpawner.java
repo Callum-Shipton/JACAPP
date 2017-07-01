@@ -42,8 +42,8 @@ public class AreaSpawner extends Spawner {
 	protected void spawnEntity(Entity entity) {
 		BaseGraphics graphicsComponent = entity.getComponent(TypeComponent.GRAPHICS);
 		Vector2 position = getPosition(graphicsComponent.getImage());
-		graphicsComponent.setX(position.x());
-		graphicsComponent.setY(position.y());
+		graphicsComponent.setX(position.x() + 10);
+		graphicsComponent.setY(position.y() + 10);
 
 		Logger.debug("Entity: " + entity.getId() + " at Spawn Location: " + position.x() / LevelMap.TILE_WIDTH + ", "
 				+ position.y() / LevelMap.TILE_WIDTH + " Size: "
@@ -92,6 +92,9 @@ public class AreaSpawner extends Spawner {
 					+ testGraphics.getWidth()))
 					&& (Math.abs((spawnY + (testGraphics.getHeight() / 2))
 							- (py + (ph / 2))) <= (Loop.getDisplay().getHeight() + testGraphics.getHeight()))) {
+				collide = true; // NOSONAR collide should be true to stop these
+								// coordinates being accepted when doing the
+								// loop check
 				continue;
 			}
 
