@@ -172,9 +172,9 @@ public class Level {
 	}
 
 	private void nextWave() {
-		totalEnemies = 0;
 		if (currentWave < MAX_WAVE) {
 			currentWave++;
+			totalEnemies++;
 			changeRadius((currentWave - 1) * radiusIncreasePerLevel);
 		} else {
 			levelFinished = true;
