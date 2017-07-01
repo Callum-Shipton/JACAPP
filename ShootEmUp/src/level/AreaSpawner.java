@@ -41,6 +41,9 @@ public class AreaSpawner extends Spawner {
 		graphicsComponent.setY(position.y());
 		entity.addComponent(graphicsComponent);
 
+		Logger.debug("Entity: " + entity.getId() + " at Spawn Location: " + position.x() / LevelMap.TILE_WIDTH + ", " + position.y() / LevelMap.TILE_WIDTH,
+				Logger.Category.ENTITIES);
+		
 		spawnedEntities.add(entity);
 	}
 
@@ -97,8 +100,6 @@ public class AreaSpawner extends Spawner {
 			}
 		} while (collide);
 
-		Logger.debug("Spawn Location: " + spawnX / LevelMap.TILE_WIDTH + ", " + spawnY / LevelMap.TILE_WIDTH,
-				Logger.Category.ENTITIES);
 		return new Vector2(spawnX, spawnY);
 	}
 }

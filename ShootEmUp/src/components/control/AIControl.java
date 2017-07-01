@@ -19,6 +19,7 @@ public class AIControl extends BaseControl {
 	private BaseMovement movement;
 	private BaseAttack attack;
 	private int counter = 0;
+	
 	private int aggression = 30;
 	private AStarSearch search;
 	private BaseGraphics playerGraphics;
@@ -52,7 +53,7 @@ public class AIControl extends BaseControl {
 
 		Vector2 goalVector = search.getGridPosition(playerGraphics.getX(), playerGraphics.getY());
 		Vector2 startVector = search.getGridPosition(graphics.getX(), graphics.getY());
-		Logger.debug("Current Tile: " + startVector.x() + ", " + startVector.y(), Category.AI);
+		Logger.debug("Entity: " + e.getId() +  " at Current Tile: " + startVector.x() + ", " + startVector.y(), Category.AI);
 
 		Vector2 target = search.findPath(goalVector, startVector);
 
