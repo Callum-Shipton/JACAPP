@@ -30,10 +30,6 @@ public final class Logger {
 			System.out.println(new Timestamp(System.currentTimeMillis()).toString() + " LOG DEBUG: " + message); // NOSONAR
 	}
 
-	public static void debug(double d, Category c) {
-		debug(Double.toString(d), c);
-	}
-
 	public static void error(String message) {
 		System.err.println(new Timestamp(System.currentTimeMillis()).toString() + " LOG ERROR: " + message); // NOSONAR
 	}

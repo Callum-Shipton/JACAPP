@@ -13,7 +13,6 @@ import components.graphical.BaseGraphics;
 import display.ImageProcessor;
 import entity.Entity;
 import logging.Logger;
-import main.ShootEmUp;
 import math.Vector2;
 import object.EntityMap;
 
@@ -73,8 +72,6 @@ public class Level {
 	}
 
 	public void init() {
-		addEntity(ShootEmUp.getGame().getPlayer());
-
 		for (Entity wall : map.getWalls().values()) {
 			addEntity(wall);
 		}

@@ -9,6 +9,7 @@ import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.movement.BaseMovement;
 import components.movement.BasicMovement;
+import display.Image;
 import display.ImageProcessor;
 import entity.Entity;
 import logging.Logger;
@@ -36,24 +37,23 @@ public class AreaSpawner extends Spawner {
 	@Override
 	protected void spawnEntity(Entity entity) {
 		BaseGraphics graphicsComponent = entity.getComponent(TypeComponent.GRAPHICS);
-		Vector2 position = getPosition();
+		Vector2 position = getPosition(graphicsComponent.getImage());
 		graphicsComponent.setX(position.x());
 		graphicsComponent.setY(position.y());
-		entity.addComponent(graphicsComponent);
 
-		Logger.debug("Entity: " + entity.getId() + " at Spawn Location: " + position.x() / LevelMap.TILE_WIDTH + ", " + position.y() / LevelMap.TILE_WIDTH,
-				Logger.Category.ENTITIES);
-		
+		Logger.debug("Entity: " + entity.getId() + " at Spawn Location: " + position.x() / LevelMap.TILE_WIDTH + ", "
+				+ position.y() / LevelMap.TILE_WIDTH + " Size: "
+				+ (graphicsComponent.getHeight() / LevelMap.TILE_WIDTH), Logger.Category.ENTITIES);
+
 		spawnedEntities.add(entity);
 	}
 
-	private Vector2 getPosition() {
+	private Vector2 getPosition(Image image) {
 
 		boolean collide;
 		Entity test = new Entity();
 
-		BaseGraphics testGraphics = new AnimatedGraphics(ImageProcessor.getImage("Enemy"), ImageProcessor.base, false,
-				1f);
+		BaseGraphics testGraphics = new AnimatedGraphics(image, ImageProcessor.base, false, 1f);
 		test.addComponent(testGraphics);
 
 		BaseCollision baseCollision = new RigidCollision();
@@ -92,8 +92,8 @@ public class AreaSpawner extends Spawner {
 			}
 
 			// Checks if the enemy will spawn on top of an entity
-			for (Entity character : level.getEntities()) {
-				if (baseMovement.doesCollide(test, character) != null) {
+			for (Entity entity : level.getEntities()) {
+				if (baseMovement.doesCollide(test, entity) != null) {
 					collide = true;
 					break;
 				}

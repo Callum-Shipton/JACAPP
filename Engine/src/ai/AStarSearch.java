@@ -14,8 +14,8 @@ import math.Vector2;
 
 public class AStarSearch {
 
-	private static Set<Vector2> walls;
-	private static GoalBounder goalBounder;
+	private Set<Vector2> walls;
+	private GoalBounder goalBounder;
 
 	private Queue<AStarNode> openNodes = new PriorityQueue<>();
 	private Set<AStarNode> closedNodes = new HashSet<>();
@@ -32,12 +32,9 @@ public class AStarSearch {
 	private float nodeWidth;
 
 	public AStarSearch(Set<Vector2> walls, GoalBounder goalBounder, float nodeWidth, int width) {
-		if (AStarSearch.walls == null) {
-			AStarSearch.walls = walls;
-		}
-		if (AStarSearch.goalBounder == null) {
-			AStarSearch.goalBounder = goalBounder;
-		}
+		this.walls = walls;
+		this.goalBounder = goalBounder;
+
 		this.nodeWidth = nodeWidth;
 		this.width = width;
 		// searched
@@ -146,7 +143,7 @@ public class AStarSearch {
 			}
 
 			Logger.warn("cannot find player");
-			Logger.debug(searchedNodes, Logger.Category.AI);
+			Logger.debug("Nodes Searched: " + searchedNodes, Logger.Category.AI);
 			playerOutOfReach = true;
 			target = new Vector2(0, 0);
 		}

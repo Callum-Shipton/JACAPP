@@ -6,7 +6,6 @@ import java.util.List;
 import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.attack.TypeAttack;
-import components.collision.RigidCollision;
 import components.graphical.BaseGraphics;
 import display.ImageProcessor;
 import entity.Entity;
@@ -74,8 +73,7 @@ public class GameBase {
 			Logger.error(e);
 		}
 		player = PlayerBuilder.buildPlayer(temp, ShootEmUp.getSave().getCharacter(temp));
-		RigidCollision bc = player.getComponent(TypeComponent.COLLISION);
-		bc.setGridPos(currentLevel.geteMap().getGridPos(player.getComponent(TypeComponent.GRAPHICS)));
+		currentLevel.addEntity(player);
 		hud = new Hud(player, 0, 0);
 	}
 

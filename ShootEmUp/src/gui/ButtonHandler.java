@@ -98,6 +98,7 @@ public abstract class ButtonHandler {
 	private static void level(int levelNum) {
 		Level level = new Level(ImageProcessor.LEVEL_FILE_LOCATION, levelNum);
 		level.init();
+		level.addEntity(ShootEmUp.getGame().getPlayer());
 
 		ShootEmUp.getGame().setLevel(levelNum);
 		ShootEmUp.getGame().setCurrentLevel(level);

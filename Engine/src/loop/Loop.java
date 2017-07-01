@@ -16,11 +16,11 @@ import org.lwjgl.glfw.GLFW;
 
 import display.ArtLoader;
 import display.Display;
+import game.Game;
 import input.Controllers;
 import input.Keyboard;
 import input.Keys;
 import logging.Logger;
-import game.Game;
 
 public final class Loop {
 
@@ -85,7 +85,7 @@ public final class Loop {
 			delta = newTime - oldTime;
 			oldTime = newTime;
 			sleepTime = (1.0 / fps) - delta;
-			Logger.debug(1.0 / delta, Logger.Category.ENGINE_STATS);
+			Logger.debug("1 / delta: " + (1.0 / delta), Logger.Category.ENGINE_STATS);
 			if (sleepTime > 0.01) {
 				try {
 					Thread.sleep((long) (sleepTime * 1000));
