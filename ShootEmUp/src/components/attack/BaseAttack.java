@@ -170,7 +170,6 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 			}
 		}
 	}
-	
 
 	public void setBoots(Armour boots) {
 		this.boots = boots;
@@ -235,7 +234,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	public void setWeapon(Weapon weapon) {
 		this.weapon = weapon;
 	}
-	
+
 	public boolean isFire() {
 		return fire;
 	}
@@ -243,7 +242,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	public boolean isPoison() {
 		return poison;
 	}
-	
+
 	public TypeAttack getAttackType() {
 		return type;
 	}

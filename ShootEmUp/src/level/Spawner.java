@@ -1,4 +1,4 @@
-package spawners;
+package level;
 
 import java.util.HashSet;
 import java.util.List;
@@ -13,13 +13,13 @@ public abstract class Spawner {
 	protected int spawnCounter = 0;
 	protected final int spawnRate;
 
-	protected List<Entity> entities;
+	protected List<TypeEnemy> enemies;
 	protected Set<Entity> spawnedEntities = new HashSet<>();
 	protected Random rand;
 
-	public Spawner(int spawnRate, List<Entity> entities) {
+	public Spawner(int spawnRate, List<TypeEnemy> enemies) {
 		this.spawnRate = spawnRate;
-		this.entities = entities;
+		this.enemies = enemies;
 
 		rand = new Random();
 	}
@@ -31,8 +31,8 @@ public abstract class Spawner {
 	protected Entity chooseEntity() {
 		Entity newEntity;
 
-		int prob = rand.nextInt(entities.size());
-		newEntity = entities.get(prob).clone();
+		int prob = rand.nextInt(enemies.size());
+		newEntity = EnemyBuilder.buildEnemy(enemies.get(prob));
 
 		return newEntity;
 	}

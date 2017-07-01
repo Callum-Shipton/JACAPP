@@ -16,7 +16,6 @@ import logging.Logger;
 import main.ShootEmUp;
 import math.Vector2;
 import object.EntityMap;
-import spawners.Spawner;
 
 public class Level {
 
@@ -61,7 +60,7 @@ public class Level {
 		changeRadius(0);
 	}
 
-	public void addSpawner(List<Entity> prototypes) {
+	public void addSpawner(List<TypeEnemy> prototypes) {
 		spawners.add(new AreaSpawner(1, prototypes, map.getWidth(), map.getHeight(), 0, 0));
 	}
 

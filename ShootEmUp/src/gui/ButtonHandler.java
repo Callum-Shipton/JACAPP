@@ -12,7 +12,6 @@ import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
 import components.inventory.BaseInventory;
 import display.ImageProcessor;
-import entity.Entity;
 import gui.menus.CharacterSelectMenu;
 import gui.menus.ControlsMenu;
 import gui.menus.InventoryMenu;
@@ -24,7 +23,6 @@ import gui.menus.SaveMenu;
 import gui.menus.SkillMenu;
 import gui.menus.SoundMenu;
 import gui.menus.UpgradesMenu;
-import level.EnemyBuilder;
 import level.Level;
 import level.PlayerBuilder;
 import level.TypeEnemy;
@@ -103,12 +101,12 @@ public abstract class ButtonHandler {
 
 		ShootEmUp.getGame().setCurrentLevel(level);
 
-		List<Entity> enemyPrototypes = new ArrayList<>();
-		enemyPrototypes.add(EnemyBuilder.buildEnemy(TypeEnemy.SMALL));
-		enemyPrototypes.add(EnemyBuilder.buildEnemy(TypeEnemy.NORMAL));
-		enemyPrototypes.add(EnemyBuilder.buildEnemy(TypeEnemy.FLYING));
-
+		List<TypeEnemy> enemyPrototypes = new ArrayList<>();
+		enemyPrototypes.add(TypeEnemy.SMALL);
+		enemyPrototypes.add(TypeEnemy.NORMAL);
+		enemyPrototypes.add(TypeEnemy.FLYING);
 		level.addSpawner(enemyPrototypes);
+
 		ShootEmUp.startGame();
 	}
 

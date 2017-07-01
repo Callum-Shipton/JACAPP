@@ -3,6 +3,8 @@ package components.attack;
 import display.ImageProcessor;
 import entity.Entity;
 import gui.HudBar;
+import logging.Logger;
+import logging.Logger.Category;
 import main.ShootEmUp;
 import object.Armour;
 import object.Weapon;
@@ -25,6 +27,7 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 
 	@Override
 	public void die(Entity e) {
+		Logger.debug("Enemy Died: " + e.getId(), Category.ENTITIES);
 		e.destroy();
 		ShootEmUp.getGame().getCurrentLevel().removeEnemy();
 	}
@@ -36,5 +39,4 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 		healthBar.setValue(health);
 		healthBar.setMaxValue(maxHealth);
 	}
-
 }

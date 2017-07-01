@@ -156,14 +156,7 @@ public class Entity implements DatableObject<Entity> {
 		return id.hashCode();
 	}
 
-	@Override
-	public Entity clone() {
-		Entity entity = new Entity();
-
-		for (Component component : getComponents().values()) {
-			entity.addComponent(component);
-		}
-
-		return entity;
+	public void setID() {
+		id = UUID.randomUUID();
 	}
 }

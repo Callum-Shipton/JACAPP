@@ -10,7 +10,6 @@ import components.graphical.BaseGraphics;
 import display.ImageProcessor;
 import entity.Entity;
 import gui.Hud;
-import level.EnemyBuilder;
 import level.Level;
 import level.PlayerBuilder;
 import level.TypeEnemy;
@@ -61,10 +60,10 @@ public class GameBase {
 		currentLevel = new Level(ImageProcessor.LEVEL_FILE_LOCATION, levelNumber + 1);
 		currentLevel.init();
 
-		List<Entity> enemyPrototypes = new ArrayList<>();
-		enemyPrototypes.add(EnemyBuilder.buildEnemy(TypeEnemy.SMALL));
-		enemyPrototypes.add(EnemyBuilder.buildEnemy(TypeEnemy.NORMAL));
-		enemyPrototypes.add(EnemyBuilder.buildEnemy(TypeEnemy.FLYING));
+		List<TypeEnemy> enemyPrototypes = new ArrayList<>();
+		enemyPrototypes.add(TypeEnemy.SMALL);
+		enemyPrototypes.add(TypeEnemy.NORMAL);
+		enemyPrototypes.add(TypeEnemy.FLYING);
 
 		currentLevel.addSpawner(enemyPrototypes);
 

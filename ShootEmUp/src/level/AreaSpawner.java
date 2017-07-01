@@ -15,7 +15,6 @@ import logging.Logger;
 import loop.Loop;
 import main.ShootEmUp;
 import math.Vector2;
-import spawners.Spawner;
 
 public class AreaSpawner extends Spawner {
 
@@ -25,8 +24,8 @@ public class AreaSpawner extends Spawner {
 	private final int x;
 	private final int y;
 
-	public AreaSpawner(int spawnRate, List<Entity> entities, int width, int height, int x, int y) {
-		super(spawnRate, entities);
+	public AreaSpawner(int spawnRate, List<TypeEnemy> enemies, int width, int height, int x, int y) {
+		super(spawnRate, enemies);
 
 		this.width = width;
 		this.height = height;
