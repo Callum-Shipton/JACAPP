@@ -87,13 +87,16 @@ public class ImageProcessor {
 		artFiles.put(key, image);
 	}
 
-	/*
-	 * public static void refreshRenderers() { base.initRenderData();
-	 * stat.initRenderData();
-	 * 
-	 * if (ShootEmUp.getCurrentLevel() != null) { irWall.bindRenderData();
-	 * irBack.bindRenderData(); irFore.bindRenderData(); } }
-	 */
+	
+	 public static void refreshRenderers() { 
+		 base.initRenderData();
+		 stat.initRenderData();
+	 
+		 if (irWall != null) irWall.bindRenderData();
+		 if (irBack != null) irBack.bindRenderData(); 
+		 if (irFore != null) irFore.bindRenderData(); 
+	 }
+	 
 
 	public void init(ArtLoader artLoader) {
 

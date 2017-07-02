@@ -160,7 +160,7 @@ public class Display {
 		this.width = width;
 	}
 
-	/*
+	
 	public void toggleFullscreen() {
 		long newWindow;
 		if (this.fullscreen) {
@@ -192,16 +192,17 @@ public class Display {
 		this.window = newWindow;
 		initGL();
 		Keyboard.keyCheck(this.window);
-		Art.initShaderUniforms();
-		Art.refreshRenderers();
-		
+		ImageProcessor.initShaderUniforms();
+		ImageProcessor.refreshRenderers();
+		/*
 		if (ShootEmUp.getCurrentLevel() != null) {
 		PlayerGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
 			BG.scrollScreen();
 		}
+		*/
 		this.fullscreen = !this.fullscreen;
 	}
-	*/
+	
 
 	public void update() {
 		if (Keyboard.getKey(Loop.getKeys().quit) == 1) {

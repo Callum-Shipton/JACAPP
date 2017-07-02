@@ -52,6 +52,7 @@ public class ShootEmUp implements Game {
 	@Override
 	public void update() {
 
+		
 		if (!menuSystem.isMainMenu() && Keyboard.getKey(Loop.getKeys().pause) == 1) {
 			paused = !paused;
 			Keyboard.setKey(Loop.getKeys().pause);

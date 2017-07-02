@@ -39,9 +39,6 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 
 	@Override
 	public void receive(Message m, Entity e) {
-		if (m == Message.ENTITY_MOVED) {
-			scrollScreen();
-		}
 
 	}
 
@@ -63,6 +60,12 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 		GL20.glUseProgram(0);
 	}
 
+	@Override 
+	public void update(Entity e){
+	super.update(e);	
+	scrollScreen();
+	}
+	
 	@Override
 	public void setDirection(int direction) {
 		this.direction = direction;
