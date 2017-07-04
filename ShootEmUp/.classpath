@@ -8,7 +8,15 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="res"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Engine"/>
-	<classpathentry kind="lib" path="lib/gson-2.6.2.jar"/>
-	<classpathentry kind="lib" path="lib/lwjgl.jar"/>
+	<classpathentry kind="lib" path="lib/gson-2.6.2.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="https://google.github.io/gson/apidocs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/lwjgl.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="https://javadoc.lwjgl.org/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
