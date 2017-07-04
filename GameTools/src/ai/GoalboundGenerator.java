@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
@@ -39,19 +43,24 @@ public class GoalboundGenerator {
 
 	public GoalboundGenerator() {
 		loadMap(IN_MAP_FILE);
-		goalboundingMaps = new HashMap<>();
+		goalboundingMaps = new ConcurrentHashMap<>();
+		
+
+		
 		for (int i = 1; i <= MAXIMUM_SIZE; i++) {
-			goalboundingMaps.put(i, new GoalboundingTile[mapImage.getWidth()][mapImage.getHeight()]);
+			goalboundingMaps.put(i, new GoalboundingTile[mapImage.getWidth()][mapImage.getHeight()]);	
 		}
 	}
+	
+	
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		GoalboundGenerator generator = new GoalboundGenerator();
 		generator.generateGoalbounder();
 
 	}
 
-	public void generateGoalbounder() {
+	public void generateGoalbounder() throws InterruptedException {
 		getWalls();
 		createGoalBoundingBoxes(mapImage.getWidth(), mapImage.getHeight());
 		Logger.info("Saving.....");
@@ -177,43 +186,66 @@ public class GoalboundGenerator {
 
 	}
 
-	private void createGoalBoundingBoxes(int mapWidth, int mapHeight) {
+	private void createGoalBoundingBoxes(int mapWidth, int mapHeight) throws InterruptedException {
+		int threads = Runtime.getRuntime().availableProcessors();
+		
+		ExecutorService pool = 
+			    Executors.newFixedThreadPool(threads);
 		for (int size = 1; size <= MAXIMUM_SIZE; size++) {
 
 			for (int x = 0; x < mapWidth; x++) {
 				for (int y = 0; y < mapHeight; y++) {
-
-					if (!containsWall(new Vector2(x, y), size, walls)) {
-
-						// queue for tiles to be looked at
-						Queue<TypeNode> open = new LinkedList<>();
-
-						// list of already viewed tiles
-						Set<TypeNode> closed = new HashSet<>();
-
-						AStarNode start = new AStarNode(new Vector2(x, y), size);
-
-						List<TypeNode> startingNodes = generateChildNodes(start, size);
-
-						for (TypeNode node : startingNodes) {
-							open.add(node);
-							closed.add(node);
-						}
-
-						Map<String, BoundingBox> boxes = initBoundingBoxes(startingNodes);
-
-						fillMap(open, closed, boxes, size);
-
-						goalboundingMaps.get(size)[x][y] = new GoalboundingTile(boxes);
-					}
+					pool.execute(new OneShotTask(size,x,y));
+					
 				}
 				Logger.info("Layer " + (x + 1) + " of " + mapWidth + " completed");
 			}
 			Logger.info("Size " + size + " completed");
 		}
+		
+		pool.shutdown();
+		 
+		// Blocks until all tasks have completed execution after a shutdown request
+		pool.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
 		Logger.info("All goalbounds Created");
 	}
 
+	class OneShotTask implements Runnable {
+        int size;
+        int x;
+        int y;
+        OneShotTask(int size,int x,int y) { this.size = size;
+        this.x = x;
+        this.y = y;}
+		@Override
+		public void run() {
+			if (!containsWall(new Vector2(x, y), size, walls)) {
+
+				// queue for tiles to be looked at
+				Queue<TypeNode> open = new LinkedList<>();
+
+				// list of already viewed tiles
+				Set<TypeNode> closed = new HashSet<>();
+
+				AStarNode start = new AStarNode(new Vector2(x, y), size);
+
+				List<TypeNode> startingNodes = generateChildNodes(start, size);
+
+				for (TypeNode node : startingNodes) {
+					open.add(node);
+					closed.add(node);
+				}
+
+				Map<String, BoundingBox> boxes = initBoundingBoxes(startingNodes);
+
+				fillMap(open, closed, boxes, size);
+
+				goalboundingMaps.get(size)[x][y] = new GoalboundingTile(boxes);
+				
+			}
+		}
+	}
+	
 	private static boolean containsWall(Vector2 position, int size, Set<Vector2> walls) {
 		for (int i = (int) position.x(); i < position.x() + size; i++) {
 			for (int j = (int) position.y(); j < position.y() + size; j++) {
