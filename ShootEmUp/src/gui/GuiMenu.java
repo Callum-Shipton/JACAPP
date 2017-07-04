@@ -35,7 +35,7 @@ public abstract class GuiMenu {
 
 	public void render() {
 		ImageProcessor.stat.draw(menuImage, new Vector2(x, y),
-				new Vector2(this.display.getWidth(), display.getHeight()), 0, new Vector2(0, 0));
+				new Vector2(this.display.getWidth(), display.getHeight()), 0, new Vector2(0, 0), new Vector2(1,1));
 		for (GuiComponent menuItem : menuItems) {
 			menuItem.render(ImageProcessor.stat);
 		}

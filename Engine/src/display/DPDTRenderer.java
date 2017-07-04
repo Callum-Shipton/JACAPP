@@ -26,6 +26,7 @@ import java.nio.FloatBuffer;
 
 import org.lwjgl.BufferUtils;
 
+import loop.Loop;
 import math.Matrix4;
 import math.Vector2;
 
@@ -43,45 +44,8 @@ public class DPDTRenderer extends Renderer {
 		initRenderData();
 	}
 
-	public void draw(Image Texid, Vector2 pos, Vector2 size, float rotate, Vector2 texPos) {
-
-		glUseProgram(this.shaderProgramID);
-		glBindVertexArray(this.VAO);
-		glBindTexture(GL_TEXTURE_2D, Texid.getID());
-
-		this.model.clearToIdentity();
-		this.model.translate(pos.x(), pos.y(), 0.0f);
-		this.model.translate(0.5f * size.x(), 0.5f * size.y(), 0.0f);
-		this.model.rotateDeg(rotate, 0.0f, 0.0f, 1.0f);
-		this.model.translate(-0.5f * size.x(), -0.5f * size.y(), 0.0f);
-		this.model.scale(size.x(), size.y(), 1.0f);
-
-		this.texture.clearToIdentity();
-		this.texture.translate(texPos.x() / Texid.getFWidth(), texPos.y() / Texid.getFHeight(), 0.0f);
-		this.texture.scale(1 / Texid.getFWidth(), 1 / Texid.getFHeight(), 1.0f);
-
-		this.matrix44Buffer = this.model.toBuffer();
-
-		glUniformMatrix4(this.modelMatrixLocation, false, this.matrix44Buffer);
-
-		this.matrix44Buffer.clear();
-
-		this.matrix44Buffer = this.texture.toBuffer();
-
-		glUniformMatrix4(this.textureMatrixLocation, false, this.matrix44Buffer);
-
-		// glEnableVertexAttribArray(0);
-		// glEnableVertexAttribArray(1);
-
-		// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, 0);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		glBindVertexArray(0);
-		glUseProgram(0);
-	}
-
 	public void draw(Image Texid, Vector2 pos, Vector2 size, float rotate, Vector2 texPos, Vector2 maxFrame) {
+		if(!visible(pos,size)) return;
 		glUseProgram(this.shaderProgramID);
 		glBindVertexArray(this.VAO);
 		glBindTexture(GL_TEXTURE_2D, Texid.getID());
@@ -116,6 +80,15 @@ public class DPDTRenderer extends Renderer {
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glBindVertexArray(0);
 		glUseProgram(0);
+
+	}
+
+	private boolean visible(Vector2 pos, Vector2 size) {
+		if(shaderProgramID == ImageProcessor.ShaderStat)return true;
+		
+		//TODO: Update to use rotation (even though I don't think anything uses it atm.)
+		else return Loop.getDisplay().getCamera().isVisible(pos,size);
+
 
 	}
 

@@ -30,12 +30,15 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 
 import java.nio.ByteBuffer;
 
+import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWvidmode;
+import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GLContext;
 
 import input.Keyboard;
 import loop.Loop;
+import math.Matrix4;
 
 public class Display {
 
@@ -52,6 +55,9 @@ public class Display {
 
 	private ByteBuffer vidmode;
 	private GLFWvidmode vm;
+	
+	private Camera cam;
+	
 	private int width;
 	private int height;
 
@@ -83,12 +89,18 @@ public class Display {
 	public long getWindow() {
 		return this.window;
 	}
+	
+	public Camera getCamera() {
+		return this.cam;
+	}
 
 	private void initGL() {
 		glClearColor(0.4f, 0.6f, 0.9f, 1.0f);
 		glViewport(0, 0, this.width, this.height);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		
+		
 	}
 
 	public void initGLFW() {
@@ -147,10 +159,13 @@ public class Display {
 
 		initGL();
 		new ImageProcessor().init(artLoader);
+		cam = new Camera(width,height);
+		
 
 		// Initialise key handling
 		Keyboard.keyCheck(this.window);
 	}
+	
 
 	public void setHeight(int height) {
 		this.height = height;
@@ -191,6 +206,7 @@ public class Display {
 		glfwDestroyWindow(this.window);
 		this.window = newWindow;
 		initGL();
+		cam = new Camera(width,height);
 		Keyboard.keyCheck(this.window);
 		ImageProcessor.initShaderUniforms();
 		ImageProcessor.refreshRenderers();

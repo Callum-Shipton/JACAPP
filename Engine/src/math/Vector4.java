@@ -228,4 +228,16 @@ public class Vector4 implements Vector<Vector4>, Serializable {
 		this.z = z;
 		return this;
 	}
+	
+	public Vector4 contains(Vector4 test) {
+		float cx = test.x;
+		float cy = test.y;
+		float cz = test.z;
+		float cw = test.w;
+		
+		if ((x < (cx + cz)) && ((x + z) > cx) && (y < (cy + cw)) && ((y + w) > cy)) {
+			return new Vector4(x - (cx + cz), y - (cy + cw), (x + z) - cx, (y + w) - cy);
+		}
+		return null;
+	}
 }
