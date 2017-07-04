@@ -6,6 +6,7 @@ import display.Art;
 import display.ImageProcessor;
 import game.Game;
 import gui.MenuSystem;
+import gui.menus.InventoryMenu;
 import gui.menus.MainMenu;
 import input.Keyboard;
 import loop.Loop;
@@ -52,21 +53,32 @@ public class ShootEmUp implements Game {
 	@Override
 	public void update() {
 
-		
+		if (Keyboard.getKey(Loop.getKeys().fullscreen) == 1) {
+			Loop.getDisplay().toggleFullscreen();
+			// TODO write code for changing position of menu items
+		}
+
 		if (!menuSystem.isMainMenu() && Keyboard.getKey(Loop.getKeys().pause) == 1) {
-			paused = !paused;
-			Keyboard.setKey(Loop.getKeys().pause);
-			menuSystem.pause();
+			pause();
 		}
 
 		if (!paused) {
 			game.update();
-
 		} else {
 			menuSystem.update();
 		}
 		// dealing with pausing music
 		musicPlayer.update();
+	}
+
+	public void pause() {
+		paused = !paused;
+		Keyboard.setKey(Loop.getKeys().pause);
+		if (paused) {
+			menuSystem.addMenu(new InventoryMenu(ImageProcessor.getImage("InventoryScreen")));
+		} else {
+			menuSystem.clearMenus();
+		}
 	}
 
 	@Override
@@ -88,10 +100,6 @@ public class ShootEmUp implements Game {
 
 	public static void setSave(Save save) {
 		ShootEmUp.save = save;
-	}
-
-	public static boolean isPaused() {
-		return paused;
 	}
 
 	public static void setPaused(boolean p) {

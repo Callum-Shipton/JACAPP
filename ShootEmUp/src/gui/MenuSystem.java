@@ -3,46 +3,29 @@ package gui;
 import java.util.Deque;
 import java.util.LinkedList;
 
-import display.ImageProcessor;
-import gui.menus.InventoryMenu;
-
 public class MenuSystem {
 	private boolean mainMenu = true;
 	private Deque<GuiMenu> menuStack = new LinkedList<>();
 
-	public MenuSystem() {
-
-	}
-
 	public void addMenu(GuiMenu menu) {
-		this.menuStack.addFirst(menu);
+		menuStack.addFirst(menu);
 	}
 
 	public void clearMenus() {
-		while (!this.menuStack.isEmpty()) {
-			this.menuStack.removeFirst();
-		}
+		menuStack.clear();
 	}
 
 	public boolean isMainMenu() {
-		return this.mainMenu;
-	}
-
-	public void pause() {
-		if (this.menuStack.isEmpty()) {
-			addMenu(new InventoryMenu(ImageProcessor.getImage("InventoryScreen")));
-		} else {
-			clearMenus();
-		}
+		return mainMenu;
 	}
 
 	public void popMenu() {
-		this.menuStack.removeFirst();
+		menuStack.removeFirst();
 	}
 
 	public void render() {
-		if (!this.menuStack.isEmpty()) {
-			this.menuStack.peek().render();
+		if (!menuStack.isEmpty()) {
+			menuStack.peek().render();
 		}
 	}
 

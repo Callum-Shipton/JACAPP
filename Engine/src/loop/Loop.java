@@ -117,8 +117,6 @@ public final class Loop {
 		// invoked during this call.
 		glfwPollEvents();
 		Controllers.poll();
-		
-		if (Keyboard.getKey(Loop.getKeys().fullscreen) == 1) display.toggleFullscreen();
 
 		game.update();
 
