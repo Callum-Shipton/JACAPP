@@ -9,7 +9,7 @@ import gui.TypeButton;
 public class SoundMenu extends GuiMenu {
 
 	public SoundMenu(Image menuImage) {
-		super(menuImage);
+		super(menuImage, true);
 		resetMenu();
 	}
 

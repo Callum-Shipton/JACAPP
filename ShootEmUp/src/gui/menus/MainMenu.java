@@ -10,7 +10,7 @@ import gui.VerticalLayout;
 public class MainMenu extends GuiMenu {
 
 	public MainMenu(Image menuImage) {
-		super(menuImage);
+		super(menuImage, true);
 		resetMenu();
 	}
 

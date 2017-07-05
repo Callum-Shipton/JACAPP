@@ -10,7 +10,7 @@ import gui.VerticalLayout;
 public abstract class PauseMenu extends GuiMenu {
 
 	public PauseMenu(Image menuImage) {
-		super(menuImage);
+		super(menuImage, false);
 
 		VerticalLayout tabs = new VerticalLayout(922, 0, ImageProcessor.getImage("SkillButton").getHeight() / 2, 0);
 		tabs.addMenuItem(new MenuButton(TypeButton.INVENTORY, ImageProcessor.getImage("InvButton"), 0, 0));
@@ -25,5 +25,10 @@ public abstract class PauseMenu extends GuiMenu {
 		nativeButtons.addMenuItem(new MenuButton(TypeButton.RESUME, ImageProcessor.getImage("BackButton"), 0, 0));
 		nativeButtons.addMenuItem(new MenuButton(TypeButton.MAIN_MENU, ImageProcessor.getImage("ExitButton"), 0, 0));
 		menuItems.add(nativeButtons);
+	}
+
+	@Override
+	public void resetMenu() {
+
 	}
 }

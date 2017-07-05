@@ -19,9 +19,11 @@ public abstract class GuiMenu {
 	protected int w;
 	protected int h;
 	protected Display display;
+	private boolean fullscreen;
 
-	public GuiMenu(Image menuImage) {
+	public GuiMenu(Image menuImage, boolean fullscreen) {
 		this.menuImage = menuImage;
+		this.fullscreen = fullscreen;
 		x = 0;
 		y = 0;
 		w = menuImage.getWidth();
@@ -34,8 +36,13 @@ public abstract class GuiMenu {
 	}
 
 	public void render() {
-		ImageProcessor.stat.draw(menuImage, new Vector2(x, y), new Vector2(display.getWidth(), display.getHeight()), 0,
-				new Vector2(0, 0), new Vector2(1, 1));
+		if (fullscreen) {
+			ImageProcessor.stat.draw(menuImage, new Vector2(x, y), new Vector2(display.getWidth(), display.getHeight()),
+					0, new Vector2(0, 0), new Vector2(1, 1));
+		} else {
+			ImageProcessor.stat.draw(menuImage, new Vector2(x, y),
+					new Vector2(menuImage.getWidth(), menuImage.getHeight()), 0, new Vector2(0, 0), new Vector2(1, 1));
+		}
 		for (GuiComponent menuItem : menuItems) {
 			menuItem.render(ImageProcessor.stat);
 		}

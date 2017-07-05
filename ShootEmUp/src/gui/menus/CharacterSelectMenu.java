@@ -17,13 +17,13 @@ public class CharacterSelectMenu extends GuiMenu {
 	private int rogueLevel = 0;
 
 	public CharacterSelectMenu(Image menuImage) {
-		super(menuImage);
+		super(menuImage, true);
 		resetMenu();
 	}
 
 	public CharacterSelectMenu(Image menuImage, int warriorLevel, int archerLevel, int mageLevel, int battleMageLevel,
 			int rogueLevel) {
-		super(menuImage);
+		super(menuImage, true);
 		this.warriorLevel = warriorLevel;
 		this.archerLevel = archerLevel;
 		this.mageLevel = mageLevel;

@@ -59,7 +59,6 @@ public class ShootEmUp implements Game {
 				game.getHud().resetHud();
 			}
 			menuSystem.resetMenus();
-			// TODO write code for changing position of menu items
 		}
 
 		if (!menuSystem.isMainMenu() && Keyboard.getKey(Loop.getKeys().pause) == 1) {

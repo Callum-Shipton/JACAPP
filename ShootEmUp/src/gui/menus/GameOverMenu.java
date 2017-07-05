@@ -10,7 +10,7 @@ import main.ShootEmUp;
 public class GameOverMenu extends GuiMenu {
 
 	public GameOverMenu(Image menuImage) {
-		super(menuImage);
+		super(menuImage, true);
 		ShootEmUp.getMenuSystem().setMainMenu(true);
 		resetMenu();
 	}

@@ -12,7 +12,7 @@ public class LevelSelectMenu extends GuiMenu {
 	private int level;
 
 	public LevelSelectMenu(Image menuImage, int level) {
-		super(menuImage);
+		super(menuImage, true);
 		this.level = level;
 		resetMenu();
 	}

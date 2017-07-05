@@ -9,7 +9,7 @@ import gui.TypeButton;
 public class ControlsMenu extends GuiMenu {
 
 	public ControlsMenu(Image menuImage) {
-		super(menuImage);
+		super(menuImage, true);
 		resetMenu();
 	}
 
