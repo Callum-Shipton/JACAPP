@@ -44,7 +44,7 @@ public class Hud extends GuiComponent {
 		PA = player.getComponent(TypeComponent.ATTACK);
 		PM = player.getComponent(TypeComponent.MOVEMENT);
 
-		hudElems = new CopyOnWriteArrayList<Icon>();
+		hudElems = new CopyOnWriteArrayList<>();
 		infoBoxTop = new Icon(0.0f, 0.0f, ImageProcessor.getImage("BarInfoTop"), false, 1f);
 		hudElems.add(infoBoxTop);
 		healthBar = new HudBar(10.0f, 10.0f, ImageProcessor.getImage("BarHealth"), 1f);
@@ -66,6 +66,14 @@ public class Hud extends GuiComponent {
 		frost = new Icon(0.0f, 140.0f, ImageProcessor.getImage("Frost"), false, 1f);
 
 		// Potions bar
+		infoBoxBottom = new Icon(0.0f,
+				Loop.getDisplay().getHeight() - ImageProcessor.getImage("BarInfoBottom").getHeight(),
+				ImageProcessor.getImage("BarInfoBottom"), false, 1f);
+		hudElems.add(infoBoxBottom);
+	}
+
+	public void resetHud() {
+		hudElems.remove(infoBoxBottom);
 		infoBoxBottom = new Icon(0.0f,
 				Loop.getDisplay().getHeight() - ImageProcessor.getImage("BarInfoBottom").getHeight(),
 				ImageProcessor.getImage("BarInfoBottom"), false, 1f);

@@ -34,8 +34,14 @@ public class MenuSystem {
 	}
 
 	public void update() {
-		if (!this.menuStack.isEmpty()) {
-			this.menuStack.peek().update();
+		if (!menuStack.isEmpty()) {
+			menuStack.peek().update();
+		}
+	}
+
+	public void resetMenus() {
+		for (GuiMenu menu : menuStack) {
+			menu.resetMenu();
 		}
 	}
 }

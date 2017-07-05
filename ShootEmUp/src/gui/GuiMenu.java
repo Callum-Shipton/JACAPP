@@ -3,9 +3,9 @@ package gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import display.ImageProcessor;
 import display.Display;
 import display.Image;
+import display.ImageProcessor;
 import loop.Loop;
 import math.Vector2;
 
@@ -22,11 +22,11 @@ public abstract class GuiMenu {
 
 	public GuiMenu(Image menuImage) {
 		this.menuImage = menuImage;
-		this.x = 0;
-		this.y = 0;
-		this.w = menuImage.getWidth();
-		this.h = menuImage.getHeight();
-		this.display = Loop.getDisplay();
+		x = 0;
+		y = 0;
+		w = menuImage.getWidth();
+		h = menuImage.getHeight();
+		display = Loop.getDisplay();
 	}
 
 	public void buttonPressed(MenuButton button) {
@@ -34,17 +34,19 @@ public abstract class GuiMenu {
 	}
 
 	public void render() {
-		ImageProcessor.stat.draw(menuImage, new Vector2(x, y),
-				new Vector2(this.display.getWidth(), display.getHeight()), 0, new Vector2(0, 0), new Vector2(1,1));
+		ImageProcessor.stat.draw(menuImage, new Vector2(x, y), new Vector2(display.getWidth(), display.getHeight()), 0,
+				new Vector2(0, 0), new Vector2(1, 1));
 		for (GuiComponent menuItem : menuItems) {
 			menuItem.render(ImageProcessor.stat);
 		}
 	}
 
 	public void update() {
-		for (GuiComponent menuItem : this.menuItems) {
+		for (GuiComponent menuItem : menuItems) {
 			menuItem.update();
 		}
 	}
+
+	public abstract void resetMenu();
 
 }

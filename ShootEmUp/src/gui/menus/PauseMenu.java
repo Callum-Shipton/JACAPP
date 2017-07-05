@@ -1,7 +1,7 @@
 package gui.menus;
 
-import display.ImageProcessor;
 import display.Image;
+import display.ImageProcessor;
 import gui.GuiMenu;
 import gui.MenuButton;
 import gui.TypeButton;
@@ -18,12 +18,12 @@ public abstract class PauseMenu extends GuiMenu {
 		tabs.addMenuItem(new MenuButton(TypeButton.UPGRADES, ImageProcessor.getImage("UpgradesButton"), 0, 0));
 		tabs.addMenuItem(new MenuButton(TypeButton.MAP, ImageProcessor.getImage("MapButton"), 0, 0));
 		tabs.addMenuItem(new MenuButton(TypeButton.SAVE, ImageProcessor.getImage("SaveButton"), 0, 0));
-		this.menuItems.add(tabs);
+		menuItems.add(tabs);
 
-		VerticalLayout nativeButtons = new VerticalLayout(30, this.display.getHeight() - 94,
+		VerticalLayout nativeButtons = new VerticalLayout(30, display.getHeight() - 94,
 				ImageProcessor.getImage("ExitButton").getHeight() / 2, 20);
 		nativeButtons.addMenuItem(new MenuButton(TypeButton.RESUME, ImageProcessor.getImage("BackButton"), 0, 0));
 		nativeButtons.addMenuItem(new MenuButton(TypeButton.MAIN_MENU, ImageProcessor.getImage("ExitButton"), 0, 0));
-		this.menuItems.add(nativeButtons);
+		menuItems.add(nativeButtons);
 	}
 }

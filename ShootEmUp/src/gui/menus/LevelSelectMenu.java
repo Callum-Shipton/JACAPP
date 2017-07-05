@@ -1,7 +1,7 @@
 package gui.menus;
 
-import display.ImageProcessor;
 import display.Image;
+import display.ImageProcessor;
 import gui.GuiMenu;
 import gui.MenuButton;
 import gui.TypeButton;
@@ -9,12 +9,20 @@ import gui.VerticalLayout;
 
 public class LevelSelectMenu extends GuiMenu {
 
+	private int level;
+
 	public LevelSelectMenu(Image menuImage, int level) {
 		super(menuImage);
+		this.level = level;
+		resetMenu();
+	}
 
+	@Override
+	public void resetMenu() {
+		menuItems.clear();
 		VerticalLayout buttonList = new VerticalLayout(
-				(this.display.getWidth() / 2) - (ImageProcessor.getImage("Level1Button").getWidth() / 2), 150,
-				ImageProcessor.getImage("Level1Button").getHeight() / 2, 20);
+				(this.display.getWidth() / 2) - (ImageProcessor.getImage("Level1Button").getWidth() / 2),
+				display.getHeight() / 2, ImageProcessor.getImage("Level1Button").getHeight() / 2, 20);
 
 		switch (level) {
 		case 3:

@@ -55,6 +55,10 @@ public class ShootEmUp implements Game {
 
 		if (Keyboard.getKey(Loop.getKeys().fullscreen) == 1) {
 			Loop.getDisplay().toggleFullscreen();
+			if (game.getHud() != null) {
+				game.getHud().resetHud();
+			}
+			menuSystem.resetMenus();
 			// TODO write code for changing position of menu items
 		}
 

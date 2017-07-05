@@ -2,12 +2,12 @@ package gui;
 
 import java.util.ArrayList;
 
-import display.ImageProcessor;
 import display.DPDTRenderer;
+import display.ImageProcessor;
 
 public class VerticalLayout extends GuiComponent {
 
-	private ArrayList<GuiComponent> menuItems = new ArrayList<GuiComponent>();
+	private ArrayList<GuiComponent> menuItems = new ArrayList<>();
 	private float gap;
 	private float height;
 
@@ -18,21 +18,21 @@ public class VerticalLayout extends GuiComponent {
 	}
 
 	public void addMenuItem(GuiComponent menuItem) {
-		menuItem.setX(this.x);
-		menuItem.setY(this.y + ((this.gap + this.height) * this.menuItems.size()));
-		this.menuItems.add(menuItem);
+		menuItem.setX(x);
+		menuItem.setY(y + ((gap + height) * menuItems.size()));
+		menuItems.add(menuItem);
 	}
 
 	@Override
 	public void render(DPDTRenderer d) {
-		for (GuiComponent menuItem : this.menuItems) {
+		for (GuiComponent menuItem : menuItems) {
 			menuItem.render(ImageProcessor.stat);
 		}
 	}
 
 	@Override
 	public void update() {
-		for (GuiComponent menuItem : this.menuItems) {
+		for (GuiComponent menuItem : menuItems) {
 			menuItem.update();
 		}
 	}

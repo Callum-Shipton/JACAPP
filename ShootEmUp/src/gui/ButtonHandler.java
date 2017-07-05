@@ -116,7 +116,8 @@ public abstract class ButtonHandler {
 		Save save = ShootEmUp.getSave();
 
 		if (save == null) {
-			ShootEmUp.setSave(new Save());
+			save = new Save();
+			ShootEmUp.setSave(save);
 		}
 		save.load(1);
 
@@ -126,22 +127,20 @@ public abstract class ButtonHandler {
 		int battleMageLevel = 0;
 		int rogueLevel = 0;
 
-		if (save != null) {
-			if (save.getCharacter(TypeAttack.WARRIOR) != null) {
-				warriorLevel = save.getCharacter(TypeAttack.WARRIOR).getPlayerLevel();
-			}
-			if (save.getCharacter(TypeAttack.ARCHER) != null) {
-				archerLevel = save.getCharacter(TypeAttack.ARCHER).getPlayerLevel();
-			}
-			if (save.getCharacter(TypeAttack.MAGE) != null) {
-				mageLevel = save.getCharacter(TypeAttack.MAGE).getPlayerLevel();
-			}
-			if (save.getCharacter(TypeAttack.BATTLE_MAGE) != null) {
-				battleMageLevel = save.getCharacter(TypeAttack.BATTLE_MAGE).getPlayerLevel();
-			}
-			if (save.getCharacter(TypeAttack.ROGUE) != null) {
-				rogueLevel = save.getCharacter(TypeAttack.ROGUE).getPlayerLevel();
-			}
+		if (save.getCharacter(TypeAttack.WARRIOR) != null) {
+			warriorLevel = save.getCharacter(TypeAttack.WARRIOR).getPlayerLevel();
+		}
+		if (save.getCharacter(TypeAttack.ARCHER) != null) {
+			archerLevel = save.getCharacter(TypeAttack.ARCHER).getPlayerLevel();
+		}
+		if (save.getCharacter(TypeAttack.MAGE) != null) {
+			mageLevel = save.getCharacter(TypeAttack.MAGE).getPlayerLevel();
+		}
+		if (save.getCharacter(TypeAttack.BATTLE_MAGE) != null) {
+			battleMageLevel = save.getCharacter(TypeAttack.BATTLE_MAGE).getPlayerLevel();
+		}
+		if (save.getCharacter(TypeAttack.ROGUE) != null) {
+			rogueLevel = save.getCharacter(TypeAttack.ROGUE).getPlayerLevel();
 		}
 
 		ShootEmUp.getMenuSystem().addMenu(new CharacterSelectMenu(ImageProcessor.getImage(MAIN_MENU_BACKGROUND),
