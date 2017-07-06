@@ -20,13 +20,13 @@ public class AStarNode implements Comparable<AStarNode> {
 		this(position, width);
 		this.parent = parent;
 		this.goal = goal;
-		parentLength = (parent == null)? 0 : parent.parentLength + 1;
+		parentLength = (parent == null)? 0 : parent.getParentLength() + 1;
 	}
 
 	@Override
 	public int compareTo(AStarNode n) {
 
-		float distance1 = goal.dist(n.getPosition()) + n.parentLength;
+		float distance1 = goal.dist(n.getPosition()) + n.getParentLength();
 		float distance2 = goal.dist(getPosition()) + parentLength;
 
 		return Float.compare(distance2, distance1);
@@ -58,6 +58,10 @@ public class AStarNode implements Comparable<AStarNode> {
 
 	public Vector2 getPosition() {
 		return position;
+	}
+	
+	public int getParentLength() {
+		return parentLength;
 	}
 
 	public void setChild(AStarNode child) {
