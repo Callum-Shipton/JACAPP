@@ -4,7 +4,7 @@ import entity.Entity;
 
 public interface AttackComponent {
 
-	void attack(Entity e, int dir);
+	boolean attack(Entity e, int dir);
 
 	void update(Entity e);
 

@@ -77,16 +77,19 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	}
 
 	@Override
-	public void attack(Entity e, int dir) {
+	public boolean attack(Entity e, int dir) {
 		if (this.fireCountdown <= 0) {
 			if (this.mana >= this.weapon.getManaCost()) {
 				this.weapon.attack(e, dir);
 				this.mana -= this.weapon.getManaCost();
+				this.fireCountdown = this.weapon.getFireRate();
+				return true;
 			}
-			this.fireCountdown = this.weapon.getFireRate();
+			
 		}
 		this.fireCountdown--;
-	}
+		return false;
+		}
 
 	public void damage(int damage, Entity e) {
 		if (this.armourValue != 0) {
