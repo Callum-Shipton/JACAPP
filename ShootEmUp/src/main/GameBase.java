@@ -59,10 +59,11 @@ public class GameBase {
 			ShootEmUp.setSave(new Save());
 		}
 		ShootEmUp.getSave().saveCharacter();
+		ShootEmUp.getSave().setLevel(++levelNumber);
 		ShootEmUp.getSave().saveToSystem(1);
 		BaseAttack playerAttack = player.getComponent(TypeComponent.ATTACK);
 		TypeAttack temp = playerAttack.getAttackType();
-		currentLevel = new Level(ImageProcessor.LEVEL_FILE_LOCATION, ++levelNumber);
+		currentLevel = new Level(ImageProcessor.LEVEL_FILE_LOCATION, levelNumber);
 		currentLevel.init();
 
 		List<TypeEnemy> enemyPrototypes = new ArrayList<>();
