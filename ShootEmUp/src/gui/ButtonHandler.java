@@ -46,9 +46,9 @@ public abstract class ButtonHandler {
 			ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(ImageProcessor.getImage(MAIN_MENU_BACKGROUND), 1));
 		} else {
 			if (save.getCharacter(type) != null) {
-				PlayerBuilder.buildPlayer(type, save.getCharacter(type));
+				ShootEmUp.getGame().setPlayer(PlayerBuilder.buildPlayer(type, save.getCharacter(type)));
 			} else {
-				PlayerBuilder.buildPlayer(type);
+				ShootEmUp.getGame().setPlayer(PlayerBuilder.buildPlayer(type));
 			}
 			ShootEmUp.getMenuSystem()
 					.addMenu(new LevelSelectMenu(ImageProcessor.getImage(MAIN_MENU_BACKGROUND), save.getLevel()));

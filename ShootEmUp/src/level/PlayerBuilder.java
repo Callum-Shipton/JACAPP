@@ -47,6 +47,7 @@ public abstract class PlayerBuilder {
 	}
 
 	public static Entity buildPlayer(TypeAttack type, CharacterSave save) {
+		player = new Entity();
 		chooseType(type);
 
 		a = new PlayerAttack(type, save);
