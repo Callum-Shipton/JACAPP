@@ -21,14 +21,14 @@ public class UpgradesMenu extends PauseMenu {
 	@Override
 	public void render() {
 		super.render();
-		this.coins.render(ImageProcessor.stat);
+		coins.render(ImageProcessor.stat);
 	}
 
 	@Override
 	public void update() {
 		super.update();
 		BaseInventory baseInventory = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
-		this.coins.update(baseInventory.getCoins());
+		coins.update(baseInventory.getCoins());
 	}
 
 	@Override
