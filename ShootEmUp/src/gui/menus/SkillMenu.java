@@ -21,14 +21,14 @@ public class SkillMenu extends PauseMenu {
 	@Override
 	public void render() {
 		super.render();
-		this.skillPoints.render(ImageProcessor.stat);
+		skillPoints.render(ImageProcessor.stat);
 	}
 
 	@Override
 	public void update() {
 		super.update();
 		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
-		this.skillPoints.update(BI.getLevelPoints());
+		skillPoints.update(BI.getLevelPoints());
 	}
 
 	@Override
