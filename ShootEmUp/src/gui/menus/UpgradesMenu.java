@@ -16,15 +16,6 @@ public class UpgradesMenu extends PauseMenu {
 
 	public UpgradesMenu(Image menuImage) {
 		super(menuImage);
-		VerticalLayout buttonList = new VerticalLayout(30, 30,
-				ImageProcessor.getImage("InventoryButton").getHeight() / 2, 20);
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.INVENTORY_UPGRADE,
-				ImageProcessor.getImage("InventoryButton"), ImageProcessor.getImage("Coin"), 5, 1f));
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.POTIONS_UPGRADE,
-				ImageProcessor.getImage("PotionsButton"), ImageProcessor.getImage("Coin"), 5, 1f));
-		this.menuItems.add(buttonList);
-		BaseInventory baseInventory = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
-		this.coins = new Counter(30.0f, 103.0f, ImageProcessor.getImage("Coin"), true, baseInventory.getCoins(), 1.0f);
 	}
 
 	@Override
@@ -38,5 +29,20 @@ public class UpgradesMenu extends PauseMenu {
 		super.update();
 		BaseInventory baseInventory = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
 		this.coins.update(baseInventory.getCoins());
+	}
+
+	@Override
+	public void resetMenu() {
+		super.resetMenu();
+		VerticalLayout buttonList = new VerticalLayout(x + 30, y + 30,
+				ImageProcessor.getImage("InventoryButton").getHeight() / 2, 20);
+		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.INVENTORY_UPGRADE,
+				ImageProcessor.getImage("InventoryButton"), ImageProcessor.getImage("Coin"), 5, 1f));
+		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.POTIONS_UPGRADE,
+				ImageProcessor.getImage("PotionsButton"), ImageProcessor.getImage("Coin"), 5, 1f));
+		menuItems.add(buttonList);
+		BaseInventory baseInventory = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
+		coins = new Counter(x + 30.0f, y + 103.0f, ImageProcessor.getImage("Coin"), true, baseInventory.getCoins(),
+				1.0f);
 	}
 }

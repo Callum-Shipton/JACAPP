@@ -44,7 +44,7 @@ public class ShootEmUp implements Game {
 
 	@Override
 	public void render() {
-		if (!paused) {
+		if (game != null) {
 			game.render();
 		}
 		menuSystem.render();

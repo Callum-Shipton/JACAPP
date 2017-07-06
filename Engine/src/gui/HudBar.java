@@ -8,24 +8,26 @@ public class HudBar extends Icon {
 
 	private float value = 3;
 	private float maxValue = 3;
+	private float type;
 
-	public HudBar(float x, float y, Image i, float scale) {
+	public HudBar(float x, float y, Image i, int type, float scale) {
 		super(x, y, i, false, scale);
+		this.type = type;
 	}
 
 	public float getMaxValue() {
-		return this.maxValue;
+		return maxValue;
 	}
 
 	public float getValue() {
-		return this.value;
+		return value;
 	}
 
 	@Override
 	public void render(DPDTRenderer r) {
-		for (int j = 0; j < this.maxValue; j++) {
-			r.draw(this.i, new Vector2(this.x + (j * 10.0f), this.y), this.size, 0.0f,
-					j >= this.value ? getCurrFrame() : new Vector2(0.0f, 1.0f), this.maxFrame);
+		for (int j = 0; j < maxValue; j++) {
+			r.draw(i, new Vector2(x + (j * 10.0f), y), size, 0.0f,
+					j >= value ? getCurrFrame() : new Vector2(type, 0.0f), maxFrame);
 		}
 	}
 

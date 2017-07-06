@@ -14,9 +14,9 @@ public class Icon extends GuiComponent {
 
 	public Icon(float x, float y, Image i, boolean animating, float scale) {
 		super(x, y);
-		this.size = new Vector2((i.getWidth() / i.getFWidth()) * scale, (i.getHeight() / i.getFHeight()) * scale);
+		size = new Vector2((i.getWidth() / i.getFWidth()) * scale, (i.getHeight() / i.getFHeight()) * scale);
 		setCurrFrame(new Vector2(0.0f, 0.0f));
-		this.maxFrame = new Vector2(i.getFWidth(), i.getFHeight());
+		maxFrame = new Vector2(i.getFWidth(), i.getFHeight());
 		this.i = i;
 		this.isAnimated = animating;
 	}

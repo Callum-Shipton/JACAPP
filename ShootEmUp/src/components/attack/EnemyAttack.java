@@ -22,7 +22,7 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 		this.legs = legs;
 		this.boots = boots;
 
-		this.healthBar = new HudBar(10.0f, 10.0f, ImageProcessor.getImage("BarHealth"), 0.25f);
+		healthBar = new HudBar(10.0f, 10.0f, ImageProcessor.getImage("Bars"), 1, 0.25f);
 	}
 
 	@Override

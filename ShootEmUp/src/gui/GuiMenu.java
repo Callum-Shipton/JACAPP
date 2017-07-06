@@ -21,14 +21,19 @@ public abstract class GuiMenu {
 	protected Display display;
 	private boolean fullscreen;
 
-	public GuiMenu(Image menuImage, boolean fullscreen) {
+	public GuiMenu(Image menuImage, Boolean fullscreen) {
 		this.menuImage = menuImage;
-		this.fullscreen = fullscreen;
-		x = 0;
-		y = 0;
+		display = Loop.getDisplay();
+		if (fullscreen) {
+			x = 0;
+			y = 0;
+		} else {
+			x = (display.getWidth() / 2) - (menuImage.getWidth() / 2);
+			y = (display.getHeight() / 2) - (menuImage.getHeight() / 2);
+		}
 		w = menuImage.getWidth();
 		h = menuImage.getHeight();
-		display = Loop.getDisplay();
+		this.fullscreen = fullscreen;
 	}
 
 	public void buttonPressed(MenuButton button) {

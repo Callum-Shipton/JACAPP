@@ -23,46 +23,35 @@ public class InventoryMenu extends PauseMenu {
 
 	public InventoryMenu(Image menuImage) {
 		super(menuImage);
-
-		this.playerAttack = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.ATTACK);
-
-		buildHelmet();
-		buildChest();
-		buildLegs();
-		buildBoots();
-		buildWeapon();
-
-		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
-		this.inventory = new Inventory(30, 30, BI.getInventory());
 	}
 
 	private void buildBoots() {
 		if (playerAttack.getBoots() != null) {
-			boots = new ItemSlot(560, 126, playerAttack.getBoots());
+			boots = new ItemSlot(x + 560, y + 126, playerAttack.getBoots());
 		}
 	}
 
 	private void buildChest() {
 		if (playerAttack.getChest() != null) {
-			chest = new ItemSlot(560, 62, playerAttack.getChest());
+			chest = new ItemSlot(x + 560, y + 62, playerAttack.getChest());
 		}
 	}
 
 	private void buildHelmet() {
 		if (playerAttack.getHelmet() != null) {
-			helmet = new ItemSlot(560, 30, playerAttack.getHelmet());
+			helmet = new ItemSlot(x + 560, y + 30, playerAttack.getHelmet());
 		}
 	}
 
 	private void buildLegs() {
 		if (playerAttack.getLegs() != null) {
-			legs = new ItemSlot(560, 94, playerAttack.getLegs());
+			legs = new ItemSlot(x + 560, y + 94, playerAttack.getLegs());
 		}
 	}
 
 	private void buildWeapon() {
 		if (playerAttack.getWeapon() != null) {
-			weapon = new ItemSlot(560, 158, playerAttack.getWeapon());
+			weapon = new ItemSlot(x + 560, y + 158, playerAttack.getWeapon());
 		}
 	}
 
@@ -125,5 +114,21 @@ public class InventoryMenu extends PauseMenu {
 			buildWeapon();
 		}
 		inventory.update();
+	}
+
+	@Override
+	public void resetMenu() {
+		super.resetMenu();
+
+		playerAttack = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.ATTACK);
+
+		buildHelmet();
+		buildChest();
+		buildLegs();
+		buildBoots();
+		buildWeapon();
+
+		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
+		inventory = new Inventory(x + 30, y + 30, BI.getInventory());
 	}
 }

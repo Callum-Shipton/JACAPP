@@ -47,11 +47,11 @@ public class Hud extends GuiComponent {
 		hudElems = new CopyOnWriteArrayList<>();
 		infoBoxTop = new Icon(0.0f, 0.0f, ImageProcessor.getImage("BarInfoTop"), false, 1f);
 		hudElems.add(infoBoxTop);
-		healthBar = new HudBar(10.0f, 10.0f, ImageProcessor.getImage("Bar"), 1, 1f);
+		healthBar = new HudBar(10.0f, 10.0f, ImageProcessor.getImage("Bars"), 1, 1f);
 		hudElems.add(healthBar);
-		manaBar = new HudBar(10.0f, 35.0f, ImageProcessor.getImage("Bar"), 2, 1f);
+		manaBar = new HudBar(10.0f, 35.0f, ImageProcessor.getImage("Bars"), 2, 1f);
 		hudElems.add(manaBar);
-		xpBar = new HudBar(10.0f, 60.0f, ImageProcessor.getImage("Bar"), 3, 1f);
+		xpBar = new HudBar(10.0f, 60.0f, ImageProcessor.getImage("Bars"), 3, 1f);
 		hudElems.add(xpBar);
 		moneyCounter = new Counter(10.0f, 82.0f, ImageProcessor.getImage("CoinIcon"), false, PI.getCoins(), 0.5f);
 		hudElems.add(moneyCounter);

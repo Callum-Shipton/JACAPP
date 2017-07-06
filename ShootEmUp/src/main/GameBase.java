@@ -42,11 +42,16 @@ public class GameBase {
 	}
 
 	public void render() {
-		currentLevel.render();
-		BaseGraphics baseGraphics = player.getComponent(TypeComponent.GRAPHICS);
-		baseGraphics.render(player);
-
-		hud.render(ImageProcessor.stat);
+		if (currentLevel != null) {
+			currentLevel.render();
+		}
+		if (player != null) {
+			BaseGraphics baseGraphics = player.getComponent(TypeComponent.GRAPHICS);
+			baseGraphics.render(player);
+		}
+		if (hud != null) {
+			hud.render(ImageProcessor.stat);
+		}
 	}
 
 	private void nextLevel() {

@@ -168,7 +168,7 @@ public class Art implements ArtLoader {
 
 		// Load HUD textures
 		ImageProcessor.addArt("BarInfoTop", new Image("/Images/HUD/BarInfoTop.png", 1, 1));
-		ImageProcessor.addArt("Bars", new Image("/Images/HUD/Bars.png", 4, 0));
+		ImageProcessor.addArt("Bars", new Image("/Images/HUD/Bars.png", 4, 1));
 		ImageProcessor.addArt("Numbers", new Image("/Images/HUD/Numbers.png", 10, 1));
 
 		ImageProcessor.addArt("BarInfoBottom", new Image("/Images/HUD/BarInfoBottom.png", 1, 1));
