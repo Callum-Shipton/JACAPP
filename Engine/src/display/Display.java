@@ -30,15 +30,12 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 
 import java.nio.ByteBuffer;
 
-import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWvidmode;
-import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GLContext;
 
 import input.Keyboard;
 import loop.Loop;
-import math.Matrix4;
 
 public class Display {
 
@@ -55,19 +52,19 @@ public class Display {
 
 	private ByteBuffer vidmode;
 	private GLFWvidmode vm;
-	
+
 	private Camera cam;
-	
+
 	private int width;
 	private int height;
 
 	boolean fullscreen = false;
-	
+
 	private ArtLoader artLoader;
 
 	public Display(ArtLoader artLoader) {
 		this.artLoader = artLoader;
-		
+
 		this.width = INITIAL_SCREEN_WIDTH;
 		this.height = INITIAL_SCREEN_HEIGHT;
 	}
@@ -89,7 +86,7 @@ public class Display {
 	public long getWindow() {
 		return this.window;
 	}
-	
+
 	public Camera getCamera() {
 		return this.cam;
 	}
@@ -99,8 +96,7 @@ public class Display {
 		glViewport(0, 0, this.width, this.height);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		
-		
+
 	}
 
 	public void initGLFW() {
@@ -159,13 +155,11 @@ public class Display {
 
 		initGL();
 		new ImageProcessor().init(artLoader);
-		cam = new Camera(width,height);
-		
+		cam = new Camera(width, height);
 
 		// Initialise key handling
 		Keyboard.keyCheck(this.window);
 	}
-	
 
 	public void setHeight(int height) {
 		this.height = height;
@@ -175,7 +169,6 @@ public class Display {
 		this.width = width;
 	}
 
-	
 	public void toggleFullscreen() {
 		long newWindow;
 		if (this.fullscreen) {
@@ -206,19 +199,17 @@ public class Display {
 		glfwDestroyWindow(this.window);
 		this.window = newWindow;
 		initGL();
-		cam = new Camera(width,height);
+		cam = new Camera(width, height);
 		Keyboard.keyCheck(this.window);
 		ImageProcessor.initShaderUniforms();
 		ImageProcessor.refreshRenderers();
 		/*
-		if (ShootEmUp.getCurrentLevel() != null) {
-		PlayerGraphics BG = ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-			BG.scrollScreen();
-		}
-		*/
+		 * if (ShootEmUp.getCurrentLevel() != null) { PlayerGraphics BG =
+		 * ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
+		 * BG.scrollScreen(); }
+		 */
 		this.fullscreen = !this.fullscreen;
 	}
-	
 
 	public void update() {
 		if (Keyboard.getKey(Loop.getKeys().quit) == 1) {
@@ -229,8 +220,8 @@ public class Display {
 			Keyboard.setKey(Loop.getKeys().quit);
 		}
 		if (Keyboard.getKey(Loop.getKeys().fullscreen) == 1) {
-			//toggleFullscreen();
-			
+			// toggleFullscreen();
+
 			// We will detect this in
 			// our update loop
 			Keyboard.setKey(Loop.getKeys().fullscreen);
