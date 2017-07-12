@@ -1,13 +1,17 @@
 package io;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -67,5 +71,20 @@ public final class FileManager {
 		}
 
 		return o;
+	}
+
+	public static List<String> getProperties(String propertiesLocation) {
+		List<String> properties = new ArrayList<>();
+		try (BufferedReader br = new BufferedReader(new FileReader(propertiesLocation))) {
+			String line = br.readLine();
+
+			while (line != null) {
+				properties.add(line);
+				line = br.readLine();
+			}
+		} catch (IOException e) {
+			Logger.error(e);
+		}
+		return properties;
 	}
 }

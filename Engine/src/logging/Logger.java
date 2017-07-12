@@ -4,12 +4,14 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+import io.FileManager;
+
 public final class Logger {
 
 	private static boolean info = true;
 	private static boolean debug = true;
 
-	private static final String PROPERTIES_LOCATION = "";
+	private static final String PROPERTIES_LOCATION = "logger.properties";
 
 	private static Set<Category> categories;
 
@@ -42,7 +44,9 @@ public final class Logger {
 
 	private static void initialiseCategories() {
 		Set<Category> categories = new HashSet<>();
-		categories.add(Category.valueOf(""));
+		for (String category : FileManager.getProperties(PROPERTIES_LOCATION)) {
+			categories.add(Category.valueOf(category));
+		}
 		Logger.categories = categories;
 	}
 
