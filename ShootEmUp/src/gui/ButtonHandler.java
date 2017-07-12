@@ -1,21 +1,11 @@
 package gui;
 
-import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
-import static org.lwjgl.opengl.GL11.GL_TRUE;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import components.TypeComponent;
-import components.attack.BaseAttack;
 import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
 import components.inventory.BaseInventory;
 import display.ImageProcessor;
 import gui.menus.CharacterSelectMenu;
-import gui.menus.ControlsMenu;
-import gui.menus.InventoryMenu;
-import gui.menus.LevelSelectMenu;
 import gui.menus.MainMenu;
 import gui.menus.MapMenu;
 import gui.menus.OptionsMenu;
@@ -23,94 +13,13 @@ import gui.menus.SaveMenu;
 import gui.menus.SkillMenu;
 import gui.menus.SoundMenu;
 import gui.menus.UpgradesMenu;
-import level.Level;
-import level.PlayerBuilder;
-import level.TypeEnemy;
 import logging.Logger;
-import loop.Loop;
 import main.ShootEmUp;
 import save.Save;
 
 public abstract class ButtonHandler {
 
 	public static final String MAIN_MENU_BACKGROUND = "MainMenuScreen";
-
-	private static void back() {
-		ShootEmUp.getMenuSystem().popMenu();
-	}
-
-	private static void selectCharacter(TypeAttack type) {
-		Save save = ShootEmUp.getSave();
-		if (save == null) {
-			ShootEmUp.getGame().setPlayer(PlayerBuilder.buildPlayer(type));
-			ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(ImageProcessor.getImage(MAIN_MENU_BACKGROUND), 1));
-		} else {
-			if (save.getCharacter(type) != null) {
-				ShootEmUp.getGame().setPlayer(PlayerBuilder.buildPlayer(type, save.getCharacter(type)));
-			} else {
-				ShootEmUp.getGame().setPlayer(PlayerBuilder.buildPlayer(type));
-			}
-			ShootEmUp.getMenuSystem()
-					.addMenu(new LevelSelectMenu(ImageProcessor.getImage(MAIN_MENU_BACKGROUND), save.getLevel()));
-		}
-		ShootEmUp.getGame().setHud(new Hud(ShootEmUp.getGame().getPlayer(), 0, 0));
-	}
-
-	private static void controls() {
-		ShootEmUp.getMenuSystem().addMenu(new ControlsMenu(ImageProcessor.getImage(MAIN_MENU_BACKGROUND)));
-	}
-
-	private static void exit() {
-		glfwSetWindowShouldClose(Loop.getDisplay().getWindow(), GL_TRUE);
-	}
-
-	private static void health() {
-		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
-		if (BI.getLevelPoints() > 0) {
-			BaseAttack BA = (ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.ATTACK));
-			BA.setMaxHealth(BA.getMaxHealth() + 1);
-			BA.setHealth(BA.getHealth() + 1);
-			BI.spendLevelPoints(1);
-		}
-	}
-
-	private static void healthRegen() {
-		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
-		if (BI.getLevelPoints() > 0) {
-			BaseAttack BA = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.ATTACK);
-			BA.setMaxHealthRegen((int) Math.ceil(BA.getMaxHealthRegen() / 2.0));
-			BI.spendLevelPoints(1);
-		}
-	}
-
-	private static void inventory() {
-		ShootEmUp.getMenuSystem().addMenu(new InventoryMenu(ImageProcessor.getImage("InventoryScreen")));
-	}
-
-	private static void inventoryUpgrade() {
-		BaseInventory PI = (ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY));
-		if (PI.getCoins() >= 5) {
-			PI.addInventorySize(5);
-			PI.spendCoins(5);
-		}
-	}
-
-	private static void level(int levelNum) {
-		Level level = new Level(ImageProcessor.LEVEL_FILE_LOCATION, levelNum);
-		level.init();
-		level.addEntity(ShootEmUp.getGame().getPlayer());
-
-		ShootEmUp.getGame().setLevel(levelNum);
-		ShootEmUp.getGame().setCurrentLevel(level);
-
-		List<TypeEnemy> enemyPrototypes = new ArrayList<>();
-		enemyPrototypes.add(TypeEnemy.SMALL);
-		enemyPrototypes.add(TypeEnemy.NORMAL);
-		enemyPrototypes.add(TypeEnemy.FLYING);
-		level.addSpawner(enemyPrototypes);
-
-		ShootEmUp.startGame();
-	}
 
 	private static void loadGame() throws Exception {
 		Save save = ShootEmUp.getSave();
@@ -233,53 +142,17 @@ public abstract class ButtonHandler {
 		case OPTIONS:
 			options();
 			break;
-		case EXIT:
-			exit();
-			break;
-		case LEVEL1:
-			level(1);
-			break;
-		case LEVEL2:
-			level(2);
-			break;
-		case LEVEL3:
-			level(3);
-			break;
-		case WARRIOR:
-			selectCharacter(TypeAttack.WARRIOR);
-			break;
-		case ARCHER:
-			selectCharacter(TypeAttack.ARCHER);
-			break;
-		case MAGE:
-			selectCharacter(TypeAttack.MAGE);
-			break;
-		case BATTLE_MAGE:
-			selectCharacter(TypeAttack.BATTLE_MAGE);
-			break;
-		case ROGUE:
-			selectCharacter(TypeAttack.ROGUE);
-			break;
-		case BACK:
-			back();
-			break;
 		case SOUND:
 			sound();
 			break;
 		case MUTE:
 			mute();
 			break;
-		case CONTROLS:
-			controls();
-			break;
 		case RESUME:
 			resume();
 			break;
 		case MAIN_MENU:
 			mainMenu();
-			break;
-		case INVENTORY:
-			inventory();
 			break;
 		case UPGRADES:
 			magic();
@@ -293,12 +166,6 @@ public abstract class ButtonHandler {
 		case SAVE:
 			save();
 			break;
-		case HEALTH_REGEN:
-			healthRegen();
-			break;
-		case HEALTH:
-			health();
-			break;
 		case MANA_REGEN:
 			upgradeManaRegen();
 			break;
@@ -307,9 +174,6 @@ public abstract class ButtonHandler {
 			break;
 		case POTIONS_UPGRADE:
 			potionsUpgrade();
-			break;
-		case INVENTORY_UPGRADE:
-			inventoryUpgrade();
 			break;
 		case SAVE_GAME:
 			saveGame();
