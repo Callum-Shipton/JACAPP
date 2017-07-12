@@ -72,7 +72,7 @@ public class AreaSpawner extends Spawner {
 		float pw = playerGraphics.getWidth();
 		float ph = playerGraphics.getHeight();
 
-		Set<Entity> levelEntities = ShootEmUp.getGame().getCurrentLevel().getEntities();
+		Set<Entity> levelEntities = ShootEmUp.getGame().getCurrentLevel().getEntityStorage().getEntities();
 
 		int spawnX;
 		int spawnY;

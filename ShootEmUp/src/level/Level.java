@@ -12,6 +12,7 @@ import components.collision.BaseCollision;
 import components.graphical.BaseGraphics;
 import display.ImageProcessor;
 import entity.Entity;
+import entity.EntityStorage;
 import logging.Logger;
 import math.Vector2;
 import object.EntityMap;
@@ -20,9 +21,7 @@ public class Level {
 
 	private EntityMap eMap;
 
-	private Set<Entity> entities;
-	private Set<Entity> oldEntities;
-	private Set<Entity> newEntities;
+	private EntityStorage entityStorage;
 
 	private Set<Spawner> spawners;
 	private LevelMap map;
@@ -49,9 +48,7 @@ public class Level {
 		eMap = new EntityMap(map.getWidth(), map.getHeight());
 		spawners = new HashSet<>();
 
-		entities = new HashSet<>();
-		oldEntities = new HashSet<>();
-		newEntities = new HashSet<>();
+		entityStorage = new EntityStorage();
 
 		radiusLocation = GL20.glGetUniformLocation(ImageProcessor.ShaderBase, "radius");
 		radiusLocationInst = GL20.glGetUniformLocation(ImageProcessor.ShaderInst, "radius");
@@ -77,52 +74,10 @@ public class Level {
 		}
 	}
 
-	public void addEntities() {
-		Iterator<Entity> newEntitiesIter = newEntities.iterator();
-		while (newEntitiesIter.hasNext()) {
-			Entity n = newEntitiesIter.next();
-			boolean res = entities.add(n);
-			if (!res) {
-				Logger.warn("New entity not added. Name: " + n.toString() + ", HC: " + n.hashCode());
-			}
-		}
-		newEntities.clear();
-	}
-
-	public void addEntity(Entity e) {
-		newEntities.add(e);
-		BaseCollision BC = e.getComponent(TypeComponent.COLLISION);
-		if (BC != null) {
-			BC.setGridPos(eMap.getGridPos(e));
-			eMap.addEntity(eMap.getGridPos(e), e);
-		} else {
-			Logger.warn("No Collision");
-		}
-	}
-
-	public void removeEntities() {
-		Iterator<Entity> oldEntitiesIter = oldEntities.iterator();
-		while (oldEntitiesIter.hasNext()) {
-			Entity n = oldEntitiesIter.next();
-			BaseCollision BC = n.getComponent(TypeComponent.COLLISION);
-			eMap.removeEntity(BC.getGridPos(), n);
-			boolean res = entities.remove(n);
-			if (!res) {
-				Logger.warn("Old entity not removed. Name: " + n.toString() + ", HC: " + n.hashCode());
-			}
-		}
-		oldEntities.clear();
-	}
-
-	public void removeEntity(Set<Vector2> gridPos, Entity e) {
-		eMap.removeEntity(gridPos, e);
-		oldEntities.add(e);
-	}
-
 	public void render() {
 		map.renderLowTiles();
 
-		for (Entity character : entities) {
+		for (Entity character : entityStorage.getEntities()) {
 			BaseGraphics BG = character.getComponent(TypeComponent.GRAPHICS);
 			BG.render(character);
 		}
@@ -152,15 +107,16 @@ public class Level {
 			nextWave();
 		}
 
-		Iterator<Entity> entityIter = entities.iterator();
+		Iterator<Entity> entityIter = entityStorage.getEntities().iterator();
 		while (entityIter.hasNext()) {
 			Entity c = entityIter.next();
 			c.update();
 		}
-
-		addEntities();
-
-		removeEntities();
+		for (Entity e : entityStorage.getOldEntities()) {
+			BaseCollision BC = e.getComponent(TypeComponent.COLLISION);
+			eMap.removeEntity(BC.getGridPos(), e);
+		}
+		entityStorage.update();
 	}
 
 	private void nextWave() {
@@ -176,16 +132,28 @@ public class Level {
 
 	}
 
+	public void addEntity(Entity e) {
+		entityStorage.addEntity(e);
+		BaseCollision BC = e.getComponent(TypeComponent.COLLISION);
+		if (BC != null) {
+			BC.setGridPos(eMap.getGridPos(e));
+			eMap.addEntity(eMap.getGridPos(e), e);
+		} else {
+			Logger.warn("No Collision");
+		}
+	}
+
+	public void removeEntity(Set<Vector2> gridPos, Entity e) {
+		eMap.removeEntity(gridPos, e);
+		entityStorage.removeEntity(e);
+	}
+
 	public void removeEnemy() {
 		enemies--;
 	}
 
 	public EntityMap geteMap() {
 		return eMap;
-	}
-
-	public Set<Entity> getEntities() {
-		return entities;
 	}
 
 	public LevelMap getMap() {
@@ -198,5 +166,9 @@ public class Level {
 
 	public boolean getLevelFinished() {
 		return levelFinished;
+	}
+
+	public EntityStorage getEntityStorage() {
+		return entityStorage;
 	}
 }
