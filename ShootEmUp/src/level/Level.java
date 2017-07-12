@@ -20,7 +20,6 @@ import object.EntityMap;
 public class Level {
 
 	private EntityMap eMap;
-
 	private EntityStorage entityStorage;
 
 	private Set<Spawner> spawners;
@@ -37,8 +36,8 @@ public class Level {
 	private int radiusLocation;
 	private int radiusLocationInst;
 
-	private static final float radius = 250.0f;
-	private static final float radiusIncreasePerLevel = 25.0f;
+	private static final float RADIUS = 250.0f;
+	private static final float RADIUS_INCREASE_PER_LEVEL = 25.0f;
 
 	private boolean levelFinished = false;
 
@@ -61,10 +60,10 @@ public class Level {
 
 	public void changeRadius(float f) {
 		GL20.glUseProgram(ImageProcessor.ShaderBase);
-		GL20.glUniform1f(radiusLocation, f + radius);
+		GL20.glUniform1f(radiusLocation, f + RADIUS);
 		GL20.glUseProgram(0);
 		GL20.glUseProgram(ImageProcessor.ShaderInst);
-		GL20.glUniform1f(radiusLocationInst, f + radius);
+		GL20.glUniform1f(radiusLocationInst, f + RADIUS);
 		GL20.glUseProgram(0);
 	}
 
@@ -78,8 +77,8 @@ public class Level {
 		map.renderLowTiles();
 
 		for (Entity character : entityStorage.getEntities()) {
-			BaseGraphics BG = character.getComponent(TypeComponent.GRAPHICS);
-			BG.render(character);
+			BaseGraphics graphics = character.getComponent(TypeComponent.GRAPHICS);
+			graphics.render(character);
 		}
 
 		map.renderHighTiles();
@@ -87,10 +86,8 @@ public class Level {
 
 	public void update() {
 		if (totalEnemies < currentWave) {
-
 			for (Spawner spawner : spawners) {
 				spawner.update();
-
 				if (!spawner.getSpawnedEntites().isEmpty()) {
 					for (Entity entity : spawner.getSpawnedEntites()) {
 						addEntity(entity);
@@ -113,8 +110,8 @@ public class Level {
 			c.update();
 		}
 		for (Entity e : entityStorage.getOldEntities()) {
-			BaseCollision BC = e.getComponent(TypeComponent.COLLISION);
-			eMap.removeEntity(BC.getGridPos(), e);
+			BaseCollision collision = e.getComponent(TypeComponent.COLLISION);
+			eMap.removeEntity(collision.getGridPos(), e);
 		}
 		entityStorage.update();
 	}
@@ -125,7 +122,7 @@ public class Level {
 			waveActive = true;
 			currentWave++;
 			totalEnemies++;
-			changeRadius((currentWave - 1) * radiusIncreasePerLevel);
+			changeRadius((currentWave - 1) * RADIUS_INCREASE_PER_LEVEL);
 		} else {
 			levelFinished = true;
 		}
@@ -134,9 +131,9 @@ public class Level {
 
 	public void addEntity(Entity e) {
 		entityStorage.addEntity(e);
-		BaseCollision BC = e.getComponent(TypeComponent.COLLISION);
-		if (BC != null) {
-			BC.setGridPos(eMap.getGridPos(e));
+		BaseCollision collision = e.getComponent(TypeComponent.COLLISION);
+		if (collision != null) {
+			collision.setGridPos(eMap.getGridPos(e));
 			eMap.addEntity(eMap.getGridPos(e), e);
 		} else {
 			Logger.warn("No Collision");

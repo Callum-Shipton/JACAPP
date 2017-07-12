@@ -1,7 +1,6 @@
 package logging;
 
 import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,10 +9,9 @@ public final class Logger {
 	private static boolean info = true;
 	private static boolean debug = true;
 
-	private static Set<Category> categories = new HashSet<>(Arrays.asList(Category.ENTITIES));
+	private static final String PROPERTIES_LOCATION = "";
 
-	private Logger() {
-	}
+	private static Set<Category> categories;
 
 	public static void info(String message) {
 		if (info) {
@@ -26,6 +24,9 @@ public final class Logger {
 	}
 
 	public static void debug(String message, Category c) {
+		if (categories == null) {
+			initialiseCategories();
+		}
 		if (debug && (categories.contains(c) || categories.contains(Category.ALL)))
 			System.out.println(new Timestamp(System.currentTimeMillis()).toString() + " LOG DEBUG: " + message); // NOSONAR
 	}
@@ -37,6 +38,12 @@ public final class Logger {
 	public static void error(Exception e) {
 		error(e.getMessage());
 		e.printStackTrace(); // NOSONAR
+	}
+
+	private static void initialiseCategories() {
+		Set<Category> categories = new HashSet<>();
+		categories.add(Category.valueOf(""));
+		Logger.categories = categories;
 	}
 
 	public enum Category {
