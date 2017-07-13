@@ -11,37 +11,37 @@ public class MusicPlayer {
 	private boolean pause = false;
 
 	public MusicPlayer() {
-		this.backgroundMusic = new BackgroundMusic();
-		this.backgroundMusic.initAL();
+		backgroundMusic = new BackgroundMusic();
+		backgroundMusic.initAL();
 	}
 
 	public void changeCurrentMusic(int index) {
-		this.backgroundMusic.stop(this.currentMusic);
-		this.currentMusic = index;
-		if (!this.pause) {
+		backgroundMusic.stop(currentMusic);
+		currentMusic = index;
+		if (!pause) {
 			play();
 		}
 	}
 
 	public void destroy() {
-		this.backgroundMusic.destoyAL();
+		backgroundMusic.destoyAL();
 	}
 
 	public void pause() {
-		if (this.pause) {
-			this.backgroundMusic.play(this.currentMusic);
+		if (pause) {
+			backgroundMusic.play(currentMusic);
 		} else {
-			this.backgroundMusic.pause(this.currentMusic);
+			backgroundMusic.pause(currentMusic);
 		}
-		this.pause = !this.pause;
+		pause = !pause;
 	}
 
 	public void play() {
-		this.backgroundMusic.play(this.currentMusic);
+		backgroundMusic.play(currentMusic);
 	}
 
 	public void stop() {
-		this.backgroundMusic.stop(this.currentMusic);
+		backgroundMusic.stop(currentMusic);
 	}
 
 	public void update() {

@@ -11,7 +11,10 @@ public class Vector4 implements Vector<Vector4>, Serializable {
 
 	private static final FloatBuffer direct = BufferUtils.createFloatBuffer(4);
 
-	private float x, y, z, w;
+	private float x;
+	private float y;
+	private float z;
+	private float w;
 
 	public Vector4() {
 		set(0, 0, 0, 0);
@@ -228,13 +231,13 @@ public class Vector4 implements Vector<Vector4>, Serializable {
 		this.z = z;
 		return this;
 	}
-	
+
 	public Vector4 contains(Vector4 test) {
 		float cx = test.x;
 		float cy = test.y;
 		float cz = test.z;
 		float cw = test.w;
-		
+
 		if ((x < (cx + cz)) && ((x + z) > cx) && (y < (cy + cw)) && ((y + w) > cy)) {
 			return new Vector4(x - (cx + cz), y - (cy + cw), (x + z) - cx, (y + w) - cy);
 		}

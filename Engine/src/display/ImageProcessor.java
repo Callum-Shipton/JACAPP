@@ -102,7 +102,7 @@ public class ImageProcessor {
 
 		initShaders();
 		initShaderUniforms();
-		artLoader.LoadArt();
+		artLoader.loadArt();
 		initRenderers();
 
 	}

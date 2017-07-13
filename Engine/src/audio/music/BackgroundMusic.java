@@ -96,9 +96,9 @@ public class BackgroundMusic {
 		// CRUCIAL!
 		// any buffer that has data added, must be flipped to establish its
 		// position and limits
-		this.listenerPos.flip();
-		this.listenerVel.flip();
-		this.listenerOri.flip();
+		listenerPos.flip();
+		listenerVel.flip();
+		listenerOri.flip();
 	}
 
 	public void destoyAL() {
@@ -141,8 +141,8 @@ public class BackgroundMusic {
 	 * returned to the system. This function frees that memory.
 	 */
 	void killALData() {
-		alDeleteSources(this.source);
-		alDeleteBuffers(this.buffer);
+		alDeleteSources(source);
+		alDeleteBuffers(buffer);
 	}
 
 	/**
@@ -154,18 +154,18 @@ public class BackgroundMusic {
 	 */
 	int loadALData() {
 		// Load wav data into a buffers.
-		alGenBuffers(this.buffer);
+		alGenBuffers(buffer);
 
 		if (alGetError() != AL_NO_ERROR) {
 			return AL_FALSE;
 		}
 
 		WaveData waveFile = WaveData.create("Music/Menu.wav");
-		alBufferData(this.buffer.get(MENU), waveFile.format, waveFile.data, waveFile.samplerate);
+		alBufferData(buffer.get(MENU), waveFile.format, waveFile.data, waveFile.samplerate);
 		waveFile.dispose();
 
 		waveFile = WaveData.create("Music/Main.wav");
-		alBufferData(this.buffer.get(MAIN), waveFile.format, waveFile.data, waveFile.samplerate);
+		alBufferData(buffer.get(MAIN), waveFile.format, waveFile.data, waveFile.samplerate);
 		waveFile.dispose();
 
 		// Bind buffers into audio sources.
@@ -175,19 +175,19 @@ public class BackgroundMusic {
 			return AL_FALSE;
 		}
 
-		alSourcei(this.source.get(MENU), AL_BUFFER, this.buffer.get(MENU));
-		alSourcef(this.source.get(MENU), AL_PITCH, 1.0f);
-		alSourcef(this.source.get(MENU), AL_GAIN, 1.0f);
-		alSource(this.source.get(MENU), AL_POSITION, (FloatBuffer) this.sourcePos.position(MENU * 3));
-		alSource(this.source.get(MENU), AL_VELOCITY, (FloatBuffer) this.sourceVel.position(MENU * 3));
-		alSourcei(this.source.get(MENU), AL_LOOPING, AL_TRUE);
+		alSourcei(source.get(MENU), AL_BUFFER, buffer.get(MENU));
+		alSourcef(source.get(MENU), AL_PITCH, 1.0f);
+		alSourcef(source.get(MENU), AL_GAIN, 1.0f);
+		alSource(source.get(MENU), AL_POSITION, (FloatBuffer) sourcePos.position(MENU * 3));
+		alSource(source.get(MENU), AL_VELOCITY, (FloatBuffer) sourceVel.position(MENU * 3));
+		alSourcei(source.get(MENU), AL_LOOPING, AL_TRUE);
 
-		alSourcei(this.source.get(MAIN), AL_BUFFER, this.buffer.get(MAIN));
-		alSourcef(this.source.get(MAIN), AL_PITCH, 1.0f);
-		alSourcef(this.source.get(MAIN), AL_GAIN, 1.0f);
-		alSource(this.source.get(MAIN), AL_POSITION, (FloatBuffer) this.sourcePos.position(MAIN * 3));
-		alSource(this.source.get(MAIN), AL_VELOCITY, (FloatBuffer) this.sourceVel.position(MAIN * 3));
-		alSourcei(this.source.get(MAIN), AL_LOOPING, AL_TRUE);
+		alSourcei(source.get(MAIN), AL_BUFFER, buffer.get(MAIN));
+		alSourcef(source.get(MAIN), AL_PITCH, 1.0f);
+		alSourcef(source.get(MAIN), AL_GAIN, 1.0f);
+		alSource(source.get(MAIN), AL_POSITION, (FloatBuffer) sourcePos.position(MAIN * 3));
+		alSource(source.get(MAIN), AL_VELOCITY, (FloatBuffer) sourceVel.position(MAIN * 3));
+		alSourcei(source.get(MAIN), AL_LOOPING, AL_TRUE);
 
 		// Do another error check and return.
 		if (alGetError() == AL_NO_ERROR) {
@@ -198,11 +198,11 @@ public class BackgroundMusic {
 	}
 
 	public void pause(int musicId) {
-		alSourcePause(this.source.get(musicId));
+		alSourcePause(source.get(musicId));
 	}
 
 	public void play(int musicId) {
-		alSourcePlay(this.source.get(musicId));
+		alSourcePlay(source.get(musicId));
 	}
 
 	/**
@@ -212,13 +212,13 @@ public class BackgroundMusic {
 	 * OpenAL to use that data. This function does just that.
 	 */
 	void setListenerValues() {
-		alListener(AL_POSITION, this.listenerPos);
-		alListener(AL_VELOCITY, this.listenerVel);
-		alListener(AL_ORIENTATION, this.listenerOri);
+		alListener(AL_POSITION, listenerPos);
+		alListener(AL_VELOCITY, listenerVel);
+		alListener(AL_ORIENTATION, listenerOri);
 	}
 
 	public void stop(int musicId) {
-		alSourceStop(this.source.get(musicId));
+		alSourceStop(source.get(musicId));
 	}
 
 }

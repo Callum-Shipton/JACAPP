@@ -3,7 +3,7 @@ package display;
 public class Art implements ArtLoader {
 
 	@Override
-	public void LoadArt() {
+	public void loadArt() {
 
 		// new Image("/filepath.png", maxFrameWidth, maxFrameHeight);
 

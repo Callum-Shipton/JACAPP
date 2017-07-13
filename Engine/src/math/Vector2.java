@@ -8,7 +8,8 @@ public class Vector2 implements Vector<Vector2> {
 
 	private static final FloatBuffer direct = BufferUtils.createFloatBuffer(2);
 
-	private float x, y;
+	private float x;
+	private float y;
 
 	public Vector2() {
 		set(0, 0);

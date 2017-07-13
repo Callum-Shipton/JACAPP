@@ -58,7 +58,7 @@ public class Icon extends GuiComponent {
 	public void update() {
 		if (this.isAnimated) {
 			if (this.currFrame.x() < this.maxFrame.x()) {
-				this.currFrame.set((this.currFrame.x() + 1), this.currFrame.y());
+				this.currFrame.set(this.currFrame.x() + 1, this.currFrame.y());
 			} else {
 				this.currFrame.set(0.0f, this.currFrame.y());
 			}

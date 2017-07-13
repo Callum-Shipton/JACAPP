@@ -2,5 +2,5 @@ package display;
 
 public interface ArtLoader {
 	
-	public void LoadArt();
+	public void loadArt();
 }
