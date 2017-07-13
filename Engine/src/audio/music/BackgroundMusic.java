@@ -141,31 +141,9 @@ public class BackgroundMusic {
 		String main = "res/Music/Main.ogg";
 		String menu = "res/Music/Menu.ogg";
 		
-		//loadAudioFile(main,MAIN);
-		//loadAudioFile(menu,MENU);
+		loadAudioFile(main,MAIN);
+		loadAudioFile(menu,MENU);
 
-		
-		WaveData waveFile = WaveData.create("Music/Menu.wav");
-		alBufferData(buffer.get(MENU), waveFile.format, waveFile.data, waveFile.samplerate);
-		waveFile.dispose();
-
-		waveFile = WaveData.create("Music/Main.wav");
-		alBufferData(buffer.get(MAIN), waveFile.format, waveFile.data, waveFile.samplerate);
-		waveFile.dispose();
-		
-		alSourcei(source.get(MENU), AL_BUFFER, buffer.get(MENU));
-		alSourcef(source.get(MENU), AL_PITCH, 1.0f);
-		alSourcef(source.get(MENU), AL_GAIN, 1.0f);
-		alSourcefv(source.get(MENU), AL_POSITION, (FloatBuffer) sourcePos.position(MENU * 3));
-		alSourcefv(source.get(MENU), AL_VELOCITY, (FloatBuffer) sourceVel.position(MENU * 3));
-		alSourcei(source.get(MENU), AL_LOOPING, AL_TRUE);
-
-		alSourcei(source.get(MAIN), AL_BUFFER, buffer.get(MAIN));
-		alSourcef(source.get(MAIN), AL_PITCH, 1.0f);
-		alSourcef(source.get(MAIN), AL_GAIN, 1.0f);
-		alSourcefv(source.get(MAIN), AL_POSITION, (FloatBuffer) sourcePos.position(MAIN * 3));
-		alSourcefv(source.get(MAIN), AL_VELOCITY, (FloatBuffer) sourceVel.position(MAIN * 3));
-		alSourcei(source.get(MAIN), AL_LOOPING, AL_TRUE);
 
 		// Do another error check and return.
 		if (alGetError() == AL_NO_ERROR) {
