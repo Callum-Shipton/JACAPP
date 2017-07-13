@@ -34,4 +34,17 @@ public class BoundingBox implements Serializable {
 		return ((point.x() >= box.x()) && (point.x() <= box.z() + (size - 1)))
 				&& ((point.y() >= box.y()) && (point.y() <= box.w() + (size - 1)));
 	}
+
+	public Vector4 getBox() {
+		return box;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof BoundingBox) {
+			return ((BoundingBox) o).getBox().equals(box);
+		}
+		return false;
+	}
+
 }
