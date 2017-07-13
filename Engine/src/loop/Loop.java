@@ -74,7 +74,7 @@ public final class Loop {
 		double sleepTime;
 		int error;
 
-		while (glfwWindowShouldClose(display.getWindow()) == GL_FALSE) {
+		while (glfwWindowShouldClose(display.getWindow()) == false) {
 
 			error = glGetError();
 

@@ -9,6 +9,6 @@ import loop.Loop;
 public class ExitButton implements ButtonAction {
 	@Override
 	public void click() {
-		glfwSetWindowShouldClose(Loop.getDisplay().getWindow(), GL_TRUE);
+		glfwSetWindowShouldClose(Loop.getDisplay().getWindow(), true);
 	}
 }

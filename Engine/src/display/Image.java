@@ -15,12 +15,15 @@ import static org.lwjgl.opengl.GL11.glTexImage2D;
 import static org.lwjgl.opengl.GL11.glTexParameteri;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 
+import static org.lwjgl.stb.STBImage.*;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 
-import de.matthiasmann.twl.utils.PNGDecoder;
-import de.matthiasmann.twl.utils.PNGDecoder.Format;
+import org.lwjgl.system.MemoryStack;
+
 import logging.Logger;
 
 public class Image {
@@ -65,29 +68,27 @@ public class Image {
 	}
 
 	public ByteBuffer byteBuffer() {
-		try {
-			// Open the PNG file as an InputStream
-			InputStream in = getClass().getResourceAsStream(this.file);
-			// Link the PNG decoder to this stream
-			PNGDecoder decoder = new PNGDecoder(in);
 
-			// Get the width and height of the texture
-			this.texWidth = decoder.getWidth();
-			this.texHeight = decoder.getHeight();
+        try (MemoryStack stack = MemoryStack.stackPush()) {
+            /* Prepare image buffers */
+            IntBuffer w = stack.mallocInt(1);
+            IntBuffer h = stack.mallocInt(1);
+            IntBuffer comp = stack.mallocInt(1);
 
-			// Decode the PNG file in a ByteBuffer
-			this.buf = ByteBuffer.allocateDirect(4 * decoder.getWidth() * decoder.getHeight());
-			decoder.decode(this.buf, decoder.getWidth() * 4, Format.RGBA);
-			this.buf.flip();
+            /* Load image */
+           // stbi_set_flip_vertically_on_load(true);
+            buf = stbi_load("res/"+file, w, h, comp, 4);
+            if (buf == null) {
+                throw new RuntimeException("Failed to load a texture file!"
+                                           + System.lineSeparator() + stbi_failure_reason());
+            }
 
-			in.close();
-			return this.buf;
-		} catch (IOException e) {
-			Logger.error(e);
-			System.exit(-1);
-		}
-		return null;
-
+            /* Get width and height of image */
+            texWidth = w.get();
+            texHeight = h.get();
+            
+        }
+        return buf;
 	}
 
 	public int getFHeight() {

@@ -1,38 +1,18 @@
 package display;
 
-import static org.lwjgl.glfw.Callbacks.errorCallbackPrint;
-import static org.lwjgl.glfw.GLFW.GLFW_RESIZABLE;
-import static org.lwjgl.glfw.GLFW.GLFW_VISIBLE;
-import static org.lwjgl.glfw.GLFW.glfwCreateWindow;
-import static org.lwjgl.glfw.GLFW.glfwDefaultWindowHints;
-import static org.lwjgl.glfw.GLFW.glfwDestroyWindow;
-import static org.lwjgl.glfw.GLFW.glfwGetPrimaryMonitor;
-import static org.lwjgl.glfw.GLFW.glfwGetVideoMode;
-import static org.lwjgl.glfw.GLFW.glfwInit;
-import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
-import static org.lwjgl.glfw.GLFW.glfwSetErrorCallback;
-import static org.lwjgl.glfw.GLFW.glfwSetWindowPos;
-import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
-import static org.lwjgl.glfw.GLFW.glfwShowWindow;
-import static org.lwjgl.glfw.GLFW.glfwSwapInterval;
-import static org.lwjgl.glfw.GLFW.glfwTerminate;
-import static org.lwjgl.glfw.GLFW.glfwWindowHint;
-import static org.lwjgl.opengl.GL11.GL_BLEND;
-import static org.lwjgl.opengl.GL11.GL_FALSE;
-import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
-import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
-import static org.lwjgl.opengl.GL11.GL_TRUE;
-import static org.lwjgl.opengl.GL11.glBlendFunc;
-import static org.lwjgl.opengl.GL11.glClearColor;
-import static org.lwjgl.opengl.GL11.glEnable;
-import static org.lwjgl.opengl.GL11.glViewport;
-import static org.lwjgl.system.MemoryUtil.NULL;
+import org.lwjgl.*;
+import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.*;
+import org.lwjgl.system.*;
+
+import static org.lwjgl.glfw.Callbacks.*;
+import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 import java.nio.ByteBuffer;
-
-import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWvidmode;
-import org.lwjgl.opengl.GLContext;
+import java.nio.IntBuffer;
 
 import input.Keyboard;
 import loop.Loop;
@@ -50,8 +30,7 @@ public class Display {
 	// The monitor handle (for Fullscreen mode)
 	private long monitor;
 
-	private ByteBuffer vidmode;
-	private GLFWvidmode vm;
+	GLFWVidMode vidmode;
 
 	private Camera cam;
 
@@ -72,7 +51,7 @@ public class Display {
 	public void destroyGLFW() {
 		glfwDestroyWindow(this.window);
 		glfwTerminate();
-		this.errorCallback.release();
+		glfwSetErrorCallback(null).free();
 	}
 
 	public int getHeight() {
@@ -101,57 +80,62 @@ public class Display {
 
 	public void initGLFW() {
 		// Setup an error callback. The default implementation
-		// will print the error message in System.err.
+				// will print the error message in System.err.
+				GLFWErrorCallback.createPrint(System.err).set();
 
-		// Initialise GLFW. Most GLFW functions will not work before doing this.
-		if (glfwInit() != GL_TRUE) {
-			throw new IllegalStateException("Unable to initialize GLFW");
-		}
+				// Initialize GLFW. Most GLFW functions will not work before doing this.
+				if ( !glfwInit() )
+					throw new IllegalStateException("Unable to initialize GLFW");
 
-		glfwSetErrorCallback(this.errorCallback = errorCallbackPrint(System.err));
+				// Configure GLFW
+				glfwDefaultWindowHints(); // optional, the current window hints are already the default
+				glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden after creation
+				glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
 
-		// Configure our window
-		glfwDefaultWindowHints(); // optional, the current window hints are
+				// Create the window
+				window = glfwCreateWindow(width, height, "THE MAZE", NULL, NULL);
+				if ( window == NULL )
+					throw new RuntimeException("Failed to create the GLFW window");
 
-		// already the default
-		glfwWindowHint(GLFW_VISIBLE, GL_FALSE); // the window will stay hidden
-		// after creation
-		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE); // the window will be
-		// resizable
+				// Setup a key callback. It will be called every time a key is pressed, repeated or released.
+				glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
+					if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
+						glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
+				});
 
-		// Find primary monitor
-		this.monitor = glfwGetPrimaryMonitor();
-		if (this.monitor == NULL) {
-			throw new RuntimeException("Failed to find primary monitor");
-		}
+				// Get the thread stack and push a new frame
+				try ( MemoryStack stack = stackPush() ) {
+					IntBuffer pWidth = stack.mallocInt(1); // int*
+					IntBuffer pHeight = stack.mallocInt(1); // int*
 
-		this.vidmode = glfwGetVideoMode(this.monitor);
-		this.vm = new GLFWvidmode(this.vidmode);
+					// Get the window size passed to glfwCreateWindow
+					glfwGetWindowSize(window, pWidth, pHeight);
 
-		// Create the window
-		this.window = glfwCreateWindow(this.width, this.height, "THE MAZE", NULL, NULL);
-		if (this.window == NULL) {
-			throw new RuntimeException("Failed to create the GLFW window");
-		}
+					// Get the resolution of the primary monitor
+					vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
-		// Center our window
-		glfwSetWindowPos(this.window, (GLFWvidmode.width(this.vidmode) - this.width) / 2,
-				(GLFWvidmode.height(this.vidmode) - this.height) / 2);
+					// Center the window
+					glfwSetWindowPos(
+						window,
+						(vidmode.width() - pWidth.get(0)) / 2,
+						(vidmode.height() - pHeight.get(0)) / 2
+					);
+				} // the stack frame is popped automatically
 
-		// Make the GLFW OpenGL context current
-		glfwMakeContextCurrent(this.window);
+				// Make the OpenGL context current
+				glfwMakeContextCurrent(window);
+				// Enable v-sync
+				glfwSwapInterval(1);
 
-		glfwSwapInterval(1);
-
-		// Make the window visible
-		glfwShowWindow(this.window);
+				// Make the window visible
+				glfwShowWindow(window);
 
 		// This line is critical for LWJGL's interoperation with GLFW's
 		// OpenGL context, or any context that is managed externally.
 		// LWJGL detects the context that is current in the current thread,
 		// creates the ContextCapabilities instance and makes the OpenGL
 		// bindings available for use.
-		GLContext.createFromCurrent();
+		GL.createCapabilities();
 
 		initGL();
 		new ImageProcessor().init(artLoader);
@@ -171,6 +155,7 @@ public class Display {
 
 	public void toggleFullscreen() {
 		long newWindow;
+		
 		if (this.fullscreen) {
 			// ShootEmUp.menuStack.peek().reset(width, height, 1024, 512);
 			this.width = INITIAL_SCREEN_WIDTH;
@@ -179,15 +164,15 @@ public class Display {
 			if (newWindow == NULL) {
 				throw new RuntimeException("Failed to create the NEW GLFW window");
 			}
-
+			
 			// Center our window
-			glfwSetWindowPos(newWindow, (GLFWvidmode.width(this.vidmode) - this.width) / 2,
-					(GLFWvidmode.height(this.vidmode) - this.height) / 2);
+			glfwSetWindowPos(newWindow, (vidmode.width() - this.width) / 2,
+					(vidmode.height() - this.height) / 2);
 		} else {
 			// ShootEmUp.menuStack.peek().reset(width, height, vm.getWidth(),
 			// vm.getHeight());
-			this.width = this.vm.getWidth();
-			this.height = this.vm.getHeight();
+			this.width = vidmode.width();
+			this.height = vidmode.height();
 			newWindow = glfwCreateWindow(this.width, this.height, "THE MAZE", this.monitor, this.window);
 			if (newWindow == NULL) {
 				throw new RuntimeException("Failed to create the GLFW window");
@@ -216,7 +201,7 @@ public class Display {
 			if (fullscreen) {
 				// toggleFullscreen();
 			}
-			glfwSetWindowShouldClose(this.window, GL_TRUE);
+			glfwSetWindowShouldClose(window, true);
 			Keyboard.setKey(Loop.getKeys().quit);
 		}
 		if (Keyboard.getKey(Loop.getKeys().fullscreen) == 1) {

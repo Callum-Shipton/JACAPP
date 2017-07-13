@@ -1,38 +1,22 @@
 package audio.music;
 
-import static org.lwjgl.openal.AL10.AL_BUFFER;
-import static org.lwjgl.openal.AL10.AL_FALSE;
-import static org.lwjgl.openal.AL10.AL_GAIN;
-import static org.lwjgl.openal.AL10.AL_LOOPING;
-import static org.lwjgl.openal.AL10.AL_NO_ERROR;
-import static org.lwjgl.openal.AL10.AL_ORIENTATION;
-import static org.lwjgl.openal.AL10.AL_PITCH;
-import static org.lwjgl.openal.AL10.AL_POSITION;
-import static org.lwjgl.openal.AL10.AL_TRUE;
-import static org.lwjgl.openal.AL10.AL_VELOCITY;
-import static org.lwjgl.openal.AL10.alBufferData;
-import static org.lwjgl.openal.AL10.alDeleteBuffers;
-import static org.lwjgl.openal.AL10.alDeleteSources;
-import static org.lwjgl.openal.AL10.alGenBuffers;
-import static org.lwjgl.openal.AL10.alGenSources;
-import static org.lwjgl.openal.AL10.alGetError;
-import static org.lwjgl.openal.AL10.alListener;
-import static org.lwjgl.openal.AL10.alSource;
-import static org.lwjgl.openal.AL10.alSourcePause;
-import static org.lwjgl.openal.AL10.alSourcePlay;
-import static org.lwjgl.openal.AL10.alSourceStop;
-import static org.lwjgl.openal.AL10.alSourcef;
-import static org.lwjgl.openal.AL10.alSourcei;
-
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.nio.ShortBuffer;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.openal.AL;
-import org.lwjgl.openal.ALContext;
-import org.lwjgl.openal.ALDevice;
+import org.lwjgl.openal.*;
+import org.lwjgl.system.MemoryStack;
 
 import audio.WaveData;
+
+import static org.lwjgl.openal.AL10.*;
+import static org.lwjgl.openal.ALC10.*;
+import static org.lwjgl.stb.STBImage.stbi_failure_reason;
+import static org.lwjgl.stb.STBVorbis.*;
+import static org.lwjgl.system.MemoryStack.stackMallocInt;
+import static org.lwjgl.system.MemoryStack.stackPop;
+import static org.lwjgl.system.MemoryStack.stackPush;
 import logging.Logger;
 
 /**
@@ -46,9 +30,9 @@ import logging.Logger;
  */
 public class BackgroundMusic {
 
-	public static ALDevice audioDevice;
+	public static long device;
 
-	public static ALContext audioContext;
+	public static long context;
 
 	/** Maximum data buffers we will need. */
 	public static final int NUM_BUFFERS = 2;
@@ -102,27 +86,26 @@ public class BackgroundMusic {
 	}
 
 	public void destoyAL() {
-		audioContext.destroy();
-		audioDevice.destroy();
-		AL.destroy(audioContext);
+		alDeleteSources(source);
+		alDeleteBuffers(buffer);
+		alcDestroyContext(context);
+		alcCloseDevice(device);
 	}
 
 	public void initAL() {
-		// Initialize OpenAL and clear the error bit.
-		audioDevice = ALDevice.create();
-		if (audioDevice == null) {
-			throw new RuntimeException("Default audio device could not be opened");
-		}
-		// Unused
-		// ALCCapabilities caps = audioDevice.getCapabilities();
-		// String defaultDeviceSpecifier = alcGetString(0L,
-		// ALC_DEFAULT_DEVICE_SPECIFIER);
-		audioContext = ALContext.create();
-		if (audioContext == null) {
-			audioDevice.destroy();
-			throw new RuntimeException("context could not be made/current");
-		}
+		String defaultDeviceName = alcGetString(0, ALC_DEFAULT_DEVICE_SPECIFIER);
+		device = alcOpenDevice(defaultDeviceName);
 
+		int[] attributes = {0};
+		context = alcCreateContext(device, attributes);
+		alcMakeContextCurrent(context);
+
+		ALCCapabilities alcCapabilities = ALC.createCapabilities(device);
+		ALCapabilities alCapabilities = AL.createCapabilities(alcCapabilities);
+
+		alGenBuffers(buffer);
+		alGenSources(source);
+			
 		alGetError();
 
 		// Load the wav data.
@@ -153,13 +136,15 @@ public class BackgroundMusic {
 	 * created to play that buffer.
 	 */
 	int loadALData() {
-		// Load wav data into a buffers.
-		alGenBuffers(buffer);
+		
+		
+		String main = "res/Music/Main.ogg";
+		String menu = "res/Music/Menu.ogg";
+		
+		//loadAudioFile(main,MAIN);
+		//loadAudioFile(menu,MENU);
 
-		if (alGetError() != AL_NO_ERROR) {
-			return AL_FALSE;
-		}
-
+		
 		WaveData waveFile = WaveData.create("Music/Menu.wav");
 		alBufferData(buffer.get(MENU), waveFile.format, waveFile.data, waveFile.samplerate);
 		waveFile.dispose();
@@ -167,26 +152,19 @@ public class BackgroundMusic {
 		waveFile = WaveData.create("Music/Main.wav");
 		alBufferData(buffer.get(MAIN), waveFile.format, waveFile.data, waveFile.samplerate);
 		waveFile.dispose();
-
-		// Bind buffers into audio sources.
-		alGenSources(this.source);
-
-		if (alGetError() != AL_NO_ERROR) {
-			return AL_FALSE;
-		}
-
+		
 		alSourcei(source.get(MENU), AL_BUFFER, buffer.get(MENU));
 		alSourcef(source.get(MENU), AL_PITCH, 1.0f);
 		alSourcef(source.get(MENU), AL_GAIN, 1.0f);
-		alSource(source.get(MENU), AL_POSITION, (FloatBuffer) sourcePos.position(MENU * 3));
-		alSource(source.get(MENU), AL_VELOCITY, (FloatBuffer) sourceVel.position(MENU * 3));
+		alSourcefv(source.get(MENU), AL_POSITION, (FloatBuffer) sourcePos.position(MENU * 3));
+		alSourcefv(source.get(MENU), AL_VELOCITY, (FloatBuffer) sourceVel.position(MENU * 3));
 		alSourcei(source.get(MENU), AL_LOOPING, AL_TRUE);
 
 		alSourcei(source.get(MAIN), AL_BUFFER, buffer.get(MAIN));
 		alSourcef(source.get(MAIN), AL_PITCH, 1.0f);
 		alSourcef(source.get(MAIN), AL_GAIN, 1.0f);
-		alSource(source.get(MAIN), AL_POSITION, (FloatBuffer) sourcePos.position(MAIN * 3));
-		alSource(source.get(MAIN), AL_VELOCITY, (FloatBuffer) sourceVel.position(MAIN * 3));
+		alSourcefv(source.get(MAIN), AL_POSITION, (FloatBuffer) sourcePos.position(MAIN * 3));
+		alSourcefv(source.get(MAIN), AL_VELOCITY, (FloatBuffer) sourceVel.position(MAIN * 3));
 		alSourcei(source.get(MAIN), AL_LOOPING, AL_TRUE);
 
 		// Do another error check and return.
@@ -197,12 +175,54 @@ public class BackgroundMusic {
 		return AL_FALSE;
 	}
 
+	private void loadAudioFile(String file, int location) {
+		//Allocate space to store return information from the function
+		try (MemoryStack stack = stackPush()) {
+				IntBuffer channelsBuffer = stackMallocInt(1);
+				IntBuffer sampleRateBuffer = stackMallocInt(1);
+
+				ShortBuffer rawAudioBuffer = stb_vorbis_decode_filename(file, channelsBuffer, sampleRateBuffer);
+				
+				if (rawAudioBuffer == null) {
+	               throw new RuntimeException("Failed to load a music file!");
+				}
+
+				//Retreive the extra information that was stored in the buffers by the function
+				int channels = channelsBuffer.get();
+				int sampleRate = sampleRateBuffer.get();
+
+				//Find the correct OpenAL format
+				int format = -1;
+				if(channels == 1) {
+				    format = AL_FORMAT_MONO16;
+				} else if(channels == 2) {
+				    format = AL_FORMAT_STEREO16;
+				}
+
+
+				//Send the data to OpenAL
+				alBufferData(buffer.get(location), format, rawAudioBuffer, sampleRate);
+				
+				alSourcei(source.get(location), AL_BUFFER, buffer.get(location));
+				alSourcef(source.get(location), AL_PITCH, 1.0f);
+				alSourcef(source.get(location), AL_GAIN, 1.0f);
+				alSourcefv(source.get(location), AL_POSITION, (FloatBuffer) sourcePos.position(location * 3));
+				alSourcefv(source.get(location), AL_VELOCITY, (FloatBuffer) sourceVel.position(location * 3));
+				alSourcei(source.get(location), AL_LOOPING, AL_TRUE);
+		}
+	}
+
 	public void pause(int musicId) {
+		checkALError();
 		alSourcePause(source.get(musicId));
+		checkALError();
+	
 	}
 
 	public void play(int musicId) {
+		checkALError();
 		alSourcePlay(source.get(musicId));
+		checkALError();
 	}
 
 	/**
@@ -212,13 +232,22 @@ public class BackgroundMusic {
 	 * OpenAL to use that data. This function does just that.
 	 */
 	void setListenerValues() {
-		alListener(AL_POSITION, listenerPos);
-		alListener(AL_VELOCITY, listenerVel);
-		alListener(AL_ORIENTATION, listenerOri);
+		alListenerfv(AL_POSITION, listenerPos);
+		alListenerfv(AL_VELOCITY, listenerVel);
+		alListenerfv(AL_ORIENTATION, listenerOri);
 	}
 
 	public void stop(int musicId) {
+		checkALError();
 		alSourceStop(source.get(musicId));
+		checkALError();
 	}
 
+	static void checkALError() {
+        int err = alGetError();
+        if (err != AL_NO_ERROR) {
+            throw new RuntimeException(alGetString(err));
+        }
+    }
+	
 }
