@@ -1,12 +1,14 @@
 package gui.menus;
 
+import components.attack.TypeAttack;
 import display.Image;
 import display.ImageProcessor;
 import gui.CounterButton;
 import gui.GuiMenu;
 import gui.MenuButton;
-import gui.TypeButton;
 import gui.VerticalLayout;
+import gui.buttons.BackButton;
+import gui.buttons.SelectCharacterButton;
 
 public class CharacterSelectMenu extends GuiMenu {
 
@@ -38,18 +40,19 @@ public class CharacterSelectMenu extends GuiMenu {
 		VerticalLayout buttonList = new VerticalLayout(
 				(display.getWidth() / 2) - (ImageProcessor.getImage("WarriorButton").getWidth() / 2),
 				display.getHeight() / 2, ImageProcessor.getImage("WarriorButton").getHeight() / 2, 20);
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.WARRIOR, ImageProcessor.getImage("WarriorButton"),
-				ImageProcessor.getImage("LevelIcon"), warriorLevel, 0.5f));
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.ARCHER, ImageProcessor.getImage("ArcherButton"),
-				ImageProcessor.getImage("LevelIcon"), archerLevel, 0.5f));
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.MAGE, ImageProcessor.getImage("MageButton"),
-				ImageProcessor.getImage("LevelIcon"), mageLevel, 0.5f));
 		buttonList.addMenuItem(
-				new CounterButton(0, 0, TypeButton.BATTLE_MAGE, ImageProcessor.getImage("BattleMageButton"),
-						ImageProcessor.getImage("LevelIcon"), battleMageLevel, 0.5f));
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.ROGUE, ImageProcessor.getImage("RogueButton"),
-				ImageProcessor.getImage("LevelIcon"), rogueLevel, 0.5f));
-		buttonList.addMenuItem(new MenuButton(TypeButton.BACK, ImageProcessor.getImage("BackButton"), x, y));
+				new CounterButton(0, 0, ImageProcessor.getImage("WarriorButton"), ImageProcessor.getImage("LevelIcon"),
+						warriorLevel, 0.5f, new SelectCharacterButton(TypeAttack.WARRIOR)));
+		buttonList.addMenuItem(new CounterButton(0, 0, ImageProcessor.getImage("ArcherButton"),
+				ImageProcessor.getImage("LevelIcon"), archerLevel, 0.5f, new SelectCharacterButton(TypeAttack.ARCHER)));
+		buttonList.addMenuItem(new CounterButton(0, 0, ImageProcessor.getImage("MageButton"),
+				ImageProcessor.getImage("LevelIcon"), mageLevel, 0.5f, new SelectCharacterButton(TypeAttack.MAGE)));
+		buttonList.addMenuItem(new CounterButton(0, 0, ImageProcessor.getImage("BattleMageButton"),
+				ImageProcessor.getImage("LevelIcon"), battleMageLevel, 0.5f,
+				new SelectCharacterButton(TypeAttack.BATTLE_MAGE)));
+		buttonList.addMenuItem(new CounterButton(0, 0, ImageProcessor.getImage("RogueButton"),
+				ImageProcessor.getImage("LevelIcon"), rogueLevel, 0.5f, new SelectCharacterButton(TypeAttack.ROGUE)));
+		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("BackButton"), x, y, new BackButton()));
 		menuItems.add(buttonList);
 	}
 }

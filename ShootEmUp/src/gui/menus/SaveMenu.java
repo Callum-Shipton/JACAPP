@@ -3,7 +3,7 @@ package gui.menus;
 import display.Image;
 import display.ImageProcessor;
 import gui.MenuButton;
-import gui.TypeButton;
+import gui.buttons.SaveButton;
 
 public class SaveMenu extends PauseMenu {
 
@@ -15,6 +15,6 @@ public class SaveMenu extends PauseMenu {
 	public void resetMenu() {
 		super.resetMenu();
 
-		menuItems.add(new MenuButton(TypeButton.SAVE_GAME, ImageProcessor.getImage("SaveGameButton"), x + 30, y + 30));
+		menuItems.add(new MenuButton(ImageProcessor.getImage("SaveGameButton"), x + 30, y + 30, new SaveButton()));
 	}
 }

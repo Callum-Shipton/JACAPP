@@ -4,7 +4,7 @@ import display.Image;
 import display.ImageProcessor;
 import gui.GuiMenu;
 import gui.MenuButton;
-import gui.TypeButton;
+import gui.buttons.MainMenuButton;
 import main.ShootEmUp;
 
 public class GameOverMenu extends GuiMenu {
@@ -19,8 +19,7 @@ public class GameOverMenu extends GuiMenu {
 	public void resetMenu() {
 		menuItems.clear();
 		Image buttonImage = ImageProcessor.getImage("ExitButton");
-		menuItems.add(new MenuButton(TypeButton.MAIN_MENU, buttonImage,
-				(display.getWidth() / 2) - (buttonImage.getWidth() / 2),
-				(display.getWidth() / 2) - (buttonImage.getHeight() / 2)));
+		menuItems.add(new MenuButton(buttonImage, (display.getWidth() / 2) - (buttonImage.getWidth() / 2),
+				(display.getWidth() / 2) - (buttonImage.getHeight() / 2), new MainMenuButton()));
 	}
 }

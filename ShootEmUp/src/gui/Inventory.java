@@ -35,9 +35,8 @@ public class Inventory extends GuiComponent {
 
 		while (items.hasNext()) {
 			InventoryItem<?> item = items.next();
-			addButton(new MenuButton(TypeButton.OTHER, item.getInventoryImage(),
-					x + (item.getInventoryImage().getWidth() * row),
-					y + ((item.getInventoryImage().getHeight() / 2) * column)));
+			addButton(new MenuButton(item.getInventoryImage(), x + (item.getInventoryImage().getWidth() * row),
+					y + ((item.getInventoryImage().getHeight() / 2) * column), null));
 			row++;
 			if (row > 10) {
 				row = 0;

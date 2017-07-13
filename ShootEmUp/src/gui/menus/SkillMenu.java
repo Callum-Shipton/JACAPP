@@ -6,8 +6,11 @@ import display.Image;
 import display.ImageProcessor;
 import gui.Counter;
 import gui.CounterButton;
-import gui.TypeButton;
 import gui.VerticalLayout;
+import gui.buttons.UpgradeHealthButton;
+import gui.buttons.UpgradeHealthRegenButton;
+import gui.buttons.UpgradeManaButton;
+import gui.buttons.UpgradeManaRegenButton;
 import main.ShootEmUp;
 
 public class SkillMenu extends PauseMenu {
@@ -36,14 +39,14 @@ public class SkillMenu extends PauseMenu {
 		super.resetMenu();
 		VerticalLayout buttonList = new VerticalLayout(x + 30, y + 30,
 				ImageProcessor.getImage("HealthButton").getHeight() / 2, 20);
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.HEALTH_REGEN,
-				ImageProcessor.getImage("HealthRegenButton"), ImageProcessor.getImage("Coin"), 1, 1f));
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.HEALTH, ImageProcessor.getImage("HealthButton"),
-				ImageProcessor.getImage("Coin"), 1, 1f));
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.MANA_REGEN,
-				ImageProcessor.getImage("ManaRegenButton"), ImageProcessor.getImage("Coin"), 1, 1f));
-		buttonList.addMenuItem(new CounterButton(0, 0, TypeButton.MANA, ImageProcessor.getImage("ManaButton"),
-				ImageProcessor.getImage("Coin"), 1, 1f));
+		buttonList.addMenuItem(new CounterButton(0, 0, ImageProcessor.getImage("HealthRegenButton"),
+				ImageProcessor.getImage("Coin"), 1, 1f, new UpgradeHealthRegenButton()));
+		buttonList.addMenuItem(new CounterButton(0, 0, ImageProcessor.getImage("HealthButton"),
+				ImageProcessor.getImage("Coin"), 1, 1f, new UpgradeHealthButton()));
+		buttonList.addMenuItem(new CounterButton(0, 0, ImageProcessor.getImage("ManaRegenButton"),
+				ImageProcessor.getImage("Coin"), 1, 1f, new UpgradeManaRegenButton()));
+		buttonList.addMenuItem(new CounterButton(0, 0, ImageProcessor.getImage("ManaButton"),
+				ImageProcessor.getImage("Coin"), 1, 1f, new UpgradeManaButton()));
 		menuItems.add(buttonList);
 		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
 		skillPoints = new Counter(x + 30.0f, y + 191.0f, ImageProcessor.getImage("Coin"), false, BI.getLevelPoints(),

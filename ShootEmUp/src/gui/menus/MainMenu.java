@@ -4,8 +4,10 @@ import display.Image;
 import display.ImageProcessor;
 import gui.GuiMenu;
 import gui.MenuButton;
-import gui.TypeButton;
 import gui.VerticalLayout;
+import gui.buttons.ExitButton;
+import gui.buttons.LoadGameButton;
+import gui.buttons.OpenMenuButton;
 
 public class MainMenu extends GuiMenu {
 
@@ -20,10 +22,12 @@ public class MainMenu extends GuiMenu {
 		VerticalLayout buttonList = new VerticalLayout(
 				(display.getWidth() / 2) - (ImageProcessor.getImage("NewGameButton").getWidth() / 2),
 				display.getHeight() / 2, ImageProcessor.getImage("NewGameButton").getHeight() / 2, 20);
-		buttonList.addMenuItem(new MenuButton(TypeButton.NEW_GAME, ImageProcessor.getImage("NewGameButton"), 0, 0));
-		buttonList.addMenuItem(new MenuButton(TypeButton.LOAD_GAME, ImageProcessor.getImage("LoadGameButton"), 0, 0));
-		buttonList.addMenuItem(new MenuButton(TypeButton.OPTIONS, ImageProcessor.getImage("OptionsButton"), 0, 0));
-		buttonList.addMenuItem(new MenuButton(TypeButton.EXIT, ImageProcessor.getImage("ExitButton"), 0, 0));
+		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("NewGameButton"), 0, 0,
+				new OpenMenuButton(new CharacterSelectMenu(ImageProcessor.getImage("MainMenuScreen")))));
+		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("LoadGameButton"), 0, 0, new LoadGameButton()));
+		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("OptionsButton"), 0, 0,
+				new OpenMenuButton(new OptionsMenu(ImageProcessor.getImage("MainMenuScreen")))));
+		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("ExitButton"), 0, 0, new ExitButton()));
 		menuItems.add(buttonList);
 	}
 }

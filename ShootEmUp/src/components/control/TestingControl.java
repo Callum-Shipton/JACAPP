@@ -6,8 +6,7 @@ import components.graphical.PlayerGraphics;
 import components.inventory.BaseInventory;
 import components.movement.BaseMovement;
 import entity.Entity;
-import gui.ButtonHandler;
-import gui.TypeButton;
+import gui.buttons.UpgradeManaRegenButton;
 import math.Vector2;
 
 public class TestingControl extends BaseControl {
@@ -29,10 +28,10 @@ public class TestingControl extends BaseControl {
 		movement.add(-1.0f, 0.0f);
 		movement.normalize();
 		this.PG.setAnimating(true);
-		//dir.add(0.0f, -1.0f);
-		
+		// dir.add(0.0f, -1.0f);
+
 	}
-	
+
 	@Override
 	public void receive(Message m, Entity e) {
 		// TODO Auto-generated method stub
@@ -41,16 +40,19 @@ public class TestingControl extends BaseControl {
 
 	@Override
 	public void update(Entity e) {
-		
+
 		this.BM.move(e, movement);
-		
-		ButtonHandler.selectButton(TypeButton.MANA_REGEN);
+
+		new UpgradeManaRegenButton().click();
 		// TODO Auto-generated method stub
-		if(toggle)dir.set(1.0f, 0.0f);
-		else dir.set(0.0f,1.0f);
+		if (toggle)
+			dir.set(1.0f, 0.0f);
+		else
+			dir.set(0.0f, 1.0f);
 		dir.normalize();
 		this.PG.setDirection((int) (Math.round(dir.angle()) / 45));
-		if(this.BA.attack(e, this.PG.getDirection()))toggle = !toggle;
+		if (this.BA.attack(e, this.PG.getDirection()))
+			toggle = !toggle;
 	}
 
 }

@@ -4,7 +4,7 @@ import display.Image;
 import display.ImageProcessor;
 import gui.GuiMenu;
 import gui.MenuButton;
-import gui.TypeButton;
+import gui.buttons.BackButton;
 
 public class ControlsMenu extends GuiMenu {
 
@@ -17,7 +17,7 @@ public class ControlsMenu extends GuiMenu {
 	public void resetMenu() {
 		menuItems.clear();
 		Image button = ImageProcessor.getImage("BackButton");
-		menuItems.add(new MenuButton(TypeButton.BACK, button, (display.getWidth() / 2) - (button.getWidth() / 2),
-				(display.getHeight() / 2) - (button.getHeight() / 2)));
+		menuItems.add(new MenuButton(button, (display.getWidth() / 2) - (button.getWidth() / 2),
+				(display.getHeight() / 2) - (button.getHeight() / 2), new BackButton()));
 	}
 }

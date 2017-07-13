@@ -4,8 +4,9 @@ import display.Image;
 import display.ImageProcessor;
 import gui.GuiMenu;
 import gui.MenuButton;
-import gui.TypeButton;
 import gui.VerticalLayout;
+import gui.buttons.BackButton;
+import gui.buttons.OpenMenuButton;
 
 public class OptionsMenu extends GuiMenu {
 
@@ -21,9 +22,11 @@ public class OptionsMenu extends GuiMenu {
 				(display.getWidth() / 2) - (ImageProcessor.getImage("ControlsButton").getWidth() / 2),
 				display.getHeight() / 2, ImageProcessor.getImage("ControlsButton").getHeight() / 2, 20);
 
-		buttonList.addMenuItem(new MenuButton(TypeButton.CONTROLS, ImageProcessor.getImage("ControlsButton"), 0, 0));
-		buttonList.addMenuItem(new MenuButton(TypeButton.SOUND, ImageProcessor.getImage("SoundButton"), 0, 0));
-		buttonList.addMenuItem(new MenuButton(TypeButton.BACK, ImageProcessor.getImage("BackButton"), 0, 0));
+		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("ControlsButton"), 0, 0,
+				new OpenMenuButton(new ControlsMenu(ImageProcessor.getImage("MainMenuScreen")))));
+		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("SoundButton"), 0, 0,
+				new OpenMenuButton(new SoundMenu(ImageProcessor.getImage("MainMenuScreen")))));
+		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("BackButton"), 0, 0, new BackButton()));
 
 		menuItems.add(buttonList);
 	}

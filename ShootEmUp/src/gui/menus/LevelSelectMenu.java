@@ -4,8 +4,9 @@ import display.Image;
 import display.ImageProcessor;
 import gui.GuiMenu;
 import gui.MenuButton;
-import gui.TypeButton;
 import gui.VerticalLayout;
+import gui.buttons.BackButton;
+import gui.buttons.SelectLevelButton;
 
 public class LevelSelectMenu extends GuiMenu {
 
@@ -26,14 +27,17 @@ public class LevelSelectMenu extends GuiMenu {
 
 		switch (level) {
 		case 3:
-			buttonList.addMenuItem(new MenuButton(TypeButton.LEVEL3, ImageProcessor.getImage("Level3Button"), 0, 0));
+			buttonList.addMenuItem(
+					new MenuButton(ImageProcessor.getImage("Level3Button"), 0, 0, new SelectLevelButton(3)));
 		case 2:
-			buttonList.addMenuItem(new MenuButton(TypeButton.LEVEL2, ImageProcessor.getImage("Level2Button"), 0, 0));
+			buttonList.addMenuItem(
+					new MenuButton(ImageProcessor.getImage("Level2Button"), 0, 0, new SelectLevelButton(2)));
 		case 1:
 		default:
-			buttonList.addMenuItem(new MenuButton(TypeButton.LEVEL1, ImageProcessor.getImage("Level1Button"), 0, 0));
+			buttonList.addMenuItem(
+					new MenuButton(ImageProcessor.getImage("Level1Button"), 0, 0, new SelectLevelButton(1)));
 		}
-		buttonList.addMenuItem(new MenuButton(TypeButton.BACK, ImageProcessor.getImage("BackButton"), 0, 0));
+		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("BackButton"), 0, 0, new BackButton()));
 
 		this.menuItems.add(buttonList);
 	}

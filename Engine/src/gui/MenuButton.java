@@ -17,8 +17,6 @@ import math.Vector2;
 
 public class MenuButton extends GuiComponent {
 
-	private TypeButton type;
-
 	private long window;
 
 	private boolean isPressed;
@@ -35,9 +33,8 @@ public class MenuButton extends GuiComponent {
 
 	private ButtonAction action;
 
-	public MenuButton(TypeButton type, Image id, float x, float y, ButtonAction action) {
+	public MenuButton(Image id, float x, float y, ButtonAction action) {
 		super(x, y);
-		this.type = type;
 		this.id = id;
 		this.action = action;
 		w = id.getWidth();
@@ -87,18 +84,16 @@ public class MenuButton extends GuiComponent {
 			isPressed = false;
 		}
 
-		if (performClick && (type != TypeButton.OTHER)) {
-			action.click();
+		if (performClick) {
+			if (action != null) {
+				action.click();
+			}
 			postAction();
 		}
 	}
 
 	public Image getId() {
 		return id;
-	}
-
-	public TypeButton getType() {
-		return type;
 	}
 
 	public boolean hasClicked() {
