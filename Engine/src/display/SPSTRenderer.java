@@ -28,6 +28,8 @@ import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 
+//TODO: Clean the hell out of this class (nothing uses it) 
+
 public class SPSTRenderer {
 
 	private int shaderProgramID;
@@ -46,15 +48,13 @@ public class SPSTRenderer {
 
 		glBindTexture(GL_TEXTURE_2D, Texid);
 
-		Matrix4f model = new Matrix4f();
-		model.clearToIdentity();
-		model.translate(pos.x(), pos.y(), 0.0f);
-		model.translate(0.5f * size.x(), 0.5f * size.y(), 0.0f);
-		model.rotateDeg(rotate, 0.0f, 0.0f, 1.0f);
-		model.translate(-0.5f * size.x(), -0.5f * size.y(), 0.0f);
-		model.scale(size.x(), size.y(), 1.0f);
-
-		model.transpose();
+		Matrix4f model = new Matrix4f()
+		.translate(pos.x(), pos.y(), 0.0f)
+		.translate(0.5f * size.x(), 0.5f * size.y(), 0.0f)
+		.rotate((float) Math.toRadians(rotate), 0.0f, 0.0f, 1.0f)
+		.translate(-0.5f * size.x(), -0.5f * size.y(), 0.0f)
+		.scale(size.x(), size.y(), 1.0f)
+		.transpose();
 
 		// model.m03 += pos.x;
 		// model.m13 += pos.y;
@@ -68,7 +68,7 @@ public class SPSTRenderer {
 		 * glUniform2f(vertexColorLocation, 0.0f, (float) greenValue);
 		 */
 
-		this.matrix44Buffer = model.toBuffer();
+		this.matrix44Buffer = model.get(matrix44Buffer);
 
 		glUniformMatrix4fv(this.modelMatrixLocation, true, this.matrix44Buffer);
 

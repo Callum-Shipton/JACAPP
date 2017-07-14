@@ -20,6 +20,7 @@ import static org.lwjgl.opengl.GL20.glShaderSource;
 import static org.lwjgl.opengl.GL20.glUniformMatrix4fv;
 import static org.lwjgl.opengl.GL20.glUseProgram;
 import static org.lwjgl.opengl.GL20.glValidateProgram;
+import static org.lwjgl.system.MemoryStack.stackPush;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,6 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.joml.Matrix4f;
+import org.lwjgl.system.MemoryStack;
 
 import logging.Logger;
 import loop.Loop;
@@ -58,29 +60,33 @@ public class ImageProcessor {
 	public static void initShaderUniforms() {
 
 		Matrix4f projectionMatrix = new Matrix4f();
-		projectionMatrix.clearToOrtho(0, Loop.getDisplay().getWidth(), Loop.getDisplay().getHeight(), 0, -1.0f, 1.0f);
-		FloatBuffer matrix44Buffer = projectionMatrix.toBuffer();
+		projectionMatrix.ortho(0, Loop.getDisplay().getWidth(), Loop.getDisplay().getHeight(), 0, -1.0f, 1.0f);
+		
+		try (MemoryStack stack = stackPush()) {
+			FloatBuffer buf = stack.callocFloat(16);
+			buf = projectionMatrix.get(buf);
 
-		glUseProgram(ShaderBase);
+			glUseProgram(ShaderBase);
 
-		int error = glGetError();
+			int error = glGetError();
 
-		if (error != GL_NO_ERROR) {
-			Logger.error("OpenGL Error: " + error);
+			if (error != GL_NO_ERROR) {
+				Logger.error("OpenGL Error: " + error);
+			}
+			int projectionMatrixLocation = glGetUniformLocation(ShaderBase, "projectionMatrix");
+			glUniformMatrix4fv(projectionMatrixLocation, false, buf);
+			glUseProgram(0);
+	
+			glUseProgram(ShaderInst);
+			projectionMatrixLocation = glGetUniformLocation(ShaderInst, "projectionMatrix");
+			glUniformMatrix4fv(projectionMatrixLocation, false, buf);
+			glUseProgram(0);
+	
+			glUseProgram(ShaderStat);
+			projectionMatrixLocation = glGetUniformLocation(ShaderStat, "projectionMatrix");
+			glUniformMatrix4fv(projectionMatrixLocation, false, buf);
+			glUseProgram(0);
 		}
-		int projectionMatrixLocation = glGetUniformLocation(ShaderBase, "projectionMatrix");
-		glUniformMatrix4fv(projectionMatrixLocation, false, matrix44Buffer);
-		glUseProgram(0);
-
-		glUseProgram(ShaderInst);
-		projectionMatrixLocation = glGetUniformLocation(ShaderInst, "projectionMatrix");
-		glUniformMatrix4fv(projectionMatrixLocation, false, matrix44Buffer);
-		glUseProgram(0);
-
-		glUseProgram(ShaderStat);
-		projectionMatrixLocation = glGetUniformLocation(ShaderStat, "projectionMatrix");
-		glUniformMatrix4fv(projectionMatrixLocation, false, matrix44Buffer);
-		glUseProgram(0);
 
 	}
 

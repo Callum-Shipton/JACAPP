@@ -26,10 +26,10 @@ public class AStarNode implements Comparable<AStarNode> {
 	@Override
 	public int compareTo(AStarNode n) {
 
-		float distance1 = goal.dist(n.getPosition()) + n.getParentLength();
-		float distance2 = goal.dist(getPosition()) + parentLength;
+		double distance1 = goal.distance(n.getPosition()) + n.getParentLength();
+		double distance2 = goal.distance(getPosition()) + parentLength;
 
-		return Float.compare(distance2, distance1);
+		return Double.compare(distance2, distance1);
 	}
 
 	@Override

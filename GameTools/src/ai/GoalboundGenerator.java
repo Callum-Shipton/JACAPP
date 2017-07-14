@@ -31,8 +31,8 @@ public class GoalboundGenerator {
 	private Set<Vector2i> walls;
 
 	private static final int MAXIMUM_SIZE = 4;
-	private static final String IN_MAP_FILE = "/Levels/Level1.png";
-	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level1.bound";
+	private static final String IN_MAP_FILE = "/Levels/Level3.png";
+	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level3.bound";
 
 	private static final int BROWNWALL_COLOR = -7864299;
 	private static final int GREYWALL_COLOR = -8421505;

@@ -9,6 +9,7 @@ import components.inventory.BaseInventory;
 import components.movement.BaseMovement;
 import entity.Entity;
 import gui.buttons.UpgradeManaRegenButton;
+import math.VectorMath;
 
 public class TestingControl extends BaseControl {
 
@@ -51,7 +52,7 @@ public class TestingControl extends BaseControl {
 		else
 			dir.set(0.0f, 1.0f);
 		dir.normalize();
-		this.PG.setDirection((int) (Math.round(dir.angle()) / 45));
+		this.PG.setDirection((int) (Math.round(VectorMath.angle(dir)) / 45));
 		if (this.BA.attack(e, this.PG.getDirection()))
 			toggle = !toggle;
 	}

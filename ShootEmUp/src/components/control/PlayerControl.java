@@ -11,6 +11,7 @@ import components.movement.BaseMovement;
 import entity.Entity;
 import input.Keyboard;
 import loop.Loop;
+import math.VectorMath;
 
 public class PlayerControl extends BaseControl {
 
@@ -83,7 +84,7 @@ public class PlayerControl extends BaseControl {
 			if (dir.length() > 1) {
 				dir.normalize();
 			}
-			this.PG.setDirection((int) (Math.round(dir.angle()) / 45));
+			this.PG.setDirection((int) (Math.round(VectorMath.angle(dir)) / 45));
 		}
 	}
 

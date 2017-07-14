@@ -1,25 +1,11 @@
 package display;
 
-import static org.lwjgl.opengl.GL11.GL_FLOAT;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
-import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
-import static org.lwjgl.opengl.GL11.GL_UNSIGNED_BYTE;
-import static org.lwjgl.opengl.GL11.glBindTexture;
-import static org.lwjgl.opengl.GL11.glDrawElements;
-import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
-import static org.lwjgl.opengl.GL15.GL_DYNAMIC_DRAW;
-import static org.lwjgl.opengl.GL15.GL_ELEMENT_ARRAY_BUFFER;
-import static org.lwjgl.opengl.GL15.GL_STATIC_DRAW;
-import static org.lwjgl.opengl.GL15.glBindBuffer;
-import static org.lwjgl.opengl.GL15.glBufferData;
-import static org.lwjgl.opengl.GL15.glGenBuffers;
-import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
-import static org.lwjgl.opengl.GL20.glGetUniformLocation;
-import static org.lwjgl.opengl.GL20.glUniformMatrix4fv;
-import static org.lwjgl.opengl.GL20.glUseProgram;
-import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
-import static org.lwjgl.opengl.GL30.glBindVertexArray;
-import static org.lwjgl.opengl.GL30.glGenVertexArrays;
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL15.*;
+import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL30.*;
+
+import static org.lwjgl.system.MemoryStack.*;
 
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
@@ -27,6 +13,7 @@ import java.nio.FloatBuffer;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
+import org.lwjgl.system.MemoryStack;
 
 import loop.Loop;
 
@@ -35,7 +22,6 @@ public class DPDTRenderer extends Renderer {
 	private int shaderProgramID;
 	private int modelMatrixLocation;
 	private int textureMatrixLocation;
-	private FloatBuffer matrix44Buffer;
 	private Matrix4f model;
 	private Matrix4f texture;
 
@@ -47,30 +33,36 @@ public class DPDTRenderer extends Renderer {
 	public void draw(Image Texid, Vector2f pos, Vector2f size, float rotate, Vector2f texPos, Vector2f maxFrame) {
 		if (!visible(pos, size))
 			return;
-		glUseProgram(this.shaderProgramID);
-		glBindVertexArray(this.VAO);
+		glUseProgram(shaderProgramID);
+		glBindVertexArray(VAO);
 		glBindTexture(GL_TEXTURE_2D, Texid.getID());
 
-		this.model.clearToIdentity();
-		this.model.translate(pos.x(), pos.y(), 0.0f);
-		this.model.translate(0.5f * size.x(), 0.5f * size.y(), 0.0f);
-		this.model.rotateDeg(rotate, 0.0f, 0.0f, 1.0f);
-		this.model.translate(-0.5f * size.x(), -0.5f * size.y(), 0.0f);
-		this.model.scale(size.x(), size.y(), 1.0f);
+		model.identity()
+		.translate(pos.x(), pos.y(), 0.0f)
+		.translate(0.5f * size.x(), 0.5f * size.y(), 0.0f)
+		.rotate((float) Math.toRadians(rotate), 0.0f, 0.0f, 1.0f)
+		.translate(-0.5f * size.x(), -0.5f * size.y(), 0.0f)
+		.scale(size.x(), size.y(), 1.0f);
 
-		this.texture.clearToIdentity();
-		this.texture.translate(texPos.x() / maxFrame.x(), texPos.y() / maxFrame.y(), 0.0f);
-		this.texture.scale(1 / maxFrame.x(), 1 / maxFrame.y(), 1.0f);
+		texture.identity()
+		.translate(texPos.x() / maxFrame.x(), texPos.y() / maxFrame.y(), 0.0f)
+		.scale(1 / maxFrame.x(), 1 / maxFrame.y(), 1.0f);
+		
+		try (MemoryStack stack = stackPush()) {
+			FloatBuffer buf = stack.callocFloat(16);
+			
+			buf = model.get(buf);
 
-		this.matrix44Buffer = this.model.toBuffer();
+			glUniformMatrix4fv(modelMatrixLocation, false, buf);
 
-		glUniformMatrix4fv(this.modelMatrixLocation, false, this.matrix44Buffer);
+			buf.clear();
 
-		this.matrix44Buffer.clear();
+			buf = texture.get(buf);
 
-		this.matrix44Buffer = this.texture.toBuffer();
+			glUniformMatrix4fv(textureMatrixLocation, false, buf);
+		}
 
-		glUniformMatrix4fv(this.textureMatrixLocation, false, this.matrix44Buffer);
+		
 
 		// glEnableVertexAttribArray(0);
 		// glEnableVertexAttribArray(1);
@@ -96,12 +88,11 @@ public class DPDTRenderer extends Renderer {
 	}
 
 	public int getVAO() {
-		return this.VAO;
+		return VAO;
 	}
 
 	public void initRenderData() {
 
-		this.matrix44Buffer = BufferUtils.createFloatBuffer(16);
 		this.model = new Matrix4f();
 		this.texture = new Matrix4f();
 
@@ -169,4 +160,5 @@ public class DPDTRenderer extends Renderer {
 		// glBindBuffer(GL_ARRAY_BUFFER, 0);
 		// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
+
 }

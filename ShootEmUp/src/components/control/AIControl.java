@@ -15,6 +15,7 @@ import level.LevelMap;
 import logging.Logger;
 import logging.Logger.Category;
 import main.ShootEmUp;
+import math.VectorMath;
 
 public class AIControl extends BaseControl {
 
@@ -67,7 +68,7 @@ public class AIControl extends BaseControl {
 			}
 			movement.move(e, movementVector);
 			if (graphics instanceof AnimatedGraphics) {
-				((AnimatedGraphics) graphics).setDirection((int) (Math.round(movementVector.angle()) / 45));
+				((AnimatedGraphics) graphics).setDirection((int) (Math.round(VectorMath.angle(movementVector)) / 45));
 			}
 
 		} else if (graphics instanceof AnimatedGraphics) {

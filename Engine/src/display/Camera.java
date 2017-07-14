@@ -1,12 +1,15 @@
 package display;
 
-import static org.lwjgl.opengl.GL20.glGetUniformLocation;
-import static org.lwjgl.opengl.GL20.glUniformMatrix4fv;
-import static org.lwjgl.opengl.GL20.glUseProgram;
+
+import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.system.MemoryStack.*;
+
+import java.nio.FloatBuffer;
 
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
+import org.lwjgl.system.MemoryStack;
 
 import math.VectorMath;
 
@@ -34,16 +37,20 @@ public class Camera {
 
 	private void updateViewMatrix() {
 
-		viewMatrix.clearToIdentity();
-		viewMatrix.translate(-box.x(), -box.y(), 0);
+		viewMatrix.identity()
+		.translate(-box.x(), -box.y(), 0);
 
-		glUseProgram(ImageProcessor.ShaderBase);
-		glUniformMatrix4fv(this.viewMatrixLocation, false, viewMatrix.toBuffer());
-		glUseProgram(0);
+		try (MemoryStack stack = stackPush()) {
+			FloatBuffer buf = stack.callocFloat(16);
+			buf = viewMatrix.get(buf);
+			glUseProgram(ImageProcessor.ShaderBase);
+			glUniformMatrix4fv(this.viewMatrixLocation, false, buf);
+			glUseProgram(0);
 
-		glUseProgram(ImageProcessor.ShaderInst);
-		glUniformMatrix4fv(this.viewMatrixLocationInst, false, viewMatrix.toBuffer());
-		glUseProgram(0);
+			glUseProgram(ImageProcessor.ShaderInst);
+			glUniformMatrix4fv(this.viewMatrixLocationInst, false, buf);
+			glUseProgram(0);
+		}
 	}
 
 	public void updateCameraSize(int width, int height) {
