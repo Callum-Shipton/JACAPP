@@ -2,6 +2,7 @@ package components.movement;
 
 import java.util.Set;
 
+import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 import components.TypeComponent;
@@ -10,7 +11,6 @@ import components.collision.HitCollision;
 import components.graphical.BaseGraphics;
 import entity.Entity;
 import main.ShootEmUp;
-import math.Vector2;
 import math.VectorMath;
 import object.EntityMap;
 
@@ -25,9 +25,9 @@ public class BasicMovement extends BaseMovement {
 		this.realSpeed = speed;
 	}
 
-	private Set<Vector2> reactToCollision(Vector4f collVec, Entity hitEntity, Entity currentEntity, Axis axis,
+	private Set<Vector2f> reactToCollision(Vector4f collVec, Entity hitEntity, Entity currentEntity, Axis axis,
 			EntityMap eMap) {
-		Set<Vector2> newGrid = eMap.getGridPos(currentEntity);
+		Set<Vector2f> newGrid = eMap.getGridPos(currentEntity);
 		BaseCollision HC = hitEntity.getComponent(TypeComponent.COLLISION);
 		if ((HC.getMoveBack()) && !(this.BC instanceof HitCollision)) {
 			switch (axis) {
@@ -53,7 +53,7 @@ public class BasicMovement extends BaseMovement {
 	public boolean checkCollision(Entity currentEntity, Axis axis) {
 		EntityMap eMap = ShootEmUp.getGame().getCurrentLevel().geteMap();
 		boolean collide = false;
-		Set<Vector2> newGrid = eMap.getGridPos(currentEntity);
+		Set<Vector2f> newGrid = eMap.getGridPos(currentEntity);
 		Set<Entity> entities = eMap.getEntites(newGrid);
 		Vector4f collVec;
 
@@ -97,7 +97,7 @@ public class BasicMovement extends BaseMovement {
 	}
 
 	@Override
-	public void move(Entity e, Vector2 moveVec) {
+	public void move(Entity e, Vector2f moveVec) {
 		super.move(e, moveVec);
 		if (Math.abs(moveVec.x()) > 0) {
 			baseGraphics.setX(baseGraphics.getX() + Math.round(moveVec.x() * speed));

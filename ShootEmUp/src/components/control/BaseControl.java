@@ -1,11 +1,12 @@
 package components.control;
 
+import org.joml.Vector2f;
+
 import components.Component;
 import components.TypeComponent;
 import components.graphical.BaseGraphics;
 import entity.Entity;
 import level.LevelMap;
-import math.Vector2;
 
 public abstract class BaseControl extends Component implements ControlComponent {
 
@@ -16,8 +17,8 @@ public abstract class BaseControl extends Component implements ControlComponent 
 		return (1.0f / speed) * (pos1 - pos2);
 	}
 
-	protected Vector2 calculateMovementVector(Vector2 target, float x, float y, int speed) {
-		Vector2 movementVector = new Vector2(0.0f, 0.0f);
+	protected Vector2f calculateMovementVector(Vector2f target, float x, float y, int speed) {
+		Vector2f movementVector = new Vector2f(0.0f, 0.0f);
 		float targetY = target.y() * LevelMap.TILE_WIDTH;
 		float targetX = target.x() * LevelMap.TILE_WIDTH;
 

@@ -2,18 +2,19 @@ package components.collision;
 
 import java.util.Set;
 
+import org.joml.Vector2f;
+
 import components.Component;
 import components.Message;
 import components.TypeComponent;
 import entity.Entity;
 import main.ShootEmUp;
-import math.Vector2;
 
 public abstract class BaseCollision extends Component implements CollisionComponent {
 
 	protected TypeComponent type = TypeComponent.COLLISION;
 
-	protected Set<Vector2> gridPos;
+	protected Set<Vector2f> gridPos;
 	protected boolean moveBack;
 
 	@Override
@@ -21,7 +22,7 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 		ShootEmUp.getGame().getCurrentLevel().removeEntity(gridPos, e);
 	}
 
-	public Set<Vector2> getGridPos() {
+	public Set<Vector2f> getGridPos() {
 		return gridPos;
 	}
 
@@ -39,7 +40,7 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 
 	}
 
-	public void setGridPos(Set<Vector2> gridPos) {
+	public void setGridPos(Set<Vector2f> gridPos) {
 		this.gridPos = gridPos;
 	}
 }

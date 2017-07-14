@@ -1,27 +1,28 @@
 package gui;
 
+import org.joml.Vector2f;
+
 import display.DPDTRenderer;
 import display.Image;
-import math.Vector2;
 
 public class Icon extends GuiComponent {
 
-	protected Vector2 size;
+	protected Vector2f size;
 	protected Image i;
-	private Vector2 currFrame;
-	protected Vector2 maxFrame;
+	private Vector2f currFrame;
+	protected Vector2f maxFrame;
 	protected boolean isAnimated;
 
 	public Icon(float x, float y, Image i, boolean animating, float scale) {
 		super(x, y);
-		size = new Vector2((i.getWidth() / i.getFWidth()) * scale, (i.getHeight() / i.getFHeight()) * scale);
-		setCurrFrame(new Vector2(0.0f, 0.0f));
-		maxFrame = new Vector2(i.getFWidth(), i.getFHeight());
+		size = new Vector2f((i.getWidth() / i.getFWidth()) * scale, (i.getHeight() / i.getFHeight()) * scale);
+		setCurrFrame(new Vector2f(0.0f, 0.0f));
+		maxFrame = new Vector2f(i.getFWidth(), i.getFHeight());
 		this.i = i;
 		this.isAnimated = animating;
 	}
 
-	public Vector2 getCurrFrame() {
+	public Vector2f getCurrFrame() {
 		return this.currFrame;
 	}
 
@@ -29,16 +30,16 @@ public class Icon extends GuiComponent {
 		return this.i;
 	}
 
-	public Vector2 getSize() {
+	public Vector2f getSize() {
 		return this.size;
 	}
 
 	@Override
 	public void render(DPDTRenderer d) {
-		d.draw(this.i, new Vector2(this.x, this.y), getSize(), 0.0f, getCurrFrame(), this.maxFrame);
+		d.draw(this.i, new Vector2f(this.x, this.y), getSize(), 0.0f, getCurrFrame(), this.maxFrame);
 	}
 
-	public void setCurrFrame(Vector2 currFrame) {
+	public void setCurrFrame(Vector2f currFrame) {
 		this.currFrame = currFrame;
 	}
 

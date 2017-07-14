@@ -1,5 +1,7 @@
 package level;
 
+import org.joml.Vector2f;
+
 import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
 import components.collision.RigidCollision;
@@ -10,7 +12,6 @@ import components.movement.BasicMovement;
 import components.spawn.PointSpawn;
 import display.ImageProcessor;
 import entity.Entity;
-import math.Vector2;
 import object.Weapon;
 import save.CharacterSave;
 
@@ -84,6 +85,6 @@ public abstract class PlayerBuilder {
 		default:
 			g = new PlayerGraphics(ImageProcessor.getImage("Warrior"), ImageProcessor.base, 1f);
 		}
-		s = new PointSpawn(g, new Vector2(480.0f, 480.0f), player);
+		s = new PointSpawn(g, new Vector2f(480.0f, 480.0f), player);
 	}
 }

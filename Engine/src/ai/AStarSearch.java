@@ -9,29 +9,30 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
+import org.joml.Vector2i;
+
 import logging.Logger;
-import math.Vector2;
 
 public class AStarSearch {
 
-	private Set<Vector2> walls;
+	private Set<Vector2i> walls;
 	private GoalBounder goalBounder;
 
 	private Queue<AStarNode> openNodes = new PriorityQueue<>();
 	private Set<AStarNode> closedNodes = new HashSet<>();
 	private Map<String, AStarNode> childNodes = new HashMap<>();
-	private Deque<Vector2> path = new LinkedList<>();
+	private Deque<Vector2i> path = new LinkedList<>();
 
 	private AStarNode startNode;
 	private AStarNode goalNode;
-	private Vector2 target;
+	private Vector2i target;
 	private int width;
 
 	private boolean playerOutOfReach = false;
 
 	private float nodeWidth;
 
-	public AStarSearch(Set<Vector2> walls, GoalBounder goalBounder, float nodeWidth, int width) {
+	public AStarSearch(Set<Vector2i> walls, GoalBounder goalBounder, float nodeWidth, int width) {
 		this.walls = walls;
 		this.goalBounder = goalBounder;
 
@@ -40,7 +41,7 @@ public class AStarSearch {
 		// searched
 	}
 
-	private void initData(Vector2 goal, Vector2 start) {
+	private void initData(Vector2i goal, Vector2i start) {
 
 		startNode = new AStarNode(start, width);
 		goalNode = new AStarNode(goal, width);
@@ -57,19 +58,19 @@ public class AStarSearch {
 	}
 
 	private void generateChildNodes(AStarNode currentNode) {
-		float currentX = currentNode.getPosition().x();
-		float currentY = currentNode.getPosition().y();
-		Vector2 goalPosition = goalNode.getPosition();
+		int currentX = currentNode.getPosition().x();
+		int currentY = currentNode.getPosition().y();
+		Vector2i goalPosition = goalNode.getPosition();
 
 		childNodes.clear();
-		childNodes.put("N", new AStarNode(new Vector2(currentX, currentY - 1), width, currentNode, goalPosition));
-		childNodes.put("NW", new AStarNode(new Vector2(currentX - 1, currentY - 1), width, currentNode, goalPosition));
-		childNodes.put("W", new AStarNode(new Vector2(currentX - 1, currentY), width, currentNode, goalPosition));
-		childNodes.put("SW", new AStarNode(new Vector2(currentX - 1, currentY + 1), width, currentNode, goalPosition));
-		childNodes.put("S", new AStarNode(new Vector2(currentX, currentY + 1), width, currentNode, goalPosition));
-		childNodes.put("SE", new AStarNode(new Vector2(currentX + 1, currentY + 1), width, currentNode, goalPosition));
-		childNodes.put("E", new AStarNode(new Vector2(currentX + 1, currentY), width, currentNode, goalPosition));
-		childNodes.put("NE", new AStarNode(new Vector2(currentX + 1, currentY - 1), width, currentNode, goalPosition));
+		childNodes.put("N", new AStarNode(new Vector2i(currentX, currentY - 1), width, currentNode, goalPosition));
+		childNodes.put("NW", new AStarNode(new Vector2i(currentX - 1, currentY - 1), width, currentNode, goalPosition));
+		childNodes.put("W", new AStarNode(new Vector2i(currentX - 1, currentY), width, currentNode, goalPosition));
+		childNodes.put("SW", new AStarNode(new Vector2i(currentX - 1, currentY + 1), width, currentNode, goalPosition));
+		childNodes.put("S", new AStarNode(new Vector2i(currentX, currentY + 1), width, currentNode, goalPosition));
+		childNodes.put("SE", new AStarNode(new Vector2i(currentX + 1, currentY + 1), width, currentNode, goalPosition));
+		childNodes.put("E", new AStarNode(new Vector2i(currentX + 1, currentY), width, currentNode, goalPosition));
+		childNodes.put("NE", new AStarNode(new Vector2i(currentX + 1, currentY - 1), width, currentNode, goalPosition));
 	}
 
 	private void addNode(String key, GoalboundingTile goalboundingTile) {
@@ -81,7 +82,7 @@ public class AStarSearch {
 		}
 	}
 
-	private void addUnobstructedChildNodes(Vector2 position) {
+	private void addUnobstructedChildNodes(Vector2i position) {
 		GoalboundingTile goalboundingTile = goalBounder.getTile(position.x(), position.y(), width);
 		if (goalboundingTile == null) {
 			Logger.debug("no goalboundingTile at:" + position.x() + ", " + position.y(),
@@ -98,7 +99,7 @@ public class AStarSearch {
 		addNode("NE", goalboundingTile);
 	}
 
-	private Vector2 findPathStart(AStarNode currentNode) {
+	private Vector2i findPathStart(AStarNode currentNode) {
 		AStarNode node = currentNode;
 		path.push(node.getPosition());
 		while (true) {
@@ -109,13 +110,13 @@ public class AStarSearch {
 					node = node.getParent();
 				}
 			} else {
-				return new Vector2(0, 0);
+				return new Vector2i(0, 0);
 			}
 			path.push(node.getPosition());
 		}
 	}
 
-	public Vector2 findPath(Vector2 goal, Vector2 start) {
+	public Vector2i findPath(Vector2i goal, Vector2i start) {
 
 		if (goalNode != null && goal.equals(goalNode.getPosition())) {
 			if (start.equals(target) && !path.isEmpty()) {
@@ -145,17 +146,17 @@ public class AStarSearch {
 			Logger.warn("cannot find player");
 			Logger.debug("Nodes Searched: " + searchedNodes, Logger.Category.AI);
 			playerOutOfReach = true;
-			target = new Vector2(0, 0);
+			target = new Vector2i(0, 0);
 		}
 		return target;
 
 	}
 
-	public boolean containsGoal(Vector2 origin, int size, Vector2 goal) {
+	public boolean containsGoal(Vector2i origin, int size, Vector2i goal) {
 
-		for (int i = (int) origin.x(); i < origin.x() + size; i++) {
-			for (int j = (int) origin.y(); j < origin.y() + size; j++) {
-				if (goal.equals(new Vector2(i, j))) {
+		for (int i = origin.x(); i < origin.x() + size; i++) {
+			for (int j = origin.y(); j < origin.y() + size; j++) {
+				if (goal.equals(new Vector2i(i, j))) {
 					return true;
 				}
 			}
@@ -163,56 +164,56 @@ public class AStarSearch {
 		return false;
 	}
 
-	public Vector2 getGridPosition(float x, float y) {
-		return new Vector2((float) Math.floor(x / nodeWidth), (float) Math.floor(y / nodeWidth));
+	public Vector2i getGridPosition(float x, float y) {
+		return new Vector2i(((int) (x / nodeWidth)), ((int) (y / nodeWidth)));
 	}
 
-	public static boolean movesIntoWall(Vector2 position, int size, Set<Vector2> walls, String key) {
+	public static boolean movesIntoWall(Vector2i position, int size, Set<Vector2i> walls, String key) {
 		switch (key) {
 		case "NW":
 			return checkEdgesForWalls(position, size + 1, walls, "N")
 					|| checkEdgesForWalls(position, size + 1, walls, "W");
 		case "NE":
-			return checkEdgesForWalls(new Vector2(position.x() - 1, position.y()), size + 1, walls, "N")
-					|| checkEdgesForWalls(new Vector2(position.x() - 1, position.y()), size + 1, walls, "E");
+			return checkEdgesForWalls(new Vector2i(position.x() - 1, position.y()), size + 1, walls, "N")
+					|| checkEdgesForWalls(new Vector2i(position.x() - 1, position.y()), size + 1, walls, "E");
 		case "SW":
-			return checkEdgesForWalls(new Vector2(position.x(), position.y() - 1), size + 1, walls, "S")
-					|| checkEdgesForWalls(new Vector2(position.x(), position.y() - 1), size + 1, walls, "W");
+			return checkEdgesForWalls(new Vector2i(position.x(), position.y() - 1), size + 1, walls, "S")
+					|| checkEdgesForWalls(new Vector2i(position.x(), position.y() - 1), size + 1, walls, "W");
 		case "SE":
-			return checkEdgesForWalls(new Vector2(position.x() - 1, position.y() - 1), size + 1, walls, "S")
-					|| checkEdgesForWalls(new Vector2(position.x() - 1, position.y() - 1), size + 1, walls, "E");
+			return checkEdgesForWalls(new Vector2i(position.x() - 1, position.y() - 1), size + 1, walls, "S")
+					|| checkEdgesForWalls(new Vector2i(position.x() - 1, position.y() - 1), size + 1, walls, "E");
 		default:
 			return checkEdgesForWalls(position, size, walls, key);
 		}
 
 	}
 
-	private static boolean checkEdgesForWalls(Vector2 position, int size, Set<Vector2> walls, String key) {
+	private static boolean checkEdgesForWalls(Vector2i position, int size, Set<Vector2i> walls, String key) {
 		switch (key) {
 		case "N":
-			for (int i = (int) position.x(); i < position.x() + size; i++) {
-				if (walls.contains(new Vector2(i, position.y()))) {
+			for (int i = position.x(); i < position.x() + size; i++) {
+				if (walls.contains(new Vector2i(i, position.y()))) {
 					return true;
 				}
 			}
 			break;
 		case "S":
-			for (int i = (int) position.x(); i < position.x() + size; i++) {
-				if (walls.contains(new Vector2(i, position.y() + size - 1))) {
+			for (int i = position.x(); i < position.x() + size; i++) {
+				if (walls.contains(new Vector2i(i, position.y() + size - 1))) {
 					return true;
 				}
 			}
 			break;
 		case "W":
-			for (int j = (int) position.y(); j < position.y() + size; j++) {
-				if (walls.contains(new Vector2(position.x(), j))) {
+			for (int j = position.y(); j < position.y() + size; j++) {
+				if (walls.contains(new Vector2i(position.x(), j))) {
 					return true;
 				}
 			}
 			break;
 		case "E":
-			for (int j = (int) position.y(); j < position.y() + size; j++) {
-				if (walls.contains(new Vector2(position.x() + size - 1, j))) {
+			for (int j = position.y(); j < position.y() + size; j++) {
+				if (walls.contains(new Vector2i(position.x() + size - 1, j))) {
 					return true;
 				}
 			}

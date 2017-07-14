@@ -1,5 +1,7 @@
 package components.control;
 
+import org.joml.Vector2f;
+
 import components.Message;
 import components.attack.BaseAttack;
 import components.graphical.PlayerGraphics;
@@ -7,7 +9,6 @@ import components.inventory.BaseInventory;
 import components.movement.BaseMovement;
 import entity.Entity;
 import gui.buttons.UpgradeManaRegenButton;
-import math.Vector2;
 
 public class TestingControl extends BaseControl {
 
@@ -15,8 +16,8 @@ public class TestingControl extends BaseControl {
 	private PlayerGraphics PG;
 	private BaseAttack BA;
 	private BaseInventory PI;
-	private Vector2 movement = new Vector2(0.0f, 0.0f);
-	private Vector2 dir = new Vector2(0.0f, 0.0f);
+	private Vector2f movement = new Vector2f(0.0f, 0.0f);
+	private Vector2f dir = new Vector2f(0.0f, 0.0f);
 	private boolean toggle = false;
 
 	public TestingControl(PlayerGraphics PG, BaseAttack BA, BaseMovement BM, BaseInventory PI) {

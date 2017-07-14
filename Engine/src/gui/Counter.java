@@ -1,15 +1,16 @@
 package gui;
 
-import display.ImageProcessor;
+import org.joml.Vector2f;
+
 import display.DPDTRenderer;
 import display.Image;
-import math.Vector2;
+import display.ImageProcessor;
 
 public class Counter extends Icon {
 
 	private int count;
-	private Vector2 numberSize;
-	private Vector2 fullSize;
+	private Vector2f numberSize;
+	private Vector2f fullSize;
 	private int width;
 	private final int FIRST_GAP = 5;
 	private final int NUMBER_GAP = 25;
@@ -20,12 +21,11 @@ public class Counter extends Icon {
 		this.scale = scale;
 		this.count = count;
 		width = (int) ((i.getWidth() / i.getFWidth()) * scale);
-		numberSize = new Vector2((i.getHeight() / i.getFHeight()) * scale,
-				(i.getHeight() / i.getFHeight()) * scale);
-		fullSize = new Vector2(width + numberSize.x(), numberSize.y());
+		numberSize = new Vector2f((i.getHeight() / i.getFHeight()) * scale, (i.getHeight() / i.getFHeight()) * scale);
+		fullSize = new Vector2f(width + numberSize.x(), numberSize.y());
 	}
 
-	public Vector2 getFullSize() {
+	public Vector2f getFullSize() {
 		return fullSize;
 	}
 
@@ -33,19 +33,18 @@ public class Counter extends Icon {
 	public void render(DPDTRenderer r) {
 		super.render(r);
 
-		Vector2 maxTex = new Vector2(10, 1);
+		Vector2f maxTex = new Vector2f(10, 1);
 
 		if (count < 10) {
 			ImageProcessor.stat.draw(ImageProcessor.getImage("Numbers"),
-					new Vector2(x + width + (FIRST_GAP * scale), y), numberSize, 0.0f,
-					new Vector2(count, 1), maxTex);
+					new Vector2f(x + width + (FIRST_GAP * scale), y), numberSize, 0.0f, new Vector2f(count, 1), maxTex);
 		} else {
 			ImageProcessor.stat.draw(ImageProcessor.getImage("Numbers"),
-					new Vector2(x + width + (FIRST_GAP * scale), y), numberSize, 0.0f,
-					new Vector2(count / 10, 1), maxTex);
+					new Vector2f(x + width + (FIRST_GAP * scale), y), numberSize, 0.0f, new Vector2f(count / 10, 1),
+					maxTex);
 			ImageProcessor.stat.draw(ImageProcessor.getImage("Numbers"),
-					new Vector2(x + width + (NUMBER_GAP * scale), y), numberSize, 0.0f,
-					new Vector2(count % 10, 1), maxTex);
+					new Vector2f(x + width + (NUMBER_GAP * scale), y), numberSize, 0.0f, new Vector2f(count % 10, 1),
+					maxTex);
 		}
 	}
 

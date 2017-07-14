@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.joml.Vector2f;
+
 import com.google.gson.JsonArray;
 
 import components.TypeComponent;
@@ -19,7 +21,6 @@ import display.ImageProcessor;
 import entity.Entity;
 import logging.Logger;
 import main.ShootEmUp;
-import math.Vector2;
 
 public final class Weapon extends InventoryItem<Weapon> {
 
@@ -127,7 +128,7 @@ public final class Weapon extends InventoryItem<Weapon> {
 			posX += (BGWidth - g.getWidth()) / 2;
 			posY -= g.getHeight();
 		}
-		PointSpawn s = new PointSpawn(g, new Vector2(posX, posY), particle);
+		PointSpawn s = new PointSpawn(g, new Vector2f(posX, posY), particle);
 		HitCollision c = new HitCollision(this);
 		FlyingMovement m = new FlyingMovement(c, g, 10);
 		particle.addComponent(s);

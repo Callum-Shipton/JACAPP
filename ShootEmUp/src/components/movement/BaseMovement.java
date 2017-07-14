@@ -1,5 +1,7 @@
 package components.movement;
 
+import org.joml.Vector2f;
+
 import components.Component;
 import components.Message;
 import components.TypeComponent;
@@ -7,7 +9,6 @@ import components.collision.BaseCollision;
 import entity.Entity;
 import loop.Loop;
 import main.ShootEmUp;
-import math.Vector2;
 import object.EntityMap;
 
 public abstract class BaseMovement extends Component implements MovementComponent {
@@ -50,7 +51,7 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	}
 
 	@Override
-	public void move(Entity e, Vector2 moveVec) {
+	public void move(Entity e, Vector2f moveVec) {
 		if (frost) {
 			speed = speed / 2;
 			frostCounter++;

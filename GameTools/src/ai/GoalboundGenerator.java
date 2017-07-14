@@ -19,16 +19,16 @@ import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
-import org.joml.Vector4f;
+import org.joml.Vector2i;
+import org.joml.Vector4i;
 
 import logging.Logger;
-import math.Vector2;
 
 public class GoalboundGenerator {
 
 	private Map<Integer, GoalboundingTile[][]> goalboundingMaps;
 	private BufferedImage mapImage;
-	private Set<Vector2> walls;
+	private Set<Vector2i> walls;
 
 	private static final int MAXIMUM_SIZE = 4;
 	private static final String IN_MAP_FILE = "/Levels/Level1.png";
@@ -89,7 +89,7 @@ public class GoalboundGenerator {
 				case GREYWALL_COLOR:
 				case LIGHTWATER_COLOR:
 				case DARKWATER_COLOR:
-					walls.add(new Vector2(x, y));
+					walls.add(new Vector2i(x, y));
 					break;
 				case GRASS_COLOR:
 				case PATH_COLOR:
@@ -117,33 +117,33 @@ public class GoalboundGenerator {
 	private List<TypeNode> generateChildNodes(AStarNode startNode, String type, int size) {
 		List<TypeNode> childNodes = new ArrayList<>();
 
-		float startX = startNode.getPosition().x();
-		float startY = startNode.getPosition().y();
+		int startX = startNode.getPosition().x();
+		int startY = startNode.getPosition().y();
 
-		if (!AStarSearch.movesIntoWall(new Vector2(startX, startY - 1), size, walls, "N")) {
-			childNodes.add(new TypeNode(new Vector2(startX, startY - 1), type != null ? type : "N"));
+		if (!AStarSearch.movesIntoWall(new Vector2i(startX, startY - 1), size, walls, "N")) {
+			childNodes.add(new TypeNode(new Vector2i(startX, startY - 1), type != null ? type : "N"));
 		}
-		if (!AStarSearch.movesIntoWall(new Vector2(startX - 1, startY), size, walls, "W")) {
-			childNodes.add(new TypeNode(new Vector2(startX - 1, startY), type != null ? type : "W"));
+		if (!AStarSearch.movesIntoWall(new Vector2i(startX - 1, startY), size, walls, "W")) {
+			childNodes.add(new TypeNode(new Vector2i(startX - 1, startY), type != null ? type : "W"));
 		}
-		if (!AStarSearch.movesIntoWall(new Vector2(startX, startY + 1), size, walls, "S")) {
-			childNodes.add(new TypeNode(new Vector2(startX, startY + 1), type != null ? type : "S"));
+		if (!AStarSearch.movesIntoWall(new Vector2i(startX, startY + 1), size, walls, "S")) {
+			childNodes.add(new TypeNode(new Vector2i(startX, startY + 1), type != null ? type : "S"));
 		}
-		if (!AStarSearch.movesIntoWall(new Vector2(startX + 1, startY), size, walls, "E")) {
-			childNodes.add(new TypeNode(new Vector2(startX + 1, startY), type != null ? type : "E"));
+		if (!AStarSearch.movesIntoWall(new Vector2i(startX + 1, startY), size, walls, "E")) {
+			childNodes.add(new TypeNode(new Vector2i(startX + 1, startY), type != null ? type : "E"));
 		}
 
-		if (!AStarSearch.movesIntoWall(new Vector2(startX - 1, startY - 1), size, walls, "NW")) {
-			childNodes.add(new TypeNode(new Vector2(startX - 1, startY - 1), type != null ? type : "NW"));
+		if (!AStarSearch.movesIntoWall(new Vector2i(startX - 1, startY - 1), size, walls, "NW")) {
+			childNodes.add(new TypeNode(new Vector2i(startX - 1, startY - 1), type != null ? type : "NW"));
 		}
-		if (!AStarSearch.movesIntoWall(new Vector2(startX - 1, startY + 1), size, walls, "SW")) {
-			childNodes.add(new TypeNode(new Vector2(startX - 1, startY + 1), type != null ? type : "SW"));
+		if (!AStarSearch.movesIntoWall(new Vector2i(startX - 1, startY + 1), size, walls, "SW")) {
+			childNodes.add(new TypeNode(new Vector2i(startX - 1, startY + 1), type != null ? type : "SW"));
 		}
-		if (!AStarSearch.movesIntoWall(new Vector2(startX + 1, startY + 1), size, walls, "SE")) {
-			childNodes.add(new TypeNode(new Vector2(startX + 1, startY + 1), type != null ? type : "SE"));
+		if (!AStarSearch.movesIntoWall(new Vector2i(startX + 1, startY + 1), size, walls, "SE")) {
+			childNodes.add(new TypeNode(new Vector2i(startX + 1, startY + 1), type != null ? type : "SE"));
 		}
-		if (!AStarSearch.movesIntoWall(new Vector2(startX + 1, startY - 1), size, walls, "NE")) {
-			childNodes.add(new TypeNode(new Vector2(startX + 1, startY - 1), type != null ? type : "NE"));
+		if (!AStarSearch.movesIntoWall(new Vector2i(startX + 1, startY - 1), size, walls, "NE")) {
+			childNodes.add(new TypeNode(new Vector2i(startX + 1, startY - 1), type != null ? type : "NE"));
 		}
 
 		return childNodes;
@@ -153,7 +153,7 @@ public class GoalboundGenerator {
 		Map<String, BoundingBox> boxes = new HashMap<>();
 
 		for (TypeNode node : childNodes) {
-			boxes.put(node.getType(), new BoundingBox(new Vector4f(node.getPosition().x(), node.getPosition().y(),
+			boxes.put(node.getType(), new BoundingBox(new Vector4i(node.getPosition().x(), node.getPosition().y(),
 					node.getPosition().x(), node.getPosition().y())));
 		}
 		return boxes;
@@ -220,7 +220,7 @@ public class GoalboundGenerator {
 
 		@Override
 		public void run() {
-			if (!containsWall(new Vector2(x, y), size, walls)) {
+			if (!containsWall(new Vector2i(x, y), size, walls)) {
 
 				// queue for tiles to be looked at
 				Queue<TypeNode> open = new LinkedList<>();
@@ -228,7 +228,7 @@ public class GoalboundGenerator {
 				// list of already viewed tiles
 				Set<TypeNode> closed = new HashSet<>();
 
-				AStarNode start = new AStarNode(new Vector2(x, y), size);
+				AStarNode start = new AStarNode(new Vector2i(x, y), size);
 
 				List<TypeNode> startingNodes = generateChildNodes(start, size);
 
@@ -247,10 +247,10 @@ public class GoalboundGenerator {
 		}
 	}
 
-	private static boolean containsWall(Vector2 position, int size, Set<Vector2> walls) {
+	private static boolean containsWall(Vector2i position, int size, Set<Vector2i> walls) {
 		for (int i = (int) position.x(); i < position.x() + size; i++) {
 			for (int j = (int) position.y(); j < position.y() + size; j++) {
-				if (walls.contains(new Vector2(i, j))) {
+				if (walls.contains(new Vector2i(i, j))) {
 					return true;
 				}
 			}

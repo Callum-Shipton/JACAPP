@@ -8,12 +8,12 @@ import static org.lwjgl.glfw.GLFW.glfwGetMouseButton;
 
 import java.nio.DoubleBuffer;
 
+import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 
 import display.DPDTRenderer;
 import display.Image;
 import loop.Loop;
-import math.Vector2;
 
 public class MenuButton extends GuiComponent {
 
@@ -45,9 +45,9 @@ public class MenuButton extends GuiComponent {
 	@Override
 	public void render(DPDTRenderer stat) {
 		if (isPressed || hovered) {
-			stat.draw(id, new Vector2(x, y), new Vector2(w, h), 0, new Vector2(0, 1), new Vector2(1, 2));
+			stat.draw(id, new Vector2f(x, y), new Vector2f(w, h), 0, new Vector2f(0, 1), new Vector2f(1, 2));
 		} else {
-			stat.draw(id, new Vector2(x, y), new Vector2(w, h), 0, new Vector2(0, 0), new Vector2(1, 2));
+			stat.draw(id, new Vector2f(x, y), new Vector2f(w, h), 0, new Vector2f(0, 0), new Vector2f(1, 2));
 		}
 	}
 

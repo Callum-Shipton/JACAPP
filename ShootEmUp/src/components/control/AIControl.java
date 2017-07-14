@@ -1,5 +1,8 @@
 package components.control;
 
+import org.joml.Vector2f;
+import org.joml.Vector2i;
+
 import ai.AStarSearch;
 import components.Message;
 import components.TypeComponent;
@@ -12,7 +15,6 @@ import level.LevelMap;
 import logging.Logger;
 import logging.Logger.Category;
 import main.ShootEmUp;
-import math.Vector2;
 
 public class AIControl extends BaseControl {
 
@@ -51,13 +53,13 @@ public class AIControl extends BaseControl {
 	@Override
 	public void update(Entity e) {
 
-		Vector2 goalVector = search.getGridPosition(playerGraphics.getX(), playerGraphics.getY());
-		Vector2 startVector = search.getGridPosition(graphics.getX(), graphics.getY());
+		Vector2i goalVector = search.getGridPosition(playerGraphics.getX(), playerGraphics.getY());
+		Vector2i startVector = search.getGridPosition(graphics.getX(), graphics.getY());
 		Logger.debug("Entity: " + e.getId() +  " at Current Tile: " + startVector.x() + ", " + startVector.y(), Category.AI);
 
-		Vector2 target = search.findPath(goalVector, startVector);
+		Vector2i target = search.findPath(goalVector, startVector);
 
-		Vector2 movementVector = calculateMovementVector(target, graphics.getX(), graphics.getY(), movement.getSpeed());
+		Vector2f movementVector = calculateMovementVector(new Vector2f(target.x(), target.y()), graphics.getX(), graphics.getY(), movement.getSpeed());
 
 		if (movementVector.length() > 0) {
 			if (graphics instanceof AnimatedGraphics) {

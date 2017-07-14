@@ -1,19 +1,34 @@
 package display;
 
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL15.*;
-import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.opengl.GL30.*;
-
+import static org.lwjgl.opengl.GL11.GL_FLOAT;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
+import static org.lwjgl.opengl.GL11.GL_UNSIGNED_BYTE;
+import static org.lwjgl.opengl.GL11.glBindTexture;
+import static org.lwjgl.opengl.GL11.glDrawElements;
+import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
+import static org.lwjgl.opengl.GL15.GL_DYNAMIC_DRAW;
+import static org.lwjgl.opengl.GL15.GL_ELEMENT_ARRAY_BUFFER;
+import static org.lwjgl.opengl.GL15.GL_STATIC_DRAW;
+import static org.lwjgl.opengl.GL15.glBindBuffer;
+import static org.lwjgl.opengl.GL15.glBufferData;
+import static org.lwjgl.opengl.GL15.glGenBuffers;
+import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
+import static org.lwjgl.opengl.GL20.glGetUniformLocation;
+import static org.lwjgl.opengl.GL20.glUniformMatrix4fv;
+import static org.lwjgl.opengl.GL20.glUseProgram;
+import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
+import static org.lwjgl.opengl.GL30.glBindVertexArray;
+import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 
+import org.joml.Matrix4f;
+import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 
 import loop.Loop;
-import math.Matrix4;
-import math.Vector2;
 
 public class DPDTRenderer extends Renderer {
 
@@ -21,16 +36,17 @@ public class DPDTRenderer extends Renderer {
 	private int modelMatrixLocation;
 	private int textureMatrixLocation;
 	private FloatBuffer matrix44Buffer;
-	private Matrix4 model;
-	private Matrix4 texture;
+	private Matrix4f model;
+	private Matrix4f texture;
 
 	public DPDTRenderer(int pID) {
 		this.shaderProgramID = pID;
 		initRenderData();
 	}
 
-	public void draw(Image Texid, Vector2 pos, Vector2 size, float rotate, Vector2 texPos, Vector2 maxFrame) {
-		if(!visible(pos,size)) return;
+	public void draw(Image Texid, Vector2f pos, Vector2f size, float rotate, Vector2f texPos, Vector2f maxFrame) {
+		if (!visible(pos, size))
+			return;
 		glUseProgram(this.shaderProgramID);
 		glBindVertexArray(this.VAO);
 		glBindTexture(GL_TEXTURE_2D, Texid.getID());
@@ -68,12 +84,14 @@ public class DPDTRenderer extends Renderer {
 
 	}
 
-	private boolean visible(Vector2 pos, Vector2 size) {
-		if(shaderProgramID == ImageProcessor.ShaderStat)return true;
-		
-		//TODO: Update to use rotation (even though I don't think anything uses it atm.)
-		else return Loop.getDisplay().getCamera().isVisible(pos,size);
+	private boolean visible(Vector2f pos, Vector2f size) {
+		if (shaderProgramID == ImageProcessor.ShaderStat)
+			return true;
 
+		// TODO: Update to use rotation (even though I don't think anything uses it
+		// atm.)
+		else
+			return Loop.getDisplay().getCamera().isVisible(pos, size);
 
 	}
 
@@ -84,8 +102,8 @@ public class DPDTRenderer extends Renderer {
 	public void initRenderData() {
 
 		this.matrix44Buffer = BufferUtils.createFloatBuffer(16);
-		this.model = new Matrix4();
-		this.texture = new Matrix4();
+		this.model = new Matrix4f();
+		this.texture = new Matrix4f();
 
 		glUseProgram(this.shaderProgramID);
 

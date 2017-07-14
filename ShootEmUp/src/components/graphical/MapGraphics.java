@@ -1,15 +1,16 @@
 package components.graphical;
 
+import org.joml.Vector2f;
+
 import components.Message;
 import display.Image;
 import entity.Entity;
-import math.Vector2;
 
 public class MapGraphics extends BaseGraphics {
 
-	private Vector2 mapPos;
+	private Vector2f mapPos;
 
-	public MapGraphics(Image image, Vector2 mapPos, float x, float y) {
+	public MapGraphics(Image image, Vector2f mapPos, float x, float y) {
 		this.image = image;
 		width = image.getWidth() / image.getFWidth();
 		height = image.getHeight() / image.getFHeight();
@@ -18,7 +19,7 @@ public class MapGraphics extends BaseGraphics {
 		this.y = y;
 	}
 
-	public Vector2 getMapPos() {
+	public Vector2f getMapPos() {
 		return this.mapPos;
 	}
 
@@ -34,7 +35,7 @@ public class MapGraphics extends BaseGraphics {
 
 	}
 
-	public void setMapPos(Vector2 mapPos) {
+	public void setMapPos(Vector2f mapPos) {
 		this.mapPos = mapPos;
 	}
 

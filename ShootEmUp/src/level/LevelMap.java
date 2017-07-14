@@ -3,6 +3,9 @@ package level;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.joml.Vector2f;
+import org.joml.Vector2i;
+
 import ai.GoalBounder;
 import components.collision.RigidCollision;
 import components.graphical.MapGraphics;
@@ -13,7 +16,6 @@ import entity.Entity;
 import logging.Logger;
 import logging.Logger.Category;
 import map.TileMap;
-import math.Vector2;
 
 public class LevelMap {
 
@@ -25,7 +27,7 @@ public class LevelMap {
 	private static final String FLOOR_TEXTURE_FILE = "Floor";
 
 	// collidable wall entities
-	private Map<Vector2, Entity> walls;
+	private Map<Vector2i, Entity> walls;
 
 	public LevelMap(String file) {
 		tileMap = new TileMap(file);
@@ -41,13 +43,13 @@ public class LevelMap {
 		tileMap.init();
 
 		ImageProcessor.irBack = new FloorRenderer(tileMap.getBackgroundTiles(),
-				new Vector2(ImageProcessor.getImage(FLOOR_TEXTURE_FILE).getFWidth(),
+				new Vector2f(ImageProcessor.getImage(FLOOR_TEXTURE_FILE).getFWidth(),
 						ImageProcessor.getImage(FLOOR_TEXTURE_FILE).getFHeight()),
 				LevelMap.TILE_WIDTH, TILE_WIDTH);
 
 		createWalls(tileMap.getWalls());
 		ImageProcessor.irWall = new WallsRenderer(walls,
-				new Vector2(ImageProcessor.getImage(WALLS_TEXTURE_FILE).getFWidth(),
+				new Vector2f(ImageProcessor.getImage(WALLS_TEXTURE_FILE).getFWidth(),
 						ImageProcessor.getImage(WALLS_TEXTURE_FILE).getFHeight()),
 				LevelMap.TILE_WIDTH, TILE_WIDTH);
 
@@ -75,15 +77,15 @@ public class LevelMap {
 		ImageProcessor.irWall.draw(ImageProcessor.getImage(WALLS_TEXTURE_FILE).getID());
 	}
 
-	private void createWalls(Vector2[][] walls) {
+	private void createWalls(Vector2f[][] walls) {
 		for (int y = 0; y < walls.length; y++) {
 			for (int x = 0; x < walls[0].length; x++) {
 
-				Vector2 wall = walls[x][y];
+				Vector2f wall = walls[x][y];
 				if (wall != null) {
-					if (wall.equals(new Vector2(1.0f, 2.0f))) {
+					if (wall.equals(new Vector2f(1.0f, 2.0f))) {
 						insertWall(x, y, wall.x(), wall.y());
-					} else if (wall.equals(new Vector2(1.0f, 1.0f))) {
+					} else if (wall.equals(new Vector2f(1.0f, 1.0f))) {
 						insertWater(x, y, wall.x(), wall.y());
 					}
 				}
@@ -94,7 +96,7 @@ public class LevelMap {
 	// create wall
 	private void insertWall(int x, int y, float tileMapX, float tileMapY) {
 		MapGraphics wallG;
-		wallG = new MapGraphics(ImageProcessor.getImage(WALLS_TEXTURE_FILE), new Vector2(tileMapX, tileMapY),
+		wallG = new MapGraphics(ImageProcessor.getImage(WALLS_TEXTURE_FILE), new Vector2f(tileMapX, tileMapY),
 				x * TILE_WIDTH, y * TILE_WIDTH);
 
 		createEntity(wallG, x, y);
@@ -103,7 +105,7 @@ public class LevelMap {
 	// create water
 	private void insertWater(int x, int y, float tileMapX, float tileMapY) {
 		MapGraphics wallG;
-		wallG = new MapGraphics(ImageProcessor.getImage(WALLS_TEXTURE_FILE), new Vector2(tileMapX, tileMapY + 4.0f),
+		wallG = new MapGraphics(ImageProcessor.getImage(WALLS_TEXTURE_FILE), new Vector2f(tileMapX, tileMapY + 4.0f),
 				x * TILE_WIDTH, y * TILE_WIDTH);
 		createEntity(wallG, x, y);
 	}
@@ -113,7 +115,7 @@ public class LevelMap {
 		wall.addComponent(wallG);
 		RigidCollision rigidCollision = new RigidCollision();
 		wall.addComponent(rigidCollision);
-		walls.put(new Vector2(x, y), wall);
+		walls.put(new Vector2i(x, y), wall);
 	}
 
 	// Getters
@@ -130,7 +132,7 @@ public class LevelMap {
 		return tileMap.getHeight();
 	}
 
-	public Map<Vector2, Entity> getWalls() {
+	public Map<Vector2i, Entity> getWalls() {
 		return walls;
 	}
 }

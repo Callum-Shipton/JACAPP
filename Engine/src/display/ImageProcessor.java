@@ -1,8 +1,25 @@
 package display;
 
-
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL11.GL_FALSE;
+import static org.lwjgl.opengl.GL11.GL_NO_ERROR;
+import static org.lwjgl.opengl.GL11.glGetError;
+import static org.lwjgl.opengl.GL20.GL_COMPILE_STATUS;
+import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
+import static org.lwjgl.opengl.GL20.GL_INFO_LOG_LENGTH;
+import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
+import static org.lwjgl.opengl.GL20.glAttachShader;
+import static org.lwjgl.opengl.GL20.glBindAttribLocation;
+import static org.lwjgl.opengl.GL20.glCompileShader;
+import static org.lwjgl.opengl.GL20.glCreateProgram;
+import static org.lwjgl.opengl.GL20.glCreateShader;
+import static org.lwjgl.opengl.GL20.glGetShaderInfoLog;
+import static org.lwjgl.opengl.GL20.glGetShaderi;
+import static org.lwjgl.opengl.GL20.glGetUniformLocation;
+import static org.lwjgl.opengl.GL20.glLinkProgram;
+import static org.lwjgl.opengl.GL20.glShaderSource;
+import static org.lwjgl.opengl.GL20.glUniformMatrix4fv;
+import static org.lwjgl.opengl.GL20.glUseProgram;
+import static org.lwjgl.opengl.GL20.glValidateProgram;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,9 +28,10 @@ import java.nio.FloatBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.joml.Matrix4f;
+
 import logging.Logger;
 import loop.Loop;
-import math.Matrix4;
 
 public class ImageProcessor {
 
@@ -39,7 +57,7 @@ public class ImageProcessor {
 
 	public static void initShaderUniforms() {
 
-		Matrix4 projectionMatrix = new Matrix4();
+		Matrix4f projectionMatrix = new Matrix4f();
 		projectionMatrix.clearToOrtho(0, Loop.getDisplay().getWidth(), Loop.getDisplay().getHeight(), 0, -1.0f, 1.0f);
 		FloatBuffer matrix44Buffer = projectionMatrix.toBuffer();
 
@@ -70,16 +88,17 @@ public class ImageProcessor {
 		artFiles.put(key, image);
 	}
 
-	
-	 public static void refreshRenderers() { 
-		 base.initRenderData();
-		 stat.initRenderData();
-	 
-		 if (irWall != null) irWall.bindRenderData();
-		 if (irBack != null) irBack.bindRenderData(); 
-		 if (irFore != null) irFore.bindRenderData(); 
-	 }
-	 
+	public static void refreshRenderers() {
+		base.initRenderData();
+		stat.initRenderData();
+
+		if (irWall != null)
+			irWall.bindRenderData();
+		if (irBack != null)
+			irBack.bindRenderData();
+		if (irFore != null)
+			irFore.bindRenderData();
+	}
 
 	public void init(ArtLoader artLoader) {
 

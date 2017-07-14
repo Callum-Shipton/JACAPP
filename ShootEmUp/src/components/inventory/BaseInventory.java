@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.joml.Vector2f;
+
 import components.Component;
 import components.Message;
 import components.TypeComponent;
@@ -23,7 +25,6 @@ import components.spawn.PointSpawn;
 import display.ImageProcessor;
 import entity.Entity;
 import main.ShootEmUp;
-import math.Vector2;
 import object.Armour;
 import object.DurationPotion;
 import object.InventoryItem;
@@ -189,7 +190,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 		CoinG = new AnimatedGraphics(ImageProcessor.getImage("Coin"), ImageProcessor.base, true,
 				this.BG.getX() - this.BG.getWidth(), this.BG.getY() - this.BG.getHeight());
 
-		CoinS = new PointSpawn(CoinG, new Vector2(this.BG.getX(), this.BG.getY()), item);
+		CoinS = new PointSpawn(CoinG, new Vector2f(this.BG.getX(), this.BG.getY()), item);
 		item.addComponent(CoinG);
 		CoinC = new PickupCollision(item, TypePickup.COIN, "Coin");
 		item.addComponent(CoinS);

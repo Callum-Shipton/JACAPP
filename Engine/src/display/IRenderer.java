@@ -19,25 +19,24 @@ import static org.lwjgl.opengl.GL33.glVertexAttribDivisor;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 
+import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
-
-import math.Vector2;
 
 public abstract class IRenderer extends Renderer {
 
 	protected float width;
 	protected float height;
 	protected int amount;
-	
-	protected Vector2 texMax;
-	
+
+	protected Vector2f texMax;
+
 	protected FloatBuffer verticesFloatBuffer;
 	protected ByteBuffer indicesBuffer;
 	protected FloatBuffer instanceFloatBuffer;
-	
-	public IRenderer(Vector2 texMax, float width, float height){
+
+	public IRenderer(Vector2f texMax, float width, float height) {
 		this.width = width;
 		this.height = height;
 		this.texMax = texMax;
@@ -51,22 +50,22 @@ public abstract class IRenderer extends Renderer {
 		glBindVertexArray(0);
 		glUseProgram(0);
 	}
-	
+
 	public abstract void initRenderData();
 
 	public void init() {
-		
+
 		initRenderData();
-		
+
 		createBufferData(texMax);
-		
+
 		bindRenderData();
 
 		// GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 		// GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
-	
-	private void createBufferData(Vector2 texMax){
+
+	private void createBufferData(Vector2f texMax) {
 		TexturedVertex vertices[];
 
 		TexturedVertex v0 = new TexturedVertex();
@@ -83,8 +82,7 @@ public abstract class IRenderer extends Renderer {
 		v3.setST(1.0f / texMax.x(), 1.0f / texMax.y());
 
 		vertices = new TexturedVertex[] { v0, v1, v2, v3 };
-		verticesFloatBuffer = BufferUtils.createByteBuffer(vertices.length * TexturedVertex.STRIDE)
-				.asFloatBuffer();
+		verticesFloatBuffer = BufferUtils.createByteBuffer(vertices.length * TexturedVertex.STRIDE).asFloatBuffer();
 		for (TexturedVertex vertice : vertices) {
 			// Add position, color and texture floats to the buffer
 			verticesFloatBuffer.put(vertice.getElements());
@@ -97,49 +95,46 @@ public abstract class IRenderer extends Renderer {
 		indicesBuffer.put(indices);
 		indicesBuffer.flip();
 	}
-	
-	public void bindRenderData(){
+
+	public void bindRenderData() {
 		this.VAO = glGenVertexArrays();
 		glBindVertexArray(this.VAO);
-		
+
 		this.VBO = glGenBuffers();
 		glBindBuffer(GL_ARRAY_BUFFER, this.VBO);
 		glBufferData(GL_ARRAY_BUFFER, verticesFloatBuffer, GL_STATIC_DRAW);
-		
+
 		this.EBO = glGenBuffers();
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this.EBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL_STATIC_DRAW);
-		
+
 		glVertexAttribPointer(0, TexturedVertex.POSITION_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE,
 				TexturedVertex.POSITION_BYTE_OFFSET);
 
 		glEnableVertexAttribArray(0);
 
-		
 		glVertexAttribPointer(1, TexturedVertex.TEXTURE_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE,
 				TexturedVertex.TEXTURE_BYTE_OFFSET);
 
 		glEnableVertexAttribArray(1);
-		
+
 		int IVBO = glGenBuffers();
 		glBindBuffer(GL15.GL_ARRAY_BUFFER, IVBO);
 		glBufferData(GL15.GL_ARRAY_BUFFER, instanceFloatBuffer, GL_STATIC_DRAW);
-		
-		
+
 		glVertexAttribPointer(2, TexturedVertex.POSITION_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE,
 				TexturedVertex.POSITION_BYTE_OFFSET);
-		
+
 		glEnableVertexAttribArray(2);
-		
 
 		glVertexAttribPointer(3, TexturedVertex.TEXTURE_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE,
 				TexturedVertex.TEXTURE_BYTE_OFFSET);
-		
+
 		glEnableVertexAttribArray(3);
-		
+
 		glVertexAttribDivisor(2, 1);
 		glVertexAttribDivisor(3, 1);
-		
+
 		glBindVertexArray(0);
 	}
 }

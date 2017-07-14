@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.joml.Vector2f;
 import org.lwjgl.opengl.GL20;
 
 import components.TypeComponent;
@@ -14,7 +15,6 @@ import display.ImageProcessor;
 import entity.Entity;
 import entity.EntityStorage;
 import logging.Logger;
-import math.Vector2;
 import object.EntityMap;
 
 public class Level {
@@ -140,7 +140,7 @@ public class Level {
 		}
 	}
 
-	public void removeEntity(Set<Vector2> gridPos, Entity e) {
+	public void removeEntity(Set<Vector2f> gridPos, Entity e) {
 		eMap.removeEntity(gridPos, e);
 		entityStorage.removeEntity(e);
 	}

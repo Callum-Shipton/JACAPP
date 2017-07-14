@@ -1,5 +1,7 @@
 package components.control;
 
+import org.joml.Vector2f;
+
 import components.Message;
 import components.attack.BaseAttack;
 import components.graphical.PlayerGraphics;
@@ -9,7 +11,6 @@ import components.movement.BaseMovement;
 import entity.Entity;
 import input.Keyboard;
 import loop.Loop;
-import math.Vector2;
 
 public class PlayerControl extends BaseControl {
 
@@ -32,7 +33,7 @@ public class PlayerControl extends BaseControl {
 	}
 
 	private void checkMovement(Entity e) {
-		Vector2 movement = new Vector2(0.0f, 0.0f);
+		Vector2f movement = new Vector2f(0.0f, 0.0f);
 		if ((Keyboard.getKey(Loop.getKeys().moveUp) == 1) || (Keyboard.getKey(Loop.getKeys().moveUp) == 2)) {
 			movement.add(0.0f, -1.0f);
 		}
@@ -62,7 +63,7 @@ public class PlayerControl extends BaseControl {
 	}
 
 	private void checkDirection() {
-		Vector2 dir = new Vector2(0.0f, 0.0f);
+		Vector2f dir = new Vector2f(0.0f, 0.0f);
 		if ((Keyboard.getKey(Loop.getKeys().lookUp) == 1) || (Keyboard.getKey(Loop.getKeys().lookUp) == 2)) {
 			dir.add(0.0f, -1.0f);
 		}

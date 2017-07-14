@@ -1,14 +1,14 @@
 package map;
 
-import math.Vector2;
+import org.joml.Vector2f;
 
 public class TileMap {
 
 	private int width;
 	private int height;
 
-	private Vector2[][] backgroundTiles;
-	private Vector2[][] walls;
+	private Vector2f[][] backgroundTiles;
+	private Vector2f[][] walls;
 
 	TileGenerator generator;
 
@@ -34,11 +34,11 @@ public class TileMap {
 		return width;
 	}
 
-	public Vector2[][] getWalls() {
+	public Vector2f[][] getWalls() {
 		return walls;
 	}
 
-	public Vector2[][] getBackgroundTiles() {
+	public Vector2f[][] getBackgroundTiles() {
 		return backgroundTiles;
 	}
 }

@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import org.joml.Vector2f;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -26,7 +28,6 @@ import entity.DatableObject;
 import entity.Entity;
 import logging.Logger;
 import main.ShootEmUp;
-import math.Vector2;
 
 public abstract class InventoryItem<I extends InventoryItem<?>> implements DatableObject<I>, Serializable {
 
@@ -47,7 +48,7 @@ public abstract class InventoryItem<I extends InventoryItem<?>> implements Datab
 		BaseGraphics entityG = e.getComponent(TypeComponent.GRAPHICS);
 
 		BG = new AnimatedGraphics(ImageProcessor.getImage(this.name), ImageProcessor.base, true, 1f);
-		BS = new PointSpawn(BG, new Vector2(entityG.getX() + BG.getWidth(), entityG.getY() + BG.getHeight()), item);
+		BS = new PointSpawn(BG, new Vector2f(entityG.getX() + BG.getWidth(), entityG.getY() + BG.getHeight()), item);
 		item.addComponent(BG);
 		BC = new PickupCollision(item, this.typePickup, this.name);
 		item.addComponent(BS);

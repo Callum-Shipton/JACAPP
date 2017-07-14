@@ -1,8 +1,9 @@
 package gui;
 
+import org.joml.Vector2f;
+
 import display.DPDTRenderer;
 import display.Image;
-import math.Vector2;
 
 public class HudBar extends Icon {
 
@@ -26,8 +27,8 @@ public class HudBar extends Icon {
 	@Override
 	public void render(DPDTRenderer r) {
 		for (int j = 0; j < maxValue; j++) {
-			r.draw(i, new Vector2(x + (j * 10.0f), y), size, 0.0f,
-					j >= value ? getCurrFrame() : new Vector2(type, 0.0f), maxFrame);
+			r.draw(i, new Vector2f(x + (j * 10.0f), y), size, 0.0f,
+					j >= value ? getCurrFrame() : new Vector2f(type, 0.0f), maxFrame);
 		}
 	}
 

@@ -5,15 +5,16 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.joml.Vector2f;
+
 import logging.Logger;
-import math.Vector2;
 
 public class TileGenerator {
 
 	private BufferedImage mapImage;
 
-	private Vector2[][] backgroundTiles;
-	private Vector2[][] walls;
+	private Vector2f[][] backgroundTiles;
+	private Vector2f[][] walls;
 	private int[][] backgroundTileTypes;
 	private int[][] wallTypes;
 
@@ -43,8 +44,8 @@ public class TileGenerator {
 		backgroundTileTypes = new int[width][height];
 		wallTypes = new int[width][height];
 
-		backgroundTiles = new Vector2[width][height];
-		walls = new Vector2[width][height];
+		backgroundTiles = new Vector2f[width][height];
+		walls = new Vector2f[width][height];
 	}
 
 	private void loadMap(String fileLocation) {
@@ -93,10 +94,10 @@ public class TileGenerator {
 			for (int x = 0; x < width; x++) {
 				switch (backgroundTileTypes[x][y]) {
 				case GRASS:
-					backgroundTiles[x][y] = new Vector2(0.0f, 0.0f);
+					backgroundTiles[x][y] = new Vector2f(0.0f, 0.0f);
 					break;
 				case PATH:
-					backgroundTiles[x][y] = new Vector2(1.0f, 0.0f);
+					backgroundTiles[x][y] = new Vector2f(1.0f, 0.0f);
 				}
 			}
 		}
@@ -106,20 +107,20 @@ public class TileGenerator {
 			for (int x = 0; x < width; x++) {
 				switch (wallTypes[x][y]) {
 				case WALL:
-					walls[x][y] = new Vector2(1.0f, 2.0f);
+					walls[x][y] = new Vector2f(1.0f, 2.0f);
 					break;
 				case WATER:
-					walls[x][y] = new Vector2(1.0f, 1.0f);
+					walls[x][y] = new Vector2f(1.0f, 1.0f);
 				}
 			}
 		}
 	}
 
-	public Vector2[][] getBackgroundTiles() {
+	public Vector2f[][] getBackgroundTiles() {
 		return backgroundTiles;
 	}
 
-	public Vector2[][] getWalls() {
+	public Vector2f[][] getWalls() {
 		return walls;
 	}
 

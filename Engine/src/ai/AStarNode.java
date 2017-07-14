@@ -1,26 +1,26 @@
 package ai;
 
-import math.Vector2;
+import org.joml.Vector2i;
 
 public class AStarNode implements Comparable<AStarNode> {
 
-	protected Vector2 position;
+	protected Vector2i position;
 	protected int width;
 	private AStarNode parent;
 	private AStarNode child;
-	private Vector2 goal;
+	private Vector2i goal;
 	private int parentLength = 0;
 
-	public AStarNode(Vector2 position, int width) {
+	public AStarNode(Vector2i position, int width) {
 		this.position = position;
 		this.width = width;
 	}
 
-	public AStarNode(Vector2 position, int width, AStarNode parent, Vector2 goal) {
+	public AStarNode(Vector2i position, int width, AStarNode parent, Vector2i goal) {
 		this(position, width);
 		this.parent = parent;
 		this.goal = goal;
-		parentLength = (parent == null)? 0 : parent.getParentLength() + 1;
+		parentLength = (parent == null) ? 0 : parent.getParentLength() + 1;
 	}
 
 	@Override
@@ -43,8 +43,8 @@ public class AStarNode implements Comparable<AStarNode> {
 	@Override
 	public int hashCode() {
 		int hash = 139;
-		hash = (int) ((467 * hash) + position.x());
-		hash = (int) ((467 * hash) + position.y());
+		hash = (467 * hash) + position.x();
+		hash = (467 * hash) + position.y();
 		return hash;
 	}
 
@@ -56,10 +56,10 @@ public class AStarNode implements Comparable<AStarNode> {
 		return parent;
 	}
 
-	public Vector2 getPosition() {
+	public Vector2i getPosition() {
 		return position;
 	}
-	
+
 	public int getParentLength() {
 		return parentLength;
 	}

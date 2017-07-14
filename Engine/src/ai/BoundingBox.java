@@ -2,21 +2,20 @@ package ai;
 
 import java.io.Serializable;
 
-import org.joml.Vector4f;
-
-import math.Vector2;
+import org.joml.Vector2i;
+import org.joml.Vector4i;
 
 public class BoundingBox implements Serializable {
 
 	private static final long serialVersionUID = 5905973252465625721L;
 
-	private Vector4f box;
+	private Vector4i box;
 
-	public BoundingBox(Vector4f box) {
+	public BoundingBox(Vector4i box) {
 		this.box = box;
 	}
 
-	public void addPoint(Vector2 point) {
+	public void addPoint(Vector2i point) {
 		if (point.x() < box.x()) {
 			box.setComponent(0, point.x());
 		}
@@ -31,12 +30,12 @@ public class BoundingBox implements Serializable {
 		}
 	}
 
-	public boolean boxContains(Vector2 point, int size) {
+	public boolean boxContains(Vector2i point, int size) {
 		return ((point.x() >= box.x()) && (point.x() <= box.z() + (size - 1)))
 				&& ((point.y() >= box.y()) && (point.y() <= box.w() + (size - 1)));
 	}
 
-	public Vector4f getBox() {
+	public Vector4i getBox() {
 		return box;
 	}
 

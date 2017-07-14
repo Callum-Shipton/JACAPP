@@ -1,14 +1,13 @@
 package display;
 
+import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
-
-import math.Vector2;
 
 public class FloorRenderer extends IRenderer {
 
-private Vector2[][] renderData;
+private Vector2f[][] renderData;
 	
-	public FloorRenderer(Vector2[][] renderData, Vector2 texMax, float width, float height){
+	public FloorRenderer(Vector2f[][] renderData, Vector2f texMax, float width, float height){
 		super(texMax, width, height);
 		this.renderData = renderData;
 	}

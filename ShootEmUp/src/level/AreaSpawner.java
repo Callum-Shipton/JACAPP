@@ -3,6 +3,8 @@ package level;
 import java.util.List;
 import java.util.Set;
 
+import org.joml.Vector2f;
+
 import components.TypeComponent;
 import components.collision.BaseCollision;
 import components.collision.RigidCollision;
@@ -17,7 +19,6 @@ import logging.Logger;
 import logging.Logger.Category;
 import loop.Loop;
 import main.ShootEmUp;
-import math.Vector2;
 
 public class AreaSpawner extends Spawner {
 
@@ -41,7 +42,7 @@ public class AreaSpawner extends Spawner {
 	@Override
 	protected void spawnEntity(Entity entity) {
 		BaseGraphics graphicsComponent = entity.getComponent(TypeComponent.GRAPHICS);
-		Vector2 position = getPosition(graphicsComponent.getImage());
+		Vector2f position = getPosition(graphicsComponent.getImage());
 		graphicsComponent.setX(position.x() + 10);
 		graphicsComponent.setY(position.y() + 10);
 
@@ -52,7 +53,7 @@ public class AreaSpawner extends Spawner {
 		spawnedEntities.add(entity);
 	}
 
-	private Vector2 getPosition(Image image) {
+	private Vector2f getPosition(Image image) {
 
 		boolean collide;
 		Entity test = new Entity();
@@ -107,6 +108,6 @@ public class AreaSpawner extends Spawner {
 			}
 		} while (collide);
 
-		return new Vector2(spawnX, spawnY);
+		return new Vector2f(spawnX, spawnY);
 	}
 }

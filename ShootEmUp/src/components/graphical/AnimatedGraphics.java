@@ -1,11 +1,12 @@
 package components.graphical;
 
+import org.joml.Vector2f;
+
 import components.Message;
 import display.DPDTRenderer;
 import display.Image;
 import display.Renderer;
 import entity.Entity;
-import math.Vector2;
 
 public class AnimatedGraphics extends BaseGraphics {
 
@@ -56,9 +57,9 @@ public class AnimatedGraphics extends BaseGraphics {
 
 	@Override
 	public void render(Entity e) {
-		((DPDTRenderer) this.r).draw(this.image, new Vector2(getX(), getY()), new Vector2(getWidth(), getHeight()),
-				0.0f, new Vector2(this.animID / this.animTime, getDirection()),
-				new Vector2(this.image.getFWidth(), this.image.getFHeight()));
+		((DPDTRenderer) this.r).draw(this.image, new Vector2f(getX(), getY()), new Vector2f(getWidth(), getHeight()),
+				0.0f, new Vector2f(this.animID / this.animTime, getDirection()),
+				new Vector2f(this.image.getFWidth(), this.image.getFHeight()));
 	}
 
 	public void setAnimating(boolean animating) {

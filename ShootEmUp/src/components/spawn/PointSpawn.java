@@ -1,16 +1,17 @@
 package components.spawn;
 
+import org.joml.Vector2f;
+
 import components.Message;
 import components.graphical.BaseGraphics;
 import entity.Entity;
-import math.Vector2;
 
 public class PointSpawn extends BaseSpawn implements SpawnComponent {
 
-	private Vector2 spawnLoc = new Vector2(480.0f, 480.0f);
+	private Vector2f spawnLoc = new Vector2f(480.0f, 480.0f);
 	private BaseGraphics BG;
 
-	public PointSpawn(BaseGraphics BG, Vector2 spawnLoc, Entity e) {
+	public PointSpawn(BaseGraphics BG, Vector2f spawnLoc, Entity e) {
 		this.BG = BG;
 		this.spawnLoc = spawnLoc;
 		spawn(e);

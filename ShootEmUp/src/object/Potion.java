@@ -2,6 +2,8 @@ package object;
 
 import java.io.Serializable;
 
+import org.joml.Vector2f;
+
 import components.TypeComponent;
 import components.collision.PickupCollision;
 import components.graphical.AnimatedGraphics;
@@ -11,7 +13,6 @@ import components.spawn.PointSpawn;
 import display.ImageProcessor;
 import entity.Entity;
 import main.ShootEmUp;
-import math.Vector2;
 
 public abstract class Potion implements Serializable {
 
@@ -40,7 +41,7 @@ public abstract class Potion implements Serializable {
 		BaseGraphics EntityG = e.getComponent(TypeComponent.GRAPHICS);
 
 		BG = new AnimatedGraphics(ImageProcessor.getImage(this.type), ImageProcessor.base, true, 1f);
-		BS = new PointSpawn(BG, new Vector2(EntityG.getX() + BG.getWidth(), EntityG.getY()), item);
+		BS = new PointSpawn(BG, new Vector2f(EntityG.getX() + BG.getWidth(), EntityG.getY()), item);
 		item.addComponent(BG);
 		BC = new PickupCollision(item, TypePickup.POTION, this.type);
 		item.addComponent(BS);

@@ -2,6 +2,8 @@ package gui;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.joml.Vector2f;
+
 import components.TypeComponent;
 import components.attack.PlayerAttack;
 import components.inventory.BaseInventory;
@@ -11,7 +13,6 @@ import display.DPDTRenderer;
 import display.ImageProcessor;
 import entity.Entity;
 import loop.Loop;
-import math.Vector2;
 
 public class Hud extends GuiComponent {
 
@@ -97,22 +98,22 @@ public class Hud extends GuiComponent {
 			frost.render(r);
 		}
 
-		Vector2 size = new Vector2(16, 16);
-		Vector2 maxTex = new Vector2(10, 1);
+		Vector2f size = new Vector2f(16, 16);
+		Vector2f maxTex = new Vector2f(10, 1);
 
 		int hPot = PI.getNumPotion(TypePotion.HEALTH);
 		int mPot = PI.getNumPotion(TypePotion.MANA);
 		int sPot = PI.getNumPotion(TypePotion.SPEED);
 		int kPot = PI.getNumPotion(TypePotion.KNOCKBACK);
 
-		r.draw(ImageProcessor.getImage("Numbers"), new Vector2(26, Loop.getDisplay().getHeight() - 55), size, 0.0f,
-				new Vector2(hPot, 1), maxTex);
-		r.draw(ImageProcessor.getImage("Numbers"), new Vector2(70, Loop.getDisplay().getHeight() - 55), size, 0.0f,
-				new Vector2(mPot, 1), maxTex);
-		r.draw(ImageProcessor.getImage("Numbers"), new Vector2(114, Loop.getDisplay().getHeight() - 55), size, 0.0f,
-				new Vector2(sPot, 1), maxTex);
-		r.draw(ImageProcessor.getImage("Numbers"), new Vector2(159, Loop.getDisplay().getHeight() - 55), size, 0.0f,
-				new Vector2(kPot, 1), maxTex);
+		r.draw(ImageProcessor.getImage("Numbers"), new Vector2f(26, Loop.getDisplay().getHeight() - 55), size, 0.0f,
+				new Vector2f(hPot, 1), maxTex);
+		r.draw(ImageProcessor.getImage("Numbers"), new Vector2f(70, Loop.getDisplay().getHeight() - 55), size, 0.0f,
+				new Vector2f(mPot, 1), maxTex);
+		r.draw(ImageProcessor.getImage("Numbers"), new Vector2f(114, Loop.getDisplay().getHeight() - 55), size, 0.0f,
+				new Vector2f(sPot, 1), maxTex);
+		r.draw(ImageProcessor.getImage("Numbers"), new Vector2f(159, Loop.getDisplay().getHeight() - 55), size, 0.0f,
+				new Vector2f(kPot, 1), maxTex);
 	}
 
 	@Override

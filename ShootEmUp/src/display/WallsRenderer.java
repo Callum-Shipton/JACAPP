@@ -4,18 +4,19 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.joml.Vector2f;
+import org.joml.Vector2i;
 import org.lwjgl.BufferUtils;
 
 import components.TypeComponent;
 import components.graphical.MapGraphics;
 import entity.Entity;
-import math.Vector2;
 
 public class WallsRenderer extends IRenderer {
 
-	private Map<Vector2, Entity> renderData;
+	private Map<Vector2i, Entity> renderData;
 	
-	public WallsRenderer(Map<Vector2,Entity> renderData, Vector2 texMax, float width, float height){
+	public WallsRenderer(Map<Vector2i, Entity> renderData, Vector2f texMax, float width, float height){
 		super(texMax, width, height);
 		this.renderData = renderData;
 	}
@@ -28,12 +29,12 @@ public class WallsRenderer extends IRenderer {
 
 		float[] texture = new float[2];
 		float[] translation = new float[2];
-		Iterator<Entry<Vector2, Entity>> iterator = renderData.entrySet().iterator();
+		Iterator<Entry<Vector2i, Entity>> iterator = renderData.entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entity wall = iterator.next().getValue();
 			MapGraphics MG = wall.getComponent(TypeComponent.GRAPHICS);
-			Vector2 textured = MG.getMapPos();
-			Vector2 pos = new Vector2(MG.getX(), MG.getY());
+			Vector2f textured = MG.getMapPos();
+			Vector2f pos = new Vector2f(MG.getX(), MG.getY());
 			texture[0] = textured.x() / texMax.x();
 			texture[1] = textured.y() / texMax.y();
 			translation[0] = pos.x();
