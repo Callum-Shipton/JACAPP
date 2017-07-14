@@ -22,7 +22,7 @@ public class Keyboard {
 		return keys[key];
 	}
 
-	public static void keyCheck(long window) {
+	public static void init(long window) {
 		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
 
 			@Override

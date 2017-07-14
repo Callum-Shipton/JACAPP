@@ -142,7 +142,7 @@ public class Display {
 		cam = new Camera(width, height);
 
 		// Initialise key handling
-		Keyboard.keyCheck(this.window);
+
 	}
 
 	public void setHeight(int height) {
@@ -185,7 +185,7 @@ public class Display {
 		this.window = newWindow;
 		initGL();
 		cam = new Camera(width, height);
-		Keyboard.keyCheck(this.window);
+		Keyboard.init(this.window);
 		ImageProcessor.initShaderUniforms();
 		ImageProcessor.refreshRenderers();
 		/*
