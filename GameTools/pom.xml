@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>GameTools</groupId>
+  <artifactId>GameTools</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>JACAPP Game Tools</name>
+  <description>The legendary JACAPP dev tools that power that development of the critically acclaimed TSS ShootEmUp</description>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.1</version>
+        <configuration>
+          <source/>
+          <target/>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <properties>
+	<maven.compiler.source>1.8</maven.compiler.source>
+	<maven.compiler.target>1.8</maven.compiler.target>
+	<joml.version>1.9.3</joml.version>
+  </properties>
+  <dependencies>
+  	<dependency>
+		<groupId>org.joml</groupId>
+		<artifactId>joml</artifactId>
+		<version>${joml.version}</version>
+	</dependency>
+  </dependencies>
+</project>

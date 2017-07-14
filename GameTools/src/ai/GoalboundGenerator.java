@@ -19,6 +19,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
+import org.joml.Vector4f;
+
 import logging.Logger;
 import math.Vector2;
 
@@ -29,8 +31,8 @@ public class GoalboundGenerator {
 	private Set<Vector2> walls;
 
 	private static final int MAXIMUM_SIZE = 4;
-	private static final String IN_MAP_FILE = "/Levels/Level3.png";
-	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level3.bound";
+	private static final String IN_MAP_FILE = "/Levels/Level1.png";
+	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level1.bound";
 
 	private static final int BROWNWALL_COLOR = -7864299;
 	private static final int GREYWALL_COLOR = -8421505;
