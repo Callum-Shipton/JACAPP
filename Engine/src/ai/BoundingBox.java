@@ -43,7 +43,20 @@ public class BoundingBox implements Serializable {
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof BoundingBox) {
-			return ((BoundingBox) o).getBox().equals(box);
+			Vector4f box2 = ((BoundingBox) o).getBox();
+			if (Float.compare(box.getX(), box2.getX()) != 0) {
+				return false;
+			}
+			if (Float.compare(box.getY(), box2.getY()) != 0) {
+				return false;
+			}
+			if (Float.compare(box.getZ(), box2.getZ()) != 0) {
+				return false;
+			}
+			if (Float.compare(box.getW(), box2.getW()) != 0) {
+				return false;
+			}
+			return true;
 		}
 		return false;
 	}
