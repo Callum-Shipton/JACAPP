@@ -1,11 +1,12 @@
 package components.graphical;
 
+import org.lwjgl.util.vector.Vector4f;
+
 import components.Component;
 import components.TypeComponent;
 import display.Image;
 import display.Renderer;
 import entity.Entity;
-import math.Vector4;
 
 public abstract class BaseGraphics extends Component implements GraphicsComponent {
 
@@ -71,9 +72,9 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 	public void setY(float y) {
 		this.y = y;
 	}
-	
-	public Vector4 getBox() {
-		return new Vector4(x,y,width,height);
+
+	public Vector4f getBox() {
+		return new Vector4f(x, y, width, height);
 	}
 
 	@Override

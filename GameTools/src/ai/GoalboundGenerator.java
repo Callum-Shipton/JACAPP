@@ -21,7 +21,6 @@ import javax.imageio.ImageIO;
 
 import logging.Logger;
 import math.Vector2;
-import math.Vector4;
 
 public class GoalboundGenerator {
 
@@ -44,15 +43,11 @@ public class GoalboundGenerator {
 	public GoalboundGenerator() {
 		loadMap(IN_MAP_FILE);
 		goalboundingMaps = new ConcurrentHashMap<>();
-		
 
-		
 		for (int i = 1; i <= MAXIMUM_SIZE; i++) {
-			goalboundingMaps.put(i, new GoalboundingTile[mapImage.getWidth()][mapImage.getHeight()]);	
+			goalboundingMaps.put(i, new GoalboundingTile[mapImage.getWidth()][mapImage.getHeight()]);
 		}
 	}
-	
-	
 
 	public static void main(String[] args) throws InterruptedException {
 		GoalboundGenerator generator = new GoalboundGenerator();
@@ -156,7 +151,7 @@ public class GoalboundGenerator {
 		Map<String, BoundingBox> boxes = new HashMap<>();
 
 		for (TypeNode node : childNodes) {
-			boxes.put(node.getType(), new BoundingBox(new Vector4(node.getPosition().x(), node.getPosition().y(),
+			boxes.put(node.getType(), new BoundingBox(new Vector4f(node.getPosition().x(), node.getPosition().y(),
 					node.getPosition().x(), node.getPosition().y())));
 		}
 		return boxes;
@@ -188,35 +183,39 @@ public class GoalboundGenerator {
 
 	private void createGoalBoundingBoxes(int mapWidth, int mapHeight) throws InterruptedException {
 		int threads = Runtime.getRuntime().availableProcessors();
-		
-		ExecutorService pool = 
-			    Executors.newFixedThreadPool(threads);
+
+		ExecutorService pool = Executors.newFixedThreadPool(threads);
 		for (int size = 1; size <= MAXIMUM_SIZE; size++) {
 
 			for (int x = 0; x < mapWidth; x++) {
 				for (int y = 0; y < mapHeight; y++) {
-					pool.execute(new OneShotTask(size,x,y));
-					
+					pool.execute(new OneShotTask(size, x, y));
+
 				}
 				Logger.info("Layer " + (x + 1) + " of " + mapWidth + " completed");
 			}
 			Logger.info("Size " + size + " completed");
 		}
-		
+
 		pool.shutdown();
-		 
-		// Blocks until all tasks have completed execution after a shutdown request
+
+		// Blocks until all tasks have completed execution after a shutdown
+		// request
 		pool.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
 		Logger.info("All goalbounds Created");
 	}
 
 	class OneShotTask implements Runnable {
-        int size;
-        int x;
-        int y;
-        OneShotTask(int size,int x,int y) { this.size = size;
-        this.x = x;
-        this.y = y;}
+		int size;
+		int x;
+		int y;
+
+		OneShotTask(int size, int x, int y) {
+			this.size = size;
+			this.x = x;
+			this.y = y;
+		}
+
 		@Override
 		public void run() {
 			if (!containsWall(new Vector2(x, y), size, walls)) {
@@ -241,11 +240,11 @@ public class GoalboundGenerator {
 				fillMap(open, closed, boxes, size);
 
 				goalboundingMaps.get(size)[x][y] = new GoalboundingTile(boxes);
-				
+
 			}
 		}
 	}
-	
+
 	private static boolean containsWall(Vector2 position, int size, Set<Vector2> walls) {
 		for (int i = (int) position.x(); i < position.x() + size; i++) {
 			for (int j = (int) position.y(); j < position.y() + size; j++) {

@@ -2,6 +2,8 @@ package components.movement;
 
 import java.util.Set;
 
+import org.lwjgl.util.vector.Vector4f;
+
 import components.TypeComponent;
 import components.collision.BaseCollision;
 import components.collision.HitCollision;
@@ -9,7 +11,7 @@ import components.graphical.BaseGraphics;
 import entity.Entity;
 import main.ShootEmUp;
 import math.Vector2;
-import math.Vector4;
+import math.VectorMath;
 import object.EntityMap;
 
 public class BasicMovement extends BaseMovement {
@@ -23,7 +25,7 @@ public class BasicMovement extends BaseMovement {
 		this.realSpeed = speed;
 	}
 
-	private Set<Vector2> reactToCollision(Vector4 collVec, Entity hitEntity, Entity currentEntity, Axis axis,
+	private Set<Vector2> reactToCollision(Vector4f collVec, Entity hitEntity, Entity currentEntity, Axis axis,
 			EntityMap eMap) {
 		Set<Vector2> newGrid = eMap.getGridPos(currentEntity);
 		BaseCollision HC = hitEntity.getComponent(TypeComponent.COLLISION);
@@ -53,7 +55,7 @@ public class BasicMovement extends BaseMovement {
 		boolean collide = false;
 		Set<Vector2> newGrid = eMap.getGridPos(currentEntity);
 		Set<Entity> entities = eMap.getEntites(newGrid);
-		Vector4 collVec;
+		Vector4f collVec;
 
 		for (Entity entity : entities) {
 			if (!entity.equals(currentEntity)) {
@@ -74,23 +76,23 @@ public class BasicMovement extends BaseMovement {
 	}
 
 	@Override
-	public Vector4 collideFunction(BaseGraphics BG, float x, float y) {
+	public Vector4f collideFunction(BaseGraphics BG, float x, float y) {
 		if (((x >= BG.getX()) && (x <= (BG.getX() + BG.getWidth())))
 				&& ((y >= BG.getY()) && (y <= (BG.getY() + BG.getHeight())))) {
-			return new Vector4(x - BG.getX(), y - BG.getY(), x - (BG.getX() + BG.getWidth()),
+			return new Vector4f(x - BG.getX(), y - BG.getY(), x - (BG.getX() + BG.getWidth()),
 					y - (BG.getY() + BG.getHeight()));
 		}
 		return null;
 	}
 
 	@Override
-	public Vector4 doesCollide(Entity moving, Entity checked) {
-		Vector4 mov = baseGraphics.getBox();
-		
-		BaseGraphics CG = checked.getComponent(TypeComponent.GRAPHICS);
-		Vector4 check = CG.getBox();
+	public Vector4f doesCollide(Entity moving, Entity checked) {
+		Vector4f mov = baseGraphics.getBox();
 
-		return mov.contains(check);
+		BaseGraphics CG = checked.getComponent(TypeComponent.GRAPHICS);
+		Vector4f check = CG.getBox();
+
+		return VectorMath.contains(mov, check);
 
 	}
 
@@ -107,19 +109,19 @@ public class BasicMovement extends BaseMovement {
 		}
 	}
 
-	public void moveBackX(Vector4 collVec) {
-		if (Math.abs(collVec.x()) <= speed) {
-			baseGraphics.setX(baseGraphics.getX() - collVec.x());
-		} else if (Math.abs(collVec.z()) <= speed) {
-			baseGraphics.setX(baseGraphics.getX() - collVec.z());
+	public void moveBackX(Vector4f collVec) {
+		if (Math.abs(collVec.getX()) <= speed) {
+			baseGraphics.setX(baseGraphics.getX() - collVec.getX());
+		} else if (Math.abs(collVec.getZ()) <= speed) {
+			baseGraphics.setX(baseGraphics.getX() - collVec.getZ());
 		}
 	}
 
-	public void moveBackY(Vector4 collVec) {
-		if (Math.abs(collVec.y()) <= speed) {
-			baseGraphics.setY(baseGraphics.getY() - collVec.y());
-		} else if (Math.abs(collVec.w()) <= speed) {
-			baseGraphics.setY(baseGraphics.getY() - collVec.w());
+	public void moveBackY(Vector4f collVec) {
+		if (Math.abs(collVec.getY()) <= speed) {
+			baseGraphics.setY(baseGraphics.getY() - collVec.getY());
+		} else if (Math.abs(collVec.getW()) <= speed) {
+			baseGraphics.setY(baseGraphics.getY() - collVec.getW());
 		}
 	}
 

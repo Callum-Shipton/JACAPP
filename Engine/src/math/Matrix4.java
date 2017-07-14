@@ -4,6 +4,7 @@ import java.nio.FloatBuffer;
 import java.util.Arrays;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.util.vector.Vector4f;
 
 public class Matrix4 {
 
@@ -76,8 +77,8 @@ public class Matrix4 {
 		return this.matrix[index];
 	}
 
-	public Vector4 getColumn(int index) {
-		return new Vector4(get((index * 4) + 0), get((index * 4) + 1), get((index * 4) + 2), get((index * 4) + 3));
+	public Vector4f getColumn(int index) {
+		return new Vector4f(get((index * 4) + 0), get((index * 4) + 1), get((index * 4) + 2), get((index * 4) + 3));
 	}
 
 	public Matrix4 inverse() {
@@ -149,13 +150,13 @@ public class Matrix4 {
 		return mult(m.matrix);
 	}
 
-	public Vector4 mult(Vector4 vec) {
-		Vector4 v = new Vector4();
+	public Vector4f mult(Vector4f vec) {
+		Vector4f v = new Vector4f();
 
-		v.x((get(0) * vec.x()) + (get(4) * vec.y()) + (get(8) * vec.z()) + (get(12) * vec.w()));
-		v.y((get(1) * vec.x()) + (get(5) * vec.y()) + (get(9) * vec.z()) + (get(13) * vec.w()));
-		v.z((get(2) * vec.x()) + (get(6) * vec.y()) + (get(10) * vec.z()) + (get(14) * vec.w()));
-		v.w((get(3) * vec.x()) + (get(7) * vec.y()) + (get(11) * vec.z()) + (get(15) * vec.w()));
+		v.setX((get(0) * vec.getX()) + (get(4) * vec.getY()) + (get(8) * vec.getZ()) + (get(12) * vec.getW()));
+		v.setY((get(1) * vec.getX()) + (get(5) * vec.getY()) + (get(9) * vec.getZ()) + (get(13) * vec.getW()));
+		v.setZ((get(2) * vec.getX()) + (get(6) * vec.getY()) + (get(10) * vec.getZ()) + (get(14) * vec.getW()));
+		v.setW((get(3) * vec.getX()) + (get(7) * vec.getY()) + (get(11) * vec.getZ()) + (get(15) * vec.getW()));
 
 		return v;
 	}
@@ -180,11 +181,11 @@ public class Matrix4 {
 		return this;
 	}
 
-	public Matrix4 putColumn(int index, Vector4 v) {
-		put((index * 4) + 0, v.x());
-		put((index * 4) + 1, v.y());
-		put((index * 4) + 2, v.z());
-		put((index * 4) + 3, v.z());
+	public Matrix4 putColumn(int index, Vector4f v) {
+		put((index * 4) + 0, v.getX());
+		put((index * 4) + 1, v.getY());
+		put((index * 4) + 2, v.getZ());
+		put((index * 4) + 3, v.getW());
 		return this;
 	}
 

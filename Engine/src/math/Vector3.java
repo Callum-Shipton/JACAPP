@@ -34,10 +34,6 @@ public class Vector3 implements Vector<Vector3> {
 		set(vec);
 	}
 
-	public Vector3(Vector4 vec) {
-		set(vec);
-	}
-
 	public Vector3 add(float x, float y, float z) {
 		this.x += x;
 		this.y += y;
@@ -153,10 +149,6 @@ public class Vector3 implements Vector<Vector3> {
 
 	public Vector3 set(Vector3 vec) {
 		return set(vec.x, vec.y, vec.z);
-	}
-
-	public Vector3 set(Vector4 vec) {
-		return set(vec.x(), vec.y(), vec.z());
 	}
 
 	public Vector3 sub(float x, float y, float z) {
