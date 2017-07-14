@@ -2,7 +2,7 @@ package ai;
 
 import java.io.Serializable;
 
-import org.lwjgl.util.vector.Vector4f;
+import org.joml.Vector4f;
 
 import math.Vector2;
 
@@ -17,23 +17,23 @@ public class BoundingBox implements Serializable {
 	}
 
 	public void addPoint(Vector2 point) {
-		if (point.x() < box.getX()) {
-			box.setX(point.x());
+		if (point.x() < box.x()) {
+			box.setComponent(0, point.x());
 		}
-		if (point.y() < box.getY()) {
-			box.setY(point.y());
+		if (point.y() < box.y()) {
+			box.setComponent(1, point.y());
 		}
-		if (point.x() > box.getZ()) {
-			box.setZ(point.x());
+		if (point.x() > box.z()) {
+			box.setComponent(2, point.x());
 		}
-		if (point.y() > box.getW()) {
-			box.setW(point.y());
+		if (point.y() > box.w()) {
+			box.setComponent(3, point.y());
 		}
 	}
 
 	public boolean boxContains(Vector2 point, int size) {
-		return ((point.x() >= box.getX()) && (point.x() <= box.getZ() + (size - 1)))
-				&& ((point.y() >= box.getY()) && (point.y() <= box.getW() + (size - 1)));
+		return ((point.x() >= box.x()) && (point.x() <= box.z() + (size - 1)))
+				&& ((point.y() >= box.y()) && (point.y() <= box.w() + (size - 1)));
 	}
 
 	public Vector4f getBox() {
@@ -43,20 +43,7 @@ public class BoundingBox implements Serializable {
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof BoundingBox) {
-			Vector4f box2 = ((BoundingBox) o).getBox();
-			if (Float.compare(box.getX(), box2.getX()) != 0) {
-				return false;
-			}
-			if (Float.compare(box.getY(), box2.getY()) != 0) {
-				return false;
-			}
-			if (Float.compare(box.getZ(), box2.getZ()) != 0) {
-				return false;
-			}
-			if (Float.compare(box.getW(), box2.getW()) != 0) {
-				return false;
-			}
-			return true;
+			return ((BoundingBox) o).getBox().equals(box);
 		}
 		return false;
 	}

@@ -2,7 +2,7 @@ package components.movement;
 
 import java.util.Set;
 
-import org.lwjgl.util.vector.Vector4f;
+import org.joml.Vector4f;
 
 import components.TypeComponent;
 import components.collision.BaseCollision;
@@ -110,18 +110,18 @@ public class BasicMovement extends BaseMovement {
 	}
 
 	public void moveBackX(Vector4f collVec) {
-		if (Math.abs(collVec.getX()) <= speed) {
-			baseGraphics.setX(baseGraphics.getX() - collVec.getX());
-		} else if (Math.abs(collVec.getZ()) <= speed) {
-			baseGraphics.setX(baseGraphics.getX() - collVec.getZ());
+		if (Math.abs(collVec.x()) <= speed) {
+			baseGraphics.setX(baseGraphics.getX() - collVec.x());
+		} else if (Math.abs(collVec.z()) <= speed) {
+			baseGraphics.setX(baseGraphics.getX() - collVec.z());
 		}
 	}
 
 	public void moveBackY(Vector4f collVec) {
-		if (Math.abs(collVec.getY()) <= speed) {
-			baseGraphics.setY(baseGraphics.getY() - collVec.getY());
-		} else if (Math.abs(collVec.getW()) <= speed) {
-			baseGraphics.setY(baseGraphics.getY() - collVec.getW());
+		if (Math.abs(collVec.y()) <= speed) {
+			baseGraphics.setY(baseGraphics.getY() - collVec.y());
+		} else if (Math.abs(collVec.w()) <= speed) {
+			baseGraphics.setY(baseGraphics.getY() - collVec.w());
 		}
 	}
 

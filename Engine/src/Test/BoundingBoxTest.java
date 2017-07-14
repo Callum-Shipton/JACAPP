@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.joml.Vector4f;
 import org.junit.Test;
-import org.lwjgl.util.vector.Vector4f;
 
 import ai.BoundingBox;
 import math.Vector2;

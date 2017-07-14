@@ -1,6 +1,6 @@
 package math;
 
-import org.lwjgl.util.vector.Vector4f;
+import org.joml.Vector4f;
 
 public class VectorMath {
 	public static Vector4f contains(Vector4f vec1, Vector4f vec2) {

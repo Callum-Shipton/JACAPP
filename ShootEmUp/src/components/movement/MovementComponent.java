@@ -1,6 +1,6 @@
 package components.movement;
 
-import org.lwjgl.util.vector.Vector4f;
+import org.joml.Vector4f;
 
 import components.graphical.BaseGraphics;
 import entity.Entity;

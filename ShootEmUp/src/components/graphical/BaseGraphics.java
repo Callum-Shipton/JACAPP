@@ -1,6 +1,6 @@
 package components.graphical;
 
-import org.lwjgl.util.vector.Vector4f;
+import org.joml.Vector4f;
 
 import components.Component;
 import components.TypeComponent;
