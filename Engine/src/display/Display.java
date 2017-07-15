@@ -92,6 +92,8 @@ public class Display {
 				glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden after creation
 				glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
 
+				monitor = glfwGetPrimaryMonitor();
+				
 				// Create the window
 				window = glfwCreateWindow(width, height, "THE MAZE", NULL, NULL);
 				if ( window == NULL )
@@ -106,7 +108,7 @@ public class Display {
 					glfwGetWindowSize(window, pWidth, pHeight);
 
 					// Get the resolution of the primary monitor
-					vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+					vidmode = glfwGetVideoMode(monitor);
 
 					// Center the window
 					glfwSetWindowPos(
@@ -167,7 +169,7 @@ public class Display {
 			// vm.getHeight());
 			this.width = vidmode.width();
 			this.height = vidmode.height();
-			newWindow = glfwCreateWindow(this.width, this.height, "THE MAZE", this.monitor, this.window);
+			newWindow = glfwCreateWindow(this.width, this.height, "THE MAZE", monitor, this.window);
 			if (newWindow == NULL) {
 				throw new RuntimeException("Failed to create the GLFW window");
 			}
