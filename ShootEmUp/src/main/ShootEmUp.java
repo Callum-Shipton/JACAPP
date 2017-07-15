@@ -59,6 +59,7 @@ public class ShootEmUp implements Game {
 				game.getHud().resetHud();
 			}
 			menuSystem.resetMenus();
+			Keyboard.setKey(Loop.getKeys().fullscreen);
 		}
 
 		if (!menuSystem.isMainMenu() && Keyboard.getKey(Loop.getKeys().pause) == 1) {
