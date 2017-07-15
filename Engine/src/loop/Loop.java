@@ -59,6 +59,7 @@ public final class Loop {
 			// Release window and window callbacks Terminate GLFW and release
 			// the GLFWerrorfun
 			Keyboard.destroy();
+			Controllers.destroy();
 			display.destroyGLFW();
 			game.destroy();
 		}

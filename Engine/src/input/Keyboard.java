@@ -1,9 +1,11 @@
 package input;
 
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
 import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 import static org.lwjgl.glfw.GLFW.GLFW_REPEAT;
 import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
+import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
 
 import org.lwjgl.glfw.GLFWKeyCallback;
 
@@ -32,6 +34,10 @@ public class Keyboard {
 			// for everything that
 			// needs input handling.
 			public void invoke(long window, int key, int scancode, int action, int mods) {
+				
+				if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
+					glfwSetWindowShouldClose(window, true);
+				
 				if ((key >= 0) && (key < keys.length)) {
 					if (action == GLFW_REPEAT) {
 						keys[key] = 2;

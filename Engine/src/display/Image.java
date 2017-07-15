@@ -24,6 +24,7 @@ import java.nio.IntBuffer;
 
 import org.lwjgl.system.MemoryStack;
 
+import io.FileManager;
 import logging.Logger;
 
 public class Image {
@@ -70,17 +71,23 @@ public class Image {
 	public ByteBuffer byteBuffer() {
 
         try (MemoryStack stack = MemoryStack.stackPush()) {
+        	
+        	ByteBuffer imageBuffer;
+            try {
+                imageBuffer = FileManager.ioResourceToByteBuffer(file, 8 * 1024);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        	
             /* Prepare image buffers */
             IntBuffer w = stack.mallocInt(1);
             IntBuffer h = stack.mallocInt(1);
             IntBuffer comp = stack.mallocInt(1);
 
-            /* Load image */
-           // stbi_set_flip_vertically_on_load(true);
-            buf = stbi_load("res/"+file, w, h, comp, 4);
+            // Decode the image
+            buf = stbi_load_from_memory(imageBuffer, w, h, comp, 4);
             if (buf == null) {
-                throw new RuntimeException("Failed to load a texture file!"
-                                           + System.lineSeparator() + stbi_failure_reason());
+                throw new RuntimeException("Failed to load image: " + stbi_failure_reason());
             }
 
             /* Get width and height of image */

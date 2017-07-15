@@ -1,5 +1,7 @@
 package audio.music;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
@@ -8,7 +10,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.*;
 import org.lwjgl.system.MemoryStack;
 
-import audio.WaveData;
+import io.FileManager;
 
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
@@ -138,8 +140,8 @@ public class BackgroundMusic {
 	int loadALData() {
 		
 		
-		String main = "res/Music/Main.ogg";
-		String menu = "res/Music/Menu.ogg";
+		String main = "/Music/Main.ogg";
+		String menu = "/Music/Menu.ogg";
 		
 		loadAudioFile(main,MAIN);
 		loadAudioFile(menu,MENU);
@@ -159,7 +161,15 @@ public class BackgroundMusic {
 				IntBuffer channelsBuffer = stackMallocInt(1);
 				IntBuffer sampleRateBuffer = stackMallocInt(1);
 
-				ShortBuffer rawAudioBuffer = stb_vorbis_decode_filename(file, channelsBuffer, sampleRateBuffer);
+				ByteBuffer buf;
+	            try {
+	                buf = FileManager.ioResourceToByteBuffer(file, 4 * 1024 * 1024);
+	            } catch (IOException e) {
+	                throw new RuntimeException(e);
+	            }
+				
+				
+				ShortBuffer rawAudioBuffer = stb_vorbis_decode_memory(buf, channelsBuffer, sampleRateBuffer);
 				
 				if (rawAudioBuffer == null) {
 	               throw new RuntimeException("Failed to load a music file!");
