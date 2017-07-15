@@ -150,46 +150,21 @@ public class Display {
 	}
 
 	public void toggleFullscreen() {
-		long newWindow;
-		
-		if (this.fullscreen) {
-			// ShootEmUp.menuStack.peek().reset(width, height, 1024, 512);
-			this.width = INITIAL_SCREEN_WIDTH;
-			this.height = INITIAL_SCREEN_HEIGHT;
-			newWindow = glfwCreateWindow(this.width, this.height, "THE MAZE", NULL, this.window);
-			if (newWindow == NULL) {
-				throw new RuntimeException("Failed to create the NEW GLFW window");
-			}
-			
-			// Center our window
-			glfwSetWindowPos(newWindow, (vidmode.width() - this.width) / 2,
-					(vidmode.height() - this.height) / 2);
-		} else {
-			// ShootEmUp.menuStack.peek().reset(width, height, vm.getWidth(),
-			// vm.getHeight());
-			this.width = vidmode.width();
-			this.height = vidmode.height();
-			newWindow = glfwCreateWindow(this.width, this.height, "THE MAZE", monitor, this.window);
-			if (newWindow == NULL) {
-				throw new RuntimeException("Failed to create the GLFW window");
-			}
+		if(fullscreen) {
+			width = INITIAL_SCREEN_WIDTH;
+			height = INITIAL_SCREEN_HEIGHT;
+			glfwSetWindowMonitor(window,NULL,(vidmode.width()-width)/2,(vidmode.height()-height)/2,width,height,60);
 		}
-		glfwMakeContextCurrent(newWindow);
+		else {
+			width = vidmode.width();
+			height = vidmode.height();
+			glfwSetWindowMonitor(window,monitor,(vidmode.width()-width)/2,(vidmode.height()-height)/2,width,height,60);
+		}
+		fullscreen = !fullscreen;
 		glfwSwapInterval(1);
-		glfwShowWindow(newWindow);
-		glfwDestroyWindow(this.window);
-		this.window = newWindow;
-		initGL();
-		cam = new Camera(width, height);
-		Keyboard.init(this.window);
+		glViewport(0, 0, this.width, this.height);
+		cam.updateCameraSize(width, height);;
 		ImageProcessor.initShaderUniforms();
-		ImageProcessor.refreshRenderers();
-		/*
-		 * if (ShootEmUp.getCurrentLevel() != null) { PlayerGraphics BG =
-		 * ShootEmUp.getPlayer().getComponent(TypeComponent.GRAPHICS);
-		 * BG.scrollScreen(); }
-		 */
-		this.fullscreen = !this.fullscreen;
 	}
 
 	public void update() {
