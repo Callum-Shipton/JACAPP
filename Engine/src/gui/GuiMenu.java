@@ -37,10 +37,6 @@ public abstract class GuiMenu {
 		this.fullscreen = fullscreen;
 	}
 
-	public void buttonPressed(MenuButton button) {
-
-	}
-
 	public void render() {
 		if (fullscreen) {
 			ImageProcessor.stat.draw(menuImage, new Vector2f(x, y),

@@ -13,10 +13,8 @@ public abstract class PauseMenu extends GuiMenu {
 
 	public PauseMenu(Image menuImage) {
 		super(menuImage, false);
-
-		resetMenu();
 	}
-
+	
 	@Override
 	public void resetMenu() {
 		menuItems.clear();
@@ -27,13 +25,13 @@ public abstract class PauseMenu extends GuiMenu {
 		tabs.addMenuItem(new MenuButton(ImageProcessor.getImage("InvButton"), 0, 0,
 				new OpenMenuButton(new InventoryMenu(ImageProcessor.getImage("InventoryScreen")))));
 		tabs.addMenuItem(new MenuButton(ImageProcessor.getImage("SkillButton"), 0, 0,
-				new OpenMenuButton(new OptionsMenu(ImageProcessor.getImage("SkillScreen")))));
+				new OpenMenuButton(new SkillMenu(ImageProcessor.getImage("SkillScreen")))));
 		tabs.addMenuItem(new MenuButton(ImageProcessor.getImage("UpgradesButton"), 0, 0,
-				new OpenMenuButton(new OptionsMenu(ImageProcessor.getImage("UpgradesScreen")))));
+				new OpenMenuButton(new UpgradesMenu(ImageProcessor.getImage("UpgradesScreen")))));
 		tabs.addMenuItem(new MenuButton(ImageProcessor.getImage("MapButton"), 0, 0,
-				new OpenMenuButton(new OptionsMenu(ImageProcessor.getImage("MapScreen")))));
+				new OpenMenuButton(new MapMenu(ImageProcessor.getImage("MapScreen")))));
 		tabs.addMenuItem(new MenuButton(ImageProcessor.getImage("SaveButton"), 0, 0,
-				new OpenMenuButton(new OptionsMenu(ImageProcessor.getImage("SaveScreen")))));
+				new OpenMenuButton(new SaveMenu(ImageProcessor.getImage("SaveScreen")))));
 		menuItems.add(tabs);
 
 		VerticalLayout nativeButtons = new VerticalLayout(x + 30, y + h - 94,

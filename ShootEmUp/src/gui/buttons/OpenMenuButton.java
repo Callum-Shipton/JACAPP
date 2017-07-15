@@ -14,6 +14,7 @@ public class OpenMenuButton implements ButtonAction {
 
 	@Override
 	public void click() {
+		menu.resetMenu();
 		ShootEmUp.getMenuSystem().addMenu(menu);
 	}
 }

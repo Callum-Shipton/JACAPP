@@ -26,10 +26,6 @@ public class GameBase {
 	private Entity player;
 	private Hud hud;
 
-	public GameBase() {
-
-	}
-
 	public void update() {
 		if (!currentLevel.getLevelFinished()) {
 			currentLevel.update();

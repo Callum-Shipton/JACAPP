@@ -79,7 +79,9 @@ public class ShootEmUp implements Game {
 		paused = !paused;
 		Keyboard.setKey(Loop.getKeys().pause);
 		if (paused) {
-			menuSystem.addMenu(new InventoryMenu(ImageProcessor.getImage("InventoryScreen")));
+			InventoryMenu invMenu = new InventoryMenu(ImageProcessor.getImage("InventoryScreen"));
+			invMenu.resetMenu();
+			menuSystem.addMenu(invMenu);
 		} else {
 			menuSystem.clearMenus();
 		}

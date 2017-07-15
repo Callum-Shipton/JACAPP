@@ -22,7 +22,7 @@ public class LevelSelectMenu extends GuiMenu {
 	public void resetMenu() {
 		menuItems.clear();
 		VerticalLayout buttonList = new VerticalLayout(
-				(this.display.getWidth() / 2) - (ImageProcessor.getImage("Level1Button").getWidth() / 2),
+				(display.getWidth() / 2) - (ImageProcessor.getImage("Level1Button").getWidth() / 2),
 				display.getHeight() / 2, ImageProcessor.getImage("Level1Button").getHeight() / 2, 20);
 
 		switch (level) {
@@ -39,6 +39,6 @@ public class LevelSelectMenu extends GuiMenu {
 		}
 		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("BackButton"), 0, 0, new BackButton()));
 
-		this.menuItems.add(buttonList);
+		menuItems.add(buttonList);
 	}
 }
