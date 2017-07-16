@@ -38,7 +38,6 @@ public class AStarSearch {
 
 		this.nodeWidth = nodeWidth;
 		this.width = width;
-		// searched
 	}
 
 	private void initData(Vector2i goal, Vector2i start) {
@@ -75,10 +74,17 @@ public class AStarSearch {
 
 	private void addNode(String key, GoalboundingTile goalboundingTile) {
 		AStarNode node = childNodes.get(key);
-		if (!closedNodes.contains(node) && !movesIntoWall(node.getPosition(), node.getWidth(), walls, key)
-				&& goalboundingTile.getBox(key).boxContains(goalNode.getPosition(), width)) {
-			openNodes.add(node);
-			closedNodes.add(node);
+		if (!closedNodes.contains(node) && !movesIntoWall(node.getPosition(), node.getWidth(), walls, key)) {
+			if (goalboundingTile != null) {
+				if (goalboundingTile.getBox(key).boxContains(goalNode.getPosition(), width)) {
+					openNodes.add(node);
+					closedNodes.add(node);
+				}
+			} else {
+				Logger.warn("No Goalbounding Tile");
+				openNodes.add(node);
+				closedNodes.add(node);
+			}
 		}
 	}
 
@@ -152,7 +158,7 @@ public class AStarSearch {
 
 	}
 
-	public boolean containsGoal(Vector2i origin, int size, Vector2i goal) {
+	public static boolean containsGoal(Vector2i origin, int size, Vector2i goal) {
 
 		for (int i = origin.x(); i < origin.x() + size; i++) {
 			for (int j = origin.y(); j < origin.y() + size; j++) {
