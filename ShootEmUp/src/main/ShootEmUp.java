@@ -1,7 +1,7 @@
 package main;
 
 import audio.MusicPlayer;
-import audio.music.BackgroundMusic;
+import audio.music.Audio;
 import display.Art;
 import display.ImageProcessor;
 import game.Game;
@@ -29,7 +29,7 @@ public class ShootEmUp implements Game {
 	public static void startGame() {
 		menuSystem.setMainMenu(false);
 		menuSystem.clearMenus();
-		musicPlayer.changeCurrentMusic(BackgroundMusic.MAIN);
+		musicPlayer.changeCurrentMusic(Audio.MAIN);
 		paused = false;
 	}
 
@@ -39,7 +39,7 @@ public class ShootEmUp implements Game {
 
 		paused = true;
 		menuSystem.addMenu(new MainMenu(ImageProcessor.getImage("MainMenuScreen")));
-		musicPlayer.play();
+		musicPlayer.playBackgroundMusic();
 	}
 
 	@Override

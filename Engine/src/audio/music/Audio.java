@@ -62,23 +62,25 @@ import logging.Logger;
  * @author Brian Matzon <brian@matzon.dk>
  * @version $Revision$
  */
-public class BackgroundMusic {
+public class Audio {
 
 	public static long device;
 
 	public static long context;
 
 	/** Maximum data buffers we will need. */
-	public static final int NUM_BUFFERS = 2;
+	public static final int NUM_BUFFERS = 3;
 
 	/** Maximum emissions we will need. */
-	public static final int NUM_SOURCES = 2;
+	public static final int NUM_SOURCES = 3;
 
 	/** Index of battle sound */
 	public static final int MENU = 0;
 
 	/** Index of gun 1 sound */
 	public static final int MAIN = 1;
+
+	public static final int SHOOT = 2;
 
 	/** Buffers hold sound data. */
 	IntBuffer buffer = BufferUtils.createIntBuffer(NUM_BUFFERS);
@@ -110,7 +112,7 @@ public class BackgroundMusic {
 	 */
 	FloatBuffer listenerOri = BufferUtils.createFloatBuffer(6).put(new float[] { 0.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f });
 
-	public BackgroundMusic() {
+	public Audio() {
 		// CRUCIAL!
 		// any buffer that has data added, must be flipped to establish its
 		// position and limits
@@ -173,9 +175,11 @@ public class BackgroundMusic {
 
 		String main = "/Music/Main.ogg";
 		String menu = "/Music/Menu.ogg";
+		String shoot = "/Music/Shoot.ogg";
 
 		loadAudioFile(main, MAIN);
 		loadAudioFile(menu, MENU);
+		loadAudioFile(shoot, SHOOT);
 
 		// Do another error check and return.
 		if (alGetError() == AL_NO_ERROR) {

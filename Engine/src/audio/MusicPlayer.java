@@ -1,47 +1,51 @@
 package audio;
 
-import audio.music.BackgroundMusic;
+import audio.music.Audio;
 import input.Keyboard;
 import loop.Loop;
 
 public class MusicPlayer {
 
-	private BackgroundMusic backgroundMusic;
-	private int currentMusic = BackgroundMusic.MENU;
+	private Audio audio;
+	private int backgroundMusic = Audio.MENU;
 	private boolean pause = false;
 
 	public MusicPlayer() {
-		backgroundMusic = new BackgroundMusic();
-		backgroundMusic.initAL();
+		audio = new Audio();
+		audio.initAL();
 	}
 
 	public void changeCurrentMusic(int index) {
-		backgroundMusic.stop(currentMusic);
-		currentMusic = index;
+		audio.stop(backgroundMusic);
+		backgroundMusic = index;
 		if (!pause) {
-			play();
+			playBackgroundMusic();
 		}
 	}
 
 	public void destroy() {
-		backgroundMusic.destoyAL();
+		audio.destoyAL();
 	}
 
 	public void pause() {
 		if (pause) {
-			backgroundMusic.play(currentMusic);
+			audio.play(backgroundMusic);
 		} else {
-			backgroundMusic.pause(currentMusic);
+			audio.pause(backgroundMusic);
 		}
 		pause = !pause;
 	}
 
-	public void play() {
-		backgroundMusic.play(currentMusic);
+	public void playBackgroundMusic() {
+		audio.play(backgroundMusic);
 	}
 
-	public void stop() {
-		backgroundMusic.stop(currentMusic);
+	public void play(String sound) {
+		audio.play(Audio.SHOOT);
+	}
+
+	public void stopBackgroundMusic() {
+		audio.stop(backgroundMusic);
 	}
 
 	public void update() {

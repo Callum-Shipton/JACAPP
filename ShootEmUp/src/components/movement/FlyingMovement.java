@@ -3,7 +3,7 @@ package components.movement;
 import components.collision.BaseCollision;
 import components.graphical.BaseGraphics;
 
-public class FlyingMovement extends BasicMovement {
+public class FlyingMovement extends GroundMovement {
 
 	public FlyingMovement(BaseCollision BC, BaseGraphics BG, int speed) {
 		super(BC, BG, speed);

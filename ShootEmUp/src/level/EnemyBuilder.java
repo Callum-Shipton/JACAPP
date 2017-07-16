@@ -1,8 +1,14 @@
 package level;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import components.Message;
 import components.attack.BaseAttack;
 import components.attack.EnemyAttack;
 import components.attack.TypeAttack;
+import components.audio.BaseAudio;
+import components.audio.EventAudio;
 import components.collision.BaseCollision;
 import components.collision.RigidCollision;
 import components.control.AIControl;
@@ -11,7 +17,7 @@ import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.inventory.BaseInventory;
 import components.movement.BaseMovement;
-import components.movement.BasicMovement;
+import components.movement.GroundMovement;
 import display.ImageProcessor;
 import entity.Entity;
 import logging.Logger;
@@ -61,11 +67,16 @@ public final class EnemyBuilder {
 		BaseControl enemyControl = new AIControl(enemyGraphics, enemyAttack, enemyMovement);
 		BaseInventory enemyInventory = new BaseInventory(enemyGraphics, enemyAttack, 1);
 
+		Map<Message, String> sounds = new HashMap<Message, String>();
+		sounds.put(Message.SHOOT, "doesn't matter");
+		BaseAudio enemyAudio = new EventAudio(sounds);
+
 		newEnemy.addComponent(enemyAttack);
 		newEnemy.addComponent(enemyCollision);
 		newEnemy.addComponent(enemyControl);
 		newEnemy.addComponent(enemyMovement);
 		newEnemy.addComponent(enemyInventory);
+		newEnemy.addComponent(enemyAudio);
 
 		return newEnemy;
 	}
@@ -74,6 +85,6 @@ public final class EnemyBuilder {
 		enemyGraphics = new AnimatedGraphics(ImageProcessor.getImage(art), ImageProcessor.base, false, 0, 0);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision();
-		enemyMovement = new BasicMovement(enemyCollision, enemyGraphics, speed);
+		enemyMovement = new GroundMovement(enemyCollision, enemyGraphics, speed);
 	}
 }

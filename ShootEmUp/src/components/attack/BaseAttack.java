@@ -82,6 +82,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		if (fireCountdown <= 0) {
 			if (mana >= weapon.getManaCost()) {
 				weapon.attack(e, dir);
+				e.send(Message.SHOOT);
 				mana -= weapon.getManaCost();
 				fireCountdown = weapon.getFireRate();
 				return true;

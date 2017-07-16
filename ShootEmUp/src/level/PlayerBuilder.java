@@ -8,7 +8,7 @@ import components.collision.RigidCollision;
 import components.control.PlayerControl;
 import components.graphical.PlayerGraphics;
 import components.inventory.BaseInventory;
-import components.movement.BasicMovement;
+import components.movement.GroundMovement;
 import components.spawn.PointSpawn;
 import display.ImageProcessor;
 import entity.Entity;
@@ -21,7 +21,7 @@ public abstract class PlayerBuilder {
 	private static PointSpawn s;
 	private static PlayerAttack a;
 	private static RigidCollision c;
-	private static BasicMovement m;
+	private static GroundMovement m;
 	private static BaseInventory i;
 	private static Entity player;
 
@@ -40,7 +40,7 @@ public abstract class PlayerBuilder {
 		chooseType(type);
 
 		c = new RigidCollision();
-		m = new BasicMovement(c, g, 5);
+		m = new GroundMovement(c, g, 5);
 		i = new BaseInventory(g, a, 0);
 
 		addComponents();
@@ -53,7 +53,7 @@ public abstract class PlayerBuilder {
 
 		a = new PlayerAttack(type, save);
 		c = new RigidCollision();
-		m = new BasicMovement(c, g, 5);
+		m = new GroundMovement(c, g, 5);
 		i = new BaseInventory(g, a, save);
 
 		addComponents();

@@ -11,7 +11,7 @@ import components.collision.RigidCollision;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.movement.BaseMovement;
-import components.movement.BasicMovement;
+import components.movement.GroundMovement;
 import display.Image;
 import display.ImageProcessor;
 import entity.Entity;
@@ -64,7 +64,7 @@ public class AreaSpawner extends Spawner {
 		BaseCollision baseCollision = new RigidCollision();
 		test.addComponent(baseCollision);
 
-		BaseMovement baseMovement = new BasicMovement(baseCollision, testGraphics, 5);
+		BaseMovement baseMovement = new GroundMovement(baseCollision, testGraphics, 5);
 		test.addComponent(baseMovement);
 
 		BaseGraphics playerGraphics = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.GRAPHICS);

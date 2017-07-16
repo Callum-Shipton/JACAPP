@@ -14,11 +14,11 @@ import main.ShootEmUp;
 import math.VectorMath;
 import object.EntityMap;
 
-public class BasicMovement extends BaseMovement {
+public class GroundMovement extends BaseMovement {
 
 	protected BaseGraphics baseGraphics;
 
-	public BasicMovement(BaseCollision baseCollision, BaseGraphics baseGraphics, int speed) {
+	public GroundMovement(BaseCollision baseCollision, BaseGraphics baseGraphics, int speed) {
 		this.baseGraphics = baseGraphics;
 		this.BC = baseCollision;
 		this.speed = speed;

@@ -8,7 +8,7 @@ import components.TypeComponent;
 import components.attack.PlayerAttack;
 import components.inventory.BaseInventory;
 import components.inventory.TypePotion;
-import components.movement.BasicMovement;
+import components.movement.GroundMovement;
 import display.DPDTRenderer;
 import display.ImageProcessor;
 import entity.Entity;
@@ -36,7 +36,7 @@ public class Hud extends GuiComponent {
 
 	private BaseInventory PI;
 	private PlayerAttack PA;
-	private BasicMovement PM;
+	private GroundMovement PM;
 
 	public Hud(Entity player, float x, float y) {
 		super(x, y);
