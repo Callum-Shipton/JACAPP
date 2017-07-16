@@ -199,41 +199,41 @@ public class BaseInventory extends Component implements InventoryComponent {
 	}
 
 	public void equipItem(int itemNo) {
-		InventoryItem<?> item = this.inventory.get(itemNo);
+		InventoryItem<?> item = inventory.get(itemNo);
 		InventoryItem<?> equipped = null;
-		this.inventory.remove(itemNo);
+		inventory.remove(itemNo);
 		if (item instanceof Armour) {
 			switch (((Armour) item).getType()) {
 			case "Boots":
-				equipped = this.BA.getBoots();
-				this.BA.setBoots((Armour) item);
+				equipped = BA.getBoots();
+				BA.setBoots((Armour) item);
 				break;
 			case "Legs":
-				equipped = this.BA.getLegs();
-				this.BA.setLegs((Armour) item);
+				equipped = BA.getLegs();
+				BA.setLegs((Armour) item);
 				break;
 			case "Chest":
-				equipped = this.BA.getChest();
-				this.BA.setChest((Armour) item);
+				equipped = BA.getChest();
+				BA.setChest((Armour) item);
 				break;
 			case "Helmet":
-				equipped = this.BA.getHelmet();
-				this.BA.setHelmet((Armour) item);
+				equipped = BA.getHelmet();
+				BA.setHelmet((Armour) item);
 				break;
 			default:
 			}
 		} else {
-			equipped = this.BA.getWeapon();
-			if (((Weapon) item).getType().compareTo(this.weaponTypes[0]) == 0
-					|| (((Weapon) item).getType().compareTo(this.weaponTypes[1]) == 0)) {
-				this.BA.setWeapon((Weapon) item);
+			equipped = BA.getWeapon();
+			if (((Weapon) item).getType().compareTo(weaponTypes[0]) == 0
+					|| (((Weapon) item).getType().compareTo(weaponTypes[1]) == 0)) {
+				BA.setWeapon((Weapon) item);
 			} else {
-				this.inventory.add(item);
+				inventory.add(item);
 				equipped = null;
 			}
 		}
 		if (equipped != null) {
-			this.inventory.add(equipped);
+			inventory.add(equipped);
 		}
 	}
 

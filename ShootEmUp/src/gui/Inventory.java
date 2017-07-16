@@ -15,6 +15,7 @@ public class Inventory extends GuiComponent {
 
 	private List<InventoryItem<?>> i;
 	private List<MenuButton> buttons = new ArrayList<>();
+	private boolean itemEquipped = false;
 
 	public Inventory(int x, int y, List<InventoryItem<?>> i) {
 		super(x, y);
@@ -23,7 +24,7 @@ public class Inventory extends GuiComponent {
 	}
 
 	private MenuButton addButton(MenuButton button) {
-		this.buttons.add(button);
+		buttons.add(button);
 		return button;
 	}
 
@@ -32,11 +33,13 @@ public class Inventory extends GuiComponent {
 		int column = 0;
 
 		Iterator<InventoryItem<?>> items = i.iterator();
+		int count = 0;
 
 		while (items.hasNext()) {
+
 			InventoryItem<?> item = items.next();
 			addButton(new MenuButton(item.getInventoryImage(), x + (item.getInventoryImage().getWidth() * row),
-					y + ((item.getInventoryImage().getHeight() / 2) * column), null));
+					y + ((item.getInventoryImage().getHeight() / 2) * column), new EquipItemButton(count++)));
 			row++;
 			if (row > 10) {
 				row = 0;
@@ -57,27 +60,26 @@ public class Inventory extends GuiComponent {
 		for (MenuButton button : buttons) {
 			button.update();
 		}
-		Iterator<MenuButton> buttonsIterator = buttons.iterator();
-		MenuButton itemButton;
-		boolean change = false;
-		int position = 0;
-		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
-		while (buttonsIterator.hasNext()) {
-			itemButton = buttonsIterator.next();
-			if (itemButton.hasClicked()) {
-				BI.equipItem(position);
-				itemButton.postAction();
-				buttonsIterator.remove();
-				change = true;
-			}
-
-			position++;
-		}
-
-		if (change) {
+		if (itemEquipped) {
 			buttons.clear();
 			addButtons();
+			itemEquipped = false;
+		}
+	}
+
+	private class EquipItemButton implements ButtonAction {
+
+		private int position;
+
+		public EquipItemButton(int position) {
+			this.position = position;
 		}
 
+		@Override
+		public void click() {
+			BaseInventory bi = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
+			bi.equipItem(position);
+			itemEquipped = true;
+		}
 	}
 }
