@@ -18,9 +18,9 @@ public class GoalBounder implements Serializable {
 		this.goalboundingMaps = goalboundingMaps;
 	}
 
-	public GoalboundingTile getTile(float x, float y, float size) {
+	public GoalboundingTile getTile(int x, int y, int size) {
 		Logger.debug("X:" + x + " Y:" + y + " Size:" + size, Category.AI_GOALBOUNDING);
-		return goalboundingMaps.get((int) size)[(int) x][(int) y];
+		return goalboundingMaps.get(size)[x][y];
 	}
 
 	public static GoalBounder readGoalbounder(String location) {

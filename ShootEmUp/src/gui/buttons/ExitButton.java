@@ -1,7 +1,6 @@
 package gui.buttons;
 
 import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
-import static org.lwjgl.opengl.GL11.GL_TRUE;
 
 import gui.ButtonAction;
 import loop.Loop;

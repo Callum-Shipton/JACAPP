@@ -1,21 +1,13 @@
 package loop;
 
-import static org.lwjgl.glfw.GLFW.GLFW_JOYSTICK_1;
-import static org.lwjgl.glfw.GLFW.glfwGetJoystickAxes;
-import static org.lwjgl.glfw.GLFW.glfwGetJoystickName;
-import static org.lwjgl.glfw.GLFW.glfwJoystickPresent;
 import static org.lwjgl.glfw.GLFW.glfwPollEvents;
 import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.GL_FALSE;
 import static org.lwjgl.opengl.GL11.GL_NO_ERROR;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.opengl.GL11.glGetError;
-
-import java.io.File;
-import java.nio.FloatBuffer;
 
 import org.lwjgl.glfw.GLFW;
 
@@ -26,7 +18,6 @@ import input.Controllers;
 import input.Keyboard;
 import input.Keys;
 import logging.Logger;
-import logging.Logger.Category;
 
 public final class Loop {
 
@@ -44,8 +35,10 @@ public final class Loop {
 	}
 
 	public void start() {
-		//System.setProperty("org.lwjgl.librarypath", new File("natives").getAbsolutePath());
-		//System.setProperty("net.java.games.input.librarypath", new File("natives/JInput").getAbsolutePath());
+		// System.setProperty("org.lwjgl.librarypath", new
+		// File("natives").getAbsolutePath());
+		// System.setProperty("net.java.games.input.librarypath", new
+		// File("natives/JInput").getAbsolutePath());
 		run();
 	}
 

@@ -14,18 +14,16 @@ import static org.lwjgl.opengl.GL11.glGenTextures;
 import static org.lwjgl.opengl.GL11.glTexImage2D;
 import static org.lwjgl.opengl.GL11.glTexParameteri;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
-
-import static org.lwjgl.stb.STBImage.*;
+import static org.lwjgl.stb.STBImage.stbi_failure_reason;
+import static org.lwjgl.stb.STBImage.stbi_load_from_memory;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 import org.lwjgl.system.MemoryStack;
 
 import io.FileManager;
-import logging.Logger;
 
 public class Image {
 
@@ -70,32 +68,32 @@ public class Image {
 
 	public ByteBuffer byteBuffer() {
 
-        try (MemoryStack stack = MemoryStack.stackPush()) {
-        	
-        	ByteBuffer imageBuffer;
-            try {
-                imageBuffer = FileManager.ioResourceToByteBuffer(file, 8 * 1024);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        	
-            /* Prepare image buffers */
-            IntBuffer w = stack.mallocInt(1);
-            IntBuffer h = stack.mallocInt(1);
-            IntBuffer comp = stack.mallocInt(1);
+		try (MemoryStack stack = MemoryStack.stackPush()) {
 
-            // Decode the image
-            buf = stbi_load_from_memory(imageBuffer, w, h, comp, 4);
-            if (buf == null) {
-                throw new RuntimeException("Failed to load image: " + stbi_failure_reason());
-            }
+			ByteBuffer imageBuffer;
+			try {
+				imageBuffer = FileManager.ioResourceToByteBuffer(file, 8 * 1024);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
 
-            /* Get width and height of image */
-            texWidth = w.get();
-            texHeight = h.get();
-            
-        }
-        return buf;
+			/* Prepare image buffers */
+			IntBuffer w = stack.mallocInt(1);
+			IntBuffer h = stack.mallocInt(1);
+			IntBuffer comp = stack.mallocInt(1);
+
+			// Decode the image
+			buf = stbi_load_from_memory(imageBuffer, w, h, comp, 4);
+			if (buf == null) {
+				throw new RuntimeException("Failed to load image: " + stbi_failure_reason());
+			}
+
+			/* Get width and height of image */
+			texWidth = w.get();
+			texHeight = h.get();
+
+		}
+		return buf;
 	}
 
 	public int getFHeight() {
