@@ -73,7 +73,7 @@ public class Audio {
 	public static long context;
 
 	/** Maximum data buffers we will need. */
-	public static final int NUM_BUFFERS = 3;
+	public static final int NUM_BUFFERS = 5;
 
 	private final Map<String, Integer> bufferMap = new HashMap<>();
 	private final Set<Integer> sourcesSet = new HashSet<>();

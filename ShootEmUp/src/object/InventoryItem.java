@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -16,7 +17,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
+import components.Message;
 import components.TypeComponent;
+import components.audio.BaseAudio;
+import components.audio.EventAudio;
 import components.collision.PickupCollision;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
@@ -51,8 +55,12 @@ public abstract class InventoryItem<I extends InventoryItem<?>> implements Datab
 		BS = new PointSpawn(BG, new Vector2f(entityG.getX() + BG.getWidth(), entityG.getY() + BG.getHeight()), item);
 		item.addComponent(BG);
 		BC = new PickupCollision(item, this.typePickup, this.name);
+		Map<Message, String> sounds = new EnumMap<>(Message.class);
+		sounds.put(Message.PICKUP, "Pickup2.ogg");
+		BaseAudio audioComponent = new EventAudio(sounds);
 		item.addComponent(BS);
 		item.addComponent(BC);
+		item.addComponent(audioComponent);
 		ShootEmUp.getGame().getCurrentLevel().addEntity(item);
 	}
 

@@ -1,6 +1,6 @@
 package components.audio;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 import audio.MusicPlayer;
@@ -10,7 +10,7 @@ import logging.Logger;
 import main.ShootEmUp;
 
 public class EventAudio extends BaseAudio {
-	Map<Message, String> sounds = new HashMap<>();
+	Map<Message, String> sounds = new EnumMap<>(Message.class);
 	MusicPlayer audio = ShootEmUp.getMusicPlayer();
 
 	public EventAudio(Map<Message, String> sounds) {

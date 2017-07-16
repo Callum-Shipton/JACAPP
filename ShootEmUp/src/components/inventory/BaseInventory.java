@@ -18,6 +18,8 @@ import components.Message;
 import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.attack.PlayerAttack;
+import components.audio.BaseAudio;
+import components.audio.EventAudio;
 import components.collision.PickupCollision;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
@@ -55,7 +57,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 	protected List<InventoryItem<?>> inventory = new ArrayList<>();
 	protected int inventorySize = 5;
-	protected Map<TypePotion, Potion> potions = new EnumMap<TypePotion, Potion>(TypePotion.class); // NOSONAR
+	protected Map<TypePotion, Potion> potions = new EnumMap<>(TypePotion.class); // NOSONAR
 	protected int maxPotions = 5;
 
 	protected String[] weaponTypes = new String[2];
@@ -193,8 +195,12 @@ public class BaseInventory extends Component implements InventoryComponent {
 		coinS = new PointSpawn(coinG, new Vector2f(BG.getX(), BG.getY()), item);
 		item.addComponent(coinG);
 		coinC = new PickupCollision(item, TypePickup.COIN, "Coin");
+		Map<Message, String> sounds = new EnumMap<>(Message.class);
+		sounds.put(Message.PICKUP, "Pickup.ogg");
+		BaseAudio audioComponent = new EventAudio(sounds);
 		item.addComponent(coinS);
 		item.addComponent(coinC);
+		item.addComponent(audioComponent);
 		ShootEmUp.getGame().getCurrentLevel().addEntity(item);
 	}
 
@@ -224,7 +230,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 			}
 		} else {
 			equipped = BA.getWeapon();
-			if (((Weapon) item).getType().compareTo(weaponTypes[0]) == 0
+			if ((((Weapon) item).getType().compareTo(weaponTypes[0]) == 0)
 					|| (((Weapon) item).getType().compareTo(weaponTypes[1]) == 0)) {
 				BA.setWeapon((Weapon) item);
 			} else {
@@ -395,7 +401,8 @@ public class BaseInventory extends Component implements InventoryComponent {
 	}
 
 	public void usePotion(TypePotion type) {
-		if (potions.containsKey(type))
+		if (potions.containsKey(type)) {
 			potions.get(type).usePotion();
+		}
 	}
 }
