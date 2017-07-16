@@ -52,7 +52,7 @@ public class Save implements Serializable {
 		this.mage = save.mage;
 		this.battleMage = save.battleMage;
 		this.rogue = save.rogue;
-		
+
 		this.level = save.level;
 
 		return save;
@@ -87,8 +87,8 @@ public class Save implements Serializable {
 	public void saveToSystem(int num) {
 		FileManager.saveEncryptedFile("save" + num + ".ser", KEY, this);
 	}
-	
-	public void setLevel(int level){
+
+	public void setLevel(int level) {
 		this.level = level;
 	}
 }

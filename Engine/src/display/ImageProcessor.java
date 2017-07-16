@@ -61,7 +61,7 @@ public class ImageProcessor {
 
 		Matrix4f projectionMatrix = new Matrix4f();
 		projectionMatrix.ortho(0, Loop.getDisplay().getWidth(), Loop.getDisplay().getHeight(), 0, -1.0f, 1.0f);
-		
+
 		try (MemoryStack stack = stackPush()) {
 			FloatBuffer buf = stack.callocFloat(16);
 			buf = projectionMatrix.get(buf);
@@ -76,12 +76,12 @@ public class ImageProcessor {
 			int projectionMatrixLocation = glGetUniformLocation(ShaderBase, "projectionMatrix");
 			glUniformMatrix4fv(projectionMatrixLocation, false, buf);
 			glUseProgram(0);
-	
+
 			glUseProgram(ShaderInst);
 			projectionMatrixLocation = glGetUniformLocation(ShaderInst, "projectionMatrix");
 			glUniformMatrix4fv(projectionMatrixLocation, false, buf);
 			glUseProgram(0);
-	
+
 			glUseProgram(ShaderStat);
 			projectionMatrixLocation = glGetUniformLocation(ShaderStat, "projectionMatrix");
 			glUniformMatrix4fv(projectionMatrixLocation, false, buf);

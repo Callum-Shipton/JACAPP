@@ -80,51 +80,47 @@ public class Display {
 
 	public void initGLFW() {
 		// Setup an error callback. The default implementation
-				// will print the error message in System.err.
-				GLFWErrorCallback.createPrint(System.err).set();
+		// will print the error message in System.err.
+		GLFWErrorCallback.createPrint(System.err).set();
 
-				// Initialize GLFW. Most GLFW functions will not work before doing this.
-				if ( !glfwInit() )
-					throw new IllegalStateException("Unable to initialize GLFW");
+		// Initialize GLFW. Most GLFW functions will not work before doing this.
+		if (!glfwInit())
+			throw new IllegalStateException("Unable to initialize GLFW");
 
-				// Configure GLFW
-				glfwDefaultWindowHints(); // optional, the current window hints are already the default
-				glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden after creation
-				glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
+		// Configure GLFW
+		glfwDefaultWindowHints(); // optional, the current window hints are already the default
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden after creation
+		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
 
-				monitor = glfwGetPrimaryMonitor();
-				
-				// Create the window
-				window = glfwCreateWindow(width, height, "THE MAZE", NULL, NULL);
-				if ( window == NULL )
-					throw new RuntimeException("Failed to create the GLFW window");
+		monitor = glfwGetPrimaryMonitor();
 
-				// Get the thread stack and push a new frame
-				try ( MemoryStack stack = stackPush() ) {
-					IntBuffer pWidth = stack.mallocInt(1); // int*
-					IntBuffer pHeight = stack.mallocInt(1); // int*
+		// Create the window
+		window = glfwCreateWindow(width, height, "THE MAZE", NULL, NULL);
+		if (window == NULL)
+			throw new RuntimeException("Failed to create the GLFW window");
 
-					// Get the window size passed to glfwCreateWindow
-					glfwGetWindowSize(window, pWidth, pHeight);
+		// Get the thread stack and push a new frame
+		try (MemoryStack stack = stackPush()) {
+			IntBuffer pWidth = stack.mallocInt(1); // int*
+			IntBuffer pHeight = stack.mallocInt(1); // int*
 
-					// Get the resolution of the primary monitor
-					vidmode = glfwGetVideoMode(monitor);
+			// Get the window size passed to glfwCreateWindow
+			glfwGetWindowSize(window, pWidth, pHeight);
 
-					// Center the window
-					glfwSetWindowPos(
-						window,
-						(vidmode.width() - pWidth.get(0)) / 2,
-						(vidmode.height() - pHeight.get(0)) / 2
-					);
-				} // the stack frame is popped automatically
+			// Get the resolution of the primary monitor
+			vidmode = glfwGetVideoMode(monitor);
 
-				// Make the OpenGL context current
-				glfwMakeContextCurrent(window);
-				// Enable v-sync
-				glfwSwapInterval(1);
+			// Center the window
+			glfwSetWindowPos(window, (vidmode.width() - pWidth.get(0)) / 2, (vidmode.height() - pHeight.get(0)) / 2);
+		} // the stack frame is popped automatically
 
-				// Make the window visible
-				glfwShowWindow(window);
+		// Make the OpenGL context current
+		glfwMakeContextCurrent(window);
+		// Enable v-sync
+		glfwSwapInterval(1);
+
+		// Make the window visible
+		glfwShowWindow(window);
 
 		// This line is critical for LWJGL's interoperation with GLFW's
 		// OpenGL context, or any context that is managed externally.
@@ -150,20 +146,22 @@ public class Display {
 	}
 
 	public void toggleFullscreen() {
-		if(fullscreen) {
+		if (fullscreen) {
 			width = INITIAL_SCREEN_WIDTH;
 			height = INITIAL_SCREEN_HEIGHT;
-			glfwSetWindowMonitor(window,NULL,(vidmode.width()-width)/2,(vidmode.height()-height)/2,width,height,60);
-		}
-		else {
+			glfwSetWindowMonitor(window, NULL, (vidmode.width() - width) / 2, (vidmode.height() - height) / 2, width,
+					height, 60);
+		} else {
 			width = vidmode.width();
 			height = vidmode.height();
-			glfwSetWindowMonitor(window,monitor,(vidmode.width()-width)/2,(vidmode.height()-height)/2,width,height,60);
+			glfwSetWindowMonitor(window, monitor, (vidmode.width() - width) / 2, (vidmode.height() - height) / 2, width,
+					height, 60);
 		}
 		fullscreen = !fullscreen;
 		glfwSwapInterval(1);
 		glViewport(0, 0, this.width, this.height);
-		cam.updateCameraSize(width, height);;
+		cam.updateCameraSize(width, height);
+		;
 		ImageProcessor.initShaderUniforms();
 	}
 

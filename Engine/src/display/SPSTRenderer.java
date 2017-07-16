@@ -48,13 +48,10 @@ public class SPSTRenderer {
 
 		glBindTexture(GL_TEXTURE_2D, Texid);
 
-		Matrix4f model = new Matrix4f()
-		.translate(pos.x(), pos.y(), 0.0f)
-		.translate(0.5f * size.x(), 0.5f * size.y(), 0.0f)
-		.rotate((float) Math.toRadians(rotate), 0.0f, 0.0f, 1.0f)
-		.translate(-0.5f * size.x(), -0.5f * size.y(), 0.0f)
-		.scale(size.x(), size.y(), 1.0f)
-		.transpose();
+		Matrix4f model = new Matrix4f().translate(pos.x(), pos.y(), 0.0f)
+				.translate(0.5f * size.x(), 0.5f * size.y(), 0.0f)
+				.rotate((float) Math.toRadians(rotate), 0.0f, 0.0f, 1.0f)
+				.translate(-0.5f * size.x(), -0.5f * size.y(), 0.0f).scale(size.x(), size.y(), 1.0f).transpose();
 
 		// model.m03 += pos.x;
 		// model.m13 += pos.y;

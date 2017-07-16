@@ -14,7 +14,7 @@ public abstract class PauseMenu extends GuiMenu {
 	public PauseMenu(Image menuImage) {
 		super(menuImage, false);
 	}
-	
+
 	@Override
 	public void resetMenu() {
 		menuItems.clear();

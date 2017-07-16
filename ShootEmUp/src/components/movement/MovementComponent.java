@@ -5,6 +5,7 @@ import org.joml.Vector4f;
 
 import components.graphical.BaseGraphics;
 import entity.Entity;
+
 public interface MovementComponent {
 
 	Vector4f collideFunction(BaseGraphics BG, float x, float y);

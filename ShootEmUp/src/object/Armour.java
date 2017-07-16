@@ -29,14 +29,14 @@ public final class Armour extends InventoryItem<Armour> {
 			a = typedArmours[temp];
 		} else {
 			for (Entry<String, Map<String, Armour>> typedWeapons : armourSystem.entrySet()) {
-				if (typedWeapons.getValue().containsKey(typeName)){
+				if (typedWeapons.getValue().containsKey(typeName)) {
 					a = typedWeapons.getValue().get(typeName);
 					this.type = typedWeapons.getKey();
 				}
 			}
 		}
 
-		if(a == null){
+		if (a == null) {
 			// Pick a random armour
 			Logger.warn("An armour was created with unknown name/type: " + typeName);
 		}

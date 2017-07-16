@@ -54,11 +54,10 @@ public class LevelMap {
 				LevelMap.TILE_WIDTH, TILE_WIDTH);
 
 		/*
-		 * ImageProcessor.irFore = new
-		 * FloorRenderer(generator.getForegroundTiles(), new
+		 * ImageProcessor.irFore = new FloorRenderer(generator.getForegroundTiles(), new
 		 * Vector2(ImageProcessor.getImage("Walls").getFWidth(),
-		 * ImageProcessor.getImage("Walls").getFHeight()),
-		 * LevelMap.getTileWidth(), LevelMap.getTileHeight());
+		 * ImageProcessor.getImage("Walls").getFHeight()), LevelMap.getTileWidth(),
+		 * LevelMap.getTileHeight());
 		 */
 
 		ImageProcessor.irBack.init();

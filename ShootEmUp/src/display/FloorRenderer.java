@@ -5,18 +5,18 @@ import org.lwjgl.BufferUtils;
 
 public class FloorRenderer extends IRenderer {
 
-private Vector2f[][] renderData;
-	
-	public FloorRenderer(Vector2f[][] renderData, Vector2f texMax, float width, float height){
+	private Vector2f[][] renderData;
+
+	public FloorRenderer(Vector2f[][] renderData, Vector2f texMax, float width, float height) {
 		super(texMax, width, height);
 		this.renderData = renderData;
 	}
-	
+
 	@Override
 	public void initRenderData() {
 		this.amount = renderData.length * renderData[0].length;
 		instanceFloatBuffer = BufferUtils.createByteBuffer(this.amount * 4 * 4).asFloatBuffer();
-		
+
 		float[] texture = new float[2];
 		float[] translation = new float[2];
 		for (int i = 0; i < renderData.length; i++) {

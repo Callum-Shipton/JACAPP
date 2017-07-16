@@ -1,6 +1,5 @@
 package display;
 
-
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -37,8 +36,7 @@ public class Camera {
 
 	private void updateViewMatrix() {
 
-		viewMatrix.identity()
-		.translate(-box.x(), -box.y(), 0);
+		viewMatrix.identity().translate(-box.x(), -box.y(), 0);
 
 		try (MemoryStack stack = stackPush()) {
 			FloatBuffer buf = stack.callocFloat(16);

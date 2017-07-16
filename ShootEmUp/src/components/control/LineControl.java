@@ -25,9 +25,9 @@ public class LineControl extends BaseControl {
 	@Override
 	public void update(Entity e) {
 		int direction;
-		if(graphics instanceof AnimatedGraphics){
+		if (graphics instanceof AnimatedGraphics) {
 			direction = ((AnimatedGraphics) graphics).getDirection();
-		} else{
+		} else {
 			direction = 0;
 		}
 		Vector2f movementVector = new Vector2f(0.0f, 0.0f);

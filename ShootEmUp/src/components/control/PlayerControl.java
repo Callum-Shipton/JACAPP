@@ -38,16 +38,13 @@ public class PlayerControl extends BaseControl {
 		if ((Keyboard.getKey(Loop.getKeys().moveUp) == 1) || (Keyboard.getKey(Loop.getKeys().moveUp) == 2)) {
 			movement.add(0.0f, -1.0f);
 		}
-		if ((Keyboard.getKey(Loop.getKeys().moveLeft) == 1)
-				|| (Keyboard.getKey(Loop.getKeys().moveLeft) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().moveLeft) == 1) || (Keyboard.getKey(Loop.getKeys().moveLeft) == 2)) {
 			movement.add(-1.0f, 0.0f);
 		}
-		if ((Keyboard.getKey(Loop.getKeys().moveDown) == 1)
-				|| (Keyboard.getKey(Loop.getKeys().moveDown) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().moveDown) == 1) || (Keyboard.getKey(Loop.getKeys().moveDown) == 2)) {
 			movement.add(0.0f, 1.0f);
 		}
-		if ((Keyboard.getKey(Loop.getKeys().moveRight) == 1)
-				|| (Keyboard.getKey(Loop.getKeys().moveRight) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().moveRight) == 1) || (Keyboard.getKey(Loop.getKeys().moveRight) == 2)) {
 			movement.add(1.0f, 0.0f);
 		}
 
@@ -68,16 +65,13 @@ public class PlayerControl extends BaseControl {
 		if ((Keyboard.getKey(Loop.getKeys().lookUp) == 1) || (Keyboard.getKey(Loop.getKeys().lookUp) == 2)) {
 			dir.add(0.0f, -1.0f);
 		}
-		if ((Keyboard.getKey(Loop.getKeys().lookLeft) == 1)
-				|| (Keyboard.getKey(Loop.getKeys().lookLeft) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().lookLeft) == 1) || (Keyboard.getKey(Loop.getKeys().lookLeft) == 2)) {
 			dir.add(-1.0f, 0.0f);
 		}
-		if ((Keyboard.getKey(Loop.getKeys().lookDown) == 1)
-				|| (Keyboard.getKey(Loop.getKeys().lookDown) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().lookDown) == 1) || (Keyboard.getKey(Loop.getKeys().lookDown) == 2)) {
 			dir.add(0.0f, 1.0f);
 		}
-		if ((Keyboard.getKey(Loop.getKeys().lookRight) == 1)
-				|| (Keyboard.getKey(Loop.getKeys().lookRight) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().lookRight) == 1) || (Keyboard.getKey(Loop.getKeys().lookRight) == 2)) {
 			dir.add(1.0f, 0.0f);
 		}
 		if (dir.length() > 0) {
@@ -95,26 +89,22 @@ public class PlayerControl extends BaseControl {
 	}
 
 	private void checkPotions() {
-		if ((Keyboard.getKey(Loop.getKeys().potion1) == 1)
-				|| (Keyboard.getKey(Loop.getKeys().potion1) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().potion1) == 1) || (Keyboard.getKey(Loop.getKeys().potion1) == 2)) {
 			this.PI.usePotion(TypePotion.HEALTH);
 			Keyboard.setKey(Loop.getKeys().potion1);
 		}
 
-		if ((Keyboard.getKey(Loop.getKeys().potion2) == 1)
-				|| (Keyboard.getKey(Loop.getKeys().potion2) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().potion2) == 1) || (Keyboard.getKey(Loop.getKeys().potion2) == 2)) {
 			this.PI.usePotion(TypePotion.MANA);
 			Keyboard.setKey(Loop.getKeys().potion2);
 		}
 
-		if ((Keyboard.getKey(Loop.getKeys().potion3) == 1)
-				|| (Keyboard.getKey(Loop.getKeys().potion3) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().potion3) == 1) || (Keyboard.getKey(Loop.getKeys().potion3) == 2)) {
 			this.PI.usePotion(TypePotion.SPEED);
 			Keyboard.setKey(Loop.getKeys().potion3);
 		}
 
-		if ((Keyboard.getKey(Loop.getKeys().potion4) == 1)
-				|| (Keyboard.getKey(Loop.getKeys().potion4) == 2)) {
+		if ((Keyboard.getKey(Loop.getKeys().potion4) == 1) || (Keyboard.getKey(Loop.getKeys().potion4) == 2)) {
 			this.PI.usePotion(TypePotion.KNOCKBACK);
 			Keyboard.setKey(Loop.getKeys().potion4);
 		}

@@ -34,10 +34,10 @@ public class Keyboard {
 			// for everything that
 			// needs input handling.
 			public void invoke(long window, int key, int scancode, int action, int mods) {
-				
-				if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
+
+				if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
 					glfwSetWindowShouldClose(window, true);
-				
+
 				if ((key >= 0) && (key < keys.length)) {
 					if (action == GLFW_REPEAT) {
 						keys[key] = 2;

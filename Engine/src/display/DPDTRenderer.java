@@ -37,20 +37,16 @@ public class DPDTRenderer extends Renderer {
 		glBindVertexArray(VAO);
 		glBindTexture(GL_TEXTURE_2D, Texid.getID());
 
-		model.identity()
-		.translate(pos.x(), pos.y(), 0.0f)
-		.translate(0.5f * size.x(), 0.5f * size.y(), 0.0f)
-		.rotate((float) Math.toRadians(rotate), 0.0f, 0.0f, 1.0f)
-		.translate(-0.5f * size.x(), -0.5f * size.y(), 0.0f)
-		.scale(size.x(), size.y(), 1.0f);
+		model.identity().translate(pos.x(), pos.y(), 0.0f).translate(0.5f * size.x(), 0.5f * size.y(), 0.0f)
+				.rotate((float) Math.toRadians(rotate), 0.0f, 0.0f, 1.0f)
+				.translate(-0.5f * size.x(), -0.5f * size.y(), 0.0f).scale(size.x(), size.y(), 1.0f);
 
-		texture.identity()
-		.translate(texPos.x() / maxFrame.x(), texPos.y() / maxFrame.y(), 0.0f)
-		.scale(1 / maxFrame.x(), 1 / maxFrame.y(), 1.0f);
-		
+		texture.identity().translate(texPos.x() / maxFrame.x(), texPos.y() / maxFrame.y(), 0.0f).scale(1 / maxFrame.x(),
+				1 / maxFrame.y(), 1.0f);
+
 		try (MemoryStack stack = stackPush()) {
 			FloatBuffer buf = stack.callocFloat(16);
-			
+
 			buf = model.get(buf);
 
 			glUniformMatrix4fv(modelMatrixLocation, false, buf);
@@ -61,8 +57,6 @@ public class DPDTRenderer extends Renderer {
 
 			glUniformMatrix4fv(textureMatrixLocation, false, buf);
 		}
-
-		
 
 		// glEnableVertexAttribArray(0);
 		// glEnableVertexAttribArray(1);

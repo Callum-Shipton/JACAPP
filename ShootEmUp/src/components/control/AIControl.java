@@ -22,7 +22,7 @@ public class AIControl extends BaseControl {
 	private BaseMovement movement;
 	private BaseAttack attack;
 	private int counter = 0;
-	
+
 	private int aggression = 30;
 	private AStarSearch search;
 	private BaseGraphics playerGraphics;
@@ -56,11 +56,13 @@ public class AIControl extends BaseControl {
 
 		Vector2i goalVector = search.getGridPosition(playerGraphics.getX(), playerGraphics.getY());
 		Vector2i startVector = search.getGridPosition(graphics.getX(), graphics.getY());
-		Logger.debug("Entity: " + e.getId() +  " at Current Tile: " + startVector.x() + ", " + startVector.y(), Category.AI);
+		Logger.debug("Entity: " + e.getId() + " at Current Tile: " + startVector.x() + ", " + startVector.y(),
+				Category.AI);
 
 		Vector2i target = search.findPath(goalVector, startVector);
 
-		Vector2f movementVector = calculateMovementVector(new Vector2f(target.x(), target.y()), graphics.getX(), graphics.getY(), movement.getSpeed());
+		Vector2f movementVector = calculateMovementVector(new Vector2f(target.x(), target.y()), graphics.getX(),
+				graphics.getY(), movement.getSpeed());
 
 		if (movementVector.length() > 0) {
 			if (graphics instanceof AnimatedGraphics) {

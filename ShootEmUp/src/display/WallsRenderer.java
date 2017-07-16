@@ -15,15 +15,15 @@ import entity.Entity;
 public class WallsRenderer extends IRenderer {
 
 	private Map<Vector2i, Entity> renderData;
-	
-	public WallsRenderer(Map<Vector2i, Entity> renderData, Vector2f texMax, float width, float height){
+
+	public WallsRenderer(Map<Vector2i, Entity> renderData, Vector2f texMax, float width, float height) {
 		super(texMax, width, height);
 		this.renderData = renderData;
 	}
-	
+
 	@Override
 	public void initRenderData() {
-		
+
 		this.amount = renderData.size();
 		instanceFloatBuffer = BufferUtils.createByteBuffer(this.amount * 4 * 4).asFloatBuffer();
 

@@ -18,44 +18,39 @@ public class XboxController implements Controller {
 	private FloatBuffer axes;
 	private ByteBuffer buttons;
 	private ByteBuffer pov;
-	
-	public XboxController(int id, String name){
+
+	public XboxController(int id, String name) {
 		this.id = id;
 		this.name = name;
 		axes = glfwGetJoystickAxes(id);
 		buttons = glfwGetJoystickButtons(id);
-		//pov = glfwGetJoystickHats(id);
+		// pov = glfwGetJoystickHats(id);
 	}
+
 	@Override
 	public void poll() {
 		axes = glfwGetJoystickAxes(id);
 		buttons = glfwGetJoystickButtons(id);
-		
+
 		axisMap();
 		buttonMap();
-		
-		//Axis Debugging
-		/*
-		int i = 0;
-		while (axes.hasRemaining()) {
-			float axis = axes.get();
-			Logger.debug("Joystick " + id + ": axis " + i + ": " + axis, Category.CONTROLLER);
-			i++;
-		}
-		*/
 
-		//Button Debugging
+		// Axis Debugging
 		/*
-		i = 0;
-		while (buttons.hasRemaining()) {
-			byte button = buttons.get();
-			Logger.debug("Joystick " + id + ": button " + i + ": " + button, Category.CONTROLLER);
-			i++;
-		}
-		*/
-		
-		//pov = glfwGetJoystickHats(id);
-		
+		 * int i = 0; while (axes.hasRemaining()) { float axis = axes.get();
+		 * Logger.debug("Joystick " + id + ": axis " + i + ": " + axis,
+		 * Category.CONTROLLER); i++; }
+		 */
+
+		// Button Debugging
+		/*
+		 * i = 0; while (buttons.hasRemaining()) { byte button = buttons.get();
+		 * Logger.debug("Joystick " + id + ": button " + i + ": " + button,
+		 * Category.CONTROLLER); i++; }
+		 */
+
+		// pov = glfwGetJoystickHats(id);
+
 	}
 
 	@Override
@@ -63,7 +58,7 @@ public class XboxController implements Controller {
 		int button = 0;
 		while (buttons.hasRemaining()) {
 			byte value = buttons.get();
-			switch(button) {
+			switch (button) {
 			case 0: // A
 				Keyboard.setKey(GLFW.GLFW_KEY_ENTER, value);
 				break;
@@ -102,7 +97,7 @@ public class XboxController implements Controller {
 			}
 			button++;
 		}
-		
+
 	}
 
 	@Override
@@ -110,7 +105,7 @@ public class XboxController implements Controller {
 		int axis = 0;
 		while (axes.hasRemaining()) {
 			float value = axes.get();
-			switch(axis) {
+			switch (axis) {
 
 			case 0: // Left Stick X (-1 LEFT) (1 RIGHT)
 				if (value < (-1 * this.axisDead)) {
@@ -164,9 +159,8 @@ public class XboxController implements Controller {
 				}
 				break;
 			}
-		axis++;
+			axis++;
 		}
 	}
-	
-	
+
 }

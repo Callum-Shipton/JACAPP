@@ -87,45 +87,43 @@ public final class FileManager {
 		}
 		return properties;
 	}
-	
+
 	public static ByteBuffer ioResourceToByteBuffer(String resource, int bufferSize) throws IOException {
-        ByteBuffer buffer;
+		ByteBuffer buffer;
 
-        Path path = Paths.get(resource);
-        if (Files.isReadable(path)) {
-            try (SeekableByteChannel fc = Files.newByteChannel(path)) {
-                buffer = BufferUtils.createByteBuffer((int)fc.size() + 1);
-                while (fc.read(buffer) != -1) {
-                    ;
-                }
-            }
-        } else {
-            try (
-                InputStream source = FileManager.class.getResourceAsStream(resource);
-                ReadableByteChannel rbc = Channels.newChannel(source)
-            ) {
-                buffer = createByteBuffer(bufferSize);
+		Path path = Paths.get(resource);
+		if (Files.isReadable(path)) {
+			try (SeekableByteChannel fc = Files.newByteChannel(path)) {
+				buffer = BufferUtils.createByteBuffer((int) fc.size() + 1);
+				while (fc.read(buffer) != -1) {
+					;
+				}
+			}
+		} else {
+			try (InputStream source = FileManager.class.getResourceAsStream(resource);
+					ReadableByteChannel rbc = Channels.newChannel(source)) {
+				buffer = createByteBuffer(bufferSize);
 
-                while (true) {
-                    int bytes = rbc.read(buffer);
-                    if (bytes == -1) {
-                        break;
-                    }
-                    if (buffer.remaining() == 0) {
-                        buffer = resizeBuffer(buffer, buffer.capacity() * 2);
-                    }
-                }
-            }
-        }
+				while (true) {
+					int bytes = rbc.read(buffer);
+					if (bytes == -1) {
+						break;
+					}
+					if (buffer.remaining() == 0) {
+						buffer = resizeBuffer(buffer, buffer.capacity() * 2);
+					}
+				}
+			}
+		}
 
-        buffer.flip();
-        return buffer;
-    }
-	
+		buffer.flip();
+		return buffer;
+	}
+
 	private static ByteBuffer resizeBuffer(ByteBuffer buffer, int newCapacity) {
-        ByteBuffer newBuffer = BufferUtils.createByteBuffer(newCapacity);
-        buffer.flip();
-        newBuffer.put(buffer);
-        return newBuffer;
-    }
+		ByteBuffer newBuffer = BufferUtils.createByteBuffer(newCapacity);
+		buffer.flip();
+		newBuffer.put(buffer);
+		return newBuffer;
+	}
 }
