@@ -24,7 +24,6 @@ import static org.lwjgl.openal.AL10.alSourcePause;
 import static org.lwjgl.openal.AL10.alSourcePlay;
 import static org.lwjgl.openal.AL10.alSourceStop;
 import static org.lwjgl.openal.AL10.alSourcef;
-import static org.lwjgl.openal.AL10.alSourcefv;
 import static org.lwjgl.openal.AL10.alSourcei;
 import static org.lwjgl.openal.ALC10.ALC_DEFAULT_DEVICE_SPECIFIER;
 import static org.lwjgl.openal.ALC10.alcCloseDevice;
@@ -42,6 +41,10 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL;
@@ -71,22 +74,12 @@ public class Audio {
 	/** Maximum data buffers we will need. */
 	public static final int NUM_BUFFERS = 3;
 
-	/** Maximum emissions we will need. */
-	public static final int NUM_SOURCES = 3;
-
-	/** Index of battle sound */
-	public static final int MENU = 0;
-
-	/** Index of gun 1 sound */
-	public static final int MAIN = 1;
-
-	public static final int SHOOT = 2;
+	private final Map<String, Integer> bufferMap = new HashMap<>();
+	private final Set<Integer> sourcesSet = new HashSet<>();
 
 	/** Buffers hold sound data. */
+	// TODO: change to allocated
 	IntBuffer buffer = BufferUtils.createIntBuffer(NUM_BUFFERS);
-
-	/** Sources are points emitting sound. */
-	IntBuffer source = BufferUtils.createIntBuffer(NUM_BUFFERS);
 
 	/** Position of the source sound. */
 	FloatBuffer sourcePos = BufferUtils.createFloatBuffer(3 * NUM_BUFFERS);
@@ -122,7 +115,8 @@ public class Audio {
 	}
 
 	public void destoyAL() {
-		alDeleteSources(source);
+		int[] array = sourcesSet.stream().mapToInt(i -> i).toArray();
+		alDeleteSources(IntBuffer.wrap(array));
 		alDeleteBuffers(buffer);
 		alcDestroyContext(context);
 		alcCloseDevice(device);
@@ -140,8 +134,6 @@ public class Audio {
 		ALCapabilities alCapabilities = AL.createCapabilities(alcCapabilities);
 
 		alGenBuffers(buffer);
-		alGenSources(source);
-
 		alGetError();
 
 		// Load the wav data.
@@ -160,7 +152,6 @@ public class Audio {
 	 * returned to the system. This function frees that memory.
 	 */
 	void killALData() {
-		alDeleteSources(source);
 		alDeleteBuffers(buffer);
 	}
 
@@ -177,9 +168,9 @@ public class Audio {
 		String menu = "/Music/Menu.ogg";
 		String shoot = "/Music/Shoot.ogg";
 
-		loadAudioFile(main, MAIN);
-		loadAudioFile(menu, MENU);
-		loadAudioFile(shoot, SHOOT);
+		loadAudioFile(main);
+		loadAudioFile(menu);
+		loadAudioFile(shoot);
 
 		// Do another error check and return.
 		if (alGetError() == AL_NO_ERROR) {
@@ -189,7 +180,7 @@ public class Audio {
 		return AL_FALSE;
 	}
 
-	private void loadAudioFile(String file, int location) {
+	private void loadAudioFile(String file) {
 		// Allocate space to store return information from the function
 		try (MemoryStack stack = stackPush()) {
 			IntBuffer channelsBuffer = stackMallocInt(1);
@@ -221,28 +212,42 @@ public class Audio {
 			}
 
 			// Send the data to OpenAL
-			alBufferData(buffer.get(location), format, rawAudioBuffer, sampleRate);
+			alBufferData(buffer.get(bufferMap.size()), format, rawAudioBuffer, sampleRate);
 
-			alSourcei(source.get(location), AL_BUFFER, buffer.get(location));
-			alSourcef(source.get(location), AL_PITCH, 1.0f);
-			alSourcef(source.get(location), AL_GAIN, 1.0f);
-			alSourcefv(source.get(location), AL_POSITION, (FloatBuffer) sourcePos.position(location * 3));
-			alSourcefv(source.get(location), AL_VELOCITY, (FloatBuffer) sourceVel.position(location * 3));
-			alSourcei(source.get(location), AL_LOOPING, AL_TRUE);
+			bufferMap.put(file, bufferMap.size());
 		}
 	}
 
 	public void pause(int musicId) {
 		checkALError();
-		alSourcePause(source.get(musicId));
+		alSourcePause(musicId);
 		checkALError();
 
 	}
 
 	public void play(int musicId) {
 		checkALError();
-		alSourcePlay(source.get(musicId));
+		alSourcePlay(musicId);
 		checkALError();
+	}
+
+	public int createSourceFromFile(String audioFile, Boolean looping) {
+		Integer buf = bufferMap.get(audioFile);
+		if (buf == null) {
+			Logger.warn("Nonexistant sound file: " + audioFile);
+		}
+		return createSourceFromBuffer(buf, looping);
+	}
+
+	private int createSourceFromBuffer(int i, Boolean looping) {
+		IntBuffer sourceBuf = BufferUtils.createIntBuffer(1);
+		alGenSources(sourceBuf);
+		int sourceId = sourceBuf.get(0);
+		alSourcei(sourceId, AL_BUFFER, buffer.get(i));
+		alSourcef(sourceId, AL_PITCH, 1.0f);
+		alSourcef(sourceId, AL_GAIN, 1.0f);
+		alSourcei(sourceId, AL_LOOPING, looping ? AL_TRUE : AL_FALSE);
+		return sourceId;
 	}
 
 	/**
@@ -259,7 +264,7 @@ public class Audio {
 
 	public void stop(int musicId) {
 		checkALError();
-		alSourceStop(source.get(musicId));
+		alSourceStop(musicId);
 		checkALError();
 	}
 

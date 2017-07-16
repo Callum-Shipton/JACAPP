@@ -67,8 +67,8 @@ public final class EnemyBuilder {
 		BaseControl enemyControl = new AIControl(enemyGraphics, enemyAttack, enemyMovement);
 		BaseInventory enemyInventory = new BaseInventory(enemyGraphics, enemyAttack, 1);
 
-		Map<Message, String> sounds = new HashMap<Message, String>();
-		sounds.put(Message.SHOOT, "doesn't matter");
+		Map<Message, String> sounds = new HashMap<>();
+		sounds.put(Message.SHOOT, "/Music/Shoot.ogg");
 		BaseAudio enemyAudio = new EventAudio(sounds);
 
 		newEnemy.addComponent(enemyAttack);

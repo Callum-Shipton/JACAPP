@@ -6,13 +6,18 @@ import loop.Loop;
 
 public class MusicPlayer {
 
-	private Audio audio;
-	private int backgroundMusic = Audio.MENU;
+	private final Audio audio;
+	private int backgroundMusic;
 	private boolean pause = false;
+	public final int menu;
+	public final int main;
 
 	public MusicPlayer() {
 		audio = new Audio();
 		audio.initAL();
+		menu = audio.createSourceFromFile("/Music/Menu.ogg", true);
+		main = audio.createSourceFromFile("/Music/Main.ogg", true);
+		backgroundMusic = menu;
 	}
 
 	public void changeCurrentMusic(int index) {
@@ -40,8 +45,12 @@ public class MusicPlayer {
 		audio.play(backgroundMusic);
 	}
 
-	public void play(String sound) {
-		audio.play(Audio.SHOOT);
+	public int createSource(String sound, Boolean looping) {
+		return audio.createSourceFromFile(sound, looping);
+	}
+
+	public void playSource(int source) {
+		audio.play(source);
 	}
 
 	public void stopBackgroundMusic() {

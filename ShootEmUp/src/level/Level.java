@@ -19,11 +19,11 @@ import object.EntityMap;
 
 public class Level {
 
-	private EntityMap eMap;
-	private EntityStorage entityStorage;
+	private final EntityMap eMap;
+	private final EntityStorage entityStorage;
 
-	private Set<Spawner> spawners;
-	private LevelMap map;
+	private final Set<Spawner> spawners;
+	private final LevelMap map;
 
 	private int currentWave = 1;
 	private static final int MAX_WAVE = 10;
@@ -33,8 +33,8 @@ public class Level {
 
 	private boolean waveActive = true;
 
-	private int radiusLocation;
-	private int radiusLocationInst;
+	private final int radiusLocation;
+	private final int radiusLocationInst;
 
 	private static final float RADIUS = 250.0f;
 	private static final float RADIUS_INCREASE_PER_LEVEL = 25.0f;
@@ -100,7 +100,7 @@ public class Level {
 			waveActive = false;
 		}
 
-		if (!waveActive && enemies <= 0) {
+		if (!waveActive && (enemies <= 0)) {
 			nextWave();
 		}
 

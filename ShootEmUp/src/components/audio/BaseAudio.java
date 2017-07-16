@@ -8,7 +8,7 @@ import components.TypeComponent;
 import entity.Entity;
 
 public abstract class BaseAudio extends Component implements AudioComponent {
-	Set<String> audioPlaying = new HashSet<>();
+	Set<Integer> audioPlaying = new HashSet<>();
 
 	@Override
 	public void destroy(Entity e) {

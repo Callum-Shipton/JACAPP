@@ -1,7 +1,6 @@
 package main;
 
 import audio.MusicPlayer;
-import audio.music.Audio;
 import display.Art;
 import display.ImageProcessor;
 import game.Game;
@@ -29,7 +28,7 @@ public class ShootEmUp implements Game {
 	public static void startGame() {
 		menuSystem.setMainMenu(false);
 		menuSystem.clearMenus();
-		musicPlayer.changeCurrentMusic(Audio.MAIN);
+		musicPlayer.changeCurrentMusic(musicPlayer.main);
 		paused = false;
 	}
 
@@ -62,7 +61,7 @@ public class ShootEmUp implements Game {
 			Keyboard.setKey(Loop.getKeys().fullscreen);
 		}
 
-		if (!menuSystem.isMainMenu() && Keyboard.getKey(Loop.getKeys().pause) == 1) {
+		if (!menuSystem.isMainMenu() && (Keyboard.getKey(Loop.getKeys().pause) == 1)) {
 			pause();
 		}
 
