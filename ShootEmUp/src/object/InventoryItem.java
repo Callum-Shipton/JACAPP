@@ -83,8 +83,8 @@ public abstract class InventoryItem<I extends InventoryItem<?>> implements Datab
 
 	public void initSystem(Class<I> itemClass) {
 		Map<String, JsonArray> jsonObjects = findFiles(getDirectoryPath());
-		for (Entry<String, JsonArray> type : jsonObjects.entrySet()) {
-			addToSystem(type.getKey(), type.getValue(), itemClass);
+		for (Entry<String, JsonArray> itemType : jsonObjects.entrySet()) {
+			addToSystem(itemType.getKey(), itemType.getValue(), itemClass);
 		}
 	}
 
@@ -92,13 +92,13 @@ public abstract class InventoryItem<I extends InventoryItem<?>> implements Datab
 		Map<String, Map<String, I>> itemSystem = getSystem();
 		for (JsonElement item : type) {
 			String subType = typeName.substring(0, typeName.length() - 5);
-			String name = item.getAsJsonObject().get("name").getAsString();
+			String itemName = item.getAsJsonObject().get("name").getAsString();
 			if (!itemSystem.containsKey(subType)) {
 				itemSystem.put(subType, new HashMap<String, I>());
 			}
 			I a = g.fromJson(item, itemClass);
 			a.type = subType;
-			itemSystem.get(subType).put(name, a);
+			itemSystem.get(subType).put(itemName, a);
 		}
 	}
 

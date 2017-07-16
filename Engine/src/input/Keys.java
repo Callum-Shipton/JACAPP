@@ -40,8 +40,4 @@ public class Keys {
 	public int potion4 = GLFW_KEY_4;
 
 	public int shoot = GLFW_KEY_SPACE;
-
-	public Keys() {
-
-	}
 }

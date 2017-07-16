@@ -18,7 +18,6 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	protected int speed;
 	protected int realSpeed;
 	protected BaseCollision BC;
-	protected boolean flat;
 
 	private boolean frost = false;
 	private int frostCounter = 0;
@@ -29,25 +28,21 @@ public abstract class BaseMovement extends Component implements MovementComponen
 
 	}
 
-	public boolean getFlat() {
-		return this.flat;
-	}
-
 	public int getSpeed() {
-		return this.speed;
+		return speed;
 	}
 
 	@Override
 	public TypeComponent getType() {
-		return this.type;
+		return type;
 	}
 
 	public void increaseSpeed(int increase) {
-		this.speed += increase;
+		speed += increase;
 	}
 
 	public boolean isFrost() {
-		return this.frost;
+		return frost;
 	}
 
 	@Override
@@ -71,10 +66,6 @@ public abstract class BaseMovement extends Component implements MovementComponen
 			BC.setGridPos(eMap.getGridPos(e));
 			eMap.addEntity(BC.getGridPos(), e);
 		}
-	}
-
-	public void setFlat(boolean flat) {
-		this.flat = flat;
 	}
 
 	public void setFrost(boolean frost) {

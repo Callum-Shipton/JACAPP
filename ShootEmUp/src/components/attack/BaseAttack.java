@@ -35,17 +35,18 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 	private boolean fire = false;
 	private int fireCounter = 0;
-	private final int FIRE_TIME = 1;
+	private static final int FIRE_TIME = 1;
 	private int fireStop = 0;
-	private final int FIRE_HITS = 10;
+	private static final int FIRE_HITS = 10;
+
 	private boolean poison = false;
 	private int poisonCounter = 0;
-	private final int POISON_TIME = 2;
+	private static final int POISON_TIME = 2;
 
 	public BaseAttack(TypeAttack type) {
 		this.type = type;
-		this.healthRegen = 100;
-		this.manaRegen = 100;
+		healthRegen = 100;
+		manaRegen = 100;
 	}
 
 	public BaseAttack(TypeAttack type, int health, int mana, Weapon weapon) {
@@ -54,49 +55,49 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 		this.weapon = weapon;
 		this.health = health;
-		this.maxHealth = health;
-		this.maxHealthRegen = this.healthRegen;
+		maxHealth = health;
+		maxHealthRegen = healthRegen;
 		this.mana = mana;
 
-		this.maxMana = mana;
-		this.maxManaRegen = this.manaRegen;
+		maxMana = mana;
+		maxManaRegen = manaRegen;
 	}
 
 	public void addHealth(int i) {
-		this.health += i;
-		if (this.health > this.maxHealth) {
-			this.health = this.maxHealth;
+		health += i;
+		if (health > maxHealth) {
+			health = maxHealth;
 		}
 	}
 
 	public void addMana(int i) {
-		this.mana += i;
-		if (this.mana > this.maxMana) {
-			this.mana = this.maxMana;
+		mana += i;
+		if (mana > maxMana) {
+			mana = maxMana;
 		}
 	}
 
 	@Override
 	public boolean attack(Entity e, int dir) {
-		if (this.fireCountdown <= 0) {
-			if (this.mana >= this.weapon.getManaCost()) {
-				this.weapon.attack(e, dir);
-				this.mana -= this.weapon.getManaCost();
-				this.fireCountdown = this.weapon.getFireRate();
+		if (fireCountdown <= 0) {
+			if (mana >= weapon.getManaCost()) {
+				weapon.attack(e, dir);
+				mana -= weapon.getManaCost();
+				fireCountdown = weapon.getFireRate();
 				return true;
 			}
-			
+
 		}
-		this.fireCountdown--;
+		fireCountdown--;
 		return false;
-		}
+	}
 
 	public void damage(int damage, Entity e) {
-		if (this.armourValue != 0) {
-			damage = damage / this.armourValue;
+		if (armourValue != 0) {
+			damage = damage / armourValue;
 		}
-		this.health -= damage;
-		if (this.health <= 0) {
+		health -= damage;
+		if (health <= 0) {
 			die(e);
 		}
 	}
@@ -153,23 +154,23 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		healthRegen();
 		manaRegen();
 
-		if (this.fire == true) {
-			this.fireCounter++;
-			if (this.fireCounter >= Loop.ticks(this.FIRE_TIME)) {
+		if (fire == true) {
+			fireCounter++;
+			if (fireCounter >= Loop.ticks(FIRE_TIME)) {
 				damage(1, e);
-				this.fireCounter = 0;
-				this.fireStop++;
-				if (this.fireStop > this.FIRE_HITS) {
-					this.fire = false;
-					this.fireStop = 0;
+				fireCounter = 0;
+				fireStop++;
+				if (fireStop > FIRE_HITS) {
+					fire = false;
+					fireStop = 0;
 				}
 			}
 		}
-		if (this.poison == true) {
-			this.poisonCounter++;
-			if (this.poisonCounter > Loop.ticks(this.POISON_TIME)) {
+		if (poison == true) {
+			poisonCounter++;
+			if (poisonCounter > Loop.ticks(POISON_TIME)) {
 				damage(2, e);
-				this.poisonCounter = 0;
+				poisonCounter = 0;
 			}
 		}
 	}

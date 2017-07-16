@@ -37,23 +37,23 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 	protected TypeComponent type = TypeComponent.INVENTORY;
 
-	protected final String BOW = "Bow";
-	protected final String DAGGER = "Dagger";
-	protected final String ONE_HANDED = "OneHanded";
-	protected final String TWO_HANDED = "TwoHanded";
-	protected final String STAFF = "Staff";
-	protected final String CROSSBOW = "Crossbow";
+	protected static final String BOW = "Bow";
+	protected static final String DAGGER = "Dagger";
+	protected static final String ONE_HANDED = "OneHanded";
+	protected static final String TWO_HANDED = "TwoHanded";
+	protected static final String STAFF = "Staff";
+	protected static final String CROSSBOW = "Crossbow";
 
 	protected int coins;
 
-	protected final int MAX_LEVEL = 99;
+	protected static final int MAX_LEVEL = 99;
 	protected int level;
 
 	protected int exp;
 	protected int expBound;
 	protected int levelPoints = 0;
 
-	protected List<InventoryItem<?>> inventory;
+	protected List<InventoryItem<?>> inventory = new ArrayList<>();
 	protected int inventorySize = 5;
 	protected Map<TypePotion, Potion> potions = new EnumMap<TypePotion, Potion>(TypePotion.class); // NOSONAR
 	protected int maxPotions = 5;
@@ -67,51 +67,51 @@ public class BaseInventory extends Component implements InventoryComponent {
 		this.BG = BG;
 		this.BA = BA;
 		this.level = level;
-		this.expBound = level + 1;
-		this.inventory = new ArrayList<>();
+		expBound = level + 1;
+
 		switch (BA.getAttackType()) {
 		case ARCHER:
-			this.weaponTypes[0] = BOW;
-			this.weaponTypes[1] = DAGGER;
+			weaponTypes[0] = BOW;
+			weaponTypes[1] = DAGGER;
 			break;
 		case MAGE:
-			this.weaponTypes[0] = STAFF;
-			this.weaponTypes[1] = DAGGER;
+			weaponTypes[0] = STAFF;
+			weaponTypes[1] = DAGGER;
 			break;
 		case WARRIOR:
-			this.weaponTypes[0] = ONE_HANDED;
-			this.weaponTypes[1] = TWO_HANDED;
+			weaponTypes[0] = ONE_HANDED;
+			weaponTypes[1] = TWO_HANDED;
 			break;
 		case BATTLE_MAGE:
-			this.weaponTypes[0] = ONE_HANDED;
-			this.weaponTypes[1] = STAFF;
+			weaponTypes[0] = ONE_HANDED;
+			weaponTypes[1] = STAFF;
 			break;
 		case ROGUE:
-			this.weaponTypes[0] = CROSSBOW;
-			this.weaponTypes[1] = DAGGER;
+			weaponTypes[0] = CROSSBOW;
+			weaponTypes[1] = DAGGER;
 			break;
 		default:
-			this.weaponTypes[0] = ONE_HANDED;
-			this.weaponTypes[1] = TWO_HANDED;
+			weaponTypes[0] = ONE_HANDED;
+			weaponTypes[1] = TWO_HANDED;
 		}
 	}
 
 	public BaseInventory(BaseGraphics BG, PlayerAttack BA, CharacterSave save) {
 		this(BG, BA, save.getPlayerLevel());
-		this.inventory = save.getInventory();
-		this.inventorySize = save.getInventorySize();
-		this.potions = save.getPotions();
-		this.maxPotions = save.getMaxPotions();
-		this.exp = save.getExp();
-		this.coins = save.getCoins();
+		inventory = save.getInventory();
+		inventorySize = save.getInventorySize();
+		potions = save.getPotions();
+		maxPotions = save.getMaxPotions();
+		exp = save.getExp();
+		coins = save.getCoins();
 	}
 
 	public void addInventorySize(int addition) {
-		this.inventorySize += addition;
+		inventorySize += addition;
 	}
 
 	public void addMaxPotions(int addition) {
-		this.maxPotions += addition;
+		maxPotions += addition;
 	}
 
 	@Override
@@ -132,28 +132,28 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 		switch (rand.nextInt(3)) {
 		case 0:
-			this.BA.getWeapon().destroy(e);
+			BA.getWeapon().destroy(e);
 			break;
 		case 1:
 			switch (rand.nextInt(4)) {
 			case 0:
-				if (this.BA.getHelmet() != null) {
-					this.BA.getHelmet().destroy(e);
+				if (BA.getHelmet() != null) {
+					BA.getHelmet().destroy(e);
 				}
 				break;
 			case 1:
-				if (this.BA.getChest() != null) {
-					this.BA.getChest().destroy(e);
+				if (BA.getChest() != null) {
+					BA.getChest().destroy(e);
 				}
 				break;
 			case 2:
-				if (this.BA.getLegs() != null) {
-					this.BA.getLegs().destroy(e);
+				if (BA.getLegs() != null) {
+					BA.getLegs().destroy(e);
 				}
 				break;
 			case 3:
-				if (this.BA.getBoots() != null) {
-					this.BA.getBoots().destroy(e);
+				if (BA.getBoots() != null) {
+					BA.getBoots().destroy(e);
 				}
 				break;
 			default:
@@ -183,18 +183,18 @@ public class BaseInventory extends Component implements InventoryComponent {
 	private void dropCoin() {
 		Entity item = new Entity();
 
-		AnimatedGraphics CoinG = null;
-		PointSpawn CoinS;
-		PickupCollision CoinC;
+		AnimatedGraphics coinG = null;
+		PointSpawn coinS;
+		PickupCollision coinC;
 
-		CoinG = new AnimatedGraphics(ImageProcessor.getImage("Coin"), ImageProcessor.base, true,
-				this.BG.getX() - this.BG.getWidth(), this.BG.getY() - this.BG.getHeight());
+		coinG = new AnimatedGraphics(ImageProcessor.getImage("Coin"), ImageProcessor.base, true,
+				BG.getX() - BG.getWidth(), BG.getY() - BG.getHeight());
 
-		CoinS = new PointSpawn(CoinG, new Vector2f(this.BG.getX(), this.BG.getY()), item);
-		item.addComponent(CoinG);
-		CoinC = new PickupCollision(item, TypePickup.COIN, "Coin");
-		item.addComponent(CoinS);
-		item.addComponent(CoinC);
+		coinS = new PointSpawn(coinG, new Vector2f(BG.getX(), BG.getY()), item);
+		item.addComponent(coinG);
+		coinC = new PickupCollision(item, TypePickup.COIN, "Coin");
+		item.addComponent(coinS);
+		item.addComponent(coinC);
 		ShootEmUp.getGame().getCurrentLevel().addEntity(item);
 	}
 
@@ -238,69 +238,69 @@ public class BaseInventory extends Component implements InventoryComponent {
 	}
 
 	public int getCoins() {
-		return this.coins;
+		return coins;
 	}
 
 	public int getExp() {
-		return this.exp;
+		return exp;
 	}
 
 	public int getExpBound() {
-		return this.expBound;
+		return expBound;
 	}
 
 	public List<InventoryItem<?>> getInventory() {
-		return this.inventory;
+		return inventory;
 	}
 
 	public int getInventorySize() {
-		return this.inventorySize;
+		return inventorySize;
 	}
 
 	public int getLevel() {
-		return this.level;
+		return level;
 	}
 
 	public int getLevelPoints() {
-		return this.levelPoints;
+		return levelPoints;
 	}
 
 	public int getMaxPotions() {
-		return this.maxPotions;
+		return maxPotions;
 	}
 
 	public int getNumPotion(TypePotion type) {
-		if (this.potions.containsKey(type)) {
-			return this.potions.get(type).getQuantity();
+		if (potions.containsKey(type)) {
+			return potions.get(type).getQuantity();
 		}
 		return 0;
 	}
 
 	public int getNumPotions() {
 		int sum = 0;
-		for (TypePotion type : this.potions.keySet()) {
+		for (TypePotion type : potions.keySet()) {
 			sum += getNumPotion(type);
 		}
 		return sum;
 	}
 
 	public Map<TypePotion, Potion> getPotions() {
-		return this.potions;
+		return potions;
 	}
 
 	@Override
 	public TypeComponent getType() {
-		return this.type;
+		return type;
 	}
 
 	public void giveExp(int exp) {
 		this.exp += exp;
-		if (this.exp > this.expBound) {
-			if (this.level < this.MAX_LEVEL) {
+		if (this.exp > expBound) {
+			if (level < MAX_LEVEL) {
 				this.exp = 0;
-				this.level++;
-				this.levelPoints++;
-				this.expBound++;
+				level++;
+				levelPoints++;
+				expBound++;
 			}
 		}
 	}
@@ -308,41 +308,41 @@ public class BaseInventory extends Component implements InventoryComponent {
 	public boolean giveItem(TypePickup type, String name) {
 		switch (type) {
 		case WEAPON:
-			if (this.inventory.size() < this.inventorySize) {
-				this.inventory.add(new Weapon(name, 0));
+			if (inventory.size() < inventorySize) {
+				inventory.add(new Weapon(name, 0));
 				return true;
 			}
 			break;
 		case ARMOUR:
-			if (this.inventory.size() < this.inventorySize) {
-				this.inventory.add(new Armour(name));
+			if (inventory.size() < inventorySize) {
+				inventory.add(new Armour(name));
 				return true;
 			}
 			break;
 		case COIN:
-			if (this.coins < 99) {
-				this.coins++;
+			if (coins < 99) {
+				coins++;
 				return true;
 			}
 			break;
 		case POTION:
 			String potionType = name;
-			if (getNumPotions() < this.maxPotions) {
-				if (this.potions.containsKey(potionType)) {
-					this.potions.get(potionType).addPotion();
+			if (getNumPotions() < maxPotions) {
+				if (potions.containsKey(potionType)) {
+					potions.get(potionType).addPotion();
 				} else {
 					switch (potionType) {
 					case "Health":
-						this.potions.put(HEALTH, new OneTimePotion("Health"));
+						potions.put(HEALTH, new OneTimePotion("Health"));
 						break;
 					case "Mana":
-						this.potions.put(MANA, new OneTimePotion("Mana"));
+						potions.put(MANA, new OneTimePotion("Mana"));
 						break;
 					case "Speed":
-						this.potions.put(SPEED, new DurationPotion("Speed", 30));
+						potions.put(SPEED, new DurationPotion("Speed", 30));
 						break;
 					case "Knockback":
-						this.potions.put(KNOCKBACK, new DurationPotion("Knockback", 30));
+						potions.put(KNOCKBACK, new DurationPotion("Knockback", 30));
 						break;
 					default:
 					}
@@ -384,18 +384,18 @@ public class BaseInventory extends Component implements InventoryComponent {
 	}
 
 	public void spendLevelPoints(int points) {
-		this.levelPoints -= points;
+		levelPoints -= points;
 	}
 
 	@Override
 	public void update(Entity e) {
-		for (Potion potion : this.potions.values()) {
+		for (Potion potion : potions.values()) {
 			potion.update(e);
 		}
 	}
 
 	public void usePotion(TypePotion type) {
-		if (this.potions.containsKey(type))
-			this.potions.get(type).usePotion();
+		if (potions.containsKey(type))
+			potions.get(type).usePotion();
 	}
 }

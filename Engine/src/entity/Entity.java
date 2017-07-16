@@ -24,14 +24,14 @@ public class Entity implements DatableObject<Entity> {
 	private static Random rand = new Random();
 
 	private String name;
-	private transient UUID id;
-	private transient Map<TypeComponent, Component> components;
+	private UUID id;
+	private Map<TypeComponent, Component> components;
 
-	private transient boolean destroy;
+	private boolean destroy;
 
 	public Entity() {
 		id = UUID.randomUUID();
-		this.components = new HashMap<TypeComponent, Component>();
+		this.components = new HashMap<>();
 	}
 
 	public Entity(String name) {
