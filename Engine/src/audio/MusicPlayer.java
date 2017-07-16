@@ -15,8 +15,8 @@ public class MusicPlayer {
 	public MusicPlayer() {
 		audio = new Audio();
 		audio.initAL();
-		menu = audio.createSourceFromFile("/Music/Menu.ogg", true);
-		main = audio.createSourceFromFile("/Music/Main.ogg", true);
+		menu = audio.createSourceFromFile("Menu.ogg", true);
+		main = audio.createSourceFromFile("Main.ogg", true);
 		backgroundMusic = menu;
 	}
 

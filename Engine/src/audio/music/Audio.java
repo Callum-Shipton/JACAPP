@@ -36,6 +36,7 @@ import static org.lwjgl.stb.STBVorbis.stb_vorbis_decode_memory;
 import static org.lwjgl.system.MemoryStack.stackMallocInt;
 import static org.lwjgl.system.MemoryStack.stackPush;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
@@ -52,6 +53,8 @@ import org.lwjgl.openal.ALC;
 import org.lwjgl.openal.ALCCapabilities;
 import org.lwjgl.openal.ALCapabilities;
 import org.lwjgl.system.MemoryStack;
+
+import com.google.gson.JsonArray;
 
 import io.FileManager;
 import logging.Logger;
@@ -163,14 +166,8 @@ public class Audio {
 	 * play that buffer.
 	 */
 	int loadALData() {
-
-		String main = "/Music/Main.ogg";
-		String menu = "/Music/Menu.ogg";
-		String shoot = "/Music/Shoot.ogg";
-
-		loadAudioFile(main);
-		loadAudioFile(menu);
-		loadAudioFile(shoot);
+		
+		findFiles("res/Music");
 
 		// Do another error check and return.
 		if (alGetError() == AL_NO_ERROR) {
@@ -180,7 +177,7 @@ public class Audio {
 		return AL_FALSE;
 	}
 
-	private void loadAudioFile(String file) {
+	private void loadAudioFile(File file) {
 		// Allocate space to store return information from the function
 		try (MemoryStack stack = stackPush()) {
 			IntBuffer channelsBuffer = stackMallocInt(1);
@@ -188,7 +185,7 @@ public class Audio {
 
 			ByteBuffer buf;
 			try {
-				buf = FileManager.ioResourceToByteBuffer(file, 4 * 1024 * 1024);
+				buf = FileManager.ioResourceToByteBuffer(file.getPath(), 4 * 1024 * 1024);
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
@@ -214,7 +211,7 @@ public class Audio {
 			// Send the data to OpenAL
 			alBufferData(buffer.get(bufferMap.size()), format, rawAudioBuffer, sampleRate);
 
-			bufferMap.put(file, bufferMap.size());
+			bufferMap.put(file.getName(), bufferMap.size());
 		}
 	}
 
@@ -272,6 +269,20 @@ public class Audio {
 		int err = alGetError();
 		if (err != AL_NO_ERROR) {
 			throw new RuntimeException(alGetString(err));
+		}
+	}
+	
+	private void findFiles(String path) {
+
+		File folder = new File(path);
+		File[] listOfFiles = folder.listFiles();
+		for (File file : listOfFiles) {
+			if (file.isFile()) {
+				loadAudioFile(file);
+			}
+			if (file.isDirectory()) {
+				findFiles(file.getPath());
+			}
 		}
 	}
 
