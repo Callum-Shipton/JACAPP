@@ -46,7 +46,10 @@ public class MusicPlayer {
 	}
 
 	public int createSource(String sound, Boolean looping) {
-		return audio.createSourceFromFile(sound, looping);
+		if (!pause) {
+			return audio.createSourceFromFile(sound, looping);
+		}
+		return -1;
 	}
 
 	public void playSource(int source) {

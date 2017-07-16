@@ -22,7 +22,9 @@ public class EventAudio extends BaseAudio {
 		String sound = sounds.get(m);
 		if (sound != null) {
 			int soundId = audio.createSource(sound, false);
-			audio.playSource(soundId);
+			if (soundId != -1) {
+				audio.playSource(soundId);
+			}
 		} else {
 			Logger.warn("No sound mapped to message: " + m.toString());
 		}

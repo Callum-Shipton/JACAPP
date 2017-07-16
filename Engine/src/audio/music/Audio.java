@@ -54,8 +54,6 @@ import org.lwjgl.openal.ALCCapabilities;
 import org.lwjgl.openal.ALCapabilities;
 import org.lwjgl.system.MemoryStack;
 
-import com.google.gson.JsonArray;
-
 import io.FileManager;
 import logging.Logger;
 
@@ -166,7 +164,7 @@ public class Audio {
 	 * play that buffer.
 	 */
 	int loadALData() {
-		
+
 		findFiles("res/Music");
 
 		// Do another error check and return.
@@ -271,7 +269,7 @@ public class Audio {
 			throw new RuntimeException(alGetString(err));
 		}
 	}
-	
+
 	private void findFiles(String path) {
 
 		File folder = new File(path);
