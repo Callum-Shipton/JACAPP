@@ -71,19 +71,16 @@ public class Audio {
 	public static long device;
 
 	public static long context;
-
-	/** Maximum data buffers we will need. */
-	public static final int NUM_BUFFERS = 5;
+	
+	public static final String DIRECTORY = "res/Music/";
 
 	private final Map<String, Integer> bufferMap = new HashMap<>();
 	private final Set<Integer> sourcesSet = new HashSet<>();
 
 	/** Buffers hold sound data. */
 	// TODO: change to allocated
-	IntBuffer buffer = BufferUtils.createIntBuffer(NUM_BUFFERS);
+	IntBuffer buffer;
 
-	/** Position of the source sound. */
-	FloatBuffer sourcePos = BufferUtils.createFloatBuffer(3 * NUM_BUFFERS);
 
 	/*
 	 * These are 3D cartesian vector coordinates. A structure or class would be a
@@ -91,8 +88,6 @@ public class Audio {
 	 * leave it as is.
 	 */
 
-	/** Velocity of the source sound. */
-	FloatBuffer sourceVel = BufferUtils.createFloatBuffer(3 * NUM_BUFFERS);
 
 	/** Position of the listener. */
 	FloatBuffer listenerPos = BufferUtils.createFloatBuffer(3).put(new float[] { 0.0f, 0.0f, 0.0f });
@@ -134,7 +129,7 @@ public class Audio {
 		ALCCapabilities alcCapabilities = ALC.createCapabilities(device);
 		ALCapabilities alCapabilities = AL.createCapabilities(alcCapabilities);
 
-		alGenBuffers(buffer);
+
 		alGetError();
 
 		// Load the wav data.
@@ -165,8 +160,14 @@ public class Audio {
 	 */
 	int loadALData() {
 
-		findFiles("res/Music");
-
+		findFiles(DIRECTORY);
+		buffer = BufferUtils.createIntBuffer(bufferMap.size());
+		alGenBuffers(buffer);
+		
+		for(String file:bufferMap.keySet()) {
+			loadAudioFile(file);
+		}
+		
 		// Do another error check and return.
 		if (alGetError() == AL_NO_ERROR) {
 			return AL_TRUE;
@@ -175,7 +176,7 @@ public class Audio {
 		return AL_FALSE;
 	}
 
-	private void loadAudioFile(File file) {
+	private void loadAudioFile(String file) {
 		// Allocate space to store return information from the function
 		try (MemoryStack stack = stackPush()) {
 			IntBuffer channelsBuffer = stackMallocInt(1);
@@ -183,7 +184,7 @@ public class Audio {
 
 			ByteBuffer buf;
 			try {
-				buf = FileManager.ioResourceToByteBuffer(file.getPath(), 4 * 1024 * 1024);
+				buf = FileManager.ioResourceToByteBuffer(DIRECTORY+file, 4 * 1024 * 1024);
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
@@ -207,9 +208,7 @@ public class Audio {
 			}
 
 			// Send the data to OpenAL
-			alBufferData(buffer.get(bufferMap.size()), format, rawAudioBuffer, sampleRate);
-
-			bufferMap.put(file.getName(), bufferMap.size());
+			alBufferData(buffer.get(bufferMap.get(file)), format, rawAudioBuffer, sampleRate);
 		}
 	}
 
@@ -276,7 +275,7 @@ public class Audio {
 		File[] listOfFiles = folder.listFiles();
 		for (File file : listOfFiles) {
 			if (file.isFile()) {
-				loadAudioFile(file);
+				bufferMap.put(file.getName(), bufferMap.size());
 			}
 			if (file.isDirectory()) {
 				findFiles(file.getPath());
