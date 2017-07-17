@@ -2,7 +2,7 @@ package ai;
 
 import org.joml.Vector2i;
 
-public class TypeNode extends AStarNode implements Comparable<AStarNode> {
+public class TypeNode extends Node {
 
 	private String type;
 

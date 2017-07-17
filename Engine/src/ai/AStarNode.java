@@ -2,18 +2,15 @@ package ai;
 
 import org.joml.Vector2i;
 
-public class AStarNode implements Comparable<AStarNode> {
+public class AStarNode extends Node implements Comparable<AStarNode> {
 
-	protected Vector2i position;
-	protected int width;
 	private AStarNode parent;
 	private AStarNode child;
 	private Vector2i goal;
 	private int parentLength = 0;
 
 	public AStarNode(Vector2i position, int width) {
-		this.position = position;
-		this.width = width;
+		super(position, width);
 	}
 
 	public AStarNode(Vector2i position, int width, AStarNode parent, Vector2i goal) {
@@ -54,10 +51,6 @@ public class AStarNode implements Comparable<AStarNode> {
 
 	public AStarNode getParent() {
 		return parent;
-	}
-
-	public Vector2i getPosition() {
-		return position;
 	}
 
 	public int getParentLength() {
