@@ -1,30 +1,6 @@
 package audio.music;
 
-import static org.lwjgl.openal.AL10.AL_BUFFER;
-import static org.lwjgl.openal.AL10.AL_FALSE;
-import static org.lwjgl.openal.AL10.AL_FORMAT_MONO16;
-import static org.lwjgl.openal.AL10.AL_FORMAT_STEREO16;
-import static org.lwjgl.openal.AL10.AL_GAIN;
-import static org.lwjgl.openal.AL10.AL_LOOPING;
-import static org.lwjgl.openal.AL10.AL_NO_ERROR;
-import static org.lwjgl.openal.AL10.AL_ORIENTATION;
-import static org.lwjgl.openal.AL10.AL_PITCH;
-import static org.lwjgl.openal.AL10.AL_POSITION;
-import static org.lwjgl.openal.AL10.AL_TRUE;
-import static org.lwjgl.openal.AL10.AL_VELOCITY;
-import static org.lwjgl.openal.AL10.alBufferData;
-import static org.lwjgl.openal.AL10.alDeleteBuffers;
-import static org.lwjgl.openal.AL10.alDeleteSources;
-import static org.lwjgl.openal.AL10.alGenBuffers;
-import static org.lwjgl.openal.AL10.alGenSources;
-import static org.lwjgl.openal.AL10.alGetError;
-import static org.lwjgl.openal.AL10.alGetString;
-import static org.lwjgl.openal.AL10.alListenerfv;
-import static org.lwjgl.openal.AL10.alSourcePause;
-import static org.lwjgl.openal.AL10.alSourcePlay;
-import static org.lwjgl.openal.AL10.alSourceStop;
-import static org.lwjgl.openal.AL10.alSourcef;
-import static org.lwjgl.openal.AL10.alSourcei;
+import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.ALC_DEFAULT_DEVICE_SPECIFIER;
 import static org.lwjgl.openal.ALC10.alcCloseDevice;
 import static org.lwjgl.openal.ALC10.alcCreateContext;
@@ -42,10 +18,13 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL;
@@ -75,7 +54,7 @@ public class Audio {
 	public static final String DIRECTORY = "res/Music/";
 
 	private final Map<String, Integer> bufferMap = new HashMap<>();
-	private final Set<Integer> sourcesSet = new HashSet<>();
+	private final Map<String, ArrayList<Integer>> sourcesMap = new HashMap<>();
 
 	/** Buffers hold sound data. */
 	// TODO: change to allocated
@@ -111,8 +90,8 @@ public class Audio {
 	}
 
 	public void destoyAL() {
-		int[] array = sourcesSet.stream().mapToInt(i -> i).toArray();
-		alDeleteSources(IntBuffer.wrap(array));
+		//int[] array = sourcesMap.values().stream().flatMap(arraylist -> arraylist.stream()).mapToInt( i -> i ).toArray();
+		//alDeleteSources(IntBuffer.wrap(array));
 		alDeleteBuffers(buffer);
 		alcDestroyContext(context);
 		alcCloseDevice(device);
@@ -226,11 +205,27 @@ public class Audio {
 	}
 
 	public int createSourceFromFile(String audioFile, Boolean looping) {
+		if (sourcesMap.containsKey(audioFile)) {
+			try(MemoryStack stack = stackPush()){
+				IntBuffer state = stack.mallocInt(1);
+				for(int source : sourcesMap.get(audioFile)) {
+					alGetSourcei(source, AL_SOURCE_STATE, state);
+					if(state.get(0) == AL_STOPPED) {
+						return source;
+					}
+				}
+			}
+		}
 		Integer buf = bufferMap.get(audioFile);
 		if (buf == null) {
 			Logger.warn("Nonexistant sound file: " + audioFile);
 		}
-		return createSourceFromBuffer(buf, looping);
+		int source = createSourceFromBuffer(buf, looping);
+		if (!sourcesMap.containsKey(audioFile)) {
+			sourcesMap.put(audioFile, new ArrayList<Integer>());
+		}
+		sourcesMap.get(audioFile).add(source);
+		return source;
 	}
 
 	private int createSourceFromBuffer(int i, Boolean looping) {
@@ -243,6 +238,7 @@ public class Audio {
 		alSourcei(sourceId, AL_LOOPING, looping ? AL_TRUE : AL_FALSE);
 		return sourceId;
 	}
+
 
 	/**
 	 * void setListenerValues()
@@ -282,5 +278,7 @@ public class Audio {
 			}
 		}
 	}
+
+
 
 }

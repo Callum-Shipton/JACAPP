@@ -11,7 +11,7 @@ import main.ShootEmUp;
 
 public class EventAudio extends BaseAudio {
 	Map<Message, String> sounds = new EnumMap<>(Message.class);
-	MusicPlayer audio = ShootEmUp.getMusicPlayer();
+	
 
 	public EventAudio(Map<Message, String> sounds) {
 		this.sounds = sounds;
