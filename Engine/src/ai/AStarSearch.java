@@ -15,22 +15,22 @@ import logging.Logger;
 
 public class AStarSearch {
 
-	private Set<Vector2i> walls;
-	private GoalBounder goalBounder;
+	private final Set<Vector2i> walls;
+	private final GoalBounder goalBounder;
 
-	private Queue<AStarNode> openNodes = new PriorityQueue<>();
-	private Set<AStarNode> closedNodes = new HashSet<>();
-	private Map<String, AStarNode> childNodes = new HashMap<>();
-	private Deque<Vector2i> path = new LinkedList<>();
+	private final Queue<AStarNode> openNodes = new PriorityQueue<>();
+	private final Set<AStarNode> closedNodes = new HashSet<>();
+	private final Map<String, AStarNode> childNodes = new HashMap<>();
+	private final Deque<Vector2i> path = new LinkedList<>();
 
 	private AStarNode startNode;
 	private AStarNode goalNode;
 	private Vector2i target;
-	private int width;
+	private final int width;
 
 	private boolean playerOutOfReach = false;
 
-	private float nodeWidth;
+	private final float nodeWidth;
 
 	public AStarSearch(Set<Vector2i> walls, GoalBounder goalBounder, float nodeWidth, int width) {
 		this.walls = walls;
@@ -74,7 +74,7 @@ public class AStarSearch {
 
 	private void addNode(String key, GoalboundingTile goalboundingTile) {
 		AStarNode node = childNodes.get(key);
-		if (!closedNodes.contains(node) && !movesIntoWall(node.getPosition(), node.getWidth(), walls, key)) {
+		if (!closedNodes.contains(node) && !Node.movesIntoWall(node, walls, key)) {
 			if (goalboundingTile != null) {
 				if (goalboundingTile.getBox(key).boxContains(goalNode.getPosition(), width)) {
 					openNodes.add(node);
@@ -124,7 +124,7 @@ public class AStarSearch {
 
 	public Vector2i findPath(Vector2i goal, Vector2i start) {
 
-		if (goalNode != null && goal.equals(goalNode.getPosition())) {
+		if ((goalNode != null) && goal.equals(goalNode.getPosition())) {
 			if (start.equals(target) && !path.isEmpty()) {
 				target = path.pop();
 			} else if (path.isEmpty() && !playerOutOfReach) {
@@ -139,7 +139,7 @@ public class AStarSearch {
 				searchedNodes++;
 				AStarNode currentNode = openNodes.poll();
 
-				if (containsGoal(currentNode.getPosition(), currentNode.getWidth(), goalNode.getPosition())) {
+				if (containsGoal(currentNode.getPosition(), currentNode.getSize(), goalNode.getPosition())) {
 					target = findPathStart(currentNode);
 					return target;
 				}
@@ -160,8 +160,8 @@ public class AStarSearch {
 
 	public static boolean containsGoal(Vector2i origin, int size, Vector2i goal) {
 
-		for (int i = origin.x(); i < origin.x() + size; i++) {
-			for (int j = origin.y(); j < origin.y() + size; j++) {
+		for (int i = origin.x(); i < (origin.x() + size); i++) {
+			for (int j = origin.y(); j < (origin.y() + size); j++) {
 				if (goal.equals(new Vector2i(i, j))) {
 					return true;
 				}
@@ -173,59 +173,4 @@ public class AStarSearch {
 	public Vector2i getGridPosition(float x, float y) {
 		return new Vector2i(((int) (x / nodeWidth)), ((int) (y / nodeWidth)));
 	}
-
-	public static boolean movesIntoWall(Vector2i position, int size, Set<Vector2i> walls, String key) {
-		switch (key) {
-		case "NW":
-			return checkEdgesForWalls(position, size + 1, walls, "N")
-					|| checkEdgesForWalls(position, size + 1, walls, "W");
-		case "NE":
-			return checkEdgesForWalls(new Vector2i(position.x() - 1, position.y()), size + 1, walls, "N")
-					|| checkEdgesForWalls(new Vector2i(position.x() - 1, position.y()), size + 1, walls, "E");
-		case "SW":
-			return checkEdgesForWalls(new Vector2i(position.x(), position.y() - 1), size + 1, walls, "S")
-					|| checkEdgesForWalls(new Vector2i(position.x(), position.y() - 1), size + 1, walls, "W");
-		case "SE":
-			return checkEdgesForWalls(new Vector2i(position.x() - 1, position.y() - 1), size + 1, walls, "S")
-					|| checkEdgesForWalls(new Vector2i(position.x() - 1, position.y() - 1), size + 1, walls, "E");
-		default:
-			return checkEdgesForWalls(position, size, walls, key);
-		}
-
-	}
-
-	private static boolean checkEdgesForWalls(Vector2i position, int size, Set<Vector2i> walls, String key) {
-		switch (key) {
-		case "N":
-			for (int i = position.x(); i < position.x() + size; i++) {
-				if (walls.contains(new Vector2i(i, position.y()))) {
-					return true;
-				}
-			}
-			break;
-		case "S":
-			for (int i = position.x(); i < position.x() + size; i++) {
-				if (walls.contains(new Vector2i(i, position.y() + size - 1))) {
-					return true;
-				}
-			}
-			break;
-		case "W":
-			for (int j = position.y(); j < position.y() + size; j++) {
-				if (walls.contains(new Vector2i(position.x(), j))) {
-					return true;
-				}
-			}
-			break;
-		case "E":
-			for (int j = position.y(); j < position.y() + size; j++) {
-				if (walls.contains(new Vector2i(position.x() + size - 1, j))) {
-					return true;
-				}
-			}
-			break;
-		}
-		return false;
-	}
-
 }

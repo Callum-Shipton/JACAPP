@@ -26,13 +26,13 @@ import logging.Logger;
 
 public class GoalboundGenerator {
 
-	private Map<Integer, GoalboundingTile[][]> goalboundingMaps;
+	private final Map<Integer, GoalboundingTile[][]> goalboundingMaps;
 	private BufferedImage mapImage;
 	private Set<Vector2i> walls;
 
 	private static final int MAXIMUM_SIZE = 4;
-	private static final String IN_MAP_FILE = "/Levels/Level3.png";
-	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level3.bound";
+	private static final String IN_MAP_FILE = "/Levels/Level1.png";
+	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level1.bound";
 
 	private static final int BROWNWALL_COLOR = -7864299;
 	private static final int GREYWALL_COLOR = -8421505;
@@ -110,46 +110,61 @@ public class GoalboundGenerator {
 		}
 	}
 
-	private List<TypeNode> generateChildNodes(AStarNode startNode, int size) {
-		return generateChildNodes(startNode, null, size);
+	private List<TypeNode> generateChildNodes(TypeNode startNode) {
+		return generateChildNodes(startNode, null);
 	}
 
-	private List<TypeNode> generateChildNodes(AStarNode startNode, String type, int size) {
+	private List<TypeNode> generateChildNodes(TypeNode startNode, String type) {
 		List<TypeNode> childNodes = new ArrayList<>();
 
 		int startX = startNode.getPosition().x();
 		int startY = startNode.getPosition().y();
+		int size = startNode.size;
 
-		if (!AStarSearch.movesIntoWall(new Vector2i(startX, startY - 1), size, walls, "N")) {
-			childNodes.add(new TypeNode(new Vector2i(startX, startY - 1), type != null ? type : "N"));
-		}
-		if (!AStarSearch.movesIntoWall(new Vector2i(startX - 1, startY), size, walls, "W")) {
-			childNodes.add(new TypeNode(new Vector2i(startX - 1, startY), type != null ? type : "W"));
-		}
-		if (!AStarSearch.movesIntoWall(new Vector2i(startX, startY + 1), size, walls, "S")) {
-			childNodes.add(new TypeNode(new Vector2i(startX, startY + 1), type != null ? type : "S"));
-		}
-		if (!AStarSearch.movesIntoWall(new Vector2i(startX + 1, startY), size, walls, "E")) {
-			childNodes.add(new TypeNode(new Vector2i(startX + 1, startY), type != null ? type : "E"));
+		TypeNode north = new TypeNode(new Vector2i(startX, startY - 1), size, type != null ? type : "N");
+		if (!Node.movesIntoWall(north, walls, "N")) {
+			childNodes.add(north);
 		}
 
-		if (!AStarSearch.movesIntoWall(new Vector2i(startX - 1, startY - 1), size, walls, "NW")) {
-			childNodes.add(new TypeNode(new Vector2i(startX - 1, startY - 1), type != null ? type : "NW"));
+		TypeNode west = new TypeNode(new Vector2i(startX - 1, startY), size, type != null ? type : "W");
+		if (!Node.movesIntoWall(west, walls, "W")) {
+			childNodes.add(west);
 		}
-		if (!AStarSearch.movesIntoWall(new Vector2i(startX - 1, startY + 1), size, walls, "SW")) {
-			childNodes.add(new TypeNode(new Vector2i(startX - 1, startY + 1), type != null ? type : "SW"));
+
+		TypeNode south = new TypeNode(new Vector2i(startX, startY + 1), size, type != null ? type : "S");
+		if (!Node.movesIntoWall(south, walls, "S")) {
+			childNodes.add(south);
 		}
-		if (!AStarSearch.movesIntoWall(new Vector2i(startX + 1, startY + 1), size, walls, "SE")) {
-			childNodes.add(new TypeNode(new Vector2i(startX + 1, startY + 1), type != null ? type : "SE"));
+
+		TypeNode east = new TypeNode(new Vector2i(startX + 1, startY), size, type != null ? type : "E");
+		if (!Node.movesIntoWall(east, walls, "E")) {
+			childNodes.add(east);
 		}
-		if (!AStarSearch.movesIntoWall(new Vector2i(startX + 1, startY - 1), size, walls, "NE")) {
-			childNodes.add(new TypeNode(new Vector2i(startX + 1, startY - 1), type != null ? type : "NE"));
+
+		TypeNode northWest = new TypeNode(new Vector2i(startX - 1, startY - 1), size, type != null ? type : "NW");
+		if (!Node.movesIntoWall(northWest, walls, "NW")) {
+			childNodes.add(northWest);
+		}
+
+		TypeNode southWest = new TypeNode(new Vector2i(startX - 1, startY + 1), size, type != null ? type : "SW");
+		if (!Node.movesIntoWall(southWest, walls, "SW")) {
+			childNodes.add(southWest);
+		}
+
+		TypeNode southEast = new TypeNode(new Vector2i(startX + 1, startY + 1), size, type != null ? type : "SE");
+		if (!Node.movesIntoWall(southEast, walls, "SE")) {
+			childNodes.add(southEast);
+		}
+
+		TypeNode northEast = new TypeNode(new Vector2i(startX + 1, startY - 1), size, type != null ? type : "NE");
+		if (!Node.movesIntoWall(northEast, walls, "NE")) {
+			childNodes.add(northEast);
 		}
 
 		return childNodes;
 	}
 
-	private Map<String, BoundingBox> initBoundingBoxes(List<TypeNode> childNodes) {
+	private static Map<String, BoundingBox> initBoundingBoxes(List<TypeNode> childNodes) {
 		Map<String, BoundingBox> boxes = new HashMap<>();
 
 		for (TypeNode node : childNodes) {
@@ -159,7 +174,7 @@ public class GoalboundGenerator {
 		return boxes;
 	}
 
-	private void addNodesToQueue(List<TypeNode> nodes, Queue<TypeNode> open, Set<TypeNode> closed) {
+	private static void addNodesToQueue(List<TypeNode> nodes, Queue<TypeNode> open, Set<TypeNode> closed) {
 		for (TypeNode node : nodes) {
 			if (!closed.contains(node)) {
 				open.add(node);
@@ -176,7 +191,7 @@ public class GoalboundGenerator {
 
 			boxes.get(currentType).addPoint(current.getPosition());
 
-			List<TypeNode> childNodes = generateChildNodes(current, currentType, size);
+			List<TypeNode> childNodes = generateChildNodes(current, currentType);
 
 			addNodesToQueue(childNodes, open, closed);
 		}
@@ -228,9 +243,9 @@ public class GoalboundGenerator {
 				// list of already viewed tiles
 				Set<TypeNode> closed = new HashSet<>();
 
-				AStarNode start = new AStarNode(new Vector2i(x, y), size);
+				TypeNode start = new TypeNode(new Vector2i(x, y), size, null);
 
-				List<TypeNode> startingNodes = generateChildNodes(start, size);
+				List<TypeNode> startingNodes = generateChildNodes(start);
 
 				for (TypeNode node : startingNodes) {
 					open.add(node);
@@ -248,8 +263,8 @@ public class GoalboundGenerator {
 	}
 
 	private static boolean containsWall(Vector2i position, int size, Set<Vector2i> walls) {
-		for (int i = (int) position.x(); i < position.x() + size; i++) {
-			for (int j = (int) position.y(); j < position.y() + size; j++) {
+		for (int i = position.x(); i < (position.x() + size); i++) {
+			for (int j = position.y(); j < (position.y() + size); j++) {
 				if (walls.contains(new Vector2i(i, j))) {
 					return true;
 				}

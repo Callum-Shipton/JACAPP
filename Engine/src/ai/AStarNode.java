@@ -61,7 +61,8 @@ public class AStarNode extends Node implements Comparable<AStarNode> {
 		this.child = child;
 	}
 
-	public int getWidth() {
-		return width;
+	@Override
+	public int getSize() {
+		return size;
 	}
 }

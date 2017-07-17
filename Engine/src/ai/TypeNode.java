@@ -4,10 +4,10 @@ import org.joml.Vector2i;
 
 public class TypeNode extends Node {
 
-	private String type;
+	private final String type;
 
-	public TypeNode(Vector2i position, String type) {
-		super(position, 1);
+	public TypeNode(Vector2i position, int size, String type) {
+		super(position, size);
 		this.type = type;
 	}
 
