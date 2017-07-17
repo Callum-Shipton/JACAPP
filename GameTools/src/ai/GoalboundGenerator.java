@@ -31,8 +31,8 @@ public class GoalboundGenerator {
 	private Set<Vector2i> walls;
 
 	private static final int MAXIMUM_SIZE = 4;
-	private static final String IN_MAP_FILE = "/Levels/Level1.png";
-	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level1.bound";
+	private static final String IN_MAP_FILE = "/Levels/Level3.png";
+	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level3.bound";
 
 	private static final int BROWNWALL_COLOR = -7864299;
 	private static final int GREYWALL_COLOR = -8421505;
@@ -117,9 +117,9 @@ public class GoalboundGenerator {
 	private List<TypeNode> generateChildNodes(TypeNode startNode, String type) {
 		List<TypeNode> childNodes = new ArrayList<>();
 
-		int startX = startNode.getPosition().x();
-		int startY = startNode.getPosition().y();
-		int size = startNode.size;
+		final int startX = startNode.getPosition().x();
+		final int startY = startNode.getPosition().y();
+		final int size = startNode.size;
 
 		TypeNode north = new TypeNode(new Vector2i(startX, startY - 1), size, type != null ? type : "N");
 		if (!Node.movesIntoWall(north, walls, "N")) {
@@ -164,7 +164,7 @@ public class GoalboundGenerator {
 		return childNodes;
 	}
 
-	private static Map<String, BoundingBox> initBoundingBoxes(List<TypeNode> childNodes) {
+	private Map<String, BoundingBox> initBoundingBoxes(List<TypeNode> childNodes) {
 		Map<String, BoundingBox> boxes = new HashMap<>();
 
 		for (TypeNode node : childNodes) {
@@ -174,7 +174,7 @@ public class GoalboundGenerator {
 		return boxes;
 	}
 
-	private static void addNodesToQueue(List<TypeNode> nodes, Queue<TypeNode> open, Set<TypeNode> closed) {
+	private void addNodesToQueue(List<TypeNode> nodes, Queue<TypeNode> open, Set<TypeNode> closed) {
 		for (TypeNode node : nodes) {
 			if (!closed.contains(node)) {
 				open.add(node);
@@ -235,15 +235,15 @@ public class GoalboundGenerator {
 
 		@Override
 		public void run() {
-			if (!containsWall(new Vector2i(x, y), size, walls)) {
+			TypeNode start = new TypeNode(new Vector2i(x, y), size, null);
+
+			if (!start.containsWall(walls)) {
 
 				// queue for tiles to be looked at
 				Queue<TypeNode> open = new LinkedList<>();
 
 				// list of already viewed tiles
 				Set<TypeNode> closed = new HashSet<>();
-
-				TypeNode start = new TypeNode(new Vector2i(x, y), size, null);
 
 				List<TypeNode> startingNodes = generateChildNodes(start);
 
@@ -260,16 +260,5 @@ public class GoalboundGenerator {
 
 			}
 		}
-	}
-
-	private static boolean containsWall(Vector2i position, int size, Set<Vector2i> walls) {
-		for (int i = position.x(); i < (position.x() + size); i++) {
-			for (int j = position.y(); j < (position.y() + size); j++) {
-				if (walls.contains(new Vector2i(i, j))) {
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 }

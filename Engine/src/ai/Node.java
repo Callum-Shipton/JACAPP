@@ -13,6 +13,22 @@ public class Node {
 		this.size = size;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Node) {
+			return ((Node) o).getPosition().equals(position);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 139;
+		hash = (467 * hash) + position.x();
+		hash = (467 * hash) + position.y();
+		return hash;
+	}
+
 	public Vector2i getPosition() {
 		return position;
 	}
@@ -23,8 +39,8 @@ public class Node {
 
 	public static boolean movesIntoWall(Node node, Set<Vector2i> walls, String key) {
 
-		Vector2i position = node.getPosition();
-		int size = node.getSize();
+		final Vector2i position = node.getPosition();
+		final int size = node.getSize();
 
 		switch (key) {
 		case "NW":
@@ -75,6 +91,17 @@ public class Node {
 				}
 			}
 			break;
+		}
+		return false;
+	}
+
+	public boolean containsWall(Set<Vector2i> walls) {
+		for (int i = position.x(); i < (position.x() + size); i++) {
+			for (int j = position.y(); j < (position.y() + size); j++) {
+				if (walls.contains(new Vector2i(i, j))) {
+					return true;
+				}
+			}
 		}
 		return false;
 	}

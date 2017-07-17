@@ -29,22 +29,6 @@ public class AStarNode extends Node implements Comparable<AStarNode> {
 		return Double.compare(distance2, distance1);
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (o instanceof AStarNode) {
-			return ((AStarNode) o).getPosition().equals(position);
-		}
-		return false;
-	}
-
-	@Override
-	public int hashCode() {
-		int hash = 139;
-		hash = (467 * hash) + position.x();
-		hash = (467 * hash) + position.y();
-		return hash;
-	}
-
 	public AStarNode getChild() {
 		return child;
 	}
@@ -59,10 +43,5 @@ public class AStarNode extends Node implements Comparable<AStarNode> {
 
 	public void setChild(AStarNode child) {
 		this.child = child;
-	}
-
-	@Override
-	public int getSize() {
-		return size;
 	}
 }
