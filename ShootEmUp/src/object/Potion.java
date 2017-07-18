@@ -46,7 +46,7 @@ public abstract class Potion implements Serializable {
 		BaseGraphics EntityG = e.getComponent(TypeComponent.GRAPHICS);
 
 		BG = new AnimatedGraphics(ImageProcessor.getImage(type), ImageProcessor.base, true, 1f);
-		BS = new PointSpawn(new Vector2f(EntityG.getX() + BG.getWidth(), EntityG.getY()), item);
+		BS = new PointSpawn(new Vector2f(EntityG.getX() + BG.getWidth(), EntityG.getY()));
 		item.addComponent(BG);
 		BC = new PickupCollision(item, TypePickup.POTION, type);
 		Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
@@ -55,6 +55,7 @@ public abstract class Potion implements Serializable {
 		item.addComponent(BS);
 		item.addComponent(BC);
 		item.addComponent(audioComponent);
+		BS.spawn(item);
 		ShootEmUp.getGame().getCurrentLevel().addEntity(item);
 	}
 

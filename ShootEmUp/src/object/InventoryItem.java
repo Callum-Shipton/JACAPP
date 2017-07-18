@@ -52,7 +52,7 @@ public abstract class InventoryItem<I extends InventoryItem<?>> implements Datab
 		BaseGraphics entityG = e.getComponent(TypeComponent.GRAPHICS);
 
 		BG = new AnimatedGraphics(ImageProcessor.getImage(this.name), ImageProcessor.base, true, 1f);
-		BS = new PointSpawn(new Vector2f(entityG.getX() + BG.getWidth(), entityG.getY() + BG.getHeight()), item);
+		BS = new PointSpawn(new Vector2f(entityG.getX() + BG.getWidth(), entityG.getY() + BG.getHeight()));
 		item.addComponent(BG);
 		BC = new PickupCollision(item, this.typePickup, this.name);
 		Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
@@ -61,6 +61,7 @@ public abstract class InventoryItem<I extends InventoryItem<?>> implements Datab
 		item.addComponent(BS);
 		item.addComponent(BC);
 		item.addComponent(audioComponent);
+		BS.spawn(item);
 		ShootEmUp.getGame().getCurrentLevel().addEntity(item);
 	}
 

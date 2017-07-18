@@ -62,10 +62,14 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	@Override
 	public void receive(Message m, Entity e) {
 		if (m.getId() == MessageId.ENTITY_MOVED) {
-			EntityMap eMap = ShootEmUp.getGame().getCurrentLevel().geteMap();
-			eMap.removeEntity(BC.getGridPos(), e);
-			BC.setGridPos(eMap.getGridPos(e));
-			eMap.addEntity(BC.getGridPos(), e);
+			if (ShootEmUp.getGame().getCurrentLevel() != null) {
+				EntityMap eMap = ShootEmUp.getGame().getCurrentLevel().geteMap();
+				if (BC.getGridPos() != null) {
+					eMap.removeEntity(BC.getGridPos(), e);
+					BC.setGridPos(eMap.getGridPos(e));
+					eMap.addEntity(BC.getGridPos(), e);
+				}
+			}
 		}
 	}
 

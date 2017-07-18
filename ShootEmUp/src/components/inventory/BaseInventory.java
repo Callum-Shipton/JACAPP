@@ -63,12 +63,12 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 	protected String[] weaponTypes = new String[2];
 
-	protected BaseAttack BA;
-	protected BaseGraphics BG;
+	protected BaseAttack attackComponent;
+	protected BaseGraphics graphicsComponent;
 
-	public BaseInventory(BaseGraphics BG, BaseAttack BA, int level) {
-		this.BG = BG;
-		this.BA = BA;
+	public BaseInventory(BaseGraphics graphicsComponent, BaseAttack BA, int level) {
+		this.graphicsComponent = graphicsComponent;
+		this.attackComponent = BA;
 		this.level = level;
 		expBound = level + 1;
 
@@ -135,28 +135,28 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 		switch (rand.nextInt(3)) {
 		case 0:
-			BA.getWeapon().destroy(e);
+			attackComponent.getWeapon().destroy(e);
 			break;
 		case 1:
 			switch (rand.nextInt(4)) {
 			case 0:
-				if (BA.getHelmet() != null) {
-					BA.getHelmet().destroy(e);
+				if (attackComponent.getHelmet() != null) {
+					attackComponent.getHelmet().destroy(e);
 				}
 				break;
 			case 1:
-				if (BA.getChest() != null) {
-					BA.getChest().destroy(e);
+				if (attackComponent.getChest() != null) {
+					attackComponent.getChest().destroy(e);
 				}
 				break;
 			case 2:
-				if (BA.getLegs() != null) {
-					BA.getLegs().destroy(e);
+				if (attackComponent.getLegs() != null) {
+					attackComponent.getLegs().destroy(e);
 				}
 				break;
 			case 3:
-				if (BA.getBoots() != null) {
-					BA.getBoots().destroy(e);
+				if (attackComponent.getBoots() != null) {
+					attackComponent.getBoots().destroy(e);
 				}
 				break;
 			default:
@@ -191,9 +191,10 @@ public class BaseInventory extends Component implements InventoryComponent {
 		PickupCollision coinC;
 
 		coinG = new AnimatedGraphics(ImageProcessor.getImage("Coin"), ImageProcessor.base, true,
-				BG.getX() - BG.getWidth(), BG.getY() - BG.getHeight());
+				graphicsComponent.getX() - graphicsComponent.getWidth(),
+				graphicsComponent.getY() - graphicsComponent.getHeight());
 
-		coinS = new PointSpawn(new Vector2f(BG.getX(), BG.getY()), item);
+		coinS = new PointSpawn(new Vector2f(graphicsComponent.getX(), graphicsComponent.getY()));
 		item.addComponent(coinG);
 		coinC = new PickupCollision(item, TypePickup.COIN, "Coin");
 		Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
@@ -202,6 +203,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 		item.addComponent(coinS);
 		item.addComponent(coinC);
 		item.addComponent(audioComponent);
+		coinS.spawn(item);
 		ShootEmUp.getGame().getCurrentLevel().addEntity(item);
 	}
 
@@ -212,28 +214,28 @@ public class BaseInventory extends Component implements InventoryComponent {
 		if (item instanceof Armour) {
 			switch (((Armour) item).getType()) {
 			case "Boots":
-				equipped = BA.getBoots();
-				BA.setBoots((Armour) item);
+				equipped = attackComponent.getBoots();
+				attackComponent.setBoots((Armour) item);
 				break;
 			case "Legs":
-				equipped = BA.getLegs();
-				BA.setLegs((Armour) item);
+				equipped = attackComponent.getLegs();
+				attackComponent.setLegs((Armour) item);
 				break;
 			case "Chest":
-				equipped = BA.getChest();
-				BA.setChest((Armour) item);
+				equipped = attackComponent.getChest();
+				attackComponent.setChest((Armour) item);
 				break;
 			case "Helmet":
-				equipped = BA.getHelmet();
-				BA.setHelmet((Armour) item);
+				equipped = attackComponent.getHelmet();
+				attackComponent.setHelmet((Armour) item);
 				break;
 			default:
 			}
 		} else {
-			equipped = BA.getWeapon();
+			equipped = attackComponent.getWeapon();
 			if ((((Weapon) item).getType().compareTo(weaponTypes[0]) == 0)
 					|| (((Weapon) item).getType().compareTo(weaponTypes[1]) == 0)) {
-				BA.setWeapon((Weapon) item);
+				attackComponent.setWeapon((Weapon) item);
 			} else {
 				inventory.add(item);
 				equipped = null;

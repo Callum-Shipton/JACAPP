@@ -33,6 +33,7 @@ public abstract class PlayerBuilder {
 		player.addComponent(m);
 		player.addComponent(i);
 		player.addComponent(new PlayerControl(g, a, m, i));
+		s.spawn(player);
 	}
 
 	public static Entity buildPlayer(TypeAttack type) {
@@ -85,6 +86,6 @@ public abstract class PlayerBuilder {
 		default:
 			g = new PlayerGraphics(ImageProcessor.getImage("Warrior"), ImageProcessor.base, 1f);
 		}
-		s = new PointSpawn(new Vector2f(480.0f, 480.0f), player);
+		s = new PointSpawn(new Vector2f(480.0f, 480.0f));
 	}
 }

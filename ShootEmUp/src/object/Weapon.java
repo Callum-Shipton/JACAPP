@@ -128,13 +128,14 @@ public final class Weapon extends InventoryItem<Weapon> {
 			posX += (BGWidth - g.getWidth()) / 2;
 			posY -= g.getHeight();
 		}
-		PointSpawn s = new PointSpawn(new Vector2f(posX, posY), particle);
+		PointSpawn s = new PointSpawn(new Vector2f(posX, posY));
 		HitCollision c = new HitCollision(this);
 		FlyingMovement m = new FlyingMovement(c, g, 10);
 		particle.addComponent(s);
 		particle.addComponent(c);
 		particle.addComponent(m);
 		particle.addComponent(new RangeControl(g, m, this.range));
+		s.spawn(particle);
 
 		ShootEmUp.getGame().getCurrentLevel().addEntity(particle);
 		// ShootEmUp.getCurrentLevel().getSpawner().checkSpawn(particle);

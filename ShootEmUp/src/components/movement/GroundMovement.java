@@ -128,7 +128,6 @@ public class GroundMovement extends BaseMovement {
 	@Override
 	public void update(Entity e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public enum Axis {

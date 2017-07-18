@@ -5,9 +5,9 @@ import display.ImageProcessor;
 import gui.GuiMenu;
 import gui.MenuButton;
 import gui.VerticalLayout;
-import gui.buttons.BackButton;
 import gui.buttons.ExitButton;
 import gui.buttons.OpenMenuButton;
+import gui.buttons.ResumeButton;
 
 public abstract class PauseMenu extends GuiMenu {
 
@@ -36,7 +36,7 @@ public abstract class PauseMenu extends GuiMenu {
 
 		VerticalLayout nativeButtons = new VerticalLayout(x + 30, y + h - 94,
 				ImageProcessor.getImage("ExitButton").getHeight() / 2, 20);
-		nativeButtons.addMenuItem(new MenuButton(ImageProcessor.getImage("BackButton"), 0, 0, new BackButton()));
+		nativeButtons.addMenuItem(new MenuButton(ImageProcessor.getImage("BackButton"), 0, 0, new ResumeButton()));
 		nativeButtons.addMenuItem(new MenuButton(ImageProcessor.getImage("ExitButton"), 0, 0, new ExitButton()));
 		menuItems.add(nativeButtons);
 	}
