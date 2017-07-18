@@ -17,19 +17,19 @@ import object.EntityMap;
 public class GroundMovement extends BaseMovement {
 
 	protected BaseGraphics baseGraphics;
+	protected BaseCollision collisionComponent;
 
 	public GroundMovement(BaseCollision baseCollision, BaseGraphics baseGraphics, int speed) {
+		super(speed);
 		this.baseGraphics = baseGraphics;
-		this.BC = baseCollision;
-		this.speed = speed;
-		this.realSpeed = speed;
+		this.collisionComponent = baseCollision;
 	}
 
 	private Set<Vector2f> reactToCollision(Vector4f collVec, Entity hitEntity, Entity currentEntity, Axis axis,
 			EntityMap eMap) {
 		Set<Vector2f> newGrid = eMap.getGridPos(currentEntity);
 		BaseCollision HC = hitEntity.getComponent(TypeComponent.COLLISION);
-		if ((HC.getMoveBack()) && !(this.BC instanceof HitCollision)) {
+		if ((HC.getMoveBack()) && !(this.collisionComponent instanceof HitCollision)) {
 			switch (axis) {
 			case X:
 				moveBackX(collVec);
@@ -39,8 +39,8 @@ public class GroundMovement extends BaseMovement {
 			}
 			newGrid = eMap.getGridPos(currentEntity);
 		}
-		if ((currentEntity.getComponent(TypeComponent.COLLISION) != null)) {
-			this.BC.collision(currentEntity, hitEntity);
+		if (currentEntity.getComponent(TypeComponent.COLLISION) != null) {
+			this.collisionComponent.collision(currentEntity, hitEntity);
 		}
 		BaseCollision EC = hitEntity.getComponent(TypeComponent.COLLISION);
 		if (EC != null) {
@@ -67,11 +67,11 @@ public class GroundMovement extends BaseMovement {
 			}
 		}
 
-		eMap.removeEntity(BC.getGridPos(), currentEntity);
+		eMap.removeEntity(collisionComponent.getGridPos(), currentEntity);
 		if (!currentEntity.isDestroy()) {
 			eMap.addEntity(newGrid, currentEntity);
 		}
-		BC.setGridPos(newGrid);
+		collisionComponent.setGridPos(newGrid);
 		return collide;
 	}
 
@@ -123,11 +123,6 @@ public class GroundMovement extends BaseMovement {
 		} else if (Math.abs(collVec.w()) <= speed) {
 			baseGraphics.takeFromY(collVec.w());
 		}
-	}
-
-	@Override
-	public void update(Entity e) {
-		// TODO Auto-generated method stub
 	}
 
 	public enum Axis {

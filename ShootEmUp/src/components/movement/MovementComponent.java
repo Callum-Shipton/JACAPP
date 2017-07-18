@@ -8,7 +8,7 @@ import entity.Entity;
 
 public interface MovementComponent {
 
-	Vector4f collideFunction(BaseGraphics BG, float x, float y);
+	Vector4f collideFunction(BaseGraphics graphicsComponent, float x, float y);
 
 	Vector4f doesCollide(Entity moving, Entity checked);
 

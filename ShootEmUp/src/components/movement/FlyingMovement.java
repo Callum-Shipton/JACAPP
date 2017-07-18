@@ -5,12 +5,7 @@ import components.graphical.BaseGraphics;
 
 public class FlyingMovement extends GroundMovement {
 
-	public FlyingMovement(BaseCollision BC, BaseGraphics BG, int speed) {
-		super(BC, BG, speed);
+	public FlyingMovement(BaseCollision collisionComponent, BaseGraphics graphicsComponent, int speed) {
+		super(collisionComponent, graphicsComponent, speed);
 	}
-
-	/*
-	 * @Override public Vector4 doesCollide(Entity moving, Entity checked) { if
-	 * (flat) { return null; } return super.doesCollide(moving, checked); }
-	 */
 }

@@ -31,10 +31,4 @@ public class PointSpawn extends BaseSpawn implements SpawnComponent {
 		e.send(new DataMessage<Vector2f>(MessageId.ENTITY_SPAWN, spawnLoc));
 		e.send(new Message(MessageId.ENTITY_MOVED));
 	}
-
-	@Override
-	public void update(Entity e) {
-		// TODO Auto-generated method stub
-
-	}
 }

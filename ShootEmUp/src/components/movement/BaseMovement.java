@@ -4,13 +4,9 @@ import org.joml.Vector2f;
 
 import components.Component;
 import components.Message;
-import components.MessageId;
 import components.TypeComponent;
-import components.collision.BaseCollision;
 import entity.Entity;
 import loop.Loop;
-import main.ShootEmUp;
-import object.EntityMap;
 
 public abstract class BaseMovement extends Component implements MovementComponent {
 
@@ -18,11 +14,15 @@ public abstract class BaseMovement extends Component implements MovementComponen
 
 	protected int speed;
 	protected int realSpeed;
-	protected BaseCollision BC;
 
 	private boolean frost = false;
 	private int frostCounter = 0;
 	private int frostTime = 5;
+
+	public BaseMovement(int speed) {
+		this.speed = speed;
+		realSpeed = speed;
+	}
 
 	@Override
 	public void destroy(Entity e) {
@@ -61,16 +61,6 @@ public abstract class BaseMovement extends Component implements MovementComponen
 
 	@Override
 	public void receive(Message m, Entity e) {
-		if (m.getId() == MessageId.ENTITY_MOVED) {
-			if (ShootEmUp.getGame().getCurrentLevel() != null) {
-				EntityMap eMap = ShootEmUp.getGame().getCurrentLevel().geteMap();
-				if (BC.getGridPos() != null) {
-					eMap.removeEntity(BC.getGridPos(), e);
-					BC.setGridPos(eMap.getGridPos(e));
-					eMap.addEntity(BC.getGridPos(), e);
-				}
-			}
-		}
 	}
 
 	public void setFrost(boolean frost) {
@@ -79,5 +69,9 @@ public abstract class BaseMovement extends Component implements MovementComponen
 
 	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+
+	@Override
+	public void update(Entity e) {
 	}
 }
