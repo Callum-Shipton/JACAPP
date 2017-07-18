@@ -53,5 +53,9 @@ public final class Logger {
 	public enum Category {
 		ALL, ENGINE_STATS, CONTROLLER, AI, AI_GOALBOUNDING, ENTITIES
 	}
+	
+	public static void setDebug(boolean debug) {
+		Logger.debug = debug;
+	}
 
 }

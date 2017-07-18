@@ -19,7 +19,7 @@ import input.Keyboard;
 import input.Keys;
 import logging.Logger;
 
-public final class Loop {
+public class Loop {
 
 	// Handle for monitor/window funcs
 	private static Display display;
@@ -65,7 +65,7 @@ public final class Loop {
 		game.init();
 	}
 
-	private void loop() {
+	protected void loop() {
 		// Run the rendering loop until the user has attempted to close
 		// the window or has pressed the ESCAPE key.
 
@@ -113,7 +113,7 @@ public final class Loop {
 		// render changes
 	}
 
-	private void update() {
+	protected void update() {
 		// Poll for window events. The key callback above will only be
 		// invoked during this call.
 		glfwPollEvents();
