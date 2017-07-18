@@ -63,26 +63,26 @@ public final class Weapon extends InventoryItem<Weapon> {
 		if (w == null) {
 			// Pick a random weapon
 			Logger.warn("A weapon was created with unknown name/type: " + typeName);
+		} else {
+			this.name = w.name;
+			this.damage = w.damage;
+			this.range = w.range;
+			this.fireRate = w.fireRate;
+			this.melee = w.melee;
+			this.manaCost = w.manaCost;
+			this.element = w.element;
+			this.team = team;
+			this.particleImage = w.particleImage;
+			this.typePickup = TypePickup.WEAPON;
 		}
-
-		this.name = w.name;
-		this.damage = w.damage;
-		this.range = w.range;
-		this.fireRate = w.fireRate;
-		this.melee = w.melee;
-		this.manaCost = w.manaCost;
-		this.element = w.element;
-		this.team = team;
-		this.particleImage = w.particleImage;
-		this.typePickup = TypePickup.WEAPON;
 	}
 
 	public void attack(Entity e, int direction) {
-		BaseGraphics BG = e.getComponent(TypeComponent.GRAPHICS);
-		float posX = BG.getX();
-		float posY = BG.getY();
-		float BGWidth = BG.getWidth();
-		float BGHeight = BG.getHeight();
+		BaseGraphics graphicsComponent = e.getComponent(TypeComponent.GRAPHICS);
+		float posX = graphicsComponent.getX();
+		float posY = graphicsComponent.getY();
+		float width = graphicsComponent.getWidth();
+		float height = graphicsComponent.getHeight();
 
 		// create particle
 		Entity particle = new Entity();
@@ -92,32 +92,32 @@ public final class Weapon extends InventoryItem<Weapon> {
 
 		switch (direction) {
 		case 0:
-			posX += (BGWidth - g.getWidth()) / 2;
+			posX += (width - g.getWidth()) / 2;
 			posY -= g.getHeight();
 			break;
 		case 1:
-			posX += BGWidth;
+			posX += width;
 			posY -= g.getHeight();
 			break;
 		case 2:
-			posX += BGWidth;
-			posY += (BGHeight - g.getHeight()) / 2;
+			posX += width;
+			posY += (height - g.getHeight()) / 2;
 			break;
 		case 3:
-			posX += BGWidth;
-			posY += BGHeight;
+			posX += width;
+			posY += height;
 			break;
 		case 4:
-			posX += (BGWidth - g.getWidth()) / 2;
-			posY += BGHeight;
+			posX += (width - g.getWidth()) / 2;
+			posY += height;
 			break;
 		case 5:
 			posX -= g.getWidth();
-			posY += BGHeight;
+			posY += height;
 			break;
 		case 6:
 			posX -= g.getWidth();
-			posY += (BGHeight - g.getHeight()) / 2;
+			posY += (height - g.getHeight()) / 2;
 			break;
 		case 7:
 			posX -= g.getWidth();
@@ -125,7 +125,7 @@ public final class Weapon extends InventoryItem<Weapon> {
 			break;
 		default:
 			Logger.warn("Entity attacked in non-uniform direction: " + direction);
-			posX += (BGWidth - g.getWidth()) / 2;
+			posX += (width - g.getWidth()) / 2;
 			posY -= g.getHeight();
 		}
 		PointSpawn s = new PointSpawn(new Vector2f(posX, posY));
