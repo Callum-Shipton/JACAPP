@@ -74,6 +74,22 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 		this.y = y;
 	}
 
+	public void addToX(float increment) {
+		x = x + increment;
+	}
+
+	public void addToY(float increment) {
+		y = y + increment;
+	}
+
+	public void takeFromX(float decrement) {
+		x = x - decrement;
+	}
+
+	public void takeFromY(float decrement) {
+		y = y - decrement;
+	}
+
 	public Vector4f getBox() {
 		return new Vector4f(x, y, width, height);
 	}
