@@ -1,6 +1,7 @@
 package components.attack;
 
 import components.Message;
+import components.MessageId;
 import display.ImageProcessor;
 import entity.Entity;
 import gui.menus.GameOverMenu;
@@ -40,7 +41,7 @@ public class PlayerAttack extends BaseAttack {
 	@Override
 	public void die(Entity e) {
 		removeLife();
-		e.send(Message.ENTITY_DIED);
+		e.send(new Message(MessageId.ENTITY_DIED));
 	}
 
 	public void removeLife() {

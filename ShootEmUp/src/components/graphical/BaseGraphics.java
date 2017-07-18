@@ -1,8 +1,12 @@
 package components.graphical;
 
+import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 import components.Component;
+import components.DataMessage;
+import components.Message;
+import components.MessageId;
 import components.TypeComponent;
 import display.Image;
 import display.Renderer;
@@ -50,9 +54,6 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 		return this.y;
 	}
 
-	@Override
-	public abstract void render(Entity e);
-
 	public void setHeight(float height) {
 		this.height = height;
 	}
@@ -78,6 +79,11 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 	}
 
 	@Override
-	public abstract void update(Entity e);
-
+	public void receive(Message m, Entity e) {
+		if (m.getId() == MessageId.ENTITY_SPAWN) {
+			Vector2f position = ((DataMessage<Vector2f>) m).getData();
+			x = position.x();
+			y = position.y();
+		}
+	}
 }

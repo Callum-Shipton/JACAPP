@@ -85,6 +85,6 @@ public abstract class PlayerBuilder {
 		default:
 			g = new PlayerGraphics(ImageProcessor.getImage("Warrior"), ImageProcessor.base, 1f);
 		}
-		s = new PointSpawn(g, new Vector2f(480.0f, 480.0f), player);
+		s = new PointSpawn(new Vector2f(480.0f, 480.0f), player);
 	}
 }

@@ -2,6 +2,7 @@ package components.attack;
 
 import components.Component;
 import components.Message;
+import components.MessageId;
 import components.TypeComponent;
 import entity.Entity;
 import loop.Loop;
@@ -82,7 +83,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		if (fireCountdown <= 0) {
 			if (mana >= weapon.getManaCost()) {
 				weapon.attack(e, dir);
-				e.send(Message.SHOOT);
+				e.send(new Message(MessageId.SHOOT));
 				mana -= weapon.getManaCost();
 				fireCountdown = weapon.getFireRate();
 				return true;

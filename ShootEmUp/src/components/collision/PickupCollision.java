@@ -1,6 +1,7 @@
 package components.collision;
 
 import components.Message;
+import components.MessageId;
 import components.TypeComponent;
 import components.control.PlayerControl;
 import components.inventory.BaseInventory;
@@ -33,7 +34,7 @@ public class PickupCollision extends BaseCollision {
 		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
 		if (hit.getComponent(TypeComponent.CONTROL) instanceof PlayerControl) {
 			if ((BI).giveItem(typePickup, name)) {
-				e.send(Message.PICKUP);
+				e.send(new Message(MessageId.PICKUP));
 				ShootEmUp.getGame().getCurrentLevel().removeEntity(gridPos, e);
 				e.destroy();
 			}

@@ -1,6 +1,7 @@
 package components.control;
 
 import components.Message;
+import components.MessageId;
 import components.graphical.AnimatedGraphics;
 import components.movement.BaseMovement;
 import entity.Entity;
@@ -22,7 +23,7 @@ public class RangeControl extends LineControl {
 		this.range--;
 		if (this.range <= 0) {
 			e.destroy();
-			e.send(Message.ENTITY_DIED);
+			e.send(new Message(MessageId.ENTITY_DIED));
 		}
 	}
 

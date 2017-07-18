@@ -3,7 +3,7 @@ package level;
 import java.util.HashMap;
 import java.util.Map;
 
-import components.Message;
+import components.MessageId;
 import components.attack.BaseAttack;
 import components.attack.EnemyAttack;
 import components.attack.TypeAttack;
@@ -67,8 +67,8 @@ public final class EnemyBuilder {
 		BaseControl enemyControl = new AIControl(enemyGraphics, enemyAttack, enemyMovement);
 		BaseInventory enemyInventory = new BaseInventory(enemyGraphics, enemyAttack, 1);
 
-		Map<Message, String> sounds = new HashMap<>();
-		sounds.put(Message.SHOOT, "Shoot.ogg");
+		Map<MessageId, String> sounds = new HashMap<>();
+		sounds.put(MessageId.SHOOT, "Shoot.ogg");
 		BaseAudio enemyAudio = new EventAudio(sounds);
 
 		newEnemy.addComponent(enemyAttack);

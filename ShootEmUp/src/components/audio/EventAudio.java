@@ -3,17 +3,15 @@ package components.audio;
 import java.util.EnumMap;
 import java.util.Map;
 
-import audio.MusicPlayer;
 import components.Message;
+import components.MessageId;
 import entity.Entity;
 import logging.Logger;
-import main.ShootEmUp;
 
 public class EventAudio extends BaseAudio {
-	Map<Message, String> sounds = new EnumMap<>(Message.class);
-	
+	Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
 
-	public EventAudio(Map<Message, String> sounds) {
+	public EventAudio(Map<MessageId, String> sounds) {
 		this.sounds = sounds;
 	}
 

@@ -2,33 +2,35 @@ package components.spawn;
 
 import org.joml.Vector2f;
 
+import components.DataMessage;
 import components.Message;
-import components.graphical.BaseGraphics;
+import components.MessageId;
 import entity.Entity;
 
 public class PointSpawn extends BaseSpawn implements SpawnComponent {
 
-	private Vector2f spawnLoc = new Vector2f(480.0f, 480.0f);
-	private BaseGraphics BG;
+	private Vector2f spawnLoc;
 
-	public PointSpawn(BaseGraphics BG, Vector2f spawnLoc, Entity e) {
-		this.BG = BG;
+	public PointSpawn(Vector2f spawnLoc, Entity e) {
 		this.spawnLoc = spawnLoc;
 		spawn(e);
 	}
 
+	public void setSpawnLocation(Vector2f spawnLoc) {
+		this.spawnLoc = spawnLoc;
+	}
+
 	@Override
 	public void receive(Message m, Entity e) {
-		if (m == Message.ENTITY_DIED) {
+		if (m.getId() == MessageId.ENTITY_DIED) {
 			spawn(e);
 		}
 	}
 
 	@Override
 	public void spawn(Entity e) {
-		BG.setX(spawnLoc.x());
-		BG.setY(spawnLoc.y());
-		e.send(Message.ENTITY_MOVED);
+		e.send(new DataMessage<Vector2f>(MessageId.ENTITY_SPAWN, spawnLoc));
+		e.send(new Message(MessageId.ENTITY_MOVED));
 	}
 
 	@Override

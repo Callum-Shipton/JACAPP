@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.joml.Vector2f;
 
-import components.Message;
+import components.MessageId;
 import components.TypeComponent;
 import components.audio.BaseAudio;
 import components.audio.EventAudio;
@@ -46,11 +46,11 @@ public abstract class Potion implements Serializable {
 		BaseGraphics EntityG = e.getComponent(TypeComponent.GRAPHICS);
 
 		BG = new AnimatedGraphics(ImageProcessor.getImage(type), ImageProcessor.base, true, 1f);
-		BS = new PointSpawn(BG, new Vector2f(EntityG.getX() + BG.getWidth(), EntityG.getY()), item);
+		BS = new PointSpawn(new Vector2f(EntityG.getX() + BG.getWidth(), EntityG.getY()), item);
 		item.addComponent(BG);
 		BC = new PickupCollision(item, TypePickup.POTION, type);
-		Map<Message, String> sounds = new EnumMap<>(Message.class);
-		sounds.put(Message.PICKUP, "Pickup2.ogg");
+		Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
+		sounds.put(MessageId.PICKUP, "Pickup2.ogg");
 		BaseAudio audioComponent = new EventAudio(sounds);
 		item.addComponent(BS);
 		item.addComponent(BC);

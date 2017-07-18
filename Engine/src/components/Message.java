@@ -1,5 +1,13 @@
 package components;
 
-public enum Message {
-	ENTITY_MOVED, ENTITY_DIED, SHOOT, PICKUP
+public class Message {
+	private MessageId id;
+
+	public Message(MessageId id) {
+		this.id = id;
+	}
+
+	public MessageId getId() {
+		return id;
+	}
 }

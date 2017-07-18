@@ -2,7 +2,6 @@ package components.graphical;
 
 import org.lwjgl.opengl.GL20;
 
-import components.Message;
 import display.Image;
 import display.ImageProcessor;
 import display.Renderer;
@@ -16,8 +15,8 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 
 	public PlayerGraphics(Image image, Renderer r, float scale) {
 		super(image, r, false, scale);
-		this.posLocation = GL20.glGetUniformLocation(ImageProcessor.ShaderBase, "playerPos");
-		this.posLocationInst = GL20.glGetUniformLocation(ImageProcessor.ShaderInst, "playerPos");
+		posLocation = GL20.glGetUniformLocation(ImageProcessor.ShaderBase, "playerPos");
+		posLocationInst = GL20.glGetUniformLocation(ImageProcessor.ShaderInst, "playerPos");
 	}
 
 	@Override
@@ -25,20 +24,15 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 		return this.direction;
 	}
 
-	@Override
-	public void receive(Message m, Entity e) {
-
-	}
-
 	public void scrollScreen() {
 
 		Loop.getDisplay().getCamera().setCameraFocus(x + (width / 2), y + (height / 2));
 
 		GL20.glUseProgram(ImageProcessor.ShaderBase);
-		GL20.glUniform2f(this.posLocation, this.x + (this.width / 2), this.y + (this.height / 2));
+		GL20.glUniform2f(posLocation, x + (width / 2), y + (height / 2));
 		GL20.glUseProgram(0);
 		GL20.glUseProgram(ImageProcessor.ShaderInst);
-		GL20.glUniform2f(this.posLocationInst, this.x + (this.width / 2), this.y + (this.height / 2));
+		GL20.glUniform2f(posLocationInst, x + (width / 2), y + (height / 2));
 		GL20.glUseProgram(0);
 	}
 

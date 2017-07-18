@@ -2,7 +2,6 @@ package components.graphical;
 
 import org.joml.Vector2f;
 
-import components.Message;
 import display.DPDTRenderer;
 import display.Image;
 import display.Renderer;
@@ -47,12 +46,6 @@ public class AnimatedGraphics extends BaseGraphics {
 
 	public boolean isAnimating() {
 		return this.animating;
-	}
-
-	@Override
-	public void receive(Message m, Entity e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

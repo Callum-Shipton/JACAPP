@@ -4,6 +4,7 @@ import org.joml.Vector2f;
 
 import components.Component;
 import components.Message;
+import components.MessageId;
 import components.TypeComponent;
 import components.collision.BaseCollision;
 import entity.Entity;
@@ -60,7 +61,7 @@ public abstract class BaseMovement extends Component implements MovementComponen
 
 	@Override
 	public void receive(Message m, Entity e) {
-		if (m == Message.ENTITY_MOVED) {
+		if (m.getId() == MessageId.ENTITY_MOVED) {
 			EntityMap eMap = ShootEmUp.getGame().getCurrentLevel().geteMap();
 			eMap.removeEntity(BC.getGridPos(), e);
 			BC.setGridPos(eMap.getGridPos(e));

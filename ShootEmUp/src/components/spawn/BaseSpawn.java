@@ -17,8 +17,4 @@ public abstract class BaseSpawn extends Component implements SpawnComponent {
 	public TypeComponent getType() {
 		return this.type;
 	}
-
-	@Override
-	public abstract void spawn(Entity e);
-
 }

@@ -2,7 +2,6 @@ package components.graphical;
 
 import org.joml.Vector2f;
 
-import components.Message;
 import display.Image;
 import entity.Entity;
 
@@ -21,12 +20,6 @@ public class MapGraphics extends BaseGraphics {
 
 	public Vector2f getMapPos() {
 		return this.mapPos;
-	}
-
-	@Override
-	public void receive(Message m, Entity e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import org.joml.Vector2f;
 
 import components.Component;
 import components.Message;
+import components.MessageId;
 import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.attack.PlayerAttack;
@@ -192,11 +193,11 @@ public class BaseInventory extends Component implements InventoryComponent {
 		coinG = new AnimatedGraphics(ImageProcessor.getImage("Coin"), ImageProcessor.base, true,
 				BG.getX() - BG.getWidth(), BG.getY() - BG.getHeight());
 
-		coinS = new PointSpawn(coinG, new Vector2f(BG.getX(), BG.getY()), item);
+		coinS = new PointSpawn(new Vector2f(BG.getX(), BG.getY()), item);
 		item.addComponent(coinG);
 		coinC = new PickupCollision(item, TypePickup.COIN, "Coin");
-		Map<Message, String> sounds = new EnumMap<>(Message.class);
-		sounds.put(Message.PICKUP, "Pickup.ogg");
+		Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
+		sounds.put(MessageId.PICKUP, "Pickup.ogg");
 		BaseAudio audioComponent = new EventAudio(sounds);
 		item.addComponent(coinS);
 		item.addComponent(coinC);
