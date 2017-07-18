@@ -1,6 +1,7 @@
 package save;
 
 import java.io.Serializable;
+import java.util.EnumMap;
 import java.util.Map;
 
 import components.TypeComponent;
@@ -15,7 +16,7 @@ public class Save implements Serializable {
 
 	private static final byte[] KEY = "funbrella0000000".getBytes();
 
-	private Map<TypeAttack, CharacterSave> characters;
+	private Map<TypeAttack, CharacterSave> characters = new EnumMap<>(TypeAttack.class);
 
 	private int level = 1;
 
@@ -39,7 +40,7 @@ public class Save implements Serializable {
 	}
 
 	public void saveCharacter() {
-		if (ShootEmUp.getGame().getLevel() > this.level) {
+		if (ShootEmUp.getGame().getLevel() > level) {
 			level = ShootEmUp.getGame().getLevel();
 		}
 		BaseAttack attackComponent = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.ATTACK);

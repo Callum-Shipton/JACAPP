@@ -66,6 +66,7 @@ public class TestLoop extends Loop {
 				setFinished(true);
 			}
 		}
+		Logger.info("TEST FINISHED");
 	}
 
 	public boolean isFinished() {
