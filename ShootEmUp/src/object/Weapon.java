@@ -130,7 +130,7 @@ public final class Weapon extends InventoryItem<Weapon> {
 		}
 		PointSpawn s = new PointSpawn(new Vector2f(posX, posY));
 		HitCollision c = new HitCollision(element, team, damage);
-		FlyingMovement m = new FlyingMovement(c, g, 10);
+		FlyingMovement m = new FlyingMovement(c, 10);
 		particle.addComponent(s);
 		particle.addComponent(c);
 		particle.addComponent(m);

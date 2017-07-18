@@ -64,7 +64,7 @@ public class AreaSpawner extends Spawner {
 		BaseCollision baseCollision = new RigidCollision();
 		test.addComponent(baseCollision);
 
-		BaseMovement baseMovement = new GroundMovement(baseCollision, testGraphics, 5);
+		BaseMovement baseMovement = new GroundMovement(baseCollision, 5);
 		test.addComponent(baseMovement);
 
 		BaseGraphics playerGraphics = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.GRAPHICS);

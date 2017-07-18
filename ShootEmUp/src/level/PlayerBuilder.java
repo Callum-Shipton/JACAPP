@@ -41,7 +41,7 @@ public abstract class PlayerBuilder {
 		chooseType(type);
 
 		c = new RigidCollision();
-		m = new GroundMovement(c, g, 5);
+		m = new GroundMovement(c, 5);
 		i = new BaseInventory(g, a, 0);
 
 		addComponents();
@@ -54,7 +54,7 @@ public abstract class PlayerBuilder {
 
 		a = new PlayerAttack(type, save);
 		c = new RigidCollision();
-		m = new GroundMovement(c, g, 5);
+		m = new GroundMovement(c, 5);
 		i = new BaseInventory(g, a, save);
 
 		addComponents();

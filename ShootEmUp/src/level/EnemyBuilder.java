@@ -85,6 +85,6 @@ public final class EnemyBuilder {
 		enemyGraphics = new AnimatedGraphics(ImageProcessor.getImage(art), ImageProcessor.base, false, 0, 0);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision();
-		enemyMovement = new GroundMovement(enemyCollision, enemyGraphics, speed);
+		enemyMovement = new GroundMovement(enemyCollision, speed);
 	}
 }

@@ -16,12 +16,10 @@ import object.EntityMap;
 
 public class GroundMovement extends BaseMovement {
 
-	protected BaseGraphics baseGraphics;
 	protected BaseCollision collisionComponent;
 
-	public GroundMovement(BaseCollision baseCollision, BaseGraphics baseGraphics, int speed) {
+	public GroundMovement(BaseCollision baseCollision, int speed) {
 		super(speed);
-		this.baseGraphics = baseGraphics;
 		this.collisionComponent = baseCollision;
 	}
 
@@ -29,13 +27,14 @@ public class GroundMovement extends BaseMovement {
 			EntityMap eMap) {
 		Set<Vector2f> newGrid = eMap.getGridPos(currentEntity);
 		BaseCollision HC = hitEntity.getComponent(TypeComponent.COLLISION);
+		BaseGraphics BG = currentEntity.getComponent(TypeComponent.GRAPHICS);
 		if ((HC.getMoveBack()) && !(this.collisionComponent instanceof HitCollision)) {
 			switch (axis) {
 			case X:
-				moveBackX(collVec);
+				moveBackX(collVec, BG);
 				break;
 			case Y:
-				moveBackY(collVec);
+				moveBackY(collVec, BG);
 			}
 			newGrid = eMap.getGridPos(currentEntity);
 		}
@@ -87,7 +86,8 @@ public class GroundMovement extends BaseMovement {
 
 	@Override
 	public Vector4f doesCollide(Entity moving, Entity checked) {
-		Vector4f mov = baseGraphics.getBox();
+		BaseGraphics BG = moving.getComponent(TypeComponent.GRAPHICS);
+		Vector4f mov = BG.getBox();
 
 		BaseGraphics CG = checked.getComponent(TypeComponent.GRAPHICS);
 		Vector4f check = CG.getBox();
@@ -99,29 +99,32 @@ public class GroundMovement extends BaseMovement {
 	@Override
 	public void move(Entity e, Vector2f moveVec) {
 		super.move(e, moveVec);
+
+		BaseGraphics BG = e.getComponent(TypeComponent.GRAPHICS);
+
 		if (Math.abs(moveVec.x()) > 0) {
-			baseGraphics.addToX(Math.round(moveVec.x() * speed));
+			BG.addToX(Math.round(moveVec.x() * speed));
 			checkCollision(e, Axis.X);
 		}
 		if (Math.abs(moveVec.y()) > 0) {
-			baseGraphics.addToY(Math.round(moveVec.y() * speed));
+			BG.addToY(Math.round(moveVec.y() * speed));
 			checkCollision(e, Axis.Y);
 		}
 	}
 
-	public void moveBackX(Vector4f collVec) {
+	public void moveBackX(Vector4f collVec, BaseGraphics BG) {
 		if (Math.abs(collVec.x()) <= speed) {
-			baseGraphics.takeFromX(collVec.x());
+			BG.takeFromX(collVec.x());
 		} else if (Math.abs(collVec.z()) <= speed) {
-			baseGraphics.takeFromX(collVec.z());
+			BG.takeFromX(collVec.z());
 		}
 	}
 
-	public void moveBackY(Vector4f collVec) {
+	public void moveBackY(Vector4f collVec, BaseGraphics BG) {
 		if (Math.abs(collVec.y()) <= speed) {
-			baseGraphics.takeFromY(collVec.y());
+			BG.takeFromY(collVec.y());
 		} else if (Math.abs(collVec.w()) <= speed) {
-			baseGraphics.takeFromY(collVec.w());
+			BG.takeFromY(collVec.w());
 		}
 	}
 
