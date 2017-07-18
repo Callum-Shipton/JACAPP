@@ -9,11 +9,11 @@ import entity.Entity;
 
 public class LineControl extends BaseControl {
 
-	private BaseMovement movement;
+	private BaseMovement movementComponent;
 
-	public LineControl(AnimatedGraphics graphics, BaseMovement BM) {
+	public LineControl(AnimatedGraphics graphics, BaseMovement movementComponent) {
 		this.graphics = graphics;
-		this.movement = BM;
+		this.movementComponent = movementComponent;
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class LineControl extends BaseControl {
 			movementVector.add(0.0f, 1.0f);
 		}
 		movementVector.normalize();
-		this.movement.move(e, movementVector);
+		movementComponent.move(e, movementVector);
 	}
 
 }

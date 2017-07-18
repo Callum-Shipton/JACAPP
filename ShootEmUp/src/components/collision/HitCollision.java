@@ -39,7 +39,7 @@ public class HitCollision extends BaseCollision {
 				hitAttack.damage(damage, hit);
 				Random rand = new Random();
 				int prob = rand.nextInt(3);
-				if (prob == 0) {
+				if (prob == 0 && element != null) {
 					switch (element) {
 					case FIRE:
 						hitAttack.setFire(true);

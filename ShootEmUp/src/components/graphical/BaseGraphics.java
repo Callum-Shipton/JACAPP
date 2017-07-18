@@ -30,28 +30,28 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 	}
 
 	public float getHeight() {
-		return this.height;
+		return height;
 	}
 
 	public Image getImage() {
-		return this.image;
+		return image;
 	}
 
 	@Override
 	public TypeComponent getType() {
-		return this.type;
+		return type;
 	}
 
 	public float getWidth() {
-		return this.width;
+		return width;
 	}
 
 	public float getX() {
-		return this.x;
+		return x;
 	}
 
 	public float getY() {
-		return this.y;
+		return y;
 	}
 
 	public void setHeight(float height) {

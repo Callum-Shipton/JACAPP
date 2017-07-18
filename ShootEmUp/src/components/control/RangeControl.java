@@ -14,14 +14,13 @@ public class RangeControl extends LineControl {
 	public RangeControl(AnimatedGraphics AG, BaseMovement BM, int range) {
 		super(AG, BM);
 		this.range = (range * (LevelMap.TILE_WIDTH)) / BM.getSpeed();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void update(Entity e) {
 		super.update(e);
-		this.range--;
-		if (this.range <= 0) {
+		range--;
+		if (range <= 0) {
 			e.destroy();
 			e.send(new Message(MessageId.ENTITY_DIED));
 		}

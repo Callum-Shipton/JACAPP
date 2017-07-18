@@ -16,43 +16,41 @@ public class AnimatedGraphics extends BaseGraphics {
 
 	public AnimatedGraphics(Image image, Renderer r, boolean animating, float scale) {
 		this.image = image;
-		this.width = (image.getWidth() / image.getFWidth()) * scale;
-		this.height = (image.getHeight() / image.getFHeight()) * scale;
 		this.r = r;
 		this.animating = animating;
+
+		width = (image.getWidth() / image.getFWidth()) * scale;
+		height = (image.getHeight() / image.getFHeight()) * scale;
+
 	}
 
 	public AnimatedGraphics(Image image, Renderer r, boolean animating, float x, float y) {
-		this.image = image;
-		this.width = image.getWidth() / image.getFWidth();
-		this.height = image.getHeight() / image.getFHeight();
-		this.r = r;
-		this.animating = animating;
+		this(image, r, animating, 1);
+
 		this.x = x;
 		this.y = y;
 	}
 
 	public int getAnimID() {
-		return this.animID;
+		return animID;
 	}
 
 	public int getAnimTime() {
-		return this.animTime;
+		return animTime;
 	}
 
 	public int getDirection() {
-		return this.direction;
+		return direction;
 	}
 
 	public boolean isAnimating() {
-		return this.animating;
+		return animating;
 	}
 
 	@Override
 	public void render(Entity e) {
-		((DPDTRenderer) this.r).draw(this.image, new Vector2f(getX(), getY()), new Vector2f(getWidth(), getHeight()),
-				0.0f, new Vector2f(this.animID / this.animTime, getDirection()),
-				new Vector2f(this.image.getFWidth(), this.image.getFHeight()));
+		((DPDTRenderer) r).draw(image, new Vector2f(getX(), getY()), new Vector2f(getWidth(), getHeight()), 0.0f,
+				new Vector2f(animID / animTime, getDirection()), new Vector2f(image.getFWidth(), image.getFHeight()));
 	}
 
 	public void setAnimating(boolean animating) {
@@ -75,9 +73,9 @@ public class AnimatedGraphics extends BaseGraphics {
 	public void update(Entity e) {
 
 		if (isAnimating()) {
-			this.animID++;
-			if (this.animID >= (this.image.getFWidth() * this.animTime)) {
-				this.animID = 0;
+			animID++;
+			if (animID >= (image.getFWidth() * animTime)) {
+				animID = 0;
 			}
 		}
 	}
