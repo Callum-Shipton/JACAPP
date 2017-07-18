@@ -28,7 +28,7 @@ public class GroundMovement extends BaseMovement {
 		Set<Vector2f> newGrid = eMap.getGridPos(currentEntity);
 		BaseCollision HC = hitEntity.getComponent(TypeComponent.COLLISION);
 		BaseGraphics BG = currentEntity.getComponent(TypeComponent.GRAPHICS);
-		if ((HC.getMoveBack()) && !(this.collisionComponent instanceof HitCollision)) {
+		if ((HC.getMoveBack()) && !(collisionComponent instanceof HitCollision)) {
 			switch (axis) {
 			case X:
 				moveBackX(collVec, BG);
@@ -39,7 +39,7 @@ public class GroundMovement extends BaseMovement {
 			newGrid = eMap.getGridPos(currentEntity);
 		}
 		if (currentEntity.getComponent(TypeComponent.COLLISION) != null) {
-			this.collisionComponent.collision(currentEntity, hitEntity);
+			collisionComponent.collision(currentEntity, hitEntity);
 		}
 		BaseCollision EC = hitEntity.getComponent(TypeComponent.COLLISION);
 		if (EC != null) {
@@ -72,16 +72,6 @@ public class GroundMovement extends BaseMovement {
 		}
 		collisionComponent.setGridPos(newGrid);
 		return collide;
-	}
-
-	@Override
-	public Vector4f collideFunction(BaseGraphics BG, float x, float y) {
-		if (((x >= BG.getX()) && (x <= (BG.getX() + BG.getWidth())))
-				&& ((y >= BG.getY()) && (y <= (BG.getY() + BG.getHeight())))) {
-			return new Vector4f(x - BG.getX(), y - BG.getY(), x - (BG.getX() + BG.getWidth()),
-					y - (BG.getY() + BG.getHeight()));
-		}
-		return null;
 	}
 
 	@Override

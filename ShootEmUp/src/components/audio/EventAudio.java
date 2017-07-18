@@ -6,7 +6,6 @@ import java.util.Map;
 import components.Message;
 import components.MessageId;
 import entity.Entity;
-import logging.Logger;
 
 public class EventAudio extends BaseAudio {
 	Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
@@ -23,8 +22,6 @@ public class EventAudio extends BaseAudio {
 			if (soundId != -1) {
 				audio.playSource(soundId);
 			}
-		} else {
-			Logger.warn("No sound mapped to message: " + m.toString());
 		}
 	}
 }
