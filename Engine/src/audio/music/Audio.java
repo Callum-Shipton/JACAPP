@@ -1,6 +1,32 @@
 package audio.music;
 
-import static org.lwjgl.openal.AL10.*;
+import static org.lwjgl.openal.AL10.AL_BUFFER;
+import static org.lwjgl.openal.AL10.AL_FALSE;
+import static org.lwjgl.openal.AL10.AL_FORMAT_MONO16;
+import static org.lwjgl.openal.AL10.AL_FORMAT_STEREO16;
+import static org.lwjgl.openal.AL10.AL_GAIN;
+import static org.lwjgl.openal.AL10.AL_LOOPING;
+import static org.lwjgl.openal.AL10.AL_NO_ERROR;
+import static org.lwjgl.openal.AL10.AL_ORIENTATION;
+import static org.lwjgl.openal.AL10.AL_PITCH;
+import static org.lwjgl.openal.AL10.AL_POSITION;
+import static org.lwjgl.openal.AL10.AL_SOURCE_STATE;
+import static org.lwjgl.openal.AL10.AL_STOPPED;
+import static org.lwjgl.openal.AL10.AL_TRUE;
+import static org.lwjgl.openal.AL10.AL_VELOCITY;
+import static org.lwjgl.openal.AL10.alBufferData;
+import static org.lwjgl.openal.AL10.alDeleteBuffers;
+import static org.lwjgl.openal.AL10.alGenBuffers;
+import static org.lwjgl.openal.AL10.alGenSources;
+import static org.lwjgl.openal.AL10.alGetError;
+import static org.lwjgl.openal.AL10.alGetSourcei;
+import static org.lwjgl.openal.AL10.alGetString;
+import static org.lwjgl.openal.AL10.alListenerfv;
+import static org.lwjgl.openal.AL10.alSourcePause;
+import static org.lwjgl.openal.AL10.alSourcePlay;
+import static org.lwjgl.openal.AL10.alSourceStop;
+import static org.lwjgl.openal.AL10.alSourcef;
+import static org.lwjgl.openal.AL10.alSourcei;
 import static org.lwjgl.openal.ALC10.ALC_DEFAULT_DEVICE_SPECIFIER;
 import static org.lwjgl.openal.ALC10.alcCloseDevice;
 import static org.lwjgl.openal.ALC10.alcCreateContext;
@@ -19,12 +45,8 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-import java.util.function.Function;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL;
@@ -50,7 +72,7 @@ public class Audio {
 	public static long device;
 
 	public static long context;
-	
+
 	public static final String DIRECTORY = "res/Music/";
 
 	private final Map<String, Integer> bufferMap = new HashMap<>();
@@ -60,13 +82,11 @@ public class Audio {
 	// TODO: change to allocated
 	IntBuffer buffer;
 
-
 	/*
-	 * These are 3D cartesian vector coordinates. A structure or class would be a
-	 * more flexible of handling these, but for the sake of simplicity we will just
-	 * leave it as is.
+	 * These are 3D cartesian vector coordinates. A structure or class would be
+	 * a more flexible of handling these, but for the sake of simplicity we will
+	 * just leave it as is.
 	 */
-
 
 	/** Position of the listener. */
 	FloatBuffer listenerPos = BufferUtils.createFloatBuffer(3).put(new float[] { 0.0f, 0.0f, 0.0f });
@@ -75,8 +95,8 @@ public class Audio {
 	FloatBuffer listenerVel = BufferUtils.createFloatBuffer(3).put(new float[] { 0.0f, 0.0f, 0.0f });
 
 	/**
-	 * Orientation of the listener. (first 3 elements are "at", second 3 are "up")
-	 * Also note that these should be units of '1'.
+	 * Orientation of the listener. (first 3 elements are "at", second 3 are
+	 * "up") Also note that these should be units of '1'.
 	 */
 	FloatBuffer listenerOri = BufferUtils.createFloatBuffer(6).put(new float[] { 0.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f });
 
@@ -90,8 +110,9 @@ public class Audio {
 	}
 
 	public void destoyAL() {
-		//int[] array = sourcesMap.values().stream().flatMap(arraylist -> arraylist.stream()).mapToInt( i -> i ).toArray();
-		//alDeleteSources(IntBuffer.wrap(array));
+		// int[] array = sourcesMap.values().stream().flatMap(arraylist ->
+		// arraylist.stream()).mapToInt( i -> i ).toArray();
+		// alDeleteSources(IntBuffer.wrap(array));
 		alDeleteBuffers(buffer);
 		alcDestroyContext(context);
 		alcCloseDevice(device);
@@ -107,7 +128,6 @@ public class Audio {
 
 		ALCCapabilities alcCapabilities = ALC.createCapabilities(device);
 		ALCapabilities alCapabilities = AL.createCapabilities(alcCapabilities);
-
 
 		alGetError();
 
@@ -133,20 +153,20 @@ public class Audio {
 	/**
 	 * boolean LoadALData()
 	 *
-	 * This function will load our sample data from the disk using the Alut utility
-	 * and send the data into OpenAL as a buffer. A source is then also created to
-	 * play that buffer.
+	 * This function will load our sample data from the disk using the Alut
+	 * utility and send the data into OpenAL as a buffer. A source is then also
+	 * created to play that buffer.
 	 */
 	int loadALData() {
 
 		findFiles(DIRECTORY);
 		buffer = BufferUtils.createIntBuffer(bufferMap.size());
 		alGenBuffers(buffer);
-		
-		for(String file:bufferMap.keySet()) {
+
+		for (String file : bufferMap.keySet()) {
 			loadAudioFile(file);
 		}
-		
+
 		// Do another error check and return.
 		if (alGetError() == AL_NO_ERROR) {
 			return AL_TRUE;
@@ -163,7 +183,7 @@ public class Audio {
 
 			ByteBuffer buf;
 			try {
-				buf = FileManager.ioResourceToByteBuffer(DIRECTORY+file, 4 * 1024 * 1024);
+				buf = FileManager.ioResourceToByteBuffer(DIRECTORY + file, 4 * 1024 * 1024);
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
@@ -174,7 +194,8 @@ public class Audio {
 				throw new RuntimeException("Failed to load a music file!");
 			}
 
-			// Retreive the extra information that was stored in the buffers by the function
+			// Retreive the extra information that was stored in the buffers by
+			// the function
 			int channels = channelsBuffer.get();
 			int sampleRate = sampleRateBuffer.get();
 
@@ -206,11 +227,11 @@ public class Audio {
 
 	public int createSourceFromFile(String audioFile, Boolean looping) {
 		if (sourcesMap.containsKey(audioFile)) {
-			try(MemoryStack stack = stackPush()){
+			try (MemoryStack stack = stackPush()) {
 				IntBuffer state = stack.mallocInt(1);
-				for(int source : sourcesMap.get(audioFile)) {
+				for (int source : sourcesMap.get(audioFile)) {
 					alGetSourcei(source, AL_SOURCE_STATE, state);
-					if(state.get(0) == AL_STOPPED) {
+					if (state.get(0) == AL_STOPPED) {
 						return source;
 					}
 				}
@@ -238,7 +259,6 @@ public class Audio {
 		alSourcei(sourceId, AL_LOOPING, looping ? AL_TRUE : AL_FALSE);
 		return sourceId;
 	}
-
 
 	/**
 	 * void setListenerValues()
@@ -278,7 +298,5 @@ public class Audio {
 			}
 		}
 	}
-
-
 
 }

@@ -16,7 +16,6 @@ public class TestingControl extends BaseControl {
 	private BaseMovement BM;
 	private PlayerGraphics PG;
 	private BaseAttack BA;
-	private BaseInventory PI;
 	private Vector2f movement = new Vector2f(0.0f, 0.0f);
 	private Vector2f dir = new Vector2f(0.0f, 0.0f);
 	private boolean toggle = false;
@@ -25,7 +24,6 @@ public class TestingControl extends BaseControl {
 		this.PG = PG;
 		this.BA = BA;
 		this.BM = BM;
-		this.PI = PI;
 		movement.add(0.0f, -1.0f);
 		movement.add(-1.0f, 0.0f);
 		movement.normalize();

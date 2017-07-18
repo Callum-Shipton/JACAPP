@@ -96,10 +96,12 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 
 	@Override
 	public void receive(Message m, Entity e) {
-		if (m.getId() == MessageId.ENTITY_SPAWN) {
-			Vector2f position = ((DataMessage<Vector2f>) m).getData();
-			x = position.x();
-			y = position.y();
+		if (m instanceof DataMessage) {
+			if (m.getId() == MessageId.ENTITY_SPAWN) {
+				Vector2f position = ((DataMessage<Vector2f>) m).getData();
+				x = position.x();
+				y = position.y();
+			}
 		}
 	}
 }
