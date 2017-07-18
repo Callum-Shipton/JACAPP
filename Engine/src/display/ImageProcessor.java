@@ -73,17 +73,20 @@ public class ImageProcessor {
 			if (error != GL_NO_ERROR) {
 				Logger.error("OpenGL Error: " + error);
 			}
-			int projectionMatrixLocation = glGetUniformLocation(ShaderBase, "projectionMatrix");
+
+			final String projectionMatrixString = "projectionMatrix";
+
+			int projectionMatrixLocation = glGetUniformLocation(ShaderBase, projectionMatrixString);
 			glUniformMatrix4fv(projectionMatrixLocation, false, buf);
 			glUseProgram(0);
 
 			glUseProgram(ShaderInst);
-			projectionMatrixLocation = glGetUniformLocation(ShaderInst, "projectionMatrix");
+			projectionMatrixLocation = glGetUniformLocation(ShaderInst, projectionMatrixString);
 			glUniformMatrix4fv(projectionMatrixLocation, false, buf);
 			glUseProgram(0);
 
 			glUseProgram(ShaderStat);
-			projectionMatrixLocation = glGetUniformLocation(ShaderStat, "projectionMatrix");
+			projectionMatrixLocation = glGetUniformLocation(ShaderStat, projectionMatrixString);
 			glUniformMatrix4fv(projectionMatrixLocation, false, buf);
 			glUseProgram(0);
 		}

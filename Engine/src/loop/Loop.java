@@ -35,10 +35,12 @@ public class Loop {
 	}
 
 	public void run() {
-		// System.setProperty("org.lwjgl.librarypath", new
-		// File("natives").getAbsolutePath());
-		// System.setProperty("net.java.games.input.librarypath", new
-		// File("natives/JInput").getAbsolutePath());
+		/**
+		 * System.setProperty("org.lwjgl.librarypath", new
+		 * File("natives").getAbsolutePath());
+		 * System.setProperty("net.java.games.input.librarypath", new
+		 * File("natives/JInput").getAbsolutePath());
+		 */
 
 		try {
 			init();

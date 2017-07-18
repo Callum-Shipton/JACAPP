@@ -12,7 +12,7 @@ import org.lwjgl.glfw.GLFWKeyCallback;
 public class Keyboard {
 
 	private static GLFWKeyCallback keyCallback;
-	private static int keys[] = new int[1024];
+	private static int[] keys = new int[1024];
 
 	public static void destroy() {
 		if (keyCallback != null) {

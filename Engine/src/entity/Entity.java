@@ -3,6 +3,7 @@ package entity;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -25,13 +26,12 @@ public class Entity implements DatableObject<Entity> {
 
 	private String name;
 	private UUID id;
-	private Map<TypeComponent, Component> components;
+	private Map<TypeComponent, Component> components = new EnumMap<>(TypeComponent.class);
 
 	private boolean destroy;
 
 	public Entity() {
 		id = UUID.randomUUID();
-		this.components = new HashMap<>();
 	}
 
 	public Entity(String name) {
@@ -40,14 +40,16 @@ public class Entity implements DatableObject<Entity> {
 			initSystem();
 		}
 		Entity e;
-		if (entitySystem.get("Characters").containsKey(name)) {
-			int temp = rand.nextInt(entitySystem.get("Characters").get(name).size());
-			Entity[] typedEntities = new Entity[entitySystem.get("Characters").get(name).size()];
+		final String charactersString = "Characters";
+
+		if (entitySystem.get(charactersString).containsKey(name)) {
+			int temp = rand.nextInt(entitySystem.get(charactersString).get(name).size());
+			Entity[] typedEntities = new Entity[entitySystem.get(charactersString).get(name).size()];
 			typedEntities = entitySystem.get(name).values().toArray(typedEntities);
 			e = typedEntities[temp];
 		} else {
-			HashMap<String, Entity> tempEntities = new HashMap<String, Entity>();
-			for (HashMap<String, Entity> typedEntities : entitySystem.get("Characters").values()) {
+			HashMap<String, Entity> tempEntities = new HashMap<>();
+			for (HashMap<String, Entity> typedEntities : entitySystem.get(charactersString).values()) {
 				tempEntities.putAll(typedEntities);
 			}
 			e = tempEntities.get(name);
@@ -103,9 +105,9 @@ public class Entity implements DatableObject<Entity> {
 
 			JsonArray jsonObjects = new JsonParser().parse(in).getAsJsonArray();
 			for (JsonElement e : jsonObjects) {
-				String name = e.getAsJsonObject().get("name").getAsString();
+				String enitityName = e.getAsJsonObject().get("name").getAsString();
 				Entity entity = g.fromJson(e, Entity.class);
-				entitySystem.get(directory).get(type).put(name, entity);
+				entitySystem.get(directory).get(type).put(enitityName, entity);
 			}
 
 			return jsonObjects;

@@ -49,7 +49,9 @@ public class Image {
 		glBindTexture(GL_TEXTURE_2D, this.texID);
 
 		// All RGB bytes are aligned to each other and each component is 1 byte
-		// glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		/**
+		 * glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		 */
 
 		// Setup the ST coordinate system
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
