@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import components.inventory.TypePickup;
-import display.ImageProcessor;
 import display.DPDTRenderer;
 import display.Image;
+import display.ImageProcessor;
 import object.Armour;
 import object.InventoryItem;
 import object.Weapon;
@@ -50,16 +50,18 @@ public class ItemSlot extends GuiComponent {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		/**
+		 * No update needed
+		 */
 	}
 
 	public void updateImage(Image image) {
-		this.icon.setI(image);
+		icon.setI(image);
 	}
 
 	public void updateStats(int[] nums) {
 		int count = 0;
-		for (Counter counter : this.stats) {
+		for (Counter counter : stats) {
 			counter.update(nums[count]);
 			count++;
 		}

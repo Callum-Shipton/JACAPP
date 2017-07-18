@@ -39,23 +39,23 @@ public abstract class Potion implements Serializable {
 
 	public void destroy(Entity e) {
 		Entity item = new Entity();
-		AnimatedGraphics BG = null;
-		PointSpawn BS;
-		PickupCollision BC;
+		AnimatedGraphics potionGraphics;
+		PointSpawn potionSpawn;
+		PickupCollision potionCollision;
 
-		BaseGraphics EntityG = e.getComponent(TypeComponent.GRAPHICS);
+		BaseGraphics entityG = e.getComponent(TypeComponent.GRAPHICS);
 
-		BG = new AnimatedGraphics(ImageProcessor.getImage(type), ImageProcessor.base, true, 1f);
-		BS = new PointSpawn(new Vector2f(EntityG.getX() + BG.getWidth(), EntityG.getY()));
-		item.addComponent(BG);
-		BC = new PickupCollision(item, TypePickup.POTION, type);
+		potionGraphics = new AnimatedGraphics(ImageProcessor.getImage(type), ImageProcessor.base, true, 1f);
+		potionSpawn = new PointSpawn(new Vector2f(entityG.getX() + potionGraphics.getWidth(), entityG.getY()));
+		item.addComponent(potionGraphics);
+		potionCollision = new PickupCollision(item, TypePickup.POTION, type);
 		Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
 		sounds.put(MessageId.PICKUP, "Pickup2.ogg");
 		BaseAudio audioComponent = new EventAudio(sounds);
-		item.addComponent(BS);
-		item.addComponent(BC);
+		item.addComponent(potionSpawn);
+		item.addComponent(potionCollision);
 		item.addComponent(audioComponent);
-		BS.spawn(item);
+		potionSpawn.spawn(item);
 		ShootEmUp.getGame().getCurrentLevel().addEntity(item);
 	}
 

@@ -5,8 +5,6 @@ public class Art implements ArtLoader {
 	@Override
 	public void loadArt() {
 
-		// new Image("/filepath.png", maxFrameWidth, maxFrameHeight);
-
 		// load menu screen art
 		ImageProcessor.addArt("MainMenuScreen", new Image("/Images/Menus/Backgrounds/MainMenuScreen.png", 1, 1));
 		ImageProcessor.addArt("InventoryScreen", new Image("/Images/Menus/Backgrounds/InventoryScreen.png", 1, 1));

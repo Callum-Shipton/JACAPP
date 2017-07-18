@@ -17,12 +17,14 @@ public class OptionsMenu extends GuiMenu {
 
 	@Override
 	public void resetMenu() {
+		final String controlButton = "ControlsButton";
+
 		menuItems.clear();
 		VerticalLayout buttonList = new VerticalLayout(
-				(display.getWidth() / 2) - (ImageProcessor.getImage("ControlsButton").getWidth() / 2),
-				display.getHeight() / 2, ImageProcessor.getImage("ControlsButton").getHeight() / 2, 20);
+				(display.getWidth() / 2) - (ImageProcessor.getImage(controlButton).getWidth() / 2),
+				display.getHeight() / 2, ImageProcessor.getImage(controlButton).getHeight() / 2, 20);
 
-		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("ControlsButton"), 0, 0,
+		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage(controlButton), 0, 0,
 				new OpenMenuButton(new ControlsMenu(ImageProcessor.getImage("MainMenuScreen")))));
 		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("SoundButton"), 0, 0,
 				new OpenMenuButton(new SoundMenu(ImageProcessor.getImage("MainMenuScreen")))));

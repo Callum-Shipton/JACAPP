@@ -20,22 +20,24 @@ public class LevelSelectMenu extends GuiMenu {
 
 	@Override
 	public void resetMenu() {
+		final String level1Button = "Level1Button";
+
 		menuItems.clear();
 		VerticalLayout buttonList = new VerticalLayout(
-				(display.getWidth() / 2) - (ImageProcessor.getImage("Level1Button").getWidth() / 2),
-				display.getHeight() / 2, ImageProcessor.getImage("Level1Button").getHeight() / 2, 20);
+				(display.getWidth() / 2) - (ImageProcessor.getImage(level1Button).getWidth() / 2),
+				display.getHeight() / 2, ImageProcessor.getImage(level1Button).getHeight() / 2, 20);
 
 		switch (level) {
-		case 3:
+		case 3: // NOSONAR
 			buttonList.addMenuItem(
 					new MenuButton(ImageProcessor.getImage("Level3Button"), 0, 0, new SelectLevelButton(3)));
-		case 2:
+		case 2: // NOSONAR
 			buttonList.addMenuItem(
 					new MenuButton(ImageProcessor.getImage("Level2Button"), 0, 0, new SelectLevelButton(2)));
 		case 1:
 		default:
-			buttonList.addMenuItem(
-					new MenuButton(ImageProcessor.getImage("Level1Button"), 0, 0, new SelectLevelButton(1)));
+			buttonList
+					.addMenuItem(new MenuButton(ImageProcessor.getImage(level1Button), 0, 0, new SelectLevelButton(1)));
 		}
 		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("BackButton"), 0, 0, new BackButton()));
 

@@ -30,8 +30,8 @@ public class SkillMenu extends PauseMenu {
 	@Override
 	public void update() {
 		super.update();
-		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
-		skillPoints.update(BI.getLevelPoints());
+		BaseInventory playerInventory = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
+		skillPoints.update(playerInventory.getLevelPoints());
 	}
 
 	@Override
@@ -48,8 +48,8 @@ public class SkillMenu extends PauseMenu {
 		buttonList.addMenuItem(new CounterButton(0, 0, ImageProcessor.getImage("ManaButton"),
 				ImageProcessor.getImage("Coin"), 1, 1f, new UpgradeManaButton()));
 		menuItems.add(buttonList);
-		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
-		skillPoints = new Counter(x + 30.0f, y + 191.0f, ImageProcessor.getImage("Coin"), false, BI.getLevelPoints(),
+		BaseInventory playerInventory = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
+		skillPoints = new Counter(x + 30.0f, y + 191.0f, ImageProcessor.getImage("Coin"), false, playerInventory.getLevelPoints(),
 				1f);
 	}
 }

@@ -22,7 +22,7 @@ public class ShootEmUp implements Game {
 
 	public static void main(String[] args) {
 		Loop loop = new Loop(new ShootEmUp(), 60.0f, new Art());
-		loop.start();
+		loop.run();
 	}
 
 	public static void startGame() {

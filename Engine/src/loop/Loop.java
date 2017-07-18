@@ -34,15 +34,12 @@ public class Loop {
 		keys = new Keys();
 	}
 
-	public void start() {
+	public void run() {
 		// System.setProperty("org.lwjgl.librarypath", new
 		// File("natives").getAbsolutePath());
 		// System.setProperty("net.java.games.input.librarypath", new
 		// File("natives/JInput").getAbsolutePath());
-		run();
-	}
 
-	public void run() {
 		try {
 			init();
 			loop();
@@ -75,7 +72,7 @@ public class Loop {
 		double sleepTime;
 		int error;
 
-		while (glfwWindowShouldClose(display.getWindow()) == false) {
+		while (!glfwWindowShouldClose(display.getWindow())) {
 
 			error = glGetError();
 

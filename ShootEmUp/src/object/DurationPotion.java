@@ -22,24 +22,24 @@ public class DurationPotion extends Potion {
 
 	@Override
 	public void update(Entity e) {
-		if (this.active && (this.counter == 0)) {
-			BaseMovement BM = e.getComponent(TypeComponent.MOVEMENT);
-			BaseAttack BA = e.getComponent(TypeComponent.ATTACK);
-			switch (this.type) {
+		if (active && (counter == 0)) {
+			BaseMovement playerMovement = e.getComponent(TypeComponent.MOVEMENT);
+			BaseAttack playerAttack = e.getComponent(TypeComponent.ATTACK);
+			switch (type) {
 			case "Speed":
-				if (this.duration == this.maxDuration) {
-					BM.increaseSpeed(2);
-				} else if (this.duration == 0) {
-					BM.increaseSpeed(-2);
+				if (duration == maxDuration) {
+					playerMovement.increaseSpeed(2);
+				} else if (duration == 0) {
+					playerMovement.increaseSpeed(-2);
 				}
 				break;
 			case "Knockback":
-				if (this.duration == this.maxDuration) {
+				if (duration == maxDuration) {
 					// Code for adding to knockback
-					BA.setHealth(100);
-					BA.setMaxHealth(100);
-					BA.setMana(100);
-					BA.setMaxMana(100);
+					playerAttack.setHealth(100);
+					playerAttack.setMaxHealth(100);
+					playerAttack.setMana(100);
+					playerAttack.setMaxMana(100);
 				}
 				break;
 
@@ -47,28 +47,28 @@ public class DurationPotion extends Potion {
 				Logger.warn("Invalid Potion Type");
 				break;
 			}
-			this.duration--;
-			if (this.duration < 0) {
-				this.active = false;
+			duration--;
+			if (duration < 0) {
+				active = false;
 			}
 		}
-		this.counter++;
-		if (this.counter == Loop.ticks(1)) {
-			this.counter = 0;
+		counter++;
+		if (counter == Loop.ticks(1)) {
+			counter = 0;
 		}
 	}
 
 	@Override
 	public void usePotion() {
-		if (this.quantity > 0) {
-			if (this.active) {
-				this.duration = this.maxDuration - 1;
+		if (quantity > 0) {
+			if (active) {
+				duration = maxDuration - 1;
 			} else {
-				this.active = true;
-				this.duration = this.maxDuration;
+				active = true;
+				duration = maxDuration;
 			}
-			this.quantity--;
-			this.counter = 0;
+			quantity--;
+			counter = 0;
 		}
 	}
 }

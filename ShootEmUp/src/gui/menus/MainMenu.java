@@ -18,11 +18,13 @@ public class MainMenu extends GuiMenu {
 
 	@Override
 	public void resetMenu() {
+		final String newGameButton = "NewGameButton";
+
 		menuItems.clear();
 		VerticalLayout buttonList = new VerticalLayout(
-				(display.getWidth() / 2) - (ImageProcessor.getImage("NewGameButton").getWidth() / 2),
-				display.getHeight() / 2, ImageProcessor.getImage("NewGameButton").getHeight() / 2, 20);
-		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("NewGameButton"), 0, 0,
+				(display.getWidth() / 2) - (ImageProcessor.getImage(newGameButton).getWidth() / 2),
+				display.getHeight() / 2, ImageProcessor.getImage(newGameButton).getHeight() / 2, 20);
+		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage(newGameButton), 0, 0,
 				new OpenMenuButton(new CharacterSelectMenu(ImageProcessor.getImage("MainMenuScreen")))));
 		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("LoadGameButton"), 0, 0, new LoadGameButton()));
 		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("OptionsButton"), 0, 0,

@@ -32,9 +32,9 @@ public class WallsRenderer extends IRenderer {
 		Iterator<Entry<Vector2i, Entity>> iterator = renderData.entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entity wall = iterator.next().getValue();
-			MapGraphics MG = wall.getComponent(TypeComponent.GRAPHICS);
-			Vector2f textured = MG.getMapPos();
-			Vector2f pos = new Vector2f(MG.getX(), MG.getY());
+			MapGraphics graphicsComponents = wall.getComponent(TypeComponent.GRAPHICS);
+			Vector2f textured = graphicsComponents.getMapPos();
+			Vector2f pos = new Vector2f(graphicsComponents.getX(), graphicsComponents.getY());
 			texture[0] = textured.x() / texMax.x();
 			texture[1] = textured.y() / texMax.y();
 			translation[0] = pos.x();

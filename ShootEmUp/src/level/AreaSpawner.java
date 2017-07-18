@@ -85,8 +85,8 @@ public class AreaSpawner extends Spawner {
 			spawnY = (rand.nextInt(height - 1) + y) * LevelMap.TILE_WIDTH;
 
 			// TODO: Fix garbage patch to enemy spawning
-			testGraphics.setX(spawnX + 10);
-			testGraphics.setY(spawnY + 10);
+			testGraphics.setX(spawnX + 10.0f);
+			testGraphics.setY(spawnY + 10.0f);
 
 			// Checks if the enemy will spawn on screen
 			if ((Math.abs((spawnX + (testGraphics.getWidth() / 2)) - (px + (pw / 2))) <= (Loop.getDisplay().getWidth()

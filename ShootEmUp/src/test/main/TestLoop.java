@@ -1,6 +1,5 @@
 package test.main;
 
-import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 import static org.lwjgl.opengl.GL11.GL_NO_ERROR;
 import static org.lwjgl.opengl.GL11.glGetError;
 
@@ -23,14 +22,14 @@ import loop.Loop;
 import main.ShootEmUp;
 
 public class TestLoop extends Loop {
-	
+
 	private boolean finished = false;
 
 	public TestLoop(Game game, double fps, ArtLoader artLoader) {
 		super(game, fps, artLoader);
-		
+
 	}
-	
+
 	@Override
 	protected void loop() {
 
@@ -41,11 +40,12 @@ public class TestLoop extends Loop {
 		new SelectCharacterButton(TypeAttack.WARRIOR).click();
 		new SelectLevelButton(1).click();
 		Entity player = ShootEmUp.getGame().getPlayer();
-		player.addComponent(new TestingControl(player.getComponent(TypeComponent.GRAPHICS), player.getComponent(TypeComponent.ATTACK), player.getComponent(TypeComponent.MOVEMENT), player.getComponent(TypeComponent.INVENTORY)));
+		player.addComponent(new TestingControl(player.getComponent(TypeComponent.GRAPHICS),
+				player.getComponent(TypeComponent.ATTACK), player.getComponent(TypeComponent.MOVEMENT),
+				player.getComponent(TypeComponent.INVENTORY)));
 		PlayerAttack pa = player.getComponent(TypeComponent.ATTACK);
 		pa.setMaxHealth(400);
-		
-		
+
 		Logger.setDebug(false);
 		int lastWave = 0;
 		while (!isFinished()) {
@@ -56,14 +56,13 @@ public class TestLoop extends Loop {
 				Logger.error("OpenGL Error: " + error);
 			}
 
-
 			update();
 			int currWave = ShootEmUp.getGame().getCurrentLevel().getWave();
-			if(currWave != lastWave) {
+			if (currWave != lastWave) {
 				Logger.info("TEST: Wave: " + currWave);
 				lastWave = currWave;
 			}
-			if( ShootEmUp.getGame().getLevel()==3) {
+			if (ShootEmUp.getGame().getLevel() == 3) {
 				setFinished(true);
 			}
 		}

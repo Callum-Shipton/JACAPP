@@ -1,6 +1,6 @@
 package level;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 import components.MessageId;
@@ -67,7 +67,7 @@ public final class EnemyBuilder {
 		BaseControl enemyControl = new AIControl(enemyGraphics, enemyAttack, enemyMovement);
 		BaseInventory enemyInventory = new BaseInventory(enemyGraphics, enemyAttack, 1);
 
-		Map<MessageId, String> sounds = new HashMap<>();
+		Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
 		sounds.put(MessageId.SHOOT, "Shoot.ogg");
 		BaseAudio enemyAudio = new EventAudio(sounds);
 

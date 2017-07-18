@@ -39,10 +39,11 @@ public final class Armour extends InventoryItem<Armour> {
 		if (a == null) {
 			// Pick a random armour
 			Logger.warn("An armour was created with unknown name/type: " + typeName);
+		} else {
+			this.name = a.name;
+			this.defence = a.defence;
+			this.typePickup = TypePickup.ARMOUR;
 		}
-		this.name = a.name;
-		this.defence = a.defence;
-		this.typePickup = TypePickup.ARMOUR;
 	}
 
 	public int getDefence() {

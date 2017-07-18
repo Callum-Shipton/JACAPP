@@ -128,7 +128,7 @@ public class InventoryMenu extends PauseMenu {
 		buildBoots();
 		buildWeapon();
 
-		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
-		inventory = new Inventory(x + 30, y + 30, BI.getInventory());
+		BaseInventory playerInventory = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
+		inventory = new Inventory(x + 30, y + 30, playerInventory.getInventory());
 	}
 }

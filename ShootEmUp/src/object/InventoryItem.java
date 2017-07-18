@@ -45,23 +45,23 @@ public abstract class InventoryItem<I extends InventoryItem<?>> implements Datab
 
 	public void destroy(Entity e) {
 		Entity item = new Entity();
-		AnimatedGraphics BG;
-		PointSpawn BS;
-		PickupCollision BC;
+		AnimatedGraphics itemGraphics;
+		PointSpawn itemSpawn;
+		PickupCollision itemCollision;
 
 		BaseGraphics entityG = e.getComponent(TypeComponent.GRAPHICS);
 
-		BG = new AnimatedGraphics(ImageProcessor.getImage(this.name), ImageProcessor.base, true, 1f);
-		BS = new PointSpawn(new Vector2f(entityG.getX() + BG.getWidth(), entityG.getY() + BG.getHeight()));
-		item.addComponent(BG);
-		BC = new PickupCollision(item, this.typePickup, this.name);
+		itemGraphics = new AnimatedGraphics(ImageProcessor.getImage(this.name), ImageProcessor.base, true, 1f);
+		itemSpawn = new PointSpawn(new Vector2f(entityG.getX() + itemGraphics.getWidth(), entityG.getY() + itemGraphics.getHeight()));
+		item.addComponent(itemGraphics);
+		itemCollision = new PickupCollision(item, this.typePickup, this.name);
 		Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
 		sounds.put(MessageId.PICKUP, "Pickup2.ogg");
 		BaseAudio audioComponent = new EventAudio(sounds);
-		item.addComponent(BS);
-		item.addComponent(BC);
+		item.addComponent(itemSpawn);
+		item.addComponent(itemCollision);
 		item.addComponent(audioComponent);
-		BS.spawn(item);
+		itemSpawn.spawn(item);
 		ShootEmUp.getGame().getCurrentLevel().addEntity(item);
 	}
 
