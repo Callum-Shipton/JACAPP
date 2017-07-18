@@ -2,21 +2,24 @@ package components.collision;
 
 import java.util.Random;
 
-import components.Message;
 import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.movement.BaseMovement;
 import entity.Entity;
 import object.Element;
-import object.Weapon;
 
 public class HitCollision extends BaseCollision {
 
-	private Weapon weapon;
+	private Element element;
+	private int team;
+	private int damage;
 
-	public HitCollision(Weapon weapon) {
-		this.weapon = weapon;
-		this.moveBack = false;
+	public HitCollision(Element element, int team, int damage) {
+		moveBack = false;
+
+		this.element = element;
+		this.team = team;
+		this.damage = damage;
 	}
 
 	@Override
@@ -25,7 +28,7 @@ public class HitCollision extends BaseCollision {
 		BaseAttack hitAttack = hit.getComponent(TypeComponent.ATTACK);
 		BaseMovement hitMove = hit.getComponent(TypeComponent.MOVEMENT);
 		if (hitAttack != null) {
-			if (hitAttack.getWeapon().getTeam() == this.weapon.getTeam()) {
+			if (hitAttack.getWeapon().getTeam() == team) {
 				e.destroy();
 				return;
 			}
@@ -33,26 +36,20 @@ public class HitCollision extends BaseCollision {
 		if (hit.getComponent(TypeComponent.COLLISION) instanceof RigidCollision) {
 			e.destroy();
 			if (hitAttack != null) {
-				hitAttack.damage(this.weapon.getDamage(), hit);
-				if (this.weapon.getElement() == Element.FIRE) {
-					Random rand = new Random();
-					int prob = rand.nextInt(3);
-					if (prob == 0) {
+				hitAttack.damage(damage, hit);
+				Random rand = new Random();
+				int prob = rand.nextInt(3);
+				if (prob == 0) {
+					switch (element) {
+					case FIRE:
 						hitAttack.setFire(true);
-					}
-				}
-				if (this.weapon.getElement() == Element.ICE) {
-					Random rand = new Random();
-					int prob = rand.nextInt(3);
-					if (prob == 0) {
+						break;
+					case ICE:
 						hitMove.setFrost(true);
-					}
-				}
-				if (this.weapon.getElement() == Element.EARTH) {
-					Random rand = new Random();
-					int prob = rand.nextInt(3);
-					if (prob == 0) {
+						break;
+					case EARTH:
 						hitAttack.setPoison(true);
+						break;
 					}
 				}
 			}
@@ -60,15 +57,8 @@ public class HitCollision extends BaseCollision {
 	}
 
 	@Override
-	public void receive(Message m, Entity e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void update(Entity e) {
 		// TODO Auto-generated method stub
 
 	}
-
 }

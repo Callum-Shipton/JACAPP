@@ -129,7 +129,7 @@ public final class Weapon extends InventoryItem<Weapon> {
 			posY -= g.getHeight();
 		}
 		PointSpawn s = new PointSpawn(new Vector2f(posX, posY));
-		HitCollision c = new HitCollision(this);
+		HitCollision c = new HitCollision(element, team, damage);
 		FlyingMovement m = new FlyingMovement(c, g, 10);
 		particle.addComponent(s);
 		particle.addComponent(c);
@@ -138,7 +138,6 @@ public final class Weapon extends InventoryItem<Weapon> {
 		s.spawn(particle);
 
 		ShootEmUp.getGame().getCurrentLevel().addEntity(particle);
-		// ShootEmUp.getCurrentLevel().getSpawner().checkSpawn(particle);
 	}
 
 	public void initSystem() {

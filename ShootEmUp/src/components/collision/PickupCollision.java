@@ -42,12 +42,6 @@ public class PickupCollision extends BaseCollision {
 	}
 
 	@Override
-	public void receive(Message m, Entity e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void update(Entity e) {
 		if (timer >= Loop.ticks(DESPAWN_TIME)) {
 			e.destroy();
