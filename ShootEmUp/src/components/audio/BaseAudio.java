@@ -12,7 +12,7 @@ import main.ShootEmUp;
 public abstract class BaseAudio extends Component implements AudioComponent {
 	Set<Integer> audioPlaying = new HashSet<>();
 	MusicPlayer audio = ShootEmUp.getMusicPlayer();
-	
+
 	@Override
 	public void destroy(Entity e) {
 	}
@@ -25,7 +25,6 @@ public abstract class BaseAudio extends Component implements AudioComponent {
 	@Override
 	public void update(Entity e) {
 		// TODO Auto-generated method stub
-
 	}
 
 }
