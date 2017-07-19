@@ -10,8 +10,11 @@ import level.LevelMap;
 
 public abstract class BaseControl extends Component implements ControlComponent {
 
-	protected TypeComponent type = TypeComponent.CONTROL;
 	protected BaseGraphics graphics;
+
+	public BaseControl(Entity entity) {
+		super(entity);
+	}
 
 	private static float getDifference(float speed, float pos1, float pos2) {
 		return (1.0f / speed) * (pos1 - pos2);
@@ -63,7 +66,7 @@ public abstract class BaseControl extends Component implements ControlComponent 
 
 	@Override
 	public TypeComponent getType() {
-		return this.type;
+		return TypeComponent.CONTROL;
 	}
 
 }

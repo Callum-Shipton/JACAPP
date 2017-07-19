@@ -28,10 +28,4 @@ public class AStarSearchTest {
 		assertTrue(AStarSearch.containsGoal(position3, 3, goal));
 		assertFalse(AStarSearch.containsGoal(position4, 3, goal));
 	}
-
-	@Test
-	public void movesIntoWallTest() {
-
-	}
-
 }

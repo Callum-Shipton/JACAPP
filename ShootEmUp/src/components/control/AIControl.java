@@ -27,10 +27,12 @@ public class AIControl extends BaseControl {
 	private AStarSearch search;
 	private BaseGraphics playerGraphics;
 
-	public AIControl(BaseGraphics graphics, BaseAttack attack, BaseMovement movement) {
-		this.graphics = graphics;
-		this.attack = attack;
-		this.movement = movement;
+	public AIControl(Entity entity) {
+		super(entity);
+
+		this.graphics = entity.getComponent(TypeComponent.GRAPHICS);
+		this.attack = entity.getComponent(TypeComponent.ATTACK);
+		this.movement = entity.getComponent(TypeComponent.MOVEMENT);
 
 		LevelMap map = ShootEmUp.getGame().getCurrentLevel().getMap();
 		playerGraphics = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.GRAPHICS);

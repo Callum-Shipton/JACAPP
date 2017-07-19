@@ -14,10 +14,12 @@ import object.EntityMap;
 
 public abstract class BaseCollision extends Component implements CollisionComponent {
 
-	protected TypeComponent type = TypeComponent.COLLISION;
-
 	protected Set<Vector2f> gridPos;
 	protected boolean moveBack;
+
+	public BaseCollision(Entity entity) {
+		super(entity);
+	}
 
 	@Override
 	public void destroy(Entity e) {
@@ -34,7 +36,7 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 
 	@Override
 	public TypeComponent getType() {
-		return type;
+		return TypeComponent.COLLISION;
 	}
 
 	@Override

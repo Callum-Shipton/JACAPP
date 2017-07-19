@@ -54,10 +54,11 @@ public class LevelMap {
 				LevelMap.TILE_WIDTH, TILE_WIDTH);
 
 		/*
-		 * ImageProcessor.irFore = new FloorRenderer(generator.getForegroundTiles(), new
+		 * ImageProcessor.irFore = new
+		 * FloorRenderer(generator.getForegroundTiles(), new
 		 * Vector2(ImageProcessor.getImage("Walls").getFWidth(),
-		 * ImageProcessor.getImage("Walls").getFHeight()), LevelMap.getTileWidth(),
-		 * LevelMap.getTileHeight());
+		 * ImageProcessor.getImage("Walls").getFHeight()),
+		 * LevelMap.getTileWidth(), LevelMap.getTileHeight());
 		 */
 
 		ImageProcessor.irBack.init();
@@ -94,25 +95,26 @@ public class LevelMap {
 
 	// create wall
 	private void insertWall(int x, int y, float tileMapX, float tileMapY) {
+		Entity wall = new Entity();
 		MapGraphics wallG;
 		wallG = new MapGraphics(ImageProcessor.getImage(WALLS_TEXTURE_FILE), new Vector2f(tileMapX, tileMapY),
-				x * TILE_WIDTH, y * TILE_WIDTH);
+				x * TILE_WIDTH, y * TILE_WIDTH, wall);
 
-		createEntity(wallG, x, y);
+		createEntity(wallG, x, y, wall);
 	}
 
 	// create water
 	private void insertWater(int x, int y, float tileMapX, float tileMapY) {
+		Entity water = new Entity();
 		MapGraphics wallG;
 		wallG = new MapGraphics(ImageProcessor.getImage(WALLS_TEXTURE_FILE), new Vector2f(tileMapX, tileMapY + 4.0f),
-				x * TILE_WIDTH, y * TILE_WIDTH);
-		createEntity(wallG, x, y);
+				x * TILE_WIDTH, y * TILE_WIDTH, water);
+		createEntity(wallG, x, y, water);
 	}
 
-	private void createEntity(MapGraphics wallG, int x, int y) {
-		Entity wall = new Entity();
+	private void createEntity(MapGraphics wallG, int x, int y, Entity wall) {
 		wall.addComponent(wallG);
-		RigidCollision rigidCollision = new RigidCollision();
+		RigidCollision rigidCollision = new RigidCollision(wall);
 		wall.addComponent(rigidCollision);
 		walls.put(new Vector2i(x, y), wall);
 	}

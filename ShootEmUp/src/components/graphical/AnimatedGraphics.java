@@ -14,7 +14,9 @@ public class AnimatedGraphics extends BaseGraphics {
 	protected int animTime = 6;
 	protected int direction = 0;
 
-	public AnimatedGraphics(Image image, Renderer r, boolean animating, float scale) {
+	public AnimatedGraphics(Image image, Renderer r, boolean animating, float scale, Entity entity) {
+		super(entity);
+
 		this.image = image;
 		this.r = r;
 		this.animating = animating;
@@ -24,8 +26,8 @@ public class AnimatedGraphics extends BaseGraphics {
 
 	}
 
-	public AnimatedGraphics(Image image, Renderer r, boolean animating, float x, float y) {
-		this(image, r, animating, 1);
+	public AnimatedGraphics(Image image, Renderer r, boolean animating, float x, float y, Entity entity) {
+		this(image, r, animating, 1, entity);
 
 		this.x = x;
 		this.y = y;

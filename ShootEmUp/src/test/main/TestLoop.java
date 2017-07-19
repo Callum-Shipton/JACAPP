@@ -1,6 +1,5 @@
 package test.main;
 
-import static org.lwjgl.glfw.GLFW.glfwSwapInterval;
 import static org.lwjgl.opengl.GL11.GL_NO_ERROR;
 import static org.lwjgl.opengl.GL11.glGetError;
 
@@ -36,15 +35,13 @@ public class TestLoop extends Loop {
 
 		int error;
 		GLFW.glfwHideWindow(getDisplay().getWindow());
-		//glfwSwapInterval(0);
+		// glfwSwapInterval(0);
 		ShootEmUp.getMusicPlayer().pause();
 		new OpenMenuButton(new CharacterSelectMenu(ImageProcessor.getImage("MainMenuScreen"))).click();
 		new SelectCharacterButton(TypeAttack.WARRIOR).click();
 		new SelectLevelButton(1).click();
 		Entity player = ShootEmUp.getGame().getPlayer();
-		player.addComponent(new TestingControl(player.getComponent(TypeComponent.GRAPHICS),
-				player.getComponent(TypeComponent.ATTACK), player.getComponent(TypeComponent.MOVEMENT),
-				player.getComponent(TypeComponent.INVENTORY)));
+		player.addComponent(new TestingControl(player));
 		PlayerAttack pa = player.getComponent(TypeComponent.ATTACK);
 		pa.setMaxHealth(400);
 
@@ -57,16 +54,14 @@ public class TestLoop extends Loop {
 			if (error != GL_NO_ERROR) {
 				Logger.error("OpenGL Error: " + error);
 			}
-			
+
 			update();
-			//render();
-			
+			// render();
+
 			int currWave = ShootEmUp.getGame().getCurrentLevel().getWave();
 			if (currWave != lastWave) {
 				player = ShootEmUp.getGame().getPlayer();
-				player.addComponent(new TestingControl(player.getComponent(TypeComponent.GRAPHICS),
-						player.getComponent(TypeComponent.ATTACK), player.getComponent(TypeComponent.MOVEMENT),
-						player.getComponent(TypeComponent.INVENTORY)));
+				player.addComponent(new TestingControl(player));
 				Logger.info("TEST: Wave: " + currWave);
 				lastWave = currWave;
 			}

@@ -4,7 +4,7 @@ import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 public class VectorMath {
-	static Vector2f axis = new Vector2f(0.0f, 1.0f);
+	private static Vector2f axis = new Vector2f(0.0f, 1.0f);
 
 	public static Vector4f contains(Vector4f vec1, Vector4f vec2) {
 		float cx = vec2.x;

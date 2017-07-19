@@ -3,6 +3,7 @@ package components.control;
 import org.joml.Vector2f;
 
 import components.Message;
+import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.graphical.PlayerGraphics;
 import components.inventory.BaseInventory;
@@ -20,11 +21,13 @@ public class PlayerControl extends BaseControl {
 	private BaseAttack BA;
 	private BaseInventory PI;
 
-	public PlayerControl(PlayerGraphics PG, BaseAttack BA, BaseMovement BM, BaseInventory PI) {
-		this.PG = PG;
-		this.BA = BA;
-		this.BM = BM;
-		this.PI = PI;
+	public PlayerControl(Entity entity) {
+		super(entity);
+
+		this.PG = entity.getComponent(TypeComponent.GRAPHICS);
+		this.BA = entity.getComponent(TypeComponent.ATTACK);
+		this.BM = entity.getComponent(TypeComponent.MOVEMENT);
+		this.PI = entity.getComponent(TypeComponent.INVENTORY);
 	}
 
 	@Override

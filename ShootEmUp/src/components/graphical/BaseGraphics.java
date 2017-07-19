@@ -14,8 +14,6 @@ import entity.Entity;
 
 public abstract class BaseGraphics extends Component implements GraphicsComponent {
 
-	protected TypeComponent type = TypeComponent.GRAPHICS;
-
 	protected Renderer r;
 
 	protected float x;
@@ -23,6 +21,10 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 	protected float width;
 	protected float height;
 	protected Image image;
+
+	public BaseGraphics(Entity entity) {
+		super(entity);
+	}
 
 	@Override
 	public void destroy(Entity e) {
@@ -39,7 +41,7 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 
 	@Override
 	public TypeComponent getType() {
-		return type;
+		return TypeComponent.GRAPHICS;
 	}
 
 	public float getWidth() {

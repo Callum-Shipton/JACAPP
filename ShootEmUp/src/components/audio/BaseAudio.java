@@ -13,6 +13,10 @@ public abstract class BaseAudio extends Component implements AudioComponent {
 	Set<Integer> audioPlaying = new HashSet<>();
 	MusicPlayer audio = ShootEmUp.getMusicPlayer();
 
+	public BaseAudio(Entity entity) {
+		super(entity);
+	}
+
 	@Override
 	public void destroy(Entity e) {
 	}

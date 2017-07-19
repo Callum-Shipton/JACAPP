@@ -32,7 +32,7 @@ public abstract class PlayerBuilder {
 		player.addComponent(a);
 		player.addComponent(m);
 		player.addComponent(i);
-		player.addComponent(new PlayerControl(g, a, m, i));
+		player.addComponent(new PlayerControl(player));
 		s.spawn(player);
 	}
 
@@ -40,9 +40,9 @@ public abstract class PlayerBuilder {
 		player = new Entity();
 		chooseType(type);
 
-		c = new RigidCollision();
-		m = new GroundMovement(c, 5);
-		i = new BaseInventory(g, a, 0);
+		c = new RigidCollision(player);
+		m = new GroundMovement(5, player);
+		i = new BaseInventory(0, player);
 
 		addComponents();
 		return player;
@@ -52,10 +52,10 @@ public abstract class PlayerBuilder {
 		player = new Entity();
 		chooseType(type);
 
-		a = new PlayerAttack(type, save);
-		c = new RigidCollision();
-		m = new GroundMovement(c, 5);
-		i = new BaseInventory(g, a, save);
+		a = new PlayerAttack(type, save, player);
+		c = new RigidCollision(player);
+		m = new GroundMovement(5, player);
+		i = new BaseInventory(save, player);
 
 		addComponents();
 		return player;
@@ -64,28 +64,28 @@ public abstract class PlayerBuilder {
 	private static void chooseType(TypeAttack type) {
 		switch (type) {
 		case ARCHER:
-			g = new PlayerGraphics(ImageProcessor.getImage("Archer"), ImageProcessor.base, 1f);
-			a = new PlayerAttack(type, 4, 5, new Weapon("Longbow", 0));
+			g = new PlayerGraphics(ImageProcessor.getImage("Archer"), ImageProcessor.base, 1f, player);
+			a = new PlayerAttack(type, 4, 5, new Weapon("Longbow", 0), player);
 			break;
 		case BATTLE_MAGE:
-			g = new PlayerGraphics(ImageProcessor.getImage("BattleMage"), ImageProcessor.base, 1f);
-			a = new PlayerAttack(type, 3, 5, new Weapon("FireStaff", 0));
+			g = new PlayerGraphics(ImageProcessor.getImage("BattleMage"), ImageProcessor.base, 1f, player);
+			a = new PlayerAttack(type, 3, 5, new Weapon("FireStaff", 0), player);
 			break;
 		case MAGE:
-			g = new PlayerGraphics(ImageProcessor.getImage("Mage"), ImageProcessor.base, 1f);
-			a = new PlayerAttack(type, 3, 5, new Weapon("FireStaff", 0));
+			g = new PlayerGraphics(ImageProcessor.getImage("Mage"), ImageProcessor.base, 1f, player);
+			a = new PlayerAttack(type, 3, 5, new Weapon("FireStaff", 0), player);
 			break;
 		case ROGUE:
-			g = new PlayerGraphics(ImageProcessor.getImage("Rogue"), ImageProcessor.base, 1f);
-			a = new PlayerAttack(type, 3, 5, new Weapon("IronDagger", 0));
+			g = new PlayerGraphics(ImageProcessor.getImage("Rogue"), ImageProcessor.base, 1f, player);
+			a = new PlayerAttack(type, 3, 5, new Weapon("IronDagger", 0), player);
 			break;
 		case WARRIOR:
-			g = new PlayerGraphics(ImageProcessor.getImage("Warrior"), ImageProcessor.base, 1f);
-			a = new PlayerAttack(type, 5, 3, new Weapon("Greatsword", 0));
+			g = new PlayerGraphics(ImageProcessor.getImage("Warrior"), ImageProcessor.base, 1f, player);
+			a = new PlayerAttack(type, 5, 3, new Weapon("Greatsword", 0), player);
 			break;
 		default:
-			g = new PlayerGraphics(ImageProcessor.getImage("Warrior"), ImageProcessor.base, 1f);
+			g = new PlayerGraphics(ImageProcessor.getImage("Warrior"), ImageProcessor.base, 1f, player);
 		}
-		s = new PointSpawn(new Vector2f(480.0f, 480.0f));
+		s = new PointSpawn(new Vector2f(480.0f, 480.0f), player);
 	}
 }

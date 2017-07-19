@@ -3,17 +3,20 @@ package components.control;
 import org.joml.Vector2f;
 
 import components.Message;
+import components.TypeComponent;
 import components.graphical.AnimatedGraphics;
 import components.movement.BaseMovement;
 import entity.Entity;
 
 public class LineControl extends BaseControl {
 
-	private BaseMovement movementComponent;
+	protected BaseMovement movementComponent;
 
-	public LineControl(AnimatedGraphics graphics, BaseMovement movementComponent) {
-		this.graphics = graphics;
-		this.movementComponent = movementComponent;
+	public LineControl(Entity entity) {
+		super(entity);
+
+		this.graphics = entity.getComponent(TypeComponent.GRAPHICS);
+		this.movementComponent = entity.getComponent(TypeComponent.MOVEMENT);
 	}
 
 	@Override

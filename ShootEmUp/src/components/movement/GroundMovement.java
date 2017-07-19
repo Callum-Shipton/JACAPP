@@ -18,9 +18,9 @@ public class GroundMovement extends BaseMovement {
 
 	protected BaseCollision collisionComponent;
 
-	public GroundMovement(BaseCollision baseCollision, int speed) {
-		super(speed);
-		this.collisionComponent = baseCollision;
+	public GroundMovement(int speed, Entity entity) {
+		super(speed, entity);
+		this.collisionComponent = entity.getComponent(TypeComponent.COLLISION);
 	}
 
 	private Set<Vector2f> reactToCollision(Vector4f collVec, Entity hitEntity, Entity currentEntity, Axis axis,

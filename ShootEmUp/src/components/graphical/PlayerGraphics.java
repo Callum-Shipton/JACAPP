@@ -13,8 +13,8 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 	private int posLocation;
 	private int posLocationInst;
 
-	public PlayerGraphics(Image image, Renderer r, float scale) {
-		super(image, r, false, scale);
+	public PlayerGraphics(Image image, Renderer r, float scale, Entity entity) {
+		super(image, r, false, scale, entity);
 		posLocation = GL20.glGetUniformLocation(ImageProcessor.ShaderBase, "playerPos");
 		posLocationInst = GL20.glGetUniformLocation(ImageProcessor.ShaderInst, "playerPos");
 	}

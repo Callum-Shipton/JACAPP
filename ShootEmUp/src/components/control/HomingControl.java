@@ -15,9 +15,11 @@ public class HomingControl extends BaseControl {
 
 	private BaseMovement movement;
 
-	public HomingControl(AnimatedGraphics graphics, BaseMovement movement) {
-		this.graphics = graphics;
-		this.movement = movement;
+	public HomingControl(Entity entity) {
+		super(entity);
+
+		this.graphics = entity.getComponent(TypeComponent.GRAPHICS);
+		this.movement = entity.getComponent(TypeComponent.MOVEMENT);
 	}
 
 	@Override

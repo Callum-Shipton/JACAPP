@@ -58,13 +58,13 @@ public class AreaSpawner extends Spawner {
 		boolean collide;
 		Entity test = new Entity();
 
-		BaseGraphics testGraphics = new AnimatedGraphics(image, ImageProcessor.base, false, 1f);
+		BaseGraphics testGraphics = new AnimatedGraphics(image, ImageProcessor.base, false, 1f, test);
 		test.addComponent(testGraphics);
 
-		BaseCollision baseCollision = new RigidCollision();
+		BaseCollision baseCollision = new RigidCollision(test);
 		test.addComponent(baseCollision);
 
-		BaseMovement baseMovement = new GroundMovement(baseCollision, 5);
+		BaseMovement baseMovement = new GroundMovement(5, test);
 		test.addComponent(baseMovement);
 
 		BaseGraphics playerGraphics = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.GRAPHICS);

@@ -51,13 +51,15 @@ public abstract class InventoryItem<I extends InventoryItem<?>> implements Datab
 
 		BaseGraphics entityG = e.getComponent(TypeComponent.GRAPHICS);
 
-		itemGraphics = new AnimatedGraphics(ImageProcessor.getImage(this.name), ImageProcessor.base, true, 1f);
-		itemSpawn = new PointSpawn(new Vector2f(entityG.getX() + itemGraphics.getWidth(), entityG.getY() + itemGraphics.getHeight()));
+		itemGraphics = new AnimatedGraphics(ImageProcessor.getImage(this.name), ImageProcessor.base, true, 1f, item);
+		itemSpawn = new PointSpawn(
+				new Vector2f(entityG.getX() + itemGraphics.getWidth(), entityG.getY() + itemGraphics.getHeight()),
+				item);
 		item.addComponent(itemGraphics);
-		itemCollision = new PickupCollision(item, this.typePickup, this.name);
+		itemCollision = new PickupCollision(this.typePickup, this.name, item);
 		Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
 		sounds.put(MessageId.PICKUP, "Pickup2.ogg");
-		BaseAudio audioComponent = new EventAudio(sounds);
+		BaseAudio audioComponent = new EventAudio(sounds, item);
 		item.addComponent(itemSpawn);
 		item.addComponent(itemCollision);
 		item.addComponent(audioComponent);

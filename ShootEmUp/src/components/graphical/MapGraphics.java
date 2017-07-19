@@ -9,7 +9,9 @@ public class MapGraphics extends BaseGraphics {
 
 	private Vector2f mapPos;
 
-	public MapGraphics(Image image, Vector2f mapPos, float x, float y) {
+	public MapGraphics(Image image, Vector2f mapPos, float x, float y, Entity entity) {
+		super(entity);
+
 		this.image = image;
 		width = image.getWidth() / image.getFWidth();
 		height = image.getHeight() / image.getFHeight();

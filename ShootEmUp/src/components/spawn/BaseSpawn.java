@@ -6,7 +6,9 @@ import entity.Entity;
 
 public abstract class BaseSpawn extends Component implements SpawnComponent {
 
-	protected TypeComponent type = TypeComponent.SPAWN;
+	public BaseSpawn(Entity entity) {
+		super(entity);
+	}
 
 	@Override
 	public void destroy(Entity e) {
@@ -15,7 +17,7 @@ public abstract class BaseSpawn extends Component implements SpawnComponent {
 
 	@Override
 	public TypeComponent getType() {
-		return this.type;
+		return TypeComponent.SPAWN;
 	}
 
 	@Override

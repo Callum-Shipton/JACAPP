@@ -10,9 +10,6 @@ import object.Armour;
 import object.Weapon;
 
 public abstract class BaseAttack extends Component implements AttackComponent {
-
-	protected TypeComponent componentType = TypeComponent.ATTACK;
-
 	protected TypeAttack type;
 
 	protected Weapon weapon;
@@ -44,15 +41,15 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	private int poisonCounter = 0;
 	private static final int POISON_TIME = 2;
 
-	public BaseAttack(TypeAttack type) {
+	public BaseAttack(TypeAttack type, Entity entity) {
+		super(entity);
 		this.type = type;
 		healthRegen = 100;
 		manaRegen = 100;
 	}
 
-	public BaseAttack(TypeAttack type, int health, int mana, Weapon weapon) {
-
-		this(type);
+	public BaseAttack(TypeAttack type, int health, int mana, Weapon weapon, Entity entity) {
+		this(type, entity);
 
 		this.weapon = weapon;
 		this.health = health;
@@ -303,7 +300,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 	@Override
 	public TypeComponent getType() {
-		return componentType;
+		return TypeComponent.ATTACK;
 	}
 
 	public Weapon getWeapon() {

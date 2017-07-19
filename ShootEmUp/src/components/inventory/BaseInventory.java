@@ -18,7 +18,6 @@ import components.Message;
 import components.MessageId;
 import components.TypeComponent;
 import components.attack.BaseAttack;
-import components.attack.PlayerAttack;
 import components.audio.BaseAudio;
 import components.audio.EventAudio;
 import components.collision.PickupCollision;
@@ -37,8 +36,6 @@ import object.Weapon;
 import save.CharacterSave;
 
 public class BaseInventory extends Component implements InventoryComponent {
-
-	protected TypeComponent type = TypeComponent.INVENTORY;
 
 	protected static final String BOW = "Bow";
 	protected static final String DAGGER = "Dagger";
@@ -66,13 +63,15 @@ public class BaseInventory extends Component implements InventoryComponent {
 	protected BaseAttack attackComponent;
 	protected BaseGraphics graphicsComponent;
 
-	public BaseInventory(BaseGraphics graphicsComponent, BaseAttack BA, int level) {
-		this.graphicsComponent = graphicsComponent;
-		this.attackComponent = BA;
+	public BaseInventory(int level, Entity entity) {
+		super(entity);
+
+		this.graphicsComponent = entity.getComponent(TypeComponent.GRAPHICS);
+		this.attackComponent = entity.getComponent(TypeComponent.ATTACK);
 		this.level = level;
 		expBound = level + 1;
 
-		switch (BA.getAttackType()) {
+		switch (attackComponent.getAttackType()) {
 		case ARCHER:
 			weaponTypes[0] = BOW;
 			weaponTypes[1] = DAGGER;
@@ -99,8 +98,8 @@ public class BaseInventory extends Component implements InventoryComponent {
 		}
 	}
 
-	public BaseInventory(BaseGraphics BG, PlayerAttack BA, CharacterSave save) {
-		this(BG, BA, save.getPlayerLevel());
+	public BaseInventory(CharacterSave save, Entity entity) {
+		this(save.getPlayerLevel(), entity);
 		inventory = save.getInventory();
 		inventorySize = save.getInventorySize();
 		potions = save.getPotions();
@@ -192,14 +191,14 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 		coinG = new AnimatedGraphics(ImageProcessor.getImage("Coin"), ImageProcessor.base, true,
 				graphicsComponent.getX() - graphicsComponent.getWidth(),
-				graphicsComponent.getY() - graphicsComponent.getHeight());
+				graphicsComponent.getY() - graphicsComponent.getHeight(), item);
 
-		coinS = new PointSpawn(new Vector2f(graphicsComponent.getX(), graphicsComponent.getY()));
+		coinS = new PointSpawn(new Vector2f(graphicsComponent.getX(), graphicsComponent.getY()), item);
 		item.addComponent(coinG);
-		coinC = new PickupCollision(item, TypePickup.COIN, "Coin");
+		coinC = new PickupCollision(TypePickup.COIN, "Coin", item);
 		Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
 		sounds.put(MessageId.PICKUP, "Pickup.ogg");
-		BaseAudio audioComponent = new EventAudio(sounds);
+		BaseAudio audioComponent = new EventAudio(sounds, item);
 		item.addComponent(coinS);
 		item.addComponent(coinC);
 		item.addComponent(audioComponent);
@@ -299,7 +298,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 	@Override
 	public TypeComponent getType() {
-		return type;
+		return TypeComponent.INVENTORY;
 	}
 
 	public void giveExp(int exp) {
@@ -382,10 +381,6 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 	public void setLevel(int level) {
 		this.level = level;
-	}
-
-	public void setType(TypeComponent type) {
-		this.type = type;
 	}
 
 	public void spendCoins(int coins) {

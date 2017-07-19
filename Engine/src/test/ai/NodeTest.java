@@ -12,7 +12,7 @@ import ai.Node;
 public class NodeTest {
 
 	@Test
-	public void containsWallTest() {
+	public void movesIntoWallTest() {
 		fail("Not yet implemented");
 	}
 

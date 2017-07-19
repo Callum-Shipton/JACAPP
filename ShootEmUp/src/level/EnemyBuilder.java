@@ -42,34 +42,34 @@ public final class EnemyBuilder {
 			Logger.debug("Small Enemy Spawn", Logger.Category.ENTITIES);
 			addComponents("SmallEnemy", 7);
 			enemyAttack = new EnemyAttack(TypeAttack.WARRIOR, 1, 5, new Weapon("OneHanded", 1), new Armour("Helmet"),
-					null, null, null);
+					null, null, null, newEnemy);
 			break;
 		case NORMAL:
 			Logger.debug("Enemy Spawn", Logger.Category.ENTITIES);
 			addComponents("Enemy", 4);
 			enemyAttack = new EnemyAttack(TypeAttack.ARCHER, 3, 5, new Weapon("Bow", 1), null, new Armour("Chest"),
-					null, null);
+					null, null, newEnemy);
 			break;
 		case FLYING:
 			Logger.debug("Flying Enemy Spawn", Logger.Category.ENTITIES);
 			addComponents("FlyingEnemy", 5);
 			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 2, 5, new Weapon("Staff", 1), null, null, new Armour("Legs"),
-					null);
+					null, newEnemy);
 			break;
 		case BOSS:
 			Logger.debug("Boss Enemy Spawn", Logger.Category.ENTITIES);
 			addComponents("BossEnemy", 5);
 			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 1, 5, new Weapon("TwoHanded", 1), null, null, null,
-					new Armour("Boots"));
+					new Armour("Boots"), newEnemy);
 			break;
 		}
 
-		BaseControl enemyControl = new AIControl(enemyGraphics, enemyAttack, enemyMovement);
-		BaseInventory enemyInventory = new BaseInventory(enemyGraphics, enemyAttack, 1);
+		BaseControl enemyControl = new AIControl(newEnemy);
+		BaseInventory enemyInventory = new BaseInventory(1, newEnemy);
 
 		Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
 		sounds.put(MessageId.SHOOT, "Shoot.ogg");
-		BaseAudio enemyAudio = new EventAudio(sounds);
+		BaseAudio enemyAudio = new EventAudio(sounds, newEnemy);
 
 		newEnemy.addComponent(enemyAttack);
 		newEnemy.addComponent(enemyCollision);
@@ -82,9 +82,9 @@ public final class EnemyBuilder {
 	}
 
 	private static void addComponents(String art, int speed) {
-		enemyGraphics = new AnimatedGraphics(ImageProcessor.getImage(art), ImageProcessor.base, false, 0, 0);
+		enemyGraphics = new AnimatedGraphics(ImageProcessor.getImage(art), ImageProcessor.base, false, 0, 0, newEnemy);
 		newEnemy.addComponent(enemyGraphics);
-		enemyCollision = new RigidCollision();
-		enemyMovement = new GroundMovement(enemyCollision, speed);
+		enemyCollision = new RigidCollision(newEnemy);
+		enemyMovement = new GroundMovement(speed, newEnemy);
 	}
 }

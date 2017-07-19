@@ -11,7 +11,9 @@ public class PointSpawn extends BaseSpawn implements SpawnComponent {
 
 	private Vector2f spawnLoc;
 
-	public PointSpawn(Vector2f spawnLoc) {
+	public PointSpawn(Vector2f spawnLoc, Entity entity) {
+		super(entity);
+
 		this.spawnLoc = spawnLoc;
 	}
 

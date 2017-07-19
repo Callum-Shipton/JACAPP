@@ -18,15 +18,17 @@ public class PickupCollision extends BaseCollision {
 	private final int DESPAWN_TIME = 10;
 	private int timer = 0;
 
-	public PickupCollision(Entity e, TypePickup type, String name) {
-		typePickup = type;
+	public PickupCollision(TypePickup type, String name, Entity entity) {
+		super(entity);
+
 		this.name = name;
 
+		typePickup = type;
 		moveBack = false;
 
 		EntityMap eMap = ShootEmUp.getGame().getCurrentLevel().geteMap();
-		setGridPos(eMap.getGridPos(e));
-		eMap.addEntity(getGridPos(), e);
+		setGridPos(eMap.getGridPos(entity));
+		eMap.addEntity(getGridPos(), entity);
 	}
 
 	@Override

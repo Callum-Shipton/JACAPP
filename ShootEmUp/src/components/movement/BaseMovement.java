@@ -10,8 +10,6 @@ import loop.Loop;
 
 public abstract class BaseMovement extends Component implements MovementComponent {
 
-	protected TypeComponent type = TypeComponent.MOVEMENT;
-
 	protected int speed;
 	protected int realSpeed;
 
@@ -19,7 +17,9 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	private int frostCounter = 0;
 	private int frostTime = 5;
 
-	public BaseMovement(int speed) {
+	public BaseMovement(int speed, Entity entity) {
+		super(entity);
+
 		this.speed = speed;
 		realSpeed = speed;
 	}
@@ -35,7 +35,7 @@ public abstract class BaseMovement extends Component implements MovementComponen
 
 	@Override
 	public TypeComponent getType() {
-		return type;
+		return TypeComponent.MOVEMENT;
 	}
 
 	public void increaseSpeed(int increase) {
