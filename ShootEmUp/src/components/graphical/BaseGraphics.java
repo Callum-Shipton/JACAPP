@@ -9,34 +9,27 @@ import components.Message;
 import components.MessageId;
 import components.TypeComponent;
 import display.Image;
+import display.ImageProcessor;
 import display.Renderer;
 
 public abstract class BaseGraphics extends Component implements GraphicsComponent {
 
 	protected Renderer r;
 
-	protected float x;
-	protected float y;
-	protected float width;
-	protected float height;
-	protected Image image;
+	protected transient float x;
+	protected transient float y;
+	protected transient float width;
+	protected transient float height;
+	protected transient Image image;
+	protected String imageId;
 
-	public BaseGraphics(float x, float y, float width, float height, Image image, Renderer r) {
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		this.image = image;
+	public BaseGraphics(String imageId, Renderer r) {
+		this.imageId = imageId;
 		this.r = r;
-	}
-	
-	public BaseGraphics(float x, float y, Image image, Renderer r) {
-		this.x = x;
-		this.y = y;
+
+		image = ImageProcessor.getImage(imageId);
 		width = image.getWidth() / image.getFWidth();
 		height = image.getHeight() / image.getFHeight();
-		this.image = image;
-		this.r = r;
 	}
 
 	@Override
@@ -50,6 +43,10 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 
 	public Image getImage() {
 		return image;
+	}
+
+	public String getImageId() {
+		return imageId;
 	}
 
 	@Override

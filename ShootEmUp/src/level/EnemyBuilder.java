@@ -82,7 +82,7 @@ public final class EnemyBuilder {
 	}
 
 	private static void addComponents(String art, int speed) {
-		enemyGraphics = new AnimatedGraphics(ImageProcessor.getImage(art), ImageProcessor.base, false, 0, 0);
+		enemyGraphics = new AnimatedGraphics(art, ImageProcessor.base, false, 0, 0);
 		newEnemy.addComponent(enemyGraphics);
 		enemyCollision = new RigidCollision();
 		enemyMovement = new GroundMovement(speed);

@@ -2,20 +2,23 @@ package components.graphical;
 
 import org.lwjgl.opengl.GL20;
 
-import display.Image;
 import display.ImageProcessor;
 import display.Renderer;
 import loop.Loop;
 
 public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponent {
 
-	private int posLocation;
-	private int posLocationInst;
+	private transient int posLocation;
+	private transient int posLocationInst;
 
-	public PlayerGraphics(Image image, Renderer r) {
-		super(image, r, false);
+	public PlayerGraphics(String imageId, Renderer r) {
+		super(imageId, r, false);
 		posLocation = GL20.glGetUniformLocation(ImageProcessor.ShaderBase, "playerPos");
 		posLocationInst = GL20.glGetUniformLocation(ImageProcessor.ShaderInst, "playerPos");
+	}
+
+	public PlayerGraphics(PlayerGraphics playerGraphics) {
+		this(playerGraphics.imageId, playerGraphics.r);
 	}
 
 	@Override

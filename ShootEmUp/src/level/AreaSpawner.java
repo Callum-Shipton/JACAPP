@@ -12,7 +12,6 @@ import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.movement.BaseMovement;
 import components.movement.GroundMovement;
-import display.Image;
 import display.ImageProcessor;
 import entity.Entity;
 import logging.Logger;
@@ -42,7 +41,7 @@ public class AreaSpawner extends Spawner {
 	@Override
 	protected void spawnEntity(Entity entity) {
 		BaseGraphics graphicsComponent = entity.getComponent(TypeComponent.GRAPHICS);
-		Vector2f position = getPosition(graphicsComponent.getImage());
+		Vector2f position = getPosition(graphicsComponent.getImageId());
 		graphicsComponent.setX(position.x() + 10);
 		graphicsComponent.setY(position.y() + 10);
 
@@ -53,12 +52,12 @@ public class AreaSpawner extends Spawner {
 		spawnedEntities.add(entity);
 	}
 
-	private Vector2f getPosition(Image image) {
+	private Vector2f getPosition(String imageId) {
 
 		boolean collide;
 		Entity test = new Entity();
 
-		BaseGraphics testGraphics = new AnimatedGraphics(image, ImageProcessor.base, false);
+		BaseGraphics testGraphics = new AnimatedGraphics(imageId, ImageProcessor.base, false);
 		test.addComponent(testGraphics);
 
 		BaseCollision baseCollision = new RigidCollision();

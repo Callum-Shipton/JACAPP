@@ -2,16 +2,18 @@ package components.graphical;
 
 import org.joml.Vector2f;
 
-import display.Image;
 import entity.Entity;
 
 public class MapGraphics extends BaseGraphics {
 
-	private Vector2f mapPos;
+	private transient Vector2f mapPos;
 
-	public MapGraphics(Image image, Vector2f mapPos, float x, float y) {
-		super(x, y, image, null);
-		setMapPos(mapPos);
+	public MapGraphics(String imageId) {
+		super(imageId, null);
+	}
+
+	public MapGraphics(MapGraphics mapGraphics) {
+		this(mapGraphics.imageId);
 	}
 
 	public Vector2f getMapPos() {

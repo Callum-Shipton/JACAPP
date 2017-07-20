@@ -16,7 +16,6 @@ import components.graphical.BaseGraphics;
 import components.inventory.TypePickup;
 import components.movement.FlyingMovement;
 import components.spawn.PointSpawn;
-import display.Image;
 import display.ImageProcessor;
 import entity.Entity;
 import logging.Logger;
@@ -167,8 +166,8 @@ public final class Weapon extends InventoryItem<Weapon> {
 		return this.manaCost;
 	}
 
-	public Image getParticleImage() {
-		return ImageProcessor.getImage(this.particleImage);
+	public String getParticleImage() {
+		return particleImage;
 	}
 
 	public int getRange() {

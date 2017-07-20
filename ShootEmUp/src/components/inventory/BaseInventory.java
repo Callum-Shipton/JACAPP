@@ -37,23 +37,27 @@ import save.CharacterSave;
 
 public class BaseInventory extends Component implements InventoryComponent {
 
-	protected int coins;
+	protected transient int coins;
 
 	protected static final int MAX_LEVEL = 99;
-	protected int level;
+	protected transient int level;
 
-	protected int exp;
-	protected int expBound;
-	protected int levelPoints = 0;
+	protected transient int exp;
+	protected transient int expBound;
+	protected transient int levelPoints = 0;
 
-	protected List<InventoryItem<?>> inventory = new ArrayList<>();
-	protected int inventorySize = 5;
-	protected Map<TypePotion, Potion> potions = new EnumMap<>(TypePotion.class); // NOSONAR
-	protected int maxPotions = 5;
+	protected transient List<InventoryItem<?>> inventory = new ArrayList<>();
+	protected transient int inventorySize = 5;
+	protected transient Map<TypePotion, Potion> potions = new EnumMap<>(TypePotion.class); // NOSONAR
+	protected transient int maxPotions = 5;
 
 	public BaseInventory(int level) {
 		this.level = level;
 		expBound = level + 1;
+	}
+
+	public BaseInventory(BaseInventory baseInventory) {
+
 	}
 
 	public BaseInventory(CharacterSave save) {
@@ -145,14 +149,14 @@ public class BaseInventory extends Component implements InventoryComponent {
 	private void dropCoin() {
 		Entity item = new Entity();
 
-		AnimatedGraphics coinG = null;
+		AnimatedGraphics coinG;
 		PointSpawn coinS;
 		PickupCollision coinC;
 
 		BaseGraphics BG = entity.getComponent(TypeComponent.GRAPHICS);
 
-		coinG = new AnimatedGraphics(ImageProcessor.getImage("Coin"), ImageProcessor.base, true,
-				BG.getX() - BG.getWidth(), BG.getY() - BG.getHeight());
+		coinG = new AnimatedGraphics("Coin", ImageProcessor.base, true, BG.getX() - BG.getWidth(),
+				BG.getY() - BG.getHeight());
 
 		coinS = new PointSpawn(new Vector2f(BG.getX(), BG.getY()));
 		item.addComponent(coinG);

@@ -3,26 +3,29 @@ package components.graphical;
 import org.joml.Vector2f;
 
 import display.DPDTRenderer;
-import display.Image;
 import display.Renderer;
 import entity.Entity;
 
 public class AnimatedGraphics extends BaseGraphics {
 
-	protected boolean animating;
-	protected int animID = 0;
-	protected int animTime = 6;
-	protected int direction = 0;
+	protected transient boolean animating;
+	protected transient int animID = 0;
+	protected transient int animTime = 6;
+	protected transient int direction = 0;
 
-	public AnimatedGraphics(Image image, Renderer r, boolean animating) {
-		super(0,0,image,r);
+	public AnimatedGraphics(String imageId, Renderer r, boolean animating) {
+		super(imageId, r);
 		this.animating = animating;
 	}
 
-	public AnimatedGraphics(Image image, Renderer r, boolean animating, float x, float y) {
-		this(image, r, animating);
+	public AnimatedGraphics(String imageId, Renderer r, boolean animating, float x, float y) {
+		this(imageId, r, animating);
 		this.x = x;
 		this.y = y;
+	}
+
+	public AnimatedGraphics(AnimatedGraphics animatedGraphics) {
+		this(animatedGraphics.imageId, animatedGraphics.r, animatedGraphics.animating);
 	}
 
 	public int getAnimID() {

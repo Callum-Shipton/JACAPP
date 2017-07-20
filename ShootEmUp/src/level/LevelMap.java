@@ -97,9 +97,10 @@ public class LevelMap {
 	private void insertWall(int x, int y, float tileMapX, float tileMapY) {
 		Entity wall = new Entity();
 		MapGraphics wallG;
-		wallG = new MapGraphics(ImageProcessor.getImage(WALLS_TEXTURE_FILE), new Vector2f(tileMapX, tileMapY),
-				x * TILE_WIDTH, y * TILE_WIDTH);
-
+		wallG = new MapGraphics(WALLS_TEXTURE_FILE);
+		wallG.setMapPos(new Vector2f(tileMapX, tileMapY));
+		wallG.setX(x * TILE_WIDTH);
+		wallG.setY(y * TILE_WIDTH);
 		createEntity(wallG, x, y, wall);
 	}
 
@@ -107,8 +108,10 @@ public class LevelMap {
 	private void insertWater(int x, int y, float tileMapX, float tileMapY) {
 		Entity water = new Entity();
 		MapGraphics wallG;
-		wallG = new MapGraphics(ImageProcessor.getImage(WALLS_TEXTURE_FILE), new Vector2f(tileMapX, tileMapY + 4.0f),
-				x * TILE_WIDTH, y * TILE_WIDTH);
+		wallG = new MapGraphics(WALLS_TEXTURE_FILE);
+		wallG.setMapPos(new Vector2f(tileMapX, tileMapY + 4.0f));
+		wallG.setX(x * TILE_WIDTH);
+		wallG.setY(y * TILE_WIDTH);
 		createEntity(wallG, x, y, water);
 	}
 
