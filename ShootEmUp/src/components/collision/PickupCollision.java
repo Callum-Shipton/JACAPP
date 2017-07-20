@@ -24,11 +24,9 @@ public class PickupCollision extends BaseCollision {
 
 		typePickup = type;
 		moveBack = false;
-
-		EntityMap eMap = ShootEmUp.getGame().getCurrentLevel().geteMap();
-		setGridPos(eMap.getGridPos(getEntity()));
-		eMap.addEntity(getGridPos(), getEntity());
 	}
+	
+	
 
 	@Override
 	public void collision(Entity e, Entity hit) {
