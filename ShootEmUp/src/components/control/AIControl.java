@@ -19,15 +19,9 @@ import math.VectorMath;
 
 public class AIControl extends BaseControl {
 
-	private BaseGraphics playerGraphics;
-
 	private int counter = 0;
 	private int aggression = 30;
 	private AStarSearch search;
-
-	public AIControl() {
-		playerGraphics = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.GRAPHICS);
-	}
 
 	@Override
 	public void receive(Message m) {
@@ -50,6 +44,7 @@ public class AIControl extends BaseControl {
 
 		BaseGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
 		BaseMovement movementComponent = getEntity().getComponent(TypeComponent.MOVEMENT);
+		BaseGraphics goalGraphics = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.GRAPHICS);
 
 		if (search == null) {
 			LevelMap map = ShootEmUp.getGame().getCurrentLevel().getMap();
@@ -57,7 +52,7 @@ public class AIControl extends BaseControl {
 					(int) (graphicsComponent.getWidth() / LevelMap.TILE_WIDTH));
 		}
 
-		Vector2i goalVector = search.getGridPosition(playerGraphics.getX(), playerGraphics.getY());
+		Vector2i goalVector = search.getGridPosition(goalGraphics.getX(), goalGraphics.getY());
 		Vector2i startVector = search.getGridPosition(graphicsComponent.getX(), graphicsComponent.getY());
 		Logger.debug("Entity: " + getEntity().getId() + " at Current Tile: " + startVector.x() + ", " + startVector.y(),
 				Category.AI);
