@@ -9,7 +9,6 @@ import components.inventory.TypePickup;
 import entity.Entity;
 import loop.Loop;
 import main.ShootEmUp;
-import object.EntityMap;
 
 public class PickupCollision extends BaseCollision {
 
@@ -25,8 +24,6 @@ public class PickupCollision extends BaseCollision {
 		typePickup = type;
 		moveBack = false;
 	}
-	
-	
 
 	@Override
 	public void collision(Entity e, Entity hit) {
@@ -41,9 +38,9 @@ public class PickupCollision extends BaseCollision {
 	}
 
 	@Override
-	public void update(Entity e) {
+	public void update() {
 		if (timer >= Loop.ticks(DESPAWN_TIME)) {
-			e.destroy();
+			getEntity().destroy();
 		}
 		timer++;
 	}

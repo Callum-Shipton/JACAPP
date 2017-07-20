@@ -10,7 +10,6 @@ import components.MessageId;
 import components.TypeComponent;
 import display.Image;
 import display.Renderer;
-import entity.Entity;
 
 public abstract class BaseGraphics extends Component implements GraphicsComponent {
 
@@ -41,7 +40,7 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 	}
 
 	@Override
-	public void destroy(Entity e) {
+	public void destroy() {
 
 	}
 
@@ -111,7 +110,7 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 	}
 
 	@Override
-	public void receive(Message m, Entity e) {
+	public void receive(Message m) {
 		if (m instanceof DataMessage) {
 			if (m.getId() == MessageId.ENTITY_SPAWN) {
 				Vector2f position = ((DataMessage<Vector2f>) m).getData();

@@ -14,11 +14,11 @@ import math.VectorMath;
 public class HomingControl extends BaseControl {
 
 	@Override
-	public void receive(Message m, Entity e) {
+	public void receive(Message m) {
 	}
 
 	@Override
-	public void update(Entity e) {
+	public void update() {
 		BaseMovement movementComponent = getEntity().getComponent(TypeComponent.MOVEMENT);
 		BaseGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
 
@@ -37,7 +37,7 @@ public class HomingControl extends BaseControl {
 				if (graphicsComponent instanceof AnimatedGraphics) {
 					((AnimatedGraphics) graphicsComponent).setAnimating(true);
 				}
-				movementComponent.move(e, movementVector);
+				movementComponent.move(getEntity(), movementVector);
 				if (graphicsComponent instanceof AnimatedGraphics) {
 					((AnimatedGraphics) graphicsComponent)
 							.setDirection((int) (Math.round(VectorMath.angle(movementVector)) / 45));

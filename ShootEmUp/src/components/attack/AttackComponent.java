@@ -6,6 +6,6 @@ public interface AttackComponent {
 
 	boolean attack(Entity e, int dir);
 
-	void update(Entity e);
+	void update();
 
 }

@@ -5,7 +5,6 @@ import org.joml.Vector2f;
 import components.DataMessage;
 import components.Message;
 import components.MessageId;
-import entity.Entity;
 
 public class PointSpawn extends BaseSpawn implements SpawnComponent {
 
@@ -21,15 +20,15 @@ public class PointSpawn extends BaseSpawn implements SpawnComponent {
 	}
 
 	@Override
-	public void receive(Message m, Entity e) {
+	public void receive(Message m) {
 		if (m.getId() == MessageId.ENTITY_DIED) {
-			spawn(e);
+			spawn();
 		}
 	}
 
 	@Override
-	public void spawn(Entity e) {
-		e.send(new DataMessage<Vector2f>(MessageId.ENTITY_SPAWN, spawnLoc));
-		e.send(new Message(MessageId.ENTITY_MOVED));
+	public void spawn() {
+		getEntity().send(new DataMessage<Vector2f>(MessageId.ENTITY_SPAWN, spawnLoc));
+		getEntity().send(new Message(MessageId.ENTITY_MOVED));
 	}
 }

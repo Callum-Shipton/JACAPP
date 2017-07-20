@@ -64,7 +64,7 @@ public class AnimatedGraphics extends BaseGraphics {
 	}
 
 	@Override
-	public void update(Entity e) {
+	public void update() {
 
 		if (isAnimating()) {
 			animID++;

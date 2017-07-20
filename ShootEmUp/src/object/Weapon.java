@@ -135,7 +135,7 @@ public final class Weapon extends InventoryItem<Weapon> {
 		particle.addComponent(c);
 		particle.addComponent(m);
 		particle.addComponent(new RangeControl(this.range));
-		s.spawn(particle);
+		s.spawn();
 
 		ShootEmUp.getGame().getCurrentLevel().addEntity(particle);
 	}

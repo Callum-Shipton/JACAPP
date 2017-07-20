@@ -17,7 +17,7 @@ import math.VectorMath;
 public class PlayerControl extends BaseControl {
 
 	@Override
-	public void receive(Message m, Entity e) {
+	public void receive(Message m) {
 		// TODO Auto-generated method stub
 
 	}
@@ -107,12 +107,12 @@ public class PlayerControl extends BaseControl {
 	}
 
 	@Override
-	public void update(Entity e) {
-		checkMovement(e);
+	public void update() {
+		checkMovement(getEntity());
 
 		checkDirection();
 
-		checkAttack(e);
+		checkAttack(getEntity());
 
 		checkPotions();
 	}

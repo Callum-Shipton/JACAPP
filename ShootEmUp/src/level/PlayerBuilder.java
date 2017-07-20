@@ -33,7 +33,7 @@ public abstract class PlayerBuilder {
 		player.addComponent(m);
 		player.addComponent(i);
 		player.addComponent(new PlayerControl());
-		s.spawn(player);
+		s.spawn();
 	}
 
 	public static Entity buildPlayer(TypeAttack type) {
@@ -41,7 +41,7 @@ public abstract class PlayerBuilder {
 		chooseType(type);
 
 		c = new RigidCollision();
-		m = new GroundMovement(5 );
+		m = new GroundMovement(5);
 		i = new BaseInventory(0);
 
 		addComponents();
@@ -54,7 +54,7 @@ public abstract class PlayerBuilder {
 
 		a = new PlayerAttack(type, save);
 		c = new RigidCollision();
-		m = new GroundMovement(5 );
+		m = new GroundMovement(5);
 		i = new BaseInventory(save);
 
 		addComponents();

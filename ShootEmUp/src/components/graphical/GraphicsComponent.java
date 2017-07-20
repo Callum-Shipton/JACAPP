@@ -6,6 +6,6 @@ public interface GraphicsComponent {
 
 	void render(Entity e);
 
-	void update(Entity e);
+	void update();
 
 }

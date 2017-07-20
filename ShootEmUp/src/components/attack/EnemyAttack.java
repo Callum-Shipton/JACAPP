@@ -33,8 +33,8 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 	}
 
 	@Override
-	public void update(Entity e) {
-		super.update(e);
+	public void update() {
+		super.update();
 		healthBar.update();
 		healthBar.setValue(health);
 		healthBar.setMaxValue(maxHealth);

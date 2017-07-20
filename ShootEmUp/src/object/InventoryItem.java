@@ -62,7 +62,7 @@ public abstract class InventoryItem<I extends InventoryItem<?>> implements Datab
 		item.addComponent(itemSpawn);
 		item.addComponent(itemCollision);
 		item.addComponent(audioComponent);
-		itemSpawn.spawn(item);
+		itemSpawn.spawn();
 		ShootEmUp.getGame().getCurrentLevel().addEntity(item);
 	}
 

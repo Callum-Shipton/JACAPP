@@ -29,7 +29,7 @@ public class MapGraphics extends BaseGraphics {
 	}
 
 	@Override
-	public void update(Entity e) {
+	public void update() {
 		// TODO Auto-generated method stub
 
 	}

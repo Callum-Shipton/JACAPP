@@ -6,10 +6,7 @@ import components.Message;
 import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.graphical.AnimatedGraphics;
-import components.graphical.BaseGraphics;
-import components.graphical.PlayerGraphics;
 import components.movement.BaseMovement;
-import entity.Entity;
 import gui.buttons.UpgradeManaRegenButton;
 import math.VectorMath;
 
@@ -26,19 +23,19 @@ public class TestingControl extends BaseControl {
 	}
 
 	@Override
-	public void receive(Message m, Entity e) {
+	public void receive(Message m) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void update(Entity e) {
+	public void update() {
 
 		AnimatedGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
 		BaseAttack attackComponent = getEntity().getComponent(TypeComponent.ATTACK);
 		BaseMovement movementComponent = getEntity().getComponent(TypeComponent.MOVEMENT);
 
-		movementComponent.move(e, movement);
+		movementComponent.move(getEntity(), movement);
 
 		new UpgradeManaRegenButton().click();
 		// TODO Auto-generated method stub
@@ -48,7 +45,7 @@ public class TestingControl extends BaseControl {
 			dir.set(0.0f, 1.0f);
 		dir.normalize();
 		graphicsComponent.setDirection((int) (Math.round(VectorMath.angle(dir)) / 45));
-		if (attackComponent.attack(e, graphicsComponent.getDirection()))
+		if (attackComponent.attack(getEntity(), graphicsComponent.getDirection()))
 			toggle = !toggle;
 	}
 

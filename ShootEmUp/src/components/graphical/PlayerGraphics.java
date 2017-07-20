@@ -5,7 +5,6 @@ import org.lwjgl.opengl.GL20;
 import display.Image;
 import display.ImageProcessor;
 import display.Renderer;
-import entity.Entity;
 import loop.Loop;
 
 public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponent {
@@ -37,8 +36,8 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 	}
 
 	@Override
-	public void update(Entity e) {
-		super.update(e);
+	public void update() {
+		super.update();
 		scrollScreen();
 	}
 

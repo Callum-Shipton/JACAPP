@@ -4,7 +4,6 @@ import org.joml.Vector2f;
 
 import components.Component;
 import components.TypeComponent;
-import entity.Entity;
 import level.LevelMap;
 
 public abstract class BaseControl extends Component implements ControlComponent {
@@ -53,7 +52,7 @@ public abstract class BaseControl extends Component implements ControlComponent 
 	}
 
 	@Override
-	public void destroy(Entity e) {
+	public void destroy() {
 
 	}
 

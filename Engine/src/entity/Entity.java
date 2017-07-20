@@ -66,8 +66,8 @@ public class Entity implements DatableObject<Entity> {
 
 	public void destroy() {
 		setDestroy(true);
-		for (Component component : this.components.values()) {
-			component.destroy(this);
+		for (Component component : components.values()) {
+			component.destroy();
 		}
 	}
 
@@ -121,7 +121,7 @@ public class Entity implements DatableObject<Entity> {
 
 	public void send(Message m) {
 		for (Component c : components.values()) {
-			c.receive(m, this);
+			c.receive(m);
 		}
 	}
 
@@ -132,7 +132,7 @@ public class Entity implements DatableObject<Entity> {
 	public void update() {
 		for (Component component : this.components.values()) {
 			if (!isDestroy()) {
-				component.update(this);
+				component.update();
 			}
 		}
 	}

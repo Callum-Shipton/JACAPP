@@ -15,7 +15,7 @@ public class EventAudio extends BaseAudio {
 	}
 
 	@Override
-	public void receive(Message m, Entity e) {
+	public void receive(Message m) {
 		String sound = sounds.get(m.getId());
 		if (sound != null) {
 			int soundId = audio.createSource(sound, false);

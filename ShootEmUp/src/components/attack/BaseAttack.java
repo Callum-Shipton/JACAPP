@@ -1,6 +1,5 @@
 package components.attack;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,9 +14,9 @@ import object.Weapon;
 
 public abstract class BaseAttack extends Component implements AttackComponent {
 	protected TypeAttack type;
-	
+
 	protected Set<String> weaponTypes = new HashSet<>();
-	
+
 	protected static final String BOW = "Bow";
 	protected static final String DAGGER = "Dagger";
 	protected static final String ONE_HANDED = "OneHanded";
@@ -56,7 +55,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 	public BaseAttack(TypeAttack type) {
 		this.type = type;
-		
+
 		switch (type) {
 		case ARCHER:
 			weaponTypes.add(BOW);
@@ -82,7 +81,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 			weaponTypes.add(ONE_HANDED);
 			weaponTypes.add(TWO_HANDED);
 		}
-		
+
 		healthRegen = 100;
 		manaRegen = 100;
 	}
@@ -141,7 +140,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	}
 
 	@Override
-	public void destroy(Entity e) {
+	public void destroy() {
 
 	}
 
@@ -168,7 +167,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	}
 
 	@Override
-	public void receive(Message m, Entity e) {
+	public void receive(Message m) {
 		// TODO Auto-generated method stub
 
 	}
@@ -187,7 +186,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	}
 
 	@Override
-	public void update(Entity e) {
+	public void update() {
 
 		healthRegen();
 		manaRegen();
@@ -195,7 +194,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		if (fire == true) {
 			fireCounter++;
 			if (fireCounter >= Loop.ticks(FIRE_TIME)) {
-				damage(1, e);
+				damage(1, getEntity());
 				fireCounter = 0;
 				fireStop++;
 				if (fireStop > FIRE_HITS) {
@@ -207,7 +206,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		if (poison == true) {
 			poisonCounter++;
 			if (poisonCounter > Loop.ticks(POISON_TIME)) {
-				damage(2, e);
+				damage(2, getEntity());
 				poisonCounter = 0;
 			}
 		}
@@ -345,8 +344,8 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	public Weapon getWeapon() {
 		return weapon;
 	}
-	
-	public Set<String> getWeaponTypes(){
+
+	public Set<String> getWeaponTypes() {
 		return weaponTypes;
 	}
 }

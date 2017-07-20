@@ -55,7 +55,7 @@ public abstract class Potion implements Serializable {
 		item.addComponent(potionSpawn);
 		item.addComponent(potionCollision);
 		item.addComponent(audioComponent);
-		potionSpawn.spawn(item);
+		potionSpawn.spawn();
 		ShootEmUp.getGame().getCurrentLevel().addEntity(item);
 	}
 

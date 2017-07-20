@@ -25,7 +25,7 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	}
 
 	@Override
-	public void destroy(Entity e) {
+	public void destroy() {
 
 	}
 
@@ -60,7 +60,7 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	}
 
 	@Override
-	public void receive(Message m, Entity e) {
+	public void receive(Message m) {
 	}
 
 	public void setFrost(boolean frost) {
@@ -72,6 +72,6 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	}
 
 	@Override
-	public void update(Entity e) {
+	public void update() {
 	}
 }

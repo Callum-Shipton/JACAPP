@@ -7,18 +7,17 @@ import components.TypeComponent;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.movement.BaseMovement;
-import entity.Entity;
 
 public class LineControl extends BaseControl {
 
 	@Override
-	public void receive(Message m, Entity e) {
+	public void receive(Message m) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void update(Entity e) {
+	public void update() {
 		BaseMovement movementComponent = getEntity().getComponent(TypeComponent.MOVEMENT);
 		BaseGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
 
@@ -42,7 +41,7 @@ public class LineControl extends BaseControl {
 			movementVector.add(0.0f, 1.0f);
 		}
 		movementVector.normalize();
-		movementComponent.move(e, movementVector);
+		movementComponent.move(getEntity(), movementVector);
 	}
 
 }

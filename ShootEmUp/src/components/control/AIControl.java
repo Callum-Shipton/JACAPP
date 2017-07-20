@@ -30,7 +30,7 @@ public class AIControl extends BaseControl {
 	}
 
 	@Override
-	public void receive(Message m, Entity e) {
+	public void receive(Message m) {
 
 	}
 
@@ -46,11 +46,11 @@ public class AIControl extends BaseControl {
 	}
 
 	@Override
-	public void update(Entity e) {
-		
+	public void update() {
+
 		BaseGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
 		BaseMovement movementComponent = getEntity().getComponent(TypeComponent.MOVEMENT);
-		
+
 		if (search == null) {
 			LevelMap map = ShootEmUp.getGame().getCurrentLevel().getMap();
 			search = new AStarSearch(map.getWalls().keySet(), map.getGoalBounder(), LevelMap.TILE_WIDTH,
@@ -59,7 +59,7 @@ public class AIControl extends BaseControl {
 
 		Vector2i goalVector = search.getGridPosition(playerGraphics.getX(), playerGraphics.getY());
 		Vector2i startVector = search.getGridPosition(graphicsComponent.getX(), graphicsComponent.getY());
-		Logger.debug("Entity: " + e.getId() + " at Current Tile: " + startVector.x() + ", " + startVector.y(),
+		Logger.debug("Entity: " + getEntity().getId() + " at Current Tile: " + startVector.x() + ", " + startVector.y(),
 				Category.AI);
 
 		Vector2i target = search.findPath(goalVector, startVector);
@@ -71,7 +71,7 @@ public class AIControl extends BaseControl {
 			if (graphicsComponent instanceof AnimatedGraphics) {
 				((AnimatedGraphics) graphicsComponent).setAnimating(true);
 			}
-			movementComponent.move(e, movementVector);
+			movementComponent.move(getEntity(), movementVector);
 			if (graphicsComponent instanceof AnimatedGraphics) {
 				((AnimatedGraphics) graphicsComponent)
 						.setDirection((int) (Math.round(VectorMath.angle(movementVector)) / 45));
@@ -81,6 +81,6 @@ public class AIControl extends BaseControl {
 			((AnimatedGraphics) graphicsComponent).setAnimating(false);
 		}
 
-		attack(e);
+		attack(getEntity());
 	}
 }

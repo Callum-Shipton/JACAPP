@@ -53,7 +53,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 	public BaseInventory(int level) {
 		this.level = level;
-		expBound = level + 1;		
+		expBound = level + 1;
 	}
 
 	public BaseInventory(CharacterSave save) {
@@ -75,8 +75,8 @@ public class BaseInventory extends Component implements InventoryComponent {
 	}
 
 	@Override
-	public void destroy(Entity e) {
-		drop(e);
+	public void destroy() {
+		drop(getEntity());
 	}
 
 	private void drop(Entity e) {
@@ -84,7 +84,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 		// give player exp
 		BaseInventory BI = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
 		BI.giveExp(1);
-		
+
 		BaseAttack BA = entity.getComponent(TypeComponent.ATTACK);
 
 		dropCoin();
@@ -148,12 +148,11 @@ public class BaseInventory extends Component implements InventoryComponent {
 		AnimatedGraphics coinG = null;
 		PointSpawn coinS;
 		PickupCollision coinC;
-		
+
 		BaseGraphics BG = entity.getComponent(TypeComponent.GRAPHICS);
 
 		coinG = new AnimatedGraphics(ImageProcessor.getImage("Coin"), ImageProcessor.base, true,
-				BG.getX() - BG.getWidth(),
-				BG.getY() - BG.getHeight());
+				BG.getX() - BG.getWidth(), BG.getY() - BG.getHeight());
 
 		coinS = new PointSpawn(new Vector2f(BG.getX(), BG.getY()));
 		item.addComponent(coinG);
@@ -164,14 +163,14 @@ public class BaseInventory extends Component implements InventoryComponent {
 		item.addComponent(coinS);
 		item.addComponent(coinC);
 		item.addComponent(audioComponent);
-		coinS.spawn(item);
+		coinS.spawn();
 		ShootEmUp.getGame().getCurrentLevel().addEntity(item);
 	}
 
 	public void equipItem(int itemNo) {
-		
+
 		BaseAttack BA = entity.getComponent(TypeComponent.ATTACK);
-		
+
 		InventoryItem<?> item = inventory.get(itemNo);
 		InventoryItem<?> equipped = null;
 		inventory.remove(itemNo);
@@ -199,7 +198,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 		} else if (item instanceof Weapon) {
 			Weapon w = (Weapon) item;
 			equipped = BA.getWeapon();
-			if (BA.getWeaponTypes().contains(w.getType())){
+			if (BA.getWeaponTypes().contains(w.getType())) {
 				BA.setWeapon(w);
 				if (equipped != null) {
 					inventory.add(equipped);
@@ -328,7 +327,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 	}
 
 	@Override
-	public void receive(Message m, Entity e) {
+	public void receive(Message m) {
 		// TODO Auto-generated method stub
 	}
 
@@ -357,9 +356,9 @@ public class BaseInventory extends Component implements InventoryComponent {
 	}
 
 	@Override
-	public void update(Entity e) {
+	public void update() {
 		for (Potion potion : potions.values()) {
-			potion.update(e);
+			potion.update(getEntity());
 		}
 	}
 

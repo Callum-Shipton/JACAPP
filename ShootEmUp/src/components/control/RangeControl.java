@@ -4,7 +4,6 @@ import components.Message;
 import components.MessageId;
 import components.TypeComponent;
 import components.movement.BaseMovement;
-import entity.Entity;
 import level.LevelMap;
 
 public class RangeControl extends LineControl {
@@ -17,8 +16,8 @@ public class RangeControl extends LineControl {
 	}
 
 	@Override
-	public void update(Entity e) {
-		super.update(e);
+	public void update() {
+		super.update();
 
 		if (!rangeSet) {
 			BaseMovement movementComponent = getEntity().getComponent(TypeComponent.MOVEMENT);
@@ -27,8 +26,8 @@ public class RangeControl extends LineControl {
 
 		range--;
 		if (range <= 0) {
-			e.destroy();
-			e.send(new Message(MessageId.ENTITY_DIED));
+			getEntity().destroy();
+			getEntity().send(new Message(MessageId.ENTITY_DIED));
 		}
 	}
 

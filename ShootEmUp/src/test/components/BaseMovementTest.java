@@ -44,7 +44,7 @@ public abstract class BaseMovementTest extends Component implements MovementComp
 	}
 
 	@Override
-	public void destroy(Entity e) {
+	public void destroy() {
 
 	}
 
@@ -79,7 +79,7 @@ public abstract class BaseMovementTest extends Component implements MovementComp
 	}
 
 	@Override
-	public void receive(Message m, Entity e) {
+	public void receive(Message m) {
 	}
 
 	public void setFrost(boolean frost) {
@@ -91,6 +91,6 @@ public abstract class BaseMovementTest extends Component implements MovementComp
 	}
 
 	@Override
-	public void update(Entity e) {
+	public void update() {
 	}
 }

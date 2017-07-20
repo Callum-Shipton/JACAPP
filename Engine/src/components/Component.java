@@ -6,14 +6,14 @@ public abstract class Component {
 
 	protected Entity entity;
 
-	public abstract void destroy(Entity e);
+	public abstract void destroy();
 
 	public abstract TypeComponent getType();
 
-	public abstract void receive(Message m, Entity e);
+	public abstract void receive(Message m);
 
-	public abstract void update(Entity e);
-	
+	public abstract void update();
+
 	public Component clone() throws CloneNotSupportedException {
 		return (Component) super.clone();
 	}

@@ -8,7 +8,6 @@ import components.Component;
 import components.Message;
 import components.MessageId;
 import components.TypeComponent;
-import entity.Entity;
 import main.ShootEmUp;
 import object.EntityMap;
 
@@ -21,8 +20,8 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 	}
 
 	@Override
-	public void destroy(Entity e) {
-		ShootEmUp.getGame().getCurrentLevel().removeEntity(gridPos, e);
+	public void destroy() {
+		ShootEmUp.getGame().getCurrentLevel().removeEntity(gridPos, getEntity());
 	}
 
 	public Set<Vector2f> getGridPos() {
@@ -39,13 +38,13 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 	}
 
 	@Override
-	public void receive(Message m, Entity e) {
+	public void receive(Message m) {
 		if (m.getId() == MessageId.ENTITY_MOVED && ShootEmUp.getGame().getCurrentLevel() != null) {
 			EntityMap eMap = ShootEmUp.getGame().getCurrentLevel().geteMap();
 			if (getGridPos() != null) {
-				eMap.removeEntity(getGridPos(), e);
-				setGridPos(eMap.getGridPos(e));
-				eMap.addEntity(getGridPos(), e);
+				eMap.removeEntity(getGridPos(), getEntity());
+				setGridPos(eMap.getGridPos(getEntity()));
+				eMap.addEntity(getGridPos(), getEntity());
 			}
 		}
 	}

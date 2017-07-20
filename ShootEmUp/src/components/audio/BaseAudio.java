@@ -6,7 +6,6 @@ import java.util.Set;
 import audio.MusicPlayer;
 import components.Component;
 import components.TypeComponent;
-import entity.Entity;
 import main.ShootEmUp;
 
 public abstract class BaseAudio extends Component implements AudioComponent {
@@ -17,7 +16,7 @@ public abstract class BaseAudio extends Component implements AudioComponent {
 	}
 
 	@Override
-	public void destroy(Entity e) {
+	public void destroy() {
 	}
 
 	@Override
@@ -26,7 +25,7 @@ public abstract class BaseAudio extends Component implements AudioComponent {
 	}
 
 	@Override
-	public void update(Entity e) {
+	public void update() {
 		// TODO Auto-generated method stub
 	}
 

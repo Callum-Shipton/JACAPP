@@ -2,7 +2,6 @@ package components.spawn;
 
 import components.Component;
 import components.TypeComponent;
-import entity.Entity;
 
 public abstract class BaseSpawn extends Component implements SpawnComponent {
 
@@ -10,7 +9,7 @@ public abstract class BaseSpawn extends Component implements SpawnComponent {
 	}
 
 	@Override
-	public void destroy(Entity e) {
+	public void destroy() {
 
 	}
 
@@ -20,6 +19,6 @@ public abstract class BaseSpawn extends Component implements SpawnComponent {
 	}
 
 	@Override
-	public void update(Entity e) {
+	public void update() {
 	}
 }
