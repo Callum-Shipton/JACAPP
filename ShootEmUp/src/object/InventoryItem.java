@@ -58,7 +58,7 @@ public abstract class InventoryItem<I extends InventoryItem<?>> implements Datab
 		itemCollision = new PickupCollision(typePickup, name);
 		Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
 		sounds.put(MessageId.PICKUP, "Pickup2.ogg");
-		BaseAudio audioComponent = new EventAudio(sounds, item);
+		BaseAudio audioComponent = new EventAudio(sounds);
 		item.addComponent(itemSpawn);
 		item.addComponent(itemCollision);
 		item.addComponent(audioComponent);

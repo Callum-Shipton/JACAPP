@@ -16,7 +16,6 @@ import components.graphical.BaseGraphics;
 import components.inventory.TypePickup;
 import components.movement.FlyingMovement;
 import components.spawn.PointSpawn;
-import display.ImageProcessor;
 import entity.Entity;
 import logging.Logger;
 import main.ShootEmUp;
@@ -128,7 +127,8 @@ public final class Weapon extends InventoryItem<Weapon> {
 			posY -= g.getHeight();
 		}
 		PointSpawn s = new PointSpawn(new Vector2f(posX, posY));
-		HitCollision c = new HitCollision(element, team, damage);
+		HitCollision c = new HitCollision(element, damage);
+		c.setTeam(team);
 		FlyingMovement m = new FlyingMovement(10);
 		particle.addComponent(s);
 		particle.addComponent(c);

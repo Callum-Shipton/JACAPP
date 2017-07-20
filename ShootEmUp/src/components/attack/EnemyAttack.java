@@ -1,5 +1,8 @@
 package components.attack;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import display.ImageProcessor;
 import entity.Entity;
 import gui.HudBar;
@@ -7,15 +10,14 @@ import logging.Logger;
 import logging.Logger.Category;
 import main.ShootEmUp;
 import object.Armour;
-import object.Weapon;
 
 public class EnemyAttack extends BaseAttack implements AttackComponent {
 
 	private HudBar healthBar;
 
-	public EnemyAttack(TypeAttack type, int health, int mana, Weapon weapon, Armour helmet, Armour chest, Armour legs,
-			Armour boots) {
-		super(type, health, mana, weapon);
+	public EnemyAttack(int health, int mana, String weaponId, Armour helmet, Armour chest, Armour legs, Armour boots,
+			Set<String> weaponTypes) {
+		super(health, mana, weaponId, 0, weaponTypes);
 
 		this.helmet = helmet;
 		this.chest = chest;
@@ -23,6 +25,11 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 		this.boots = boots;
 
 		healthBar = new HudBar(10.0f, 10.0f, ImageProcessor.getImage("Bars"), 1, 0.25f);
+	}
+
+	public EnemyAttack(EnemyAttack enemyAttack) {
+		this(enemyAttack.maxHealth, enemyAttack.maxMana, enemyAttack.weaponId, null, null, null, null,
+				new HashSet<String>(enemyAttack.weaponTypes));
 	}
 
 	@Override

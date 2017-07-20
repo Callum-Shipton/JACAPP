@@ -12,14 +12,18 @@ import math.VectorMath;
 
 public class TestingControl extends BaseControl {
 
-	private Vector2f movement = new Vector2f(0.0f, 0.0f);
-	private Vector2f dir = new Vector2f(0.0f, 0.0f);
-	private boolean toggle = false;
+	private transient Vector2f movement = new Vector2f(0.0f, 0.0f);
+	private transient Vector2f dir = new Vector2f(0.0f, 0.0f);
+	private transient boolean toggle = false;
 
 	public TestingControl() {
 		movement.add(0.0f, -1.0f);
 		movement.add(-1.0f, 0.0f);
 		movement.normalize();
+	}
+
+	public TestingControl(TestingControl testingControl) {
+		this();
 	}
 
 	@Override

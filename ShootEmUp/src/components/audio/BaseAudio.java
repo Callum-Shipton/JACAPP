@@ -9,8 +9,8 @@ import components.TypeComponent;
 import main.ShootEmUp;
 
 public abstract class BaseAudio extends Component implements AudioComponent {
-	Set<Integer> audioPlaying = new HashSet<>();
-	MusicPlayer audio = ShootEmUp.getMusicPlayer();
+	transient Set<Integer> audioPlaying = new HashSet<>();
+	transient MusicPlayer audio = ShootEmUp.getMusicPlayer();
 
 	public BaseAudio() {
 	}

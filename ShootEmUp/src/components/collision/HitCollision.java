@@ -11,16 +11,19 @@ import object.Element;
 public class HitCollision extends BaseCollision {
 
 	private Element element;
-	private int team;
+	private transient int team;
 	private int damage;
 
-	public HitCollision(Element element, int team, int damage) {
+	public HitCollision(Element element, int damage) {
 
 		moveBack = false;
 
 		this.element = element;
-		this.team = team;
 		this.damage = damage;
+	}
+
+	public HitCollision(HitCollision hitCollision) {
+		this(hitCollision.element, hitCollision.damage);
 	}
 
 	@Override
@@ -55,6 +58,10 @@ public class HitCollision extends BaseCollision {
 				}
 			}
 		}
+	}
+
+	public void setTeam(int team) {
+		this.team = team;
 	}
 
 	@Override

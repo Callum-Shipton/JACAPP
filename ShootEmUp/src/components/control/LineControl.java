@@ -10,6 +10,14 @@ import components.movement.BaseMovement;
 
 public class LineControl extends BaseControl {
 
+	public LineControl() {
+
+	}
+
+	public LineControl(LineControl lineControl) {
+
+	}
+
 	@Override
 	public void receive(Message m) {
 	}

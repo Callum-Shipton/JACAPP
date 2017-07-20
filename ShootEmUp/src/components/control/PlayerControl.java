@@ -16,6 +16,14 @@ import math.VectorMath;
 
 public class PlayerControl extends BaseControl {
 
+	public PlayerControl() {
+
+	}
+
+	public PlayerControl(PlayerControl playerControl) {
+
+	}
+
 	@Override
 	public void receive(Message m) {
 

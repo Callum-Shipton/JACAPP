@@ -13,6 +13,10 @@ import math.VectorMath;
 
 public class HomingControl extends BaseControl {
 
+	public HomingControl(HomingControl homingControl) {
+
+	}
+
 	@Override
 	public void receive(Message m) {
 	}

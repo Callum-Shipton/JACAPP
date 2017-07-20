@@ -24,7 +24,6 @@ import components.collision.PickupCollision;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.spawn.PointSpawn;
-import display.ImageProcessor;
 import entity.Entity;
 import main.ShootEmUp;
 import object.Armour;
@@ -155,15 +154,14 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 		BaseGraphics BG = entity.getComponent(TypeComponent.GRAPHICS);
 
-		coinG = new AnimatedGraphics("Coin", true, BG.getX() - BG.getWidth(),
-				BG.getY() - BG.getHeight());
+		coinG = new AnimatedGraphics("Coin", true, BG.getX() - BG.getWidth(), BG.getY() - BG.getHeight());
 
 		coinS = new PointSpawn(new Vector2f(BG.getX(), BG.getY()));
 		item.addComponent(coinG);
 		coinC = new PickupCollision(TypePickup.COIN, "Coin");
 		Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
 		sounds.put(MessageId.PICKUP, "Pickup.ogg");
-		BaseAudio audioComponent = new EventAudio(sounds, item);
+		BaseAudio audioComponent = new EventAudio(sounds);
 		item.addComponent(coinS);
 		item.addComponent(coinC);
 		item.addComponent(audioComponent);

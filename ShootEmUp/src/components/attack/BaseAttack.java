@@ -13,83 +13,49 @@ import object.Armour;
 import object.Weapon;
 
 public abstract class BaseAttack extends Component implements AttackComponent {
-	protected TypeAttack type;
-
 	protected Set<String> weaponTypes = new HashSet<>();
 
-	protected static final String BOW = "Bow";
-	protected static final String DAGGER = "Dagger";
-	protected static final String ONE_HANDED = "OneHanded";
-	protected static final String TWO_HANDED = "TwoHanded";
-	protected static final String STAFF = "Staff";
-	protected static final String CROSSBOW = "Crossbow";
+	protected transient Weapon weapon;
+	protected String weaponId;
 
-	protected Weapon weapon;
+	protected transient Armour boots = null;
+	protected transient Armour legs = null;
+	protected transient Armour chest = null;
+	protected transient Armour helmet = null;
+	protected transient int armourValue = 0;
 
-	protected Armour boots = null;
-	protected Armour legs = null;
-	protected Armour chest = null;
-	protected Armour helmet = null;
-	protected int armourValue = 0;
-
-	protected int health;
-	protected int healthRegen;
+	protected transient int health;
+	protected transient int healthRegen;
 	protected int maxHealth;
-	protected int maxHealthRegen;
+	protected transient int maxHealthRegen;
 
-	protected int mana;
-	protected int manaRegen;
+	protected transient int mana;
+	protected transient int manaRegen;
 	protected int maxMana;
-	protected int maxManaRegen;
-	private int fireCountdown;
+	protected transient int maxManaRegen;
+	private transient int fireCountdown;
 
-	private boolean fire = false;
-	private int fireCounter = 0;
-	private static final int FIRE_TIME = 1;
-	private int fireStop = 0;
-	private static final int FIRE_HITS = 10;
+	private transient boolean fire = false;
+	private transient int fireCounter = 0;
+	private transient static final int FIRE_TIME = 1;
+	private transient int fireStop = 0;
+	private transient static final int FIRE_HITS = 10;
 
-	private boolean poison = false;
-	private int poisonCounter = 0;
-	private static final int POISON_TIME = 2;
+	private transient boolean poison = false;
+	private transient int poisonCounter = 0;
+	private transient static final int POISON_TIME = 2;
 
-	public BaseAttack(TypeAttack type) {
-		this.type = type;
+	public BaseAttack() {
 
-		switch (type) {
-		case ARCHER:
-			weaponTypes.add(BOW);
-			weaponTypes.add(DAGGER);
-			break;
-		case MAGE:
-			weaponTypes.add(STAFF);
-			weaponTypes.add(DAGGER);
-			break;
-		case WARRIOR:
-			weaponTypes.add(ONE_HANDED);
-			weaponTypes.add(TWO_HANDED);
-			break;
-		case BATTLE_MAGE:
-			weaponTypes.add(ONE_HANDED);
-			weaponTypes.add(STAFF);
-			break;
-		case ROGUE:
-			weaponTypes.add(CROSSBOW);
-			weaponTypes.add(DAGGER);
-			break;
-		default:
-			weaponTypes.add(ONE_HANDED);
-			weaponTypes.add(TWO_HANDED);
-		}
-
-		healthRegen = 100;
-		manaRegen = 100;
 	}
 
-	public BaseAttack(TypeAttack type, int health, int mana, Weapon weapon) {
-		this(type);
+	public BaseAttack(int health, int mana, String weaponId, int team, Set<String> weaponTypes) {
 
-		this.weapon = weapon;
+		this.weaponTypes = weaponTypes;
+		healthRegen = 100;
+		manaRegen = 100;
+		this.weaponId = weaponId;
+		weapon = new Weapon(weaponId, team);
 		this.health = health;
 		maxHealth = health;
 		maxHealthRegen = healthRegen;
@@ -280,10 +246,6 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 	public boolean isPoison() {
 		return poison;
-	}
-
-	public TypeAttack getAttackType() {
-		return type;
 	}
 
 	public Armour getBoots() {

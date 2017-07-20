@@ -19,9 +19,17 @@ import math.VectorMath;
 
 public class AIControl extends BaseControl {
 
-	private int counter = 0;
-	private int aggression = 30;
-	private AStarSearch search;
+	private transient int counter = 0;
+	private transient int aggression = 30;
+	private transient AStarSearch search;
+
+	public AIControl() {
+
+	}
+
+	public AIControl(AIControl aiControl) {
+
+	}
 
 	@Override
 	public void receive(Message m) {

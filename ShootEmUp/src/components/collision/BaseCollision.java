@@ -13,8 +13,8 @@ import object.EntityMap;
 
 public abstract class BaseCollision extends Component implements CollisionComponent {
 
-	protected Set<Vector2f> gridPos;
-	protected boolean moveBack;
+	protected transient Set<Vector2f> gridPos;
+	protected transient boolean moveBack;
 
 	public BaseCollision() {
 	}

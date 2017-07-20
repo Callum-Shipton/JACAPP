@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import components.TypeComponent;
-import components.attack.BaseAttack;
 import components.attack.TypeAttack;
 import components.graphical.BaseGraphics;
 import display.ImageProcessor;
@@ -57,8 +56,6 @@ public class GameBase {
 		ShootEmUp.getSave().saveCharacter();
 		ShootEmUp.getSave().setLevel(++levelNumber);
 		ShootEmUp.getSave().saveToSystem(1);
-		BaseAttack playerAttack = player.getComponent(TypeComponent.ATTACK);
-		TypeAttack temp = playerAttack.getAttackType();
 		currentLevel = new Level(ImageProcessor.LEVEL_FILE_LOCATION, levelNumber);
 		currentLevel.init();
 
@@ -74,7 +71,7 @@ public class GameBase {
 		} catch (Exception e) {
 			Logger.error(e);
 		}
-		player = PlayerBuilder.buildPlayer(temp, ShootEmUp.getSave().getCharacter(temp));
+		player = PlayerBuilder.buildPlayer(TypeAttack.WARRIOR);
 		currentLevel.addEntity(player);
 		hud = new Hud(player, 0, 0);
 	}

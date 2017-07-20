@@ -10,9 +10,7 @@ import components.graphical.PlayerGraphics;
 import components.inventory.BaseInventory;
 import components.movement.GroundMovement;
 import components.spawn.PointSpawn;
-import display.ImageProcessor;
 import entity.Entity;
-import object.Weapon;
 import save.CharacterSave;
 
 public abstract class PlayerBuilder {
@@ -52,7 +50,7 @@ public abstract class PlayerBuilder {
 		player = new Entity();
 		chooseType(type);
 
-		a = new PlayerAttack(type, save);
+		a = new PlayerAttack(save);
 		c = new RigidCollision();
 		m = new GroundMovement(5);
 		i = new BaseInventory(save);
@@ -65,23 +63,23 @@ public abstract class PlayerBuilder {
 		switch (type) {
 		case ARCHER:
 			g = new PlayerGraphics("Archer");
-			a = new PlayerAttack(type, 4, 5, new Weapon("Longbow", 0));
+			a = new PlayerAttack(4, 5, "Longbow", 0, null);
 			break;
 		case BATTLE_MAGE:
 			g = new PlayerGraphics("BattleMage");
-			a = new PlayerAttack(type, 3, 5, new Weapon("FireStaff", 0));
+			a = new PlayerAttack(3, 5, "FireStaff", 0, null);
 			break;
 		case MAGE:
 			g = new PlayerGraphics("Mage");
-			a = new PlayerAttack(type, 3, 5, new Weapon("FireStaff", 0));
+			a = new PlayerAttack(3, 5, "FireStaff", 0, null);
 			break;
 		case ROGUE:
 			g = new PlayerGraphics("Rogue");
-			a = new PlayerAttack(type, 3, 5, new Weapon("IronDagger", 0));
+			a = new PlayerAttack(3, 5, "IronDagger", 0, null);
 			break;
 		case WARRIOR:
 			g = new PlayerGraphics("Warrior");
-			a = new PlayerAttack(type, 5, 3, new Weapon("Greatsword", 0));
+			a = new PlayerAttack(5, 3, "Greatsword", 0, null);
 			break;
 		default:
 			g = new PlayerGraphics("Warrior");

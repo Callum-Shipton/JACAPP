@@ -9,6 +9,10 @@ public class RigidCollision extends BaseCollision {
 		moveBack = true;
 	}
 
+	public RigidCollision(RigidCollision rigidCollision) {
+		this();
+	}
+
 	@Override
 	public void collision(Entity e, Entity hit) {
 		// TODO Auto-generated method stub

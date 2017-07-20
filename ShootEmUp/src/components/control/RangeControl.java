@@ -9,10 +9,14 @@ import level.LevelMap;
 public class RangeControl extends LineControl {
 
 	private int range;
-	private boolean rangeSet = false;
+	private transient boolean rangeSet = false;
 
 	public RangeControl(int range) {
 		this.range = range * (LevelMap.TILE_WIDTH);
+	}
+
+	public RangeControl(RangeControl rangeControl) {
+		this(rangeControl.range);
 	}
 
 	@Override

@@ -15,7 +15,6 @@ import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.inventory.TypePickup;
 import components.spawn.PointSpawn;
-import display.ImageProcessor;
 import entity.Entity;
 import main.ShootEmUp;
 
@@ -51,7 +50,7 @@ public abstract class Potion implements Serializable {
 		potionCollision = new PickupCollision(TypePickup.POTION, type);
 		Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
 		sounds.put(MessageId.PICKUP, "Pickup2.ogg");
-		BaseAudio audioComponent = new EventAudio(sounds, item);
+		BaseAudio audioComponent = new EventAudio(sounds);
 		item.addComponent(potionSpawn);
 		item.addComponent(potionCollision);
 		item.addComponent(audioComponent);

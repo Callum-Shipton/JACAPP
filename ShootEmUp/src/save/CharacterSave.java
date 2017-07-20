@@ -58,7 +58,7 @@ public class CharacterSave implements Serializable {
 
 		PlayerAttack tempAttack = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.ATTACK);
 
-		player = tempAttack.getAttackType();
+		player = TypeAttack.WARRIOR;
 
 		lives = tempAttack.getLives();
 

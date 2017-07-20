@@ -1,20 +1,21 @@
 package components.attack;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import components.Message;
 import components.MessageId;
 import display.ImageProcessor;
 import entity.Entity;
 import gui.menus.GameOverMenu;
 import main.ShootEmUp;
-import object.Weapon;
 import save.CharacterSave;
 
 public class PlayerAttack extends BaseAttack {
 
 	protected int lives;
 
-	public PlayerAttack(TypeAttack type, CharacterSave save) {
-		super(type);
+	public PlayerAttack(CharacterSave save) {
 
 		lives = save.getLives();
 
@@ -33,9 +34,14 @@ public class PlayerAttack extends BaseAttack {
 		maxManaRegen = save.getMaxManaRegen();
 	}
 
-	public PlayerAttack(TypeAttack type, int health, int mana, Weapon weapon) {
-		super(type, health, mana, weapon);
+	public PlayerAttack(int health, int mana, String weaponId, int team, Set<String> weaponTypes) {
+		super(health, mana, weaponId, team, weaponTypes);
 		lives = 3;
+	}
+
+	public PlayerAttack(PlayerAttack playerAttack) {
+		this(playerAttack.maxHealth, playerAttack.maxMana, playerAttack.weaponId, 1,
+				new HashSet<String>(playerAttack.weaponTypes));
 	}
 
 	@Override

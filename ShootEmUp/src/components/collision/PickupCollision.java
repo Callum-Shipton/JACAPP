@@ -14,8 +14,8 @@ public class PickupCollision extends BaseCollision {
 
 	private final TypePickup typePickup;
 	private final String name;
-	private final int DESPAWN_TIME = 10;
-	private int timer = 0;
+	private transient final int DESPAWN_TIME = 10;
+	private transient int timer = 0;
 
 	public PickupCollision(TypePickup type, String name) {
 
@@ -23,6 +23,10 @@ public class PickupCollision extends BaseCollision {
 
 		typePickup = type;
 		moveBack = false;
+	}
+
+	public PickupCollision(PickupCollision pickupCollision) {
+		this(pickupCollision.typePickup, pickupCollision.name);
 	}
 
 	@Override

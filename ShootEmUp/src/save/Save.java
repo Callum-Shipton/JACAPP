@@ -44,7 +44,7 @@ public class Save implements Serializable {
 			level = ShootEmUp.getGame().getLevel();
 		}
 		BaseAttack attackComponent = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.ATTACK);
-		characters.put(attackComponent.getAttackType(), new CharacterSave());
+		characters.put(TypeAttack.WARRIOR, new CharacterSave());
 	}
 
 	public void saveToSystem(int num) {
