@@ -24,7 +24,6 @@ public class TestingControl extends BaseControl {
 
 	@Override
 	public void receive(Message m) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -38,7 +37,6 @@ public class TestingControl extends BaseControl {
 		movementComponent.move(getEntity(), movement);
 
 		new UpgradeManaRegenButton().click();
-		// TODO Auto-generated method stub
 		if (toggle)
 			dir.set(1.0f, 0.0f);
 		else

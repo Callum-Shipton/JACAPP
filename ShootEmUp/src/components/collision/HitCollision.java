@@ -59,7 +59,5 @@ public class HitCollision extends BaseCollision {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-
 	}
 }

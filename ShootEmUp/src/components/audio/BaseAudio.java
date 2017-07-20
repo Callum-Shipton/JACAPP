@@ -26,7 +26,6 @@ public abstract class BaseAudio extends Component implements AudioComponent {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 	}
 
 }

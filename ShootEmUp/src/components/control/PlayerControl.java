@@ -18,7 +18,6 @@ public class PlayerControl extends BaseControl {
 
 	@Override
 	public void receive(Message m) {
-		// TODO Auto-generated method stub
 
 	}
 

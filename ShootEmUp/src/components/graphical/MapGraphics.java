@@ -10,7 +10,7 @@ public class MapGraphics extends BaseGraphics {
 	private Vector2f mapPos;
 
 	public MapGraphics(Image image, Vector2f mapPos, float x, float y) {
-		super(x,y,image,null);
+		super(x, y, image, null);
 		setMapPos(mapPos);
 	}
 
@@ -20,7 +20,6 @@ public class MapGraphics extends BaseGraphics {
 
 	@Override
 	public void render(Entity e) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -30,7 +29,6 @@ public class MapGraphics extends BaseGraphics {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 
 	}
 

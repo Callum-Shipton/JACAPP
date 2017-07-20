@@ -12,8 +12,6 @@ public class LineControl extends BaseControl {
 
 	@Override
 	public void receive(Message m) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

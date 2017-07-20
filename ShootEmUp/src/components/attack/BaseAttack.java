@@ -168,8 +168,6 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 	@Override
 	public void receive(Message m) {
-		// TODO Auto-generated method stub
-
 	}
 
 	protected void setArmourValue() {
@@ -191,7 +189,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		healthRegen();
 		manaRegen();
 
-		if (fire == true) {
+		if (fire) {
 			fireCounter++;
 			if (fireCounter >= Loop.ticks(FIRE_TIME)) {
 				damage(1, getEntity());
@@ -203,7 +201,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 				}
 			}
 		}
-		if (poison == true) {
+		if (poison) {
 			poisonCounter++;
 			if (poisonCounter > Loop.ticks(POISON_TIME)) {
 				damage(2, getEntity());
