@@ -10,18 +10,16 @@ import loop.Loop;
 
 public abstract class BaseMovement extends Component implements MovementComponent {
 
+	protected transient int currentSpeed;
 	protected int speed;
-	protected int realSpeed;
 
-	private boolean frost = false;
-	private int frostCounter = 0;
-	private int frostTime = 5;
+	private transient boolean frost = false;
+	private transient int frostCounter = 0;
+	private transient int frostTime = 5;
 
 	public BaseMovement(int speed) {
-	
-
+		this.currentSpeed = speed;
 		this.speed = speed;
-		realSpeed = speed;
 	}
 
 	@Override
@@ -30,7 +28,7 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	}
 
 	public int getSpeed() {
-		return speed;
+		return currentSpeed;
 	}
 
 	@Override
@@ -39,7 +37,7 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	}
 
 	public void increaseSpeed(int increase) {
-		speed += increase;
+		currentSpeed += increase;
 	}
 
 	public boolean isFrost() {
@@ -49,11 +47,11 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	@Override
 	public void move(Entity e, Vector2f moveVec) {
 		if (frost) {
-			speed = speed / 2;
+			currentSpeed = currentSpeed / 2;
 			frostCounter++;
 			if (frostCounter > Loop.ticks(frostTime)) {
 				frost = false;
-				speed = realSpeed;
+				currentSpeed = speed;
 				frostCounter = 0;
 			}
 		}
@@ -68,7 +66,7 @@ public abstract class BaseMovement extends Component implements MovementComponen
 	}
 
 	public void setSpeed(int speed) {
-		this.speed = speed;
+		this.currentSpeed = speed;
 	}
 
 	@Override

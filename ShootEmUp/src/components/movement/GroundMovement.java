@@ -20,13 +20,17 @@ public class GroundMovement extends BaseMovement {
 		super(speed);
 	}
 
+	public GroundMovement(GroundMovement groundMovement) {
+		this(groundMovement.speed);
+	}
+
 	private Set<Vector2f> reactToCollision(Vector4f collVec, Entity hitEntity, Entity currentEntity, Axis axis,
 			EntityMap eMap) {
 		Set<Vector2f> newGrid = eMap.getGridPos(currentEntity);
 		BaseCollision BC = currentEntity.getComponent(TypeComponent.COLLISION);
 		BaseCollision HC = hitEntity.getComponent(TypeComponent.COLLISION);
 		BaseGraphics BG = currentEntity.getComponent(TypeComponent.GRAPHICS);
-		
+
 		if ((HC.getMoveBack()) && !(BC instanceof HitCollision)) {
 			switch (axis) {
 			case X:
@@ -66,7 +70,7 @@ public class GroundMovement extends BaseMovement {
 		}
 
 		BaseCollision BC = currentEntity.getComponent(TypeComponent.COLLISION);
-		
+
 		eMap.removeEntity(BC.getGridPos(), currentEntity);
 		if (!currentEntity.isDestroy()) {
 			eMap.addEntity(newGrid, currentEntity);
@@ -94,27 +98,27 @@ public class GroundMovement extends BaseMovement {
 		BaseGraphics BG = e.getComponent(TypeComponent.GRAPHICS);
 
 		if (Math.abs(moveVec.x()) > 0) {
-			BG.addToX(Math.round(moveVec.x() * speed));
+			BG.addToX(Math.round(moveVec.x() * currentSpeed));
 			checkCollision(e, Axis.X);
 		}
 		if (Math.abs(moveVec.y()) > 0) {
-			BG.addToY(Math.round(moveVec.y() * speed));
+			BG.addToY(Math.round(moveVec.y() * currentSpeed));
 			checkCollision(e, Axis.Y);
 		}
 	}
 
 	public void moveBackX(Vector4f collVec, BaseGraphics BG) {
-		if (Math.abs(collVec.x()) <= speed) {
+		if (Math.abs(collVec.x()) <= currentSpeed) {
 			BG.takeFromX(collVec.x());
-		} else if (Math.abs(collVec.z()) <= speed) {
+		} else if (Math.abs(collVec.z()) <= currentSpeed) {
 			BG.takeFromX(collVec.z());
 		}
 	}
 
 	public void moveBackY(Vector4f collVec, BaseGraphics BG) {
-		if (Math.abs(collVec.y()) <= speed) {
+		if (Math.abs(collVec.y()) <= currentSpeed) {
 			BG.takeFromY(collVec.y());
-		} else if (Math.abs(collVec.w()) <= speed) {
+		} else if (Math.abs(collVec.w()) <= currentSpeed) {
 			BG.takeFromY(collVec.w());
 		}
 	}

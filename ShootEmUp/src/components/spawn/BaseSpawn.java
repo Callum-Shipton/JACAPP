@@ -5,9 +5,6 @@ import components.TypeComponent;
 
 public abstract class BaseSpawn extends Component implements SpawnComponent {
 
-	public BaseSpawn() {
-	}
-
 	@Override
 	public void destroy() {
 
