@@ -10,14 +10,8 @@ public class MapGraphics extends BaseGraphics {
 	private Vector2f mapPos;
 
 	public MapGraphics(Image image, Vector2f mapPos, float x, float y) {
-	
-
-		this.image = image;
-		width = image.getWidth() / image.getFWidth();
-		height = image.getHeight() / image.getFHeight();
+		super(x,y,image,null);
 		setMapPos(mapPos);
-		this.x = x;
-		this.y = y;
 	}
 
 	public Vector2f getMapPos() {

@@ -47,15 +47,15 @@ public class AIControl extends BaseControl {
 
 	@Override
 	public void update(Entity e) {
+		
+		BaseGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
+		BaseMovement movementComponent = getEntity().getComponent(TypeComponent.MOVEMENT);
+		
 		if (search == null) {
-			BaseGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
 			LevelMap map = ShootEmUp.getGame().getCurrentLevel().getMap();
 			search = new AStarSearch(map.getWalls().keySet(), map.getGoalBounder(), LevelMap.TILE_WIDTH,
 					(int) (graphicsComponent.getWidth() / LevelMap.TILE_WIDTH));
 		}
-
-		BaseGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
-		BaseMovement movementComponent = getEntity().getComponent(TypeComponent.MOVEMENT);
 
 		Vector2i goalVector = search.getGridPosition(playerGraphics.getX(), playerGraphics.getY());
 		Vector2i startVector = search.getGridPosition(graphicsComponent.getX(), graphicsComponent.getY());

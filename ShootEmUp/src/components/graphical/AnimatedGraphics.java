@@ -14,20 +14,13 @@ public class AnimatedGraphics extends BaseGraphics {
 	protected int animTime = 6;
 	protected int direction = 0;
 
-	public AnimatedGraphics(Image image, Renderer r, boolean animating, float scale) {
-
-		this.image = image;
-		this.r = r;
+	public AnimatedGraphics(Image image, Renderer r, boolean animating) {
+		super(0,0,image,r);
 		this.animating = animating;
-
-		width = (image.getWidth() / image.getFWidth()) * scale;
-		height = (image.getHeight() / image.getFHeight()) * scale;
-
 	}
 
 	public AnimatedGraphics(Image image, Renderer r, boolean animating, float x, float y) {
-		this(image, r, animating, 1);
-
+		this(image, r, animating);
 		this.x = x;
 		this.y = y;
 	}

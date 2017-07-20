@@ -64,27 +64,27 @@ public abstract class PlayerBuilder {
 	private static void chooseType(TypeAttack type) {
 		switch (type) {
 		case ARCHER:
-			g = new PlayerGraphics(ImageProcessor.getImage("Archer"), ImageProcessor.base, 1f);
+			g = new PlayerGraphics(ImageProcessor.getImage("Archer"), ImageProcessor.base);
 			a = new PlayerAttack(type, 4, 5, new Weapon("Longbow", 0));
 			break;
 		case BATTLE_MAGE:
-			g = new PlayerGraphics(ImageProcessor.getImage("BattleMage"), ImageProcessor.base, 1f);
+			g = new PlayerGraphics(ImageProcessor.getImage("BattleMage"), ImageProcessor.base);
 			a = new PlayerAttack(type, 3, 5, new Weapon("FireStaff", 0));
 			break;
 		case MAGE:
-			g = new PlayerGraphics(ImageProcessor.getImage("Mage"), ImageProcessor.base, 1f);
+			g = new PlayerGraphics(ImageProcessor.getImage("Mage"), ImageProcessor.base);
 			a = new PlayerAttack(type, 3, 5, new Weapon("FireStaff", 0));
 			break;
 		case ROGUE:
-			g = new PlayerGraphics(ImageProcessor.getImage("Rogue"), ImageProcessor.base, 1f);
+			g = new PlayerGraphics(ImageProcessor.getImage("Rogue"), ImageProcessor.base);
 			a = new PlayerAttack(type, 3, 5, new Weapon("IronDagger", 0));
 			break;
 		case WARRIOR:
-			g = new PlayerGraphics(ImageProcessor.getImage("Warrior"), ImageProcessor.base, 1f);
+			g = new PlayerGraphics(ImageProcessor.getImage("Warrior"), ImageProcessor.base);
 			a = new PlayerAttack(type, 5, 3, new Weapon("Greatsword", 0));
 			break;
 		default:
-			g = new PlayerGraphics(ImageProcessor.getImage("Warrior"), ImageProcessor.base, 1f);
+			g = new PlayerGraphics(ImageProcessor.getImage("Warrior"), ImageProcessor.base);
 		}
 		s = new PointSpawn(new Vector2f(480.0f, 480.0f));
 	}

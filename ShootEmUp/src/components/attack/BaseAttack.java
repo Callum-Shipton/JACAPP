@@ -1,5 +1,9 @@
 package components.attack;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import components.Component;
 import components.Message;
 import components.MessageId;
@@ -11,6 +15,15 @@ import object.Weapon;
 
 public abstract class BaseAttack extends Component implements AttackComponent {
 	protected TypeAttack type;
+	
+	protected Set<String> weaponTypes = new HashSet<>();
+	
+	protected static final String BOW = "Bow";
+	protected static final String DAGGER = "Dagger";
+	protected static final String ONE_HANDED = "OneHanded";
+	protected static final String TWO_HANDED = "TwoHanded";
+	protected static final String STAFF = "Staff";
+	protected static final String CROSSBOW = "Crossbow";
 
 	protected Weapon weapon;
 
@@ -43,6 +56,33 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 	public BaseAttack(TypeAttack type) {
 		this.type = type;
+		
+		switch (type) {
+		case ARCHER:
+			weaponTypes.add(BOW);
+			weaponTypes.add(DAGGER);
+			break;
+		case MAGE:
+			weaponTypes.add(STAFF);
+			weaponTypes.add(DAGGER);
+			break;
+		case WARRIOR:
+			weaponTypes.add(ONE_HANDED);
+			weaponTypes.add(TWO_HANDED);
+			break;
+		case BATTLE_MAGE:
+			weaponTypes.add(ONE_HANDED);
+			weaponTypes.add(STAFF);
+			break;
+		case ROGUE:
+			weaponTypes.add(CROSSBOW);
+			weaponTypes.add(DAGGER);
+			break;
+		default:
+			weaponTypes.add(ONE_HANDED);
+			weaponTypes.add(TWO_HANDED);
+		}
+		
 		healthRegen = 100;
 		manaRegen = 100;
 	}
@@ -304,5 +344,9 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 	public Weapon getWeapon() {
 		return weapon;
+	}
+	
+	public Set<String> getWeaponTypes(){
+		return weaponTypes;
 	}
 }

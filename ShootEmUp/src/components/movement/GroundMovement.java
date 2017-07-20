@@ -16,19 +16,18 @@ import object.EntityMap;
 
 public class GroundMovement extends BaseMovement {
 
-	protected BaseCollision collisionComponent;
-
 	public GroundMovement(int speed) {
 		super(speed);
-		this.collisionComponent = getEntity().getComponent(TypeComponent.COLLISION);
 	}
 
 	private Set<Vector2f> reactToCollision(Vector4f collVec, Entity hitEntity, Entity currentEntity, Axis axis,
 			EntityMap eMap) {
 		Set<Vector2f> newGrid = eMap.getGridPos(currentEntity);
+		BaseCollision BC = currentEntity.getComponent(TypeComponent.COLLISION);
 		BaseCollision HC = hitEntity.getComponent(TypeComponent.COLLISION);
 		BaseGraphics BG = currentEntity.getComponent(TypeComponent.GRAPHICS);
-		if ((HC.getMoveBack()) && !(collisionComponent instanceof HitCollision)) {
+		
+		if ((HC.getMoveBack()) && !(BC instanceof HitCollision)) {
 			switch (axis) {
 			case X:
 				moveBackX(collVec, BG);
@@ -39,7 +38,7 @@ public class GroundMovement extends BaseMovement {
 			newGrid = eMap.getGridPos(currentEntity);
 		}
 		if (currentEntity.getComponent(TypeComponent.COLLISION) != null) {
-			collisionComponent.collision(currentEntity, hitEntity);
+			BC.collision(currentEntity, hitEntity);
 		}
 		BaseCollision EC = hitEntity.getComponent(TypeComponent.COLLISION);
 		if (EC != null) {
@@ -66,11 +65,13 @@ public class GroundMovement extends BaseMovement {
 			}
 		}
 
-		eMap.removeEntity(collisionComponent.getGridPos(), currentEntity);
+		BaseCollision BC = currentEntity.getComponent(TypeComponent.COLLISION);
+		
+		eMap.removeEntity(BC.getGridPos(), currentEntity);
 		if (!currentEntity.isDestroy()) {
 			eMap.addEntity(newGrid, currentEntity);
 		}
-		collisionComponent.setGridPos(newGrid);
+		BC.setGridPos(newGrid);
 		return collide;
 	}
 

@@ -5,6 +5,8 @@ import org.joml.Vector2f;
 import components.Message;
 import components.TypeComponent;
 import components.attack.BaseAttack;
+import components.graphical.AnimatedGraphics;
+import components.graphical.BaseGraphics;
 import components.graphical.PlayerGraphics;
 import components.movement.BaseMovement;
 import entity.Entity;
@@ -21,8 +23,6 @@ public class TestingControl extends BaseControl {
 		movement.add(0.0f, -1.0f);
 		movement.add(-1.0f, 0.0f);
 		movement.normalize();
-		this.PG.setAnimating(true);
-		// dir.add(0.0f, -1.0f);
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class TestingControl extends BaseControl {
 	@Override
 	public void update(Entity e) {
 
-		PlayerGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
+		AnimatedGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
 		BaseAttack attackComponent = getEntity().getComponent(TypeComponent.ATTACK);
 		BaseMovement movementComponent = getEntity().getComponent(TypeComponent.MOVEMENT);
 

@@ -51,7 +51,7 @@ public abstract class InventoryItem<I extends InventoryItem<?>> implements Datab
 
 		BaseGraphics entityG = e.getComponent(TypeComponent.GRAPHICS);
 
-		itemGraphics = new AnimatedGraphics(ImageProcessor.getImage(this.name), ImageProcessor.base, true, 1f);
+		itemGraphics = new AnimatedGraphics(ImageProcessor.getImage(this.name), ImageProcessor.base, true);
 		itemSpawn = new PointSpawn(
 				new Vector2f(entityG.getX() + itemGraphics.getWidth(), entityG.getY() + itemGraphics.getHeight()));
 		item.addComponent(itemGraphics);

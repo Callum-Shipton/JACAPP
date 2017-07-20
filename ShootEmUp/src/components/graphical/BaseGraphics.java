@@ -22,8 +22,21 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 	protected float height;
 	protected Image image;
 
-	public BaseGraphics() {
+	public BaseGraphics(float x, float y, float width, float height, Image image, Renderer r) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.image = image;
+		this.r = r;
+	}
 	
+	public BaseGraphics(float x, float y, Image image, Renderer r) {
+		this.x = x;
+		this.y = y;
+		width = image.getWidth() / image.getFWidth();
+		height = image.getHeight() / image.getFHeight();
+		this.image = image;
 	}
 
 	@Override
