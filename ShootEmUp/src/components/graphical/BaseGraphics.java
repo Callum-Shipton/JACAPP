@@ -37,6 +37,7 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 		width = image.getWidth() / image.getFWidth();
 		height = image.getHeight() / image.getFHeight();
 		this.image = image;
+		this.r = r;
 	}
 
 	@Override
