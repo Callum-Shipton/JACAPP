@@ -5,19 +5,11 @@ import org.joml.Vector2f;
 import components.Message;
 import components.TypeComponent;
 import components.graphical.AnimatedGraphics;
+import components.graphical.BaseGraphics;
 import components.movement.BaseMovement;
 import entity.Entity;
 
 public class LineControl extends BaseControl {
-
-	protected BaseMovement movementComponent;
-
-	public LineControl() {
-	
-
-		this.graphics = getEntity().getComponent(TypeComponent.GRAPHICS);
-		this.movementComponent = getEntity().getComponent(TypeComponent.MOVEMENT);
-	}
 
 	@Override
 	public void receive(Message m, Entity e) {
@@ -27,9 +19,12 @@ public class LineControl extends BaseControl {
 
 	@Override
 	public void update(Entity e) {
+		BaseMovement movementComponent = getEntity().getComponent(TypeComponent.MOVEMENT);
+		BaseGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
+
 		int direction;
-		if (graphics instanceof AnimatedGraphics) {
-			direction = ((AnimatedGraphics) graphics).getDirection();
+		if (graphicsComponent instanceof AnimatedGraphics) {
+			direction = ((AnimatedGraphics) graphicsComponent).getDirection();
 		} else {
 			direction = 0;
 		}

@@ -16,20 +16,6 @@ import math.VectorMath;
 
 public class PlayerControl extends BaseControl {
 
-	private BaseMovement BM;
-	private PlayerGraphics PG;
-	private BaseAttack BA;
-	private BaseInventory PI;
-
-	public PlayerControl() {
-	
-
-		this.PG = getEntity().getComponent(TypeComponent.GRAPHICS);
-		this.BA = getEntity().getComponent(TypeComponent.ATTACK);
-		this.BM = getEntity().getComponent(TypeComponent.MOVEMENT);
-		this.PI = getEntity().getComponent(TypeComponent.INVENTORY);
-	}
-
 	@Override
 	public void receive(Message m, Entity e) {
 		// TODO Auto-generated method stub
@@ -37,6 +23,9 @@ public class PlayerControl extends BaseControl {
 	}
 
 	private void checkMovement(Entity e) {
+		BaseMovement movementComponent = getEntity().getComponent(TypeComponent.MOVEMENT);
+		PlayerGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
+
 		Vector2f movement = new Vector2f(0.0f, 0.0f);
 		if ((Keyboard.getKey(Loop.getKeys().moveUp) == 1) || (Keyboard.getKey(Loop.getKeys().moveUp) == 2)) {
 			movement.add(0.0f, -1.0f);
@@ -55,15 +44,16 @@ public class PlayerControl extends BaseControl {
 			if (movement.length() > 1) {
 				movement.normalize();
 			}
-			this.PG.setAnimating(true);
-			this.BM.move(e, movement);
+			graphicsComponent.setAnimating(true);
+			movementComponent.move(e, movement);
 
 		} else {
-			this.PG.setAnimating(false);
+			graphicsComponent.setAnimating(false);
 		}
 	}
 
 	private void checkDirection() {
+		PlayerGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
 		Vector2f dir = new Vector2f(0.0f, 0.0f);
 		if ((Keyboard.getKey(Loop.getKeys().lookUp) == 1) || (Keyboard.getKey(Loop.getKeys().lookUp) == 2)) {
 			dir.add(0.0f, -1.0f);
@@ -81,34 +71,37 @@ public class PlayerControl extends BaseControl {
 			if (dir.length() > 1) {
 				dir.normalize();
 			}
-			this.PG.setDirection((int) (Math.round(VectorMath.angle(dir)) / 45));
+			graphicsComponent.setDirection((int) (Math.round(VectorMath.angle(dir)) / 45));
 		}
 	}
 
 	private void checkAttack(Entity e) {
+		PlayerGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
+		BaseAttack attackComponent = getEntity().getComponent(TypeComponent.ATTACK);
 		if ((Keyboard.getKey(Loop.getKeys().shoot) == 1) || (Keyboard.getKey(Loop.getKeys().shoot) == 2)) {
-			this.BA.attack(e, this.PG.getDirection());
+			attackComponent.attack(e, graphicsComponent.getDirection());
 		}
 	}
 
 	private void checkPotions() {
+		BaseInventory baseInventory = getEntity().getComponent(TypeComponent.INVENTORY);
 		if ((Keyboard.getKey(Loop.getKeys().potion1) == 1) || (Keyboard.getKey(Loop.getKeys().potion1) == 2)) {
-			this.PI.usePotion(TypePotion.HEALTH);
+			baseInventory.usePotion(TypePotion.HEALTH);
 			Keyboard.setKey(Loop.getKeys().potion1);
 		}
 
 		if ((Keyboard.getKey(Loop.getKeys().potion2) == 1) || (Keyboard.getKey(Loop.getKeys().potion2) == 2)) {
-			this.PI.usePotion(TypePotion.MANA);
+			baseInventory.usePotion(TypePotion.MANA);
 			Keyboard.setKey(Loop.getKeys().potion2);
 		}
 
 		if ((Keyboard.getKey(Loop.getKeys().potion3) == 1) || (Keyboard.getKey(Loop.getKeys().potion3) == 2)) {
-			this.PI.usePotion(TypePotion.SPEED);
+			baseInventory.usePotion(TypePotion.SPEED);
 			Keyboard.setKey(Loop.getKeys().potion3);
 		}
 
 		if ((Keyboard.getKey(Loop.getKeys().potion4) == 1) || (Keyboard.getKey(Loop.getKeys().potion4) == 2)) {
-			this.PI.usePotion(TypePotion.KNOCKBACK);
+			baseInventory.usePotion(TypePotion.KNOCKBACK);
 			Keyboard.setKey(Loop.getKeys().potion4);
 		}
 	}

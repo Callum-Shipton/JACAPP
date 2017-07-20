@@ -19,24 +19,14 @@ import math.VectorMath;
 
 public class AIControl extends BaseControl {
 
-	private BaseMovement movement;
-	private BaseAttack attack;
-	private int counter = 0;
-
-	private int aggression = 30;
-	private AStarSearch search;
 	private BaseGraphics playerGraphics;
 
+	private int counter = 0;
+	private int aggression = 30;
+	private AStarSearch search;
+
 	public AIControl() {
-
-		this.graphics = entity.getComponent(TypeComponent.GRAPHICS);
-		this.attack = entity.getComponent(TypeComponent.ATTACK);
-		this.movement = entity.getComponent(TypeComponent.MOVEMENT);
-
-		LevelMap map = ShootEmUp.getGame().getCurrentLevel().getMap();
 		playerGraphics = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.GRAPHICS);
-		search = new AStarSearch(map.getWalls().keySet(), map.getGoalBounder(), LevelMap.TILE_WIDTH,
-				(int) (graphics.getWidth() / LevelMap.TILE_WIDTH));
 	}
 
 	@Override
@@ -45,37 +35,50 @@ public class AIControl extends BaseControl {
 	}
 
 	private void attack(Entity e) {
+		BaseGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
+		BaseAttack attackComponent = getEntity().getComponent(TypeComponent.ATTACK);
 		counter++;
 		if (counter == aggression) {
-			attack.attack(e, (graphics instanceof AnimatedGraphics) ? ((AnimatedGraphics) graphics).getDirection() : 0);
+			attackComponent.attack(e, (graphicsComponent instanceof AnimatedGraphics)
+					? ((AnimatedGraphics) graphicsComponent).getDirection() : 0);
 			counter = 0;
 		}
 	}
 
 	@Override
 	public void update(Entity e) {
+		if (search == null) {
+			BaseGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
+			LevelMap map = ShootEmUp.getGame().getCurrentLevel().getMap();
+			search = new AStarSearch(map.getWalls().keySet(), map.getGoalBounder(), LevelMap.TILE_WIDTH,
+					(int) (graphicsComponent.getWidth() / LevelMap.TILE_WIDTH));
+		}
+
+		BaseGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
+		BaseMovement movementComponent = getEntity().getComponent(TypeComponent.MOVEMENT);
 
 		Vector2i goalVector = search.getGridPosition(playerGraphics.getX(), playerGraphics.getY());
-		Vector2i startVector = search.getGridPosition(graphics.getX(), graphics.getY());
+		Vector2i startVector = search.getGridPosition(graphicsComponent.getX(), graphicsComponent.getY());
 		Logger.debug("Entity: " + e.getId() + " at Current Tile: " + startVector.x() + ", " + startVector.y(),
 				Category.AI);
 
 		Vector2i target = search.findPath(goalVector, startVector);
 
-		Vector2f movementVector = calculateMovementVector(new Vector2f(target.x(), target.y()), graphics.getX(),
-				graphics.getY(), movement.getSpeed());
+		Vector2f movementVector = calculateMovementVector(new Vector2f(target.x(), target.y()),
+				graphicsComponent.getX(), graphicsComponent.getY(), movementComponent.getSpeed());
 
 		if (movementVector.length() > 0) {
-			if (graphics instanceof AnimatedGraphics) {
-				((AnimatedGraphics) graphics).setAnimating(true);
+			if (graphicsComponent instanceof AnimatedGraphics) {
+				((AnimatedGraphics) graphicsComponent).setAnimating(true);
 			}
-			movement.move(e, movementVector);
-			if (graphics instanceof AnimatedGraphics) {
-				((AnimatedGraphics) graphics).setDirection((int) (Math.round(VectorMath.angle(movementVector)) / 45));
+			movementComponent.move(e, movementVector);
+			if (graphicsComponent instanceof AnimatedGraphics) {
+				((AnimatedGraphics) graphicsComponent)
+						.setDirection((int) (Math.round(VectorMath.angle(movementVector)) / 45));
 			}
 
-		} else if (graphics instanceof AnimatedGraphics) {
-			((AnimatedGraphics) graphics).setAnimating(false);
+		} else if (graphicsComponent instanceof AnimatedGraphics) {
+			((AnimatedGraphics) graphicsComponent).setAnimating(false);
 		}
 
 		attack(e);

@@ -13,43 +13,38 @@ import math.VectorMath;
 
 public class HomingControl extends BaseControl {
 
-	private BaseMovement movement;
-
-	public HomingControl() {
-
-		this.graphics = getEntity().getComponent(TypeComponent.GRAPHICS);
-		this.movement = getEntity().getComponent(TypeComponent.MOVEMENT);
-	}
-
 	@Override
 	public void receive(Message m, Entity e) {
 	}
 
 	@Override
 	public void update(Entity e) {
+		BaseMovement movementComponent = getEntity().getComponent(TypeComponent.MOVEMENT);
+		BaseGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
+
 		Entity target = ShootEmUp.getGame().getPlayer();
 		BaseGraphics playerGraphics = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.GRAPHICS);
 
 		Vector2f targetVector = new Vector2f(playerGraphics.getX(), playerGraphics.getY());
 
-		float y = graphics.getY();
-		float x = graphics.getX();
-		int speed = movement.getSpeed();
+		float y = graphicsComponent.getY();
+		float x = graphicsComponent.getX();
+		int speed = movementComponent.getSpeed();
 
 		if (target != null) {
 			Vector2f movementVector = calculateMovementVector(targetVector, x, y, speed);
 			if (movementVector.length() > 0) {
-				if (graphics instanceof AnimatedGraphics) {
-					((AnimatedGraphics) graphics).setAnimating(true);
+				if (graphicsComponent instanceof AnimatedGraphics) {
+					((AnimatedGraphics) graphicsComponent).setAnimating(true);
 				}
-				movement.move(e, movementVector);
-				if (graphics instanceof AnimatedGraphics) {
-					((AnimatedGraphics) graphics)
+				movementComponent.move(e, movementVector);
+				if (graphicsComponent instanceof AnimatedGraphics) {
+					((AnimatedGraphics) graphicsComponent)
 							.setDirection((int) (Math.round(VectorMath.angle(movementVector)) / 45));
 				}
 
-			} else if (graphics instanceof AnimatedGraphics) {
-				((AnimatedGraphics) graphics).setAnimating(false);
+			} else if (graphicsComponent instanceof AnimatedGraphics) {
+				((AnimatedGraphics) graphicsComponent).setAnimating(false);
 			}
 		}
 	}

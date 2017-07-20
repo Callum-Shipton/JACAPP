@@ -13,25 +13,16 @@ import math.VectorMath;
 
 public class TestingControl extends BaseControl {
 
-	private BaseMovement BM;
-	private PlayerGraphics PG;
-	private BaseAttack BA;
 	private Vector2f movement = new Vector2f(0.0f, 0.0f);
 	private Vector2f dir = new Vector2f(0.0f, 0.0f);
 	private boolean toggle = false;
 
 	public TestingControl() {
-	
-
-		this.PG = getEntity().getComponent(TypeComponent.GRAPHICS);
-		this.BA = getEntity().getComponent(TypeComponent.ATTACK);
-		this.BM = getEntity().getComponent(TypeComponent.MOVEMENT);
 		movement.add(0.0f, -1.0f);
 		movement.add(-1.0f, 0.0f);
 		movement.normalize();
 		this.PG.setAnimating(true);
 		// dir.add(0.0f, -1.0f);
-
 	}
 
 	@Override
@@ -43,7 +34,11 @@ public class TestingControl extends BaseControl {
 	@Override
 	public void update(Entity e) {
 
-		this.BM.move(e, movement);
+		PlayerGraphics graphicsComponent = getEntity().getComponent(TypeComponent.GRAPHICS);
+		BaseAttack attackComponent = getEntity().getComponent(TypeComponent.ATTACK);
+		BaseMovement movementComponent = getEntity().getComponent(TypeComponent.MOVEMENT);
+
+		movementComponent.move(e, movement);
 
 		new UpgradeManaRegenButton().click();
 		// TODO Auto-generated method stub
@@ -52,8 +47,8 @@ public class TestingControl extends BaseControl {
 		else
 			dir.set(0.0f, 1.0f);
 		dir.normalize();
-		this.PG.setDirection((int) (Math.round(VectorMath.angle(dir)) / 45));
-		if (this.BA.attack(e, this.PG.getDirection()))
+		graphicsComponent.setDirection((int) (Math.round(VectorMath.angle(dir)) / 45));
+		if (attackComponent.attack(e, graphicsComponent.getDirection()))
 			toggle = !toggle;
 	}
 
