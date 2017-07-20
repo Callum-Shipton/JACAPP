@@ -2,6 +2,7 @@ package level;
 
 import org.joml.Vector2f;
 
+import components.TypeComponent;
 import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
 import components.collision.RigidCollision;
@@ -9,6 +10,7 @@ import components.control.PlayerControl;
 import components.graphical.PlayerGraphics;
 import components.inventory.BaseInventory;
 import components.movement.GroundMovement;
+import components.spawn.BaseSpawn;
 import components.spawn.PointSpawn;
 import entity.Entity;
 import save.CharacterSave;
@@ -35,15 +37,23 @@ public abstract class PlayerBuilder {
 	}
 
 	public static Entity buildPlayer(TypeAttack type) {
-		player = new Entity();
-		chooseType(type);
+		if(type != TypeAttack.ARCHER) {
+			player = new Entity();
+			chooseType(type);
 
-		c = new RigidCollision();
-		m = new GroundMovement(5);
-		i = new BaseInventory(0);
+			c = new RigidCollision();
+			m = new GroundMovement(5);
+			i = new BaseInventory(0);
 
-		addComponents();
-		return player;
+			addComponents();
+			return player;
+		}
+		else {
+			player = new Entity("Characters","Players","Archer");
+			BaseSpawn bs = player.getComponent(TypeComponent.SPAWN);
+			bs.spawn();
+			return player;
+		}
 	}
 
 	public static Entity buildPlayer(TypeAttack type, CharacterSave save) {

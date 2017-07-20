@@ -17,6 +17,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 	protected transient Weapon weapon;
 	protected String weaponId;
+	protected int team;
 
 	protected transient Armour boots = null;
 	protected transient Armour legs = null;
@@ -55,6 +56,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		healthRegen = 100;
 		manaRegen = 100;
 		this.weaponId = weaponId;
+		this.team = team;
 		weapon = new Weapon(weaponId, team);
 		this.health = health;
 		maxHealth = health;

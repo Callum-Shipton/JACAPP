@@ -1,6 +1,5 @@
 package test.components;
 
-import java.io.Serializable;
 
 import org.joml.Vector2f;
 
@@ -11,35 +10,31 @@ import components.movement.MovementComponent;
 import entity.Entity;
 import loop.Loop;
 
-public abstract class BaseMovementTest extends Component implements MovementComponent, Cloneable, Serializable {
+
+
+public abstract class BaseMovementTest extends Component implements MovementComponent {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	protected static final TypeComponent type = TypeComponent.MOVEMENT;
+	protected transient static final TypeComponent type = TypeComponent.MOVEMENT;
 
 	protected int speed;
-	protected int realSpeed;
+	protected transient int realSpeed;
 
-	protected boolean frost = false;
-	protected int frostCounter = 0;
-	protected int frostTime = 5;
-
+	protected transient boolean frost = false;
+	protected transient int frostCounter = 0;
+	protected transient int frostTime = 5;
+	
+	
 	public BaseMovementTest(int speed) {
 		this.speed = speed;
 		realSpeed = speed;
 	}
-	
 	public BaseMovementTest(BaseMovementTest bm) {
 		this(bm.speed);
-	}
-	
-	@Override
-	public BaseMovementTest clone() throws CloneNotSupportedException {
-			BaseMovementTest result = (BaseMovementTest) super.clone();
-			return result;	
 	}
 
 	@Override

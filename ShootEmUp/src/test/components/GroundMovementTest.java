@@ -1,69 +1,45 @@
 package test.components;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
-import ai.BoundingBox;
 import components.TypeComponent;
 import components.collision.BaseCollision;
 import components.collision.HitCollision;
 import components.graphical.BaseGraphics;
+import components.movement.GroundMovement.Axis;
 import entity.Entity;
 import main.ShootEmUp;
 import math.VectorMath;
 import object.EntityMap;
 
-public class GroundMovementTest extends BaseMovementTest implements Cloneable,Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class GroundMovementTest extends BaseMovementTest{
 	
-	protected BaseCollision collisionComponent;
-
-	public GroundMovementTest(BaseCollision baseCollision, int speed) {
+	public GroundMovementTest(int speed) {
 		super(speed);
-		this.collisionComponent = baseCollision;
 	}
 	
 	public GroundMovementTest(GroundMovementTest gm) {
-		this(gm.collisionComponent,gm.speed);
-	}
-	
-	@Override
-	public GroundMovementTest clone() throws CloneNotSupportedException {
-		GroundMovementTest result = (GroundMovementTest) super.clone();
-
-		result.collisionComponent = collisionComponent;
-		return result;
+		this(gm.speed);
 	}
 	
 	@Override
 	public boolean equals(Object o) {
-		if (o instanceof GroundMovementTest) {
-			GroundMovementTest b = (GroundMovementTest) o;
-			if(b.collisionComponent != collisionComponent) return false;
-			if(b.realSpeed != realSpeed) return false;
-			if(b.speed != speed) return false;
-			if(b.frost != frost) return false;
-			if(b.frostCounter != frostCounter) return false;
-			if(b.frostTime != frostTime) return false;
-			return true;
-		}
-		return false;
-	}
 	
+		return this.speed == ((GroundMovementTest) o).speed;
+		
+	}
 
 	private Set<Vector2f> reactToCollision(Vector4f collVec, Entity hitEntity, Entity currentEntity, Axis axis,
 			EntityMap eMap) {
 		Set<Vector2f> newGrid = eMap.getGridPos(currentEntity);
+		BaseCollision BC = currentEntity.getComponent(TypeComponent.COLLISION);
 		BaseCollision HC = hitEntity.getComponent(TypeComponent.COLLISION);
 		BaseGraphics BG = currentEntity.getComponent(TypeComponent.GRAPHICS);
-		if ((HC.getMoveBack()) && !(collisionComponent instanceof HitCollision)) {
+		
+		if ((HC.getMoveBack()) && !(BC instanceof HitCollision)) {
 			switch (axis) {
 			case X:
 				moveBackX(collVec, BG);
@@ -74,7 +50,7 @@ public class GroundMovementTest extends BaseMovementTest implements Cloneable,Se
 			newGrid = eMap.getGridPos(currentEntity);
 		}
 		if (currentEntity.getComponent(TypeComponent.COLLISION) != null) {
-			collisionComponent.collision(currentEntity, hitEntity);
+			BC.collision(currentEntity, hitEntity);
 		}
 		BaseCollision EC = hitEntity.getComponent(TypeComponent.COLLISION);
 		if (EC != null) {
@@ -101,11 +77,13 @@ public class GroundMovementTest extends BaseMovementTest implements Cloneable,Se
 			}
 		}
 
-		eMap.removeEntity(collisionComponent.getGridPos(), currentEntity);
+		BaseCollision BC = currentEntity.getComponent(TypeComponent.COLLISION);
+		
+		eMap.removeEntity(BC.getGridPos(), currentEntity);
 		if (!currentEntity.isDestroy()) {
 			eMap.addEntity(newGrid, currentEntity);
 		}
-		collisionComponent.setGridPos(newGrid);
+		BC.setGridPos(newGrid);
 		return collide;
 	}
 

@@ -15,9 +15,9 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 
 	private HudBar healthBar;
 
-	public EnemyAttack(int health, int mana, String weaponId, Armour helmet, Armour chest, Armour legs, Armour boots,
+	public EnemyAttack(int health, int mana, String weaponId, int team, Armour helmet, Armour chest, Armour legs, Armour boots,
 			Set<String> weaponTypes) {
-		super(health, mana, weaponId, 0, weaponTypes);
+		super(health, mana, weaponId, team, weaponTypes);
 
 		this.helmet = helmet;
 		this.chest = chest;
@@ -28,7 +28,7 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 	}
 
 	public EnemyAttack(EnemyAttack enemyAttack) {
-		this(enemyAttack.maxHealth, enemyAttack.maxMana, enemyAttack.weaponId, null, null, null, null,
+		this(enemyAttack.maxHealth, enemyAttack.maxMana, enemyAttack.weaponId,enemyAttack.team, null, null, null, null,
 				new HashSet<String>(enemyAttack.weaponTypes));
 	}
 

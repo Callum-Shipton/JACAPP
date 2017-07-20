@@ -40,7 +40,7 @@ public class PlayerAttack extends BaseAttack {
 	}
 
 	public PlayerAttack(PlayerAttack playerAttack) {
-		this(playerAttack.maxHealth, playerAttack.maxMana, playerAttack.weaponId, 1,
+		this(playerAttack.maxHealth, playerAttack.maxMana, playerAttack.weaponId, playerAttack.team,
 				new HashSet<String>(playerAttack.weaponTypes));
 	}
 

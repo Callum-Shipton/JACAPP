@@ -35,7 +35,7 @@ public class TestLoop extends Loop {
 
 		int error;
 		GLFW.glfwHideWindow(getDisplay().getWindow());
-		// glfwSwapInterval(0);
+		//GLFW.glfwSwapInterval(0);
 		ShootEmUp.getMusicPlayer().pause();
 		new OpenMenuButton(new CharacterSelectMenu(ImageProcessor.getImage("MainMenuScreen"))).click();
 		new SelectCharacterButton(TypeAttack.WARRIOR).click();
@@ -56,7 +56,7 @@ public class TestLoop extends Loop {
 			}
 
 			update();
-			// render();
+			//render();
 
 			int currWave = ShootEmUp.getGame().getCurrentLevel().getWave();
 			if (currWave != lastWave) {
@@ -65,7 +65,7 @@ public class TestLoop extends Loop {
 				Logger.info("TEST: Wave: " + currWave);
 				lastWave = currWave;
 			}
-			if (currWave == 10 && ShootEmUp.getGame().getLevel() == 3) {
+			if (ShootEmUp.getGame().getLevel() == 3) {
 				setFinished(true);
 			}
 		}

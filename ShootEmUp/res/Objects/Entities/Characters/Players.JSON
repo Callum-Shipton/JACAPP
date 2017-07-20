@@ -1,5 +1,71 @@
 [
 {
-  "name": "Jack"
+  "name": "Archer",
+  "components":[
+  {
+  	"class":"attack.PlayerAttack",
+  	"component":
+  		{
+  		"maxHealth": 40,
+  		"maxMana": 50,
+  		"weaponId": "Longbow",
+  		"team": 1,
+  		"weaponTypes":[
+  			"Bow","Dagger"
+  			]
+  		}
+  },
+  {
+  	"class":"graphical.PlayerGraphics",
+  	"component":
+  		{
+  		"imageId": "Archer"
+ 		}
+  },
+  {
+  	"class":"movement.GroundMovement",
+  	"component":
+  		{
+  		"speed": 5
+ 		}
+  },
+  {
+  	"class":"collision.RigidCollision",
+  	"component":
+  		{
+ 		}
+ 	},
+ 	{
+  	"class":"inventory.BaseInventory",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"spawn.PointSpawn",
+  	"component":
+  		{
+  		"spawnLoc": {
+  			"x":480.0,
+  			"y":480.0
+ 			}
+ 		}
+  },
+  {
+  	"class":"control.PlayerControl",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"audio.EventAudio",
+  	"component":
+  		{
+  		"sounds": {
+  			"SHOOT":"Shoot.ogg"
+ 			}
+ 		}
+  }
+  ]
 }
 ]

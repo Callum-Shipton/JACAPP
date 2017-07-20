@@ -17,7 +17,7 @@ public class ComponentCopyTestClone {
 		
 		//INITIALISATION
 		Entity e = new Entity();
-		Component gm = new GroundMovementTest(null, numObjects);
+		Component gm = new GroundMovementTest(numObjects);
 		e.addComponent(gm);
 		
 		//CREATION PER OBJECT
