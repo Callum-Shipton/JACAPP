@@ -41,7 +41,7 @@ public class TestLoop extends Loop {
 		new SelectCharacterButton(TypeAttack.WARRIOR).click();
 		new SelectLevelButton(1).click();
 		Entity player = ShootEmUp.getGame().getPlayer();
-		player.addComponent(new TestingControl(player));
+		player.addComponent(new TestingControl());
 		PlayerAttack pa = player.getComponent(TypeComponent.ATTACK);
 		pa.setMaxHealth(400);
 
@@ -61,7 +61,7 @@ public class TestLoop extends Loop {
 			int currWave = ShootEmUp.getGame().getCurrentLevel().getWave();
 			if (currWave != lastWave) {
 				player = ShootEmUp.getGame().getPlayer();
-				player.addComponent(new TestingControl(player));
+				player.addComponent(new TestingControl());
 				Logger.info("TEST: Wave: " + currWave);
 				lastWave = currWave;
 			}

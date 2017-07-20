@@ -86,7 +86,7 @@ public final class Weapon extends InventoryItem<Weapon> {
 
 		// create particle
 		Entity particle = new Entity();
-		AnimatedGraphics g = new AnimatedGraphics(getParticleImage(), ImageProcessor.base, false, 1f, particle);
+		AnimatedGraphics g = new AnimatedGraphics(getParticleImage(), ImageProcessor.base, false, 1f);
 		g.setDirection(direction);
 		particle.addComponent(g);
 
@@ -128,13 +128,13 @@ public final class Weapon extends InventoryItem<Weapon> {
 			posX += (width - g.getWidth()) / 2;
 			posY -= g.getHeight();
 		}
-		PointSpawn s = new PointSpawn(new Vector2f(posX, posY), particle);
-		HitCollision c = new HitCollision(element, team, damage, particle);
-		FlyingMovement m = new FlyingMovement(10, particle);
+		PointSpawn s = new PointSpawn(new Vector2f(posX, posY));
+		HitCollision c = new HitCollision(element, team, damage);
+		FlyingMovement m = new FlyingMovement(10);
 		particle.addComponent(s);
 		particle.addComponent(c);
 		particle.addComponent(m);
-		particle.addComponent(new RangeControl(this.range, particle));
+		particle.addComponent(new RangeControl(this.range));
 		s.spawn(particle);
 
 		ShootEmUp.getGame().getCurrentLevel().addEntity(particle);

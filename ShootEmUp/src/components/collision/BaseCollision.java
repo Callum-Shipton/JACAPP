@@ -17,8 +17,7 @@ public abstract class BaseCollision extends Component implements CollisionCompon
 	protected Set<Vector2f> gridPos;
 	protected boolean moveBack;
 
-	public BaseCollision(Entity entity) {
-		super(entity);
+	public BaseCollision() {
 	}
 
 	@Override

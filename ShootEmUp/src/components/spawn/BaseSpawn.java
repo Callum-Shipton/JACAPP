@@ -6,8 +6,7 @@ import entity.Entity;
 
 public abstract class BaseSpawn extends Component implements SpawnComponent {
 
-	public BaseSpawn(Entity entity) {
-		super(entity);
+	public BaseSpawn() {
 	}
 
 	@Override

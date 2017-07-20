@@ -12,11 +12,11 @@ public class LineControl extends BaseControl {
 
 	protected BaseMovement movementComponent;
 
-	public LineControl(Entity entity) {
-		super(entity);
+	public LineControl() {
+	
 
-		this.graphics = entity.getComponent(TypeComponent.GRAPHICS);
-		this.movementComponent = entity.getComponent(TypeComponent.MOVEMENT);
+		this.graphics = getEntity().getComponent(TypeComponent.GRAPHICS);
+		this.movementComponent = getEntity().getComponent(TypeComponent.MOVEMENT);
 	}
 
 	@Override

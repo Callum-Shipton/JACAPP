@@ -12,8 +12,7 @@ public abstract class BaseControl extends Component implements ControlComponent 
 
 	protected BaseGraphics graphics;
 
-	public BaseControl(Entity entity) {
-		super(entity);
+	public BaseControl() {
 	}
 
 	private static float getDifference(float speed, float pos1, float pos2) {

@@ -4,8 +4,7 @@ import entity.Entity;
 
 public class RigidCollision extends BaseCollision {
 
-	public RigidCollision(Entity entity) {
-		super(entity);
+	public RigidCollision() {
 
 		moveBack = true;
 	}

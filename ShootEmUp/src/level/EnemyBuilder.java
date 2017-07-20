@@ -42,30 +42,30 @@ public final class EnemyBuilder {
 			Logger.debug("Small Enemy Spawn", Logger.Category.ENTITIES);
 			addComponents("SmallEnemy", 7);
 			enemyAttack = new EnemyAttack(TypeAttack.WARRIOR, 1, 5, new Weapon("OneHanded", 1), new Armour("Helmet"),
-					null, null, null, newEnemy);
+					null, null, null);
 			break;
 		case NORMAL:
 			Logger.debug("Enemy Spawn", Logger.Category.ENTITIES);
 			addComponents("Enemy", 4);
 			enemyAttack = new EnemyAttack(TypeAttack.ARCHER, 3, 5, new Weapon("Bow", 1), null, new Armour("Chest"),
-					null, null, newEnemy);
+					null, null);
 			break;
 		case FLYING:
 			Logger.debug("Flying Enemy Spawn", Logger.Category.ENTITIES);
 			addComponents("FlyingEnemy", 5);
 			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 2, 5, new Weapon("Staff", 1), null, null, new Armour("Legs"),
-					null, newEnemy);
+					null);
 			break;
 		case BOSS:
 			Logger.debug("Boss Enemy Spawn", Logger.Category.ENTITIES);
 			addComponents("BossEnemy", 5);
 			enemyAttack = new EnemyAttack(TypeAttack.MAGE, 1, 5, new Weapon("TwoHanded", 1), null, null, null,
-					new Armour("Boots"), newEnemy);
+					new Armour("Boots"));
 			break;
 		}
 
-		BaseControl enemyControl = new AIControl(newEnemy);
-		BaseInventory enemyInventory = new BaseInventory(1, newEnemy);
+		BaseControl enemyControl = new AIControl();
+		BaseInventory enemyInventory = new BaseInventory(1);
 
 		Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
 		sounds.put(MessageId.SHOOT, "Shoot.ogg");
@@ -82,9 +82,9 @@ public final class EnemyBuilder {
 	}
 
 	private static void addComponents(String art, int speed) {
-		enemyGraphics = new AnimatedGraphics(ImageProcessor.getImage(art), ImageProcessor.base, false, 0, 0, newEnemy);
+		enemyGraphics = new AnimatedGraphics(ImageProcessor.getImage(art), ImageProcessor.base, false, 0, 0);
 		newEnemy.addComponent(enemyGraphics);
-		enemyCollision = new RigidCollision(newEnemy);
-		enemyMovement = new GroundMovement(speed, newEnemy);
+		enemyCollision = new RigidCollision();
+		enemyMovement = new GroundMovement(speed);
 	}
 }

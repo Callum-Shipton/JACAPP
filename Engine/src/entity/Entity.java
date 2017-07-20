@@ -61,6 +61,7 @@ public class Entity implements DatableObject<Entity> {
 	// add components
 	public void addComponent(Component c) {
 		components.put(c.getType(), c);
+		c.setEntity(this);
 	}
 
 	public void destroy() {

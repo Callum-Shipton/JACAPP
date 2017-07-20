@@ -1,10 +1,12 @@
-package components.movement;
+package test.components;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
+import ai.BoundingBox;
 import components.TypeComponent;
 import components.collision.BaseCollision;
 import components.collision.HitCollision;
@@ -14,14 +16,48 @@ import main.ShootEmUp;
 import math.VectorMath;
 import object.EntityMap;
 
-public class GroundMovement extends BaseMovement {
+public class GroundMovementTest extends BaseMovementTest implements Cloneable,Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	protected BaseCollision collisionComponent;
 
-	public GroundMovement(int speed) {
+	public GroundMovementTest(BaseCollision baseCollision, int speed) {
 		super(speed);
-		this.collisionComponent = getEntity().getComponent(TypeComponent.COLLISION);
+		this.collisionComponent = baseCollision;
 	}
+	
+	public GroundMovementTest(GroundMovementTest gm) {
+		this(gm.collisionComponent,gm.speed);
+		this.collisionComponent = gm.collisionComponent;
+	}
+	
+	@Override
+	public GroundMovementTest clone() throws CloneNotSupportedException {
+		GroundMovementTest result = (GroundMovementTest) super.clone();
+
+		result.collisionComponent = collisionComponent;
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof GroundMovementTest) {
+			GroundMovementTest b = (GroundMovementTest) o;
+			if(b.collisionComponent != collisionComponent) return false;
+			if(b.realSpeed != realSpeed) return false;
+			if(b.speed != speed) return false;
+			if(b.frost != frost) return false;
+			if(b.frostCounter != frostCounter) return false;
+			if(b.frostTime != frostTime) return false;
+			return true;
+		}
+		return false;
+	}
+	
 
 	private Set<Vector2f> reactToCollision(Vector4f collVec, Entity hitEntity, Entity currentEntity, Axis axis,
 			EntityMap eMap) {

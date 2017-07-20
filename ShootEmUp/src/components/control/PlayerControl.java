@@ -21,13 +21,13 @@ public class PlayerControl extends BaseControl {
 	private BaseAttack BA;
 	private BaseInventory PI;
 
-	public PlayerControl(Entity entity) {
-		super(entity);
+	public PlayerControl() {
+	
 
-		this.PG = entity.getComponent(TypeComponent.GRAPHICS);
-		this.BA = entity.getComponent(TypeComponent.ATTACK);
-		this.BM = entity.getComponent(TypeComponent.MOVEMENT);
-		this.PI = entity.getComponent(TypeComponent.INVENTORY);
+		this.PG = getEntity().getComponent(TypeComponent.GRAPHICS);
+		this.BA = getEntity().getComponent(TypeComponent.ATTACK);
+		this.BM = getEntity().getComponent(TypeComponent.MOVEMENT);
+		this.PI = getEntity().getComponent(TypeComponent.INVENTORY);
 	}
 
 	@Override

@@ -1,27 +1,46 @@
-package components.movement;
+package test.components;
+
+import java.io.Serializable;
 
 import org.joml.Vector2f;
 
 import components.Component;
 import components.Message;
 import components.TypeComponent;
+import components.movement.MovementComponent;
 import entity.Entity;
 import loop.Loop;
 
-public abstract class BaseMovement extends Component implements MovementComponent {
+public abstract class BaseMovementTest extends Component implements MovementComponent, Cloneable, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	protected static final TypeComponent type = TypeComponent.MOVEMENT;
 
 	protected int speed;
 	protected int realSpeed;
 
-	private boolean frost = false;
-	private int frostCounter = 0;
-	private int frostTime = 5;
+	protected boolean frost = false;
+	protected int frostCounter = 0;
+	protected int frostTime = 5;
 
-	public BaseMovement(int speed) {
-	
-
+	public BaseMovementTest(int speed) {
 		this.speed = speed;
 		realSpeed = speed;
+	}
+	
+	public BaseMovementTest(BaseMovementTest bm) {
+		this(bm.speed);
+		realSpeed = speed;
+	}
+	
+	@Override
+	public BaseMovementTest clone() throws CloneNotSupportedException {
+			BaseMovementTest result = (BaseMovementTest) super.clone();
+			return result;	
 	}
 
 	@Override
@@ -35,7 +54,7 @@ public abstract class BaseMovement extends Component implements MovementComponen
 
 	@Override
 	public TypeComponent getType() {
-		return TypeComponent.MOVEMENT;
+		return type;
 	}
 
 	public void increaseSpeed(int increase) {

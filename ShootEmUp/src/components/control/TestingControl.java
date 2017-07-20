@@ -20,12 +20,12 @@ public class TestingControl extends BaseControl {
 	private Vector2f dir = new Vector2f(0.0f, 0.0f);
 	private boolean toggle = false;
 
-	public TestingControl(Entity entity) {
-		super(entity);
+	public TestingControl() {
+	
 
-		this.PG = entity.getComponent(TypeComponent.GRAPHICS);
-		this.BA = entity.getComponent(TypeComponent.ATTACK);
-		this.BM = entity.getComponent(TypeComponent.MOVEMENT);
+		this.PG = getEntity().getComponent(TypeComponent.GRAPHICS);
+		this.BA = getEntity().getComponent(TypeComponent.ATTACK);
+		this.BM = getEntity().getComponent(TypeComponent.MOVEMENT);
 		movement.add(0.0f, -1.0f);
 		movement.add(-1.0f, 0.0f);
 		movement.normalize();

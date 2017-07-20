@@ -13,8 +13,8 @@ public class PlayerAttack extends BaseAttack {
 
 	protected int lives;
 
-	public PlayerAttack(TypeAttack type, CharacterSave save, Entity entity) {
-		super(type, entity);
+	public PlayerAttack(TypeAttack type, CharacterSave save) {
+		super(type);
 
 		lives = save.getLives();
 
@@ -33,8 +33,8 @@ public class PlayerAttack extends BaseAttack {
 		maxManaRegen = save.getMaxManaRegen();
 	}
 
-	public PlayerAttack(TypeAttack type, int health, int mana, Weapon weapon, Entity entity) {
-		super(type, health, mana, weapon, entity);
+	public PlayerAttack(TypeAttack type, int health, int mana, Weapon weapon) {
+		super(type, health, mana, weapon);
 		lives = 3;
 	}
 

@@ -41,15 +41,14 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	private int poisonCounter = 0;
 	private static final int POISON_TIME = 2;
 
-	public BaseAttack(TypeAttack type, Entity entity) {
-		super(entity);
+	public BaseAttack(TypeAttack type) {
 		this.type = type;
 		healthRegen = 100;
 		manaRegen = 100;
 	}
 
-	public BaseAttack(TypeAttack type, int health, int mana, Weapon weapon, Entity entity) {
-		this(type, entity);
+	public BaseAttack(TypeAttack type, int health, int mana, Weapon weapon) {
+		this(type);
 
 		this.weapon = weapon;
 		this.health = health;

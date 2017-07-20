@@ -14,8 +14,8 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 	private HudBar healthBar;
 
 	public EnemyAttack(TypeAttack type, int health, int mana, Weapon weapon, Armour helmet, Armour chest, Armour legs,
-			Armour boots, Entity entity) {
-		super(type, health, mana, weapon, entity);
+			Armour boots) {
+		super(type, health, mana, weapon);
 
 		this.helmet = helmet;
 		this.chest = chest;

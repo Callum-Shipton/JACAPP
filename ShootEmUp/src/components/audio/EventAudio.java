@@ -11,7 +11,6 @@ public class EventAudio extends BaseAudio {
 	Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
 
 	public EventAudio(Map<MessageId, String> sounds, Entity entity) {
-		super(entity);
 		this.sounds = sounds;
 	}
 

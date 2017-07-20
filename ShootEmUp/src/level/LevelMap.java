@@ -98,7 +98,7 @@ public class LevelMap {
 		Entity wall = new Entity();
 		MapGraphics wallG;
 		wallG = new MapGraphics(ImageProcessor.getImage(WALLS_TEXTURE_FILE), new Vector2f(tileMapX, tileMapY),
-				x * TILE_WIDTH, y * TILE_WIDTH, wall);
+				x * TILE_WIDTH, y * TILE_WIDTH);
 
 		createEntity(wallG, x, y, wall);
 	}
@@ -108,13 +108,13 @@ public class LevelMap {
 		Entity water = new Entity();
 		MapGraphics wallG;
 		wallG = new MapGraphics(ImageProcessor.getImage(WALLS_TEXTURE_FILE), new Vector2f(tileMapX, tileMapY + 4.0f),
-				x * TILE_WIDTH, y * TILE_WIDTH, water);
+				x * TILE_WIDTH, y * TILE_WIDTH);
 		createEntity(wallG, x, y, water);
 	}
 
 	private void createEntity(MapGraphics wallG, int x, int y, Entity wall) {
 		wall.addComponent(wallG);
-		RigidCollision rigidCollision = new RigidCollision(wall);
+		RigidCollision rigidCollision = new RigidCollision();
 		wall.addComponent(rigidCollision);
 		walls.put(new Vector2i(x, y), wall);
 	}

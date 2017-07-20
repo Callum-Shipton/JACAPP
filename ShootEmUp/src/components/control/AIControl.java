@@ -27,8 +27,7 @@ public class AIControl extends BaseControl {
 	private AStarSearch search;
 	private BaseGraphics playerGraphics;
 
-	public AIControl(Entity entity) {
-		super(entity);
+	public AIControl() {
 
 		this.graphics = entity.getComponent(TypeComponent.GRAPHICS);
 		this.attack = entity.getComponent(TypeComponent.ATTACK);

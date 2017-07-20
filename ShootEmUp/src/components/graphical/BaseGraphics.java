@@ -22,8 +22,8 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 	protected float height;
 	protected Image image;
 
-	public BaseGraphics(Entity entity) {
-		super(entity);
+	public BaseGraphics() {
+	
 	}
 
 	@Override

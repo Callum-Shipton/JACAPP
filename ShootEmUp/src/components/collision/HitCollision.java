@@ -14,8 +14,7 @@ public class HitCollision extends BaseCollision {
 	private int team;
 	private int damage;
 
-	public HitCollision(Element element, int team, int damage, Entity entity) {
-		super(entity);
+	public HitCollision(Element element, int team, int damage) {
 
 		moveBack = false;
 

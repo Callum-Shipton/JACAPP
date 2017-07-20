@@ -4,7 +4,7 @@ import entity.Entity;
 
 public class FlyingMovement extends GroundMovement {
 
-	public FlyingMovement(int speed, Entity entity) {
-		super(speed, entity);
+	public FlyingMovement(int speed) {
+		super(speed);
 	}
 }

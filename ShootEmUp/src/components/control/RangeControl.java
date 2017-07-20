@@ -9,8 +9,8 @@ public class RangeControl extends LineControl {
 
 	private int range;
 
-	public RangeControl(int range, Entity entity) {
-		super(entity);
+	public RangeControl(int range) {
+	
 		this.range = (range * (LevelMap.TILE_WIDTH)) / movementComponent.getSpeed();
 	}
 
