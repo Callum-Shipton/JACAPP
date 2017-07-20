@@ -34,7 +34,6 @@ public abstract class BaseMovementTest extends Component implements MovementComp
 	
 	public BaseMovementTest(BaseMovementTest bm) {
 		this(bm.speed);
-		realSpeed = speed;
 	}
 	
 	@Override

@@ -32,7 +32,6 @@ public class GroundMovementTest extends BaseMovementTest implements Cloneable,Se
 	
 	public GroundMovementTest(GroundMovementTest gm) {
 		this(gm.collisionComponent,gm.speed);
-		this.collisionComponent = gm.collisionComponent;
 	}
 	
 	@Override
