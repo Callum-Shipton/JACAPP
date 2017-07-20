@@ -57,7 +57,7 @@ public class AreaSpawner extends Spawner {
 		boolean collide;
 		Entity test = new Entity();
 
-		BaseGraphics testGraphics = new AnimatedGraphics(imageId, ImageProcessor.base, false);
+		BaseGraphics testGraphics = new AnimatedGraphics(imageId, false);
 		test.addComponent(testGraphics);
 
 		BaseCollision baseCollision = new RigidCollision();

@@ -14,7 +14,7 @@ import display.Renderer;
 
 public abstract class BaseGraphics extends Component implements GraphicsComponent {
 
-	protected Renderer r;
+	protected transient Renderer r;
 
 	protected transient float x;
 	protected transient float y;

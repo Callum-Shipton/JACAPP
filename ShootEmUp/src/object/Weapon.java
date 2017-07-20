@@ -85,7 +85,7 @@ public final class Weapon extends InventoryItem<Weapon> {
 
 		// create particle
 		Entity particle = new Entity();
-		AnimatedGraphics g = new AnimatedGraphics(getParticleImage(), ImageProcessor.base, false);
+		AnimatedGraphics g = new AnimatedGraphics(getParticleImage(), false);
 		g.setDirection(direction);
 		particle.addComponent(g);
 

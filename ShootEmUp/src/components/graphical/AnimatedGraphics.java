@@ -3,6 +3,7 @@ package components.graphical;
 import org.joml.Vector2f;
 
 import display.DPDTRenderer;
+import display.ImageProcessor;
 import display.Renderer;
 import entity.Entity;
 
@@ -13,19 +14,19 @@ public class AnimatedGraphics extends BaseGraphics {
 	protected transient int animTime = 6;
 	protected transient int direction = 0;
 
-	public AnimatedGraphics(String imageId, Renderer r, boolean animating) {
-		super(imageId, r);
+	public AnimatedGraphics(String imageId, boolean animating) {
+		super(imageId, ImageProcessor.base);
 		this.animating = animating;
 	}
 
-	public AnimatedGraphics(String imageId, Renderer r, boolean animating, float x, float y) {
-		this(imageId, r, animating);
+	public AnimatedGraphics(String imageId, boolean animating, float x, float y) {
+		this(imageId, animating);
 		this.x = x;
 		this.y = y;
 	}
 
 	public AnimatedGraphics(AnimatedGraphics animatedGraphics) {
-		this(animatedGraphics.imageId, animatedGraphics.r, animatedGraphics.animating);
+		this(animatedGraphics.imageId, animatedGraphics.animating);
 	}
 
 	public int getAnimID() {

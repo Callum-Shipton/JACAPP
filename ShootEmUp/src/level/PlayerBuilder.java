@@ -64,27 +64,27 @@ public abstract class PlayerBuilder {
 	private static void chooseType(TypeAttack type) {
 		switch (type) {
 		case ARCHER:
-			g = new PlayerGraphics("Archer", ImageProcessor.base);
+			g = new PlayerGraphics("Archer");
 			a = new PlayerAttack(type, 4, 5, new Weapon("Longbow", 0));
 			break;
 		case BATTLE_MAGE:
-			g = new PlayerGraphics("BattleMage", ImageProcessor.base);
+			g = new PlayerGraphics("BattleMage");
 			a = new PlayerAttack(type, 3, 5, new Weapon("FireStaff", 0));
 			break;
 		case MAGE:
-			g = new PlayerGraphics("Mage", ImageProcessor.base);
+			g = new PlayerGraphics("Mage");
 			a = new PlayerAttack(type, 3, 5, new Weapon("FireStaff", 0));
 			break;
 		case ROGUE:
-			g = new PlayerGraphics("Rogue", ImageProcessor.base);
+			g = new PlayerGraphics("Rogue");
 			a = new PlayerAttack(type, 3, 5, new Weapon("IronDagger", 0));
 			break;
 		case WARRIOR:
-			g = new PlayerGraphics("Warrior", ImageProcessor.base);
+			g = new PlayerGraphics("Warrior");
 			a = new PlayerAttack(type, 5, 3, new Weapon("Greatsword", 0));
 			break;
 		default:
-			g = new PlayerGraphics("Warrior", ImageProcessor.base);
+			g = new PlayerGraphics("Warrior");
 		}
 		s = new PointSpawn(new Vector2f(480.0f, 480.0f));
 	}

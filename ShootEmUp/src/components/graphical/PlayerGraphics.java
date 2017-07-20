@@ -11,14 +11,14 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 	private transient int posLocation;
 	private transient int posLocationInst;
 
-	public PlayerGraphics(String imageId, Renderer r) {
-		super(imageId, r, false);
+	public PlayerGraphics(String imageId) {
+		super(imageId, false);
 		posLocation = GL20.glGetUniformLocation(ImageProcessor.ShaderBase, "playerPos");
 		posLocationInst = GL20.glGetUniformLocation(ImageProcessor.ShaderInst, "playerPos");
 	}
 
 	public PlayerGraphics(PlayerGraphics playerGraphics) {
-		this(playerGraphics.imageId, playerGraphics.r);
+		this(playerGraphics.imageId);
 	}
 
 	@Override

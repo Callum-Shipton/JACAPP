@@ -155,7 +155,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 		BaseGraphics BG = entity.getComponent(TypeComponent.GRAPHICS);
 
-		coinG = new AnimatedGraphics("Coin", ImageProcessor.base, true, BG.getX() - BG.getWidth(),
+		coinG = new AnimatedGraphics("Coin", true, BG.getX() - BG.getWidth(),
 				BG.getY() - BG.getHeight());
 
 		coinS = new PointSpawn(new Vector2f(BG.getX(), BG.getY()));
