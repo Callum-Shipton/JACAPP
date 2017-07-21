@@ -14,7 +14,7 @@
   	"component":
   		{
   		"typePickup":"POTION",
-  		"type":"Health"
+  		"name":"Health"
  		}
   },
   {
@@ -49,7 +49,7 @@
   	"component":
   		{
   		"typePickup":"POTION",
-  		"type":"Health"
+  		"name":"Mana"
  		}
   },
   {
@@ -84,7 +84,7 @@
   	"component":
   		{
   		"typePickup":"POTION",
-  		"type":"Health"
+  		"name":"Speed"
  		}
   },
   {
@@ -119,7 +119,7 @@
   	"component":
   		{
   		"typePickup":"POTION",
-  		"type":"Health"
+  		"name":"Knockback"
  		}
   },
   {
