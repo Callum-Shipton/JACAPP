@@ -25,7 +25,7 @@ import logging.Logger;
 public class Entity implements DatableObject<Entity> {
 
 	private static Map<String, HashMap<String, HashMap<String, Entity>>> entitySystem;
-	private static HashMap<TypeComponent, Constructor<? extends Component>> constructorMap;
+	private static HashMap<Class<? extends Component>, Constructor<? extends Component>> constructorMap;
 	
 	private static Random rand = new Random();
 
@@ -49,7 +49,7 @@ public class Entity implements DatableObject<Entity> {
 			e = entitySystem.get(type).get(subType).get(name);
 			for(Component c :e.components.values()) {
 				try {
-					addComponent(constructorMap.get(c.getType()).newInstance(c));
+					addComponent(constructorMap.get(c.getClass()).newInstance(c));
 				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 						| InvocationTargetException e1) {
 					Logger.error(e1);
@@ -122,7 +122,7 @@ public class Entity implements DatableObject<Entity> {
 					Class<? extends Component> cClass = (Class<? extends Component>) Class.forName(cClassString);
 					Component c =  g.fromJson(comp, cClass);
 					Constructor<? extends Component> copyConst = cClass.getConstructor(cClass);
-					constructorMap.put(c.getType(), copyConst);
+					constructorMap.put(c.getClass(), copyConst);
 					e.addComponent(c);
 				}
 				entitySystem.get(directory).get(type).put(entityName, e);
