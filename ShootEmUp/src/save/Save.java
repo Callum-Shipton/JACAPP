@@ -8,6 +8,7 @@ import components.TypeComponent;
 import components.attack.BaseAttack;
 import components.attack.TypeAttack;
 import io.FileManager;
+import main.GameBase;
 import main.ShootEmUp;
 
 public class Save implements Serializable {
@@ -40,10 +41,12 @@ public class Save implements Serializable {
 	}
 
 	public void saveCharacter() {
-		if (ShootEmUp.getGame().getLevel() > level) {
-			level = ShootEmUp.getGame().getLevel();
+		GameBase gameBase = ShootEmUp.getGame();
+
+		if (gameBase.getLevel() > level) {
+			level = gameBase.getLevel();
 		}
-		BaseAttack attackComponent = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.ATTACK);
+		BaseAttack attackComponent = gameBase.getPlayer().getComponent(TypeComponent.ATTACK);
 		characters.put(TypeAttack.WARRIOR, new CharacterSave());
 	}
 

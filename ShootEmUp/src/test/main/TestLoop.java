@@ -7,7 +7,6 @@ import org.lwjgl.glfw.GLFW;
 
 import components.TypeComponent;
 import components.attack.PlayerAttack;
-import components.attack.TypeAttack;
 import components.control.TestingControl;
 import display.ArtLoader;
 import display.ImageProcessor;
@@ -35,10 +34,10 @@ public class TestLoop extends Loop {
 
 		int error;
 		GLFW.glfwHideWindow(getDisplay().getWindow());
-		//GLFW.glfwSwapInterval(0);
+		// GLFW.glfwSwapInterval(0);
 		ShootEmUp.getMusicPlayer().pause();
 		new OpenMenuButton(new CharacterSelectMenu(ImageProcessor.getImage("MainMenuScreen"))).click();
-		new SelectCharacterButton(TypeAttack.WARRIOR).click();
+		new SelectCharacterButton("Warrior").click();
 		new SelectLevelButton(1).click();
 		Entity player = ShootEmUp.getGame().getPlayer();
 		player.addComponent(new TestingControl());
@@ -56,7 +55,7 @@ public class TestLoop extends Loop {
 			}
 
 			update();
-			//render();
+			// render();
 
 			int currWave = ShootEmUp.getGame().getCurrentLevel().getWave();
 			if (currWave != lastWave) {

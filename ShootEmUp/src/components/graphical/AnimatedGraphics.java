@@ -4,7 +4,6 @@ import org.joml.Vector2f;
 
 import display.DPDTRenderer;
 import display.ImageProcessor;
-import display.Renderer;
 import entity.Entity;
 
 public class AnimatedGraphics extends BaseGraphics {
@@ -26,7 +25,7 @@ public class AnimatedGraphics extends BaseGraphics {
 	}
 
 	public AnimatedGraphics(AnimatedGraphics animatedGraphics) {
-		this(animatedGraphics.imageId, animatedGraphics.animating);
+		this(animatedGraphics.imageId, true);
 	}
 
 	public int getAnimID() {

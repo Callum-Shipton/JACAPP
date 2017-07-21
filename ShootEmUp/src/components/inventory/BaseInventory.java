@@ -156,7 +156,8 @@ public class BaseInventory extends Component implements InventoryComponent {
 
 		coinG = new AnimatedGraphics("Coin", true, BG.getX() - BG.getWidth(), BG.getY() - BG.getHeight());
 
-		coinS = new PointSpawn(new Vector2f(BG.getX(), BG.getY()));
+		coinS = new PointSpawn();
+		coinS.setSpawnLocation(new Vector2f(BG.getX(), BG.getY()));
 		item.addComponent(coinG);
 		coinC = new PickupCollision(TypePickup.COIN, "Coin");
 		Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);

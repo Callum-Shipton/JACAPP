@@ -126,7 +126,8 @@ public final class Weapon extends InventoryItem<Weapon> {
 			posX += (width - g.getWidth()) / 2;
 			posY -= g.getHeight();
 		}
-		PointSpawn s = new PointSpawn(new Vector2f(posX, posY));
+		PointSpawn s = new PointSpawn();
+		s.setSpawnLocation(new Vector2f(posX, posY));
 		HitCollision c = new HitCollision(element, damage);
 		c.setTeam(team);
 		FlyingMovement m = new FlyingMovement(10);

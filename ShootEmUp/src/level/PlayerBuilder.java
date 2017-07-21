@@ -1,8 +1,5 @@
 package level;
 
-import org.joml.Vector2f;
-
-import components.TypeComponent;
 import components.attack.PlayerAttack;
 import components.attack.TypeAttack;
 import components.collision.RigidCollision;
@@ -10,7 +7,6 @@ import components.control.PlayerControl;
 import components.graphical.PlayerGraphics;
 import components.inventory.BaseInventory;
 import components.movement.GroundMovement;
-import components.spawn.BaseSpawn;
 import components.spawn.PointSpawn;
 import entity.Entity;
 import save.CharacterSave;
@@ -36,29 +32,8 @@ public abstract class PlayerBuilder {
 		s.spawn();
 	}
 
-	public static Entity buildPlayer(TypeAttack type) {
-		if(type != TypeAttack.ARCHER) {
-			player = new Entity();
-			chooseType(type);
-
-			c = new RigidCollision();
-			m = new GroundMovement(5);
-			i = new BaseInventory(0);
-
-			addComponents();
-			return player;
-		}
-		else {
-			player = new Entity("Characters","Players","Archer");
-			BaseSpawn bs = player.getComponent(TypeComponent.SPAWN);
-			bs.spawn();
-			return player;
-		}
-	}
-
 	public static Entity buildPlayer(TypeAttack type, CharacterSave save) {
 		player = new Entity();
-		chooseType(type);
 
 		a = new PlayerAttack(save);
 		c = new RigidCollision();
@@ -67,33 +42,5 @@ public abstract class PlayerBuilder {
 
 		addComponents();
 		return player;
-	}
-
-	private static void chooseType(TypeAttack type) {
-		switch (type) {
-		case ARCHER:
-			g = new PlayerGraphics("Archer");
-			a = new PlayerAttack(4, 5, "Longbow", 0, null);
-			break;
-		case BATTLE_MAGE:
-			g = new PlayerGraphics("BattleMage");
-			a = new PlayerAttack(3, 5, "FireStaff", 0, null);
-			break;
-		case MAGE:
-			g = new PlayerGraphics("Mage");
-			a = new PlayerAttack(3, 5, "FireStaff", 0, null);
-			break;
-		case ROGUE:
-			g = new PlayerGraphics("Rogue");
-			a = new PlayerAttack(3, 5, "IronDagger", 0, null);
-			break;
-		case WARRIOR:
-			g = new PlayerGraphics("Warrior");
-			a = new PlayerAttack(5, 3, "Greatsword", 0, null);
-			break;
-		default:
-			g = new PlayerGraphics("Warrior");
-		}
-		s = new PointSpawn(new Vector2f(480.0f, 480.0f));
 	}
 }

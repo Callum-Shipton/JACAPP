@@ -12,7 +12,6 @@ import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.movement.BaseMovement;
 import components.movement.GroundMovement;
-import display.ImageProcessor;
 import entity.Entity;
 import logging.Logger;
 import logging.Logger.Category;

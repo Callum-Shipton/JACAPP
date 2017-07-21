@@ -52,7 +52,8 @@ public abstract class InventoryItem<I extends InventoryItem<?>> implements Datab
 		BaseGraphics entityG = e.getComponent(TypeComponent.GRAPHICS);
 
 		itemGraphics = new AnimatedGraphics(name, true);
-		itemSpawn = new PointSpawn(
+		itemSpawn = new PointSpawn();
+		itemSpawn.setSpawnLocation(
 				new Vector2f(entityG.getX() + itemGraphics.getWidth(), entityG.getY() + itemGraphics.getHeight()));
 		item.addComponent(itemGraphics);
 		itemCollision = new PickupCollision(typePickup, name);

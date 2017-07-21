@@ -8,14 +8,12 @@ import components.MessageId;
 
 public class PointSpawn extends BaseSpawn implements SpawnComponent {
 
-	private Vector2f spawnLoc;
+	private transient Vector2f spawnLoc;
 
-	public PointSpawn(Vector2f spawnLoc) {
-		this.spawnLoc = spawnLoc;
+	public PointSpawn() {
 	}
 
 	public PointSpawn(PointSpawn pointSpawn) {
-		this(pointSpawn.spawnLoc);
 	}
 
 	public void setSpawnLocation(Vector2f spawnLoc) {

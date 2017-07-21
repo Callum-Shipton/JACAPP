@@ -3,14 +3,15 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joml.Vector2f;
+
 import components.TypeComponent;
-import components.attack.TypeAttack;
 import components.graphical.BaseGraphics;
+import components.spawn.PointSpawn;
 import display.ImageProcessor;
 import entity.Entity;
 import gui.Hud;
 import level.Level;
-import level.PlayerBuilder;
 import level.TypeEnemy;
 import logging.Logger;
 import save.Save;
@@ -71,7 +72,10 @@ public class GameBase {
 		} catch (Exception e) {
 			Logger.error(e);
 		}
-		player = PlayerBuilder.buildPlayer(TypeAttack.WARRIOR);
+		player = new Entity("Characters", "Players", "warrior");
+		PointSpawn bs = player.getComponent(TypeComponent.SPAWN);
+		bs.setSpawnLocation(new Vector2f(480.0f, 480.0f));
+		bs.spawn();
 		currentLevel.addEntity(player);
 		hud = new Hud(player, 0, 0);
 	}

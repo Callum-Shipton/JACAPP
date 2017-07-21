@@ -45,10 +45,266 @@
   	"class":"spawn.PointSpawn",
   	"component":
   		{
-  		"spawnLoc": {
-  			"x":480.0,
-  			"y":480.0
+ 		}
+  },
+  {
+  	"class":"control.PlayerControl",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"audio.EventAudio",
+  	"component":
+  		{
+  		"sounds": {
+  			"SHOOT":"Shoot.ogg"
  			}
+ 		}
+  }
+  ]
+},
+{
+  "name": "Warrior",
+  "components":[
+  {
+  	"class":"attack.PlayerAttack",
+  	"component":
+  		{
+  		"maxHealth": 50,
+  		"maxMana": 30,
+  		"weaponId": "Greatsword",
+  		"team": 1,
+  		"weaponTypes":[
+  			"One-Handed","Two-Handed"
+  			]
+  		}
+  },
+  {
+  	"class":"graphical.PlayerGraphics",
+  	"component":
+  		{
+  		"imageId": "Warrior"
+ 		}
+  },
+  {
+  	"class":"movement.GroundMovement",
+  	"component":
+  		{
+  		"speed": 5
+ 		}
+  },
+  {
+  	"class":"collision.RigidCollision",
+  	"component":
+  		{
+ 		}
+ 	},
+ 	{
+  	"class":"inventory.BaseInventory",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"spawn.PointSpawn",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"control.PlayerControl",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"audio.EventAudio",
+  	"component":
+  		{
+  		"sounds": {
+  			"SHOOT":"Shoot.ogg"
+ 			}
+ 		}
+  }
+  ]
+},
+{
+  "name": "Mage",
+  "components":[
+  {
+  	"class":"attack.PlayerAttack",
+  	"component":
+  		{
+  		"maxHealth": 30,
+  		"maxMana": 50,
+  		"weaponId": "FireStaff",
+  		"team": 1,
+  		"weaponTypes":[
+  			"Staff","Dagger"
+  			]
+  		}
+  },
+  {
+  	"class":"graphical.PlayerGraphics",
+  	"component":
+  		{
+  		"imageId": "Mage"
+ 		}
+  },
+  {
+  	"class":"movement.GroundMovement",
+  	"component":
+  		{
+  		"speed": 5
+ 		}
+  },
+  {
+  	"class":"collision.RigidCollision",
+  	"component":
+  		{
+ 		}
+ 	},
+ 	{
+  	"class":"inventory.BaseInventory",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"spawn.PointSpawn",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"control.PlayerControl",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"audio.EventAudio",
+  	"component":
+  		{
+  		"sounds": {
+  			"SHOOT":"Shoot.ogg"
+ 			}
+ 		}
+  }
+  ]
+},
+{
+  "name": "BattleMage",
+  "components":[
+  {
+  	"class":"attack.PlayerAttack",
+  	"component":
+  		{
+  		"maxHealth": 30,
+  		"maxMana": 50,
+  		"weaponId": "FireStaff",
+  		"team": 1,
+  		"weaponTypes":[
+  			"Staff","One-Handed"
+  			]
+  		}
+  },
+  {
+  	"class":"graphical.PlayerGraphics",
+  	"component":
+  		{
+  		"imageId": "BattleMage"
+ 		}
+  },
+  {
+  	"class":"movement.GroundMovement",
+  	"component":
+  		{
+  		"speed": 5
+ 		}
+  },
+  {
+  	"class":"collision.RigidCollision",
+  	"component":
+  		{
+ 		}
+ 	},
+ 	{
+  	"class":"inventory.BaseInventory",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"spawn.PointSpawn",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"control.PlayerControl",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"audio.EventAudio",
+  	"component":
+  		{
+  		"sounds": {
+  			"SHOOT":"Shoot.ogg"
+ 			}
+ 		}
+  }
+  ]
+},
+{
+  "name": "Rogue",
+  "components":[
+  {
+  	"class":"attack.PlayerAttack",
+  	"component":
+  		{
+  		"maxHealth": 30,
+  		"maxMana": 50,
+  		"weaponId": "IronDagger",
+  		"team": 1,
+  		"weaponTypes":[
+  			"One-Handed","Dagger"
+  			]
+  		}
+  },
+  {
+  	"class":"graphical.PlayerGraphics",
+  	"component":
+  		{
+  		"imageId": "Rogue"
+ 		}
+  },
+  {
+  	"class":"movement.GroundMovement",
+  	"component":
+  		{
+  		"speed": 5
+ 		}
+  },
+  {
+  	"class":"collision.RigidCollision",
+  	"component":
+  		{
+ 		}
+ 	},
+ 	{
+  	"class":"inventory.BaseInventory",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"spawn.PointSpawn",
+  	"component":
+  		{
  		}
   },
   {

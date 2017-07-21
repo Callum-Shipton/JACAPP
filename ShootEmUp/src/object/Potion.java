@@ -1,19 +1,11 @@
 package object;
 
 import java.io.Serializable;
-import java.util.EnumMap;
-import java.util.Map;
 
 import org.joml.Vector2f;
 
-import components.MessageId;
 import components.TypeComponent;
-import components.audio.BaseAudio;
-import components.audio.EventAudio;
-import components.collision.PickupCollision;
-import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
-import components.inventory.TypePickup;
 import components.spawn.PointSpawn;
 import entity.Entity;
 import main.ShootEmUp;
@@ -37,23 +29,13 @@ public abstract class Potion implements Serializable {
 	}
 
 	public void destroy(Entity e) {
-		Entity item = new Entity();
-		AnimatedGraphics potionGraphics;
-		PointSpawn potionSpawn;
-		PickupCollision potionCollision;
+		Entity item = new Entity("Items", "Potions", type);
 
 		BaseGraphics entityG = e.getComponent(TypeComponent.GRAPHICS);
+		BaseGraphics potionGraphics = e.getComponent(TypeComponent.GRAPHICS);
 
-		potionGraphics = new AnimatedGraphics(type, true);
-		potionSpawn = new PointSpawn(new Vector2f(entityG.getX() + potionGraphics.getWidth(), entityG.getY()));
-		item.addComponent(potionGraphics);
-		potionCollision = new PickupCollision(TypePickup.POTION, type);
-		Map<MessageId, String> sounds = new EnumMap<>(MessageId.class);
-		sounds.put(MessageId.PICKUP, "Pickup2.ogg");
-		BaseAudio audioComponent = new EventAudio(sounds);
-		item.addComponent(potionSpawn);
-		item.addComponent(potionCollision);
-		item.addComponent(audioComponent);
+		PointSpawn potionSpawn = item.getComponent(TypeComponent.SPAWN);
+		potionSpawn.setSpawnLocation(new Vector2f(entityG.getX() + potionGraphics.getWidth(), entityG.getY()));
 		potionSpawn.spawn();
 		ShootEmUp.getGame().getCurrentLevel().addEntity(item);
 	}

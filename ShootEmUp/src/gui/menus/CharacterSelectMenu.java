@@ -1,6 +1,5 @@
 package gui.menus;
 
-import components.attack.TypeAttack;
 import display.Image;
 import display.ImageProcessor;
 import gui.CounterButton;
@@ -44,16 +43,15 @@ public class CharacterSelectMenu extends GuiMenu {
 				(display.getWidth() / 2) - (ImageProcessor.getImage(warriorButton).getWidth() / 2),
 				display.getHeight() / 2, ImageProcessor.getImage(warriorButton).getHeight() / 2, 20);
 		buttonList.addMenuItem(new CounterButton(0, 0, ImageProcessor.getImage(warriorButton),
-				ImageProcessor.getImage(levelIcon), warriorLevel, 0.5f, new SelectCharacterButton(TypeAttack.WARRIOR)));
+				ImageProcessor.getImage(levelIcon), warriorLevel, 0.5f, new SelectCharacterButton("Warrior")));
 		buttonList.addMenuItem(new CounterButton(0, 0, ImageProcessor.getImage("ArcherButton"),
-				ImageProcessor.getImage(levelIcon), archerLevel, 0.5f, new SelectCharacterButton(TypeAttack.ARCHER)));
+				ImageProcessor.getImage(levelIcon), archerLevel, 0.5f, new SelectCharacterButton("Archer")));
 		buttonList.addMenuItem(new CounterButton(0, 0, ImageProcessor.getImage("MageButton"),
-				ImageProcessor.getImage(levelIcon), mageLevel, 0.5f, new SelectCharacterButton(TypeAttack.MAGE)));
-		buttonList.addMenuItem(
-				new CounterButton(0, 0, ImageProcessor.getImage("BattleMageButton"), ImageProcessor.getImage(levelIcon),
-						battleMageLevel, 0.5f, new SelectCharacterButton(TypeAttack.BATTLE_MAGE)));
+				ImageProcessor.getImage(levelIcon), mageLevel, 0.5f, new SelectCharacterButton("Mage")));
+		buttonList.addMenuItem(new CounterButton(0, 0, ImageProcessor.getImage("BattleMageButton"),
+				ImageProcessor.getImage(levelIcon), battleMageLevel, 0.5f, new SelectCharacterButton("BattleMage")));
 		buttonList.addMenuItem(new CounterButton(0, 0, ImageProcessor.getImage("RogueButton"),
-				ImageProcessor.getImage(levelIcon), rogueLevel, 0.5f, new SelectCharacterButton(TypeAttack.ROGUE)));
+				ImageProcessor.getImage(levelIcon), rogueLevel, 0.5f, new SelectCharacterButton("Rogue")));
 		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("BackButton"), x, y, new BackButton()));
 		menuItems.add(buttonList);
 	}
