@@ -1,14 +1,15 @@
 [
 {
-  "name": "Archer",
+  "name": "Small",
   "components":[
   {
   	"class":"attack.PlayerAttack",
   	"component":
   		{
-  		"maxHealth": 4,
+  		"maxHealth": 1,
   		"maxMana": 5,
-  		"team": 1,
+  		"weaponId": "OneHanded",
+  		"team": 0,
   		"weaponTypes":[
   			"Bow","Dagger"
   			]
@@ -64,14 +65,14 @@
   ]
 },
 {
-  "name": "Warrior",
+  "name": "Normal",
   "components":[
   {
   	"class":"attack.PlayerAttack",
   	"component":
   		{
-  		"maxHealth": 5,
-  		"maxMana": 3,
+  		"maxHealth": 50,
+  		"maxMana": 30,
   		"weaponId": "Greatsword",
   		"team": 1,
   		"weaponTypes":[
@@ -129,14 +130,14 @@
   ]
 },
 {
-  "name": "Mage",
+  "name": "Flying",
   "components":[
   {
   	"class":"attack.PlayerAttack",
   	"component":
   		{
-  		"maxHealth": 3,
-  		"maxMana": 5,
+  		"maxHealth": 30,
+  		"maxMana": 50,
   		"weaponId": "FireStaff",
   		"team": 1,
   		"weaponTypes":[
@@ -194,14 +195,14 @@
   ]
 },
 {
-  "name": "BattleMage",
+  "name": "Boss",
   "components":[
   {
   	"class":"attack.PlayerAttack",
   	"component":
   		{
-  		"maxHealth": 3,
-  		"maxMana": 5,
+  		"maxHealth": 30,
+  		"maxMana": 50,
   		"weaponId": "FireStaff",
   		"team": 1,
   		"weaponTypes":[
@@ -214,71 +215,6 @@
   	"component":
   		{
   		"imageId": "BattleMage"
- 		}
-  },
-  {
-  	"class":"movement.GroundMovement",
-  	"component":
-  		{
-  		"speed": 5
- 		}
-  },
-  {
-  	"class":"collision.RigidCollision",
-  	"component":
-  		{
- 		}
- 	},
- 	{
-  	"class":"inventory.BaseInventory",
-  	"component":
-  		{
- 		}
-  },
-  {
-  	"class":"spawn.PointSpawn",
-  	"component":
-  		{
- 		}
-  },
-  {
-  	"class":"control.PlayerControl",
-  	"component":
-  		{
- 		}
-  },
-  {
-  	"class":"audio.EventAudio",
-  	"component":
-  		{
-  		"sounds": {
-  			"SHOOT":"Shoot.ogg"
- 			}
- 		}
-  }
-  ]
-},
-{
-  "name": "Rogue",
-  "components":[
-  {
-  	"class":"attack.PlayerAttack",
-  	"component":
-  		{
-  		"maxHealth": 3,
-  		"maxMana": 5,
-  		"weaponId": "IronDagger",
-  		"team": 1,
-  		"weaponTypes":[
-  			"One-Handed","Dagger"
-  			]
-  		}
-  },
-  {
-  	"class":"graphical.PlayerGraphics",
-  	"component":
-  		{
-  		"imageId": "Rogue"
  		}
   },
   {

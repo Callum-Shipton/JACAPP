@@ -2,6 +2,7 @@ package components.audio;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import components.Message;
 import components.MessageId;
@@ -14,7 +15,7 @@ public class EventAudio extends BaseAudio {
 	}
 
 	public EventAudio(EventAudio eventAudio) {
-		this(new EnumMap<MessageId, String>(eventAudio.sounds));
+		this(eventAudio.sounds.entrySet().stream().collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue())));
 	}
 
 	@Override

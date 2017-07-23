@@ -2,6 +2,7 @@ package components.attack;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import components.Message;
 import components.MessageId;
@@ -41,7 +42,7 @@ public class PlayerAttack extends BaseAttack {
 
 	public PlayerAttack(PlayerAttack playerAttack) {
 		this(playerAttack.maxHealth, playerAttack.maxMana, playerAttack.weaponId, playerAttack.team,
-				new HashSet<String>(playerAttack.weaponTypes));
+				playerAttack.weaponTypes.stream().collect(Collectors.toSet()));
 	}
 
 	@Override

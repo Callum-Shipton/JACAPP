@@ -26,7 +26,7 @@ public class Entity implements DatableObject<Entity> {
 
 	private static Map<String, HashMap<String, HashMap<String, Entity>>> entitySystem;
 	private static HashMap<Class<? extends Component>, Constructor<? extends Component>> constructorMap;
-	
+
 	private static Random rand = new Random();
 
 	private String name;
@@ -45,9 +45,10 @@ public class Entity implements DatableObject<Entity> {
 			initSystem();
 		}
 		Entity e;
-		if (entitySystem.containsKey(type) && entitySystem.get(type).containsKey(subType) && entitySystem.get(type).get(subType).containsKey(name)) {
+		if (entitySystem.containsKey(type) && entitySystem.get(type).containsKey(subType)
+				&& entitySystem.get(type).get(subType).containsKey(name)) {
 			e = entitySystem.get(type).get(subType).get(name);
-			for(Component c :e.components.values()) {
+			for (Component c : e.components.values()) {
 				try {
 					addComponent(constructorMap.get(c.getClass()).newInstance(c));
 				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
@@ -55,8 +56,8 @@ public class Entity implements DatableObject<Entity> {
 					Logger.error(e1);
 				}
 			}
-		}else {
-			Logger.warn("No Entity found: " + type +", "+subType+","+name);
+		} else {
+			Logger.warn("No Entity found: " + type + ", " + subType + "," + name);
 		}
 		this.name = name;
 	}
@@ -115,15 +116,18 @@ public class Entity implements DatableObject<Entity> {
 				JsonObject charObj = entity.getAsJsonObject();
 				String entityName = charObj.get("name").getAsString();
 				JsonArray components = charObj.get("components").getAsJsonArray();
-				for(JsonElement component: components) {
+				for (JsonElement component : components) {
 					JsonObject compObj = component.getAsJsonObject();
 					String cClassString = "components." + compObj.get("class").getAsString();
 					JsonObject comp = compObj.get("component").getAsJsonObject();
 					Class<? extends Component> cClass = (Class<? extends Component>) Class.forName(cClassString);
-					Component c =  g.fromJson(comp, cClass);
-					Constructor<? extends Component> copyConst = cClass.getConstructor(cClass);
-					constructorMap.put(c.getClass(), copyConst);
+					Component c = g.fromJson(comp, cClass);
 					e.addComponent(c);
+					if (!constructorMap.containsKey(cClass)) {
+						Constructor<? extends Component> copyConst = cClass.getConstructor(cClass);
+						constructorMap.put(c.getClass(), copyConst);
+					}
+
 				}
 				entitySystem.get(directory).get(type).put(entityName, e);
 			}

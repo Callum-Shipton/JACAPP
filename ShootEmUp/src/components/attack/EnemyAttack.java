@@ -2,6 +2,7 @@ package components.attack;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import display.ImageProcessor;
 import entity.Entity;
@@ -29,7 +30,8 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 
 	public EnemyAttack(EnemyAttack enemyAttack) {
 		this(enemyAttack.maxHealth, enemyAttack.maxMana, enemyAttack.weaponId,enemyAttack.team, null, null, null, null,
-				new HashSet<String>(enemyAttack.weaponTypes));
+				enemyAttack.weaponTypes.stream().collect(Collectors.toSet()));
+		
 	}
 
 	@Override
