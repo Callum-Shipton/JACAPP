@@ -54,7 +54,7 @@ public class Level {
 		changeRadius(0);
 	}
 
-	public void addSpawner(List<TypeEnemy> prototypes) {
+	public void addSpawner(List<String> prototypes) {
 		spawners.add(new AreaSpawner(1, prototypes, map.getWidth(), map.getHeight(), 0, 0));
 	}
 

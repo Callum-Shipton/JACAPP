@@ -3,30 +3,32 @@
   "name": "Small",
   "components":[
   {
-  	"class":"attack.PlayerAttack",
+  	"class":"attack.EnemyAttack",
   	"component":
   		{
   		"maxHealth": 1,
   		"maxMana": 5,
   		"weaponId": "OneHanded",
+  		"helmetId": "Helmet",
+  		"chestId": null,
+  		"legsId": null,
+  		"bootsId": null,
   		"team": 0,
-  		"weaponTypes":[
-  			"Bow","Dagger"
-  			]
+  		"weaponTypes":["OneHanded"]
   		}
   },
   {
-  	"class":"graphical.PlayerGraphics",
+  	"class":"graphical.AnimatedGraphics",
   	"component":
   		{
-  		"imageId": "Archer"
+  		"imageId": "SmallEnemy"
  		}
   },
   {
   	"class":"movement.GroundMovement",
   	"component":
   		{
-  		"speed": 5
+  		"speed": 7
  		}
   },
   {
@@ -42,13 +44,7 @@
  		}
   },
   {
-  	"class":"spawn.PointSpawn",
-  	"component":
-  		{
- 		}
-  },
-  {
-  	"class":"control.PlayerControl",
+  	"class":"control.AIControl",
   	"component":
   		{
  		}
@@ -68,30 +64,32 @@
   "name": "Normal",
   "components":[
   {
-  	"class":"attack.PlayerAttack",
+  	"class":"attack.EnemyAttack",
   	"component":
   		{
-  		"maxHealth": 50,
-  		"maxMana": 30,
-  		"weaponId": "Greatsword",
-  		"team": 1,
-  		"weaponTypes":[
-  			"One-Handed","Two-Handed"
-  			]
+  		"maxHealth": 3,
+  		"maxMana": 5,
+  		"weaponId": "Bow",
+  		"helmetId": null,
+  		"chestId": "Chest",
+  		"legsId": null,
+  		"bootsId": null,
+  		"team": 0,
+  		"weaponTypes":["Bow"]
   		}
   },
   {
-  	"class":"graphical.PlayerGraphics",
+  	"class":"graphical.AnimatedGraphics",
   	"component":
   		{
-  		"imageId": "Warrior"
+  		"imageId": "Enemy"
  		}
   },
   {
   	"class":"movement.GroundMovement",
   	"component":
   		{
-  		"speed": 5
+  		"speed": 4
  		}
   },
   {
@@ -107,13 +105,7 @@
  		}
   },
   {
-  	"class":"spawn.PointSpawn",
-  	"component":
-  		{
- 		}
-  },
-  {
-  	"class":"control.PlayerControl",
+  	"class":"control.AIControl",
   	"component":
   		{
  		}
@@ -133,23 +125,25 @@
   "name": "Flying",
   "components":[
   {
-  	"class":"attack.PlayerAttack",
+  	"class":"attack.EnemyAttack",
   	"component":
   		{
-  		"maxHealth": 30,
-  		"maxMana": 50,
-  		"weaponId": "FireStaff",
-  		"team": 1,
-  		"weaponTypes":[
-  			"Staff","Dagger"
-  			]
+  		"maxHealth": 2,
+  		"maxMana": 5,
+  		"weaponId": "Staff",
+  		"helmetId": null,
+  		"chestId": null,
+  		"legsId": "Legs",
+  		"bootsId": null,
+  		"team": 0,
+  		"weaponTypes":["Staff"]
   		}
   },
   {
-  	"class":"graphical.PlayerGraphics",
+  	"class":"graphical.AnimatedGraphics",
   	"component":
   		{
-  		"imageId": "Mage"
+  		"imageId": "FlyingEnemy"
  		}
   },
   {
@@ -172,13 +166,7 @@
  		}
   },
   {
-  	"class":"spawn.PointSpawn",
-  	"component":
-  		{
- 		}
-  },
-  {
-  	"class":"control.PlayerControl",
+  	"class":"control.AIControl",
   	"component":
   		{
  		}
@@ -198,23 +186,25 @@
   "name": "Boss",
   "components":[
   {
-  	"class":"attack.PlayerAttack",
+  	"class":"attack.EnemyAttack",
   	"component":
   		{
-  		"maxHealth": 30,
-  		"maxMana": 50,
-  		"weaponId": "FireStaff",
-  		"team": 1,
-  		"weaponTypes":[
-  			"Staff","One-Handed"
-  			]
+  		"maxHealth": 1,
+  		"maxMana": 5,
+  		"weaponId": "TwoHanded",
+  		"helmetId": null,
+  		"chestId": null,
+  		"legsId": null,
+  		"bootsId": "Boots",
+  		"team": 0,
+  		"weaponTypes":["TwoHanded"]
   		}
   },
   {
-  	"class":"graphical.PlayerGraphics",
+  	"class":"graphical.AnimatedGraphics",
   	"component":
   		{
-  		"imageId": "BattleMage"
+  		"imageId": "BossEnemy"
  		}
   },
   {
@@ -237,13 +227,7 @@
  		}
   },
   {
-  	"class":"spawn.PointSpawn",
-  	"component":
-  		{
- 		}
-  },
-  {
-  	"class":"control.PlayerControl",
+  	"class":"control.AIControl",
   	"component":
   		{
  		}

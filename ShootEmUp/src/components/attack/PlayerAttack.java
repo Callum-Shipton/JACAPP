@@ -1,6 +1,5 @@
 package components.attack;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,8 +15,7 @@ public class PlayerAttack extends BaseAttack {
 
 	protected int lives;
 
-	public PlayerAttack(CharacterSave save) {
-
+	public PlayerAttack(CharacterSave save) {	
 		lives = save.getLives();
 
 		health = save.getHealth();
@@ -34,14 +32,15 @@ public class PlayerAttack extends BaseAttack {
 		maxMana = save.getMaxMana();
 		maxManaRegen = save.getMaxManaRegen();
 	}
-
-	public PlayerAttack(int health, int mana, String weaponId, int team, Set<String> weaponTypes) {
-		super(health, mana, weaponId, team, weaponTypes);
+	
+	public PlayerAttack(int health, int mana, String weaponId, int team, String helmetId, String chestId, String legsId, String bootsId,
+			Set<String> weaponTypes) {
+		super(health, mana, weaponId, team, weaponTypes,helmetId,chestId,legsId,bootsId);
 		lives = 3;
 	}
 
 	public PlayerAttack(PlayerAttack playerAttack) {
-		this(playerAttack.maxHealth, playerAttack.maxMana, playerAttack.weaponId, playerAttack.team,
+		this(playerAttack.maxHealth, playerAttack.maxMana, playerAttack.weaponId, playerAttack.team,playerAttack.helmetId, playerAttack.chestId, playerAttack.legsId, playerAttack.bootsId,
 				playerAttack.weaponTypes.stream().collect(Collectors.toSet()));
 	}
 

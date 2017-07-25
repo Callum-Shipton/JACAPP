@@ -26,7 +26,7 @@ public class AreaSpawner extends Spawner {
 	private final int x;
 	private final int y;
 
-	public AreaSpawner(int spawnRate, List<TypeEnemy> enemies, int width, int height, int x, int y) {
+	public AreaSpawner(int spawnRate, List<String> enemies, int width, int height, int x, int y) {
 		super(spawnRate, enemies);
 
 		Logger.debug("Spawner Size: " + width + ", " + height, Category.ENTITIES);

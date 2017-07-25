@@ -16,20 +16,15 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 
 	private HudBar healthBar;
 
-	public EnemyAttack(int health, int mana, String weaponId, int team, Armour helmet, Armour chest, Armour legs, Armour boots,
+	public EnemyAttack(int health, int mana, String weaponId, int team, String helmetId, String chestId, String legsId, String bootsId,
 			Set<String> weaponTypes) {
-		super(health, mana, weaponId, team, weaponTypes);
-
-		this.helmet = helmet;
-		this.chest = chest;
-		this.legs = legs;
-		this.boots = boots;
+		super(health, mana, weaponId, team, weaponTypes,helmetId,chestId,legsId,bootsId);
 
 		healthBar = new HudBar(10.0f, 10.0f, ImageProcessor.getImage("Bars"), 1, 0.25f);
 	}
 
 	public EnemyAttack(EnemyAttack enemyAttack) {
-		this(enemyAttack.maxHealth, enemyAttack.maxMana, enemyAttack.weaponId,enemyAttack.team, null, null, null, null,
+		this(enemyAttack.maxHealth, enemyAttack.maxMana, enemyAttack.weaponId,enemyAttack.team, enemyAttack.helmetId, enemyAttack.chestId, enemyAttack.legsId, enemyAttack.bootsId,
 				enemyAttack.weaponTypes.stream().collect(Collectors.toSet()));
 		
 	}

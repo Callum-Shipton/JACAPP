@@ -60,10 +60,10 @@ public class GameBase {
 		currentLevel = new Level(ImageProcessor.LEVEL_FILE_LOCATION, levelNumber);
 		currentLevel.init();
 
-		List<TypeEnemy> enemyPrototypes = new ArrayList<>();
-		enemyPrototypes.add(TypeEnemy.SMALL);
-		enemyPrototypes.add(TypeEnemy.NORMAL);
-		enemyPrototypes.add(TypeEnemy.FLYING);
+		List<String> enemyPrototypes = new ArrayList<>();
+		enemyPrototypes.add("Small");
+		enemyPrototypes.add("Normal");
+		enemyPrototypes.add("Flying");
 
 		currentLevel.addSpawner(enemyPrototypes);
 
@@ -72,7 +72,7 @@ public class GameBase {
 		} catch (Exception e) {
 			Logger.error(e);
 		}
-		player = new Entity("Characters", "Players", "warrior");
+		player = new Entity("Characters", "Players", "Warrior");
 		PointSpawn bs = player.getComponent(TypeComponent.SPAWN);
 		bs.setSpawnLocation(new Vector2f(480.0f, 480.0f));
 		bs.spawn();

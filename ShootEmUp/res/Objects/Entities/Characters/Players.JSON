@@ -9,6 +9,10 @@
   		"maxHealth": 4,
   		"maxMana": 5,
   		"team": 1,
+  		"helmetId": null,
+  		"chestId": null,
+  		"legsId": null,
+  		"bootsId": null,
   		"weaponTypes":[
   			"Bow","Dagger"
   			]
@@ -74,8 +78,12 @@
   		"maxMana": 3,
   		"weaponId": "Greatsword",
   		"team": 1,
+  		"helmetId": null,
+  		"chestId": null,
+  		"legsId": null,
+  		"bootsId": null,
   		"weaponTypes":[
-  			"One-Handed","Two-Handed"
+  			"OneHanded","TwoHanded"
   			]
   		}
   },
@@ -139,6 +147,10 @@
   		"maxMana": 5,
   		"weaponId": "FireStaff",
   		"team": 1,
+  		"helmetId": null,
+  		"chestId": null,
+  		"legsId": null,
+  		"bootsId": null,
   		"weaponTypes":[
   			"Staff","Dagger"
   			]
@@ -204,8 +216,12 @@
   		"maxMana": 5,
   		"weaponId": "FireStaff",
   		"team": 1,
+  		"helmetId": null,
+  		"chestId": null,
+  		"legsId": null,
+  		"bootsId": null,
   		"weaponTypes":[
-  			"Staff","One-Handed"
+  			"Staff","OneHanded"
   			]
   		}
   },
@@ -269,8 +285,12 @@
   		"maxMana": 5,
   		"weaponId": "IronDagger",
   		"team": 1,
+  		"helmetId": null,
+  		"chestId": null,
+  		"legsId": null,
+  		"bootsId": null,
   		"weaponTypes":[
-  			"One-Handed","Dagger"
+  			"OneHanded","Dagger"
   			]
   		}
   },

@@ -13,11 +13,11 @@ public abstract class Spawner {
 	protected int spawnCounter = 0;
 	protected final int spawnRate;
 
-	protected List<TypeEnemy> enemies;
+	protected List<String> enemies;
 	protected Set<Entity> spawnedEntities = new HashSet<>();
 	protected Random rand;
 
-	public Spawner(int spawnRate, List<TypeEnemy> enemies) {
+	public Spawner(int spawnRate, List<String> enemies) {
 		this.spawnRate = spawnRate;
 		this.enemies = enemies;
 
@@ -32,7 +32,7 @@ public abstract class Spawner {
 		Entity newEntity;
 
 		int prob = rand.nextInt(enemies.size());
-		newEntity = EnemyBuilder.buildEnemy(enemies.get(prob));
+		newEntity = new Entity("Characters","Enemies", enemies.get(prob));
 
 		return newEntity;
 	}

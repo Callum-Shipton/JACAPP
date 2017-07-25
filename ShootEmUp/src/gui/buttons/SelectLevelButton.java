@@ -26,10 +26,10 @@ public class SelectLevelButton implements ButtonAction {
 		ShootEmUp.getGame().setLevel(levelNum);
 		ShootEmUp.getGame().setCurrentLevel(level);
 
-		List<TypeEnemy> enemyPrototypes = new ArrayList<>();
-		enemyPrototypes.add(TypeEnemy.SMALL);
-		enemyPrototypes.add(TypeEnemy.NORMAL);
-		enemyPrototypes.add(TypeEnemy.FLYING);
+		List<String> enemyPrototypes = new ArrayList<>();
+		enemyPrototypes.add("Small");
+		enemyPrototypes.add("Normal");
+		enemyPrototypes.add("Flying");
 		level.addSpawner(enemyPrototypes);
 
 		ShootEmUp.startGame();
