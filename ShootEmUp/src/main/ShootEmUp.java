@@ -10,12 +10,13 @@ import gui.menus.MainMenu;
 import input.Keyboard;
 import loop.Loop;
 import save.Save;
+import save.ShootEmUpSave;
 
 public class ShootEmUp implements Game {
 
 	private static MusicPlayer musicPlayer;
 	private static MenuSystem menuSystem = new MenuSystem();
-	private static Save save;
+	private static ShootEmUpSave save;
 	private static GameBase game = new GameBase();
 
 	private static boolean paused = true;
@@ -35,7 +36,7 @@ public class ShootEmUp implements Game {
 	@Override
 	public void init() {
 		musicPlayer = new MusicPlayer();
-
+		Save.init("funbrella0000000");
 		paused = true;
 		menuSystem.addMenu(new MainMenu(ImageProcessor.getImage("MainMenuScreen")));
 		musicPlayer.playBackgroundMusic();
@@ -99,11 +100,11 @@ public class ShootEmUp implements Game {
 		return musicPlayer;
 	}
 
-	public static Save getSave() {
+	public static ShootEmUpSave getSave() {
 		return save;
 	}
 
-	public static void setSave(Save save) {
+	public static void setSave(ShootEmUpSave save) {
 		ShootEmUp.save = save;
 	}
 

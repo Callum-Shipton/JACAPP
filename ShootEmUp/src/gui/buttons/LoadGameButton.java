@@ -5,12 +5,12 @@ import gui.ButtonAction;
 import gui.menus.CharacterSelectMenu;
 import logging.Logger;
 import main.ShootEmUp;
-import save.Save;
+import save.ShootEmUpSave;
 
 public class LoadGameButton implements ButtonAction {
 	@Override
 	public void click() {
-		Save save = ShootEmUp.getSave();
+		ShootEmUpSave save = ShootEmUp.getSave();
 
 		int warriorLevel = 0;
 		int archerLevel = 0;
@@ -19,7 +19,7 @@ public class LoadGameButton implements ButtonAction {
 		int rogueLevel = 0;
 
 		if (save == null) {
-			save = new Save();
+			save = new ShootEmUpSave();
 			ShootEmUp.setSave(save);
 		}
 		try {

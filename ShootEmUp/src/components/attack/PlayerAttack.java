@@ -14,7 +14,6 @@ import save.CharacterSave;
 public class PlayerAttack extends BaseAttack {
 
 	private int lives;
-	private transient String AttackType;
 
 	public PlayerAttack(CharacterSave save) {
 		lives = save.getLives();

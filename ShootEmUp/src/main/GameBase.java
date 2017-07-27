@@ -13,7 +13,7 @@ import entity.Entity;
 import gui.Hud;
 import level.Level;
 import logging.Logger;
-import save.Save;
+import save.ShootEmUpSave;
 
 public class GameBase {
 
@@ -52,13 +52,13 @@ public class GameBase {
 	private void nextLevel() {
 
 		if (ShootEmUp.getSave() == null) {
-			ShootEmUp.setSave(new Save());
+			ShootEmUp.setSave(new ShootEmUpSave());
 		}
 
-		Save save = ShootEmUp.getSave();
+		ShootEmUpSave save = ShootEmUp.getSave();
 
 		// TODO fix saves
-		save.saveCharacter("well fuck");
+		save.saveCharacter("well fuck", player.getComponent(TypeComponent.ATTACK));
 		save.setLevel(++levelNumber);
 		save.saveToSystem(1);
 

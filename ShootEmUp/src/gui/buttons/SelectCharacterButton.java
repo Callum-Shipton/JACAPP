@@ -10,7 +10,7 @@ import gui.ButtonAction;
 import gui.Hud;
 import gui.menus.LevelSelectMenu;
 import main.ShootEmUp;
-import save.Save;
+import save.ShootEmUpSave;
 
 public class SelectCharacterButton implements ButtonAction {
 
@@ -22,7 +22,7 @@ public class SelectCharacterButton implements ButtonAction {
 
 	@Override
 	public void click() {
-		Save save = ShootEmUp.getSave();
+		ShootEmUpSave save = ShootEmUp.getSave();
 		if (save == null) {
 			newPlayer();
 			ShootEmUp.getMenuSystem().addMenu(new LevelSelectMenu(ImageProcessor.getImage("MainMenuScreen"), 1));
