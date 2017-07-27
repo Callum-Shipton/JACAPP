@@ -2,6 +2,7 @@ package components.spawn;
 
 import org.joml.Vector2f;
 
+import component.interfaces.SpawnComponent;
 import components.DataMessage;
 import components.Message;
 import components.MessageId;

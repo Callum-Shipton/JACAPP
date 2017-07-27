@@ -13,6 +13,7 @@ import java.util.Random;
 
 import org.joml.Vector2f;
 
+import component.interfaces.InventoryComponent;
 import components.Component;
 import components.Message;
 import components.MessageId;

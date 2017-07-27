@@ -2,6 +2,7 @@ package components.graphical;
 
 import org.lwjgl.opengl.GL20;
 
+import component.interfaces.GraphicsComponent;
 import display.ImageProcessor;
 import display.Renderer;
 import loop.Loop;

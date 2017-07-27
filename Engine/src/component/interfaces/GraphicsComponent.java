@@ -1,4 +1,4 @@
-package components.graphical;
+package component.interfaces;
 
 import entity.Entity;
 

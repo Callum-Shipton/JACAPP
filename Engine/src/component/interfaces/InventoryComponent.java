@@ -1,4 +1,4 @@
-package components.inventory;
+package component.interfaces;
 
 public interface InventoryComponent {
 

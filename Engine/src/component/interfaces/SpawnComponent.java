@@ -1,4 +1,4 @@
-package components.spawn;
+package component.interfaces;
 
 @FunctionalInterface
 public interface SpawnComponent {

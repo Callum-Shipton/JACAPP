@@ -1,4 +1,4 @@
-package components.control;
+package component.interfaces;
 
 @FunctionalInterface
 public interface ControlComponent {

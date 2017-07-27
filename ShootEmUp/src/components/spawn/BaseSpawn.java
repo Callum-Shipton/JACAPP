@@ -1,5 +1,6 @@
 package components.spawn;
 
+import component.interfaces.SpawnComponent;
 import components.Component;
 import components.TypeComponent;
 

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import component.interfaces.AttackComponent;
 import display.ImageProcessor;
 import entity.Entity;
 import gui.HudBar;

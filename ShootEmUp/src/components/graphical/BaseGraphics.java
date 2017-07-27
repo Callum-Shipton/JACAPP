@@ -3,6 +3,7 @@ package components.graphical;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
+import component.interfaces.GraphicsComponent;
 import components.Component;
 import components.DataMessage;
 import components.Message;

@@ -1,4 +1,4 @@
-package components.audio;
+package component.interfaces;
 
 public interface AudioComponent {
 

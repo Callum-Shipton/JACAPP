@@ -1,4 +1,4 @@
-package components.attack;
+package component.interfaces;
 
 import entity.Entity;
 

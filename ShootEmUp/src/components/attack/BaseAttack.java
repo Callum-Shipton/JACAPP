@@ -3,6 +3,7 @@ package components.attack;
 import java.util.HashSet;
 import java.util.Set;
 
+import component.interfaces.AttackComponent;
 import components.Component;
 import components.Message;
 import components.MessageId;

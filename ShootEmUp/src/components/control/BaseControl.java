@@ -2,6 +2,7 @@ package components.control;
 
 import org.joml.Vector2f;
 
+import component.interfaces.ControlComponent;
 import components.Component;
 import components.TypeComponent;
 import level.LevelMap;
