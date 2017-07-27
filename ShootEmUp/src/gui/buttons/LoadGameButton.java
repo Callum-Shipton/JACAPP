@@ -1,6 +1,5 @@
 package gui.buttons;
 
-import components.attack.TypeAttack;
 import display.ImageProcessor;
 import gui.ButtonAction;
 import gui.menus.CharacterSelectMenu;
@@ -25,20 +24,20 @@ public class LoadGameButton implements ButtonAction {
 		}
 		try {
 			save.load(1);
-			if (save.getCharacter(TypeAttack.WARRIOR) != null) {
-				warriorLevel = save.getCharacter(TypeAttack.WARRIOR).getPlayerLevel();
+			if (save.getCharacter("Warrior") != null) {
+				warriorLevel = save.getCharacter("Warrior").getPlayerLevel();
 			}
-			if (save.getCharacter(TypeAttack.ARCHER) != null) {
-				archerLevel = save.getCharacter(TypeAttack.ARCHER).getPlayerLevel();
+			if (save.getCharacter("Archer") != null) {
+				archerLevel = save.getCharacter("Archer").getPlayerLevel();
 			}
-			if (save.getCharacter(TypeAttack.MAGE) != null) {
-				mageLevel = save.getCharacter(TypeAttack.MAGE).getPlayerLevel();
+			if (save.getCharacter("Mage") != null) {
+				mageLevel = save.getCharacter("Mage").getPlayerLevel();
 			}
-			if (save.getCharacter(TypeAttack.BATTLE_MAGE) != null) {
-				battleMageLevel = save.getCharacter(TypeAttack.BATTLE_MAGE).getPlayerLevel();
+			if (save.getCharacter("BattleMage") != null) {
+				battleMageLevel = save.getCharacter("BattleMage").getPlayerLevel();
 			}
-			if (save.getCharacter(TypeAttack.ROGUE) != null) {
-				rogueLevel = save.getCharacter(TypeAttack.ROGUE).getPlayerLevel();
+			if (save.getCharacter("Rogue") != null) {
+				rogueLevel = save.getCharacter("Rogue").getPlayerLevel();
 			}
 		} catch (Exception e) {
 			Logger.error(e);

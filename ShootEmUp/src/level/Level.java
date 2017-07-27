@@ -14,6 +14,7 @@ import components.graphical.BaseGraphics;
 import display.ImageProcessor;
 import entity.Entity;
 import entity.EntityStorage;
+import entity.Spawner;
 import logging.Logger;
 import object.EntityMap;
 

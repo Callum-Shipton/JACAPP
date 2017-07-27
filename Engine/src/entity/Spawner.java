@@ -1,11 +1,10 @@
-package level;
+package entity;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import entity.Entity;
 import loop.Loop;
 
 public abstract class Spawner {

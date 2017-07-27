@@ -1,12 +1,10 @@
 package save;
 
 import java.io.Serializable;
-import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 
 import components.TypeComponent;
-import components.attack.BaseAttack;
-import components.attack.TypeAttack;
 import io.FileManager;
 import main.GameBase;
 import main.ShootEmUp;
@@ -17,11 +15,11 @@ public class Save implements Serializable {
 
 	private static final byte[] KEY = "funbrella0000000".getBytes();
 
-	private Map<TypeAttack, CharacterSave> characters = new EnumMap<>(TypeAttack.class);
+	private Map<String, CharacterSave> characters = new HashMap<>();
 
 	private int level = 1;
 
-	public CharacterSave getCharacter(TypeAttack type) {
+	public CharacterSave getCharacter(String type) {
 		return characters.get(type);
 	}
 
@@ -40,14 +38,11 @@ public class Save implements Serializable {
 		return save;
 	}
 
-	public void saveCharacter() {
+	public void saveCharacter(String attackType) {
 		GameBase gameBase = ShootEmUp.getGame();
+		level = gameBase.getLevel();
 
-		if (gameBase.getLevel() > level) {
-			level = gameBase.getLevel();
-		}
-		BaseAttack attackComponent = gameBase.getPlayer().getComponent(TypeComponent.ATTACK);
-		characters.put(TypeAttack.WARRIOR, new CharacterSave());
+		characters.put(attackType, new CharacterSave(gameBase.getPlayer().getComponent(TypeComponent.ATTACK)));
 	}
 
 	public void saveToSystem(int num) {
@@ -58,7 +53,7 @@ public class Save implements Serializable {
 		this.level = level;
 	}
 
-	public Map<TypeAttack, CharacterSave> getCharacters() {
+	public Map<String, CharacterSave> getCharacters() {
 		return characters;
 	}
 }

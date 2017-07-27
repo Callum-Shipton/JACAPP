@@ -13,6 +13,7 @@ import components.graphical.BaseGraphics;
 import components.movement.BaseMovement;
 import components.movement.GroundMovement;
 import entity.Entity;
+import entity.Spawner;
 import logging.Logger;
 import logging.Logger.Category;
 import loop.Loop;

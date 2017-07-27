@@ -6,7 +6,6 @@ import java.util.List;
 import display.ImageProcessor;
 import gui.ButtonAction;
 import level.Level;
-import level.TypeEnemy;
 import main.ShootEmUp;
 
 public class SelectLevelButton implements ButtonAction {

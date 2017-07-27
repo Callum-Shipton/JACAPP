@@ -11,7 +11,8 @@ public class SaveButton implements ButtonAction {
 		if (ShootEmUp.getSave() == null) {
 			ShootEmUp.setSave(new Save());
 		}
-		ShootEmUp.getSave().saveCharacter();
+		// TODO fix saves
+		ShootEmUp.getSave().saveCharacter("well fuck");
 		ShootEmUp.getSave().saveToSystem(1);
 		ShootEmUp.setSave(null);
 	}

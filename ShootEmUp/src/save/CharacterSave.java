@@ -50,13 +50,11 @@ public class CharacterSave implements Serializable {
 	private Map<TypePotion, Potion> potions;
 	private int maxPotions;
 
-	public CharacterSave() {
-		getData();
+	public CharacterSave(PlayerAttack tempAttack) {
+		getData(tempAttack);
 	}
 
-	private void getData() {
-
-		PlayerAttack tempAttack = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.ATTACK);
+	private void getData(PlayerAttack tempAttack) {
 
 		player = TypeAttack.WARRIOR;
 

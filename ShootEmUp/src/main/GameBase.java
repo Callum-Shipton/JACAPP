@@ -12,7 +12,6 @@ import display.ImageProcessor;
 import entity.Entity;
 import gui.Hud;
 import level.Level;
-import level.TypeEnemy;
 import logging.Logger;
 import save.Save;
 
@@ -51,12 +50,18 @@ public class GameBase {
 	}
 
 	private void nextLevel() {
+
 		if (ShootEmUp.getSave() == null) {
 			ShootEmUp.setSave(new Save());
 		}
-		ShootEmUp.getSave().saveCharacter();
-		ShootEmUp.getSave().setLevel(++levelNumber);
-		ShootEmUp.getSave().saveToSystem(1);
+
+		Save save = ShootEmUp.getSave();
+
+		// TODO fix saves
+		save.saveCharacter("well fuck");
+		save.setLevel(++levelNumber);
+		save.saveToSystem(1);
+
 		currentLevel = new Level(ImageProcessor.LEVEL_FILE_LOCATION, levelNumber);
 		currentLevel.init();
 

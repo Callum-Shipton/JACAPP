@@ -1,0 +1,142 @@
+[
+{
+  "name": "Health",
+  "components":[
+  {
+  	"class":"graphical.AnimatedGraphics",
+  	"component":
+  		{
+  		"imageId": "Health"
+ 		}
+  },
+  {
+  	"class":"collision.PickupCollision",
+  	"component":
+  		{
+  		"typePickup":"POTION",
+  		"name":"Health"
+ 		}
+  },
+  {
+  	"class":"spawn.PointSpawn",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"audio.EventAudio",
+  	"component":
+  		{
+  		"sounds": {
+  			"PICKUP":"Pickup2.ogg"
+ 			}
+ 		}
+  }
+  ]
+},
+{
+  "name": "Mana",
+  "components":[
+  {
+  	"class":"graphical.AnimatedGraphics",
+  	"component":
+  		{
+  		"imageId": "Mana"
+ 		}
+  },
+  {
+  	"class":"collision.PickupCollision",
+  	"component":
+  		{
+  		"typePickup":"POTION",
+  		"name":"Mana"
+ 		}
+  },
+  {
+  	"class":"spawn.PointSpawn",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"audio.EventAudio",
+  	"component":
+  		{
+  		"sounds": {
+  			"PICKUP":"Pickup2.ogg"
+ 			}
+ 		}
+  }
+  ]
+},
+{
+  "name": "Speed",
+  "components":[
+  {
+  	"class":"graphical.AnimatedGraphics",
+  	"component":
+  		{
+  		"imageId": "Speed"
+ 		}
+  },
+  {
+  	"class":"collision.PickupCollision",
+  	"component":
+  		{
+  		"typePickup":"POTION",
+  		"name":"Speed"
+ 		}
+  },
+  {
+  	"class":"spawn.PointSpawn",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"audio.EventAudio",
+  	"component":
+  		{
+  		"sounds": {
+  			"PICKUP":"Pickup2.ogg"
+ 			}
+ 		}
+  }
+  ]
+},
+{
+  "name": "Knockback",
+  "components":[
+  {
+  	"class":"graphical.AnimatedGraphics",
+  	"component":
+  		{
+  		"imageId": "Knockback"
+ 		}
+  },
+  {
+  	"class":"collision.PickupCollision",
+  	"component":
+  		{
+  		"typePickup":"POTION",
+  		"name":"Knockback"
+ 		}
+  },
+  {
+  	"class":"spawn.PointSpawn",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"audio.EventAudio",
+  	"component":
+  		{
+  		"sounds": {
+  			"PICKUP":"Pickup2.ogg"
+ 			}
+ 		}
+  }
+  ]
+}
+]
