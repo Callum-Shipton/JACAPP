@@ -13,9 +13,9 @@ import input.Keyboard;
 
 public class PS4Controller implements Controller {
 
-	private float axisDead = 0.3f;
-	private int id;
-	private String name;
+	private final float axisDead = 0.3f;
+	private final int id;
+	private final String name;
 	private FloatBuffer axes;
 	private ByteBuffer buttons;
 	private ByteBuffer pov;
@@ -113,40 +113,48 @@ public class PS4Controller implements Controller {
 			switch (axis) {
 
 			case 0: // Left Stick X (-1 LEFT) (1 RIGHT)
-				if (value < (-1 * this.axisDead)) {
+				if (value < (-1 * axisDead)) {
 					Keyboard.setKey(GLFW.GLFW_KEY_A, 1);
-				} else if (value > this.axisDead) {
+					Keyboard.setKey(GLFW.GLFW_KEY_D, 0);
+				} else if (value > axisDead) {
 					Keyboard.setKey(GLFW.GLFW_KEY_D, 1);
+					Keyboard.setKey(GLFW.GLFW_KEY_A, 0);
 				} else {
 					Keyboard.setKey(GLFW.GLFW_KEY_A, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_D, 0);
 				}
 				break;
 			case 1: // Left Stick Y (-1 DOWN) (1 UP)
-				if (value < (-1 * this.axisDead)) {
+				if (value < (-1 * axisDead)) {
 					Keyboard.setKey(GLFW.GLFW_KEY_W, 1);
-				} else if (value > this.axisDead) {
+					Keyboard.setKey(GLFW.GLFW_KEY_S, 0);
+				} else if (value > axisDead) {
 					Keyboard.setKey(GLFW.GLFW_KEY_S, 1);
+					Keyboard.setKey(GLFW.GLFW_KEY_W, 0);
 				} else {
 					Keyboard.setKey(GLFW.GLFW_KEY_S, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_W, 0);
 				}
 				break;
 			case 2: // Right Stick X (-1 LEFT) (1 RIGHT)
-				if (value < (-1 * this.axisDead)) {
+				if (value < (-1 * axisDead)) {
 					Keyboard.setKey(GLFW.GLFW_KEY_LEFT, 1);
-				} else if (value > this.axisDead) {
+					Keyboard.setKey(GLFW.GLFW_KEY_RIGHT, 0);
+				} else if (value > axisDead) {
 					Keyboard.setKey(GLFW.GLFW_KEY_RIGHT, 1);
+					Keyboard.setKey(GLFW.GLFW_KEY_LEFT, 0);
 				} else {
 					Keyboard.setKey(GLFW.GLFW_KEY_LEFT, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_RIGHT, 0);
 				}
 				break;
 			case 5: // Right Stick Y (-1 DOWN) (1 UP)
-				if (value < (-1 * this.axisDead)) {
+				if (value < (-1 * axisDead)) {
 					Keyboard.setKey(GLFW.GLFW_KEY_UP, 1);
-				} else if (value > this.axisDead) {
+					Keyboard.setKey(GLFW.GLFW_KEY_DOWN, 0);
+				} else if (value > axisDead) {
 					Keyboard.setKey(GLFW.GLFW_KEY_DOWN, 1);
+					Keyboard.setKey(GLFW.GLFW_KEY_UP, 0);
 				} else {
 					Keyboard.setKey(GLFW.GLFW_KEY_DOWN, 0);
 					Keyboard.setKey(GLFW.GLFW_KEY_UP, 0);
