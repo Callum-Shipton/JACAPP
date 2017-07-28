@@ -312,16 +312,36 @@ public class BaseInventory extends Component implements InventoryComponent {
 				} else {
 					switch (potionType) {
 					case "Health":
-						potions.put(HEALTH, new OneTimePotion("Health"));
+						if(!potions.containsKey(HEALTH)){
+							potions.put(HEALTH, new OneTimePotion("Health"));
+						}
+						else{
+							potions.get(HEALTH).addPotion();
+						}
 						break;
 					case "Mana":
-						potions.put(MANA, new OneTimePotion("Mana"));
+						if(!potions.containsKey(MANA)){
+							potions.put(MANA, new OneTimePotion("Mana"));
+						}
+						else{
+							potions.get(MANA).addPotion();
+						}
 						break;
 					case "Speed":
-						potions.put(SPEED, new DurationPotion("Speed", 30));
+						if(!potions.containsKey(SPEED)){
+							potions.put(SPEED, new DurationPotion("Speed", 30));
+						}
+						else{
+							potions.get(SPEED).addPotion();
+						}
 						break;
 					case "Knockback":
-						potions.put(KNOCKBACK, new DurationPotion("Knockback", 30));
+						if(!potions.containsKey(KNOCKBACK)){
+							potions.put(KNOCKBACK, new DurationPotion("Knockback", 30));
+						}
+						else{
+							potions.get(KNOCKBACK).addPotion();
+						}
 						break;
 					default:
 					}
