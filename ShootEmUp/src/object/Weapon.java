@@ -47,13 +47,13 @@ public final class Weapon extends InventoryItem<Weapon> {
 			Weapon[] typedWeapons = new Weapon[weaponSystem.get(typeName).size()];
 			typedWeapons = weaponSystem.get(typeName).values().toArray(typedWeapons);
 			w = typedWeapons[temp];
-			this.type = typeName;
+			type = typeName;
 
 		} else {
 			for (Entry<String, Map<String, Weapon>> typedWeapons : weaponSystem.entrySet()) {
 				if (typedWeapons.getValue().containsKey(typeName)) {
 					w = typedWeapons.getValue().get(typeName);
-					this.type = typedWeapons.getKey();
+					type = typedWeapons.getKey();
 				}
 			}
 		}
@@ -62,16 +62,16 @@ public final class Weapon extends InventoryItem<Weapon> {
 			// Pick a random weapon
 			Logger.warn("A weapon was created with unknown name/type: " + typeName);
 		} else {
-			this.name = w.name;
-			this.damage = w.damage;
-			this.range = w.range;
-			this.fireRate = w.fireRate;
-			this.melee = w.melee;
-			this.manaCost = w.manaCost;
-			this.element = w.element;
+			name = w.name;
+			damage = w.damage;
+			range = w.range;
+			fireRate = w.fireRate;
+			melee = w.melee;
+			manaCost = w.manaCost;
+			element = w.element;
 			this.team = team;
-			this.particleImage = w.particleImage;
-			this.typePickup = TypePickup.WEAPON;
+			particleImage = w.particleImage;
+			typePickup = TypePickup.WEAPON;
 		}
 	}
 
@@ -134,7 +134,7 @@ public final class Weapon extends InventoryItem<Weapon> {
 		particle.addComponent(s);
 		particle.addComponent(c);
 		particle.addComponent(m);
-		particle.addComponent(new RangeControl(this.range));
+		particle.addComponent(new RangeControl(range));
 		s.spawn();
 
 		ShootEmUp.getGame().getCurrentLevel().addEntity(particle);
@@ -148,23 +148,23 @@ public final class Weapon extends InventoryItem<Weapon> {
 	}
 
 	public boolean isMelee() {
-		return this.melee;
+		return melee;
 	}
 
 	public int getDamage() {
-		return this.damage;
+		return damage;
 	}
 
 	public Element getElement() {
-		return this.element;
+		return element;
 	}
 
 	public int getFireRate() {
-		return this.fireRate;
+		return fireRate;
 	}
 
 	public int getManaCost() {
-		return this.manaCost;
+		return manaCost;
 	}
 
 	public String getParticleImage() {
@@ -172,19 +172,19 @@ public final class Weapon extends InventoryItem<Weapon> {
 	}
 
 	public int getRange() {
-		return this.range;
+		return range;
 	}
 
 	public String getSubType() {
-		return this.name;
+		return name;
 	}
 
 	public int getTeam() {
-		return this.team;
+		return team;
 	}
 
 	public String getType() {
-		return this.type;
+		return type;
 	}
 
 	public void setDamage(int damage) {

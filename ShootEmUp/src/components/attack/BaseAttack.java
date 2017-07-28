@@ -24,12 +24,12 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	protected transient Armour legs = null;
 	protected transient Armour chest = null;
 	protected transient Armour helmet = null;
-	
+
 	protected String helmetId;
 	protected String chestId;
 	protected String legsId;
 	protected String bootsId;
-	
+
 	protected transient int armourValue = 0;
 
 	protected transient int health;
@@ -52,24 +52,24 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 	private transient boolean poison = false;
 	private transient int poisonCounter = 0;
 	private transient static final int POISON_TIME = 2;
-	
+
 	public BaseAttack() {
-		
+
 	}
-	
+
 	public BaseAttack(int health, int mana, String weaponId, int team, Set<String> weaponTypes) {
 
-		
 	}
-	
-	public BaseAttack(int health, int mana, String weaponId, int team, Set<String> weaponTypes, String helmetId, String chestId, String legsId, String bootsId) {
+
+	public BaseAttack(int health, int mana, String weaponId, int team, Set<String> weaponTypes, String helmetId,
+			String chestId, String legsId, String bootsId) {
 		healthRegen = 100;
 		manaRegen = 100;
-		
+
 		this.health = health;
 		maxHealth = health;
 		maxHealthRegen = healthRegen;
-		
+
 		this.mana = mana;
 		maxMana = mana;
 		maxManaRegen = manaRegen;
@@ -77,20 +77,28 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		this.weaponId = weaponId;
 		this.team = team;
 		this.weaponTypes = weaponTypes;
-		if(weaponId != null)weapon = new Weapon(weaponId, team);
+		if (weaponId != null) {
+			weapon = new Weapon(weaponId, team);
+		}
 
 		this.helmetId = helmetId;
 		this.chestId = chestId;
 		this.legsId = legsId;
 		this.bootsId = bootsId;
-		
-		if(helmetId != null) helmet = new Armour(helmetId);
-		if(chestId != null) chest = new Armour(chestId);
-		if(legsId != null) legs = new Armour(legsId);
-		if(bootsId != null) boots = new Armour(bootsId);
+
+		if (helmetId != null) {
+			helmet = new Armour(helmetId);
+		}
+		if (chestId != null) {
+			chest = new Armour(chestId);
+		}
+		if (legsId != null) {
+			legs = new Armour(legsId);
+		}
+		if (bootsId != null) {
+			boots = new Armour(bootsId);
+		}
 	}
-	
-	
 
 	public void addHealth(int i) {
 		health += i;
@@ -108,7 +116,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 	@Override
 	public boolean attack(Entity e, int dir) {
-		if(weapon != null) {
+		if (weapon != null) {
 			if (fireCountdown <= 0) {
 				if (mana >= weapon.getManaCost()) {
 					weapon.attack(e, dir);
@@ -117,7 +125,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 					fireCountdown = weapon.getFireRate();
 					return true;
 				}
-	
+
 			}
 			fireCountdown--;
 		}
@@ -336,5 +344,9 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 	public Set<String> getWeaponTypes() {
 		return weaponTypes;
+	}
+
+	public int getTeam() {
+		return team;
 	}
 }

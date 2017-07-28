@@ -285,10 +285,12 @@ public class BaseInventory extends Component implements InventoryComponent {
 	}
 
 	public boolean giveItem(TypePickup type, String name) {
+		BaseAttack attack = entity.getComponent(TypeComponent.ATTACK);
+		int team = attack.getTeam();
 		switch (type) {
 		case WEAPON:
 			if (inventory.size() < inventorySize) {
-				inventory.add(new Weapon(name, 0));
+				inventory.add(new Weapon(name, team));
 				return true;
 			}
 			break;
@@ -312,34 +314,30 @@ public class BaseInventory extends Component implements InventoryComponent {
 				} else {
 					switch (potionType) {
 					case "Health":
-						if(!potions.containsKey(HEALTH)){
+						if (!potions.containsKey(HEALTH)) {
 							potions.put(HEALTH, new OneTimePotion("Health"));
-						}
-						else{
+						} else {
 							potions.get(HEALTH).addPotion();
 						}
 						break;
 					case "Mana":
-						if(!potions.containsKey(MANA)){
+						if (!potions.containsKey(MANA)) {
 							potions.put(MANA, new OneTimePotion("Mana"));
-						}
-						else{
+						} else {
 							potions.get(MANA).addPotion();
 						}
 						break;
 					case "Speed":
-						if(!potions.containsKey(SPEED)){
+						if (!potions.containsKey(SPEED)) {
 							potions.put(SPEED, new DurationPotion("Speed", 30));
-						}
-						else{
+						} else {
 							potions.get(SPEED).addPotion();
 						}
 						break;
 					case "Knockback":
-						if(!potions.containsKey(KNOCKBACK)){
+						if (!potions.containsKey(KNOCKBACK)) {
 							potions.put(KNOCKBACK, new DurationPotion("Knockback", 30));
-						}
-						else{
+						} else {
 							potions.get(KNOCKBACK).addPotion();
 						}
 						break;
