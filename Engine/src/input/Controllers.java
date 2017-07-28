@@ -71,8 +71,10 @@ public class Controllers {
 			switch (name) {
 			case "Xbox 360 Controller":
 				controllers.put(jid, new XboxController(jid, name));
+				break;
 			case "Wireless Controller":
 				controllers.put(jid, new PS4Controller(jid, name));
+				break;
 			default:
 				Logger.info(name);
 			}

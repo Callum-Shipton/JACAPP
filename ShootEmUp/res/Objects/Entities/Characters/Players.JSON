@@ -9,6 +9,7 @@
   		"maxHealth": 4,
   		"maxMana": 5,
   		"team": 1,
+  		"weaponId": "Longbow",
   		"helmetId": null,
   		"chestId": null,
   		"legsId": null,
