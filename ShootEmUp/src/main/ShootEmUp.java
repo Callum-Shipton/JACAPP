@@ -38,7 +38,7 @@ public class ShootEmUp implements Game {
 		musicPlayer = new MusicPlayer();
 		Save.init("funbrella0000000");
 		paused = true;
-		menuSystem.addMenu(new MainMenu(ImageProcessor.getImage("MainMenuScreen")));
+		menuSystem.addMenu(new MainMenu());
 		musicPlayer.playBackgroundMusic();
 	}
 

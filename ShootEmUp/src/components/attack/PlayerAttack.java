@@ -1,8 +1,5 @@
 package components.attack;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import components.Message;
 import components.MessageId;
 import display.ImageProcessor;
@@ -34,15 +31,14 @@ public class PlayerAttack extends BaseAttack {
 	}
 
 	public PlayerAttack(int health, int mana, String weaponId, int team, String helmetId, String chestId, String legsId,
-			String bootsId, Set<String> weaponTypes) {
-		super(health, mana, weaponId, team, weaponTypes, helmetId, chestId, legsId, bootsId);
+			String bootsId) {
+		super(health, mana, weaponId, team, helmetId, chestId, legsId, bootsId);
 		lives = 3;
 	}
 
 	public PlayerAttack(PlayerAttack playerAttack) {
 		this(playerAttack.maxHealth, playerAttack.maxMana, playerAttack.weaponId, playerAttack.team,
-				playerAttack.helmetId, playerAttack.chestId, playerAttack.legsId, playerAttack.bootsId,
-				playerAttack.weaponTypes.stream().collect(Collectors.toSet()));
+				playerAttack.helmetId, playerAttack.chestId, playerAttack.legsId, playerAttack.bootsId);
 	}
 
 	@Override

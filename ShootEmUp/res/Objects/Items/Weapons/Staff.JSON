@@ -11,7 +11,7 @@
 },
 {
   "name": "IceStaff",
-  "damage": 1,
+  "damage": 2,
   "range": 3,
   "fireRate": 10,
   "melee": false,
@@ -20,7 +20,7 @@
 },
 {
   "name": "FireStaff",
-  "damage": 1,
+  "damage": 2,
   "range": 3,
   "fireRate": 10,
   "melee": false,

@@ -1,9 +1,5 @@
 package components.attack;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import component.interfaces.AttackComponent;
 import display.ImageProcessor;
 import entity.Entity;
@@ -11,23 +7,22 @@ import gui.HudBar;
 import logging.Logger;
 import logging.Logger.Category;
 import main.ShootEmUp;
-import object.Armour;
 
 public class EnemyAttack extends BaseAttack implements AttackComponent {
 
-	private HudBar healthBar;
+	private final HudBar healthBar;
 
-	public EnemyAttack(int health, int mana, String weaponId, int team, String helmetId, String chestId, String legsId, String bootsId,
-			Set<String> weaponTypes) {
-		super(health, mana, weaponId, team, weaponTypes,helmetId,chestId,legsId,bootsId);
+	public EnemyAttack(int health, int mana, String weaponId, int team, String helmetId, String chestId, String legsId,
+			String bootsId) {
+		super(health, mana, weaponId, team, helmetId, chestId, legsId, bootsId);
 
 		healthBar = new HudBar(10.0f, 10.0f, ImageProcessor.getImage("Bars"), 1, 0.25f);
 	}
 
 	public EnemyAttack(EnemyAttack enemyAttack) {
-		this(enemyAttack.maxHealth, enemyAttack.maxMana, enemyAttack.weaponId,enemyAttack.team, enemyAttack.helmetId, enemyAttack.chestId, enemyAttack.legsId, enemyAttack.bootsId,
-				enemyAttack.weaponTypes.stream().collect(Collectors.toSet()));
-		
+		this(enemyAttack.maxHealth, enemyAttack.maxMana, enemyAttack.weaponId, enemyAttack.team, enemyAttack.helmetId,
+				enemyAttack.chestId, enemyAttack.legsId, enemyAttack.bootsId);
+
 	}
 
 	@Override

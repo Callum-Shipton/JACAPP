@@ -13,8 +13,7 @@
   		"chestId": null,
   		"legsId": null,
   		"bootsId": null,
-  		"team": 0,
-  		"weaponTypes":["OneHanded"]
+  		"team": 0
   		}
   },
   {
@@ -74,8 +73,7 @@
   		"chestId": "Chest",
   		"legsId": null,
   		"bootsId": null,
-  		"team": 0,
-  		"weaponTypes":["Bow"]
+  		"team": 0
   		}
   },
   {
@@ -135,8 +133,7 @@
   		"chestId": null,
   		"legsId": "Legs",
   		"bootsId": null,
-  		"team": 0,
-  		"weaponTypes":["Staff"]
+  		"team": 0
   		}
   },
   {
@@ -196,8 +193,7 @@
   		"chestId": null,
   		"legsId": null,
   		"bootsId": "Boots",
-  		"team": 0,
-  		"weaponTypes":["TwoHanded"]
+  		"team": 0
   		}
   },
   {

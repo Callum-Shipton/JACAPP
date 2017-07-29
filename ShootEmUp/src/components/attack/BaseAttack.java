@@ -1,6 +1,5 @@
 package components.attack;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import component.interfaces.AttackComponent;
@@ -14,8 +13,6 @@ import object.Armour;
 import object.Weapon;
 
 public abstract class BaseAttack extends Component implements AttackComponent {
-	protected Set<String> weaponTypes = new HashSet<>();
-
 	protected transient Weapon weapon;
 	protected String weaponId;
 	protected int team;
@@ -61,8 +58,8 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 	}
 
-	public BaseAttack(int health, int mana, String weaponId, int team, Set<String> weaponTypes, String helmetId,
-			String chestId, String legsId, String bootsId) {
+	public BaseAttack(int health, int mana, String weaponId, int team, String helmetId, String chestId, String legsId,
+			String bootsId) {
 		healthRegen = 100;
 		manaRegen = 100;
 
@@ -76,7 +73,6 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 		this.weaponId = weaponId;
 		this.team = team;
-		this.weaponTypes = weaponTypes;
 		if (weaponId != null) {
 			weapon = new Weapon(weaponId, team);
 		}
@@ -340,10 +336,6 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 	public Weapon getWeapon() {
 		return weapon;
-	}
-
-	public Set<String> getWeaponTypes() {
-		return weaponTypes;
 	}
 
 	public int getTeam() {

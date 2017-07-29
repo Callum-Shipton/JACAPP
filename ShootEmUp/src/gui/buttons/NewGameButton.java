@@ -12,35 +12,15 @@ import entity.Entity;
 import gui.ButtonAction;
 import gui.Hud;
 import level.Level;
-import logging.Logger;
 import main.ShootEmUp;
-import save.ShootEmUpSave;
 
-public class LoadGameButton implements ButtonAction {
-
-	int save;
-
-	public LoadGameButton(int save) {
-		this.save = save;
-	}
+public class NewGameButton implements ButtonAction {
 
 	@Override
 	public void click() {
-		ShootEmUpSave save = ShootEmUp.getSave();
-
-		if (save != null) {
-			try {
-				save.load(1);
-			} catch (Exception e) {
-				Logger.error(e);
-			}
-
-			newPlayer();
-			ShootEmUp.getMenuSystem().clearMenus();
-			startLevel(save.getLevel());
-
-			ShootEmUp.getGame().setHud(new Hud(ShootEmUp.getGame().getPlayer(), 0, 0));
-		}
+		newPlayer();
+		startLevel();
+		ShootEmUp.getGame().setHud(new Hud(ShootEmUp.getGame().getPlayer(), 0, 0));
 	}
 
 	private void newPlayer() {
@@ -51,12 +31,12 @@ public class LoadGameButton implements ButtonAction {
 		ShootEmUp.getGame().setPlayer(player);
 	}
 
-	private void startLevel(int levelNum) {
-		Level level = new Level(ImageProcessor.LEVEL_FILE_LOCATION, levelNum);
+	private void startLevel() {
+		Level level = new Level(ImageProcessor.LEVEL_FILE_LOCATION, 1);
 		level.init();
 		level.addEntity(ShootEmUp.getGame().getPlayer());
 
-		ShootEmUp.getGame().setLevel(levelNum);
+		ShootEmUp.getGame().setLevel(1);
 		ShootEmUp.getGame().setCurrentLevel(level);
 
 		List<String> enemyPrototypes = new ArrayList<>();
@@ -67,4 +47,5 @@ public class LoadGameButton implements ButtonAction {
 
 		ShootEmUp.startGame();
 	}
+
 }

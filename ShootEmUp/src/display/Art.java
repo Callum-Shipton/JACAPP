@@ -33,16 +33,9 @@ public class Art implements ArtLoader {
 		ImageProcessor.addArt("SaveGameButton",
 				new Image("/Images/Menus/Buttons/MenuButtons/SaveGameButton.png", 1, 2));
 
-		ImageProcessor.addArt("Level1Button", new Image("/Images/Menus/Buttons/MenuButtons/Level1Button.png", 1, 2));
-		ImageProcessor.addArt("Level2Button", new Image("/Images/Menus/Buttons/MenuButtons/Level2Button.png", 1, 2));
-		ImageProcessor.addArt("Level3Button", new Image("/Images/Menus/Buttons/MenuButtons/Level3Button.png", 1, 2));
-
-		ImageProcessor.addArt("WarriorButton", new Image("/Images/Menus/Buttons/MenuButtons/WarriorButton.png", 1, 2));
-		ImageProcessor.addArt("ArcherButton", new Image("/Images/Menus/Buttons/MenuButtons/ArcherButton.png", 1, 2));
-		ImageProcessor.addArt("MageButton", new Image("/Images/Menus/Buttons/MenuButtons/MageButton.png", 1, 2));
-		ImageProcessor.addArt("BattleMageButton",
-				new Image("/Images/Menus/Buttons/MenuButtons/BattleMageButton.png", 1, 2));
-		ImageProcessor.addArt("RogueButton", new Image("/Images/Menus/Buttons/MenuButtons/RogueButton.png", 1, 2));
+		ImageProcessor.addArt("Save1Button", new Image("/Images/Menus/Buttons/MenuButtons/Save1Button.png", 1, 2));
+		ImageProcessor.addArt("Save2Button", new Image("/Images/Menus/Buttons/MenuButtons/Save2Button.png", 1, 2));
+		ImageProcessor.addArt("Save3Button", new Image("/Images/Menus/Buttons/MenuButtons/Save3Button.png", 1, 2));
 
 		ImageProcessor.addArt("HealthButton", new Image("/Images/Menus/Buttons/MenuButtons/HealthButton.png", 1, 2));
 		ImageProcessor.addArt("HealthRegenButton",
@@ -107,10 +100,6 @@ public class Art implements ArtLoader {
 
 		// Load character maps
 		ImageProcessor.addArt("Warrior", new Image("/Images/Characters/Players/Warrior.png", 6, 8));
-		ImageProcessor.addArt("Archer", new Image("/Images/Characters/Players/Archer.png", 6, 8));
-		ImageProcessor.addArt("Mage", new Image("/Images/Characters/Players/Mage.png", 6, 8));
-		ImageProcessor.addArt("BattleMage", new Image("/Images/Characters/Players/BattleMage.png", 6, 8));
-		ImageProcessor.addArt("Rogue", new Image("/Images/Characters/Players/Rogue.png", 6, 8));
 
 		ImageProcessor.addArt("Enemy", new Image("/Images/Characters/Enemies/Enemy.png", 6, 8));
 		ImageProcessor.addArt("SmallEnemy", new Image("/Images/Characters/Enemies/SmallEnemy.png", 6, 8));

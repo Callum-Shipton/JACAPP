@@ -205,13 +205,9 @@ public class BaseInventory extends Component implements InventoryComponent {
 		} else if (item instanceof Weapon) {
 			Weapon w = (Weapon) item;
 			equipped = BA.getWeapon();
-			if (BA.getWeaponTypes().contains(w.getType())) {
-				BA.setWeapon(w);
-				if (equipped != null) {
-					inventory.add(equipped);
-				}
-			} else {
-				inventory.add(w);
+			BA.setWeapon(w);
+			if (equipped != null) {
+				inventory.add(equipped);
 			}
 		}
 	}
