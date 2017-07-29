@@ -26,10 +26,19 @@ public class GameBase {
 	private Hud hud;
 
 	public void update() {
-		if (!currentLevel.getLevelFinished()) {
-			currentLevel.update();
-		} else if (levelNumber < MAX_LEVEL) {
-			nextLevel();
+		switch(currentLevel.getLevelState()){
+			case 0: currentLevel.update();
+			break;
+			case 1:
+				if (levelNumber < MAX_LEVEL) {
+					changeLevel(++levelNumber);
+				}
+				break;
+			case -1:
+				if (levelNumber > 1) {
+					changeLevel(--levelNumber);
+				}
+				break;
 		}
 
 		hud.updateWaveCounter(currentLevel.getWave());
@@ -49,7 +58,7 @@ public class GameBase {
 		}
 	}
 
-	private void nextLevel() {
+	private void changeLevel(int levelNumber) {
 
 		if (ShootEmUp.getSave() == null) {
 			ShootEmUp.setSave(new ShootEmUpSave());
@@ -59,7 +68,7 @@ public class GameBase {
 
 		// TODO fix saves
 		save.saveCharacter("well fuck", player.getComponent(TypeComponent.ATTACK));
-		save.setLevel(++levelNumber);
+		save.setLevel(levelNumber);
 		save.saveToSystem(1);
 
 		currentLevel = new Level(ImageProcessor.LEVEL_FILE_LOCATION, levelNumber);

@@ -6,14 +6,18 @@ import main.ShootEmUp;
 
 public class TransportCollision extends BaseCollision {
 
-	public TransportCollision() {
+	private boolean direction;
+	
+	public TransportCollision(int direction) {
+		this.direction = (direction == 1)? true:false;
 	}
 
 	@Override
 	public void collision(Entity e, Entity hit) {
 		if(hit.equals(ShootEmUp.getGame().getPlayer())){
 			Level l = ShootEmUp.getGame().getCurrentLevel();
-			l.setLevelFinished(true);
+			if(direction)l.setLevelStateNext();
+			else l.setLevelStatePrev();
 		}
 	}
 

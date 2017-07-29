@@ -40,7 +40,7 @@ public class Level {
 	private static final float RADIUS = 250.0f;
 	private static final float RADIUS_INCREASE_PER_LEVEL = 25.0f;
 
-	private boolean levelFinished = false;
+	private int levelState = 0;
 
 	public Level(String file, int level) {
 		map = new LevelMap(file + level + ".png");
@@ -125,7 +125,7 @@ public class Level {
 			totalEnemies++;
 			changeRadius((currentWave - 1) * RADIUS_INCREASE_PER_LEVEL);
 		} else {
-			levelFinished = true;
+			levelState = 1;
 		}
 
 	}
@@ -161,16 +161,20 @@ public class Level {
 	public int getWave() {
 		return currentWave;
 	}
-
-	public boolean getLevelFinished() {
-		return levelFinished;
+	
+	public int getLevelState() {
+		return levelState;
 	}
 
 	public EntityStorage getEntityStorage() {
 		return entityStorage;
 	}
 
-	public void setLevelFinished(boolean b) {
-		this.levelFinished = b;
+	public void setLevelStateNext() {
+		levelState = 1;
+	}
+	
+	public void setLevelStatePrev(){
+		levelState = -1;
 	}
 }
