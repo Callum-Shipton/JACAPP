@@ -169,4 +169,8 @@ public class Level {
 	public EntityStorage getEntityStorage() {
 		return entityStorage;
 	}
+
+	public void setLevelFinished(boolean b) {
+		this.levelFinished = b;
+	}
 }
