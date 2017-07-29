@@ -16,25 +16,24 @@ import loop.Loop;
 
 public class Hud extends GuiComponent {
 
-	private CopyOnWriteArrayList<Icon> hudElems;
-	private Icon infoBoxTop;
-	private HudBar healthBar;
-	private HudBar manaBar;
-	private HudBar xpBar;
-	private Counter moneyCounter;
-	private Counter levelCounter;
-	private Counter waveCounter;
-	private Counter livesCounter;
+	private final CopyOnWriteArrayList<Icon> hudElems;
+	private final Icon infoBoxTop;
+	private final HudBar healthBar;
+	private final HudBar manaBar;
+	private final HudBar xpBar;
+	private final Counter moneyCounter;
+	private final Counter levelCounter;
+	private final Counter livesCounter;
 
-	private Icon fire;
-	private Icon frost;
-	private Icon poison;
+	private final Icon fire;
+	private final Icon frost;
+	private final Icon poison;
 
 	private Icon infoBoxBottom;
 
-	private BaseInventory playerInventory;
-	private PlayerAttack playerAttack;
-	private GroundMovement playerMovement;
+	private final BaseInventory playerInventory;
+	private final PlayerAttack playerAttack;
+	private final GroundMovement playerMovement;
 
 	private static final String BAR_INFO_TOP = "BarInfoTop";
 	private static final String BAR_INFO_BOTTOM = "BarInfoBottom";
@@ -61,9 +60,7 @@ public class Hud extends GuiComponent {
 		levelCounter = new Counter(90.0f, 82.0f, ImageProcessor.getImage("LevelIcon"), false,
 				playerInventory.getLevel(), 0.5f);
 		hudElems.add(levelCounter);
-		waveCounter = new Counter(170.0f, 82.0f, ImageProcessor.getImage("WaveIcon"), false, 0, 0.5f);
-		hudElems.add(waveCounter);
-		livesCounter = new Counter(250.0f, 82.0f, ImageProcessor.getImage("LivesIcon"), false, playerAttack.getLives(),
+		livesCounter = new Counter(170.0f, 82.0f, ImageProcessor.getImage("LivesIcon"), false, playerAttack.getLives(),
 				0.5f);
 		hudElems.add(livesCounter);
 		fire = new Icon(0.0f, 100.0f, ImageProcessor.getImage("Fire"), false, 1f);
@@ -154,9 +151,5 @@ public class Hud extends GuiComponent {
 		manaBar.setMaxValue(maxMana);
 		xpBar.setValue(exp);
 		xpBar.setMaxValue(expBound);
-	}
-
-	public void updateWaveCounter(int wave) {
-		waveCounter.update(wave);
 	}
 }

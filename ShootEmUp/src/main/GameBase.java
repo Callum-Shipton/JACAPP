@@ -26,22 +26,22 @@ public class GameBase {
 	private Hud hud;
 
 	public void update() {
-		switch(currentLevel.getLevelState()){
-			case 0: currentLevel.update();
+		switch (currentLevel.getLevelState()) {
+		case 0:
+			currentLevel.update();
 			break;
-			case 1:
-				if (levelNumber < MAX_LEVEL) {
-					changeLevel(++levelNumber);
-				}
-				break;
-			case -1:
-				if (levelNumber > 1) {
-					changeLevel(--levelNumber);
-				}
-				break;
+		case 1:
+			if (levelNumber < MAX_LEVEL) {
+				changeLevel(++levelNumber);
+			}
+			break;
+		case -1:
+			if (levelNumber > 1) {
+				changeLevel(--levelNumber);
+			}
+			break;
 		}
 
-		hud.updateWaveCounter(currentLevel.getWave());
 		hud.update();
 	}
 

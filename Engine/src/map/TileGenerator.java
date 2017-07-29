@@ -13,10 +13,10 @@ public class TileGenerator {
 
 	private BufferedImage mapImage;
 
-	private Vector2f[][] backgroundTiles;
-	private Vector2f[][] walls;
-	private int[][] backgroundTileTypes;
-	private int[][] wallTypes;
+	private final Vector2f[][] backgroundTiles;
+	private final Vector2f[][] walls;
+	private final int[][] backgroundTileTypes;
+	private final int[][] wallTypes;
 
 	// RGB integer values for tiles
 	private static final int BROWNWALL_COLOR = -7864299;
@@ -27,14 +27,19 @@ public class TileGenerator {
 	private static final int GRASS_COLOR = -4856291;
 	private static final int PATH_COLOR = -1055568;
 
+	private static final int NEXT_LEVEL_COLOR = -6075996;
+	private static final int PREVIOUS_LEVEL_COLOR = -20791;
+
 	private static final int GRASS = 1;
 	private static final int PATH = 2;
 
 	private static final int WALL = 1;
 	private static final int WATER = 2;
+	private static final int NEXT_LEVEL = 3;
+	private static final int PREVIOUS_LEVEL = 4;
 
-	private int width;
-	private int height;
+	private final int width;
+	private final int height;
 
 	public TileGenerator(String fileLocation) {
 		loadMap(fileLocation);
@@ -81,6 +86,12 @@ public class TileGenerator {
 				case DARKWATER_COLOR:
 					wallTypes[x][y] = 2;
 					break;
+				case NEXT_LEVEL_COLOR:
+					wallTypes[x][y] = 3;
+					break;
+				case PREVIOUS_LEVEL_COLOR:
+					wallTypes[x][y] = 4;
+					break;
 				default:
 					Logger.warn("Unknown tile code: " + mapImage.getRGB(x, y));
 				}
@@ -111,6 +122,12 @@ public class TileGenerator {
 					break;
 				case WATER:
 					walls[x][y] = new Vector2f(1.0f, 1.0f);
+					break;
+				case NEXT_LEVEL:
+					walls[x][y] = new Vector2f(0.0f, 0.0f);
+					break;
+				case PREVIOUS_LEVEL:
+					walls[x][y] = new Vector2f(1.0f, 0.0f);
 				}
 			}
 		}

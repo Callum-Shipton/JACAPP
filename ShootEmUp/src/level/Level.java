@@ -26,13 +26,7 @@ public class Level {
 	private final Set<Spawner> spawners;
 	private final LevelMap map;
 
-	private int currentWave = 1;
-	private static final int MAX_WAVE = 10;
-
 	private int enemies = 0;
-	private int totalEnemies = 0;
-
-	private boolean waveActive = true;
 
 	private final int radiusLocation;
 	private final int radiusLocationInst;
@@ -86,23 +80,16 @@ public class Level {
 	}
 
 	public void update() {
-		if (totalEnemies < currentWave) {
+		if (enemies < 5) {
 			for (Spawner spawner : spawners) {
 				spawner.update();
 				if (!spawner.getSpawnedEntites().isEmpty()) {
 					for (Entity entity : spawner.getSpawnedEntites()) {
 						addEntity(entity);
 						enemies++;
-						totalEnemies++;
 					}
 				}
 			}
-		} else {
-			waveActive = false;
-		}
-
-		if (!waveActive && (enemies <= 0)) {
-			nextWave();
 		}
 
 		Iterator<Entity> entityIter = entityStorage.getEntities().iterator();
@@ -115,19 +102,6 @@ public class Level {
 			eMap.removeEntity(collision.getGridPos(), e);
 		}
 		entityStorage.update();
-	}
-
-	private void nextWave() {
-		totalEnemies = 0;
-		if (currentWave < MAX_WAVE) {
-			waveActive = true;
-			currentWave++;
-			totalEnemies++;
-			changeRadius((currentWave - 1) * RADIUS_INCREASE_PER_LEVEL);
-		} else {
-			levelState = 1;
-		}
-
 	}
 
 	public void addEntity(Entity e) {
@@ -158,10 +132,6 @@ public class Level {
 		return map;
 	}
 
-	public int getWave() {
-		return currentWave;
-	}
-	
 	public int getLevelState() {
 		return levelState;
 	}
@@ -173,8 +143,8 @@ public class Level {
 	public void setLevelStateNext() {
 		levelState = 1;
 	}
-	
-	public void setLevelStatePrev(){
+
+	public void setLevelStatePrev() {
 		levelState = -1;
 	}
 }

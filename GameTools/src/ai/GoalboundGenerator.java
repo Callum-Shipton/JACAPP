@@ -42,6 +42,9 @@ public class GoalboundGenerator {
 	private static final int GRASS_COLOR = -4856291;
 	private static final int PATH_COLOR = -1055568;
 
+	private static final int NEXT_LEVEL_COLOR = -6075996;
+	private static final int PREVIOUS_LEVEL_COLOR = -20791;
+
 	public GoalboundGenerator() {
 		loadMap(IN_MAP_FILE);
 		goalboundingMaps = new ConcurrentHashMap<>();
@@ -89,13 +92,15 @@ public class GoalboundGenerator {
 				case GREYWALL_COLOR:
 				case LIGHTWATER_COLOR:
 				case DARKWATER_COLOR:
+				case NEXT_LEVEL_COLOR:
+				case PREVIOUS_LEVEL_COLOR:
 					walls.add(new Vector2i(x, y));
 					break;
 				case GRASS_COLOR:
 				case PATH_COLOR:
 					break;
 				default:
-					Logger.warn("Tile type not found");
+					Logger.warn("Tile type not found: " + mapImage.getRGB(x, y));
 				}
 			}
 		}
