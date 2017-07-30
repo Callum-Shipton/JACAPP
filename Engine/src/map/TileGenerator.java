@@ -105,10 +105,10 @@ public class TileGenerator {
 			for (int x = 0; x < width; x++) {
 				switch (backgroundTileTypes[x][y]) {
 				case GRASS:
-					backgroundTiles[x][y] = new Vector2f(0.0f, 0.0f);
+					backgroundTiles[x][y] = new Vector2f(0.0f, 7.0f);
 					break;
 				case PATH:
-					backgroundTiles[x][y] = new Vector2f(1.0f, 0.0f);
+					backgroundTiles[x][y] = new Vector2f(1.0f, 7.0f);
 				}
 			}
 		}

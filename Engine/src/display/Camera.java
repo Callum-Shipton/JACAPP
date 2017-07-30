@@ -1,7 +1,9 @@
 package display;
 
-import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.opengl.GL20.glGetUniformLocation;
+import static org.lwjgl.opengl.GL20.glUniformMatrix4fv;
+import static org.lwjgl.opengl.GL20.glUseProgram;
+import static org.lwjgl.system.MemoryStack.stackPush;
 
 import java.nio.FloatBuffer;
 
@@ -15,10 +17,12 @@ import math.VectorMath;
 public class Camera {
 
 	// Camera variables
-	private Vector4f box;
-	private Matrix4f viewMatrix;
-	private int viewMatrixLocation;
-	private int viewMatrixLocationInst;
+	private final Vector4f box;
+	private final Matrix4f viewMatrix;
+	private final int viewMatrixLocation;
+	private final int viewMatrixLocationInst;
+	private float levelWidth;
+	private float levelHeight;
 
 	Camera(int width, int height) {
 		box = new Vector4f(0, 0, width, height);
@@ -28,10 +32,18 @@ public class Camera {
 	}
 
 	public void setCameraFocus(float x, float y) {
-		box.setComponent(0, x - (box.z / 2));
-		box.setComponent(1, y - (box.w / 2));
+		float left = (x - (box.z / 2));
+		float top = (y - (box.w / 2));
 
+		if ((0 <= left) && ((left + box.z) <= levelWidth)) {
+			box.setComponent(0, x - (box.z / 2));
+		}
+
+		if ((top > 0) && ((top + box.w) <= levelHeight)) {
+			box.setComponent(1, y - (box.w / 2));
+		}
 		updateViewMatrix();
+
 	}
 
 	private void updateViewMatrix() {
@@ -42,11 +54,11 @@ public class Camera {
 			FloatBuffer buf = stack.callocFloat(16);
 			buf = viewMatrix.get(buf);
 			glUseProgram(ImageProcessor.ShaderBase);
-			glUniformMatrix4fv(this.viewMatrixLocation, false, buf);
+			glUniformMatrix4fv(viewMatrixLocation, false, buf);
 			glUseProgram(0);
 
 			glUseProgram(ImageProcessor.ShaderInst);
-			glUniformMatrix4fv(this.viewMatrixLocationInst, false, buf);
+			glUniformMatrix4fv(viewMatrixLocationInst, false, buf);
 			glUseProgram(0);
 		}
 	}
@@ -59,4 +71,8 @@ public class Camera {
 		return VectorMath.contains(box, new Vector4f(pos.x(), pos.y(), size.x(), size.y())) != null;
 	}
 
+	public void setLevelSize(Vector2f levelSize) {
+		levelWidth = levelSize.x();
+		levelHeight = levelSize.y();
+	}
 }

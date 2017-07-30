@@ -95,8 +95,7 @@ public class Art implements ArtLoader {
 		ImageProcessor.addArt("LivesIcon", new Image("/Images/Menus/Icons/LivesIcon.png", 1, 1));
 
 		// Load tile maps
-		ImageProcessor.addArt("Floor", new Image("/Images/Tiles/Floor.png", 2, 2));
-		ImageProcessor.addArt("Walls", new Image("/Images/Tiles/Walls.png", 6, 7));
+		ImageProcessor.addArt("Tiles", new Image("/Images/Tiles/Tiles.png", 6, 8));
 
 		// Load character maps
 		ImageProcessor.addArt("Warrior", new Image("/Images/Characters/Players/Warrior.png", 6, 8));

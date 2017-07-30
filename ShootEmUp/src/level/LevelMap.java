@@ -17,6 +17,7 @@ import display.WallsRenderer;
 import entity.Entity;
 import logging.Logger;
 import logging.Logger.Category;
+import loop.Loop;
 import map.TileMap;
 
 public class LevelMap {
@@ -25,14 +26,16 @@ public class LevelMap {
 
 	private final TileMap tileMap;
 	private final GoalBounder goalBounder;
-	private static final String WALLS_TEXTURE_FILE = "Walls";
-	private static final String FLOOR_TEXTURE_FILE = "Floor";
+	private static final String TILES_TEXTURE_FILE = "Tiles";
 
 	// collidable wall entities
 	private final Map<Vector2i, Entity> walls;
 
 	public LevelMap(String file) {
 		tileMap = new TileMap(file);
+		Loop.getDisplay().getCamera()
+				.setLevelSize(new Vector2f(tileMap.getWidth() * TILE_WIDTH, tileMap.getHeight() * TILE_WIDTH));
+
 		walls = new HashMap<>();
 
 		String goalboundfile = file.substring(0, file.length() - 4) + ".bound";
@@ -45,14 +48,14 @@ public class LevelMap {
 		tileMap.init();
 
 		ImageProcessor.irBack = new FloorRenderer(tileMap.getBackgroundTiles(),
-				new Vector2f(ImageProcessor.getImage(FLOOR_TEXTURE_FILE).getFWidth(),
-						ImageProcessor.getImage(FLOOR_TEXTURE_FILE).getFHeight()),
+				new Vector2f(ImageProcessor.getImage(TILES_TEXTURE_FILE).getFWidth(),
+						ImageProcessor.getImage(TILES_TEXTURE_FILE).getFHeight()),
 				LevelMap.TILE_WIDTH, TILE_WIDTH);
 
 		createWalls(tileMap.getWalls());
 		ImageProcessor.irWall = new WallsRenderer(walls,
-				new Vector2f(ImageProcessor.getImage(WALLS_TEXTURE_FILE).getFWidth(),
-						ImageProcessor.getImage(WALLS_TEXTURE_FILE).getFHeight()),
+				new Vector2f(ImageProcessor.getImage(TILES_TEXTURE_FILE).getFWidth(),
+						ImageProcessor.getImage(TILES_TEXTURE_FILE).getFHeight()),
 				LevelMap.TILE_WIDTH, TILE_WIDTH);
 
 		/*
@@ -74,8 +77,8 @@ public class LevelMap {
 	}
 
 	public void renderLowTiles() {
-		ImageProcessor.irBack.draw(ImageProcessor.getImage(FLOOR_TEXTURE_FILE).getID());
-		ImageProcessor.irWall.draw(ImageProcessor.getImage(WALLS_TEXTURE_FILE).getID());
+		ImageProcessor.irBack.draw(ImageProcessor.getImage(TILES_TEXTURE_FILE).getID());
+		ImageProcessor.irWall.draw(ImageProcessor.getImage(TILES_TEXTURE_FILE).getID());
 	}
 
 	private void createWalls(Vector2f[][] walls) {
@@ -102,7 +105,7 @@ public class LevelMap {
 	private void insertWall(int x, int y, float tileMapX, float tileMapY) {
 		Entity wall = new Entity();
 		MapGraphics wallG;
-		wallG = new MapGraphics(WALLS_TEXTURE_FILE);
+		wallG = new MapGraphics(TILES_TEXTURE_FILE);
 		wallG.setMapPos(new Vector2f(tileMapX, tileMapY));
 		wallG.setX(x * TILE_WIDTH);
 		wallG.setY(y * TILE_WIDTH);
@@ -113,7 +116,7 @@ public class LevelMap {
 	private void insertWater(int x, int y, float tileMapX, float tileMapY) {
 		Entity water = new Entity();
 		MapGraphics wallG;
-		wallG = new MapGraphics(WALLS_TEXTURE_FILE);
+		wallG = new MapGraphics(TILES_TEXTURE_FILE);
 		wallG.setMapPos(new Vector2f(tileMapX, tileMapY + 4.0f));
 		wallG.setX(x * TILE_WIDTH);
 		wallG.setY(y * TILE_WIDTH);
@@ -124,8 +127,8 @@ public class LevelMap {
 	private void insertTransporter(int x, int y, float tileMapX, float tileMapY, int direction) {
 		Entity wall = new Entity();
 		MapGraphics wallG;
-		wallG = new MapGraphics(WALLS_TEXTURE_FILE);
-		wallG.setMapPos(new Vector2f(tileMapX, tileMapY));
+		wallG = new MapGraphics(TILES_TEXTURE_FILE);
+		wallG.setMapPos(new Vector2f(tileMapX, tileMapY + 7.0f));
 		wallG.setX(x * TILE_WIDTH);
 		wallG.setY(y * TILE_WIDTH);
 		wall.addComponent(wallG);
