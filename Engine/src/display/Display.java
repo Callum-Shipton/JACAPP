@@ -192,19 +192,19 @@ public class Display {
 	}
 
 	public void update() {
-		if (Keyboard.getKey(Loop.getKeys().quit) == 1) {
+		if (Keyboard.getKey(Loop.getKeys().getKey("quit")) == 1) {
 			if (fullscreen) {
 				// toggleFullscreen();
 			}
 			glfwSetWindowShouldClose(window, true);
-			Keyboard.setKey(Loop.getKeys().quit);
+			Keyboard.setKey(Loop.getKeys().getKey("quit"));
 		}
-		if (Keyboard.getKey(Loop.getKeys().fullscreen) == 1) {
+		if (Keyboard.getKey(Loop.getKeys().getKey("fullscreen")) == 1) {
 			// toggleFullscreen();
 
 			// We will detect this in
 			// our update loop
-			Keyboard.setKey(Loop.getKeys().fullscreen);
+			Keyboard.setKey(Loop.getKeys().getKey("fullscreen"));
 		}
 	}
 }

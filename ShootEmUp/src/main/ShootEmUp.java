@@ -53,16 +53,16 @@ public class ShootEmUp implements Game {
 	@Override
 	public void update() {
 
-		if (Keyboard.getKey(Loop.getKeys().fullscreen) == 1) {
+		if (Keyboard.getKey(Loop.getKeys().getKey("fullscreen")) == 1) {
 			Loop.getDisplay().toggleFullscreen();
 			if (game.getHud() != null) {
 				game.getHud().resetHud();
 			}
 			menuSystem.resetMenus();
-			Keyboard.setKey(Loop.getKeys().fullscreen);
+			Keyboard.setKey(Loop.getKeys().getKey("fullscreen"));
 		}
 
-		if (!menuSystem.isMainMenu() && (Keyboard.getKey(Loop.getKeys().pause) == 1)) {
+		if (!menuSystem.isMainMenu() && (Keyboard.getKey(Loop.getKeys().getKey("pause")) == 1)) {
 			pause();
 		}
 
@@ -77,7 +77,7 @@ public class ShootEmUp implements Game {
 
 	public void pause() {
 		paused = !paused;
-		Keyboard.setKey(Loop.getKeys().pause);
+		Keyboard.setKey(Loop.getKeys().getKey("pause"));
 		if (paused) {
 			InventoryMenu invMenu = new InventoryMenu(ImageProcessor.getImage("InventoryScreen"));
 			invMenu.resetMenu();

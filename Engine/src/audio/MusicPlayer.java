@@ -61,8 +61,8 @@ public class MusicPlayer {
 	}
 
 	public void update() {
-		if (Keyboard.getKey(Loop.getKeys().mute) == 1) {
-			Keyboard.setKey(Loop.getKeys().mute);
+		if (Keyboard.getKey(Loop.getKeys().getKey("mute")) == 1) {
+			Keyboard.setKey(Loop.getKeys().getKey("mute"));
 			pause();
 		}
 	}

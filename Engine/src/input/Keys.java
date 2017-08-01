@@ -18,26 +18,49 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import io.FileManager;
+
 public class Keys {
-	public int pause = GLFW_KEY_P;
-	public int mute = GLFW_KEY_M;
-	public int fullscreen = GLFW_KEY_F;
-	public int quit = GLFW_KEY_ESCAPE;
 
-	public int moveUp = GLFW_KEY_W;
-	public int moveLeft = GLFW_KEY_A;
-	public int moveRight = GLFW_KEY_D;
-	public int moveDown = GLFW_KEY_S;
+	private static final String KEYBINDING_LOCATION = "keybinding.properties";
+	private Map<String, Integer> keybinding = new HashMap<>();
+	private Map<String, Integer> keyCodes = new HashMap<>();
 
-	public int lookUp = GLFW_KEY_UP;
-	public int lookLeft = GLFW_KEY_LEFT;
-	public int lookDown = GLFW_KEY_DOWN;
-	public int lookRight = GLFW_KEY_RIGHT;
+	public Keys() {
+		setKeyCodes();
 
-	public int potion1 = GLFW_KEY_1;
-	public int potion2 = GLFW_KEY_2;
-	public int potion3 = GLFW_KEY_3;
-	public int potion4 = GLFW_KEY_4;
+		for (String keybind : FileManager.getProperties(KEYBINDING_LOCATION)) {
+			int equalsLocation = keybind.indexOf('=');
+			String action = keybind.substring(0, equalsLocation);
+			int key = keyCodes.get(keybind.substring(equalsLocation + 1));
+			keybinding.put(action, key);
+		}
+	}
 
-	public int shoot = GLFW_KEY_SPACE;
+	private void setKeyCodes() {
+		keyCodes.put("GLFW_KEY_P", GLFW_KEY_P);
+		keyCodes.put("GLFW_KEY_M", GLFW_KEY_M);
+		keyCodes.put("GLFW_KEY_F", GLFW_KEY_F);
+		keyCodes.put("GLFW_KEY_ESCAPE", GLFW_KEY_ESCAPE);
+		keyCodes.put("GLFW_KEY_W", GLFW_KEY_W);
+		keyCodes.put("GLFW_KEY_A", GLFW_KEY_A);
+		keyCodes.put("GLFW_KEY_D", GLFW_KEY_D);
+		keyCodes.put("GLFW_KEY_S", GLFW_KEY_S);
+		keyCodes.put("GLFW_KEY_UP", GLFW_KEY_UP);
+		keyCodes.put("GLFW_KEY_LEFT", GLFW_KEY_LEFT);
+		keyCodes.put("GLFW_KEY_DOWN", GLFW_KEY_DOWN);
+		keyCodes.put("GLFW_KEY_RIGHT", GLFW_KEY_RIGHT);
+		keyCodes.put("GLFW_KEY_1", GLFW_KEY_1);
+		keyCodes.put("GLFW_KEY_2", GLFW_KEY_2);
+		keyCodes.put("GLFW_KEY_3", GLFW_KEY_3);
+		keyCodes.put("GLFW_KEY_4", GLFW_KEY_4);
+		keyCodes.put("GLFW_KEY_SPACE", GLFW_KEY_SPACE);
+	}
+
+	public int getKey(String action) {
+		return keybinding.get(action);
+	}
 }
