@@ -42,6 +42,19 @@ public class Camera {
 		if ((top > 0) && ((top + box.w) <= levelHeight)) {
 			box.setComponent(1, y - (box.w / 2));
 		}
+
+		if (0 > left) {
+			box.setComponent(0, 0);
+		} else if ((left + box.z) > levelWidth) {
+			box.setComponent(0, levelWidth - box.z);
+		}
+
+		if (0 > top) {
+			box.setComponent(1, 0);
+		} else if ((top + box.w) > levelHeight) {
+			box.setComponent(1, levelHeight - box.w);
+		}
+
 		updateViewMatrix();
 
 	}
