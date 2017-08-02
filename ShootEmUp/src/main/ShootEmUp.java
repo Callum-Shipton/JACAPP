@@ -8,6 +8,7 @@ import gui.MenuSystem;
 import gui.menus.InventoryMenu;
 import gui.menus.MainMenu;
 import input.Keyboard;
+import input.Keys;
 import loop.Loop;
 import save.Save;
 import save.ShootEmUpSave;
@@ -53,16 +54,16 @@ public class ShootEmUp implements Game {
 	@Override
 	public void update() {
 
-		if (Keyboard.getKey(Loop.getKeys().getKey("fullscreen")) == 1) {
+		if (Keyboard.getKey(Keys.getKey("fullscreen")) == 1) {
 			Loop.getDisplay().toggleFullscreen();
 			if (game.getHud() != null) {
 				game.getHud().resetHud();
 			}
 			menuSystem.resetMenus();
-			Keyboard.setKey(Loop.getKeys().getKey("fullscreen"));
+			Keyboard.setKey(Keys.getKey("fullscreen"));
 		}
 
-		if (!menuSystem.isMainMenu() && (Keyboard.getKey(Loop.getKeys().getKey("pause")) == 1)) {
+		if (!menuSystem.isMainMenu() && (Keyboard.getKey(Keys.getKey("pause")) == 1)) {
 			pause();
 		}
 
@@ -77,7 +78,7 @@ public class ShootEmUp implements Game {
 
 	public void pause() {
 		paused = !paused;
-		Keyboard.setKey(Loop.getKeys().getKey("pause"));
+		Keyboard.setKey(Keys.getKey("pause"));
 		if (paused) {
 			InventoryMenu invMenu = new InventoryMenu(ImageProcessor.getImage("InventoryScreen"));
 			invMenu.resetMenu();

@@ -38,7 +38,7 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
 
 import input.Keyboard;
-import loop.Loop;
+import input.Keys;
 
 public class Display {
 
@@ -192,19 +192,19 @@ public class Display {
 	}
 
 	public void update() {
-		if (Keyboard.getKey(Loop.getKeys().getKey("quit")) == 1) {
+		if (Keyboard.getKey(Keys.getKey("quit")) == 1) {
 			if (fullscreen) {
 				// toggleFullscreen();
 			}
 			glfwSetWindowShouldClose(window, true);
-			Keyboard.setKey(Loop.getKeys().getKey("quit"));
+			Keyboard.setKey(Keys.getKey("quit"));
 		}
-		if (Keyboard.getKey(Loop.getKeys().getKey("fullscreen")) == 1) {
+		if (Keyboard.getKey(Keys.getKey("fullscreen")) == 1) {
 			// toggleFullscreen();
 
 			// We will detect this in
 			// our update loop
-			Keyboard.setKey(Loop.getKeys().getKey("fullscreen"));
+			Keyboard.setKey(Keys.getKey("fullscreen"));
 		}
 	}
 }

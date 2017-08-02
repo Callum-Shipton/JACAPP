@@ -2,7 +2,7 @@ package audio;
 
 import audio.music.Audio;
 import input.Keyboard;
-import loop.Loop;
+import input.Keys;
 
 public class MusicPlayer {
 
@@ -61,8 +61,8 @@ public class MusicPlayer {
 	}
 
 	public void update() {
-		if (Keyboard.getKey(Loop.getKeys().getKey("mute")) == 1) {
-			Keyboard.setKey(Loop.getKeys().getKey("mute"));
+		if (Keyboard.getKey(Keys.getKey("mute")) == 1) {
+			Keyboard.setKey(Keys.getKey("mute"));
 			pause();
 		}
 	}

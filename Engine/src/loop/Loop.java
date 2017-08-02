@@ -24,14 +24,12 @@ public class Loop {
 	// Handle for monitor/window funcs
 	private static Display display;
 	private static double fps;
-	private static Keys keys;
 	private Game game;
 
 	public Loop(Game game, double fps, ArtLoader artLoader) {
 		this.game = game;
 		Loop.fps = fps;
 		display = new Display(artLoader);
-		keys = new Keys();
 	}
 
 	public void run() {
@@ -60,6 +58,7 @@ public class Loop {
 	private void init() {
 		display.initGLFW();
 		Keyboard.init(display.getWindow());
+		Keys.init();
 		Controllers.init();
 		game.init();
 	}
@@ -133,9 +132,5 @@ public class Loop {
 
 	public static double getFPS() {
 		return fps;
-	}
-
-	public static Keys getKeys() {
-		return keys;
 	}
 }
