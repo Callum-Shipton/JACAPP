@@ -5,6 +5,8 @@ import static org.lwjgl.glfw.GLFW.glfwGetJoystickButtons;
 
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.lwjgl.glfw.GLFW;
 
@@ -20,12 +22,48 @@ public class PS4Controller implements Controller {
 	private ByteBuffer buttons;
 	private ByteBuffer pov;
 
+	private Map<Byte, Integer> controllerBinding;
+
+	public static final byte SQUARE = 0;
+	public static final byte X = 1;
+	public static final byte CIRCLE = 2;
+	public static final byte TRIANGLE = 3;
+	public static final byte L1 = 4;
+	public static final byte R1 = 5;
+	public static final byte L2 = 6;
+	public static final byte R2 = 7;
+	public static final byte SHARE = 8;
+	public static final byte OPTIONS = 9;
+	public static final byte LEFT_STICK_IN = 10;
+	public static final byte RIGHT_STICK_IN = 11;
+	public static final byte PS_BUTTON = 12;
+	public static final byte TOUCH_BUTTON = 13;
+	public static final byte D_PAD_UP = 14;
+	public static final byte D_PAD_RIGHT = 15;
+	public static final byte D_PAD_DOWN = 16;
+	public static final byte D_PAD_LEFT = 17;
+
 	public PS4Controller(int id, String name) {
 		this.id = id;
 		this.name = name;
 		axes = glfwGetJoystickAxes(id);
 		buttons = glfwGetJoystickButtons(id);
 		// pov = glfwGetJoystickHats(id);
+		setControllerBinding();
+	}
+
+	private void setControllerBinding() {
+		controllerBinding = new HashMap<>();
+		controllerBinding.put(X, GLFW.GLFW_KEY_ENTER);
+		controllerBinding.put(CIRCLE, GLFW.GLFW_KEY_M);
+		controllerBinding.put(L1, GLFW.GLFW_KEY_LEFT_SHIFT);
+		controllerBinding.put(R1, GLFW.GLFW_KEY_TAB);
+		controllerBinding.put(TOUCH_BUTTON, GLFW.GLFW_KEY_F);
+		controllerBinding.put(OPTIONS, GLFW.GLFW_KEY_P);
+		controllerBinding.put(D_PAD_UP, GLFW.GLFW_KEY_4);
+		controllerBinding.put(D_PAD_RIGHT, GLFW.GLFW_KEY_1);
+		controllerBinding.put(D_PAD_DOWN, GLFW.GLFW_KEY_2);
+		controllerBinding.put(D_PAD_LEFT, GLFW.GLFW_KEY_3);
 	}
 
 	@Override
@@ -45,9 +83,9 @@ public class PS4Controller implements Controller {
 
 		// Button Debugging
 		/*
-		 * int i = 0; while (buttons.hasRemaining()) { byte button = buttons.get();
-		 * Logger.debug("Joystick " + id + ": button " + i + ": " + button,
-		 * Category.CONTROLLER); i++; }
+		 * int i = 0; while (buttons.hasRemaining()) { byte button =
+		 * buttons.get(); Logger.debug("Joystick " + id + ": button " + i + ": "
+		 * + button, Category.CONTROLLER); i++; }
 		 */
 
 		// pov = glfwGetJoystickHats(id);
@@ -59,50 +97,9 @@ public class PS4Controller implements Controller {
 		int button = 0;
 		while (buttons.hasRemaining()) {
 			byte value = buttons.get();
-			switch (button) {
-			case 1: // X
-				Keyboard.setKey(GLFW.GLFW_KEY_ENTER, value);
-				break;
-			case 2: // Circle
-				Keyboard.setKey(GLFW.GLFW_KEY_M, value);
-				break;
-			case 4: // LB
-				Keyboard.setKey(GLFW.GLFW_KEY_LEFT_SHIFT, value);
-				break;
-			case 5: // RB
-				Keyboard.setKey(GLFW.GLFW_KEY_TAB, value);
-				break;
-			case 13: // Touch Button
-				Keyboard.setKey(GLFW.GLFW_KEY_F, value);
-				break;
-			case 9: // Options
-				Keyboard.setKey(GLFW.GLFW_KEY_P, value);
-				break;
-			case 14: // D-Pad UP
-				Keyboard.setKey(GLFW.GLFW_KEY_4, value);
-				break;
-			case 15: // D-Pad RIGHT
-				Keyboard.setKey(GLFW.GLFW_KEY_1, value);
-				break;
-			case 16: // D-Pad DOWN
-				Keyboard.setKey(GLFW.GLFW_KEY_2, value);
-				break;
-			case 17: // D-Pad LEFT
-				Keyboard.setKey(GLFW.GLFW_KEY_3, value);
-				break;
-			case 0: // Square
-			case 3: // Triangle
-			case 10: // Left Stick In
-			case 11: // Right Stick In
-			case 12: // PS Button
-			case 6: // Left Trigger
-			case 7: // Right Trigger
-			case 8: // Share
-				break;
-			}
+			Keyboard.setKey(controllerBinding.get(button), value);
 			button++;
 		}
-
 	}
 
 	@Override

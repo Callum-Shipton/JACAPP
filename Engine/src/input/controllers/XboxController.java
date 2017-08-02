@@ -5,6 +5,8 @@ import static org.lwjgl.glfw.GLFW.glfwGetJoystickButtons;
 
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.lwjgl.glfw.GLFW;
 
@@ -20,12 +22,44 @@ public class XboxController implements Controller {
 	private ByteBuffer buttons;
 	private ByteBuffer pov;
 
+	private Map<Byte, Integer> controllerBinding;
+
+	public static final byte A = 0;
+	public static final byte B = 1;
+	public static final byte X = 2;
+	public static final byte Y = 3;
+	public static final byte LB = 4;
+	public static final byte RB = 5;
+	public static final byte BACK = 6;
+	public static final byte PAUSE = 7;
+	public static final byte LEFT_STICK_IN = 8;
+	public static final byte RIGHT_STICK_IN = 9;
+	public static final byte D_PAD_UP = 10;
+	public static final byte D_PAD_RIGHT = 11;
+	public static final byte D_PAD_DOWN = 12;
+	public static final byte D_PAD_LEFT = 13;
+
 	public XboxController(int id, String name) {
 		this.id = id;
 		this.name = name;
 		axes = glfwGetJoystickAxes(id);
 		buttons = glfwGetJoystickButtons(id);
 		// pov = glfwGetJoystickHats(id);
+		setControllerBinding();
+	}
+
+	private void setControllerBinding() {
+		controllerBinding = new HashMap<>();
+		controllerBinding.put(A, GLFW.GLFW_KEY_ENTER);
+		controllerBinding.put(B, GLFW.GLFW_KEY_M);
+		controllerBinding.put(LB, GLFW.GLFW_KEY_LEFT_SHIFT);
+		controllerBinding.put(RB, GLFW.GLFW_KEY_TAB);
+		controllerBinding.put(BACK, GLFW.GLFW_KEY_F);
+		controllerBinding.put(PAUSE, GLFW.GLFW_KEY_P);
+		controllerBinding.put(D_PAD_UP, GLFW.GLFW_KEY_4);
+		controllerBinding.put(D_PAD_RIGHT, GLFW.GLFW_KEY_1);
+		controllerBinding.put(D_PAD_DOWN, GLFW.GLFW_KEY_2);
+		controllerBinding.put(D_PAD_LEFT, GLFW.GLFW_KEY_3);
 	}
 
 	@Override
@@ -59,43 +93,7 @@ public class XboxController implements Controller {
 		int button = 0;
 		while (buttons.hasRemaining()) {
 			byte value = buttons.get();
-			switch (button) {
-			case 0: // A
-				Keyboard.setKey(GLFW.GLFW_KEY_ENTER, value);
-				break;
-			case 1: // B
-				Keyboard.setKey(GLFW.GLFW_KEY_M, value);
-				break;
-			case 4: // LB
-				Keyboard.setKey(GLFW.GLFW_KEY_LEFT_SHIFT, value);
-				break;
-			case 5: // RB
-				Keyboard.setKey(GLFW.GLFW_KEY_TAB, value);
-				break;
-			case 6: // Back
-				Keyboard.setKey(GLFW.GLFW_KEY_F, value);
-				break;
-			case 7: // Pause
-				Keyboard.setKey(GLFW.GLFW_KEY_P, value);
-				break;
-			case 10: // D-Pad UP
-				Keyboard.setKey(GLFW.GLFW_KEY_4, value);
-				break;
-			case 11: // D-Pad RIGHT
-				Keyboard.setKey(GLFW.GLFW_KEY_1, value);
-				break;
-			case 12: // D-Pad DOWN
-				Keyboard.setKey(GLFW.GLFW_KEY_2, value);
-				break;
-			case 13: // D-Pad LEFT
-				Keyboard.setKey(GLFW.GLFW_KEY_3, value);
-				break;
-			case 2: // X
-			case 3: // Y
-			case 8: // Left Stick In
-			case 9: // Right Stick In
-				break;
-			}
+			Keyboard.setKey(controllerBinding.get(button), value);
 			button++;
 		}
 
