@@ -62,7 +62,7 @@ public abstract class Controller {
 			byte value = buttons.get();
 			Integer action = controllerBinding.get(button);
 			if (action != null) {
-				Keyboard.setKey(action, value);
+				Keyboard.setKey(action.intValue(), value);
 			}
 			button++;
 		}
