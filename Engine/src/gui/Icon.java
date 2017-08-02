@@ -19,24 +19,24 @@ public class Icon extends GuiComponent {
 		setCurrFrame(new Vector2f(0.0f, 0.0f));
 		maxFrame = new Vector2f(i.getFWidth(), i.getFHeight());
 		this.i = i;
-		this.isAnimated = animating;
+		isAnimated = animating;
 	}
 
 	public Vector2f getCurrFrame() {
-		return this.currFrame;
+		return currFrame;
 	}
 
 	public Image getI() {
-		return this.i;
+		return i;
 	}
 
 	public Vector2f getSize() {
-		return this.size;
+		return size;
 	}
 
 	@Override
 	public void render(DPDTRenderer d) {
-		d.draw(this.i, new Vector2f(this.x, this.y), getSize(), 0.0f, getCurrFrame(), this.maxFrame);
+		d.draw(i, new Vector2f(x, y), getSize(), 0.0f, getCurrFrame(), maxFrame);
 	}
 
 	public void setCurrFrame(Vector2f currFrame) {
@@ -48,20 +48,20 @@ public class Icon extends GuiComponent {
 	}
 
 	public void setMFrame(float w, float h) {
-		this.maxFrame.set(w, h);
+		maxFrame.set(w, h);
 	}
 
 	public void setSize(float w, float h) {
-		this.size.set(w, h);
+		size.set(w, h);
 	}
 
 	@Override
 	public void update() {
-		if (this.isAnimated) {
-			if (this.currFrame.x() < this.maxFrame.x()) {
-				this.currFrame.set(this.currFrame.x() + 1, this.currFrame.y());
+		if (isAnimated) {
+			if (currFrame.x() < maxFrame.x()) {
+				currFrame.set(currFrame.x() + 1, currFrame.y());
 			} else {
-				this.currFrame.set(0.0f, this.currFrame.y());
+				currFrame.set(0.0f, currFrame.y());
 			}
 		}
 	}

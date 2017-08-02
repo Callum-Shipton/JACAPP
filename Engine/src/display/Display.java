@@ -67,35 +67,35 @@ public class Display {
 	public Display(ArtLoader artLoader) {
 		this.artLoader = artLoader;
 
-		this.width = INITIAL_SCREEN_WIDTH;
-		this.height = INITIAL_SCREEN_HEIGHT;
+		width = INITIAL_SCREEN_WIDTH;
+		height = INITIAL_SCREEN_HEIGHT;
 	}
 
 	public void destroyGLFW() {
-		glfwDestroyWindow(this.window);
+		glfwDestroyWindow(window);
 		glfwTerminate();
 		glfwSetErrorCallback(null).free();
 	}
 
 	public int getHeight() {
-		return this.height;
+		return height;
 	}
 
 	public int getWidth() {
-		return this.width;
+		return width;
 	}
 
 	public long getWindow() {
-		return this.window;
+		return window;
 	}
 
 	public Camera getCamera() {
-		return this.cam;
+		return cam;
 	}
 
 	private void initGL() {
 		glClearColor(0.4f, 0.6f, 0.9f, 1.0f);
-		glViewport(0, 0, this.width, this.height);
+		glViewport(0, 0, width, height);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -185,7 +185,7 @@ public class Display {
 		}
 		fullscreen = !fullscreen;
 		glfwSwapInterval(1);
-		glViewport(0, 0, this.width, this.height);
+		glViewport(0, 0, width, height);
 		cam.updateCameraSize(width, height);
 		;
 		ImageProcessor.initShaderUniforms();

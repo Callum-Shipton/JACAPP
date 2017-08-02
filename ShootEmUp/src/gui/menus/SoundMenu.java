@@ -1,6 +1,5 @@
 package gui.menus;
 
-import display.Image;
 import display.ImageProcessor;
 import gui.GuiMenu;
 import gui.MenuButton;
@@ -9,8 +8,8 @@ import gui.buttons.MuteButton;
 
 public class SoundMenu extends GuiMenu {
 
-	public SoundMenu(Image menuImage) {
-		super(menuImage, true);
+	public SoundMenu() {
+		super(ImageProcessor.getImage("MainMenuScreen"), true);
 		resetMenu();
 	}
 

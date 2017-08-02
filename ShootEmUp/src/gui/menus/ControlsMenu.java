@@ -8,8 +8,8 @@ import gui.buttons.BackButton;
 
 public class ControlsMenu extends GuiMenu {
 
-	public ControlsMenu(Image menuImage) {
-		super(menuImage, true);
+	public ControlsMenu() {
+		super(ImageProcessor.getImage("MainMenuScreen"), true);
 		resetMenu();
 	}
 

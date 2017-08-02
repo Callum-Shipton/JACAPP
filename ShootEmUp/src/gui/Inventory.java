@@ -7,6 +7,7 @@ import java.util.List;
 import components.TypeComponent;
 import components.inventory.BaseInventory;
 import display.DPDTRenderer;
+import display.Image;
 import display.ImageProcessor;
 import main.ShootEmUp;
 import object.InventoryItem;
@@ -38,8 +39,9 @@ public class Inventory extends GuiComponent {
 		while (items.hasNext()) {
 
 			InventoryItem<?> item = items.next();
-			addButton(new MenuButton(item.getInventoryImage(), x + (item.getInventoryImage().getWidth() * row),
-					y + ((item.getInventoryImage().getHeight() / 2) * column), new EquipItemButton(count++)));
+			Image image = item.getInventoryImage();
+			addButton(new MenuButton(image, x + (image.getWidth() * row), y + ((image.getHeight() / 2) * column),
+					new EquipItemButton(count++)));
 			row++;
 			if (row > 10) {
 				row = 0;

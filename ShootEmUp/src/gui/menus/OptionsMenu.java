@@ -24,10 +24,10 @@ public class OptionsMenu extends GuiMenu {
 				(display.getWidth() / 2) - (ImageProcessor.getImage(controlButton).getWidth() / 2),
 				display.getHeight() / 2, ImageProcessor.getImage(controlButton).getHeight() / 2, 20);
 
-		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage(controlButton), 0, 0,
-				new OpenMenuButton(new ControlsMenu(ImageProcessor.getImage("MainMenuScreen")))));
-		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("SoundButton"), 0, 0,
-				new OpenMenuButton(new SoundMenu(ImageProcessor.getImage("MainMenuScreen")))));
+		buttonList.addMenuItem(
+				new MenuButton(ImageProcessor.getImage(controlButton), 0, 0, new OpenMenuButton(new ControlsMenu())));
+		buttonList.addMenuItem(
+				new MenuButton(ImageProcessor.getImage("SoundButton"), 0, 0, new OpenMenuButton(new SoundMenu())));
 		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("BackButton"), 0, 0, new BackButton()));
 
 		menuItems.add(buttonList);
