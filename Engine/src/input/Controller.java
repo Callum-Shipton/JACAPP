@@ -60,7 +60,10 @@ public abstract class Controller {
 		int button = 0;
 		while (buttons.hasRemaining()) {
 			byte value = buttons.get();
-			Keyboard.setKey(controllerBinding.get(button), value);
+			Integer action = controllerBinding.get(button);
+			if (action != null) {
+				Keyboard.setKey(action, value);
+			}
 			button++;
 		}
 	};
