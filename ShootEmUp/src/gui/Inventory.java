@@ -15,33 +15,39 @@ import object.InventoryItem;
 public class Inventory extends GuiComponent {
 
 	private List<InventoryItem<?>> i;
-	private List<Button> buttons = new ArrayList<>();
+	private List<GuiComponent> items = new ArrayList<>();
 	private boolean itemEquipped = false;
 
 	public Inventory(int x, int y, List<InventoryItem<?>> i) {
 		super(x, y);
 		this.i = i;
-		addButtons();
+		refreshItemGrid();
 	}
 
-	private Button addButton(Button button) {
-		buttons.add(button);
-		return button;
+	private GuiComponent addItem(GuiComponent item) {
+		items.add(item);
+		return item;
 	}
 
-	private void addButtons() {
+	private void refreshItemGrid() {
 		int row = 0;
 		int column = 0;
 
-		Iterator<InventoryItem<?>> items = i.iterator();
+		Iterator<InventoryItem<?>> itemsIter = i.iterator();
 		int count = 0;
 
-		while (items.hasNext()) {
+		while (itemsIter.hasNext()) {
 
-			InventoryItem<?> item = items.next();
+			InventoryItem<?> item = itemsIter.next();
 			Image image = item.getInventoryImage();
-			addButton(new Button(image, x + (image.getWidth() * row), y + ((image.getHeight() / 2) * column),
-					new EquipItemButton(count++)));
+
+			Button invItemButton = new Button(image, new EquipItemButton(count++));
+			ItemSlot invItemHover = new ItemSlot((int) x + (image.getWidth() * row),
+					(int) y + ((image.getHeight() / 2) * column), item);
+			HoverButton invItem = new HoverButton(x + (image.getWidth() * row), y + ((image.getHeight() / 2) * column),
+					invItemButton, invItemHover);
+
+			addItem(invItem);
 			row++;
 			if (row > 10) {
 				row = 0;
@@ -52,19 +58,19 @@ public class Inventory extends GuiComponent {
 
 	@Override
 	public void render(DPDTRenderer d) {
-		for (Button button : buttons) {
-			button.render(ImageProcessor.stat);
+		for (GuiComponent item : items) {
+			item.render(ImageProcessor.stat);
 		}
 	}
 
 	@Override
 	public void update() {
-		for (Button button : buttons) {
-			button.update();
+		for (GuiComponent item : items) {
+			item.update();
 		}
 		if (itemEquipped) {
-			buttons.clear();
-			addButtons();
+			items.clear();
+			refreshItemGrid();
 			itemEquipped = false;
 		}
 	}
