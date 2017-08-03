@@ -1,6 +1,10 @@
-package gui;
+package gui.layouts;
+
+import java.util.ArrayList;
 
 import display.DPDTRenderer;
+import display.ImageProcessor;
+import gui.GuiComponent;
 
 public class GridLayout extends GuiComponent {
 
@@ -8,40 +12,45 @@ public class GridLayout extends GuiComponent {
 	private final int columns;
 	private final float gap;
 
-	private int row = 0;
-	private int column = 0;
+	private int row;
+	private int column;
+
 	private boolean full = false;
 
-	private final GuiComponent[][] grid;
+	private ArrayList<GuiComponent> gridItems = new ArrayList<>();
 
 	public GridLayout(float x, float y, int rows, int columns, float gap) {
 		super(x, y);
 		this.rows = rows;
 		this.columns = columns;
 		this.gap = gap;
-
-		grid = new GuiComponent[rows][columns];
 	}
 
 	public void addComponent(GuiComponent component) {
 		if (!full) {
-			grid[row++][column] = component;
-			if (row >= rows) {
-				row = 0;
-				column++;
-				if (column >= columns) {
-					full = true;
-				}
+			gridItems.add(component);
+			if (gridItems.size() >= rows * columns) {
+				full = true;
 			}
 		}
 	}
 
+	public void removeComponent(GuiComponent component) {
+		gridItems.remove(component);
+	}
+
 	@Override
 	public void render(DPDTRenderer d) {
+		for (GuiComponent item : gridItems) {
+			item.render(ImageProcessor.stat);
+		}
 	}
 
 	@Override
 	public void update() {
+		for (GuiComponent item : gridItems) {
+			item.update();
+		}
 	}
 
 }

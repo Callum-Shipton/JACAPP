@@ -51,7 +51,7 @@ public class TestLoop extends Loop {
 			update();
 			// render();
 
-			int currWave = ShootEmUp.getGame().getCurrentLevel().getWave();
+			int currWave = 0;
 			if (currWave != lastWave) {
 				player = ShootEmUp.getGame().getPlayer();
 				player.addComponent(new TestingControl());

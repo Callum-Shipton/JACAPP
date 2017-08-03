@@ -15,6 +15,6 @@ public class SaveMenu extends PauseMenu {
 	public void resetMenu() {
 		super.resetMenu();
 
-		menuItems.add(new MenuButton(ImageProcessor.getImage("SaveGameButton"), x + 30, y + 30, new SaveButton()));
+		addMenuItem(new MenuButton(ImageProcessor.getImage("SaveGameButton"), x + 30, y + 30, new SaveButton()));
 	}
 }

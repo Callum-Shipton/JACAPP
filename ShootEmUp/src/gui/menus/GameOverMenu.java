@@ -17,9 +17,9 @@ public class GameOverMenu extends GuiMenu {
 
 	@Override
 	public void resetMenu() {
-		menuItems.clear();
+		clearMenu();
 		Image buttonImage = ImageProcessor.getImage("ExitButton");
-		menuItems.add(new MenuButton(buttonImage, (display.getWidth() / 2) - (buttonImage.getWidth() / 2),
+		addMenuItem(new MenuButton(buttonImage, (display.getWidth() / 2) - (buttonImage.getWidth() / 2),
 				(display.getWidth() / 2) - (buttonImage.getHeight() / 2), new MainMenuButton()));
 	}
 }

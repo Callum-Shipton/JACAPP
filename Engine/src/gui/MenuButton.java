@@ -21,8 +21,6 @@ public class MenuButton extends GuiComponent {
 
 	private boolean isPressed;
 	private boolean hovered = false;
-	private final int w;
-	private final int h;
 
 	private final Image id;
 
@@ -37,17 +35,21 @@ public class MenuButton extends GuiComponent {
 		super(x, y);
 		this.id = id;
 		this.action = action;
-		w = id.getWidth();
-		h = id.getHeight() / 2;
+		width = id.getWidth();
+		height = id.getHeight() / 2;
 		window = Loop.getDisplay().getWindow();
+	}
+
+	public MenuButton(Image id, ButtonAction action) {
+		this(id, 0, 0, action);
 	}
 
 	@Override
 	public void render(DPDTRenderer stat) {
 		if (isPressed || hovered) {
-			stat.draw(id, new Vector2f(x, y), new Vector2f(w, h), 0, new Vector2f(0, 1), new Vector2f(1, 2));
+			stat.draw(id, new Vector2f(x, y), new Vector2f(width, height), 0, new Vector2f(0, 1), new Vector2f(1, 2));
 		} else {
-			stat.draw(id, new Vector2f(x, y), new Vector2f(w, h), 0, new Vector2f(0, 0), new Vector2f(1, 2));
+			stat.draw(id, new Vector2f(x, y), new Vector2f(width, height), 0, new Vector2f(0, 0), new Vector2f(1, 2));
 		}
 	}
 
@@ -71,7 +73,7 @@ public class MenuButton extends GuiComponent {
 		double mx = bx.get();
 		double my = by.get();
 
-		if ((mx >= x) && (my >= y) && (mx < (x + w)) && (my < (y + h))) {
+		if ((mx >= x) && (my >= y) && (mx < (x + width)) && (my < (y + height))) {
 
 			if (isPressed && (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE)) {
 				performClick = true;

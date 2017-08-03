@@ -15,9 +15,9 @@ public class ControlsMenu extends GuiMenu {
 
 	@Override
 	public void resetMenu() {
-		menuItems.clear();
+		clearMenu();
 		Image button = ImageProcessor.getImage("BackButton");
-		menuItems.add(new MenuButton(button, (display.getWidth() / 2) - (button.getWidth() / 2),
+		addMenuItem(new MenuButton(button, (display.getWidth() / 2) - (button.getWidth() / 2),
 				(display.getHeight() / 2) - (button.getHeight() / 2), new BackButton()));
 	}
 }

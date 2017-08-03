@@ -12,7 +12,7 @@ import loop.Loop;
 
 public abstract class GuiMenu {
 
-	protected List<GuiComponent> menuItems = new ArrayList<>();
+	private List<GuiComponent> menuItems = new ArrayList<>();
 	protected int buttonPointer = 0;
 	protected Image menuImage;
 	protected int x;
@@ -58,5 +58,13 @@ public abstract class GuiMenu {
 	}
 
 	public abstract void resetMenu();
+
+	protected void addMenuItem(GuiComponent guiComponent) {
+		menuItems.add(guiComponent);
+	}
+
+	protected void clearMenu() {
+		menuItems.clear();
+	}
 
 }
