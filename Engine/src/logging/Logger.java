@@ -11,7 +11,7 @@ public final class Logger {
 	private static boolean info = true;
 	private static boolean debug = true;
 
-	private static final String PROPERTIES_LOCATION = "logger.properties";
+	private static final String PROPERTIES_LOCATION = "res/Properties/logger.properties";
 
 	private static Set<Category> categories;
 
@@ -53,7 +53,7 @@ public final class Logger {
 	public enum Category {
 		ALL, ENGINE_STATS, CONTROLLER, AI, AI_GOALBOUNDING, ENTITIES
 	}
-	
+
 	public static void setDebug(boolean debug) {
 		Logger.debug = debug;
 	}

@@ -7,7 +7,7 @@ import io.FileManager;
 
 public class Keys {
 
-	private static final String KEYBINDING_LOCATION = "keyboardbinding.properties";
+	private static final String KEYBINDING_LOCATION = "res/Properties/keyboardbinding.properties";
 	private static Map<String, Integer> keybinding = new HashMap<>();
 
 	public static void init() {

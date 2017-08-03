@@ -5,7 +5,7 @@ import components.inventory.BaseInventory;
 import display.Image;
 import display.ImageProcessor;
 import gui.Counter;
-import gui.MenuButton;
+import gui.Button;
 import gui.buttons.UpgradeHealthButton;
 import gui.buttons.UpgradeHealthRegenButton;
 import gui.buttons.UpgradeManaButton;
@@ -41,7 +41,7 @@ public class SkillMenu extends PauseMenu {
 		VerticalLayout buttonList = new VerticalLayout(x + 30, y + 30, 20);
 		HorizontalLayout healthRegenUpgrade = new HorizontalLayout(0);
 		buttonList.addMenuItem(healthRegenUpgrade);
-		MenuButton healthRegenButton = new MenuButton(ImageProcessor.getImage("HealthRegenButton"),
+		Button healthRegenButton = new Button(ImageProcessor.getImage("HealthRegenButton"),
 				new UpgradeHealthRegenButton());
 		Counter healthRegenPrice = new Counter(ImageProcessor.getImage("Coin"), 1);
 		healthRegenUpgrade.additem(healthRegenButton);
@@ -49,7 +49,7 @@ public class SkillMenu extends PauseMenu {
 
 		HorizontalLayout healthUpgrade = new HorizontalLayout(0);
 		buttonList.addMenuItem(healthUpgrade);
-		MenuButton healthUpgradeButton = new MenuButton(ImageProcessor.getImage("HealthButton"),
+		Button healthUpgradeButton = new Button(ImageProcessor.getImage("HealthButton"),
 				new UpgradeHealthButton());
 
 		Counter healthUpgradePrice = new Counter(ImageProcessor.getImage("Coin"), 1);
@@ -58,7 +58,7 @@ public class SkillMenu extends PauseMenu {
 
 		HorizontalLayout manaRegenUpgrade = new HorizontalLayout(0);
 		buttonList.addMenuItem(manaRegenUpgrade);
-		MenuButton manaRegenButton = new MenuButton(ImageProcessor.getImage("ManaRegenButton"),
+		Button manaRegenButton = new Button(ImageProcessor.getImage("ManaRegenButton"),
 				new UpgradeManaRegenButton());
 		Counter manaRegenPrice = new Counter(ImageProcessor.getImage("Coin"), 1);
 		manaRegenUpgrade.additem(manaRegenButton);
@@ -66,7 +66,7 @@ public class SkillMenu extends PauseMenu {
 
 		HorizontalLayout manaUpgrade = new HorizontalLayout(0);
 		buttonList.addMenuItem(manaUpgrade);
-		MenuButton manaButton = new MenuButton(ImageProcessor.getImage("ManaButton"), new UpgradeManaButton());
+		Button manaButton = new Button(ImageProcessor.getImage("ManaButton"), new UpgradeManaButton());
 		Counter manaPrice = new Counter(ImageProcessor.getImage("Coin"), 1);
 		manaUpgrade.additem(manaButton);
 		manaUpgrade.additem(manaPrice);

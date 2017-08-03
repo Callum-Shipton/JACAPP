@@ -3,7 +3,7 @@ package gui.menus;
 import display.Image;
 import display.ImageProcessor;
 import gui.GuiMenu;
-import gui.MenuButton;
+import gui.Button;
 import gui.buttons.MainMenuButton;
 import main.ShootEmUp;
 
@@ -19,7 +19,7 @@ public class GameOverMenu extends GuiMenu {
 	public void resetMenu() {
 		clearMenu();
 		Image buttonImage = ImageProcessor.getImage("ExitButton");
-		addMenuItem(new MenuButton(buttonImage, (display.getWidth() / 2) - (buttonImage.getWidth() / 2),
+		addMenuItem(new Button(buttonImage, (display.getWidth() / 2) - (buttonImage.getWidth() / 2),
 				(display.getWidth() / 2) - (buttonImage.getHeight() / 2), new MainMenuButton()));
 	}
 }

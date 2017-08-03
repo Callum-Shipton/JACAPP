@@ -15,7 +15,7 @@ import display.DPDTRenderer;
 import display.Image;
 import loop.Loop;
 
-public class MenuButton extends GuiComponent {
+public class Button extends GuiComponent {
 
 	private long window;
 
@@ -31,7 +31,7 @@ public class MenuButton extends GuiComponent {
 
 	private ButtonAction action;
 
-	public MenuButton(Image id, float x, float y, ButtonAction action) {
+	public Button(Image id, float x, float y, ButtonAction action) {
 		super(x, y);
 		this.id = id;
 		this.action = action;
@@ -40,7 +40,7 @@ public class MenuButton extends GuiComponent {
 		window = Loop.getDisplay().getWindow();
 	}
 
-	public MenuButton(Image id, ButtonAction action) {
+	public Button(Image id, ButtonAction action) {
 		this(id, 0, 0, action);
 	}
 

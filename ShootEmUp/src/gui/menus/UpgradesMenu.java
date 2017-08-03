@@ -5,7 +5,7 @@ import components.inventory.BaseInventory;
 import display.Image;
 import display.ImageProcessor;
 import gui.Counter;
-import gui.MenuButton;
+import gui.Button;
 import gui.buttons.InventoryUpgradeButton;
 import gui.buttons.PotionUpgradeButton;
 import gui.layouts.HorizontalLayout;
@@ -35,7 +35,7 @@ public class UpgradesMenu extends PauseMenu {
 
 		HorizontalLayout inventoryUpgrade = new HorizontalLayout(0);
 		buttonList.addMenuItem(inventoryUpgrade);
-		MenuButton inventoryButton = new MenuButton(ImageProcessor.getImage("InventoryButton"),
+		Button inventoryButton = new Button(ImageProcessor.getImage("InventoryButton"),
 				new InventoryUpgradeButton());
 		Counter inventoryPrice = new Counter(ImageProcessor.getImage("Coin"), 5);
 		inventoryUpgrade.additem(inventoryButton);
@@ -43,7 +43,7 @@ public class UpgradesMenu extends PauseMenu {
 
 		HorizontalLayout potionsUpgrade = new HorizontalLayout(0);
 		buttonList.addMenuItem(potionsUpgrade);
-		MenuButton potionsButton = new MenuButton(ImageProcessor.getImage("PotionsButton"), new PotionUpgradeButton());
+		Button potionsButton = new Button(ImageProcessor.getImage("PotionsButton"), new PotionUpgradeButton());
 		Counter potionsPrice = new Counter(ImageProcessor.getImage("Coin"), 5);
 		potionsUpgrade.additem(potionsButton);
 		potionsUpgrade.additem(potionsPrice);

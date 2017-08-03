@@ -15,7 +15,7 @@ import object.InventoryItem;
 public class Inventory extends GuiComponent {
 
 	private List<InventoryItem<?>> i;
-	private List<MenuButton> buttons = new ArrayList<>();
+	private List<Button> buttons = new ArrayList<>();
 	private boolean itemEquipped = false;
 
 	public Inventory(int x, int y, List<InventoryItem<?>> i) {
@@ -24,7 +24,7 @@ public class Inventory extends GuiComponent {
 		addButtons();
 	}
 
-	private MenuButton addButton(MenuButton button) {
+	private Button addButton(Button button) {
 		buttons.add(button);
 		return button;
 	}
@@ -40,7 +40,7 @@ public class Inventory extends GuiComponent {
 
 			InventoryItem<?> item = items.next();
 			Image image = item.getInventoryImage();
-			addButton(new MenuButton(image, x + (image.getWidth() * row), y + ((image.getHeight() / 2) * column),
+			addButton(new Button(image, x + (image.getWidth() * row), y + ((image.getHeight() / 2) * column),
 					new EquipItemButton(count++)));
 			row++;
 			if (row > 10) {
@@ -52,14 +52,14 @@ public class Inventory extends GuiComponent {
 
 	@Override
 	public void render(DPDTRenderer d) {
-		for (MenuButton button : buttons) {
+		for (Button button : buttons) {
 			button.render(ImageProcessor.stat);
 		}
 	}
 
 	@Override
 	public void update() {
-		for (MenuButton button : buttons) {
+		for (Button button : buttons) {
 			button.update();
 		}
 		if (itemEquipped) {

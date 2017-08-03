@@ -3,7 +3,7 @@ package gui.menus;
 import display.Image;
 import display.ImageProcessor;
 import gui.GuiMenu;
-import gui.MenuButton;
+import gui.Button;
 import gui.buttons.BackButton;
 import gui.buttons.OpenMenuButton;
 import gui.layouts.VerticalLayout;
@@ -25,10 +25,10 @@ public class OptionsMenu extends GuiMenu {
 				display.getHeight() / 2, 20);
 
 		buttonList.addMenuItem(
-				new MenuButton(ImageProcessor.getImage(controlButton), new OpenMenuButton(new ControlsMenu())));
+				new Button(ImageProcessor.getImage(controlButton), new OpenMenuButton(new ControlsMenu())));
 		buttonList.addMenuItem(
-				new MenuButton(ImageProcessor.getImage("SoundButton"), new OpenMenuButton(new SoundMenu())));
-		buttonList.addMenuItem(new MenuButton(ImageProcessor.getImage("BackButton"), new BackButton()));
+				new Button(ImageProcessor.getImage("SoundButton"), new OpenMenuButton(new SoundMenu())));
+		buttonList.addMenuItem(new Button(ImageProcessor.getImage("BackButton"), new BackButton()));
 
 		addMenuItem(buttonList);
 	}
