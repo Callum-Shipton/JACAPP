@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import audio.MusicPlayer;
-import component.interfaces.AudioComponent;
 import components.Component;
 import components.TypeComponent;
+import components.interfaces.AudioComponent;
 import main.ShootEmUp;
 
 public abstract class BaseAudio extends Component implements AudioComponent {

@@ -2,9 +2,9 @@ package components.control;
 
 import org.joml.Vector2f;
 
-import component.interfaces.ControlComponent;
 import components.Component;
 import components.TypeComponent;
+import components.interfaces.ControlComponent;
 import level.LevelMap;
 
 public abstract class BaseControl extends Component implements ControlComponent {

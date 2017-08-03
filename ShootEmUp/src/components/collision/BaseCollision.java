@@ -4,11 +4,11 @@ import java.util.Set;
 
 import org.joml.Vector2f;
 
-import component.interfaces.CollisionComponent;
 import components.Component;
 import components.Message;
 import components.MessageId;
 import components.TypeComponent;
+import components.interfaces.CollisionComponent;
 import main.ShootEmUp;
 import object.EntityMap;
 

@@ -13,7 +13,6 @@ import java.util.Random;
 
 import org.joml.Vector2f;
 
-import component.interfaces.InventoryComponent;
 import components.Component;
 import components.Message;
 import components.MessageId;
@@ -24,6 +23,7 @@ import components.audio.EventAudio;
 import components.collision.PickupCollision;
 import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
+import components.interfaces.InventoryComponent;
 import components.spawn.PointSpawn;
 import entity.Entity;
 import main.ShootEmUp;

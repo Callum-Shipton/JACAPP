@@ -1,8 +1,8 @@
 package components.spawn;
 
-import component.interfaces.SpawnComponent;
 import components.Component;
 import components.TypeComponent;
+import components.interfaces.SpawnComponent;
 
 public abstract class BaseSpawn extends Component implements SpawnComponent {
 

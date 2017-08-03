@@ -3,12 +3,12 @@ package components.graphical;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
-import component.interfaces.GraphicsComponent;
 import components.Component;
 import components.DataMessage;
 import components.Message;
 import components.MessageId;
 import components.TypeComponent;
+import components.interfaces.GraphicsComponent;
 import display.Image;
 import display.ImageProcessor;
 import display.Renderer;

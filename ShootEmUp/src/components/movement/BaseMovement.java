@@ -2,10 +2,10 @@ package components.movement;
 
 import org.joml.Vector2f;
 
-import component.interfaces.MovementComponent;
 import components.Component;
 import components.Message;
 import components.TypeComponent;
+import components.interfaces.MovementComponent;
 import entity.Entity;
 import loop.Loop;
 

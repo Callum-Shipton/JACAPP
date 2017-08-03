@@ -1,6 +1,6 @@
 package components.attack;
 
-import component.interfaces.AttackComponent;
+import components.interfaces.AttackComponent;
 import display.ImageProcessor;
 import entity.Entity;
 import gui.HudBar;

@@ -2,11 +2,11 @@ package components.attack;
 
 import java.util.Set;
 
-import component.interfaces.AttackComponent;
 import components.Component;
 import components.Message;
 import components.MessageId;
 import components.TypeComponent;
+import components.interfaces.AttackComponent;
 import entity.Entity;
 import loop.Loop;
 import object.Armour;
