@@ -22,6 +22,8 @@ import javax.imageio.ImageIO;
 import org.joml.Vector2i;
 import org.joml.Vector4i;
 
+import ai.nodes.Node;
+import ai.nodes.TypeNode;
 import logging.Logger;
 
 public class GoalboundGenerator {
@@ -124,7 +126,7 @@ public class GoalboundGenerator {
 
 		final int startX = startNode.getPosition().x();
 		final int startY = startNode.getPosition().y();
-		final int size = startNode.size;
+		final int size = startNode.getSize();
 
 		TypeNode north = new TypeNode(new Vector2i(startX, startY - 1), size, type != null ? type : "N");
 		if (!Node.movesIntoWall(north, walls, "N")) {

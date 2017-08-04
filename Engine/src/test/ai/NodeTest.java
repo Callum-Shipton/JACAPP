@@ -7,7 +7,7 @@ import static org.junit.Assert.fail;
 import org.joml.Vector2i;
 import org.junit.Test;
 
-import ai.Node;
+import ai.nodes.Node;
 
 public class NodeTest {
 

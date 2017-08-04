@@ -1,4 +1,4 @@
-package ai;
+package ai.nodes;
 
 import java.util.Set;
 
@@ -11,6 +11,10 @@ public class Node {
 	public Node(Vector2i position, int size) {
 		this.position = position;
 		this.size = size;
+	}
+
+	public Node(Vector2i position) {
+		this(position, 1);
 	}
 
 	@Override

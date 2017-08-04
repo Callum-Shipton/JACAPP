@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.joml.Vector2i;
 import org.junit.Test;
 
-import ai.AStarNode;
+import ai.nodes.AStarNode;
 
 public class AStarNodeTest {
 	@Test

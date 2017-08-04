@@ -1,4 +1,4 @@
-package ai;
+package ai.nodes;
 
 import org.joml.Vector2i;
 
