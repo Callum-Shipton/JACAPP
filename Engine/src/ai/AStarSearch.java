@@ -124,7 +124,7 @@ public class AStarSearch {
 		}
 	}
 
-	public Vector2i findPath(Vector2i goal, Vector2i start) {
+	public Vector2i findPath(Vector2i start, Vector2i goal) {
 
 		if ((goalNode != null) && goal.equals(goalNode.getPosition())) {
 			if (start.equals(target) && !path.isEmpty()) {
