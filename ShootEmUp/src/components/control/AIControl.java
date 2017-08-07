@@ -134,34 +134,43 @@ public class AIControl extends BaseControl {
 					return false;
 				}
 			}
+			return true;
 		}
-		return true;
+		return false;
+
 	}
 
 	private Set<Vector2i> getTilesOnLine(Vector2i start, Vector2i goal) {
 		Set<Vector2i> tiles = new HashSet<>();
-		int dx = goal.x() - start.x();
-		int dy = goal.y() - start.y();
-		int d = 2 * dy - dx;
-		int y = start.y();
+		int x0 = start.x();
+		int y0 = start.y();
+		int x1 = goal.x();
+		int y1 = goal.y();
 
-		if (start.x() <= goal.x()) {
-			for (int x = start.x(); x < goal.x(); x++) {
-				tiles.add(new Vector2i(x, y));
-				if (d > 0) {
-					y = y + 1;
-					d = d - 2 * dx;
-				}
-				d = d + 2 * dy;
+		int dx = x0 - x1;
+		int dy = y0 - y1;
+
+		int sx = x0 < x1 ? 1 : -1;
+		int sy = y0 < y1 ? 1 : -1;
+
+		int err = dx - dy;
+		int e2;
+
+		while (true) {
+			tiles.add(new Vector2i(x0, y0));
+
+			if (x0 == x1 && y0 == y1)
+				break;
+
+			e2 = 2 * err;
+			if (e2 > -dy) {
+				err = err - dy;
+				x0 = x0 + sx;
 			}
-		} else {
-			for (int x = start.x(); x > goal.x(); x--) {
-				tiles.add(new Vector2i(x, y));
-				if (d > 0) {
-					y = y + 1;
-					d = d - 2 * dx;
-				}
-				d = d + 2 * dy;
+
+			if (e2 < dx) {
+				err = err + dx;
+				y0 = y0 + sy;
 			}
 		}
 
