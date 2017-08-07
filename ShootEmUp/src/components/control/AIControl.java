@@ -125,8 +125,8 @@ public class AIControl extends BaseControl {
 		attack(getEntity());
 	}
 
-	private boolean inRange(Vector2i start, Vector2i goal, Set<Vector2i> walls) {
-		final double viewRange = 5;
+	private static boolean inRange(Vector2i start, Vector2i goal, Set<Vector2i> walls) {
+		final double viewRange = 10;
 		if (start.distance(goal) < viewRange) {
 			Set<Vector2i> viewTiles = getTilesOnLine(start, goal);
 			for (Vector2i tile : viewTiles) {
@@ -140,15 +140,15 @@ public class AIControl extends BaseControl {
 
 	}
 
-	private Set<Vector2i> getTilesOnLine(Vector2i start, Vector2i goal) {
+	private static Set<Vector2i> getTilesOnLine(Vector2i start, Vector2i goal) {
 		Set<Vector2i> tiles = new HashSet<>();
 		int x0 = start.x();
 		int y0 = start.y();
 		int x1 = goal.x();
 		int y1 = goal.y();
 
-		int dx = x1 - x0;
-		int dy = y1 - y0;
+		int dx = Math.abs(x1 - x0);
+		int dy = Math.abs(y1 - y0);
 
 		int sx = x0 < x1 ? 1 : -1;
 		int sy = y0 < y1 ? 1 : -1;
