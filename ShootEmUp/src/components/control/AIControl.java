@@ -103,9 +103,9 @@ public class AIControl extends BaseControl {
 			research = false;
 		}
 
-		nextNodeVector = search.findPath(startVector, nextNodeVector);
+		Vector2i nextNode = search.findPath(startVector, nextNodeVector);
 
-		Vector2f movementVector = calculateMovementVector(new Vector2f(nextNodeVector.x(), nextNodeVector.y()),
+		Vector2f movementVector = calculateMovementVector(new Vector2f(nextNode.x(), nextNode.y()),
 				graphicsComponent.getX(), graphicsComponent.getY(), movementComponent.getSpeed());
 
 		if (movementVector.length() > 0) {
