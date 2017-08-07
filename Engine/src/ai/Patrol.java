@@ -1,8 +1,10 @@
 package ai;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Random;
@@ -10,8 +12,8 @@ import java.util.Set;
 
 import org.joml.Vector2i;
 
+import ai.nodes.Node;
 import ai.nodes.RangeNode;
-import logging.Logger;
 
 public class Patrol {
 
@@ -56,25 +58,26 @@ public class Patrol {
 
 		}
 
-		Logger.debug(patrolLoc.x + " " + patrolLoc.y, Logger.Category.AI);
 		return patrolLoc;
 	}
 
 	public void addChildNodes(RangeNode node) {
-		Set<RangeNode> childNodes = new HashSet<>();
+		Map<String, RangeNode> childNodes = new HashMap<>();
 
-		childNodes.add(node.getChild(0, -1));
-		childNodes.add(node.getChild(-1, -1));
-		childNodes.add(node.getChild(-1, 0));
-		childNodes.add(node.getChild(-1, 1));
-		childNodes.add(node.getChild(0, 1));
-		childNodes.add(node.getChild(1, 1));
-		childNodes.add(node.getChild(1, 0));
-		childNodes.add(node.getChild(1, -1));
+		childNodes.put("N", node.getChild(0, -1));
+		childNodes.put("NW", node.getChild(-1, -1));
+		childNodes.put("W", node.getChild(-1, 0));
+		childNodes.put("SW", node.getChild(-1, 1));
+		childNodes.put("S", node.getChild(0, 1));
+		childNodes.put("SE", node.getChild(1, 1));
+		childNodes.put("E", node.getChild(1, 0));
+		childNodes.put("NE", node.getChild(1, -1));
 
-		for (RangeNode child : childNodes) {
-			if (!closedNodes.contains(child) && !openNodes.contains(child) && !walls.contains(child.getPosition())) {
-				openNodes.add(child);
+		for (Entry<String, RangeNode> child : childNodes.entrySet()) {
+			RangeNode childNode = child.getValue();
+			if (!closedNodes.contains(childNode) && !openNodes.contains(childNode)
+					&& !Node.movesIntoWall(childNode, walls, child.getKey())) {
+				openNodes.add(childNode);
 			}
 		}
 	}

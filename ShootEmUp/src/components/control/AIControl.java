@@ -126,16 +126,12 @@ public class AIControl extends BaseControl {
 	}
 
 	private static boolean inRange(Vector2i start, Vector2i goal, Set<Vector2i> walls) {
-		final double viewRange = 10;
-		if (start.distance(goal) < viewRange) {
-			Set<Vector2i> viewTiles = getTilesOnLine(start, goal);
-			for (Vector2i tile : viewTiles) {
-				if (walls.contains(tile)) {
-					return false;
-				}
-			}
-			return true;
-		}
+		/*
+		 * final double viewRange = 10; if (start.distance(goal) < viewRange) {
+		 * Set<Vector2i> viewTiles = getTilesOnLine(start, goal); for (Vector2i
+		 * tile : viewTiles) { if (walls.contains(tile)) { return false; } }
+		 * return true; }
+		 */
 		return false;
 
 	}

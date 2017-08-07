@@ -118,6 +118,7 @@ public class AStarSearch {
 					node = node.getParent();
 				}
 			} else {
+				Logger.error("Path Error");
 				return new Vector2i(0, 0);
 			}
 			path.push(node.getPosition());
