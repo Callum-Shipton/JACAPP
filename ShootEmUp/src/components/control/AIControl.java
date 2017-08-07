@@ -1,5 +1,8 @@
 package components.control;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.joml.Vector2f;
 import org.joml.Vector2i;
 
@@ -21,15 +24,15 @@ import math.VectorMath;
 
 public class AIControl extends BaseControl {
 
-	private transient int attackCounter = 0;
-	private transient int aggression = 30;
-	private transient AStarSearch search;
-	private transient Patrol patrol;
+	private int attackCounter = 0;
+	private int aggression = 30;
+	private AStarSearch search;
+	private Patrol patrol;
 
 	private Vector2i enemyVector;
 	private Vector2i patrolVector;
 	private Vector2i nextNodeVector;
-	private transient int patrolCounter = 0;
+	private int patrolCounter = 0;
 
 	private boolean research = true;
 
@@ -60,13 +63,15 @@ public class AIControl extends BaseControl {
 		BaseMovement movementComponent = getEntity().getComponent(TypeComponent.MOVEMENT);
 		BaseGraphics goalGraphics = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.GRAPHICS);
 
+		LevelMap map = ShootEmUp.getGame().getCurrentLevel().getMap();
+		Set<Vector2i> wallLocs = map.getWalls().keySet();
+
 		if (search == null) {
-			LevelMap map = ShootEmUp.getGame().getCurrentLevel().getMap();
-			search = new AStarSearch(map.getWalls().keySet(), map.getGoalBounder(), LevelMap.TILE_WIDTH,
+			search = new AStarSearch(wallLocs, map.getGoalBounder(), LevelMap.TILE_WIDTH,
 					(int) (graphicsComponent.getWidth() / LevelMap.TILE_WIDTH));
-			patrol = new Patrol(map.getWalls().keySet(), 6);
+			patrol = new Patrol(wallLocs, 6);
 		}
-		
+
 		Vector2i startVector = search.getGridPosition(graphicsComponent.getX(), graphicsComponent.getY());
 
 		Vector2i newVector = search.getGridPosition(goalGraphics.getX(), goalGraphics.getY());
@@ -74,31 +79,30 @@ public class AIControl extends BaseControl {
 			enemyVector = newVector;
 			research = true;
 		}
-		
-		if(patrolCounter > 0) {
+
+		if (patrolCounter > 0) {
 			patrolCounter--;
 		}
-		
-		if(patrolCounter <= 0) {
+
+		if (patrolCounter <= 0) {
 			if (startVector.equals(patrolVector)) {
 				patrolCounter = Loop.ticks(3);
 			}
 			patrolVector = patrol.getTarget(startVector);
 			nextNodeVector = patrolVector;
 		}
-		
+
 		if (research) {
-			if (inRange(startVector, enemyVector)) {
+			if (inRange(startVector, enemyVector, wallLocs)) {
 				nextNodeVector = enemyVector;
 			}
 			Logger.debug(
 					"Entity: " + getEntity().getId() + " at Current Tile: " + startVector.x() + ", " + startVector.y(),
 					Category.AI);
 
-			
 			research = false;
 		}
-		
+
 		nextNodeVector = search.findPath(startVector, nextNodeVector);
 
 		Vector2f movementVector = calculateMovementVector(new Vector2f(nextNodeVector.x(), nextNodeVector.y()),
@@ -121,7 +125,46 @@ public class AIControl extends BaseControl {
 		attack(getEntity());
 	}
 
-	private boolean inRange(Vector2i start, Vector2i goal) {
-		return false;
+	private boolean inRange(Vector2i start, Vector2i goal, Set<Vector2i> walls) {
+		final double viewRange = 5;
+		if (start.distance(goal) < viewRange) {
+			Set<Vector2i> viewTiles = getTilesOnLine(start, goal);
+			for (Vector2i tile : viewTiles) {
+				if (walls.contains(tile)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	private Set<Vector2i> getTilesOnLine(Vector2i start, Vector2i goal) {
+		Set<Vector2i> tiles = new HashSet<>();
+		int dx = goal.x() - start.x();
+		int dy = goal.y() - start.y();
+		int d = 2 * dy - dx;
+		int y = start.y();
+
+		if (start.x() <= goal.x()) {
+			for (int x = start.x(); x < goal.x(); x++) {
+				tiles.add(new Vector2i(x, y));
+				if (d > 0) {
+					y = y + 1;
+					d = d - 2 * dx;
+				}
+				d = d + 2 * dy;
+			}
+		} else {
+			for (int x = start.x(); x > goal.x(); x--) {
+				tiles.add(new Vector2i(x, y));
+				if (d > 0) {
+					y = y + 1;
+					d = d - 2 * dx;
+				}
+				d = d + 2 * dy;
+			}
+		}
+
+		return tiles;
 	}
 }
