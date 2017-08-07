@@ -30,7 +30,7 @@ public class Patrol {
 		this.moveRange = moveRange;
 	}
 
-	public Vector2i getTarget(Vector2i start) {
+	public Vector2i getTarget(Vector2i start, int size) {
 		if (patrolLoc == null || start.equals(patrolLoc)) {
 
 			openNodes.clear();
@@ -38,7 +38,7 @@ public class Patrol {
 			edgeNodes.clear();
 			RangeNode currentNode;
 
-			startNode = new RangeNode(start);
+			startNode = new RangeNode(start, size);
 
 			openNodes.add(startNode);
 

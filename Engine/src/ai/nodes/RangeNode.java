@@ -6,12 +6,12 @@ public class RangeNode extends Node implements Comparable<RangeNode> {
 
 	private int layer;
 
-	public RangeNode(Vector2i position) {
-		this(position, 0);
+	public RangeNode(Vector2i position, int size) {
+		this(position, 0, size);
 	}
 
-	public RangeNode(Vector2i position, int layer) {
-		super(position);
+	public RangeNode(Vector2i position, int layer, int size) {
+		super(position, size);
 		this.layer = layer;
 	}
 
@@ -30,6 +30,6 @@ public class RangeNode extends Node implements Comparable<RangeNode> {
 	}
 
 	public RangeNode getChild(int x, int y) {
-		return new RangeNode(new Vector2i(position.x + x, position.y + y), layer + 1);
+		return new RangeNode(new Vector2i(position.x + x, position.y + y), layer + 1, size);
 	}
 }

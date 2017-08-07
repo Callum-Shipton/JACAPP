@@ -65,10 +65,10 @@ public class AIControl extends BaseControl {
 
 		LevelMap map = ShootEmUp.getGame().getCurrentLevel().getMap();
 		Set<Vector2i> wallLocs = map.getWalls().keySet();
+		int width = (int) (graphicsComponent.getWidth() / LevelMap.TILE_WIDTH);
 
 		if (search == null) {
-			search = new AStarSearch(wallLocs, map.getGoalBounder(), LevelMap.TILE_WIDTH,
-					(int) (graphicsComponent.getWidth() / LevelMap.TILE_WIDTH));
+			search = new AStarSearch(wallLocs, map.getGoalBounder(), LevelMap.TILE_WIDTH, width);
 			patrol = new Patrol(wallLocs, 6);
 		}
 
@@ -88,7 +88,7 @@ public class AIControl extends BaseControl {
 			if (startVector.equals(patrolVector)) {
 				patrolCounter = Loop.ticks(3);
 			}
-			patrolVector = patrol.getTarget(startVector);
+			patrolVector = patrol.getTarget(startVector, width);
 			nextNodeVector = patrolVector;
 		}
 
@@ -126,14 +126,19 @@ public class AIControl extends BaseControl {
 	}
 
 	private static boolean inRange(Vector2i start, Vector2i goal, Set<Vector2i> walls) {
-		/*
-		 * final double viewRange = 10; if (start.distance(goal) < viewRange) {
-		 * Set<Vector2i> viewTiles = getTilesOnLine(start, goal); for (Vector2i
-		 * tile : viewTiles) { if (walls.contains(tile)) { return false; } }
-		 * return true; }
-		 */
-		return false;
 
+		final double viewRange = 10;
+		if (start.distance(goal) < viewRange) {
+			Set<Vector2i> viewTiles = getTilesOnLine(start, goal);
+			for (Vector2i tile : viewTiles) {
+				if (walls.contains(tile)) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		return true;
 	}
 
 	private static Set<Vector2i> getTilesOnLine(Vector2i start, Vector2i goal) {
