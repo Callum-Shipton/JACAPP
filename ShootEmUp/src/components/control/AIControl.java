@@ -30,6 +30,7 @@ public class AIControl extends BaseControl {
 	private Patrol patrol;
 
 	private Vector2i enemyVector;
+	private Vector2i enemyLastSeenVector;
 	private Vector2i patrolVector;
 	private Vector2i nextNodeVector;
 	private int patrolCounter = 0;
@@ -95,6 +96,9 @@ public class AIControl extends BaseControl {
 		if (research) {
 			if (inRange(startVector, enemyVector, wallLocs)) {
 				nextNodeVector = enemyVector;
+				enemyLastSeenVector = enemyVector;
+			} else if (enemyLastSeenVector != null) {
+				nextNodeVector = enemyLastSeenVector;
 			}
 			Logger.debug(
 					"Entity: " + getEntity().getId() + " at Current Tile: " + startVector.x() + ", " + startVector.y(),
