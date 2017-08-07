@@ -147,8 +147,8 @@ public class AIControl extends BaseControl {
 		int x1 = goal.x();
 		int y1 = goal.y();
 
-		int dx = x0 - x1;
-		int dy = y0 - y1;
+		int dx = x1 - x0;
+		int dy = y1 - y0;
 
 		int sx = x0 < x1 ? 1 : -1;
 		int sy = y0 < y1 ? 1 : -1;
