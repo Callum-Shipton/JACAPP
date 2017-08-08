@@ -88,14 +88,17 @@ public class Patrol {
 	}
 
 	public Vector2i update(Vector2i currentPos) {
+		if (!patrolling) {
+			patrolCounter = Loop.ticks(3);
+			patrolLoc = currentPos;
+			patrolling = true;
+		}
 
 		if (currentPos.equals(patrolLoc)) {
 			if (patrolCounter > 0) {
 				patrolCounter--;
 				return currentPos;
-			}
-
-			if (patrolCounter <= 0) {
+			} else {
 				patrolCounter = Loop.ticks(3);
 			}
 		}
@@ -105,15 +108,5 @@ public class Patrol {
 
 	public void off() {
 		patrolling = false;
-	}
-
-	public void on(Vector2i currentPos) {
-		patrolCounter = Loop.ticks(3);
-		patrolLoc = currentPos;
-		patrolling = true;
-	}
-
-	public boolean isPatrolling() {
-		return patrolling;
 	}
 }

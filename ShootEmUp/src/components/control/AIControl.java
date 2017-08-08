@@ -76,18 +76,18 @@ public class AIControl extends BaseControl {
 		Vector2i currentEnemyVector = search.getGridPosition(goalGraphics.getX(), goalGraphics.getY());
 		Vector2i currentTargetVector = targetVector;
 
-		if(currentTargetVector == null) {
+		if (currentTargetVector == null) {
 			currentTargetVector = currentStartVector;
 		}
-		
+
 		if (!currentStartVector.equals(startVector) || !currentEnemyVector.equals(enemyVector)) {
 			if (rangeSearch.enemyInRange(currentStartVector, currentEnemyVector)) {
 				currentTargetVector = currentEnemyVector;
+				patrol.off();
 			}
 		}
-		
-		
-		if (!currentTargetVector.equals(currentEnemyVector)){
+
+		if (!currentTargetVector.equals(currentEnemyVector)) {
 			currentTargetVector = patrol.update(currentStartVector);
 		}
 
