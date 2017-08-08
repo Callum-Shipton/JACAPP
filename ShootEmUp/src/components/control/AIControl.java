@@ -30,6 +30,7 @@ public class AIControl extends BaseControl {
 	private Vector2i enemyVector;
 	private Vector2i startVector;
 	private Vector2i targetVector;
+	private Vector2i lastSeenVector;
 
 	private static final int PATROL_DISTANCE = 6;
 	private static final double VIEW_RANGE = 10;
@@ -76,6 +77,10 @@ public class AIControl extends BaseControl {
 		Vector2i currentEnemyVector = search.getGridPosition(goalGraphics.getX(), goalGraphics.getY());
 		Vector2i currentTargetVector = targetVector;
 
+		if (currentStartVector.equals(lastSeenVector)) {
+			lastSeenVector = null;
+		}
+
 		if (currentTargetVector == null) {
 			currentTargetVector = currentStartVector;
 		}
@@ -83,11 +88,14 @@ public class AIControl extends BaseControl {
 		if (!currentStartVector.equals(startVector) || !currentEnemyVector.equals(enemyVector)) {
 			if (rangeSearch.enemyInRange(currentStartVector, currentEnemyVector)) {
 				currentTargetVector = currentEnemyVector;
+				lastSeenVector = currentEnemyVector;
 				patrol.off();
+			} else if (lastSeenVector != null) {
+				currentTargetVector = lastSeenVector;
 			}
 		}
 
-		if (!currentTargetVector.equals(currentEnemyVector)) {
+		if (!currentTargetVector.equals(currentEnemyVector) || !currentTargetVector.equals(lastSeenVector)) {
 			currentTargetVector = patrol.update(currentStartVector);
 		}
 
