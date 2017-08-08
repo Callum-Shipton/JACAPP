@@ -14,6 +14,7 @@ import org.joml.Vector2i;
 
 import ai.nodes.Node;
 import ai.nodes.RangeNode;
+import loop.Loop;
 
 public class Patrol {
 
@@ -21,16 +22,20 @@ public class Patrol {
 	private Queue<RangeNode> openNodes = new PriorityQueue<>();
 	private List<RangeNode> closedNodes = new LinkedList<>();
 	private List<RangeNode> edgeNodes = new LinkedList<>();
-	private RangeNode startNode;
 	private final int moveRange;
 	private Vector2i patrolLoc;
+	private int size;
 
-	public Patrol(Set<Vector2i> walls, int moveRange) {
+	private boolean patrolling = true;
+	private int patrolCounter = 0;
+
+	public Patrol(Set<Vector2i> walls, int moveRange, int size) {
 		this.walls = walls;
 		this.moveRange = moveRange;
+		this.size = size;
 	}
 
-	public Vector2i getTarget(Vector2i start, int size) {
+	public Vector2i getTarget(Vector2i start) {
 		if (patrolLoc == null || start.equals(patrolLoc)) {
 
 			openNodes.clear();
@@ -38,7 +43,7 @@ public class Patrol {
 			edgeNodes.clear();
 			RangeNode currentNode;
 
-			startNode = new RangeNode(start, size);
+			RangeNode startNode = new RangeNode(start, size);
 
 			openNodes.add(startNode);
 
@@ -80,5 +85,35 @@ public class Patrol {
 				openNodes.add(childNode);
 			}
 		}
+	}
+
+	public Vector2i update(Vector2i currentPos) {
+
+		if (currentPos.equals(patrolLoc)) {
+			if (patrolCounter > 0) {
+				patrolCounter--;
+				return currentPos;
+			}
+
+			if (patrolCounter <= 0) {
+				patrolCounter = Loop.ticks(3);
+			}
+		}
+
+		return getTarget(currentPos);
+	}
+
+	public void off() {
+		patrolling = false;
+	}
+
+	public void on(Vector2i currentPos) {
+		patrolCounter = Loop.ticks(3);
+		patrolLoc = currentPos;
+		patrolling = true;
+	}
+
+	public boolean isPatrolling() {
+		return patrolling;
 	}
 }

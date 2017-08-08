@@ -11,6 +11,8 @@ import java.util.Set;
 
 import org.joml.Vector2i;
 
+import ai.goalbounding.GoalBounder;
+import ai.goalbounding.GoalboundingTile;
 import ai.nodes.AStarNode;
 import ai.nodes.Node;
 import logging.Logger;

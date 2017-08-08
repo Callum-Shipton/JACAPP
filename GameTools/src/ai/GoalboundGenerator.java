@@ -22,6 +22,9 @@ import javax.imageio.ImageIO;
 import org.joml.Vector2i;
 import org.joml.Vector4i;
 
+import ai.goalbounding.BoundingBox;
+import ai.goalbounding.GoalBounder;
+import ai.goalbounding.GoalboundingTile;
 import ai.nodes.Node;
 import ai.nodes.TypeNode;
 import logging.Logger;

@@ -6,7 +6,7 @@ import java.util.Map;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
 
-import ai.GoalBounder;
+import ai.goalbounding.GoalBounder;
 import components.collision.BaseCollision;
 import components.collision.RigidCollision;
 import components.collision.TransportCollision;

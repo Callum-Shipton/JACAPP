@@ -8,7 +8,7 @@ import org.joml.Vector2i;
 import org.joml.Vector4i;
 import org.junit.Test;
 
-import ai.BoundingBox;
+import ai.goalbounding.BoundingBox;
 
 public class BoundingBoxTest {
 
