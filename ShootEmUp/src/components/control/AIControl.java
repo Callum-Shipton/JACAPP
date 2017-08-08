@@ -95,7 +95,7 @@ public class AIControl extends BaseControl {
 			}
 		}
 
-		if (!currentTargetVector.equals(currentEnemyVector) || !currentTargetVector.equals(lastSeenVector)) {
+		if (!currentTargetVector.equals(currentEnemyVector) && !currentTargetVector.equals(lastSeenVector)) {
 			currentTargetVector = patrol.update(currentStartVector);
 		}
 
