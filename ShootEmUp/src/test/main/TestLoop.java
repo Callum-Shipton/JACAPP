@@ -58,9 +58,6 @@ public class TestLoop extends Loop {
 				Logger.info("TEST: Wave: " + currWave);
 				lastWave = currWave;
 			}
-			if (ShootEmUp.getGame().getLevel() == 3) {
-				setFinished(true);
-			}
 		}
 		Logger.info("TEST FINISHED");
 	}

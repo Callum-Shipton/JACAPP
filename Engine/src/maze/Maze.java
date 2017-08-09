@@ -15,13 +15,19 @@ public class Maze {
 	private Set<Vector2i> closed;
 	private Vector2i start;
 	private Random rand;
+	private long seed;
 
 	public Maze(int size) {
+		this(size, new Random().nextLong());
+	}
+
+	public Maze(int size, long seed) {
+		this.seed = seed;
 		this.size = size;
 		grid = new MazeTile[size][size];
 		open = new ArrayList<>();
 		closed = new HashSet<>();
-		rand = new Random();
+		rand = new Random(seed);
 	}
 
 	public void generateMaze() {
@@ -111,8 +117,8 @@ public class Maze {
 		System.out.println();
 	}
 
-	public MazeTile getStart() {
-		return grid[start.x][start.y];
+	public Vector2i getStart() {
+		return start;
 	}
 
 	public MazeTile getTile(Vector2i position) {
@@ -121,5 +127,9 @@ public class Maze {
 
 	public MazeTile[][] getGrid() {
 		return grid;
+	}
+
+	public long getSeed() {
+		return seed;
 	}
 }

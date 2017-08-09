@@ -51,7 +51,7 @@ public class LoadGameButton implements ButtonAction {
 		ShootEmUp.getGame().setPlayer(player);
 	}
 
-	private void startLevel(int levelNum) {
+	private void startLevel() {
 		Level level = new Level(ImageProcessor.LEVEL_FILE_LOCATION, levelNum);
 		level.init();
 		level.addEntity(ShootEmUp.getGame().getPlayer());

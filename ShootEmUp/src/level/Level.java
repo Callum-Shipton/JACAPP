@@ -16,6 +16,7 @@ import entity.Entity;
 import entity.EntityStorage;
 import entity.Spawner;
 import logging.Logger;
+import maze.MazeTile;
 import object.EntityMap;
 
 public class Level {
@@ -36,8 +37,8 @@ public class Level {
 
 	private int levelState = 0;
 
-	public Level(String file, int level) {
-		map = new LevelMap(file + level + ".png");
+	public Level(MazeTile mazeTile) {
+		map = new LevelMap(mazeTile);
 		map.init();
 		eMap = new EntityMap(map.getWidth(), map.getHeight());
 		spawners = new HashSet<>();

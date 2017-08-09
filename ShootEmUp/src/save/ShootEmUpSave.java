@@ -3,6 +3,8 @@ package save;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.joml.Vector2i;
+
 import components.attack.PlayerAttack;
 import main.GameBase;
 import main.ShootEmUp;
@@ -12,7 +14,7 @@ public class ShootEmUpSave extends Save {
 	private static final long serialVersionUID = 7179389236763035983L;
 
 	private Map<String, CharacterSave> characters = new HashMap<>();
-	private int level = 1;
+	private Vector2i level;
 
 	@Override
 	public ShootEmUpSave load(int num) throws Exception {
@@ -24,15 +26,14 @@ public class ShootEmUpSave extends Save {
 
 	public void saveCharacter(String attackType, PlayerAttack attack) {
 		GameBase gameBase = ShootEmUp.getGame();
-		level = gameBase.getLevel();
 		characters.put(attackType, new CharacterSave(attack));
 	}
 
-	public int getLevel() {
+	public Vector2i getLevel() {
 		return level;
 	}
 
-	public void setLevel(int level) {
+	public void setLevel(Vector2i level) {
 		this.level = level;
 	}
 

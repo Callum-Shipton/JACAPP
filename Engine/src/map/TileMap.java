@@ -1,8 +1,16 @@
 package map;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
+
 import org.joml.Vector2f;
 
-public class TileMap {
+import logging.Logger;
+
+public class TileMap implements Serializable {
+
+	private static final long serialVersionUID = 2960526026451120160L;
 
 	private int width;
 	private int height;
@@ -10,20 +18,27 @@ public class TileMap {
 	private Vector2f[][] backgroundTiles;
 	private Vector2f[][] walls;
 
-	TileGenerator generator;
+	public TileMap(int width, int height, Vector2f[][] backgroundTiles, Vector2f[][] walls) {
+		this.width = width;
+		this.height = height;
+		this.backgroundTiles = backgroundTiles;
+		this.walls = walls;
 
-	public TileMap(String levelLocation) {
-
-		generator = new TileGenerator(levelLocation);
-
-		width = generator.getWidth();
-		height = generator.getHeight();
 	}
 
-	public void init() {
-		generator.generateTiles();
-		backgroundTiles = generator.getBackgroundTiles();
-		walls = generator.getWalls();
+	public static TileMap readTileMap(String location) {
+		TileMap tileMap = null;
+		try (ObjectInputStream in = new ObjectInputStream(TileMap.class.getResourceAsStream(location))) {
+			tileMap = (TileMap) in.readObject();
+			in.close();
+		} catch (IOException i) {
+			Logger.error(i);
+		} catch (ClassNotFoundException c) {
+			Logger.error("Employee class not found");
+			Logger.error(c);
+		}
+
+		return tileMap;
 	}
 
 	public int getHeight() {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.joml.Vector2f;
+import org.joml.Vector2i;
 
 import components.TypeComponent;
 import components.graphical.BaseGraphics;
@@ -13,14 +14,15 @@ import entity.Entity;
 import gui.Hud;
 import level.Level;
 import logging.Logger;
+import maze.Maze;
 import save.ShootEmUpSave;
 
 public class GameBase {
 
 	private Level currentLevel;
 
-	private int levelNumber;
-	private static final int MAX_LEVEL = 3;
+	private Vector2i levelPosition;
+	private Maze maze;
 
 	private Entity player;
 	private Hud hud;
@@ -31,14 +33,16 @@ public class GameBase {
 			currentLevel.update();
 			break;
 		case 1:
-			if (levelNumber < MAX_LEVEL) {
-				changeLevel(++levelNumber);
-			}
+			changeLevel(new Vector2i(levelPosition.x, levelPosition.y - 1));
 			break;
-		case -1:
-			if (levelNumber > 1) {
-				changeLevel(--levelNumber);
-			}
+		case 2:
+			changeLevel(new Vector2i(levelPosition.x - 1, levelPosition.y));
+			break;
+		case 3:
+			changeLevel(new Vector2i(levelPosition.x, levelPosition.y + 1));
+			break;
+		case 4:
+			changeLevel(new Vector2i(levelPosition.x + 1, levelPosition.y));
 			break;
 		}
 
@@ -58,7 +62,8 @@ public class GameBase {
 		}
 	}
 
-	private void changeLevel(int levelNumber) {
+	private void changeLevel(Vector2i levelPosition) {
+		this.levelPosition = levelPosition;
 
 		if (ShootEmUp.getSave() == null) {
 			ShootEmUp.setSave(new ShootEmUpSave());
@@ -68,10 +73,10 @@ public class GameBase {
 
 		// TODO fix saves
 		save.saveCharacter("well fuck", player.getComponent(TypeComponent.ATTACK));
-		save.setLevel(levelNumber);
+		save.setLevel(levelPosition);
 		save.saveToSystem(1);
 
-		currentLevel = new Level(ImageProcessor.LEVEL_FILE_LOCATION, levelNumber);
+		currentLevel = new Level(maze.getTile(levelPosition));
 		currentLevel.init();
 
 		List<String> enemyPrototypes = new ArrayList<>();
@@ -92,6 +97,31 @@ public class GameBase {
 		bs.spawn();
 		currentLevel.addEntity(player);
 		hud = new Hud(player, 0, 0);
+	}
+
+	public void newGame() {
+		maze = new Maze(10);
+		maze.generateMaze();
+
+		player = new Entity("Characters", "Players", "Warrior");
+		PointSpawn spawn = player.getComponent(TypeComponent.SPAWN);
+		spawn.setSpawnLocation(new Vector2f(480.0f, 480.0f));
+		spawn.spawn();
+
+		levelPosition = maze.getStart();
+		currentLevel = new Level(maze.getTile(levelPosition));
+		currentLevel.init();
+		currentLevel.addEntity(player);
+
+		List<String> enemyPrototypes = new ArrayList<>();
+		enemyPrototypes.add("Small");
+		enemyPrototypes.add("Normal");
+		enemyPrototypes.add("Flying");
+		currentLevel.addSpawner(enemyPrototypes);
+
+		ShootEmUp.startGame();
+
+		hud = new Hud(ShootEmUp.getGame().getPlayer(), 0, 0);
 	}
 
 	public Entity getPlayer() {
@@ -116,13 +146,5 @@ public class GameBase {
 
 	public void setHud(Hud hud) {
 		this.hud = hud;
-	}
-
-	public int getLevel() {
-		return levelNumber;
-	}
-
-	public void setLevel(int levelNumber) {
-		this.levelNumber = levelNumber;
 	}
 }

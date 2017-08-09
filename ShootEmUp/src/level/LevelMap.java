@@ -19,6 +19,7 @@ import logging.Logger;
 import logging.Logger.Category;
 import loop.Loop;
 import map.TileMap;
+import maze.MazeTile;
 
 public class LevelMap {
 
@@ -27,12 +28,17 @@ public class LevelMap {
 	private final TileMap tileMap;
 	private final GoalBounder goalBounder;
 	private static final String TILES_TEXTURE_FILE = "Tiles";
+	private MazeTile mazeTile;
 
 	// collidable wall entities
 	private final Map<Vector2i, Entity> walls;
 
-	public LevelMap(String file) {
-		tileMap = new TileMap(file);
+	public LevelMap(MazeTile mazeTile) {
+		this.mazeTile = mazeTile;
+
+		String file = ImageProcessor.LEVEL_FILE_LOCATION + "1.map";
+
+		tileMap = TileMap.readTileMap(file);
 		Loop.getDisplay().getCamera()
 				.setLevelSize(new Vector2f(tileMap.getWidth() * TILE_WIDTH, tileMap.getHeight() * TILE_WIDTH));
 
@@ -44,8 +50,6 @@ public class LevelMap {
 	}
 
 	public void init() {
-
-		tileMap.init();
 
 		ImageProcessor.irBack = new FloorRenderer(tileMap.getBackgroundTiles(),
 				new Vector2f(ImageProcessor.getImage(TILES_TEXTURE_FILE).getFWidth(),
@@ -59,10 +63,11 @@ public class LevelMap {
 				LevelMap.TILE_WIDTH, TILE_WIDTH);
 
 		/*
-		 * ImageProcessor.irFore = new FloorRenderer(generator.getForegroundTiles(), new
+		 * ImageProcessor.irFore = new
+		 * FloorRenderer(generator.getForegroundTiles(), new
 		 * Vector2(ImageProcessor.getImage("Walls").getFWidth(),
-		 * ImageProcessor.getImage("Walls").getFHeight()), LevelMap.getTileWidth(),
-		 * LevelMap.getTileHeight());
+		 * ImageProcessor.getImage("Walls").getFHeight()),
+		 * LevelMap.getTileWidth(), LevelMap.getTileHeight());
 		 */
 
 		ImageProcessor.irBack.init();
