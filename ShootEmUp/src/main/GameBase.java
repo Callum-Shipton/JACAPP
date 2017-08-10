@@ -60,19 +60,19 @@ public class GameBase {
 		switch (direction) {
 		case N:
 			levelPosition = new Vector2i(levelPosition.x, levelPosition.y - 1);
-			spawnLocation = new Vector2f(levelWidth / 2, levelHeight - 100.0f);
+			spawnLocation = new Vector2f(levelWidth / 2, levelHeight - 200.0f);
 			break;
 		case W:
 			levelPosition = new Vector2i(levelPosition.x - 1, levelPosition.y);
-			spawnLocation = new Vector2f(levelWidth - 100.0f, levelHeight / 2);
+			spawnLocation = new Vector2f(levelWidth - 200.0f, levelHeight / 2);
 			break;
 		case S:
 			levelPosition = new Vector2i(levelPosition.x, levelPosition.y + 1);
-			spawnLocation = new Vector2f(levelWidth / 2, 100.0f);
+			spawnLocation = new Vector2f(levelWidth / 2, 200.0f);
 			break;
 		case E:
 			levelPosition = new Vector2i(levelPosition.x + 1, levelPosition.y);
-			spawnLocation = new Vector2f(100.0f, levelHeight / 2);
+			spawnLocation = new Vector2f(200.0f, levelHeight / 2);
 			break;
 		}
 
