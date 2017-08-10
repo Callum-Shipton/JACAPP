@@ -119,7 +119,7 @@ public class LevelMap {
 			insertTransporter(mapWidthMiddle - 2, 1, new Vector2f(0.0f, 7.0f), Direction.N);
 			insertTransporter(mapWidthMiddle - 1, 1, new Vector2f(0.0f, 7.0f), Direction.N);
 			insertTransporter(mapWidthMiddle, 1, new Vector2f(0.0f, 7.0f), Direction.N);
-			insertTransporter(mapWidthMiddle + 2, 1, new Vector2f(0.0f, 7.0f), Direction.N);
+			insertTransporter(mapWidthMiddle + 1, 1, new Vector2f(0.0f, 7.0f), Direction.N);
 		} else {
 			insertWall(mapWidthMiddle - 2, 0, new Vector2f(1.0f, 2.0f));
 			insertWall(mapWidthMiddle - 1, 0, new Vector2f(1.0f, 2.0f));
