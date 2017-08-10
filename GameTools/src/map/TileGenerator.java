@@ -5,32 +5,36 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
 
 import org.joml.Vector2f;
+import org.joml.Vector2i;
 
 import logging.Logger;
+import map.MapTile.TileType;
 
 public class TileGenerator {
 
-	private static final String INPUT_LOCATION = "/Levels/Level2.png";
-	private static final String OUTPUT_LOCATION = "../ShootEmUp/res/Levels/Level2.map";
+	private static final String INPUT_LOCATION = "/Levels/Level1.png";
+	private static final String OUTPUT_LOCATION = "../ShootEmUp/res/Levels/Level1.map";
 
-	private static Map<Integer, Vector2f> colours;
+	private static Map<Integer, MapTile> colours;
 
 	private BufferedImage mapImage;
 	private int size;
 	private Vector2f[][] backgroundTiles;
-	private Vector2f[][] walls;
+	private Set<MapTile> walls;
 
 	public TileGenerator() {
 		loadMap(INPUT_LOCATION);
 
 		this.size = mapImage.getWidth();
 		backgroundTiles = new Vector2f[size][size];
-		walls = new Vector2f[size][size];
+		walls = new HashSet<>();
 	}
 
 	public static void main(String[] args) {
@@ -45,12 +49,12 @@ public class TileGenerator {
 
 	private static void initTileColours() {
 		colours = new HashMap<>();
-		colours.put(-7864299, new Vector2f(1.0f, 2.0f)); // Brown Wall
-		colours.put(-8421505, new Vector2f(1.0f, 2.0f)); // Grey/ Wall
-		colours.put(-16735512, new Vector2f(1.0f, 1.0f)); // Light Water
-		colours.put(-12629812, new Vector2f(1.0f, 1.0f)); // Dark Water
-		colours.put(-4856291, new Vector2f(0.0f, 7.0f)); // Grass
-		colours.put(-1055568, new Vector2f(1.0f, 7.0f)); // Path
+		colours.put(-7864299, new MapTile(new Vector2f(1.0f, 2.0f), TileType.WALL)); // BrownWall
+		colours.put(-8421505, new MapTile(new Vector2f(1.0f, 2.0f), TileType.WALL)); // GreyWall
+		colours.put(-16735512, new MapTile(new Vector2f(1.0f, 1.0f), TileType.WATER)); // LightWater
+		colours.put(-12629812, new MapTile(new Vector2f(1.0f, 1.0f), TileType.WATER)); // DarkWater
+		colours.put(-4856291, new MapTile(new Vector2f(0.0f, 7.0f), TileType.GROUND)); // Grass
+		colours.put(-1055568, new MapTile(new Vector2f(1.0f, 7.0f), TileType.GROUND)); // Path
 	}
 
 	private void loadMap(String fileLocation) {
@@ -64,17 +68,16 @@ public class TileGenerator {
 	public void setTiles() {
 		Logger.info("Setting Tiles...");
 
-		// Set Background Tiles
 		for (int y = 0; y < size; y++) {
 			for (int x = 0; x < size; x++) {
-				backgroundTiles[x][y] = colours.get(mapImage.getRGB(x, y));
-			}
-		}
+				MapTile tile = new MapTile(colours.get(mapImage.getRGB(x, y)));
+				if (tile.getType() == TileType.GROUND) {
+					backgroundTiles[x][y] = tile.getTexture();
+				} else {
+					tile.setPosition(new Vector2i(x, y));
+					walls.add(tile);
+				}
 
-		// insert correct wall/water type and side
-		for (int y = 0; y < size; y++) {
-			for (int x = 0; x < size; x++) {
-				walls[x][y] = colours.get(mapImage.getRGB(x, y));
 			}
 		}
 

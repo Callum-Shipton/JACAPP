@@ -17,7 +17,7 @@ public class MapGraphics extends BaseGraphics {
 	}
 
 	public Vector2f getMapPos() {
-		return this.mapPos;
+		return mapPos;
 	}
 
 	@Override

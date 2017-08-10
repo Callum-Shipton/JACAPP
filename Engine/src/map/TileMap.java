@@ -3,6 +3,7 @@ package map;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.util.Set;
 
 import org.joml.Vector2f;
 
@@ -16,9 +17,9 @@ public class TileMap implements Serializable {
 	private int height;
 
 	private Vector2f[][] backgroundTiles;
-	private Vector2f[][] walls;
+	private Set<MapTile> walls;
 
-	public TileMap(int width, int height, Vector2f[][] backgroundTiles, Vector2f[][] walls) {
+	public TileMap(int width, int height, Vector2f[][] backgroundTiles, Set<MapTile> walls) {
 		this.width = width;
 		this.height = height;
 		this.backgroundTiles = backgroundTiles;
@@ -49,7 +50,7 @@ public class TileMap implements Serializable {
 		return width;
 	}
 
-	public Vector2f[][] getWalls() {
+	public Set<MapTile> getWalls() {
 		return walls;
 	}
 

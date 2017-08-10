@@ -14,8 +14,8 @@ public class FloorRenderer extends IRenderer {
 
 	@Override
 	public void initRenderData() {
-		this.amount = renderData.length * renderData[0].length;
-		instanceFloatBuffer = BufferUtils.createByteBuffer(this.amount * 4 * 4).asFloatBuffer();
+		amount = renderData.length * renderData[0].length;
+		instanceFloatBuffer = BufferUtils.createByteBuffer(amount * 4 * 4).asFloatBuffer();
 
 		float[] texture = new float[2];
 		float[] translation = new float[2];
@@ -24,13 +24,13 @@ public class FloorRenderer extends IRenderer {
 				if (renderData[i][j] != null) {
 					texture[0] = renderData[i][j].x() / texMax.x();
 					texture[1] = renderData[i][j].y() / texMax.y();
-					translation[0] = i * this.width;
-					translation[1] = j * this.height;
+					translation[0] = i * width;
+					translation[1] = j * height;
 				} else {
 					texture[0] = texMax.x() - (1.0f / texMax.x());
 					texture[1] = texMax.y() - (1.0f / texMax.y());
-					translation[0] = 1000 * this.width;
-					translation[1] = 1000 * this.width;
+					translation[0] = 1000 * width;
+					translation[1] = 1000 * width;
 				}
 				instanceFloatBuffer.put(translation);
 				instanceFloatBuffer.put(texture);

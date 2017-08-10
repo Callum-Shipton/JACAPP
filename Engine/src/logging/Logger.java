@@ -51,7 +51,7 @@ public final class Logger {
 	}
 
 	public enum Category {
-		ALL, ENGINE_STATS, CONTROLLER, AI, AI_GOALBOUNDING, ENTITIES
+		ALL, ENGINE_STATS, CONTROLLER, AI, AI_GOALBOUNDING, ENTITIES, MAZE
 	}
 
 	public static void setDebug(boolean debug) {

@@ -24,8 +24,8 @@ public class WallsRenderer extends IRenderer {
 	@Override
 	public void initRenderData() {
 
-		this.amount = renderData.size();
-		instanceFloatBuffer = BufferUtils.createByteBuffer(this.amount * 4 * 4).asFloatBuffer();
+		amount = renderData.size();
+		instanceFloatBuffer = BufferUtils.createByteBuffer(amount * 4 * 4).asFloatBuffer();
 
 		float[] texture = new float[2];
 		float[] translation = new float[2];

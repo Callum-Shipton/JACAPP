@@ -2,6 +2,7 @@ package level;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.joml.Vector2f;
 import org.joml.Vector2i;
@@ -18,6 +19,7 @@ import entity.Entity;
 import logging.Logger;
 import logging.Logger.Category;
 import loop.Loop;
+import map.MapTile;
 import map.TileMap;
 import maze.MazeTile;
 
@@ -28,6 +30,9 @@ public class LevelMap {
 	private final TileMap tileMap;
 	private final GoalBounder goalBounder;
 	private static final String TILES_TEXTURE_FILE = "Tiles";
+	private static final Vector2f WATER_MODIFIER = new Vector2f(0.0f, 4.0f);
+	private static final Vector2f GROUND_MODIFIER = new Vector2f(0.0f, 7.0f);
+
 	private MazeTile mazeTile;
 
 	// collidable wall entities
@@ -86,54 +91,43 @@ public class LevelMap {
 		ImageProcessor.irWall.draw(ImageProcessor.getImage(TILES_TEXTURE_FILE).getID());
 	}
 
-	private void createWalls(Vector2f[][] walls) {
-		for (int y = 0; y < walls.length; y++) {
-			for (int x = 0; x < walls[0].length; x++) {
+	private void createWalls(Set<MapTile> walls) {
 
-				Vector2f wall = walls[x][y];
-				if (wall != null) {
-					if (wall.equals(new Vector2f(1.0f, 2.0f))) {
-						insertWall(x, y, wall.x(), wall.y());
-					} else if (wall.equals(new Vector2f(1.0f, 1.0f))) {
-						insertWater(x, y, wall.x(), wall.y());
-					} else if (wall.equals(new Vector2f(0.0f, 0.0f))) {
-						insertTransporter(x, y, wall.x(), wall.y(), 1);
-					} else if (wall.equals(new Vector2f(1.0f, 0.0f))) {
-						insertTransporter(x, y, wall.x(), wall.y(), -1);
-					}
-				}
+		for (MapTile wall : walls) {
+			int x = wall.getPosition().x;
+			int y = wall.getPosition().y;
+			Vector2f texture = wall.getTexture();
+			switch (wall.getType()) {
+			case WALL:
+				insertWall(x, y, texture);
+				break;
+			case WATER:
+				insertWater(x, y, texture);
+				break;
+			default:
 			}
 		}
 	}
 
 	// create wall
-	private void insertWall(int x, int y, float tileMapX, float tileMapY) {
-		Entity wall = new Entity();
-		MapGraphics wallG;
-		wallG = new MapGraphics(TILES_TEXTURE_FILE);
-		wallG.setMapPos(new Vector2f(tileMapX, tileMapY));
-		wallG.setX(x * TILE_WIDTH);
-		wallG.setY(y * TILE_WIDTH);
-		createEntity(wallG, x, y, wall);
+	private void insertWall(int x, int y, Vector2f texture) {
+		MapGraphics wallG = new MapGraphics(TILES_TEXTURE_FILE);
+		wallG.setMapPos(texture);
+		createEntity(wallG, x, y);
 	}
 
 	// create water
-	private void insertWater(int x, int y, float tileMapX, float tileMapY) {
-		Entity water = new Entity();
-		MapGraphics wallG;
-		wallG = new MapGraphics(TILES_TEXTURE_FILE);
-		wallG.setMapPos(new Vector2f(tileMapX, tileMapY + 4.0f));
-		wallG.setX(x * TILE_WIDTH);
-		wallG.setY(y * TILE_WIDTH);
-		createEntity(wallG, x, y, water);
+	private void insertWater(int x, int y, Vector2f texture) {
+		MapGraphics wallG = new MapGraphics(TILES_TEXTURE_FILE);
+		wallG.setMapPos(texture.add(WATER_MODIFIER));
+		createEntity(wallG, x, y);
 	}
 
 	// create wall
-	private void insertTransporter(int x, int y, float tileMapX, float tileMapY, int direction) {
+	private void insertTransporter(int x, int y, Vector2f texture, int direction) {
 		Entity wall = new Entity();
-		MapGraphics wallG;
-		wallG = new MapGraphics(TILES_TEXTURE_FILE);
-		wallG.setMapPos(new Vector2f(tileMapX, tileMapY + 7.0f));
+		MapGraphics wallG = new MapGraphics(TILES_TEXTURE_FILE);
+		wallG.setMapPos(new Vector2f(GROUND_MODIFIER));
 		wallG.setX(x * TILE_WIDTH);
 		wallG.setY(y * TILE_WIDTH);
 		wall.addComponent(wallG);
@@ -142,7 +136,10 @@ public class LevelMap {
 		walls.put(new Vector2i(x, y), wall);
 	}
 
-	private void createEntity(MapGraphics wallG, int x, int y, Entity wall) {
+	private void createEntity(MapGraphics wallG, int x, int y) {
+		Entity wall = new Entity();
+		wallG.setX(x * TILE_WIDTH);
+		wallG.setY(y * TILE_WIDTH);
 		wall.addComponent(wallG);
 		RigidCollision rigidCollision = new RigidCollision();
 		wall.addComponent(rigidCollision);

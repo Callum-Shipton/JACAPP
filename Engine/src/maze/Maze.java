@@ -8,6 +8,9 @@ import java.util.Set;
 
 import org.joml.Vector2i;
 
+import logging.Logger;
+import logging.Logger.Category;
+
 public class Maze {
 	private MazeTile[][] grid;
 	private int size;
@@ -104,17 +107,19 @@ public class Maze {
 	}
 
 	private void logState() {
-		System.out.println();
-		System.out.print("Open: ");
+		String output = "";
+		output = output.concat("\n");
+		output = output.concat("Open: ");
 		for (Vector2i pos : open) {
-			System.out.print("(" + pos.x + ", " + pos.y + ") ");
+			output = output.concat("(" + pos.x + ", " + pos.y + ") ");
 		}
-		System.out.println();
-		System.out.print("Closed: ");
+		output = output.concat("\n");
+		output = output.concat("Closed: ");
 		for (Vector2i pos : closed) {
-			System.out.print("(" + pos.x + ", " + pos.y + ") ");
+			output = output.concat("(" + pos.x + ", " + pos.y + ") ");
 		}
-		System.out.println();
+		output = output.concat("\n");
+		Logger.debug(output, Category.MAZE);
 	}
 
 	public Vector2i getStart() {
