@@ -28,22 +28,26 @@ public class GameBase {
 	private Hud hud;
 
 	public void update() {
-		switch (currentLevel.getLevelState()) {
-		case 0:
+		if (currentLevel.getLevelState() == null) {
 			currentLevel.update();
-			break;
-		case 1:
-			changeLevel(new Vector2i(levelPosition.x, levelPosition.y - 1));
-			break;
-		case 2:
-			changeLevel(new Vector2i(levelPosition.x - 1, levelPosition.y));
-			break;
-		case 3:
-			changeLevel(new Vector2i(levelPosition.x, levelPosition.y + 1));
-			break;
-		case 4:
-			changeLevel(new Vector2i(levelPosition.x + 1, levelPosition.y));
-			break;
+		} else {
+			switch (currentLevel.getLevelState()) {
+			case N:
+				changeLevel(new Vector2i(levelPosition.x, levelPosition.y - 1));
+				break;
+			case W:
+				changeLevel(new Vector2i(levelPosition.x - 1, levelPosition.y));
+				break;
+			case S:
+				changeLevel(new Vector2i(levelPosition.x, levelPosition.y + 1));
+				break;
+			case E:
+				changeLevel(new Vector2i(levelPosition.x + 1, levelPosition.y));
+				break;
+			default:
+				currentLevel.update();
+			}
+			currentLevel.setLevelState(null);
 		}
 
 		hud.update();

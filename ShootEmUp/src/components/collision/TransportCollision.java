@@ -3,13 +3,14 @@ package components.collision;
 import entity.Entity;
 import level.Level;
 import main.ShootEmUp;
+import maze.Direction;
 
 public class TransportCollision extends BaseCollision {
 
-	private final boolean direction;
+	private final Direction direction;
 
-	public TransportCollision(int direction) {
-		this.direction = (direction == 1) ? true : false;
+	public TransportCollision(Direction direction) {
+		this.direction = direction;
 		moveBack = false;
 	}
 
@@ -17,11 +18,7 @@ public class TransportCollision extends BaseCollision {
 	public void collision(Entity e, Entity hit) {
 		if (hit.equals(ShootEmUp.getGame().getPlayer())) {
 			Level l = ShootEmUp.getGame().getCurrentLevel();
-			if (direction) {
-				l.setLevelStateNext();
-			} else {
-				l.setLevelStatePrev();
-			}
+			l.setLevelState(direction);
 		}
 	}
 

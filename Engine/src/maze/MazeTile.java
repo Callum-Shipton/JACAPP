@@ -21,8 +21,4 @@ public class MazeTile {
 	public Set<Direction> getAdjacentTiles() {
 		return adjacentTiles;
 	}
-
-	public enum Direction {
-		N, W, S, E
-	}
 }

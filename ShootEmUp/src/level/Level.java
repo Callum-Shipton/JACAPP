@@ -16,6 +16,7 @@ import entity.Entity;
 import entity.EntityStorage;
 import entity.Spawner;
 import logging.Logger;
+import maze.Direction;
 import maze.MazeTile;
 import object.EntityMap;
 
@@ -35,7 +36,7 @@ public class Level {
 	private static final float RADIUS = 250.0f;
 	private static final float RADIUS_INCREASE_PER_LEVEL = 25.0f;
 
-	private int levelState = 0;
+	private Direction levelState = null;
 
 	public Level(MazeTile mazeTile) {
 		map = new LevelMap(mazeTile);
@@ -133,7 +134,7 @@ public class Level {
 		return map;
 	}
 
-	public int getLevelState() {
+	public Direction getLevelState() {
 		return levelState;
 	}
 
@@ -141,11 +142,7 @@ public class Level {
 		return entityStorage;
 	}
 
-	public void setLevelStateNext() {
-		levelState = 1;
-	}
-
-	public void setLevelStatePrev() {
-		levelState = -1;
+	public void setLevelState(Direction direction) {
+		levelState = direction;
 	}
 }

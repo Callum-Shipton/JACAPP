@@ -40,7 +40,7 @@ public class Maze {
 		while (!open.isEmpty()) {
 			logState();
 			Vector2i nextTile = open.remove(rand.nextInt(open.size()));
-			System.out.println("Current: " + nextTile.x + ", " + nextTile.y);
+			Logger.debug("Current: " + nextTile.x + ", " + nextTile.y, Category.MAZE);
 			grid[nextTile.x][nextTile.y] = new MazeTile();
 			setWalls(nextTile);
 			addAdjacentTiles(nextTile);
@@ -71,36 +71,36 @@ public class Maze {
 	}
 
 	private void setWalls(Vector2i position) {
-		List<MazeTile.Direction> directions = new ArrayList<>();
+		List<Direction> directions = new ArrayList<>();
 		if (position.x > 0 && grid[position.x - 1][position.y] != null) {
-			directions.add(MazeTile.Direction.W);
+			directions.add(Direction.W);
 		}
 		if (position.x < size - 1 && grid[position.x + 1][position.y] != null) {
-			directions.add(MazeTile.Direction.E);
+			directions.add(Direction.E);
 		}
 		if (position.y > 0 && grid[position.x][position.y - 1] != null) {
-			directions.add(MazeTile.Direction.N);
+			directions.add(Direction.N);
 		}
 		if (position.y < size - 1 && grid[position.x][position.y + 1] != null) {
-			directions.add(MazeTile.Direction.S);
+			directions.add(Direction.S);
 		}
 
 		if (!directions.isEmpty()) {
-			MazeTile.Direction adjacent = directions.get(rand.nextInt(directions.size()));
+			Direction adjacent = directions.get(rand.nextInt(directions.size()));
 			grid[position.x][position.y].setAdjacent(adjacent);
 
 			switch (adjacent) {
 			case N:
-				grid[position.x][position.y - 1].setAdjacent(MazeTile.Direction.S);
+				grid[position.x][position.y - 1].setAdjacent(Direction.S);
 				break;
 			case W:
-				grid[position.x - 1][position.y].setAdjacent(MazeTile.Direction.E);
+				grid[position.x - 1][position.y].setAdjacent(Direction.E);
 				break;
 			case S:
-				grid[position.x][position.y + 1].setAdjacent(MazeTile.Direction.N);
+				grid[position.x][position.y + 1].setAdjacent(Direction.N);
 				break;
 			case E:
-				grid[position.x + 1][position.y].setAdjacent(MazeTile.Direction.W);
+				grid[position.x + 1][position.y].setAdjacent(Direction.W);
 				break;
 			}
 		}
