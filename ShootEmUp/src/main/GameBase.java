@@ -76,6 +76,11 @@ public class GameBase {
 			break;
 		}
 
+		if (levelPosition.equals(new Vector2i(5, 9))) {
+			System.out.print("YOU WIN!!!!");
+			System.exit(0);
+		}
+
 		currentLevel.setLevelState(null);
 
 		if (ShootEmUp.getSave() == null) {
