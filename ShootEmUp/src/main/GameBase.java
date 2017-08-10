@@ -53,26 +53,28 @@ public class GameBase {
 
 	private void changeLevel(Direction direction) {
 
-		Vector2f SpawnLocation = new Vector2f(1500.0f, 2400.0f);
+		Vector2f spawnLocation = new Vector2f(1500.0f, 2400.0f);
 
-		switch (currentLevel.getLevelState()) {
+		switch (direction) {
 		case N:
 			levelPosition = new Vector2i(levelPosition.x, levelPosition.y - 1);
-			SpawnLocation = new Vector2f(1500.0f, 2400.0f);
+			spawnLocation = new Vector2f(1500.0f, 2400.0f);
 			break;
 		case W:
 			levelPosition = new Vector2i(levelPosition.x - 1, levelPosition.y);
-			SpawnLocation = new Vector2f(2400.0f, 1500.0f);
+			spawnLocation = new Vector2f(2400.0f, 1500.0f);
 			break;
 		case S:
 			levelPosition = new Vector2i(levelPosition.x, levelPosition.y + 1);
-			SpawnLocation = new Vector2f(1500.0f, 100.0f);
+			spawnLocation = new Vector2f(1500.0f, 100.0f);
 			break;
 		case E:
 			levelPosition = new Vector2i(levelPosition.x + 1, levelPosition.y);
-			SpawnLocation = new Vector2f(100.0f, 1500.0f);
+			spawnLocation = new Vector2f(100.0f, 1500.0f);
 			break;
 		}
+
+		currentLevel.setLevelState(null);
 
 		if (ShootEmUp.getSave() == null) {
 			ShootEmUp.setSave(new ShootEmUpSave());
@@ -102,7 +104,7 @@ public class GameBase {
 		}
 		player = new Entity("Characters", "Players", "Warrior");
 		PointSpawn bs = player.getComponent(TypeComponent.SPAWN);
-		bs.setSpawnLocation(SpawnLocation);
+		bs.setSpawnLocation(spawnLocation);
 		bs.spawn();
 		currentLevel.addEntity(player);
 		hud = new Hud(player, 0, 0);
