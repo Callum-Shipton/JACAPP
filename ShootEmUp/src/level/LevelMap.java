@@ -128,7 +128,7 @@ public class LevelMap {
 			insertWall(mapWidthMiddle - 2, 1, new Vector2f(1.0f, 2.0f));
 			insertWall(mapWidthMiddle - 1, 1, new Vector2f(1.0f, 2.0f));
 			insertWall(mapWidthMiddle, 1, new Vector2f(1.0f, 2.0f));
-			insertWall(mapWidthMiddle + 2, 1, new Vector2f(1.0f, 2.0f));
+			insertWall(mapWidthMiddle + 1, 1, new Vector2f(1.0f, 2.0f));
 		}
 		if (mazeTile.getAdjacentTile(Direction.S)) {
 			insertTransporter(mapWidthMiddle - 2, tileMap.getHeight() - 1, new Vector2f(0.0f, 7.0f), Direction.S);
@@ -138,7 +138,7 @@ public class LevelMap {
 			insertTransporter(mapWidthMiddle - 2, tileMap.getHeight() - 2, new Vector2f(0.0f, 7.0f), Direction.S);
 			insertTransporter(mapWidthMiddle - 1, tileMap.getHeight() - 2, new Vector2f(0.0f, 7.0f), Direction.S);
 			insertTransporter(mapWidthMiddle, tileMap.getHeight() - 2, new Vector2f(0.0f, 7.0f), Direction.S);
-			insertTransporter(mapWidthMiddle + 2, tileMap.getHeight() - 2, new Vector2f(0.0f, 7.0f), Direction.S);
+			insertTransporter(mapWidthMiddle + 1, tileMap.getHeight() - 2, new Vector2f(0.0f, 7.0f), Direction.S);
 		} else {
 			insertWall(mapWidthMiddle - 2, tileMap.getHeight() - 1, new Vector2f(1.0f, 2.0f));
 			insertWall(mapWidthMiddle - 1, tileMap.getHeight() - 1, new Vector2f(1.0f, 2.0f));
@@ -147,7 +147,7 @@ public class LevelMap {
 			insertWall(mapWidthMiddle - 2, tileMap.getHeight() - 2, new Vector2f(1.0f, 2.0f));
 			insertWall(mapWidthMiddle - 1, tileMap.getHeight() - 2, new Vector2f(1.0f, 2.0f));
 			insertWall(mapWidthMiddle, tileMap.getHeight() - 2, new Vector2f(1.0f, 2.0f));
-			insertWall(mapWidthMiddle + 2, tileMap.getHeight() - 2, new Vector2f(1.0f, 2.0f));
+			insertWall(mapWidthMiddle + 1, tileMap.getHeight() - 2, new Vector2f(1.0f, 2.0f));
 		}
 		if (mazeTile.getAdjacentTile(Direction.W)) {
 			insertTransporter(0, mapHeightMiddle - 2, new Vector2f(0.0f, 7.0f), Direction.W);
