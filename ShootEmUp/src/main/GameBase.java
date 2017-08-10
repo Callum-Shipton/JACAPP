@@ -54,23 +54,25 @@ public class GameBase {
 	private void changeLevel(Direction direction) {
 
 		Vector2f spawnLocation = new Vector2f(1500.0f, 2400.0f);
+		float levelWidth = currentLevel.getMap().getRealWidth();
+		float levelHeight = currentLevel.getMap().getRealHeight();
 
 		switch (direction) {
 		case N:
 			levelPosition = new Vector2i(levelPosition.x, levelPosition.y - 1);
-			spawnLocation = new Vector2f(1500.0f, 2400.0f);
+			spawnLocation = new Vector2f(levelWidth / 2, levelHeight - 100.0f);
 			break;
 		case W:
 			levelPosition = new Vector2i(levelPosition.x - 1, levelPosition.y);
-			spawnLocation = new Vector2f(2400.0f, 1500.0f);
+			spawnLocation = new Vector2f(levelWidth - 100.0f, levelHeight / 2);
 			break;
 		case S:
 			levelPosition = new Vector2i(levelPosition.x, levelPosition.y + 1);
-			spawnLocation = new Vector2f(1500.0f, 100.0f);
+			spawnLocation = new Vector2f(levelWidth / 2, 100.0f);
 			break;
 		case E:
 			levelPosition = new Vector2i(levelPosition.x + 1, levelPosition.y);
-			spawnLocation = new Vector2f(100.0f, 1500.0f);
+			spawnLocation = new Vector2f(100.0f, levelHeight / 2);
 			break;
 		}
 

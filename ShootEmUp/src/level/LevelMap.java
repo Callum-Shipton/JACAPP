@@ -232,6 +232,14 @@ public class LevelMap {
 		return tileMap.getWidth();
 	}
 
+	public float getRealWidth() {
+		return tileMap.getWidth() * TILE_WIDTH;
+	}
+
+	public float getRealHeight() {
+		return tileMap.getHeight() * TILE_WIDTH;
+	}
+
 	public GoalBounder getGoalBounder() {
 		return goalBounder;
 	}
