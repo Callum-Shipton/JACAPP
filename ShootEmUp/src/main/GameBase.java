@@ -14,6 +14,7 @@ import entity.Entity;
 import gui.Hud;
 import level.Level;
 import logging.Logger;
+import maze.Direction;
 import maze.Maze;
 import save.ShootEmUpSave;
 
@@ -31,23 +32,7 @@ public class GameBase {
 		if (currentLevel.getLevelState() == null) {
 			currentLevel.update();
 		} else {
-			switch (currentLevel.getLevelState()) {
-			case N:
-				changeLevel(new Vector2i(levelPosition.x, levelPosition.y - 1));
-				break;
-			case W:
-				changeLevel(new Vector2i(levelPosition.x - 1, levelPosition.y));
-				break;
-			case S:
-				changeLevel(new Vector2i(levelPosition.x, levelPosition.y + 1));
-				break;
-			case E:
-				changeLevel(new Vector2i(levelPosition.x + 1, levelPosition.y));
-				break;
-			default:
-				currentLevel.update();
-			}
-			currentLevel.setLevelState(null);
+			changeLevel(currentLevel.getLevelState());
 		}
 
 		hud.update();
@@ -66,8 +51,22 @@ public class GameBase {
 		}
 	}
 
-	private void changeLevel(Vector2i levelPosition) {
-		this.levelPosition = levelPosition;
+	private void changeLevel(Direction direction) {
+
+		switch (currentLevel.getLevelState()) {
+		case N:
+			levelPosition = new Vector2i(levelPosition.x, levelPosition.y - 1);
+			break;
+		case W:
+			levelPosition = new Vector2i(levelPosition.x - 1, levelPosition.y);
+			break;
+		case S:
+			levelPosition = new Vector2i(levelPosition.x, levelPosition.y + 1);
+			break;
+		case E:
+			levelPosition = new Vector2i(levelPosition.x + 1, levelPosition.y);
+			break;
+		}
 
 		if (ShootEmUp.getSave() == null) {
 			ShootEmUp.setSave(new ShootEmUpSave());
