@@ -109,7 +109,6 @@ public class GameBase {
 		} catch (Exception e) {
 			Logger.error(e);
 		}
-		player = new Entity("Characters", "Players", "Warrior");
 		PointSpawn bs = player.getComponent(TypeComponent.SPAWN);
 		bs.setSpawnLocation(spawnLocation);
 		bs.spawn();
