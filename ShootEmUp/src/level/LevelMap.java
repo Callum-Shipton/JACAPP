@@ -45,7 +45,7 @@ public class LevelMap {
 
 		Random rand = new Random();
 
-		String file = ImageProcessor.LEVEL_FILE_LOCATION + (rand.nextInt(2) + 1) + ".map";
+		String file = ImageProcessor.LEVEL_FILE_LOCATION + (rand.nextInt(5) + 1) + ".map";
 
 		tileMap = TileMap.readTileMap(file);
 		Loop.getDisplay().getCamera()
@@ -114,11 +114,13 @@ public class LevelMap {
 
 		int mapWidthMiddle = tileMap.getWidth() / 2;
 		int mapHeightMiddle = tileMap.getHeight() / 2;
+		Vector2f transportTexture = new Vector2f(1.0f, 7.0f);
+
 		if (mazeTile.getAdjacentTile(Direction.N)) {
-			insertTransporter(mapWidthMiddle - 2, 0, new Vector2f(0.0f, 7.0f), Direction.N);
-			insertTransporter(mapWidthMiddle - 1, 0, new Vector2f(0.0f, 7.0f), Direction.N);
-			insertTransporter(mapWidthMiddle, 0, new Vector2f(0.0f, 7.0f), Direction.N);
-			insertTransporter(mapWidthMiddle + 1, 0, new Vector2f(0.0f, 7.0f), Direction.N);
+			insertTransporter(mapWidthMiddle - 2, 0, transportTexture, Direction.N);
+			insertTransporter(mapWidthMiddle - 1, 0, transportTexture, Direction.N);
+			insertTransporter(mapWidthMiddle, 0, transportTexture, Direction.N);
+			insertTransporter(mapWidthMiddle + 1, 0, transportTexture, Direction.N);
 		} else {
 			insertWall(mapWidthMiddle - 2, 0, new Vector2f(1.0f, 2.0f));
 			insertWall(mapWidthMiddle - 1, 0, new Vector2f(1.0f, 2.0f));
@@ -130,10 +132,10 @@ public class LevelMap {
 			insertWall(mapWidthMiddle + 1, 1, new Vector2f(1.0f, 2.0f));
 		}
 		if (mazeTile.getAdjacentTile(Direction.S)) {
-			insertTransporter(mapWidthMiddle - 2, tileMap.getHeight() - 1, new Vector2f(0.0f, 7.0f), Direction.S);
-			insertTransporter(mapWidthMiddle - 1, tileMap.getHeight() - 1, new Vector2f(0.0f, 7.0f), Direction.S);
-			insertTransporter(mapWidthMiddle, tileMap.getHeight() - 1, new Vector2f(0.0f, 7.0f), Direction.S);
-			insertTransporter(mapWidthMiddle + 1, tileMap.getHeight() - 1, new Vector2f(0.0f, 7.0f), Direction.S);
+			insertTransporter(mapWidthMiddle - 2, tileMap.getHeight() - 1, transportTexture, Direction.S);
+			insertTransporter(mapWidthMiddle - 1, tileMap.getHeight() - 1, transportTexture, Direction.S);
+			insertTransporter(mapWidthMiddle, tileMap.getHeight() - 1, transportTexture, Direction.S);
+			insertTransporter(mapWidthMiddle + 1, tileMap.getHeight() - 1, transportTexture, Direction.S);
 		} else {
 			insertWall(mapWidthMiddle - 2, tileMap.getHeight() - 1, new Vector2f(1.0f, 2.0f));
 			insertWall(mapWidthMiddle - 1, tileMap.getHeight() - 1, new Vector2f(1.0f, 2.0f));
@@ -145,10 +147,10 @@ public class LevelMap {
 			insertWall(mapWidthMiddle + 1, tileMap.getHeight() - 2, new Vector2f(1.0f, 2.0f));
 		}
 		if (mazeTile.getAdjacentTile(Direction.W)) {
-			insertTransporter(0, mapHeightMiddle - 2, new Vector2f(0.0f, 7.0f), Direction.W);
-			insertTransporter(0, mapHeightMiddle - 1, new Vector2f(0.0f, 7.0f), Direction.W);
-			insertTransporter(0, mapHeightMiddle, new Vector2f(0.0f, 7.0f), Direction.W);
-			insertTransporter(0, mapHeightMiddle + 1, new Vector2f(0.0f, 7.0f), Direction.W);
+			insertTransporter(0, mapHeightMiddle - 2, transportTexture, Direction.W);
+			insertTransporter(0, mapHeightMiddle - 1, transportTexture, Direction.W);
+			insertTransporter(0, mapHeightMiddle, transportTexture, Direction.W);
+			insertTransporter(0, mapHeightMiddle + 1, transportTexture, Direction.W);
 		} else {
 			insertWall(0, mapHeightMiddle - 2, new Vector2f(1.0f, 2.0f));
 			insertWall(0, mapHeightMiddle - 1, new Vector2f(1.0f, 2.0f));
@@ -160,10 +162,10 @@ public class LevelMap {
 			insertWall(1, mapHeightMiddle + 1, new Vector2f(1.0f, 2.0f));
 		}
 		if (mazeTile.getAdjacentTile(Direction.E)) {
-			insertTransporter(tileMap.getHeight() - 1, mapHeightMiddle - 2, new Vector2f(0.0f, 7.0f), Direction.E);
-			insertTransporter(tileMap.getHeight() - 1, mapHeightMiddle - 1, new Vector2f(0.0f, 7.0f), Direction.E);
-			insertTransporter(tileMap.getHeight() - 1, mapHeightMiddle, new Vector2f(0.0f, 7.0f), Direction.E);
-			insertTransporter(tileMap.getHeight() - 1, mapHeightMiddle + 1, new Vector2f(0.0f, 7.0f), Direction.E);
+			insertTransporter(tileMap.getHeight() - 1, mapHeightMiddle - 2, transportTexture, Direction.E);
+			insertTransporter(tileMap.getHeight() - 1, mapHeightMiddle - 1, transportTexture, Direction.E);
+			insertTransporter(tileMap.getHeight() - 1, mapHeightMiddle, transportTexture, Direction.E);
+			insertTransporter(tileMap.getHeight() - 1, mapHeightMiddle + 1, transportTexture, Direction.E);
 		} else {
 			insertWall(tileMap.getHeight() - 1, mapHeightMiddle - 2, new Vector2f(1.0f, 2.0f));
 			insertWall(tileMap.getHeight() - 1, mapHeightMiddle - 1, new Vector2f(1.0f, 2.0f));

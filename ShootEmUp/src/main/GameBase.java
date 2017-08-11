@@ -120,9 +120,12 @@ public class GameBase {
 		maze = new Maze(11);
 		maze.generateMaze();
 
+		float levelWidth = currentLevel.getMap().getRealWidth();
+		float levelHeight = currentLevel.getMap().getRealHeight();
+
 		player = new Entity("Characters", "Players", "Warrior");
 		PointSpawn spawn = player.getComponent(TypeComponent.SPAWN);
-		spawn.setSpawnLocation(new Vector2f(480.0f, 480.0f));
+		spawn.setSpawnLocation(new Vector2f(levelWidth / 2, levelHeight - 96.0f).add(new Vector2f(-32.0f, -32.0f)));
 		spawn.spawn();
 
 		levelPosition = maze.getStart();

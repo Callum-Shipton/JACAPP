@@ -19,8 +19,8 @@ import map.MapTile.TileType;
 
 public class TileGenerator {
 
-	private static final String INPUT_LOCATION = "/Levels/Level1.png";
-	private static final String OUTPUT_LOCATION = "../ShootEmUp/res/Levels/Level1.map";
+	private static final String INPUT_LOCATION = "/Levels/Level5.png";
+	private static final String OUTPUT_LOCATION = "../ShootEmUp/res/Levels/Level5.map";
 
 	private static Map<Integer, MapTile> colours;
 
@@ -55,6 +55,7 @@ public class TileGenerator {
 		colours.put(-12629812, new MapTile(new Vector2f(1.0f, 1.0f), TileType.WATER)); // DarkWater
 		colours.put(-4856291, new MapTile(new Vector2f(0.0f, 7.0f), TileType.GROUND)); // Grass
 		colours.put(-1055568, new MapTile(new Vector2f(1.0f, 7.0f), TileType.GROUND)); // Path
+		colours.put(-6075996, new MapTile(null, TileType.TRANSPORT)); // Path
 	}
 
 	private void loadMap(String fileLocation) {
@@ -70,14 +71,18 @@ public class TileGenerator {
 
 		for (int y = 0; y < size; y++) {
 			for (int x = 0; x < size; x++) {
-				MapTile tile = new MapTile(colours.get(mapImage.getRGB(x, y)));
-				if (tile.getType() == TileType.GROUND) {
-					backgroundTiles[x][y] = tile.getTexture();
-				} else {
-					tile.setPosition(new Vector2i(x, y));
-					walls.add(tile);
+				if (colours.get(mapImage.getRGB(x, y)) == null) {
+					Logger.warn("Tile colour not standard: " + mapImage.getRGB(x, y));
 				}
-
+				MapTile tile = new MapTile(colours.get(mapImage.getRGB(x, y)));
+				if (tile.getTexture() != null) {
+					if (tile.getType() == TileType.GROUND || tile.getType() == TileType.TRANSPORT) {
+						backgroundTiles[x][y] = tile.getTexture();
+					} else {
+						tile.setPosition(new Vector2i(x, y));
+						walls.add(tile);
+					}
+				}
 			}
 		}
 

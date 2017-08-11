@@ -15,7 +15,7 @@ public class MazeTest {
 
 	@Before
 	public void setUp() {
-		Maze maze = new Maze(100);
+		Maze maze = new Maze(10);
 		maze.generateMaze();
 		grid = maze.getGrid();
 	}
