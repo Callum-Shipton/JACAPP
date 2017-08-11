@@ -26,6 +26,7 @@ import components.graphical.BaseGraphics;
 import components.interfaces.InventoryComponent;
 import components.spawn.PointSpawn;
 import entity.Entity;
+import loop.Loop;
 import main.ShootEmUp;
 import object.Armour;
 import object.DurationPotion;
@@ -134,7 +135,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 				new OneTimePotion("Mana").destroy(e);
 				break;
 			case 2:
-				new DurationPotion("Speed", 30).destroy(e);
+				new DurationPotion("Speed", Loop.ticks(30)).destroy(e);
 				break;
 			case 3:
 				new DurationPotion("Knockback", 30).destroy(e);
@@ -325,7 +326,7 @@ public class BaseInventory extends Component implements InventoryComponent {
 						break;
 					case "Speed":
 						if (!potions.containsKey(SPEED)) {
-							potions.put(SPEED, new DurationPotion("Speed", 30));
+							potions.put(SPEED, new DurationPotion("Speed", Loop.ticks(30)));
 						} else {
 							potions.get(SPEED).addPotion();
 						}
