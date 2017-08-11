@@ -5,6 +5,7 @@ import java.util.Set;
 
 public class MazeTile {
 	Set<Direction> adjacentTiles;
+	boolean explored = false;
 
 	public MazeTile() {
 		adjacentTiles = new HashSet<>();
@@ -20,5 +21,13 @@ public class MazeTile {
 
 	public Set<Direction> getAdjacentTiles() {
 		return adjacentTiles;
+	}
+
+	public void setExplored() {
+		explored = true;
+	}
+
+	public boolean getExplored() {
+		return explored;
 	}
 }

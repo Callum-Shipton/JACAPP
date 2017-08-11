@@ -76,6 +76,8 @@ public class GameBase {
 			break;
 		}
 
+		maze.getGrid()[levelPosition.x][levelPosition.y].setExplored();
+
 		if (levelPosition.equals(new Vector2i(5, 10))) {
 			System.out.print("YOU WIN!!!!");
 			System.exit(0);
@@ -167,5 +169,9 @@ public class GameBase {
 
 	public void setHud(Hud hud) {
 		this.hud = hud;
+	}
+
+	public Maze getMaze() {
+		return maze;
 	}
 }
