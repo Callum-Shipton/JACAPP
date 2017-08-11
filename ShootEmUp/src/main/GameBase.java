@@ -120,6 +120,10 @@ public class GameBase {
 		maze = new Maze(11);
 		maze.generateMaze();
 
+		levelPosition = maze.getStart();
+		currentLevel = new Level(maze.getTile(levelPosition));
+		currentLevel.init();
+
 		float levelWidth = currentLevel.getMap().getRealWidth();
 		float levelHeight = currentLevel.getMap().getRealHeight();
 
@@ -128,9 +132,6 @@ public class GameBase {
 		spawn.setSpawnLocation(new Vector2f(levelWidth / 2, levelHeight - 96.0f).add(new Vector2f(-32.0f, -32.0f)));
 		spawn.spawn();
 
-		levelPosition = maze.getStart();
-		currentLevel = new Level(maze.getTile(levelPosition));
-		currentLevel.init();
 		currentLevel.addEntity(player);
 
 		List<String> enemyPrototypes = new ArrayList<>();

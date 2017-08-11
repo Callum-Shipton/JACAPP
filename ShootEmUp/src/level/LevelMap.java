@@ -33,8 +33,6 @@ public class LevelMap {
 	private final GoalBounder goalBounder;
 	private static final String TILES_TEXTURE_FILE = "Tiles";
 	private static final Vector2f WATER_MODIFIER = new Vector2f(0.0f, 4.0f);
-	private static final Vector2f GROUND_MODIFIER = new Vector2f(0.0f, 7.0f);
-
 	private MazeTile mazeTile;
 
 	// collidable wall entities
@@ -196,7 +194,7 @@ public class LevelMap {
 	private void insertTransporter(int x, int y, Vector2f texture, Direction direction) {
 		Entity wall = new Entity();
 		MapGraphics wallG = new MapGraphics(TILES_TEXTURE_FILE);
-		wallG.setMapPos(new Vector2f(GROUND_MODIFIER));
+		wallG.setMapPos(new Vector2f(texture));
 		wallG.setX(x * TILE_WIDTH);
 		wallG.setY(y * TILE_WIDTH);
 		wall.addComponent(wallG);
