@@ -31,7 +31,7 @@ public class MainMenu extends GuiMenu {
 		Button exitButton = new Button(ImageProcessor.getImage("ExitButton"), new ExitButton());
 
 		buttonList.addMenuItem(newGameButton);
-		buttonList.addMenuItem(loadGameButton);
+		// buttonList.addMenuItem(loadGameButton);
 		buttonList.addMenuItem(optionsButton);
 		buttonList.addMenuItem(exitButton);
 		addMenuItem(buttonList);
