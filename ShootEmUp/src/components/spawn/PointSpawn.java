@@ -18,7 +18,7 @@ public class PointSpawn extends BaseSpawn implements SpawnComponent {
 	}
 
 	public void setSpawnLocation(Vector2f spawnLoc) {
-		this.spawnLoc = spawnLoc.add(new Vector2f(-32.0f, -32.0f));
+		this.spawnLoc = spawnLoc;
 	}
 
 	@Override

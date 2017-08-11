@@ -110,7 +110,7 @@ public class GameBase {
 			Logger.error(e);
 		}
 		PointSpawn bs = player.getComponent(TypeComponent.SPAWN);
-		bs.setSpawnLocation(spawnLocation);
+		bs.setSpawnLocation(spawnLocation.add(new Vector2f(-32.0f, -32.0f)));
 		bs.spawn();
 		currentLevel.addEntity(player);
 		hud = new Hud(player, 0, 0);
