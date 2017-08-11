@@ -60,23 +60,23 @@ public class GameBase {
 		switch (direction) {
 		case N:
 			levelPosition = new Vector2i(levelPosition.x, levelPosition.y - 1);
-			spawnLocation = new Vector2f(levelWidth / 2, levelHeight - 200.0f);
+			spawnLocation = new Vector2f(levelWidth / 2, levelHeight - 96.0f);
 			break;
 		case W:
 			levelPosition = new Vector2i(levelPosition.x - 1, levelPosition.y);
-			spawnLocation = new Vector2f(levelWidth - 200.0f, levelHeight / 2);
+			spawnLocation = new Vector2f(levelWidth - 96.0f, levelHeight / 2);
 			break;
 		case S:
 			levelPosition = new Vector2i(levelPosition.x, levelPosition.y + 1);
-			spawnLocation = new Vector2f(levelWidth / 2, 200.0f);
+			spawnLocation = new Vector2f(levelWidth / 2, 96.0f);
 			break;
 		case E:
 			levelPosition = new Vector2i(levelPosition.x + 1, levelPosition.y);
-			spawnLocation = new Vector2f(200.0f, levelHeight / 2);
+			spawnLocation = new Vector2f(96.0f, levelHeight / 2);
 			break;
 		}
 
-		if (levelPosition.equals(new Vector2i(5, 9))) {
+		if (levelPosition.equals(new Vector2i(5, 10))) {
 			System.out.print("YOU WIN!!!!");
 			System.exit(0);
 		}
@@ -117,7 +117,7 @@ public class GameBase {
 	}
 
 	public void newGame() {
-		maze = new Maze(10);
+		maze = new Maze(11);
 		maze.generateMaze();
 
 		player = new Entity("Characters", "Players", "Warrior");

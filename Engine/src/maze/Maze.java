@@ -34,7 +34,7 @@ public class Maze {
 	}
 
 	public void generateMaze() {
-		start = new Vector2i(size / 2, 0);
+		start = new Vector2i(size / 2, size / 2);
 		open.add(start);
 
 		while (!open.isEmpty()) {

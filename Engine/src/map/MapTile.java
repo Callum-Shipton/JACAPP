@@ -46,7 +46,7 @@ public class MapTile implements Serializable {
 	}
 
 	public enum TileType implements Serializable {
-		WALL, WATER, GROUND
+		WALL, WATER, GROUND, TRANSPORT
 	}
 
 }

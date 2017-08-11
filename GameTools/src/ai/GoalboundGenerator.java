@@ -36,13 +36,15 @@ public class GoalboundGenerator {
 	private Set<Vector2i> walls;
 
 	private static final int MAXIMUM_SIZE = 4;
-	private static final String IN_MAP_FILE = "/Levels/Level1.png";
-	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level1.bound";
+	private static final String IN_MAP_FILE = "/Levels/Level2.png";
+	private static final String OUT_MAP_FILE = "../ShootEmUp/res/Levels/Level2.bound";
 
 	private static final int BROWNWALL_COLOR = -7864299;
 	private static final int GREYWALL_COLOR = -8421505;
 	private static final int LIGHTWATER_COLOR = -16735512;
 	private static final int DARKWATER_COLOR = -12629812;
+
+	private static final int TRANSPORT_COLOR = -6075996;
 
 	private static final int GRASS_COLOR = -4856291;
 	private static final int PATH_COLOR = -1055568;
@@ -94,6 +96,7 @@ public class GoalboundGenerator {
 				case GREYWALL_COLOR:
 				case LIGHTWATER_COLOR:
 				case DARKWATER_COLOR:
+				case TRANSPORT_COLOR:
 					walls.add(new Vector2i(x, y));
 					break;
 				case GRASS_COLOR:
