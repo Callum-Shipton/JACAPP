@@ -123,6 +123,7 @@ public class GameBase {
 		maze.generateMaze();
 
 		levelPosition = maze.getStart();
+		maze.getGrid()[levelPosition.x][levelPosition.y].setExplored();
 		currentLevel = new Level(maze.getTile(levelPosition));
 		currentLevel.init();
 

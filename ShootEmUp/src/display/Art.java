@@ -159,21 +159,21 @@ public class Art implements ArtLoader {
 
 		ImageProcessor.addArt("BarInfoBottom", new Image("/Images/HUD/BarInfoBottom.png", 1, 1));
 
-		ImageProcessor.addArt("MazeIconN", new Image("/Images/Menu/Maze/MazeIconN.png", 1, 1));
-		ImageProcessor.addArt("MazeIconW", new Image("/Images/Menu/Maze/MazeIconW.png", 1, 1));
-		ImageProcessor.addArt("MazeIconS", new Image("/Images/Menu/Maze/MazeIconS.png", 1, 1));
-		ImageProcessor.addArt("MazeIconE", new Image("/Images/Menu/Maze/MazeIconE.png", 1, 1));
-		ImageProcessor.addArt("MazeIconNW", new Image("/Images/Menu/Maze/MazeIconNW.png", 1, 1));
-		ImageProcessor.addArt("MazeIconWS", new Image("/Images/Menu/Maze/MazeIconWS.png", 1, 1));
-		ImageProcessor.addArt("MazeIconSE", new Image("/Images/Menu/Maze/MazeIconSE.png", 1, 1));
-		ImageProcessor.addArt("MazeIconEN", new Image("/Images/Menu/Maze/MazeIconEN.png", 1, 1));
-		ImageProcessor.addArt("MazeIconNWS", new Image("/Images/Menu/Maze/MazeIconNWS.png", 1, 1));
-		ImageProcessor.addArt("MazeIconWSE", new Image("/Images/Menu/Maze/MazeIconWSE.png", 1, 1));
-		ImageProcessor.addArt("MazeIconSEN", new Image("/Images/Menu/Maze/MazeIconSEN.png", 1, 1));
-		ImageProcessor.addArt("MazeIconENW", new Image("/Images/Menu/Maze/MazeIconENW.png", 1, 1));
-		ImageProcessor.addArt("MazeIconNWES", new Image("/Images/Menu/Maze/MazeIconNWES.png", 1, 1));
-		ImageProcessor.addArt("MazeIconNS", new Image("/Images/Menu/Maze/MazeIconNS.png", 1, 1));
-		ImageProcessor.addArt("MazeIconWE", new Image("/Images/Menu/Maze/MazeIconWE.png", 1, 1));
+		ImageProcessor.addArt("MapIconN", new Image("/Images/Menus/Map/MapIconN.png", 1, 1));
+		ImageProcessor.addArt("MapIconW", new Image("/Images/Menus/Map/MapIconW.png", 1, 1));
+		ImageProcessor.addArt("MapIconS", new Image("/Images/Menus/Map/MapIconS.png", 1, 1));
+		ImageProcessor.addArt("MapIconE", new Image("/Images/Menus/Map/MapIconE.png", 1, 1));
+		ImageProcessor.addArt("MapIconNW", new Image("/Images/Menus/Map/MapIconNW.png", 1, 1));
+		ImageProcessor.addArt("MapIconWS", new Image("/Images/Menus/Map/MapIconWS.png", 1, 1));
+		ImageProcessor.addArt("MapIconSE", new Image("/Images/Menus/Map/MapIconSE.png", 1, 1));
+		ImageProcessor.addArt("MapIconEN", new Image("/Images/Menus/Map/MapIconEN.png", 1, 1));
+		ImageProcessor.addArt("MapIconNWS", new Image("/Images/Menus/Map/MapIconNWS.png", 1, 1));
+		ImageProcessor.addArt("MapIconWSE", new Image("/Images/Menus/Map/MapIconWSE.png", 1, 1));
+		ImageProcessor.addArt("MapIconSEN", new Image("/Images/Menus/Map/MapIconSEN.png", 1, 1));
+		ImageProcessor.addArt("MapIconENW", new Image("/Images/Menus/Map/MapIconENW.png", 1, 1));
+		ImageProcessor.addArt("MapIconNWSE", new Image("/Images/Menus/Map/MapIconNWSE.png", 1, 1));
+		ImageProcessor.addArt("MapIconNS", new Image("/Images/Menus/Map/MapIconNS.png", 1, 1));
+		ImageProcessor.addArt("MapIconWE", new Image("/Images/Menus/Map/MapIconWE.png", 1, 1));
 	}
 
 }

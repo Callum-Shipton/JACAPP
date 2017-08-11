@@ -49,12 +49,19 @@ public class MenuMap extends GuiComponent {
 					if (indexX > maxX) {
 						maxX = indexX;
 					}
+				}
+			}
+		}
+		mapWidth = 11;
+		mapHeight = 11;
+
+		for (int indexY = 0; indexY < grid.length; indexY++) {
+			for (int indexX = 0; indexX < grid[0].length; indexX++) {
+				if (grid[indexX][indexY].getExplored()) {
 					setIcon(new Vector2i(indexX, indexY));
 				}
 			}
 		}
-		mapWidth = maxX - minX;
-		mapHeight = maxY - minY;
 	}
 
 	private static void initMazeIconMap() {
@@ -126,7 +133,7 @@ public class MenuMap extends GuiComponent {
 	private void setIcon(Vector2i position) {
 		Set<Direction> tileDirections = grid[position.x][position.y].getAdjacentTiles();
 		float scale = (width / mapWidth) / 4;
-		float gap = (width / mapWidth);
+		float gap = width / mapWidth;
 		mapTiles.put(position, new Icon(x + (position.x * gap), x + (position.y * gap), mazeIconMap.get(tileDirections),
 				false, scale));
 	}
