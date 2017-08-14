@@ -134,7 +134,7 @@ public class MenuMap extends GuiComponent {
 		Set<Direction> tileDirections = grid[position.x][position.y].getAdjacentTiles();
 		float scale = (width / mapWidth) / 4;
 		float gap = width / mapWidth;
-		mapTiles.put(position, new Icon(x + (position.x * gap), x + (position.y * gap), mazeIconMap.get(tileDirections),
+		mapTiles.put(position, new Icon(x + (position.x * gap), y + (position.y * gap), mazeIconMap.get(tileDirections),
 				false, scale));
 	}
 
