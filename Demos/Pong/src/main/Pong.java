@@ -13,25 +13,21 @@ public class Pong implements Game{
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void render() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
-		
 	}
 
 }
