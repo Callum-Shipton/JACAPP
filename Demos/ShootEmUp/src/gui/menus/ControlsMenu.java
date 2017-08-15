@@ -1,5 +1,6 @@
 package gui.menus;
 
+import display.Art;
 import display.Image;
 import display.ImageProcessor;
 import gui.GuiMenu;
@@ -9,14 +10,14 @@ import gui.buttons.BackButton;
 public class ControlsMenu extends GuiMenu {
 
 	public ControlsMenu() {
-		super(ImageProcessor.getImage("MainMenuScreen"), true);
+		super(Art.getImage("MainMenuScreen"), true);
 		resetMenu();
 	}
 
 	@Override
 	public void resetMenu() {
 		clearMenu();
-		Image button = ImageProcessor.getImage("BackButton");
+		Image button = Art.getImage("BackButton");
 		addMenuItem(new Button(button, (display.getWidth() / 2) - (button.getWidth() / 2),
 				(display.getHeight() / 2) - (button.getHeight() / 2), new BackButton()));
 	}

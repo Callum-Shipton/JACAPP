@@ -8,7 +8,7 @@ import org.joml.Vector2f;
 import display.Display;
 import display.Image;
 import display.ImageProcessor;
-import loop.Loop;
+import loop.GameLoop;
 
 public abstract class GuiMenu {
 
@@ -24,7 +24,7 @@ public abstract class GuiMenu {
 
 	public GuiMenu(Image menuImage, Boolean fullscreen) {
 		this.menuImage = menuImage;
-		display = Loop.getDisplay();
+		display = GameLoop.getDisplay();
 		if (fullscreen) {
 			x = 0;
 			y = 0;

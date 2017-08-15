@@ -7,7 +7,7 @@ import components.Message;
 import components.TypeComponent;
 import components.interfaces.MovementComponent;
 import entity.Entity;
-import loop.Loop;
+import loop.GameLoop;
 
 public abstract class BaseMovement extends Component implements MovementComponent {
 
@@ -50,7 +50,7 @@ public abstract class BaseMovement extends Component implements MovementComponen
 		if (frost) {
 			currentSpeed = currentSpeed / 2;
 			frostCounter++;
-			if (frostCounter > Loop.ticks(frostTime)) {
+			if (frostCounter > GameLoop.ticks(frostTime)) {
 				frost = false;
 				currentSpeed = speed;
 				frostCounter = 0;

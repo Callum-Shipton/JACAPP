@@ -13,7 +13,7 @@ import org.lwjgl.BufferUtils;
 
 import display.DPDTRenderer;
 import display.Image;
-import loop.Loop;
+import loop.GameLoop;
 
 public class Button extends GuiComponent {
 
@@ -37,7 +37,7 @@ public class Button extends GuiComponent {
 		this.action = action;
 		width = id.getWidth();
 		height = id.getHeight() / 2;
-		window = Loop.getDisplay().getWindow();
+		window = GameLoop.getDisplay().getWindow();
 	}
 
 	public Button(Image id, ButtonAction action) {
@@ -64,7 +64,7 @@ public class Button extends GuiComponent {
 
 	@Override
 	public void update() {
-		window = Loop.getDisplay().getWindow();
+		window = GameLoop.getDisplay().getWindow();
 		bx.clear();
 		by.clear();
 

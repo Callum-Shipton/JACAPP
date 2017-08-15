@@ -1,5 +1,6 @@
 package gui.menus;
 
+import display.Art;
 import display.Image;
 import display.ImageProcessor;
 import gui.GuiMenu;
@@ -21,14 +22,14 @@ public class OptionsMenu extends GuiMenu {
 
 		clearMenu();
 		VerticalLayout buttonList = new VerticalLayout(
-				(display.getWidth() / 2) - (ImageProcessor.getImage(controlButton).getWidth() / 2),
+				(display.getWidth() / 2) - (Art.getImage(controlButton).getWidth() / 2),
 				display.getHeight() / 2, 20);
 
 		buttonList.addMenuItem(
-				new Button(ImageProcessor.getImage(controlButton), new OpenMenuButton(new ControlsMenu())));
+				new Button(Art.getImage(controlButton), new OpenMenuButton(new ControlsMenu())));
 		buttonList.addMenuItem(
-				new Button(ImageProcessor.getImage("SoundButton"), new OpenMenuButton(new SoundMenu())));
-		buttonList.addMenuItem(new Button(ImageProcessor.getImage("BackButton"), new BackButton()));
+				new Button(Art.getImage("SoundButton"), new OpenMenuButton(new SoundMenu())));
+		buttonList.addMenuItem(new Button(Art.getImage("BackButton"), new BackButton()));
 
 		addMenuItem(buttonList);
 	}

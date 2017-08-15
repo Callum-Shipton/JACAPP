@@ -2,6 +2,7 @@ package components.attack;
 
 import components.Message;
 import components.MessageId;
+import display.Art;
 import display.ImageProcessor;
 import entity.Entity;
 import gui.menus.GameOverMenu;
@@ -50,7 +51,7 @@ public class PlayerAttack extends BaseAttack {
 	public void removeLife() {
 		if (lives == 1) {
 			ShootEmUp.setPaused(true);
-			ShootEmUp.getMenuSystem().addMenu(new GameOverMenu(ImageProcessor.getImage("GameOverScreen")));
+			ShootEmUp.getMenuSystem().addMenu(new GameOverMenu(Art.getImage("GameOverScreen")));
 		} else {
 			lives--;
 			health = maxHealth;

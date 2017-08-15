@@ -5,7 +5,7 @@ import org.lwjgl.opengl.GL20;
 import components.interfaces.GraphicsComponent;
 import display.ImageProcessor;
 import display.Renderer;
-import loop.Loop;
+import loop.GameLoop;
 
 public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponent {
 
@@ -29,7 +29,7 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 
 	public void scrollScreen() {
 
-		Loop.getDisplay().getCamera().setCameraFocus(x + (width / 2), y + (height / 2));
+		GameLoop.getDisplay().getCamera().setCameraFocus(x + (width / 2), y + (height / 2));
 
 		GL20.glUseProgram(ImageProcessor.ShaderBase);
 		GL20.glUniform2f(posLocation, x + (width / 2), y + (height / 2));

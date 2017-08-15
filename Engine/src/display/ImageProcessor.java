@@ -26,18 +26,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.FloatBuffer;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.joml.Matrix4f;
 import org.lwjgl.system.MemoryStack;
 
 import logging.Logger;
-import loop.Loop;
+import loop.GameLoop;
 
 public class ImageProcessor {
-
-	private static Map<String, Image> artFiles = new HashMap<>();
 
 	// Level map file locations
 	public static final String LEVEL_FILE_LOCATION = "/Levels/Level";
@@ -53,14 +49,10 @@ public class ImageProcessor {
 	public static IRenderer irWall;
 	public static IRenderer irFore;
 
-	public static Image getImage(String filename) {
-		return artFiles.get(filename);
-	}
-
 	public static void initShaderUniforms() {
 
 		Matrix4f projectionMatrix = new Matrix4f();
-		projectionMatrix.ortho(0, Loop.getDisplay().getWidth(), Loop.getDisplay().getHeight(), 0, -1.0f, 1.0f);
+		projectionMatrix.ortho(0, GameLoop.getDisplay().getWidth(), GameLoop.getDisplay().getHeight(), 0, -1.0f, 1.0f);
 
 		try (MemoryStack stack = stackPush()) {
 			FloatBuffer buf = stack.callocFloat(16);
@@ -93,10 +85,6 @@ public class ImageProcessor {
 
 	}
 
-	public static void addArt(String key, Image image) {
-		artFiles.put(key, image);
-	}
-
 	public static void refreshRenderers() {
 		base.initRenderData();
 		stat.initRenderData();
@@ -109,13 +97,11 @@ public class ImageProcessor {
 			irFore.bindRenderData();
 	}
 
-	public void init(ArtLoader artLoader) {
-
+	public static void init(ArtLoader artLoader) {
 		initShaders();
 		initShaderUniforms();
 		artLoader.loadArt();
 		initRenderers();
-
 	}
 
 	private static void initRenderers() {
@@ -123,7 +109,7 @@ public class ImageProcessor {
 		stat = new DPDTRenderer(ShaderStat);
 	}
 
-	private void initShaders() {
+	private static void initShaders() {
 
 		// Load the vertex shader
 		int vsId = loadShader("/Shaders/VertexShader.glsl", GL_VERTEX_SHADER);
@@ -179,12 +165,13 @@ public class ImageProcessor {
 
 	}
 
-	public int loadShader(String filename, int type) {
+	public static int loadShader(String filename, int type) {
 		StringBuilder shaderSource = new StringBuilder();
 		int shaderID;
 
 		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(filename)));
+			BufferedReader reader = new BufferedReader(
+					new InputStreamReader(ImageProcessor.class.getResourceAsStream(filename)));
 			String line;
 			while ((line = reader.readLine()) != null) {
 				shaderSource.append(line).append("\n");

@@ -5,7 +5,7 @@ import components.attack.BaseAttack;
 import components.movement.BaseMovement;
 import entity.Entity;
 import logging.Logger;
-import loop.Loop;
+import loop.GameLoop;
 
 public class DurationPotion extends Potion {
 
@@ -53,7 +53,7 @@ public class DurationPotion extends Potion {
 			}
 		}
 		counter++;
-		if (counter == Loop.ticks(1)) {
+		if (counter == GameLoop.ticks(1)) {
 			counter = 0;
 		}
 	}

@@ -19,27 +19,20 @@ import input.Keyboard;
 import input.Keys;
 import logging.Logger;
 
-public class Loop {
+public class GameLoop {
 
 	// Handle for monitor/window funcs
 	private static Display display;
 	private static double fps;
 	private Game game;
 
-	public Loop(Game game, double fps, ArtLoader artLoader) {
+	public GameLoop(Game game, double fps, ArtLoader artLoader) {
 		this.game = game;
-		Loop.fps = fps;
+		GameLoop.fps = fps;
 		display = new Display(artLoader);
 	}
 
 	public void run() {
-		/**
-		 * System.setProperty("org.lwjgl.librarypath", new
-		 * File("natives").getAbsolutePath());
-		 * System.setProperty("net.java.games.input.librarypath", new
-		 * File("natives/JInput").getAbsolutePath());
-		 */
-
 		try {
 			init();
 			loop();

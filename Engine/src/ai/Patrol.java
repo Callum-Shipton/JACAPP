@@ -14,7 +14,7 @@ import org.joml.Vector2i;
 
 import ai.nodes.Node;
 import ai.nodes.RangeNode;
-import loop.Loop;
+import loop.GameLoop;
 
 public class Patrol {
 
@@ -89,7 +89,7 @@ public class Patrol {
 
 	public Vector2i update(Vector2i currentPos) {
 		if (!patrolling) {
-			patrolCounter = Loop.ticks(3);
+			patrolCounter = GameLoop.ticks(3);
 			patrolLoc = currentPos;
 			patrolling = true;
 		}
@@ -99,7 +99,7 @@ public class Patrol {
 				patrolCounter--;
 				return currentPos;
 			} else {
-				patrolCounter = Loop.ticks(3);
+				patrolCounter = GameLoop.ticks(3);
 			}
 		}
 

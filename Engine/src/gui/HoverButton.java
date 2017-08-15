@@ -7,7 +7,7 @@ import java.nio.DoubleBuffer;
 import org.lwjgl.BufferUtils;
 
 import display.DPDTRenderer;
-import loop.Loop;
+import loop.GameLoop;
 
 public class HoverButton extends GuiComponent {
 
@@ -45,7 +45,7 @@ public class HoverButton extends GuiComponent {
 
 		bx.clear();
 		by.clear();
-		glfwGetCursorPos(Loop.getDisplay().getWindow(), bx, by);
+		glfwGetCursorPos(GameLoop.getDisplay().getWindow(), bx, by);
 		double mx = bx.get();
 		double my = by.get();
 

@@ -16,7 +16,7 @@ import entity.Entity;
 import entity.Spawner;
 import logging.Logger;
 import logging.Logger.Category;
-import loop.Loop;
+import loop.GameLoop;
 import main.ShootEmUp;
 
 public class AreaSpawner extends Spawner {
@@ -88,10 +88,10 @@ public class AreaSpawner extends Spawner {
 			testGraphics.setY(spawnY + 10.0f);
 
 			// Checks if the enemy will spawn on screen
-			if ((Math.abs((spawnX + (testGraphics.getWidth() / 2)) - (px + (pw / 2))) <= (Loop.getDisplay().getWidth()
+			if ((Math.abs((spawnX + (testGraphics.getWidth() / 2)) - (px + (pw / 2))) <= (GameLoop.getDisplay().getWidth()
 					+ testGraphics.getWidth()))
 					&& (Math.abs((spawnY + (testGraphics.getHeight() / 2))
-							- (py + (ph / 2))) <= (Loop.getDisplay().getHeight() + testGraphics.getHeight()))) {
+							- (py + (ph / 2))) <= (GameLoop.getDisplay().getHeight() + testGraphics.getHeight()))) {
 				collide = true; // NOSONAR collide should be true to stop these
 								// coordinates being accepted when doing the
 								// loop check

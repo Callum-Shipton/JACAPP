@@ -9,10 +9,11 @@ import components.attack.PlayerAttack;
 import components.inventory.BaseInventory;
 import components.inventory.TypePotion;
 import components.movement.GroundMovement;
+import display.Art;
 import display.DPDTRenderer;
 import display.ImageProcessor;
 import entity.Entity;
-import loop.Loop;
+import loop.GameLoop;
 
 public class Hud extends GuiComponent {
 
@@ -46,39 +47,39 @@ public class Hud extends GuiComponent {
 		playerMovement = player.getComponent(TypeComponent.MOVEMENT);
 
 		hudElems = new CopyOnWriteArrayList<>();
-		infoBoxTop = new Icon(0.0f, 0.0f, ImageProcessor.getImage(BAR_INFO_TOP), false, 1f);
+		infoBoxTop = new Icon(0.0f, 0.0f, Art.getImage(BAR_INFO_TOP), false, 1f);
 		hudElems.add(infoBoxTop);
-		healthBar = new HudBar(10.0f, 10.0f, ImageProcessor.getImage("Bars"), 1, 1f);
+		healthBar = new HudBar(10.0f, 10.0f, Art.getImage("Bars"), 1, 1f);
 		hudElems.add(healthBar);
-		manaBar = new HudBar(10.0f, 35.0f, ImageProcessor.getImage("Bars"), 2, 1f);
+		manaBar = new HudBar(10.0f, 35.0f, Art.getImage("Bars"), 2, 1f);
 		hudElems.add(manaBar);
-		xpBar = new HudBar(10.0f, 60.0f, ImageProcessor.getImage("Bars"), 3, 1f);
+		xpBar = new HudBar(10.0f, 60.0f, Art.getImage("Bars"), 3, 1f);
 		hudElems.add(xpBar);
-		moneyCounter = new Counter(10.0f, 82.0f, ImageProcessor.getImage("CoinIcon"), false, playerInventory.getCoins(),
+		moneyCounter = new Counter(10.0f, 82.0f, Art.getImage("CoinIcon"), false, playerInventory.getCoins(),
 				0.5f);
 		hudElems.add(moneyCounter);
-		levelCounter = new Counter(90.0f, 82.0f, ImageProcessor.getImage("LevelIcon"), false,
+		levelCounter = new Counter(90.0f, 82.0f, Art.getImage("LevelIcon"), false,
 				playerInventory.getLevel(), 0.5f);
 		hudElems.add(levelCounter);
-		livesCounter = new Counter(170.0f, 82.0f, ImageProcessor.getImage("LivesIcon"), false, playerAttack.getLives(),
+		livesCounter = new Counter(170.0f, 82.0f, Art.getImage("LivesIcon"), false, playerAttack.getLives(),
 				0.5f);
 		hudElems.add(livesCounter);
-		fire = new Icon(0.0f, 100.0f, ImageProcessor.getImage("Fire"), false, 1f);
-		poison = new Icon(0.0f, 120.0f, ImageProcessor.getImage("Poison"), false, 1f);
-		frost = new Icon(0.0f, 140.0f, ImageProcessor.getImage("Frost"), false, 1f);
+		fire = new Icon(0.0f, 100.0f, Art.getImage("Fire"), false, 1f);
+		poison = new Icon(0.0f, 120.0f, Art.getImage("Poison"), false, 1f);
+		frost = new Icon(0.0f, 140.0f, Art.getImage("Frost"), false, 1f);
 
 		// Potions bar
 		infoBoxBottom = new Icon(0.0f,
-				Loop.getDisplay().getHeight() - ImageProcessor.getImage(BAR_INFO_BOTTOM).getHeight(),
-				ImageProcessor.getImage(BAR_INFO_BOTTOM), false, 1f);
+				GameLoop.getDisplay().getHeight() - Art.getImage(BAR_INFO_BOTTOM).getHeight(),
+				Art.getImage(BAR_INFO_BOTTOM), false, 1f);
 		hudElems.add(infoBoxBottom);
 	}
 
 	public void resetHud() {
 		hudElems.remove(infoBoxBottom);
 		infoBoxBottom = new Icon(0.0f,
-				Loop.getDisplay().getHeight() - ImageProcessor.getImage(BAR_INFO_BOTTOM).getHeight(),
-				ImageProcessor.getImage(BAR_INFO_BOTTOM), false, 1f);
+				GameLoop.getDisplay().getHeight() - Art.getImage(BAR_INFO_BOTTOM).getHeight(),
+				Art.getImage(BAR_INFO_BOTTOM), false, 1f);
 		hudElems.add(infoBoxBottom);
 	}
 
@@ -109,13 +110,13 @@ public class Hud extends GuiComponent {
 
 		final String numbers = "Numbers";
 
-		r.draw(ImageProcessor.getImage(numbers), new Vector2f(26, Loop.getDisplay().getHeight() - 55), size, 0.0f,
+		r.draw(Art.getImage(numbers), new Vector2f(26, GameLoop.getDisplay().getHeight() - 55), size, 0.0f,
 				new Vector2f(hPot, 1), maxTex);
-		r.draw(ImageProcessor.getImage(numbers), new Vector2f(70, Loop.getDisplay().getHeight() - 55), size, 0.0f,
+		r.draw(Art.getImage(numbers), new Vector2f(70, GameLoop.getDisplay().getHeight() - 55), size, 0.0f,
 				new Vector2f(mPot, 1), maxTex);
-		r.draw(ImageProcessor.getImage(numbers), new Vector2f(114, Loop.getDisplay().getHeight() - 55), size, 0.0f,
+		r.draw(Art.getImage(numbers), new Vector2f(114, GameLoop.getDisplay().getHeight() - 55), size, 0.0f,
 				new Vector2f(sPot, 1), maxTex);
-		r.draw(ImageProcessor.getImage(numbers), new Vector2f(159, Loop.getDisplay().getHeight() - 55), size, 0.0f,
+		r.draw(Art.getImage(numbers), new Vector2f(159, GameLoop.getDisplay().getHeight() - 55), size, 0.0f,
 				new Vector2f(kPot, 1), maxTex);
 	}
 
@@ -141,8 +142,8 @@ public class Hud extends GuiComponent {
 
 		if (Math.max(maxHealth, maxMana) > 18.0f) {
 			float hudW = ((Math.max(maxHealth, maxMana) - 18.0f) * 10.0f)
-					+ ImageProcessor.getImage(BAR_INFO_TOP).getWidth();
-			infoBoxTop.setSize(hudW, ImageProcessor.getImage(BAR_INFO_TOP).getHeight());
+					+ Art.getImage(BAR_INFO_TOP).getWidth();
+			infoBoxTop.setSize(hudW, Art.getImage(BAR_INFO_TOP).getHeight());
 		}
 
 		healthBar.setValue(health);

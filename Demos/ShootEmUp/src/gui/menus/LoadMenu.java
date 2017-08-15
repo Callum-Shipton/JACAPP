@@ -1,5 +1,6 @@
 package gui.menus;
 
+import display.Art;
 import display.ImageProcessor;
 import gui.GuiMenu;
 import gui.Button;
@@ -10,7 +11,7 @@ import gui.layouts.VerticalLayout;
 public class LoadMenu extends GuiMenu {
 
 	public LoadMenu() {
-		super(ImageProcessor.getImage("MainMenuScreen"), true);
+		super(Art.getImage("MainMenuScreen"), true);
 		resetMenu();
 	}
 
@@ -20,12 +21,12 @@ public class LoadMenu extends GuiMenu {
 
 		clearMenu();
 		VerticalLayout buttonList = new VerticalLayout(
-				(display.getWidth() / 2) - (ImageProcessor.getImage(newGameButton).getWidth() / 2),
+				(display.getWidth() / 2) - (Art.getImage(newGameButton).getWidth() / 2),
 				display.getHeight() / 2, 20);
-		buttonList.addMenuItem(new Button(ImageProcessor.getImage("Save1Button"), new LoadGameButton(1)));
-		buttonList.addMenuItem(new Button(ImageProcessor.getImage("Save2Button"), new LoadGameButton(2)));
-		buttonList.addMenuItem(new Button(ImageProcessor.getImage("Save3Button"), new LoadGameButton(3)));
-		buttonList.addMenuItem(new Button(ImageProcessor.getImage("BackButton"), new BackButton()));
+		buttonList.addMenuItem(new Button(Art.getImage("Save1Button"), new LoadGameButton(1)));
+		buttonList.addMenuItem(new Button(Art.getImage("Save2Button"), new LoadGameButton(2)));
+		buttonList.addMenuItem(new Button(Art.getImage("Save3Button"), new LoadGameButton(3)));
+		buttonList.addMenuItem(new Button(Art.getImage("BackButton"), new BackButton()));
 		addMenuItem(buttonList);
 	}
 

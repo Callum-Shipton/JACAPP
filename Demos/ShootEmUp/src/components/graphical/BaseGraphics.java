@@ -9,6 +9,7 @@ import components.Message;
 import components.MessageId;
 import components.TypeComponent;
 import components.interfaces.GraphicsComponent;
+import display.Art;
 import display.Image;
 import display.ImageProcessor;
 import display.Renderer;
@@ -28,7 +29,7 @@ public abstract class BaseGraphics extends Component implements GraphicsComponen
 		this.imageId = imageId;
 		this.r = r;
 
-		image = ImageProcessor.getImage(imageId);
+		image = Art.getImage(imageId);
 		width = image.getWidth() / image.getFWidth();
 		height = image.getHeight() / image.getFHeight();
 	}

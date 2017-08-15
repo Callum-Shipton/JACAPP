@@ -26,6 +26,7 @@ import components.graphical.AnimatedGraphics;
 import components.graphical.BaseGraphics;
 import components.inventory.TypePickup;
 import components.spawn.PointSpawn;
+import display.Art;
 import display.Image;
 import display.ImageProcessor;
 import entity.DatableObject;
@@ -68,7 +69,7 @@ public abstract class InventoryItem<I extends InventoryItem<?>> implements Datab
 	}
 
 	public Image getInventoryImage() {
-		return ImageProcessor.getImage(name + "Button");
+		return Art.getImage(name + "Button");
 	}
 
 	public String getName() {

@@ -8,7 +8,7 @@ import components.MessageId;
 import components.TypeComponent;
 import components.interfaces.AttackComponent;
 import entity.Entity;
-import loop.Loop;
+import loop.GameLoop;
 import object.Armour;
 import object.Weapon;
 
@@ -190,7 +190,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 
 		if (fire) {
 			fireCounter++;
-			if (fireCounter >= Loop.ticks(FIRE_TIME)) {
+			if (fireCounter >= GameLoop.ticks(FIRE_TIME)) {
 				damage(1, getEntity());
 				fireCounter = 0;
 				fireStop++;
@@ -202,7 +202,7 @@ public abstract class BaseAttack extends Component implements AttackComponent {
 		}
 		if (poison) {
 			poisonCounter++;
-			if (poisonCounter > Loop.ticks(POISON_TIME)) {
+			if (poisonCounter > GameLoop.ticks(POISON_TIME)) {
 				damage(2, getEntity());
 				poisonCounter = 0;
 			}

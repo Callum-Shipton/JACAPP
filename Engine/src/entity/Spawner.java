@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import loop.Loop;
+import loop.GameLoop;
 
 public abstract class Spawner {
 
@@ -39,7 +39,7 @@ public abstract class Spawner {
 	public void update() {
 		spawnedEntities.clear();
 		spawnCounter++;
-		if (spawnCounter == Loop.ticks(spawnRate)) {
+		if (spawnCounter == GameLoop.ticks(spawnRate)) {
 			Entity entity = chooseEntity();
 			spawnEntity(entity);
 			spawnCounter = 0;

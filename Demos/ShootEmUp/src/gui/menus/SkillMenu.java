@@ -2,6 +2,7 @@ package gui.menus;
 
 import components.TypeComponent;
 import components.inventory.BaseInventory;
+import display.Art;
 import display.Image;
 import display.ImageProcessor;
 import gui.Counter;
@@ -41,39 +42,39 @@ public class SkillMenu extends PauseMenu {
 		VerticalLayout buttonList = new VerticalLayout(x + 30, y + 30, 20);
 		HorizontalLayout healthRegenUpgrade = new HorizontalLayout(0);
 		buttonList.addMenuItem(healthRegenUpgrade);
-		Button healthRegenButton = new Button(ImageProcessor.getImage("HealthRegenButton"),
+		Button healthRegenButton = new Button(Art.getImage("HealthRegenButton"),
 				new UpgradeHealthRegenButton());
-		Counter healthRegenPrice = new Counter(ImageProcessor.getImage("Coin"), 1);
+		Counter healthRegenPrice = new Counter(Art.getImage("Coin"), 1);
 		healthRegenUpgrade.additem(healthRegenButton);
 		healthRegenUpgrade.additem(healthRegenPrice);
 
 		HorizontalLayout healthUpgrade = new HorizontalLayout(0);
 		buttonList.addMenuItem(healthUpgrade);
-		Button healthUpgradeButton = new Button(ImageProcessor.getImage("HealthButton"),
+		Button healthUpgradeButton = new Button(Art.getImage("HealthButton"),
 				new UpgradeHealthButton());
 
-		Counter healthUpgradePrice = new Counter(ImageProcessor.getImage("Coin"), 1);
+		Counter healthUpgradePrice = new Counter(Art.getImage("Coin"), 1);
 		healthUpgrade.additem(healthUpgradeButton);
 		healthUpgrade.additem(healthUpgradePrice);
 
 		HorizontalLayout manaRegenUpgrade = new HorizontalLayout(0);
 		buttonList.addMenuItem(manaRegenUpgrade);
-		Button manaRegenButton = new Button(ImageProcessor.getImage("ManaRegenButton"),
+		Button manaRegenButton = new Button(Art.getImage("ManaRegenButton"),
 				new UpgradeManaRegenButton());
-		Counter manaRegenPrice = new Counter(ImageProcessor.getImage("Coin"), 1);
+		Counter manaRegenPrice = new Counter(Art.getImage("Coin"), 1);
 		manaRegenUpgrade.additem(manaRegenButton);
 		manaRegenUpgrade.additem(manaRegenPrice);
 
 		HorizontalLayout manaUpgrade = new HorizontalLayout(0);
 		buttonList.addMenuItem(manaUpgrade);
-		Button manaButton = new Button(ImageProcessor.getImage("ManaButton"), new UpgradeManaButton());
-		Counter manaPrice = new Counter(ImageProcessor.getImage("Coin"), 1);
+		Button manaButton = new Button(Art.getImage("ManaButton"), new UpgradeManaButton());
+		Counter manaPrice = new Counter(Art.getImage("Coin"), 1);
 		manaUpgrade.additem(manaButton);
 		manaUpgrade.additem(manaPrice);
 
 		addMenuItem(buttonList);
 		BaseInventory playerInventory = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
-		skillPoints = new Counter(x + 30.0f, y + 191.0f, ImageProcessor.getImage("Coin"), false,
+		skillPoints = new Counter(x + 30.0f, y + 191.0f, Art.getImage("Coin"), false,
 				playerInventory.getLevelPoints(), 1f);
 	}
 }

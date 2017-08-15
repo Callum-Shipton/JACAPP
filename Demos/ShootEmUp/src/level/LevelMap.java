@@ -13,13 +13,14 @@ import components.collision.BaseCollision;
 import components.collision.RigidCollision;
 import components.collision.TransportCollision;
 import components.graphical.MapGraphics;
+import display.Art;
 import display.FloorRenderer;
 import display.ImageProcessor;
 import display.WallsRenderer;
 import entity.Entity;
 import logging.Logger;
 import logging.Logger.Category;
-import loop.Loop;
+import loop.GameLoop;
 import map.MapTile;
 import map.TileMap;
 import maze.Direction;
@@ -46,7 +47,7 @@ public class LevelMap {
 		String file = ImageProcessor.LEVEL_FILE_LOCATION + (rand.nextInt(5) + 1) + ".map";
 
 		tileMap = TileMap.readTileMap(file);
-		Loop.getDisplay().getCamera()
+		GameLoop.getDisplay().getCamera()
 				.setLevelSize(new Vector2f(tileMap.getWidth() * TILE_WIDTH, tileMap.getHeight() * TILE_WIDTH));
 
 		walls = new HashMap<>();
@@ -59,14 +60,14 @@ public class LevelMap {
 	public void init() {
 
 		ImageProcessor.irBack = new FloorRenderer(tileMap.getBackgroundTiles(),
-				new Vector2f(ImageProcessor.getImage(TILES_TEXTURE_FILE).getFWidth(),
-						ImageProcessor.getImage(TILES_TEXTURE_FILE).getFHeight()),
+				new Vector2f(Art.getImage(TILES_TEXTURE_FILE).getFWidth(),
+						Art.getImage(TILES_TEXTURE_FILE).getFHeight()),
 				LevelMap.TILE_WIDTH, TILE_WIDTH);
 
 		createWalls(tileMap.getWalls());
 		ImageProcessor.irWall = new WallsRenderer(walls,
-				new Vector2f(ImageProcessor.getImage(TILES_TEXTURE_FILE).getFWidth(),
-						ImageProcessor.getImage(TILES_TEXTURE_FILE).getFHeight()),
+				new Vector2f(Art.getImage(TILES_TEXTURE_FILE).getFWidth(),
+						Art.getImage(TILES_TEXTURE_FILE).getFHeight()),
 				LevelMap.TILE_WIDTH, TILE_WIDTH);
 
 		/*
@@ -89,8 +90,8 @@ public class LevelMap {
 	}
 
 	public void renderLowTiles() {
-		ImageProcessor.irBack.draw(ImageProcessor.getImage(TILES_TEXTURE_FILE).getID());
-		ImageProcessor.irWall.draw(ImageProcessor.getImage(TILES_TEXTURE_FILE).getID());
+		ImageProcessor.irBack.draw(Art.getImage(TILES_TEXTURE_FILE).getID());
+		ImageProcessor.irWall.draw(Art.getImage(TILES_TEXTURE_FILE).getID());
 	}
 
 	private void createWalls(Set<MapTile> walls) {

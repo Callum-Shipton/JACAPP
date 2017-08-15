@@ -15,7 +15,7 @@ import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.system.MemoryStack;
 
-import loop.Loop;
+import loop.GameLoop;
 
 public class DPDTRenderer extends Renderer {
 
@@ -77,7 +77,7 @@ public class DPDTRenderer extends Renderer {
 		// TODO: Update to use rotation (even though I don't think anything uses it
 		// atm.)
 		else
-			return Loop.getDisplay().getCamera().isVisible(pos, size);
+			return GameLoop.getDisplay().getCamera().isVisible(pos, size);
 
 	}
 

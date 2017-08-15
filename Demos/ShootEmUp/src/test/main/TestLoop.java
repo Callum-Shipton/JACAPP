@@ -13,10 +13,10 @@ import entity.Entity;
 import game.Game;
 import gui.buttons.NewGameButton;
 import logging.Logger;
-import loop.Loop;
+import loop.GameLoop;
 import main.ShootEmUp;
 
-public class TestLoop extends Loop {
+public class TestLoop extends GameLoop {
 
 	private boolean finished = false;
 

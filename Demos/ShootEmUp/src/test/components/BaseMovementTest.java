@@ -8,7 +8,7 @@ import components.Message;
 import components.TypeComponent;
 import components.interfaces.MovementComponent;
 import entity.Entity;
-import loop.Loop;
+import loop.GameLoop;
 
 
 
@@ -64,7 +64,7 @@ public abstract class BaseMovementTest extends Component implements MovementComp
 		if (frost) {
 			speed = speed / 2;
 			frostCounter++;
-			if (frostCounter > Loop.ticks(frostTime)) {
+			if (frostCounter > GameLoop.ticks(frostTime)) {
 				frost = false;
 				speed = realSpeed;
 				frostCounter = 0;
