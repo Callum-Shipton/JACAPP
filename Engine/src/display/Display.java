@@ -62,11 +62,7 @@ public class Display {
 
 	boolean fullscreen = false;
 
-	private ArtLoader artLoader;
-
-	public Display(ArtLoader artLoader) {
-		this.artLoader = artLoader;
-
+	public Display() {
 		width = INITIAL_SCREEN_WIDTH;
 		height = INITIAL_SCREEN_HEIGHT;
 	}
@@ -156,7 +152,7 @@ public class Display {
 		GL.createCapabilities();
 
 		initGL();
-		ImageProcessor.init(artLoader);
+		ImageProcessor.init();
 		cam = new Camera(width, height);
 
 		// Initialise key handling

@@ -16,7 +16,8 @@ public class ShootEmUpTest {
 	public void mainTest() {
 		Art a = new Art();
 		for (int i : runs) {
-		TestLoop loop = new TestLoop(new ShootEmUp(), 60.0f, a);
+		TestLoop loop = new TestLoop(new ShootEmUp(), 60.0f);
+		a.loadArt();
 		loop.run();
 		assertTrue(loop.isFinished());
 		}

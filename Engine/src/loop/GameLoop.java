@@ -11,7 +11,6 @@ import static org.lwjgl.opengl.GL11.glGetError;
 
 import org.lwjgl.glfw.GLFW;
 
-import display.ArtLoader;
 import display.Display;
 import game.Game;
 import input.Controllers;
@@ -26,10 +25,10 @@ public class GameLoop {
 	private static double fps;
 	private Game game;
 
-	public GameLoop(Game game, double fps, ArtLoader artLoader) {
+	public GameLoop(Game game, double fps) {
 		this.game = game;
 		GameLoop.fps = fps;
-		display = new Display(artLoader);
+		display = new Display();
 	}
 
 	public void run() {

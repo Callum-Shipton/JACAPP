@@ -8,7 +8,6 @@ import org.lwjgl.glfw.GLFW;
 import components.TypeComponent;
 import components.attack.PlayerAttack;
 import components.control.TestingControl;
-import display.ArtLoader;
 import entity.Entity;
 import game.Game;
 import gui.buttons.NewGameButton;
@@ -20,8 +19,8 @@ public class TestLoop extends GameLoop {
 
 	private boolean finished = false;
 
-	public TestLoop(Game game, double fps, ArtLoader artLoader) {
-		super(game, fps, artLoader);
+	public TestLoop(Game game, double fps) {
+		super(game, fps);
 
 	}
 

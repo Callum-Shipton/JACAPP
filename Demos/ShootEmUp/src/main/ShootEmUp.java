@@ -2,7 +2,6 @@ package main;
 
 import audio.MusicPlayer;
 import display.Art;
-import display.ImageProcessor;
 import game.Game;
 import gui.MenuSystem;
 import gui.menus.InventoryMenu;
@@ -23,7 +22,8 @@ public class ShootEmUp implements Game {
 	private static boolean paused = true;
 
 	public static void main(String[] args) {
-		GameLoop loop = new GameLoop(new ShootEmUp(), 60.0f, new Art());
+		GameLoop loop = new GameLoop(new ShootEmUp(), 60.0f);
+		new Art().loadArt();
 		loop.run();
 	}
 

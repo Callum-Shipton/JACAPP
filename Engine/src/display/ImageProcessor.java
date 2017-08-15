@@ -97,10 +97,9 @@ public class ImageProcessor {
 			irFore.bindRenderData();
 	}
 
-	public static void init(ArtLoader artLoader) {
+	public static void init() {
 		initShaders();
 		initShaderUniforms();
-		artLoader.loadArt();
 		initRenderers();
 	}
 
