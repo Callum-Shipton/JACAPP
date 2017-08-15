@@ -1,8 +1,7 @@
 package gui.menus;
 
-import display.Art;
+import display.ArtLoader;
 import display.Image;
-import display.ImageProcessor;
 import gui.GuiMenu;
 import gui.Button;
 import gui.buttons.BackButton;
@@ -22,14 +21,14 @@ public class OptionsMenu extends GuiMenu {
 
 		clearMenu();
 		VerticalLayout buttonList = new VerticalLayout(
-				(display.getWidth() / 2) - (Art.getImage(controlButton).getWidth() / 2),
+				(display.getWidth() / 2) - (ArtLoader.getImage(controlButton).getWidth() / 2),
 				display.getHeight() / 2, 20);
 
 		buttonList.addMenuItem(
-				new Button(Art.getImage(controlButton), new OpenMenuButton(new ControlsMenu())));
+				new Button(ArtLoader.getImage(controlButton), new OpenMenuButton(new ControlsMenu())));
 		buttonList.addMenuItem(
-				new Button(Art.getImage("SoundButton"), new OpenMenuButton(new SoundMenu())));
-		buttonList.addMenuItem(new Button(Art.getImage("BackButton"), new BackButton()));
+				new Button(ArtLoader.getImage("SoundButton"), new OpenMenuButton(new SoundMenu())));
+		buttonList.addMenuItem(new Button(ArtLoader.getImage("BackButton"), new BackButton()));
 
 		addMenuItem(buttonList);
 	}

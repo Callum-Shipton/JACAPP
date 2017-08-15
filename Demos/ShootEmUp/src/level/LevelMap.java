@@ -13,7 +13,7 @@ import components.collision.BaseCollision;
 import components.collision.RigidCollision;
 import components.collision.TransportCollision;
 import components.graphical.MapGraphics;
-import display.Art;
+import display.ArtLoader;
 import display.FloorRenderer;
 import display.ImageProcessor;
 import display.WallsRenderer;
@@ -60,14 +60,14 @@ public class LevelMap {
 	public void init() {
 
 		ImageProcessor.irBack = new FloorRenderer(tileMap.getBackgroundTiles(),
-				new Vector2f(Art.getImage(TILES_TEXTURE_FILE).getFWidth(),
-						Art.getImage(TILES_TEXTURE_FILE).getFHeight()),
+				new Vector2f(ArtLoader.getImage(TILES_TEXTURE_FILE).getFWidth(),
+						ArtLoader.getImage(TILES_TEXTURE_FILE).getFHeight()),
 				LevelMap.TILE_WIDTH, TILE_WIDTH);
 
 		createWalls(tileMap.getWalls());
 		ImageProcessor.irWall = new WallsRenderer(walls,
-				new Vector2f(Art.getImage(TILES_TEXTURE_FILE).getFWidth(),
-						Art.getImage(TILES_TEXTURE_FILE).getFHeight()),
+				new Vector2f(ArtLoader.getImage(TILES_TEXTURE_FILE).getFWidth(),
+						ArtLoader.getImage(TILES_TEXTURE_FILE).getFHeight()),
 				LevelMap.TILE_WIDTH, TILE_WIDTH);
 
 		/*
@@ -90,8 +90,8 @@ public class LevelMap {
 	}
 
 	public void renderLowTiles() {
-		ImageProcessor.irBack.draw(Art.getImage(TILES_TEXTURE_FILE).getID());
-		ImageProcessor.irWall.draw(Art.getImage(TILES_TEXTURE_FILE).getID());
+		ImageProcessor.irBack.draw(ArtLoader.getImage(TILES_TEXTURE_FILE).getID());
+		ImageProcessor.irWall.draw(ArtLoader.getImage(TILES_TEXTURE_FILE).getID());
 	}
 
 	private void createWalls(Set<MapTile> walls) {

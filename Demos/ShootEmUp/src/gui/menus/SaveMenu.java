@@ -1,8 +1,7 @@
 package gui.menus;
 
-import display.Art;
+import display.ArtLoader;
 import display.Image;
-import display.ImageProcessor;
 import gui.Button;
 import gui.buttons.SaveButton;
 
@@ -16,6 +15,6 @@ public class SaveMenu extends PauseMenu {
 	public void resetMenu() {
 		super.resetMenu();
 
-		addMenuItem(new Button(Art.getImage("SaveGameButton"), x + 30, y + 30, new SaveButton()));
+		addMenuItem(new Button(ArtLoader.getImage("SaveGameButton"), x + 30, y + 30, new SaveButton()));
 	}
 }

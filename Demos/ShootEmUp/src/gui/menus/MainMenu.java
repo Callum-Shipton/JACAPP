@@ -1,7 +1,6 @@
 package gui.menus;
 
-import display.Art;
-import display.ImageProcessor;
+import display.ArtLoader;
 import gui.Button;
 import gui.GuiMenu;
 import gui.buttons.ExitButton;
@@ -12,7 +11,7 @@ import gui.layouts.VerticalLayout;
 public class MainMenu extends GuiMenu {
 
 	public MainMenu() {
-		super(Art.getImage("MainMenuScreen"), true);
+		super(ArtLoader.getImage("MainMenuScreen"), true);
 		resetMenu();
 	}
 
@@ -22,14 +21,14 @@ public class MainMenu extends GuiMenu {
 		clearMenu();
 
 		VerticalLayout buttonList = new VerticalLayout(
-				(display.getWidth() / 2) - (Art.getImage(newGameButtonId).getWidth() / 2),
+				(display.getWidth() / 2) - (ArtLoader.getImage(newGameButtonId).getWidth() / 2),
 				display.getHeight() / 2, 20);
-		Button newGameButton = new Button(Art.getImage(newGameButtonId), new NewGameButton());
-		Button loadGameButton = new Button(Art.getImage("LoadGameButton"),
+		Button newGameButton = new Button(ArtLoader.getImage(newGameButtonId), new NewGameButton());
+		Button loadGameButton = new Button(ArtLoader.getImage("LoadGameButton"),
 				new OpenMenuButton(new LoadMenu()));
-		Button optionsButton = new Button(Art.getImage("OptionsButton"),
-				new OpenMenuButton(new OptionsMenu(Art.getImage("MainMenuScreen"))));
-		Button exitButton = new Button(Art.getImage("ExitButton"), new ExitButton());
+		Button optionsButton = new Button(ArtLoader.getImage("OptionsButton"),
+				new OpenMenuButton(new OptionsMenu(ArtLoader.getImage("MainMenuScreen"))));
+		Button exitButton = new Button(ArtLoader.getImage("ExitButton"), new ExitButton());
 
 		buttonList.addMenuItem(newGameButton);
 		// buttonList.addMenuItem(loadGameButton);

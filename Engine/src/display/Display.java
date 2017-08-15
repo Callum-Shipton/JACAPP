@@ -183,7 +183,6 @@ public class Display {
 		glfwSwapInterval(1);
 		glViewport(0, 0, width, height);
 		cam.updateCameraSize(width, height);
-		;
 		ImageProcessor.initShaderUniforms();
 	}
 

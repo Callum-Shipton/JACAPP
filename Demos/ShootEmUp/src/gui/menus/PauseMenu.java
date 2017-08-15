@@ -1,8 +1,7 @@
 package gui.menus;
 
-import display.Art;
+import display.ArtLoader;
 import display.Image;
-import display.ImageProcessor;
 import gui.GuiMenu;
 import gui.Button;
 import gui.buttons.ExitButton;
@@ -22,21 +21,21 @@ public abstract class PauseMenu extends GuiMenu {
 		x = (display.getWidth() / 2) - (menuImage.getWidth() / 2);
 		y = (display.getHeight() / 2) - (menuImage.getHeight() / 2);
 		VerticalLayout tabs = new VerticalLayout(x + w - 102, y, 0);
-		tabs.addMenuItem(new Button(Art.getImage("InvButton"),
-				new OpenMenuButton(new InventoryMenu(Art.getImage("InventoryScreen")))));
-		tabs.addMenuItem(new Button(Art.getImage("SkillButton"),
-				new OpenMenuButton(new SkillMenu(Art.getImage("SkillScreen")))));
-		tabs.addMenuItem(new Button(Art.getImage("UpgradesButton"),
-				new OpenMenuButton(new UpgradesMenu(Art.getImage("UpgradesScreen")))));
-		tabs.addMenuItem(new Button(Art.getImage("MapButton"),
-				new OpenMenuButton(new MapMenu(Art.getImage("MapScreen")))));
-		tabs.addMenuItem(new Button(Art.getImage("SaveButton"),
-				new OpenMenuButton(new SaveMenu(Art.getImage("SaveScreen")))));
+		tabs.addMenuItem(new Button(ArtLoader.getImage("InvButton"),
+				new OpenMenuButton(new InventoryMenu(ArtLoader.getImage("InventoryScreen")))));
+		tabs.addMenuItem(new Button(ArtLoader.getImage("SkillButton"),
+				new OpenMenuButton(new SkillMenu(ArtLoader.getImage("SkillScreen")))));
+		tabs.addMenuItem(new Button(ArtLoader.getImage("UpgradesButton"),
+				new OpenMenuButton(new UpgradesMenu(ArtLoader.getImage("UpgradesScreen")))));
+		tabs.addMenuItem(new Button(ArtLoader.getImage("MapButton"),
+				new OpenMenuButton(new MapMenu(ArtLoader.getImage("MapScreen")))));
+		tabs.addMenuItem(new Button(ArtLoader.getImage("SaveButton"),
+				new OpenMenuButton(new SaveMenu(ArtLoader.getImage("SaveScreen")))));
 		addMenuItem(tabs);
 
 		VerticalLayout nativeButtons = new VerticalLayout(x + 30, y + h - 94, 20);
-		nativeButtons.addMenuItem(new Button(Art.getImage("BackButton"), new ResumeButton()));
-		nativeButtons.addMenuItem(new Button(Art.getImage("ExitButton"), new ExitButton()));
+		nativeButtons.addMenuItem(new Button(ArtLoader.getImage("BackButton"), new ResumeButton()));
+		nativeButtons.addMenuItem(new Button(ArtLoader.getImage("ExitButton"), new ExitButton()));
 		addMenuItem(nativeButtons);
 	}
 }

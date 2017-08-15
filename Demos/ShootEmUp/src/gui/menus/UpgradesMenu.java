@@ -2,9 +2,8 @@ package gui.menus;
 
 import components.TypeComponent;
 import components.inventory.BaseInventory;
-import display.Art;
+import display.ArtLoader;
 import display.Image;
-import display.ImageProcessor;
 import gui.Counter;
 import gui.Button;
 import gui.buttons.InventoryUpgradeButton;
@@ -36,23 +35,23 @@ public class UpgradesMenu extends PauseMenu {
 
 		HorizontalLayout inventoryUpgrade = new HorizontalLayout(0);
 		buttonList.addMenuItem(inventoryUpgrade);
-		Button inventoryButton = new Button(Art.getImage("InventoryButton"),
+		Button inventoryButton = new Button(ArtLoader.getImage("InventoryButton"),
 				new InventoryUpgradeButton());
-		Counter inventoryPrice = new Counter(Art.getImage("Coin"), 5);
+		Counter inventoryPrice = new Counter(ArtLoader.getImage("Coin"), 5);
 		inventoryUpgrade.additem(inventoryButton);
 		inventoryUpgrade.additem(inventoryPrice);
 
 		HorizontalLayout potionsUpgrade = new HorizontalLayout(0);
 		buttonList.addMenuItem(potionsUpgrade);
-		Button potionsButton = new Button(Art.getImage("PotionsButton"), new PotionUpgradeButton());
-		Counter potionsPrice = new Counter(Art.getImage("Coin"), 5);
+		Button potionsButton = new Button(ArtLoader.getImage("PotionsButton"), new PotionUpgradeButton());
+		Counter potionsPrice = new Counter(ArtLoader.getImage("Coin"), 5);
 		potionsUpgrade.additem(potionsButton);
 		potionsUpgrade.additem(potionsPrice);
 
 		addMenuItem(buttonList);
 
 		BaseInventory baseInventory = ShootEmUp.getGame().getPlayer().getComponent(TypeComponent.INVENTORY);
-		coinCounter = new Counter(x + 30.0f, y + 103.0f, Art.getImage("Coin"), true,
+		coinCounter = new Counter(x + 30.0f, y + 103.0f, ArtLoader.getImage("Coin"), true,
 				baseInventory.getCoins(), 1.0f);
 
 		addMenuItem(coinCounter);

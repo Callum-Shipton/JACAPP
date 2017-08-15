@@ -100,6 +100,7 @@ public class ImageProcessor {
 	public static void init() {
 		initShaders();
 		initShaderUniforms();
+		ArtLoader.loadArt();
 		initRenderers();
 	}
 

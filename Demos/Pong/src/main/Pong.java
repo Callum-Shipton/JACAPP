@@ -1,5 +1,4 @@
 package main;
-import display.Art;
 import game.Game;
 import loop.GameLoop;
 
@@ -7,7 +6,6 @@ public class Pong implements Game{
 	
 	public static void main(String[] args) {
 		GameLoop loop = new GameLoop(new Pong(), 60.0f);
-		new Art().loadArt();
 		loop.run();
 	}
 

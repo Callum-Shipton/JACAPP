@@ -1,8 +1,7 @@
 package components.attack;
 
 import components.interfaces.AttackComponent;
-import display.Art;
-import display.ImageProcessor;
+import display.ArtLoader;
 import entity.Entity;
 import gui.HudBar;
 import logging.Logger;
@@ -17,7 +16,7 @@ public class EnemyAttack extends BaseAttack implements AttackComponent {
 			String bootsId) {
 		super(health, mana, weaponId, team, helmetId, chestId, legsId, bootsId);
 
-		healthBar = new HudBar(10.0f, 10.0f, Art.getImage("Bars"), 1, 0.25f);
+		healthBar = new HudBar(10.0f, 10.0f, ArtLoader.getImage("Bars"), 1, 0.25f);
 	}
 
 	public EnemyAttack(EnemyAttack enemyAttack) {

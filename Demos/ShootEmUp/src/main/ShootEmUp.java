@@ -1,7 +1,7 @@
 package main;
 
 import audio.MusicPlayer;
-import display.Art;
+import display.ArtLoader;
 import game.Game;
 import gui.MenuSystem;
 import gui.menus.InventoryMenu;
@@ -23,7 +23,6 @@ public class ShootEmUp implements Game {
 
 	public static void main(String[] args) {
 		GameLoop loop = new GameLoop(new ShootEmUp(), 60.0f);
-		new Art().loadArt();
 		loop.run();
 	}
 
@@ -79,7 +78,7 @@ public class ShootEmUp implements Game {
 		paused = !paused;
 		Keyboard.setKey(Keys.getKey("pause"));
 		if (paused) {
-			InventoryMenu invMenu = new InventoryMenu(Art.getImage("InventoryScreen"));
+			InventoryMenu invMenu = new InventoryMenu(ArtLoader.getImage("InventoryScreen"));
 			invMenu.resetMenu();
 			menuSystem.addMenu(invMenu);
 		} else {
