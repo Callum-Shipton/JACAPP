@@ -30,46 +30,46 @@
 /Images/Menus/Buttons/MenuButtons/ManaRegenButton.png, 1, 2
 
 /Images/Menus/Buttons/MenuButtons/PotionsButton.png, 1, 2
-/InventoryButton.png, 1, 2
+/Images/Menus/Buttons/MenuButtons/InventoryButton.png, 1, 2
 
-/IronDaggerButton.png, 1, 2
-/Items/SteelDaggerButton.png, 1, 2
-/Items/GreatswordButton.png, 1, 2
-/Items/SwordButton.png, 1, 2
-/Items/BattleaxeButton.png, 1, 2
-/Items/MaceButton.png, 1, 2
-/Items/LongbowButton.png, 1, 2
-/Items/ShortbowButton.png, 1, 2
-/Items/CompoundCrossbowButton.png, 1, 2
-/Items/RecurveCrossbowButton.png, 1, 2
-/IceStaffButton.png, 1, 2
-/Items/FireStaffButton.png, 1, 2
-/Items/EarthStaffButton.png, 1, 2
+/Images/Menus/Buttons/Items/IronDaggerButton.png, 1, 2
+/Images/Menus/Buttons/Items/SteelDaggerButton.png, 1, 2
+/Images/Menus/Buttons/Items/GreatswordButton.png, 1, 2
+/Images/Menus/Buttons/Items/SwordButton.png, 1, 2
+/Images/Menus/Buttons/Items/BattleaxeButton.png, 1, 2
+/Images/Menus/Buttons/Items/MaceButton.png, 1, 2
+/Images/Menus/Buttons/Items/LongbowButton.png, 1, 2
+/Images/Menus/Buttons/Items/ShortbowButton.png, 1, 2
+/Images/Menus/Buttons/Items/CompoundCrossbowButton.png, 1, 2
+/Images/Menus/Buttons/Items/RecurveCrossbowButton.png, 1, 2
+/Images/Menus/Buttons/Items/IceStaffButton.png, 1, 2
+/Images/Menus/Buttons/Items/FireStaffButton.png, 1, 2
+/Images/Menus/Buttons/Items/EarthStaffButton.png, 1, 2
 
-/Items/LeatherBootsButton.png, 1, 2
-/Items/LeatherLegsButton.png, 1, 2
-/Items/LeatherChestButton.png, 1, 2
-/Items/LeatherHelmetButton.png, 1, 2
-/IronBootsButton.png, 1, 2
-/IronLegsButton.png, 1, 2
-/IronChestButton.png, 1, 2
-/IronHelmetButton.png, 1, 2
+/Images/Menus/Buttons/Items/LeatherBootsButton.png, 1, 2
+/Images/Menus/Buttons/Items/LeatherLegsButton.png, 1, 2
+/Images/Menus/Buttons/Items/LeatherChestButton.png, 1, 2
+/Images/Menus/Buttons/Items/LeatherHelmetButton.png, 1, 2
+/Images/Menus/Buttons/Items/IronBootsButton.png, 1, 2
+/Images/Menus/Buttons/Items/IronLegsButton.png, 1, 2
+/Images/Menus/Buttons/Items/IronChestButton.png, 1, 2
+/Images/Menus/Buttons/Items/IronHelmetButton.png, 1, 2
 
-/InventoryButton.png, 1, 2
+/Images/Menus/Buttons/Tabs/InventoryButton.png, 1, 2
 /Images/Menus/Buttons/Tabs/SkillButton.png, 1, 2
 /Images/Menus/Buttons/Tabs/UpgradesButton.png, 1, 2
 /Images/Menus/Buttons/Tabs/MapButton.png, 1, 2
 /Images/Menus/Buttons/Tabs/SaveButton.png, 1, 2
 
-/Icons/LevelIcon.png, 1, 1
-/Icons/DamageIcon.png, 1, 1
-/Icons/ArmourIcon.png, 1, 1
-/Icons/RangeIcon.png, 1, 1
-/Icons/FireRateIcon.png, 1, 1
-/Icons/ManaCostIcon.png, 1, 1
-/Icons/CoinIcon.png, 1, 1
-/Icons/WaveIcon.png, 1, 1
-/Icons/LivesIcon.png, 1, 1
+/Images/Menus/Icons/LevelIcon.png, 1, 1
+/Images/Menus/Icons/DamageIcon.png, 1, 1
+/Images/Menus/Icons/ArmourIcon.png, 1, 1
+/Images/Menus/Icons/RangeIcon.png, 1, 1
+/Images/Menus/Icons/FireRateIcon.png, 1, 1
+/Images/Menus/Icons/ManaCostIcon.png, 1, 1
+/Images/Menus/Icons/CoinIcon.png, 1, 1
+/Images/Menus/Icons/WaveIcon.png, 1, 1
+/Images/Menus/Icons/LivesIcon.png, 1, 1
 
 /Images/Tiles/Tiles.png, 6, 8
 
@@ -84,7 +84,7 @@
 
 /Images/Particles/EarthMagic.png, 1, 8
 /Images/Particles/FireMagic.png, 1, 8
-/IceMagic.png, 1, 8
+/Images/Particles/IceMagic.png, 1, 8
 
 /Images/Particles/Arrow.png, 1, 8
 /Images/Particles/Sword.png, 1, 8
@@ -97,17 +97,17 @@
 /Images/Drops/Armour/LeatherLegs.png, 4, 1
 /Images/Drops/Armour/LeatherChest.png, 4, 1
 /Images/Drops/Armour/LeatherHelmet.png, 7, 1
-/IronBoots.png, 8, 1
-/IronLegs.png, 4, 1
-/IronChest.png, 4, 1
-/IronHelmet.png, 7, 1
+/Images/Drops/Armour/IronBoots.png, 8, 1
+/Images/Drops/Armour/IronLegs.png, 4, 1
+/Images/Drops/Armour/IronChest.png, 4, 1
+/Images/Drops/Armour/IronHelmet.png, 7, 1
 
 /Images/Drops/Potions/HealthPotion.png, 3, 1
 /Images/Drops/Potions/ManaPotion.png, 3, 1
 /Images/Drops/Potions/SpeedPotion.png, 3, 1
 /Images/Drops/Potions/KnockbackPotion.png, 3, 1
 
-/IronDagger.png, 8, 1
+/Images/Drops/Weapons/IronDagger.png, 8, 1
 /Images/Drops/Weapons/SteelDagger.png, 8, 1
 /Images/Drops/Weapons/Greatsword.png, 8, 1
 /Images/Drops/Weapons/Sword.png, 8, 1
@@ -118,7 +118,7 @@
 /Images/Drops/Weapons/RecurveCrossbow.png, 8, 1
 /Images/Drops/Weapons/CompoundCrossbow.png, 8, 1
 /Images/Drops/Weapons/FireStaff.png, 8, 1
-/IceStaff.png, 8, 1
+/Images/Drops/Weapons/IceStaff.png, 8, 1
 /Images/Drops/Weapons/EarthStaff.png, 8, 1
 
 /Images/HUD/BarInfoTop.png, 1, 1
