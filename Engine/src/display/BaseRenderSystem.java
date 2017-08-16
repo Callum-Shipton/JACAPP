@@ -80,9 +80,9 @@ public class ImageProcessor {
 	private static void initShaders() {
 
 		// Create a new shader program that links both shaders
-		ShaderBase = new Shader("/Shaders/VertexShader.glsl","/Shaders/FragmentShader.glsl",Arrays.asList("pos","tex"));
-		ShaderInst = new Shader("/Shaders/IVertexShader.glsl","/Shaders/IFragmentShader.glsl",Arrays.asList("pos","tex","trans","text"));
-		ShaderStat = new Shader("/Shaders/StatVertexShader.glsl","/Shaders/StatFragmentShader.glsl",Arrays.asList("pos","tex"));
+		ShaderBase = new Shader("/Shaders/CameraVertexShader.glsl","/Shaders/BaseFragmentShader.glsl",Arrays.asList("pos","tex"));
+		ShaderInst = new Shader("/Shaders/CameraIVertexShader.glsl","/Shaders/BaseIFragmentShader.glsl",Arrays.asList("pos","tex","trans","text"));
+		ShaderStat = new Shader("/Shaders/StaticVertexShader.glsl","/Shaders/BaseFragmentShader.glsl",Arrays.asList("pos","tex"));
 		
 	}
 }

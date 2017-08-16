@@ -48,7 +48,8 @@ public class Shader {
 
 		try {
 			BufferedReader reader = new BufferedReader(
-					new InputStreamReader(ImageProcessor.class.getResourceAsStream(filename)));
+
+					new InputStreamReader(Shader.class.getResourceAsStream(filename)));
 			String line;
 			while ((line = reader.readLine()) != null) {
 				shaderSource.append(line).append("\n");

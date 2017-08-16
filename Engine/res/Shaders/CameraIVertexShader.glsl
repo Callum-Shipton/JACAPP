@@ -1,6 +1,6 @@
 #version 330
 
-layout(location = 0) in vec2 pos;
+layout (location = 0) in vec2 pos;
 layout (location = 1) in vec2 tex;
 layout (location = 2) in vec2 trans;
 layout (location = 3) in vec2 text;
