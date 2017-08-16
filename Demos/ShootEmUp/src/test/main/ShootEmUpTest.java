@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import display.Art;
 import main.ShootEmUp;
 
 public class ShootEmUpTest {
@@ -14,10 +13,8 @@ public class ShootEmUpTest {
 	
 	@Test
 	public void mainTest() {
-		Art a = new Art();
 		for (int i : runs) {
 		TestLoop loop = new TestLoop(new ShootEmUp(), 60.0f);
-		a.loadArt();
 		loop.run();
 		assertTrue(loop.isFinished());
 		}

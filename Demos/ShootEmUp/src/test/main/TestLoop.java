@@ -21,7 +21,6 @@ public class TestLoop extends GameLoop {
 
 	public TestLoop(Game game, double fps) {
 		super(game, fps);
-
 	}
 
 	@Override

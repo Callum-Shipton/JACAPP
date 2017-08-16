@@ -43,9 +43,9 @@ import input.Keys;
 public class Display {
 
 	// Screen Width & Height
-	public static final int INITIAL_SCREEN_WIDTH = 1024;
+	public final int initialScreenWidth;
 
-	public static final int INITIAL_SCREEN_HEIGHT = 512;
+	public final int initialScreenHeight;
 
 	private GLFWErrorCallback errorCallback;
 	// The window handle
@@ -62,9 +62,9 @@ public class Display {
 
 	boolean fullscreen = false;
 
-	public Display() {
-		width = INITIAL_SCREEN_WIDTH;
-		height = INITIAL_SCREEN_HEIGHT;
+	public Display(int initialScreenWidth, int initialScreenHeight) {
+		this.initialScreenWidth = initialScreenWidth;
+		this.initialScreenHeight = initialScreenHeight;
 	}
 
 	public void destroyGLFW() {
@@ -169,8 +169,8 @@ public class Display {
 
 	public void toggleFullscreen() {
 		if (fullscreen) {
-			width = INITIAL_SCREEN_WIDTH;
-			height = INITIAL_SCREEN_HEIGHT;
+			width = initialScreenWidth;
+			height = initialScreenHeight;
 			glfwSetWindowMonitor(window, NULL, (vidmode.width() - width) / 2, (vidmode.height() - height) / 2, width,
 					height, 60);
 		} else {

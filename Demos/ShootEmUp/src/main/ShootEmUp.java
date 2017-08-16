@@ -13,6 +13,10 @@ import save.Save;
 import save.ShootEmUpSave;
 
 public class ShootEmUp implements Game {
+	
+	private static final float FPS = 60.0f;
+	private static final int SCREEN_WIDTH = 1024;
+	private static final int SCREEN_HEIGHT = 512;
 
 	private static MusicPlayer musicPlayer;
 	private static MenuSystem menuSystem = new MenuSystem();
@@ -22,7 +26,7 @@ public class ShootEmUp implements Game {
 	private static boolean paused = true;
 
 	public static void main(String[] args) {
-		GameLoop loop = new GameLoop(new ShootEmUp(), 60.0f);
+		GameLoop loop = new GameLoop(new ShootEmUp(), FPS, SCREEN_WIDTH, SCREEN_HEIGHT);
 		loop.run();
 	}
 

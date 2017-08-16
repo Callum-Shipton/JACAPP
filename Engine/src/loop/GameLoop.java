@@ -25,10 +25,10 @@ public class GameLoop {
 	private static double fps;
 	private Game game;
 
-	public GameLoop(Game game, double fps) {
+	public GameLoop(Game game, double fps, int width, int height) {
 		this.game = game;
 		GameLoop.fps = fps;
-		display = new Display();
+		display = new Display(width, height);
 	}
 
 	public void run() {
