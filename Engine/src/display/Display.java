@@ -45,6 +45,7 @@ public class Display {
 	// Screen Width & Height
 	public final int initialScreenWidth;
 	public final int initialScreenHeight;
+	public final String gameName;
 
 	private GLFWErrorCallback errorCallback;
 	// The window handle
@@ -61,9 +62,11 @@ public class Display {
 
 	boolean fullscreen = false;
 
-	public Display(int initialScreenWidth, int initialScreenHeight) {
+	public Display(int initialScreenWidth, int initialScreenHeight, String gameName) {
 		this.initialScreenWidth = initialScreenWidth;
 		this.initialScreenHeight = initialScreenHeight;
+		this.gameName = gameName;
+
 		width = initialScreenWidth;
 		height = initialScreenHeight;
 	}
@@ -118,7 +121,7 @@ public class Display {
 		monitor = glfwGetPrimaryMonitor();
 
 		// Create the window
-		window = glfwCreateWindow(width, height, "THE MAZE", NULL, NULL);
+		window = glfwCreateWindow(width, height, gameName, NULL, NULL);
 		if (window == NULL)
 			throw new RuntimeException("Failed to create the GLFW window");
 

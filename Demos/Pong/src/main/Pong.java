@@ -7,9 +7,10 @@ public class Pong implements Game{
 	private static final float FPS = 60.0f;
 	private static final int SCREEN_WIDTH = 512;
 	private static final int SCREEN_HEIGHT = 512;
+	private static final String GAME_NAME = "Pong";
 	
 	public static void main(String[] args) {
-		GameLoop loop = new GameLoop(new Pong(), FPS, SCREEN_WIDTH, SCREEN_HEIGHT);
+		GameLoop loop = new GameLoop(new Pong(), FPS, SCREEN_WIDTH, SCREEN_HEIGHT, GAME_NAME);
 		loop.run();
 	}
 
