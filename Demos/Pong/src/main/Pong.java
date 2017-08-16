@@ -7,9 +7,12 @@ import components.MessageId;
 import components.TypeComponent;
 import components.graphical.BaseGraphics;
 import components.spawn.BaseSpawn;
+import display.ArtLoader;
 import display.BaseRenderSystem;
 import entity.Entity;
 import game.Game;
+import gui.Counter;
+import gui.Icon;
 import loop.GameLoop;
 
 public class Pong implements Game{
@@ -26,8 +29,8 @@ public class Pong implements Game{
 	private static Entity player;
 	private static Entity enemy;
 	
-	private static int enemyPoints;
-	private static int playerPoints;
+	private static Counter enemyPoints;
+	private static Counter playerPoints;
 	
 	public static void main(String[] args) {
 		GameLoop loop = new GameLoop(new Pong(), FPS, SCREEN_WIDTH, SCREEN_HEIGHT, GAME_NAME);
@@ -41,6 +44,9 @@ public class Pong implements Game{
 		ball = new Entity("Level","Objects","Ball");
 		player = new Entity("Characters","Players","Player");
 		enemy = new Entity("Characters","Players","Enemy");
+		
+		enemyPoints = new Counter(360,40,ArtLoader.getImage("Numbers"),1.0f);
+		playerPoints = new Counter(100,40,ArtLoader.getImage("Numbers"),1.0f);
 		
 		entities.add(ball);
 
@@ -62,10 +68,10 @@ public class Pong implements Game{
 		for(Entity e: entities) {
 			e.update();
 		}
-		if(playerPoints > 3) {
+		if(playerPoints.getCurrFrame().length() > 3) {
 			System.out.println("Player Wins");
 			System.exit(0);
-		}else if(enemyPoints > 3){
+		}else if(enemyPoints.getCurrFrame().length() > 3){
 			System.out.println("Enemy Wins");
 			System.exit(0);
 		}
@@ -79,6 +85,8 @@ public class Pong implements Game{
 			graphics = e.getComponent(TypeComponent.GRAPHICS);
 			graphics.render(e);
 		}
+		enemyPoints.render(renderSystem.stat);
+		playerPoints.render(renderSystem.stat);
 	}
 
 	@Override
@@ -95,13 +103,13 @@ public class Pong implements Game{
 	}
 
 	public static void enemyPoint() {
-		enemyPoints++;
+		enemyPoints.add();
 		System.out.println("Enemy scored: " + enemyPoints);
 		reset();
 	}
 
 	public static void playerPoint() {
-		playerPoints++;
+		playerPoints.add();
 		System.out.println("Player scored: " + playerPoints);
 		reset();
 	}

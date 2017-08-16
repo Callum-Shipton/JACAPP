@@ -9,7 +9,7 @@ public class Icon extends GuiComponent {
 
 	protected Vector2f size;
 	protected Image i;
-	private Vector2f currFrame;
+	protected Vector2f currFrame;
 	protected Vector2f maxFrame;
 	protected boolean isAnimated;
 
