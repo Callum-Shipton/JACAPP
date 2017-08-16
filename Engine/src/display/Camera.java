@@ -27,7 +27,6 @@ public class Camera {
 	Camera(int width, int height) {
 		box = new Vector4f(0, 0, width, height);
 		viewMatrix = new Matrix4f();
-		
 	}
 
 	public void setCameraFocus(float x, float y) {
@@ -79,11 +78,13 @@ public class Camera {
 	}
 
 	public void updateCameraSize(int width, int height) {
-		box.set(box.z, box.y, width, height);
+		box.set(box.x, box.y, width, height);
+		updateViewMatrix();
 	}
 
 	public boolean isVisible(Vector2f pos, Vector2f size) {
-		return VectorMath.contains(box, new Vector4f(pos.x(), pos.y(), size.x(), size.y())) != null;
+		return true;
+		//return VectorMath.contains(box, new Vector4f(pos.x(), pos.y(), size.x(), size.y())) != null;
 	}
 
 	public void setLevelSize(Vector2f levelSize) {

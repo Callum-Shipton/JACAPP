@@ -1,0 +1,78 @@
+[
+{
+  "name": "Player",
+  "components":[
+  {
+  	"class":"graphical.AnimatedGraphics",
+  	"component":
+  		{
+  		"imageId": "Paddle"
+ 		}
+  },
+  {
+  	"class":"movement.GroundMovement",
+  	"component":
+  		{
+  		"speed": 5
+ 		}
+  },
+  {
+  	"class":"collision.RigidCollision",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"spawn.SectionSpawn",
+  	"component":
+  		{
+  		"section":-1
+ 		}
+  },
+  {
+  	"class":"control.PlayerControl",
+  	"component":
+  		{
+ 		}
+  }
+  ]
+},
+{
+  "name": "Enemy",
+  "components":[
+  {
+  	"class":"graphical.AnimatedGraphics",
+  	"component":
+  		{
+  		"imageId": "Paddle"
+ 		}
+  },
+  {
+  	"class":"movement.GroundMovement",
+  	"component":
+  		{
+  		"speed": 5
+ 		}
+  },
+  {
+  	"class":"collision.RigidCollision",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"spawn.SectionSpawn",
+  	"component":
+  		{
+  		"section": 1
+ 		}
+  },
+  {
+  	"class":"control.EnemyControl",
+  	"component":
+  		{
+ 		}
+  }
+  ]
+}
+]

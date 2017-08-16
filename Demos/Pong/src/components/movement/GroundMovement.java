@@ -1,0 +1,119 @@
+package components.movement;
+
+import java.util.Set;
+
+import org.joml.Vector2f;
+import org.joml.Vector4f;
+
+import components.TypeComponent;
+import components.collision.BaseCollision;
+import components.graphical.BaseGraphics;
+import entity.Entity;
+import main.Pong;
+import math.VectorMath;
+
+public class GroundMovement extends BaseMovement {
+
+	public GroundMovement(int speed) {
+		super(speed);
+	}
+
+	public GroundMovement(GroundMovement groundMovement) {
+		this(groundMovement.speed);
+	}
+
+	private void reactToCollision(Vector4f collVec, Entity hitEntity, Entity currentEntity, Axis axis) {
+		BaseCollision BC = currentEntity.getComponent(TypeComponent.COLLISION);
+		BaseCollision HC = hitEntity.getComponent(TypeComponent.COLLISION);
+		BaseGraphics BG = currentEntity.getComponent(TypeComponent.GRAPHICS);
+		
+		if(HC == null) {
+			return;
+		}
+
+		if (HC.getMoveBack()) {
+			switch (axis) {
+			case X:
+				moveBackX(collVec, BG);
+				break;
+			case Y:
+				moveBackY(collVec, BG);
+			}
+		}
+		if (currentEntity.getComponent(TypeComponent.COLLISION) != null) {
+			BC.collision(currentEntity, hitEntity);
+		}
+		BaseCollision EC = hitEntity.getComponent(TypeComponent.COLLISION);
+		if (EC != null) {
+			EC.collision(hitEntity, currentEntity);
+		}
+		
+	}
+
+	public boolean checkCollision(Entity currentEntity, Axis axis) {
+		boolean collide = false;
+		Set<Entity> entities = Pong.getEntites();
+		Vector4f collVec;
+
+		for (Entity entity : entities) {
+			if (!entity.equals(currentEntity)) {
+				collVec = doesCollide(currentEntity, entity);
+				if (collVec != null) {
+					collide = true;
+					reactToCollision(collVec, entity, currentEntity, axis);
+				}
+			}
+		}
+
+		BaseCollision BC = currentEntity.getComponent(TypeComponent.COLLISION);
+		return collide;
+	}
+
+	@Override
+	public Vector4f doesCollide(Entity moving, Entity checked) {
+		BaseGraphics BG = moving.getComponent(TypeComponent.GRAPHICS);
+		Vector4f mov = BG.getBox();
+
+		BaseGraphics CG = checked.getComponent(TypeComponent.GRAPHICS);
+		Vector4f check = CG.getBox();
+
+		return VectorMath.contains(mov, check);
+
+	}
+
+	@Override
+	public void move(Entity e, Vector2f moveVec) {
+		super.move(e, moveVec);
+
+		BaseGraphics BG = e.getComponent(TypeComponent.GRAPHICS);
+
+		if (Math.abs(moveVec.x()) > 0) {
+			BG.addToX(Math.round(moveVec.x() * currentSpeed));
+			checkCollision(e, Axis.X);
+		}
+		if (Math.abs(moveVec.y()) > 0) {
+			BG.addToY(Math.round(moveVec.y() * currentSpeed));
+			checkCollision(e, Axis.Y);
+		}
+	}
+
+	public void moveBackX(Vector4f collVec, BaseGraphics BG) {
+		if (Math.abs(collVec.x()) <= currentSpeed) {
+			BG.takeFromX(collVec.x());
+		} else if (Math.abs(collVec.z()) <= currentSpeed) {
+			BG.takeFromX(collVec.z());
+		}
+	}
+
+	public void moveBackY(Vector4f collVec, BaseGraphics BG) {
+		if (Math.abs(collVec.y()) <= currentSpeed) {
+			BG.takeFromY(collVec.y());
+		} else if (Math.abs(collVec.w()) <= currentSpeed) {
+			BG.takeFromY(collVec.w());
+		}
+	}
+
+	public enum Axis {
+		X, Y
+	}
+}

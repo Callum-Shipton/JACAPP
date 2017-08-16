@@ -1,0 +1,52 @@
+[
+{
+  "name": "Ball",
+  "components":[
+  {
+  	"class":"graphical.AnimatedGraphics",
+  	"component":
+  		{
+  		"imageId": "Ball"
+ 		}
+  },
+  {
+  	"class":"movement.GroundMovement",
+  	"component":
+  		{
+  		"speed": 5
+ 		}
+  },
+  {
+  	"class":"collision.ReboundCollision",
+  	"component":
+  		{
+ 		}
+  },
+  {
+  	"class":"spawn.SectionSpawn",
+  	"component":
+  		{
+  		"section":0
+ 		}
+  },
+  {
+  	"class":"control.BallControl",
+  	"component":
+  		{
+ 		}
+  }
+  ]
+},
+{
+  "name": "Background",
+  "components":[
+  {
+  	"class":"graphical.AnimatedGraphics",
+  	"component":
+  		{
+  		"imageId": "Background"
+ 		}
+  }
+  ]
+}
+]
