@@ -21,15 +21,15 @@ public abstract class PauseMenu extends GuiMenu {
 		x = (display.getWidth() / 2) - (menuImage.getWidth() / 2);
 		y = (display.getHeight() / 2) - (menuImage.getHeight() / 2);
 		VerticalLayout tabs = new VerticalLayout(x + w - 102, y, 0);
-		tabs.addMenuItem(new Button(ArtLoader.getImage("InvButton"),
+		tabs.addMenuItem(new Button(ArtLoader.getImage("InventoryTabButton"),
 				new OpenMenuButton(new InventoryMenu(ArtLoader.getImage("InventoryScreen")))));
-		tabs.addMenuItem(new Button(ArtLoader.getImage("SkillButton"),
+		tabs.addMenuItem(new Button(ArtLoader.getImage("SkillTabButton"),
 				new OpenMenuButton(new SkillMenu(ArtLoader.getImage("SkillScreen")))));
-		tabs.addMenuItem(new Button(ArtLoader.getImage("UpgradesButton"),
+		tabs.addMenuItem(new Button(ArtLoader.getImage("UpgradesTabButton"),
 				new OpenMenuButton(new UpgradesMenu(ArtLoader.getImage("UpgradesScreen")))));
-		tabs.addMenuItem(new Button(ArtLoader.getImage("MapButton"),
+		tabs.addMenuItem(new Button(ArtLoader.getImage("MapTabButton"),
 				new OpenMenuButton(new MapMenu(ArtLoader.getImage("MapScreen")))));
-		tabs.addMenuItem(new Button(ArtLoader.getImage("SaveButton"),
+		tabs.addMenuItem(new Button(ArtLoader.getImage("SaveTabButton"),
 				new OpenMenuButton(new SaveMenu(ArtLoader.getImage("SaveScreen")))));
 		addMenuItem(tabs);
 

@@ -55,11 +55,11 @@
 /Images/Menus/Buttons/Items/IronChestButton.png, 1, 2
 /Images/Menus/Buttons/Items/IronHelmetButton.png, 1, 2
 
-/Images/Menus/Buttons/Tabs/InventoryButton.png, 1, 2
-/Images/Menus/Buttons/Tabs/SkillButton.png, 1, 2
-/Images/Menus/Buttons/Tabs/UpgradesButton.png, 1, 2
-/Images/Menus/Buttons/Tabs/MapButton.png, 1, 2
-/Images/Menus/Buttons/Tabs/SaveButton.png, 1, 2
+/Images/Menus/Buttons/Tabs/InventoryTabButton.png, 1, 2
+/Images/Menus/Buttons/Tabs/SkillTabButton.png, 1, 2
+/Images/Menus/Buttons/Tabs/UpgradesTabButton.png, 1, 2
+/Images/Menus/Buttons/Tabs/MapTabButton.png, 1, 2
+/Images/Menus/Buttons/Tabs/SaveTabButton.png, 1, 2
 
 /Images/Menus/Icons/LevelIcon.png, 1, 1
 /Images/Menus/Icons/DamageIcon.png, 1, 1
@@ -110,7 +110,7 @@
 /Images/Drops/Weapons/IronDagger.png, 8, 1
 /Images/Drops/Weapons/SteelDagger.png, 8, 1
 /Images/Drops/Weapons/Greatsword.png, 8, 1
-/Images/Drops/Weapons/Sword.png, 8, 1
+/Images/Drops/Weapons/ShortSword.png, 8, 1
 /Images/Drops/Weapons/Battleaxe.png, 8, 1
 /Images/Drops/Weapons/Mace.png, 8, 1
 /Images/Drops/Weapons/Longbow.png, 8, 1

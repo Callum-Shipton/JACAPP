@@ -6,17 +6,17 @@
   "fireRate": 15,
   "melee": true,
   "manaCost": 3,
-  "particleImage": "SwordProjectile",
+  "particleImage": "Sword",
   "element": null
 },
 {
-  "name": "Sword",
+  "name": "ShortSword",
   "damage": 3,
   "range": 1,
   "fireRate": 5,
   "melee": true,
   "manaCost": 1,
-  "particleImage": "SwordProjectile",
+  "particleImage": "Sword",
   "element": null
 }
 ]

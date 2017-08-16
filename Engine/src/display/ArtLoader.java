@@ -30,6 +30,11 @@ public abstract class ArtLoader {
 	}
 
 	public static Image getImage(String filename) {
-		return artFiles.get(filename);
+		Image image = artFiles.get(filename);
+		if (image == null) {
+			Logger.error("Art file missing: " + filename);
+			return new Image("/Images/defaultTexture.png", 1, 1);
+		}
+		return image;
 	}
 }

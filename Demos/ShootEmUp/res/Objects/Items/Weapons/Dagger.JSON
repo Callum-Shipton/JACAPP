@@ -6,7 +6,7 @@
   "fireRate": 5,
   "melee": true,
   "manaCost": 1,
-  "particleImage": "SwordProjectile",
+  "particleImage": "Sword",
   "element": null
 },
 {
@@ -16,7 +16,7 @@
   "fireRate": 3,
   "melee": true,
   "manaCost": 1,
-  "particleImage": "SwordProjectile",
+  "particleImage": "Sword",
   "element": null
 }
 ]
