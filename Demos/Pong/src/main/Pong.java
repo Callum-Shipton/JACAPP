@@ -2,6 +2,8 @@ package main;
 import java.util.HashSet;
 import java.util.Set;
 
+import components.Message;
+import components.MessageId;
 import components.TypeComponent;
 import components.graphical.BaseGraphics;
 import components.spawn.BaseSpawn;
@@ -23,6 +25,9 @@ public class Pong implements Game{
 	private static Entity background;
 	private static Entity player;
 	private static Entity enemy;
+	
+	private static int enemyPoints;
+	private static int playerPoints;
 	
 	public static void main(String[] args) {
 		GameLoop loop = new GameLoop(new Pong(), FPS, SCREEN_WIDTH, SCREEN_HEIGHT, GAME_NAME);
@@ -57,6 +62,13 @@ public class Pong implements Game{
 		for(Entity e: entities) {
 			e.update();
 		}
+		if(playerPoints > 3) {
+			System.out.println("Player Wins");
+			System.exit(0);
+		}else if(enemyPoints > 3){
+			System.out.println("Enemy Wins");
+			System.exit(0);
+		}
 	}
 
 	@Override
@@ -80,6 +92,30 @@ public class Pong implements Game{
 
 	public static Entity getBall() {
 		return ball;
+	}
+
+	public static void enemyPoint() {
+		enemyPoints++;
+		System.out.println("Enemy scored: " + enemyPoints);
+		reset();
+	}
+
+	public static void playerPoint() {
+		playerPoints++;
+		System.out.println("Player scored: " + playerPoints);
+		reset();
+	}
+	
+	private static void reset() {
+		player.send(new Message(MessageId.ENTITY_DIED));
+		enemy.send(new Message(MessageId.ENTITY_DIED));
+		ball.send(new Message(MessageId.ENTITY_DIED));
+		try {
+			Thread.sleep(1500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
