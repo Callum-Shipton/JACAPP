@@ -33,7 +33,13 @@ public abstract class ArtLoader {
 		Image image = artFiles.get(filename);
 		if (image == null) {
 			Logger.error("Art file missing: " + filename);
-			return new Image("/Images/defaultTexture.png", 1, 1);
+			if (artFiles.containsKey("defaultTexture")){
+				return artFiles.get("defaultTexture");
+			}else {
+				Image defaultImage = new Image("/Images/defaultTexture.png", 1, 1);
+				artFiles.put("defaultTexture", defaultImage);
+				return defaultImage;
+			}
 		}
 		return image;
 	}
