@@ -5,7 +5,7 @@ import loop.GameLoop;
 public class Pong implements Game{
 	
 	private static final float FPS = 60.0f;
-	private static final int SCREEN_WIDTH = 1024;
+	private static final int SCREEN_WIDTH = 512;
 	private static final int SCREEN_HEIGHT = 512;
 	
 	public static void main(String[] args) {

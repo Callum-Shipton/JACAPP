@@ -44,7 +44,6 @@ public class Display {
 
 	// Screen Width & Height
 	public final int initialScreenWidth;
-
 	public final int initialScreenHeight;
 
 	private GLFWErrorCallback errorCallback;
@@ -65,6 +64,8 @@ public class Display {
 	public Display(int initialScreenWidth, int initialScreenHeight) {
 		this.initialScreenWidth = initialScreenWidth;
 		this.initialScreenHeight = initialScreenHeight;
+		width = initialScreenWidth;
+		height = initialScreenHeight;
 	}
 
 	public void destroyGLFW() {
