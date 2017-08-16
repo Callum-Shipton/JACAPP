@@ -3,6 +3,7 @@ package components.graphical;
 import org.joml.Vector2f;
 
 import display.DPDTRenderer;
+import display.ExtendedRenderSystem;
 import display.BaseRenderSystem;
 import entity.Entity;
 
@@ -14,7 +15,7 @@ public class AnimatedGraphics extends BaseGraphics {
 	protected transient int direction = 0;
 
 	public AnimatedGraphics(String imageId, boolean animating) {
-		super(imageId, BaseRenderSystem.base);
+		super(imageId, ExtendedRenderSystem.base);
 		this.animating = animating;
 	}
 

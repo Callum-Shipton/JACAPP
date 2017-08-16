@@ -4,6 +4,12 @@ import java.util.Arrays;
 
 public class ExtendedRenderSystem extends BaseRenderSystem {
 
+	public static Shader ShaderInst;
+	
+	public static IRenderer irBack;
+	public static IRenderer irWall;
+	public static IRenderer irFloor;
+	
 	
 	@Override
 	protected void initShaders() {

@@ -20,14 +20,10 @@ public class BaseRenderSystem {
 
 	// Texture.....stuff
 	public static Shader ShaderBase;
-	public static Shader ShaderInst;
 	public static Shader ShaderStat;
 
 	public static DPDTRenderer base;
 	public static DPDTRenderer stat;
-	public static IRenderer irBack;
-	public static IRenderer irWall;
-	public static IRenderer irFore;
 
 
 	public void init() {
@@ -45,7 +41,6 @@ public class BaseRenderSystem {
 
 		// Create a new shader program that links both shaders
 		ShaderBase = new Shader("/Shaders/CameraVertexShader.glsl","/Shaders/BaseFragmentShader.glsl",Arrays.asList("pos","tex"));
-		ShaderInst = new Shader("/Shaders/CameraIVertexShader.glsl","/Shaders/BaseIFragmentShader.glsl",Arrays.asList("pos","tex","trans","text"));
 		ShaderStat = new Shader("/Shaders/StaticVertexShader.glsl","/Shaders/BaseFragmentShader.glsl",Arrays.asList("pos","tex"));
 	}
 }
