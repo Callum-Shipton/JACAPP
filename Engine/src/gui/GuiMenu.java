@@ -7,7 +7,7 @@ import org.joml.Vector2f;
 
 import display.Display;
 import display.Image;
-import display.ImageProcessor;
+import display.BaseRenderSystem;
 import loop.GameLoop;
 
 public abstract class GuiMenu {
@@ -39,15 +39,15 @@ public abstract class GuiMenu {
 
 	public void render() {
 		if (fullscreen) {
-			ImageProcessor.stat.draw(menuImage, new Vector2f(x, y),
+			BaseRenderSystem.stat.draw(menuImage, new Vector2f(x, y),
 					new Vector2f(display.getWidth(), display.getHeight()), 0, new Vector2f(0, 0), new Vector2f(1, 1));
 		} else {
-			ImageProcessor.stat.draw(menuImage, new Vector2f(x, y),
+			BaseRenderSystem.stat.draw(menuImage, new Vector2f(x, y),
 					new Vector2f(menuImage.getWidth(), menuImage.getHeight()), 0, new Vector2f(0, 0),
 					new Vector2f(1, 1));
 		}
 		for (GuiComponent menuItem : menuItems) {
-			menuItem.render(ImageProcessor.stat);
+			menuItem.render(BaseRenderSystem.stat);
 		}
 	}
 

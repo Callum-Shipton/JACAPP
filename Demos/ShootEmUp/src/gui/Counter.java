@@ -5,7 +5,7 @@ import org.joml.Vector2f;
 import display.ArtLoader;
 import display.DPDTRenderer;
 import display.Image;
-import display.ImageProcessor;
+import display.BaseRenderSystem;
 
 public class Counter extends Icon {
 
@@ -41,14 +41,14 @@ public class Counter extends Icon {
 		Vector2f maxTex = new Vector2f(10, 1);
 
 		if (count < 10) {
-			ImageProcessor.stat.draw(ArtLoader.getImage("Numbers"),
+			BaseRenderSystem.stat.draw(ArtLoader.getImage("Numbers"),
 					new Vector2f(x + numberWidth + (FIRST_GAP * scale), y), numberSize, 0.0f, new Vector2f(count, 1),
 					maxTex);
 		} else {
-			ImageProcessor.stat.draw(ArtLoader.getImage("Numbers"),
+			BaseRenderSystem.stat.draw(ArtLoader.getImage("Numbers"),
 					new Vector2f(x + numberWidth + (FIRST_GAP * scale), y), numberSize, 0.0f,
 					new Vector2f(count / 10, 1), maxTex);
-			ImageProcessor.stat.draw(ArtLoader.getImage("Numbers"),
+			BaseRenderSystem.stat.draw(ArtLoader.getImage("Numbers"),
 					new Vector2f(x + numberWidth + (NUMBER_GAP * scale), y), numberSize, 0.0f,
 					new Vector2f(count % 10, 1), maxTex);
 		}

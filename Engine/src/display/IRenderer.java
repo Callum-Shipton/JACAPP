@@ -26,7 +26,7 @@ import org.lwjgl.opengl.GL15;
 
 public abstract class IRenderer extends Renderer {
 
-	protected Shader shader = ImageProcessor.ShaderInst;
+	protected Shader shader = BaseRenderSystem.ShaderInst;
 	
 	protected float width;
 	protected float height;

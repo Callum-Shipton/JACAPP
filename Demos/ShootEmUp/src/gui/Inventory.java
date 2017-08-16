@@ -8,7 +8,7 @@ import components.TypeComponent;
 import components.inventory.BaseInventory;
 import display.DPDTRenderer;
 import display.Image;
-import display.ImageProcessor;
+import display.BaseRenderSystem;
 import main.ShootEmUp;
 import object.InventoryItem;
 
@@ -59,7 +59,7 @@ public class Inventory extends GuiComponent {
 	@Override
 	public void render(DPDTRenderer d) {
 		for (GuiComponent item : items) {
-			item.render(ImageProcessor.stat);
+			item.render(BaseRenderSystem.stat);
 		}
 	}
 

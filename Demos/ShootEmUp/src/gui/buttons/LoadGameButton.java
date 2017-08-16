@@ -7,7 +7,7 @@ import org.joml.Vector2f;
 
 import components.TypeComponent;
 import components.spawn.PointSpawn;
-import display.ImageProcessor;
+import display.BaseRenderSystem;
 import entity.Entity;
 import gui.ButtonAction;
 import gui.Hud;
@@ -52,7 +52,7 @@ public class LoadGameButton implements ButtonAction {
 	}
 
 	private void startLevel() {
-		Level level = new Level(ImageProcessor.LEVEL_FILE_LOCATION, levelNum);
+		Level level = new Level(BaseRenderSystem.LEVEL_FILE_LOCATION, levelNum);
 		level.init();
 		level.addEntity(ShootEmUp.getGame().getPlayer());
 

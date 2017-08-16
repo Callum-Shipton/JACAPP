@@ -4,7 +4,7 @@ import components.TypeComponent;
 import components.attack.PlayerAttack;
 import components.inventory.BaseInventory;
 import display.Image;
-import display.ImageProcessor;
+import display.BaseRenderSystem;
 import gui.Inventory;
 import gui.ItemSlot;
 import main.ShootEmUp;
@@ -59,22 +59,22 @@ public class InventoryMenu extends PauseMenu {
 	public void render() {
 		super.render();
 		if (boots != null) {
-			boots.render(ImageProcessor.stat);
+			boots.render(BaseRenderSystem.stat);
 		}
 		if (legs != null) {
-			legs.render(ImageProcessor.stat);
+			legs.render(BaseRenderSystem.stat);
 		}
 		if (chest != null) {
-			chest.render(ImageProcessor.stat);
+			chest.render(BaseRenderSystem.stat);
 		}
 		if (helmet != null) {
-			helmet.render(ImageProcessor.stat);
+			helmet.render(BaseRenderSystem.stat);
 		}
 		if (weapon != null) {
-			weapon.render(ImageProcessor.stat);
+			weapon.render(BaseRenderSystem.stat);
 		}
 
-		inventory.render(ImageProcessor.stat);
+		inventory.render(BaseRenderSystem.stat);
 	}
 
 	@Override

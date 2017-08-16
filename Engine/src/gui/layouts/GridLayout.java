@@ -3,7 +3,7 @@ package gui.layouts;
 import java.util.ArrayList;
 
 import display.DPDTRenderer;
-import display.ImageProcessor;
+import display.BaseRenderSystem;
 import gui.GuiComponent;
 
 public class GridLayout extends GuiComponent {
@@ -42,7 +42,7 @@ public class GridLayout extends GuiComponent {
 	@Override
 	public void render(DPDTRenderer d) {
 		for (GuiComponent item : gridItems) {
-			item.render(ImageProcessor.stat);
+			item.render(BaseRenderSystem.stat);
 		}
 	}
 

@@ -15,7 +15,7 @@ import components.collision.TransportCollision;
 import components.graphical.MapGraphics;
 import display.ArtLoader;
 import display.FloorRenderer;
-import display.ImageProcessor;
+import display.BaseRenderSystem;
 import display.WallsRenderer;
 import entity.Entity;
 import logging.Logger;
@@ -44,7 +44,7 @@ public class LevelMap {
 
 		Random rand = new Random();
 
-		String file = ImageProcessor.LEVEL_FILE_LOCATION + (rand.nextInt(5) + 1) + ".map";
+		String file = BaseRenderSystem.LEVEL_FILE_LOCATION + (rand.nextInt(5) + 1) + ".map";
 
 		tileMap = TileMap.readTileMap(file);
 		GameLoop.getDisplay().getCamera()
@@ -59,13 +59,13 @@ public class LevelMap {
 
 	public void init() {
 
-		ImageProcessor.irBack = new FloorRenderer(tileMap.getBackgroundTiles(),
+		BaseRenderSystem.irBack = new FloorRenderer(tileMap.getBackgroundTiles(),
 				new Vector2f(ArtLoader.getImage(TILES_TEXTURE_FILE).getFWidth(),
 						ArtLoader.getImage(TILES_TEXTURE_FILE).getFHeight()),
 				LevelMap.TILE_WIDTH, TILE_WIDTH);
 
 		createWalls(tileMap.getWalls());
-		ImageProcessor.irWall = new WallsRenderer(walls,
+		BaseRenderSystem.irWall = new WallsRenderer(walls,
 				new Vector2f(ArtLoader.getImage(TILES_TEXTURE_FILE).getFWidth(),
 						ArtLoader.getImage(TILES_TEXTURE_FILE).getFHeight()),
 				LevelMap.TILE_WIDTH, TILE_WIDTH);
@@ -78,8 +78,8 @@ public class LevelMap {
 		 * LevelMap.getTileWidth(), LevelMap.getTileHeight());
 		 */
 
-		ImageProcessor.irBack.init();
-		ImageProcessor.irWall.init();
+		BaseRenderSystem.irBack.init();
+		BaseRenderSystem.irWall.init();
 		// ImageProcessor.irFore.init();
 
 		Logger.info("Map Loaded");
@@ -90,8 +90,8 @@ public class LevelMap {
 	}
 
 	public void renderLowTiles() {
-		ImageProcessor.irBack.draw(ArtLoader.getImage(TILES_TEXTURE_FILE).getID());
-		ImageProcessor.irWall.draw(ArtLoader.getImage(TILES_TEXTURE_FILE).getID());
+		BaseRenderSystem.irBack.draw(ArtLoader.getImage(TILES_TEXTURE_FILE).getID());
+		BaseRenderSystem.irWall.draw(ArtLoader.getImage(TILES_TEXTURE_FILE).getID());
 	}
 
 	private void createWalls(Set<MapTile> walls) {

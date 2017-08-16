@@ -2,14 +2,19 @@ package display;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
-
+import static org.lwjgl.system.MemoryStack.stackPush;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.FloatBuffer;
 import java.util.List;
 
+import org.joml.Matrix4f;
+import org.lwjgl.system.MemoryStack;
+
 import logging.Logger;
+import loop.GameLoop;
 
 public class Shader {
 	
@@ -34,6 +39,22 @@ public class Shader {
 		
 		glLinkProgram(programID);
 		glValidateProgram(programID);
+		
+		Matrix4f projectionMatrix = new Matrix4f();
+		projectionMatrix.ortho(0, GameLoop.getDisplay().getWidth(), GameLoop.getDisplay().getHeight(), 0, -1.0f, 1.0f);
+
+		try (MemoryStack stack = stackPush()) {
+			FloatBuffer buf = stack.callocFloat(16);
+			buf = projectionMatrix.get(buf);
+
+			glUseProgram(programID);
+
+			final String projectionMatrixString = "projectionMatrix";
+
+			int projectionMatrixLocation = glGetUniformLocation(programID, projectionMatrixString);
+			glUniformMatrix4fv(projectionMatrixLocation, false, buf);
+			glUseProgram(0);
+		}
 		
 		int error = glGetError();
 

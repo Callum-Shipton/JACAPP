@@ -7,7 +7,7 @@ import components.inventory.TypePickup;
 import display.ArtLoader;
 import display.DPDTRenderer;
 import display.Image;
-import display.ImageProcessor;
+import display.BaseRenderSystem;
 import object.Armour;
 import object.InventoryItem;
 import object.Weapon;

@@ -156,7 +156,6 @@ public class Display {
 		GL.createCapabilities();
 
 		initGL();
-		ImageProcessor.init();
 		cam = new Camera(width, height);
 
 		// Initialise key handling

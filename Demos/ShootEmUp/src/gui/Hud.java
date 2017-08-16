@@ -11,7 +11,7 @@ import components.inventory.TypePotion;
 import components.movement.GroundMovement;
 import display.ArtLoader;
 import display.DPDTRenderer;
-import display.ImageProcessor;
+import display.BaseRenderSystem;
 import entity.Entity;
 import loop.GameLoop;
 

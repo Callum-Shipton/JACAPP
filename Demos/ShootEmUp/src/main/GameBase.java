@@ -9,7 +9,7 @@ import org.joml.Vector2i;
 import components.TypeComponent;
 import components.graphical.BaseGraphics;
 import components.spawn.PointSpawn;
-import display.ImageProcessor;
+import display.BaseRenderSystem;
 import entity.Entity;
 import gui.Hud;
 import level.Level;
@@ -47,7 +47,7 @@ public class GameBase {
 			baseGraphics.render(player);
 		}
 		if (hud != null) {
-			hud.render(ImageProcessor.stat);
+			hud.render(BaseRenderSystem.stat);
 		}
 	}
 

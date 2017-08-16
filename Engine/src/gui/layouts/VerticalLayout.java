@@ -3,7 +3,7 @@ package gui.layouts;
 import java.util.ArrayList;
 
 import display.DPDTRenderer;
-import display.ImageProcessor;
+import display.BaseRenderSystem;
 import gui.GuiComponent;
 
 public class VerticalLayout extends GuiComponent {
@@ -36,7 +36,7 @@ public class VerticalLayout extends GuiComponent {
 	@Override
 	public void render(DPDTRenderer d) {
 		for (GuiComponent menuItem : menuItems) {
-			menuItem.render(ImageProcessor.stat);
+			menuItem.render(BaseRenderSystem.stat);
 		}
 	}
 

@@ -4,7 +4,7 @@ import components.TypeComponent;
 import components.inventory.BaseInventory;
 import display.ArtLoader;
 import display.Image;
-import display.ImageProcessor;
+import display.BaseRenderSystem;
 import gui.Counter;
 import gui.Button;
 import gui.buttons.UpgradeHealthButton;
@@ -26,7 +26,7 @@ public class SkillMenu extends PauseMenu {
 	@Override
 	public void render() {
 		super.render();
-		skillPoints.render(ImageProcessor.stat);
+		skillPoints.render(BaseRenderSystem.stat);
 	}
 
 	@Override

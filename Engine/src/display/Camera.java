@@ -19,16 +19,15 @@ public class Camera {
 	// Camera variables
 	private final Vector4f box;
 	private final Matrix4f viewMatrix;
-	private final int viewMatrixLocation;
-	private final int viewMatrixLocationInst;
+	private int viewMatrixLocation;
+	private int viewMatrixLocationInst;
 	private float levelWidth;
 	private float levelHeight;
 
 	Camera(int width, int height) {
 		box = new Vector4f(0, 0, width, height);
 		viewMatrix = new Matrix4f();
-		viewMatrixLocation = glGetUniformLocation(ImageProcessor.ShaderBase.getProgramID(), "viewMatrix");
-		viewMatrixLocationInst = glGetUniformLocation(ImageProcessor.ShaderInst.getProgramID(), "viewMatrix");
+		
 	}
 
 	public void setCameraFocus(float x, float y) {
@@ -62,15 +61,18 @@ public class Camera {
 	private void updateViewMatrix() {
 
 		viewMatrix.identity().translate(-box.x(), -box.y(), 0);
+		
+		viewMatrixLocation = glGetUniformLocation(BaseRenderSystem.ShaderBase.getProgramID(), "viewMatrix");
+		viewMatrixLocationInst = glGetUniformLocation(BaseRenderSystem.ShaderInst.getProgramID(), "viewMatrix");
 
 		try (MemoryStack stack = stackPush()) {
 			FloatBuffer buf = stack.callocFloat(16);
 			buf = viewMatrix.get(buf);
-			glUseProgram(ImageProcessor.ShaderBase.getProgramID());
+			glUseProgram(BaseRenderSystem.ShaderBase.getProgramID());
 			glUniformMatrix4fv(viewMatrixLocation, false, buf);
 			glUseProgram(0);
 
-			glUseProgram(ImageProcessor.ShaderInst.getProgramID());
+			glUseProgram(BaseRenderSystem.ShaderInst.getProgramID());
 			glUniformMatrix4fv(viewMatrixLocationInst, false, buf);
 			glUseProgram(0);
 		}

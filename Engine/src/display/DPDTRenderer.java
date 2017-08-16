@@ -71,7 +71,7 @@ public class DPDTRenderer extends Renderer {
 	}
 
 	private boolean visible(Vector2f pos, Vector2f size) {
-		if (shader == ImageProcessor.ShaderStat)
+		if (shader == BaseRenderSystem.ShaderStat)
 			return true;
 
 		// TODO: Update to use rotation (even though I don't think anything uses it

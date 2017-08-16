@@ -2,6 +2,7 @@ package main;
 
 import audio.MusicPlayer;
 import display.ArtLoader;
+import display.ExtendedRenderSystem;
 import game.Game;
 import gui.MenuSystem;
 import gui.menus.InventoryMenu;
@@ -23,6 +24,7 @@ public class ShootEmUp implements Game {
 	private static MenuSystem menuSystem = new MenuSystem();
 	private static ShootEmUpSave save;
 	private static GameBase game = new GameBase();
+	private static ExtendedRenderSystem renderSystem = new ExtendedRenderSystem();
 
 	private static boolean paused = true;
 
@@ -40,6 +42,7 @@ public class ShootEmUp implements Game {
 
 	@Override
 	public void init() {
+		renderSystem.init();
 		musicPlayer = new MusicPlayer();
 		Save.init("funbrella0000000");
 		menuSystem.addMenu(new MainMenu());
