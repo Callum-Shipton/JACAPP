@@ -46,8 +46,8 @@ public class Level {
 
 		entityStorage = new EntityStorage();
 
-		radiusLocation = GL20.glGetUniformLocation(ImageProcessor.ShaderBase, "radius");
-		radiusLocationInst = GL20.glGetUniformLocation(ImageProcessor.ShaderInst, "radius");
+		radiusLocation = GL20.glGetUniformLocation(ImageProcessor.ShaderBase.getProgramID(), "radius");
+		radiusLocationInst = GL20.glGetUniformLocation(ImageProcessor.ShaderInst.getProgramID(), "radius");
 		changeRadius(0);
 	}
 
@@ -56,10 +56,10 @@ public class Level {
 	}
 
 	public void changeRadius(float f) {
-		GL20.glUseProgram(ImageProcessor.ShaderBase);
+		GL20.glUseProgram(ImageProcessor.ShaderBase.getProgramID());
 		GL20.glUniform1f(radiusLocation, f + RADIUS);
 		GL20.glUseProgram(0);
-		GL20.glUseProgram(ImageProcessor.ShaderInst);
+		GL20.glUseProgram(ImageProcessor.ShaderInst.getProgramID());
 		GL20.glUniform1f(radiusLocationInst, f + RADIUS);
 		GL20.glUseProgram(0);
 	}

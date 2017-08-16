@@ -19,21 +19,21 @@ import loop.GameLoop;
 
 public class DPDTRenderer extends Renderer {
 
-	private int shaderProgramID;
+	private Shader shader;
 	private int modelMatrixLocation;
 	private int textureMatrixLocation;
 	private Matrix4f model;
 	private Matrix4f texture;
 
-	public DPDTRenderer(int pID) {
-		this.shaderProgramID = pID;
+	public DPDTRenderer(Shader shaderBase) {
+		this.shader = shaderBase;
 		initRenderData();
 	}
 
 	public void draw(Image Texid, Vector2f pos, Vector2f size, float rotate, Vector2f texPos, Vector2f maxFrame) {
 		if (!visible(pos, size))
 			return;
-		glUseProgram(shaderProgramID);
+		glUseProgram(shader.getProgramID());
 		glBindVertexArray(VAO);
 		glBindTexture(GL_TEXTURE_2D, Texid.getID());
 
@@ -71,7 +71,7 @@ public class DPDTRenderer extends Renderer {
 	}
 
 	private boolean visible(Vector2f pos, Vector2f size) {
-		if (shaderProgramID == ImageProcessor.ShaderStat)
+		if (shader == ImageProcessor.ShaderStat)
 			return true;
 
 		// TODO: Update to use rotation (even though I don't think anything uses it
@@ -90,10 +90,10 @@ public class DPDTRenderer extends Renderer {
 		this.model = new Matrix4f();
 		this.texture = new Matrix4f();
 
-		glUseProgram(this.shaderProgramID);
+		glUseProgram(shader.getProgramID());
 
-		this.modelMatrixLocation = glGetUniformLocation(this.shaderProgramID, "modelMatrix");
-		this.textureMatrixLocation = glGetUniformLocation(this.shaderProgramID, "textureMatrix");
+		this.modelMatrixLocation = glGetUniformLocation(shader.getProgramID(), "modelMatrix");
+		this.textureMatrixLocation = glGetUniformLocation(shader.getProgramID(), "textureMatrix");
 
 		glUseProgram(0);
 

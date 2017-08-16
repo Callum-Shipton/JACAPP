@@ -186,8 +186,8 @@ public class Display {
 		fullscreen = !fullscreen;
 		glfwSwapInterval(1);
 		glViewport(0, 0, width, height);
-		cam.updateCameraSize(width, height);
-		ImageProcessor.initShaderUniforms();
+		//cam.updateCameraSize(width, height);
+		//ImageProcessor.refreshShaderProjections();
 	}
 
 	public void update() {

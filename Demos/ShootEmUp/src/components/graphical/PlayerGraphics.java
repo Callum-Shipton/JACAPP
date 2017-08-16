@@ -14,8 +14,8 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 
 	public PlayerGraphics(String imageId) {
 		super(imageId, false);
-		posLocation = GL20.glGetUniformLocation(ImageProcessor.ShaderBase, "playerPos");
-		posLocationInst = GL20.glGetUniformLocation(ImageProcessor.ShaderInst, "playerPos");
+		posLocation = GL20.glGetUniformLocation(ImageProcessor.ShaderBase.getProgramID(), "playerPos");
+		posLocationInst = GL20.glGetUniformLocation(ImageProcessor.ShaderInst.getProgramID(), "playerPos");
 	}
 
 	public PlayerGraphics(PlayerGraphics playerGraphics) {
@@ -31,10 +31,10 @@ public class PlayerGraphics extends AnimatedGraphics implements GraphicsComponen
 
 		GameLoop.getDisplay().getCamera().setCameraFocus(x + (width / 2), y + (height / 2));
 
-		GL20.glUseProgram(ImageProcessor.ShaderBase);
+		GL20.glUseProgram(ImageProcessor.ShaderBase.getProgramID());
 		GL20.glUniform2f(posLocation, x + (width / 2), y + (height / 2));
 		GL20.glUseProgram(0);
-		GL20.glUseProgram(ImageProcessor.ShaderInst);
+		GL20.glUseProgram(ImageProcessor.ShaderInst.getProgramID());
 		GL20.glUniform2f(posLocationInst, x + (width / 2), y + (height / 2));
 		GL20.glUseProgram(0);
 	}

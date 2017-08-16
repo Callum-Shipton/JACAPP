@@ -26,6 +26,8 @@ import org.lwjgl.opengl.GL15;
 
 public abstract class IRenderer extends Renderer {
 
+	protected Shader shader = ImageProcessor.ShaderInst;
+	
 	protected float width;
 	protected float height;
 	protected int amount;
@@ -43,7 +45,7 @@ public abstract class IRenderer extends Renderer {
 	}
 
 	public void draw(int texid) {
-		glUseProgram(ImageProcessor.ShaderInst);
+		glUseProgram(shader.getProgramID());
 		glBindTexture(GL11.GL_TEXTURE_2D, texid);
 		glBindVertexArray(this.VAO);
 		glDrawElementsInstanced(GL11.GL_TRIANGLES, 6, GL11.GL_UNSIGNED_BYTE, 0, this.amount);
