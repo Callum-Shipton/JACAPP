@@ -45,8 +45,8 @@ public class Pong implements Game{
 		player = new Entity("Characters","Players","Player");
 		enemy = new Entity("Characters","Players","Enemy");
 		
-		enemyPoints = new Counter(360,40,ArtLoader.getImage("Numbers"),1.0f);
-		playerPoints = new Counter(100,40,ArtLoader.getImage("Numbers"),1.0f);
+		enemyPoints = new Counter(376,40,ArtLoader.getImage("Numbers"),1.0f);
+		playerPoints = new Counter(132,40,ArtLoader.getImage("Numbers"),1.0f);
 		
 		entities.add(ball);
 
