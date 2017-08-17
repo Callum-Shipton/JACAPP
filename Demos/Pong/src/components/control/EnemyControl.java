@@ -35,10 +35,10 @@ public class EnemyControl extends BaseControl {
 		AnimatedGraphics ballComponent = Pong.getBall().getComponent(TypeComponent.GRAPHICS);
 
 		Vector2f movement = new Vector2f(0.0f, 0.0f);
-		if (ballComponent.getY()<graphicsComponent.getY()+graphicsComponent.getHeight()/2) {
+		if (ballComponent.getY()<graphicsComponent.getY()+graphicsComponent.getHeight()/2 - 2) {
 			if(graphicsComponent.getY()> 0) movement.add(0.0f, -1.0f);
 		}
-		if (ballComponent.getY()>graphicsComponent.getY()+graphicsComponent.getHeight()/2) {
+		if (ballComponent.getY()>graphicsComponent.getY()+graphicsComponent.getHeight()/2 + 2) {
 			if(graphicsComponent.getY()+graphicsComponent.getHeight()< GameLoop.getDisplay().getHeight()) movement.add(0.0f, 1.0f);
 		}
 
