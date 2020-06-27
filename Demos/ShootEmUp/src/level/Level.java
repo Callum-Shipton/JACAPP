@@ -16,6 +16,7 @@ import entity.Entity;
 import entity.EntityStorage;
 import entity.Spawner;
 import logging.Logger;
+import loop.Loop;
 import maze.Direction;
 import maze.MazeTile;
 import object.EntityMap;
@@ -35,11 +36,21 @@ public class Level {
 
 	private static final float RADIUS = 250.0f;
 	private static final float RADIUS_INCREASE_PER_LEVEL = 25.0f;
+	
+	private String levelLayoutFileName;
 
 	private Direction levelState = null;
 
-	public Level(MazeTile mazeTile) {
-		map = new LevelMap(mazeTile);
+	public Level(MazeTile mazeTile, String levelLayoutFileName) {
+		if(levelLayoutFileName == null) {
+			map = new LevelMap(mazeTile);
+			this.levelLayoutFileName = map.getlevelLayoutFileName();
+		} else {
+			this.levelLayoutFileName = levelLayoutFileName;
+			map = new LevelMap(mazeTile, levelLayoutFileName);
+		}
+		Loop.getDisplay().getCamera().setLevelSize(new Vector2f(map.getRealWidth(), map.getRealHeight()));
+		
 		map.init();
 		eMap = new EntityMap(map.getWidth(), map.getHeight());
 		spawners = new HashSet<>();
@@ -144,5 +155,9 @@ public class Level {
 
 	public void setLevelState(Direction direction) {
 		levelState = direction;
+	}
+	
+	public String getLevelLayoutFileName() {
+		return levelLayoutFileName;
 	}
 }

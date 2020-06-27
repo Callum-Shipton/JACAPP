@@ -1,7 +1,9 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.joml.Vector2f;
 import org.joml.Vector2i;
@@ -24,6 +26,7 @@ public class GameBase {
 
 	private Vector2i levelPosition;
 	private Maze maze;
+	private Map<Vector2i, String> tileLayoutMap = new HashMap<>();
 
 	private Entity player;
 	private Hud hud;
@@ -96,7 +99,9 @@ public class GameBase {
 		save.setLevel(levelPosition);
 		save.saveToSystem(1);
 
-		currentLevel = new Level(maze.getTile(levelPosition));
+		currentLevel = new Level(maze.getTile(levelPosition), tileLayoutMap.get(levelPosition));
+		Vector2i levelPositionClone = new Vector2i(levelPosition.x, levelPosition.y);
+		tileLayoutMap.put(levelPositionClone, currentLevel.getLevelLayoutFileName());
 		currentLevel.init();
 
 		List<String> enemyPrototypes = new ArrayList<>();
@@ -124,7 +129,9 @@ public class GameBase {
 
 		levelPosition = maze.getStart();
 		maze.getGrid()[levelPosition.x][levelPosition.y].setExplored();
-		currentLevel = new Level(maze.getTile(levelPosition));
+		currentLevel = new Level(maze.getTile(levelPosition), null);
+		Vector2i levelPositionClone = new Vector2i(levelPosition.x, levelPosition.y);
+		tileLayoutMap.put(levelPositionClone, currentLevel.getLevelLayoutFileName());
 		currentLevel.init();
 
 		float levelWidth = currentLevel.getMap().getRealWidth();

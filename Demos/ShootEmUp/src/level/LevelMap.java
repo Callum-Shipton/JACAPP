@@ -18,8 +18,6 @@ import display.ImageProcessor;
 import display.WallsRenderer;
 import entity.Entity;
 import logging.Logger;
-import logging.Logger.Category;
-import loop.Loop;
 import map.MapTile;
 import map.TileMap;
 import maze.Direction;
@@ -31,29 +29,29 @@ public class LevelMap {
 
 	private final TileMap tileMap;
 	private final GoalBounder goalBounder;
+	private final String levelLayoutFileName;
 	private static final String TILES_TEXTURE_FILE = "Tiles";
 	private static final Vector2f WATER_MODIFIER = new Vector2f(0.0f, 4.0f);
 	private MazeTile mazeTile;
 
 	// collidable wall entities
-	private final Map<Vector2i, Entity> walls;
-
+	private final Map<Vector2i, Entity> walls = new HashMap<>();
+	
 	public LevelMap(MazeTile mazeTile) {
-		this.mazeTile = mazeTile;
-
 		Random rand = new Random();
+		int levelLayoutFileId = rand.nextInt(5) + 1;
+		
+		this.mazeTile = mazeTile;
+		levelLayoutFileName = ImageProcessor.LEVEL_FILE_LOCATION + levelLayoutFileId;
+		tileMap = TileMap.readTileMap(levelLayoutFileName + ".map");
+		goalBounder = GoalBounder.readGoalbounder(levelLayoutFileName + ".bound");
+	}
 
-		String file = ImageProcessor.LEVEL_FILE_LOCATION + (rand.nextInt(5) + 1) + ".map";
-
-		tileMap = TileMap.readTileMap(file);
-		Loop.getDisplay().getCamera()
-				.setLevelSize(new Vector2f(tileMap.getWidth() * TILE_WIDTH, tileMap.getHeight() * TILE_WIDTH));
-
-		walls = new HashMap<>();
-
-		String goalboundfile = file.substring(0, file.length() - 4) + ".bound";
-		Logger.debug(goalboundfile, Category.AI_GOALBOUNDING);
-		goalBounder = GoalBounder.readGoalbounder(goalboundfile);
+	public LevelMap(MazeTile mazeTile, String levelLayoutFileName) {
+		this.mazeTile = mazeTile;
+		this.levelLayoutFileName = levelLayoutFileName;
+		tileMap = TileMap.readTileMap(levelLayoutFileName + ".map");
+		goalBounder = GoalBounder.readGoalbounder(levelLayoutFileName + ".bound");
 	}
 
 	public void init() {
@@ -69,23 +67,14 @@ public class LevelMap {
 						ImageProcessor.getImage(TILES_TEXTURE_FILE).getFHeight()),
 				LevelMap.TILE_WIDTH, TILE_WIDTH);
 
-		/*
-		 * ImageProcessor.irFore = new
-		 * FloorRenderer(generator.getForegroundTiles(), new
-		 * Vector2(ImageProcessor.getImage("Walls").getFWidth(),
-		 * ImageProcessor.getImage("Walls").getFHeight()),
-		 * LevelMap.getTileWidth(), LevelMap.getTileHeight());
-		 */
-
 		ImageProcessor.irBack.init();
 		ImageProcessor.irWall.init();
-		// ImageProcessor.irFore.init();
 
 		Logger.info("Map Loaded");
 	}
 
 	public void renderHighTiles() {
-		// ImageProcessor.irFore.draw(ImageProcessor.getImage("Walls").getID());
+		//TODO: Add logic for rendering foreground tiles
 	}
 
 	public void renderLowTiles() {
@@ -115,10 +104,10 @@ public class LevelMap {
 		Vector2f transportTexture = new Vector2f(1.0f, 7.0f);
 
 		if (mazeTile.getAdjacentTile(Direction.N)) {
-			insertTransporter(mapWidthMiddle - 2, 0, transportTexture, Direction.N);
-			insertTransporter(mapWidthMiddle - 1, 0, transportTexture, Direction.N);
-			insertTransporter(mapWidthMiddle, 0, transportTexture, Direction.N);
-			insertTransporter(mapWidthMiddle + 1, 0, transportTexture, Direction.N);
+			insertTransporterEntity(mapWidthMiddle - 2, 0, transportTexture, Direction.N);
+			insertTransporterEntity(mapWidthMiddle - 1, 0, transportTexture, Direction.N);
+			insertTransporterEntity(mapWidthMiddle, 0, transportTexture, Direction.N);
+			insertTransporterEntity(mapWidthMiddle + 1, 0, transportTexture, Direction.N);
 		} else {
 			insertWall(mapWidthMiddle - 2, 0, new Vector2f(1.0f, 2.0f));
 			insertWall(mapWidthMiddle - 1, 0, new Vector2f(1.0f, 2.0f));
@@ -130,10 +119,10 @@ public class LevelMap {
 			insertWall(mapWidthMiddle + 1, 1, new Vector2f(1.0f, 2.0f));
 		}
 		if (mazeTile.getAdjacentTile(Direction.S)) {
-			insertTransporter(mapWidthMiddle - 2, tileMap.getHeight() - 1, transportTexture, Direction.S);
-			insertTransporter(mapWidthMiddle - 1, tileMap.getHeight() - 1, transportTexture, Direction.S);
-			insertTransporter(mapWidthMiddle, tileMap.getHeight() - 1, transportTexture, Direction.S);
-			insertTransporter(mapWidthMiddle + 1, tileMap.getHeight() - 1, transportTexture, Direction.S);
+			insertTransporterEntity(mapWidthMiddle - 2, tileMap.getHeight() - 1, transportTexture, Direction.S);
+			insertTransporterEntity(mapWidthMiddle - 1, tileMap.getHeight() - 1, transportTexture, Direction.S);
+			insertTransporterEntity(mapWidthMiddle, tileMap.getHeight() - 1, transportTexture, Direction.S);
+			insertTransporterEntity(mapWidthMiddle + 1, tileMap.getHeight() - 1, transportTexture, Direction.S);
 		} else {
 			insertWall(mapWidthMiddle - 2, tileMap.getHeight() - 1, new Vector2f(1.0f, 2.0f));
 			insertWall(mapWidthMiddle - 1, tileMap.getHeight() - 1, new Vector2f(1.0f, 2.0f));
@@ -145,10 +134,10 @@ public class LevelMap {
 			insertWall(mapWidthMiddle + 1, tileMap.getHeight() - 2, new Vector2f(1.0f, 2.0f));
 		}
 		if (mazeTile.getAdjacentTile(Direction.W)) {
-			insertTransporter(0, mapHeightMiddle - 2, transportTexture, Direction.W);
-			insertTransporter(0, mapHeightMiddle - 1, transportTexture, Direction.W);
-			insertTransporter(0, mapHeightMiddle, transportTexture, Direction.W);
-			insertTransporter(0, mapHeightMiddle + 1, transportTexture, Direction.W);
+			insertTransporterEntity(0, mapHeightMiddle - 2, transportTexture, Direction.W);
+			insertTransporterEntity(0, mapHeightMiddle - 1, transportTexture, Direction.W);
+			insertTransporterEntity(0, mapHeightMiddle, transportTexture, Direction.W);
+			insertTransporterEntity(0, mapHeightMiddle + 1, transportTexture, Direction.W);
 		} else {
 			insertWall(0, mapHeightMiddle - 2, new Vector2f(1.0f, 2.0f));
 			insertWall(0, mapHeightMiddle - 1, new Vector2f(1.0f, 2.0f));
@@ -160,10 +149,10 @@ public class LevelMap {
 			insertWall(1, mapHeightMiddle + 1, new Vector2f(1.0f, 2.0f));
 		}
 		if (mazeTile.getAdjacentTile(Direction.E)) {
-			insertTransporter(tileMap.getHeight() - 1, mapHeightMiddle - 2, transportTexture, Direction.E);
-			insertTransporter(tileMap.getHeight() - 1, mapHeightMiddle - 1, transportTexture, Direction.E);
-			insertTransporter(tileMap.getHeight() - 1, mapHeightMiddle, transportTexture, Direction.E);
-			insertTransporter(tileMap.getHeight() - 1, mapHeightMiddle + 1, transportTexture, Direction.E);
+			insertTransporterEntity(tileMap.getHeight() - 1, mapHeightMiddle - 2, transportTexture, Direction.E);
+			insertTransporterEntity(tileMap.getHeight() - 1, mapHeightMiddle - 1, transportTexture, Direction.E);
+			insertTransporterEntity(tileMap.getHeight() - 1, mapHeightMiddle, transportTexture, Direction.E);
+			insertTransporterEntity(tileMap.getHeight() - 1, mapHeightMiddle + 1, transportTexture, Direction.E);
 		} else {
 			insertWall(tileMap.getHeight() - 1, mapHeightMiddle - 2, new Vector2f(1.0f, 2.0f));
 			insertWall(tileMap.getHeight() - 1, mapHeightMiddle - 1, new Vector2f(1.0f, 2.0f));
@@ -180,30 +169,30 @@ public class LevelMap {
 	private void insertWall(int x, int y, Vector2f texture) {
 		MapGraphics wallG = new MapGraphics(TILES_TEXTURE_FILE);
 		wallG.setMapPos(texture);
-		createEntity(wallG, x, y);
+		createWallEntity(wallG, x, y);
 	}
 
 	// create water
 	private void insertWater(int x, int y, Vector2f texture) {
 		MapGraphics wallG = new MapGraphics(TILES_TEXTURE_FILE);
 		wallG.setMapPos(texture.add(WATER_MODIFIER));
-		createEntity(wallG, x, y);
+		createWallEntity(wallG, x, y);
 	}
 
 	// create wall
-	private void insertTransporter(int x, int y, Vector2f texture, Direction direction) {
-		Entity wall = new Entity();
-		MapGraphics wallG = new MapGraphics(TILES_TEXTURE_FILE);
-		wallG.setMapPos(new Vector2f(texture));
-		wallG.setX(x * TILE_WIDTH);
-		wallG.setY(y * TILE_WIDTH);
-		wall.addComponent(wallG);
+	private void insertTransporterEntity(int x, int y, Vector2f texture, Direction direction) {
+		Entity transporter = new Entity();
+		MapGraphics transporterG = new MapGraphics(TILES_TEXTURE_FILE);
+		transporterG.setMapPos(new Vector2f(texture));
+		transporterG.setX(x * TILE_WIDTH);
+		transporterG.setY(y * TILE_WIDTH);
+		transporter.addComponent(transporterG);
 		BaseCollision collision = new TransportCollision(direction);
-		wall.addComponent(collision);
-		walls.put(new Vector2i(x, y), wall);
+		transporter.addComponent(collision);
+		walls.put(new Vector2i(x, y), transporter);
 	}
 
-	private void createEntity(MapGraphics wallG, int x, int y) {
+	private void createWallEntity(MapGraphics wallG, int x, int y) {
 		Entity wall = new Entity();
 		wallG.setX(x * TILE_WIDTH);
 		wallG.setY(y * TILE_WIDTH);
@@ -237,5 +226,9 @@ public class LevelMap {
 
 	public Map<Vector2i, Entity> getWalls() {
 		return walls;
+	}
+	
+	public String getlevelLayoutFileName() {
+		return levelLayoutFileName;
 	}
 }
