@@ -37,7 +37,8 @@ public class LoadGameButton implements ButtonAction {
 
 			newPlayer();
 			ShootEmUp.getMenuSystem().clearMenus();
-			startLevel(save.getLevel());
+			//startLevel(save.getLevel());
+			startLevel();
 
 			ShootEmUp.getGame().setHud(new Hud(ShootEmUp.getGame().getPlayer(), 0, 0));
 		}
@@ -52,18 +53,20 @@ public class LoadGameButton implements ButtonAction {
 	}
 
 	private void startLevel() {
+		/*
 		Level level = new Level(ImageProcessor.LEVEL_FILE_LOCATION, levelNum);
 		level.init();
 		level.addEntity(ShootEmUp.getGame().getPlayer());
 
 		ShootEmUp.getGame().setLevel(levelNum);
 		ShootEmUp.getGame().setCurrentLevel(level);
+		*/
 
 		List<String> enemyPrototypes = new ArrayList<>();
 		enemyPrototypes.add("Small");
 		enemyPrototypes.add("Normal");
 		enemyPrototypes.add("Flying");
-		level.addSpawner(enemyPrototypes);
+		//level.addSpawner(enemyPrototypes);
 
 		ShootEmUp.startGame();
 	}
