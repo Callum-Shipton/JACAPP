@@ -15,7 +15,7 @@ public class MazeTile {
 		adjacentTiles.add(direction);
 	}
 
-	public boolean getAdjacentTile(Direction direction) {
+	public boolean hasAdjacentTile(Direction direction) {
 		return adjacentTiles.contains(direction);
 	}
 

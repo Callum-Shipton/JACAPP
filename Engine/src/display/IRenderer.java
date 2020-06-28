@@ -108,13 +108,11 @@ public abstract class IRenderer extends Renderer {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this.EBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL_STATIC_DRAW);
 
-		glVertexAttribPointer(0, TexturedVertex.POSITION_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE,
-				TexturedVertex.POSITION_BYTE_OFFSET);
+		glVertexAttribPointer(0, TexturedVertex.POSITION_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE, TexturedVertex.POSITION_BYTE_OFFSET);
 
 		glEnableVertexAttribArray(0);
 
-		glVertexAttribPointer(1, TexturedVertex.TEXTURE_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE,
-				TexturedVertex.TEXTURE_BYTE_OFFSET);
+		glVertexAttribPointer(1, TexturedVertex.TEXTURE_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE, TexturedVertex.TEXTURE_BYTE_OFFSET);
 
 		glEnableVertexAttribArray(1);
 
@@ -122,13 +120,11 @@ public abstract class IRenderer extends Renderer {
 		glBindBuffer(GL15.GL_ARRAY_BUFFER, IVBO);
 		glBufferData(GL15.GL_ARRAY_BUFFER, instanceFloatBuffer, GL_STATIC_DRAW);
 
-		glVertexAttribPointer(2, TexturedVertex.POSITION_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE,
-				TexturedVertex.POSITION_BYTE_OFFSET);
+		glVertexAttribPointer(2, TexturedVertex.POSITION_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE, TexturedVertex.POSITION_BYTE_OFFSET);
 
 		glEnableVertexAttribArray(2);
 
-		glVertexAttribPointer(3, TexturedVertex.TEXTURE_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE,
-				TexturedVertex.TEXTURE_BYTE_OFFSET);
+		glVertexAttribPointer(3, TexturedVertex.TEXTURE_ELEMENT_COUNT, GL_FLOAT, false, TexturedVertex.STRIDE, TexturedVertex.TEXTURE_BYTE_OFFSET);
 
 		glEnableVertexAttribArray(3);
 

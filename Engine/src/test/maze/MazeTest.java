@@ -41,7 +41,7 @@ public class MazeTest {
 			for (int j = 0; j < grid.length; j++) {
 				System.out.print('0');
 				if (j < grid.length - 1) {
-					if (grid[j][i].getAdjacentTile(Direction.E)) {
+					if (grid[j][i].hasAdjacentTile(Direction.E)) {
 						System.out.print('0');
 					} else {
 						System.out.print('|');
@@ -53,7 +53,7 @@ public class MazeTest {
 			if (i < grid.length - 1) {
 				System.out.print('+');
 				for (int j = 0; j < grid.length; j++) {
-					if (grid[j][i].getAdjacentTile(Direction.S)) {
+					if (grid[j][i].hasAdjacentTile(Direction.S)) {
 						System.out.print('0');
 					} else {
 						System.out.print('-');

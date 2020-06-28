@@ -49,6 +49,7 @@ public class ImageProcessor {
 
 	public static DPDTRenderer base;
 	public static DPDTRenderer stat;
+	
 	public static IRenderer irBack;
 	public static IRenderer irWall;
 	public static IRenderer irFore;
