@@ -24,9 +24,7 @@ public class MapTile implements Serializable {
 	}
 
 	public MapTile(MapTile mapTile) {
-		position = mapTile.position;
-		texture = mapTile.texture;
-		type = mapTile.type;
+		this(mapTile.position, mapTile.texture, mapTile.type);
 	}
 
 	public void setPosition(Vector2i position) {

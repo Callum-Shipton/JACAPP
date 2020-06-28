@@ -43,7 +43,7 @@ public class LevelMap {
 	
 	private static final Random rand = new Random();
 	
-	private static final int NUMBER_OF_LEVELS = 5;
+	private static final int NUMBER_OF_LEVELS = 4;
 	
 	public LevelMap(MazeTile mazeTile) {
 		this(mazeTile, ImageProcessor.LEVEL_FILE_LOCATION + (rand.nextInt(NUMBER_OF_LEVELS) + 1));
