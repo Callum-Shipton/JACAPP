@@ -14,6 +14,7 @@ import components.collision.RigidCollision;
 import components.collision.TransportCollision;
 import components.graphical.MapGraphics;
 import display.FloorRenderer;
+import display.Image;
 import display.ImageProcessor;
 import display.WallsRenderer;
 import entity.Entity;
@@ -37,35 +38,32 @@ public class LevelMap {
 	// collidable wall entities
 	private final Map<Vector2i, Entity> walls = new HashMap<>();
 	
+	private final Vector2f transportTexture = new Vector2f(1.0f, 7.0f);
+	private final Vector2f wallTexture = new Vector2f(1.0f, 2.0f);
+	
+	private static final Random rand = new Random();
+	
+	private static final int NUMBER_OF_LEVELS = 5;
+	
 	public LevelMap(MazeTile mazeTile) {
-		Random rand = new Random();
-		int levelLayoutFileId = rand.nextInt(5) + 1;
-		
-		this.mazeTile = mazeTile;
-		levelLayoutFileName = ImageProcessor.LEVEL_FILE_LOCATION + levelLayoutFileId;
-		tileMap = TileMap.readTileMap(levelLayoutFileName + ".map");
-		goalBounder = GoalBounder.readGoalbounder(levelLayoutFileName + ".bound");
+		this(mazeTile, ImageProcessor.LEVEL_FILE_LOCATION + (rand.nextInt(NUMBER_OF_LEVELS) + 1));
 	}
 
 	public LevelMap(MazeTile mazeTile, String levelLayoutFileName) {
-		this.mazeTile = mazeTile;
 		this.levelLayoutFileName = levelLayoutFileName;
+		
+		this.mazeTile = mazeTile;
 		tileMap = TileMap.readTileMap(levelLayoutFileName + ".map");
 		goalBounder = GoalBounder.readGoalbounder(levelLayoutFileName + ".bound");
 	}
 
 	public void init() {
 
-		ImageProcessor.irBack = new FloorRenderer(tileMap.getBackgroundTiles(),
-				new Vector2f(ImageProcessor.getImage(TILES_TEXTURE_FILE).getFWidth(),
-						ImageProcessor.getImage(TILES_TEXTURE_FILE).getFHeight()),
-				LevelMap.TILE_WIDTH, TILE_WIDTH);
-
+		Image textureMap = ImageProcessor.getImage(TILES_TEXTURE_FILE);
 		createWalls(tileMap.getWalls());
-		ImageProcessor.irWall = new WallsRenderer(walls,
-				new Vector2f(ImageProcessor.getImage(TILES_TEXTURE_FILE).getFWidth(),
-						ImageProcessor.getImage(TILES_TEXTURE_FILE).getFHeight()),
-				LevelMap.TILE_WIDTH, TILE_WIDTH);
+		
+		ImageProcessor.irBack = new FloorRenderer(tileMap.getBackgroundTiles(), new Vector2f(textureMap.getFWidth(), textureMap.getFHeight()), LevelMap.TILE_WIDTH, TILE_WIDTH);
+		ImageProcessor.irWall = new WallsRenderer(walls, new Vector2f(textureMap.getFWidth(), textureMap.getFHeight()), LevelMap.TILE_WIDTH, TILE_WIDTH);
 
 		ImageProcessor.irBack.init();
 		ImageProcessor.irWall.init();
@@ -85,15 +83,15 @@ public class LevelMap {
 	private void createWalls(Set<MapTile> walls) {
 
 		for (MapTile wall : walls) {
-			int x = wall.getPosition().x;
-			int y = wall.getPosition().y;
-			Vector2f texture = wall.getTexture();
+			
+			Vector2i wallPosition = wall.getPosition();
+			
 			switch (wall.getType()) {
 			case WALL:
-				insertWall(x, y, texture);
+				insertWall(wallPosition.x, wallPosition.y, wall.getTexture(), false);
 				break;
 			case WATER:
-				insertWater(x, y, texture);
+				insertWall(wallPosition.x, wallPosition.y, wall.getTexture(), true);
 				break;
 			default:
 			}
@@ -101,105 +99,106 @@ public class LevelMap {
 
 		int mapWidthMiddle = tileMap.getWidth() / 2;
 		int mapHeightMiddle = tileMap.getHeight() / 2;
-		Vector2f transportTexture = new Vector2f(1.0f, 7.0f);
-
-		if (mazeTile.getAdjacentTile(Direction.N)) {
-			insertTransporterEntity(mapWidthMiddle - 2, 0, transportTexture, Direction.N);
-			insertTransporterEntity(mapWidthMiddle - 1, 0, transportTexture, Direction.N);
-			insertTransporterEntity(mapWidthMiddle, 0, transportTexture, Direction.N);
-			insertTransporterEntity(mapWidthMiddle + 1, 0, transportTexture, Direction.N);
+		
+		fillMapHole(Direction.N, mapWidthMiddle, 0);
+		fillMapHole(Direction.S, mapWidthMiddle, tileMap.getHeight() - 1);
+		fillMapHole(Direction.W, 0, mapHeightMiddle);
+		fillMapHole(Direction.E, tileMap.getHeight() - 1, mapHeightMiddle);
+	}
+	
+	private void fillMapHole(Direction direction, int x, int y) {
+		if (mazeTile.hasAdjacentTile(direction)) {
+			insertTransporterEntityBlock(x, y, direction);
 		} else {
-			insertWall(mapWidthMiddle - 2, 0, new Vector2f(1.0f, 2.0f));
-			insertWall(mapWidthMiddle - 1, 0, new Vector2f(1.0f, 2.0f));
-			insertWall(mapWidthMiddle, 0, new Vector2f(1.0f, 2.0f));
-			insertWall(mapWidthMiddle + 1, 0, new Vector2f(1.0f, 2.0f));
-			insertWall(mapWidthMiddle - 2, 1, new Vector2f(1.0f, 2.0f));
-			insertWall(mapWidthMiddle - 1, 1, new Vector2f(1.0f, 2.0f));
-			insertWall(mapWidthMiddle, 1, new Vector2f(1.0f, 2.0f));
-			insertWall(mapWidthMiddle + 1, 1, new Vector2f(1.0f, 2.0f));
+			insertWallEntityBlock(x, y, direction);
 		}
-		if (mazeTile.getAdjacentTile(Direction.S)) {
-			insertTransporterEntity(mapWidthMiddle - 2, tileMap.getHeight() - 1, transportTexture, Direction.S);
-			insertTransporterEntity(mapWidthMiddle - 1, tileMap.getHeight() - 1, transportTexture, Direction.S);
-			insertTransporterEntity(mapWidthMiddle, tileMap.getHeight() - 1, transportTexture, Direction.S);
-			insertTransporterEntity(mapWidthMiddle + 1, tileMap.getHeight() - 1, transportTexture, Direction.S);
-		} else {
-			insertWall(mapWidthMiddle - 2, tileMap.getHeight() - 1, new Vector2f(1.0f, 2.0f));
-			insertWall(mapWidthMiddle - 1, tileMap.getHeight() - 1, new Vector2f(1.0f, 2.0f));
-			insertWall(mapWidthMiddle, tileMap.getHeight() - 1, new Vector2f(1.0f, 2.0f));
-			insertWall(mapWidthMiddle + 1, tileMap.getHeight() - 1, new Vector2f(1.0f, 2.0f));
-			insertWall(mapWidthMiddle - 2, tileMap.getHeight() - 2, new Vector2f(1.0f, 2.0f));
-			insertWall(mapWidthMiddle - 1, tileMap.getHeight() - 2, new Vector2f(1.0f, 2.0f));
-			insertWall(mapWidthMiddle, tileMap.getHeight() - 2, new Vector2f(1.0f, 2.0f));
-			insertWall(mapWidthMiddle + 1, tileMap.getHeight() - 2, new Vector2f(1.0f, 2.0f));
+	}
+	
+	private void insertWallEntityBlock(int x, int y, Direction direction) {
+		int newX = x;
+		int newY = y;
+		
+		for(int modifier = -2; modifier <= 1; modifier++) {
+			for(int modifier2 = 0; modifier2 <= 1; modifier2++) {
+				newX = x;
+				newY = y;
+				
+				switch(direction) {
+				case N:
+					newX += modifier;
+					newY += modifier2;
+					break;
+				case S:
+					newX += modifier;
+					newY += modifier2 - 1;
+					break;
+				case W:
+					newY += modifier;
+					newX += modifier2;
+					break;
+				case E:
+					newY += modifier;
+					newX += modifier2 - 1;
+				}
+				
+				insertWall(newX, newY, wallTexture, false);
+			}
 		}
-		if (mazeTile.getAdjacentTile(Direction.W)) {
-			insertTransporterEntity(0, mapHeightMiddle - 2, transportTexture, Direction.W);
-			insertTransporterEntity(0, mapHeightMiddle - 1, transportTexture, Direction.W);
-			insertTransporterEntity(0, mapHeightMiddle, transportTexture, Direction.W);
-			insertTransporterEntity(0, mapHeightMiddle + 1, transportTexture, Direction.W);
-		} else {
-			insertWall(0, mapHeightMiddle - 2, new Vector2f(1.0f, 2.0f));
-			insertWall(0, mapHeightMiddle - 1, new Vector2f(1.0f, 2.0f));
-			insertWall(0, mapHeightMiddle, new Vector2f(1.0f, 2.0f));
-			insertWall(0, mapHeightMiddle + 1, new Vector2f(1.0f, 2.0f));
-			insertWall(1, mapHeightMiddle - 2, new Vector2f(1.0f, 2.0f));
-			insertWall(1, mapHeightMiddle - 1, new Vector2f(1.0f, 2.0f));
-			insertWall(1, mapHeightMiddle, new Vector2f(1.0f, 2.0f));
-			insertWall(1, mapHeightMiddle + 1, new Vector2f(1.0f, 2.0f));
-		}
-		if (mazeTile.getAdjacentTile(Direction.E)) {
-			insertTransporterEntity(tileMap.getHeight() - 1, mapHeightMiddle - 2, transportTexture, Direction.E);
-			insertTransporterEntity(tileMap.getHeight() - 1, mapHeightMiddle - 1, transportTexture, Direction.E);
-			insertTransporterEntity(tileMap.getHeight() - 1, mapHeightMiddle, transportTexture, Direction.E);
-			insertTransporterEntity(tileMap.getHeight() - 1, mapHeightMiddle + 1, transportTexture, Direction.E);
-		} else {
-			insertWall(tileMap.getHeight() - 1, mapHeightMiddle - 2, new Vector2f(1.0f, 2.0f));
-			insertWall(tileMap.getHeight() - 1, mapHeightMiddle - 1, new Vector2f(1.0f, 2.0f));
-			insertWall(tileMap.getHeight() - 1, mapHeightMiddle, new Vector2f(1.0f, 2.0f));
-			insertWall(tileMap.getHeight() - 1, mapHeightMiddle + 1, new Vector2f(1.0f, 2.0f));
-			insertWall(tileMap.getHeight() - 2, mapHeightMiddle - 2, new Vector2f(1.0f, 2.0f));
-			insertWall(tileMap.getHeight() - 2, mapHeightMiddle - 1, new Vector2f(1.0f, 2.0f));
-			insertWall(tileMap.getHeight() - 2, mapHeightMiddle, new Vector2f(1.0f, 2.0f));
-			insertWall(tileMap.getHeight() - 2, mapHeightMiddle + 1, new Vector2f(1.0f, 2.0f));
+	}
+	
+	private void insertTransporterEntityBlock(int x, int y, Direction direction) {
+		int newX;
+		int newY;
+		
+		for(int modifier = -2; modifier <= 1; modifier++) {
+			newX = x;
+			newY = y;
+			
+			if(direction == Direction.N || direction == Direction.S) {
+				newX += modifier;
+			} else {
+				newY += modifier;
+			}
+			
+			insertTransporterEntity(newX, newY, direction);
 		}
 	}
 
-	// create wall
-	private void insertWall(int x, int y, Vector2f texture) {
+	private void insertWall(int x, int y, Vector2f texture, boolean isWater) {
 		MapGraphics wallG = new MapGraphics(TILES_TEXTURE_FILE);
-		wallG.setMapPos(texture);
-		createWallEntity(wallG, x, y);
-	}
-
-	// create water
-	private void insertWater(int x, int y, Vector2f texture) {
-		MapGraphics wallG = new MapGraphics(TILES_TEXTURE_FILE);
-		wallG.setMapPos(texture.add(WATER_MODIFIER));
-		createWallEntity(wallG, x, y);
-	}
-
-	// create wall
-	private void insertTransporterEntity(int x, int y, Vector2f texture, Direction direction) {
-		Entity transporter = new Entity();
-		MapGraphics transporterG = new MapGraphics(TILES_TEXTURE_FILE);
-		transporterG.setMapPos(new Vector2f(texture));
-		transporterG.setX(x * TILE_WIDTH);
-		transporterG.setY(y * TILE_WIDTH);
-		transporter.addComponent(transporterG);
-		BaseCollision collision = new TransportCollision(direction);
-		transporter.addComponent(collision);
-		walls.put(new Vector2i(x, y), transporter);
-	}
-
-	private void createWallEntity(MapGraphics wallG, int x, int y) {
-		Entity wall = new Entity();
+		
+		Vector2f wallTexture = new Vector2f(texture);
+		if(isWater) {
+			texture.add(WATER_MODIFIER);
+		}
+		wallG.setMapPos(wallTexture);
 		wallG.setX(x * TILE_WIDTH);
 		wallG.setY(y * TILE_WIDTH);
-		wall.addComponent(wallG);
+		
 		RigidCollision rigidCollision = new RigidCollision();
+
+		Entity wall = new Entity();
+		
+		wall.addComponent(wallG);
 		wall.addComponent(rigidCollision);
+		
 		walls.put(new Vector2i(x, y), wall);
+	}
+
+	private void insertTransporterEntity(int x, int y, Direction direction) {
+		Entity transporter = new Entity();
+		
+		MapGraphics transporterG = new MapGraphics(TILES_TEXTURE_FILE);
+		transporterG.setMapPos(new Vector2f(transportTexture));
+		transporterG.setX(x * TILE_WIDTH);
+		transporterG.setY(y * TILE_WIDTH);
+
+		BaseCollision collision = new TransportCollision(direction);
+		
+		transporter.addComponent(transporterG);
+		transporter.addComponent(collision);
+		
+		walls.put(new Vector2i(x, y), transporter);
 	}
 
 	// Getters
